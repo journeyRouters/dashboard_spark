@@ -1,0 +1,76 @@
+.headerinclusion{
+    width: 50rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    background-color: aquamarine;
+}
+.center{
+    margin: 7rem;
+    margin-left: 20rem;
+    width: 50rem;
+    background-color:#FFFFFF
+
+}
+.inclusionContaint1{
+    /* margin-left: 1rem; */
+    font-weight: 600;
+    background-color: rgb(165, 239, 214);
+}
+.indicatorHeader{
+    width: 18rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 32rem;
+    background-color: #FFFFFF;
+}
+.breakfast{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.settingToSide{
+    width: 15rem;
+    /* margin-left: -3rem; */
+    justify-content: space-around;
+    display: flex;
+}
+.setaline{
+    margin-left: 1rem;
+}
+.tag_heading{
+    font-family: cursive;
+}
+.comments_from{
+    height: 4.3rem;
+    width: 21.43rem;
+}
+.other_inclusion{
+    height: 5.06rem;
+    width: 47.93rem;
+}
+.other_exclusion{
+    height: 5.6rem;
+    width: 29.31rem;
+}
+.cancel_button{
+    width: 4rem;
+    height: 2rem;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    background-image: linear-gradient(to right,  rgb(97, 134, 215), rgb(124, 227, 210));
+}
+.cancel_button:hover{
+    background-image: linear-gradient(to right,  rgb(107, 215, 97), rgb(102, 212, 69));
+    cursor: pointer;
+
+}
+.cancel_button_div{
+    display: flex;
+    justify-content: space-between;
+    /* float: right; */
+}

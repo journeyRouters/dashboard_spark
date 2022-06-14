@@ -1,0 +1,156 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 3.5rem;
+  color: #3e3e3e;
+ text-transform: uppercase;
+  background-color:#56c4c1;
+  position: sticky;
+  top: 0;
+}
+
+.sidebars{
+  width: 20%;
+  height: 41rem;
+  /* background-color:#dfd2d2; */
+  overflow-y: hidden;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+} 
+.button{
+  /* width: 4rem; */
+  /* height: 1.5rem; */
+  /* background-color: #8a8abbb3; */
+  color: #FFFFFF;
+  /* border-radius: 10px; */
+  margin-right: 1rem;
+}
+.button:hover{
+  transform: scale(1.5);
+}
+.headLine{
+  width: 9rem;
+ font-family: 'Courier New', Courier, monospace;
+ margin-left: 2rem;
+}
+.sidebarCardContaint{
+  margin-left: 1rem;
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: Montserrat;
+}
+.sidebarCard{
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+}
+.sidebarCard:hover{
+  color: #56c2c4;
+  background: #f8f8f8;
+  cursor: pointer;
+}
+.assembler{
+  display: flex;
+  overflow: hidden;
+
+}
+.mainContaint{
+  width: 80%;
+  height: 41rem;
+  overflow-y: scroll;
+}
+.mainContaint::-webkit-scrollbar {
+  display:none;}
+.popUp{
+  width: 20rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  justify-content: flex-start;
+  background-color: #56c2c4;
+  align-items: center;
+}
+.popUp_{
+  width: 20rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  justify-content: flex-start;
+  background-color: #56c2c4;
+  align-items: center; 
+}
+.inputEmail{
+  margin-top: 2rem;
+  width: 17rem;
+  height: 2rem;
+  border-radius: 1rem;
+}
+.inputEmailerror{
+  margin-top: 2rem;
+  width: 17rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(202, 6, 6);
+}
+.inputPassword{
+  margin-top: 2rem;
+  width: 17rem;
+  height: 2rem;
+  border-radius: 1rem;
+}
+.inputPassworderror{
+  margin-top: 2rem;
+  width: 17rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(202, 6, 6);
+
+}
+.signInWithGoogle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 17rem;
+  height: 2rem;
+  border-radius: 1rem;
+  color: #0a0a0a;
+  font-family: Montserrat;
+  /* background: #da4733; */
+}
+.signInWithGoogleText{
+  margin-left: 1rem;
+}
+.signIn{
+  margin-top: 3rem;
+  width: 7rem;
+  height: 2rem;
+  color: #FFFFFF;
+  background: rgb(22, 191, 221);
+  border-radius: 1rem;
+}
+.top{
+  width: 4rem;
+  height: 3rem;
+  background-color: rgb(28, 212, 59);
+  border-radius: 1rem;
+  display: flex;
+}
+.create_new_account{
+  color: rgb(20, 20, 190);
+}
+.create_new_account:hover{
+  cursor: pointer;
+
+}

@@ -1,0 +1,283 @@
+.pre {
+    display: flex;
+    flex-direction: column;
+}
+
+#sample {
+    margin-right: 5rem;
+    margin-left: 3rem;
+    background-color: #FFFF;
+    letter-spacing: 0.1px;
+    width: 630px;
+    overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-transform: capitalize;
+    /* background-image: url("https://www.planetware.com/wpimages/2019/10/malaysia-best-beaches-mersing.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.5; */
+    clear: both;
+}
+
+.pdf_Header {
+    /* display: flex; */
+    margin-left: -0.8rem;
+}
+.addressOfJr{
+    margin-left: -0.8rem;
+    font-size: 11px;
+    width: 8rem;
+    /* height: 3rem; */
+    margin-left: 0rem;
+}
+.flightImgAliner{
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-size: 6px;
+    font-weight: 600;
+    font-family: Brush Script MT;
+    letter-spacing: 2px;
+    color: gold;
+    margin-top: -4px;
+    margin-left: 15px;
+}
+.address{
+    width: 9rem;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;    
+}
+
+.details {
+    font-size: 12px;
+    font-weight: 700;
+    width:98%;
+    height: 6rem;
+    /* font-size: 8px; */
+    letter-spacing: 0.2px;
+    font-family: monospace;
+    /* background-image: url("'public/assets/img/intro.jpg'");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    /* opacity: 0.5; */
+}
+.limiter{
+    width: 10rem;
+    height: 4rem;
+}
+
+.details1 {
+    width: 98%;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: monospace;
+    /* border-bottom: 1px dashed; */
+    /* color: blue; */
+    font-weight: 700;
+
+}
+
+.index {
+    color: rgb(226 13 17);
+    font-weight: bold;
+}
+
+
+.underline {
+    border-bottom: 0.2px dashed rgb(134, 130, 130);
+}
+
+.destination_details {
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    font-weight: 700;
+    /* color: blue */
+
+}
+
+.Itinerary {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    font-weight: 600;
+    font-family: Arial;
+    /* border-bottom: 0.2px dashed; */
+    color: rgb(149, 215, 78);
+}
+
+.pdfImg {
+    width: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.day_ {
+    font-family: Arial, Helvetica, sans-serif;
+    /* font-weight: 600; */
+    text-decoration: underline;
+    color:black;
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.travel_info {
+    display: flex;
+    justify-content: space-evenly;
+    width: 12rem;
+    align-items: center;
+    color: rgb(94, 212, 129);
+    font-weight: bold;
+}
+
+.parallel {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    border-bottom: 0.2px dashed;
+    color: rgb(131, 161, 215);
+    font-weight: bold;
+}
+
+.travel_info1 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 8rem;
+    align-items: center;
+    font-weight: 600;
+    color: rgb(11, 11, 11);
+    font-weight: bold;
+    border-bottom: 1px solid black;
+
+}
+
+.night_details {
+    border-bottom: 0.2px dashed;
+}
+
+.download_button {
+    width: 6rem;
+    height: 2rem;
+    background-color: rgb(156, 156, 227);
+    border-radius: 1rem;
+    margin: 2rem;
+    margin-left: 4rem;
+}
+
+.download_button:hover {
+    background-color: rgb(85, 225, 85);
+    cursor: pointer;
+}
+
+.inclusion {
+    margin-bottom: -0.4rem;
+    text-decoration: underline;
+}
+
+.comments_ {
+    margin-bottom: -0.7rem;
+    /* text-decoration: underline; */
+    color: rgb(45, 45, 211);
+    font-weight: bold;
+
+    /* border-bottom: 1px  solid black; */
+}
+
+.small_line {
+    width: 9rem;
+    height: 0.01rem;
+    background-color: black;
+    margin-top: -0.7rem;
+
+}
+
+.comments_details {
+    font-weight: 600;
+    font-size: large;
+    /* color: rgb(6, 44, 114); */
+    /* font-weight: bold; */
+
+}
+
+.set_in_line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* width: 33% */
+    /* align-items: flex-start; */
+}
+
+.intro_page {
+    height: 34rem;
+    width: 100%;
+    margin-top: 0.3rem;
+    background-image: url("/public/assets/img/intro.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.client_details {
+    width: 15rem;
+    height: 13rem;
+    margin: 22rem;
+    background-color: #FFFF;
+    background-image: url("/public/assets/img/intro.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+
+}
+
+.customer_Details {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    font-size: medium;
+    font-weight: 700;
+    font-family: monospaces;
+    /* border-bottom: 0.2px dashed; */
+    color: red
+}
+.jraccountdetails{
+    width: 100%;
+}
+.accounts_and_bank{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    font-size: medium;  
+    font-weight: 800;
+    align-items: center;
+    font-family: Arial;
+
+}
+.acc_details{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: rgb(114 109 109);
+}
+.answer{
+    font-size: x-small;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(145, 140, 140);
+}
+.cutomerCare{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: x-small;
+    color: rgb(145, 140, 140);
+    font-family: cursive;
+
+
+}

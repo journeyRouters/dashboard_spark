@@ -10,7 +10,7 @@ import makeAnimated from 'react-select/animated';
 
 
 
-const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile }) => {
+const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile,getinvoice }) => {
     // console.log(pdfHolder)
     const animatedComponents = makeAnimated();
     const [installment, setinstallment] = useState([
@@ -267,6 +267,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile }) => {
                                     auth={auth}
                                     profile={profile}
                                     hint={true}
+                                    getinvoice={getinvoice}
                                 />
                             </div>
                         </Modal>

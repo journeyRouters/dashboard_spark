@@ -174,7 +174,7 @@ const Row = (props) => {
             }
             allComments.push(comment_holder)
             // console.log('allcoments new', allComments, row.trip_doc)
-            setDoc(doc(db, "Trip", row.trip_doc), {
+            setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
                 Lead_Status: Lead_Status
 
@@ -429,6 +429,7 @@ const Row = (props) => {
                                                     profile={props.profile}
                                                     closeinvoice={closeinvoice}
                                                     pdfHolder={pdfHolder}
+                                                    getinvoice={getinvoice}
                                                 /> : <></>
                                         }
                                     </div>

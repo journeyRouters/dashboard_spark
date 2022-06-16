@@ -52,8 +52,10 @@ function App() {
         for (let i = 1; i <= rows.length - 1; i++) {
           let Row = rows[i]
           let id = `trp00${i}`
-          setDoc(doc(db, "Trip", `trp00${i}`), {
-            TripId: "TRP" + Math.random(),
+          let any=Math.random()
+          let tripid=`TRP${any}`
+          setDoc(doc(db, "Trip", tripid), {
+            TripId: tripid,
             trip_doc: id,
             Lead_Status: Row[0],
             Campaign_code: Row[1],
@@ -79,8 +81,11 @@ function App() {
             quotation: 0,
             quotation_flg: false,
             month: '',
-            comments: []
-
+            comments: [],
+           Vouchers_flight:[],
+           Vouchers_hotels:[],
+           Vouchers_others:[],
+           vouchers_idproof:[]
           });
         }
         // console.log(rows[1][0])

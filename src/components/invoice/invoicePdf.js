@@ -3,7 +3,7 @@ import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestor
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
 
-const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile ,hint}) => {
+const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile ,hint,getinvoice}) => {
     const pdfExportComponent = useRef(null);
     console.log(selected_pdf_data)
     const db = getFirestore(app);
@@ -18,6 +18,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
         pdfExportComponent.current.save();
         if(hint){
             setInvoice()
+            getinvoice()
         }
         // pdfgenrator
     };

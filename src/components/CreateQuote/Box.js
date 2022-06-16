@@ -31,9 +31,9 @@ const Box = (props) => {
     const [selected_date, set_selected_date] = useState()
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
-    const [inclusion_data, setinclusion] = useState([])
-    const [flights, setflights] = useState()
-    const [cabDetailsData, setcabDetails] = useState()
+    const [inclusion_data, setinclusion] = useState(null)
+    const [flights, setflights] = useState(null)
+    const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
 
 

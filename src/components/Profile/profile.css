@@ -28,6 +28,7 @@
 .addressOfJr{
     margin-left: -0.8rem;
     font-size: 11px;
+    margin-top: -1rem;
     width: 8rem;
     /* height: 3rem; */
     margin-left: 0rem;
@@ -35,6 +36,14 @@
 .flightImgAliner{
     display: flex;
     align-items: center;
+}
+.headProfile{
+    color: rgb(59 70 220);;
+    font-size: 20px;
+    /* font-weight: 1300; */
+    font-family: monospaces;
+    text-transform: capitalize;
+
 }
 
 .name {
@@ -84,7 +93,7 @@
 }
 
 .index {
-    color: rgb(226 13 17);
+    color: rgb(88 51 243);;
     font-weight: bold;
 }
 
@@ -98,6 +107,10 @@
     justify-content: space-between;
     font-size: medium;
     font-weight: 700;
+    font-family: monospaces;
+    /* border-bottom: 0.2px dashed; */
+    color: rgb(59 70 220);
+    margin-bottom: 1rem;
     /* color: blue */
 
 }
@@ -105,11 +118,13 @@
 .Itinerary {
     display: flex;
     justify-content: center;
-    font-size: larger;
+    font-size: 25px;
     font-weight: 600;
-    font-family: Arial;
     /* border-bottom: 0.2px dashed; */
-    color: rgb(149, 215, 78);
+    color: rgb(59 70 220);
+    /* font-size: 20px; */
+    /* font-family: monospaces; */
+    text-transform: capitalize;
 }
 
 .pdfImg {
@@ -149,16 +164,22 @@
 
 .travel_info1 {
     display: flex;
-    justify-content: space-evenly;
-    width: 8rem;
+    justify-content: space-between;
+    width: 9.5rem;
     align-items: center;
     font-weight: 600;
-    color: rgb(11, 11, 11);
+    color: rgb(59 70 220);
     font-weight: bold;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 
 }
+.hotel_font{
+    color: rgb(59 70 220);
+    /* font-size: 20px; */
+    font-family: monospaces;
+    text-transform: capitalize;
 
+}
 .night_details {
     border-bottom: 0.2px dashed;
 }
@@ -240,13 +261,13 @@
 
 .customer_Details {
     display: flex;
-    margin-top: 1rem;
+    margin-top: 1.4rem;
     justify-content: space-between;
     font-size: medium;
     font-weight: 700;
     font-family: monospaces;
     /* border-bottom: 0.2px dashed; */
-    color: red
+    color: rgb(59 70 220);
 }
 .jraccountdetails{
     width: 100%;
@@ -265,7 +286,7 @@
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
-    color: rgb(114 109 109);
+    color: rgb(74 39 223);;
 }
 .answer{
     font-size: x-small;
@@ -280,4 +301,13 @@
     font-family: cursive;
 
 
+}
+.contact_help_details{
+    font-size: 13px;
+}
+.aline_displayer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 11rem;
 }

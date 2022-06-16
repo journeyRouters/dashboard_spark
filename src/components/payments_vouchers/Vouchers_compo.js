@@ -1,14 +1,198 @@
 import { Details } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Payments.css'
-import handleSubmit from '../UploadDataFileToFirebasestorage/uploader'
+import { Modal } from '@material-ui/core';
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { fromEvent } from 'file-selector';
+import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
+import app from '../required';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const VouchersCompo = ({ data }) => {
-    console.log("from vouchers", data.comments)
+const VouchersCompo = ({ data, datahandle }) => {
+    const [latestData, setlatestData] = useState(null)
+    const[loading,setloading]=useState(false)
+    // console.log("from vouchers", data)
     const [details, setDetails] = useState(false)
+    const [target, settarget] = useState(0)
+    const storage = getStorage();
+    const [openuploader, setuploader] = useState(false)
+    function uploaderpopup() {
+        setuploader(!openuploader)
+        settarget(0)
+    }
+    function stoploading(){
+        setloading(false)
+    }
+    const [idproof, idproofcontrller] = useState(false)
+    const db = getFirestore(app);
+    const today = new Date()
+    function closeidproof() {
+        idproofcontrller(false)
+        settarget(0)
+    }
+    async function getdatalatest() {
+        const docRef = doc(db, "Trip", data.TripId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            setlatestData(docSnap.data())
+            console.log("Document data:", docSnap.data());
+        } else {
+            console.log("No such document!");
+        }
+    }
+    async function updateLinkAndPathOfUploadedVouchers(path, link, name) {
+        const docref = doc(db, "Trip", data.TripId);
+        console.log(target)
+        if (target === 'flights') {
+            let previousData = latestData.Vouchers_flight
+            console.log(data.Vouchers_flight)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            // console.log("list to set", content, previousData)
+            await updateDoc(docref, {
+                "Vouchers_flight": previousData
+            });
+
+        }
+        if (target === 'hotels') {
+            let previousData = data.Vouchers_hotels
+            console.log(data.Vouchers_hotels)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            console.log("list to set", content, previousData)
+            await updateDoc(docref, {
+                "Vouchers_hotels": previousData
+            });
+
+        }
+        if (target === 'others') {
+            let previousData = data.Vouchers_others
+            console.log(data.Vouchers_others)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            console.log("list to set", content, previousData)
+            await updateDoc(docref, {
+                "Vouchers_others": previousData
+            });
+
+        }
+
+    }
+
+    async function handleSubmit() {
+        /**this function will upload the file in firebase storage
+           vouchers/tripid/flight,hotel,others/filename 
+         */
+        const handles = await window.showOpenFilePicker({ multiple: false });
+        const file = await fromEvent(handles);
+        uploaderpopup()
+        setloading(true)
+        if (!file) return;
+        const storageRef = ref(storage, `vouchers/${data.TripId}/${target}/${file[0].name}`);
+        const path = `vouchers/${data.TripId}/${target}/${file[0].name}`
+        const name = file[0].name
+        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // console.log(snapshot)
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        // console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        break;
+                    case 'storage/canceled':
+                        break;
+                    case 'storage/unknown':
+                        break;
+                }
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
+                    getdatalatest()
+                    stoploading()
+
+                });
+            }
+        );
+    }
+    useEffect(() => {
+        getdatalatest()
+    }, [details]);
+    function ondelete(target, path, index) {
+        deleteuploadedvoucher_from_firebase_storage(path)
+        delete_vouchers_from_firebase_firestore(target, index)
+        getdatalatest()
+    }
+    async function delete_vouchers_from_firebase_firestore(target, del_index) {
+        const docref = doc(db, "Trip", data.TripId);
+        console.log(target)
+        if (target === 'flights') {
+            let previousData = latestData.Vouchers_flight
+            previousData.splice(del_index, 1);
+            console.log(previousData)
+            // console.log("list to set", content, previousData)
+            await updateDoc(docref, {
+                "Vouchers_flight": previousData
+            });
+
+        }
+        if (target === 'hotels') {
+            let previousData = data.Vouchers_hotels
+            previousData.splice(del_index, 1)
+            await updateDoc(docref, {
+                "Vouchers_hotels": previousData
+            });
+
+        }
+        if (target === 'others') {
+            let previousData = data.Vouchers_others
+            previousData.splice(del_index, 1)
+            await updateDoc(docref, {
+                "Vouchers_others": previousData
+            });
+
+        }
+    }
+    function deleteuploadedvoucher_from_firebase_storage(path) {
+        const deleteItem = ref(storage, path)
+        deleteObject(deleteItem).then(() => { }).catch((error) => { console.log(error) })
+    }
     function detailsFlgactive() {
         setDetails(!details)
+    }
+    function optionHandler(e) {
+        settarget(e.target.value)
     }
     return (
         <div className='details_of_specific_trip'>
@@ -42,13 +226,9 @@ const VouchersCompo = ({ data }) => {
                         {data.Budget}
                     </p>
                     <button
-                        onClick={() => detailsFlgactive()}
-                    >Show More
+                        onClick={() => detailsFlgactive()}>
+                        Show More
                     </button>
-                    <button
-                        onClick={() => handleSubmit()}
-                    >uploaded</button>
-
 
                 </div>
 
@@ -73,13 +253,140 @@ const VouchersCompo = ({ data }) => {
                                 </>))
                             }
                         </div>
+                        <div className='voucher_and_payments'>
+                            <div className='vouchers_upload'>
+                                <p>ID proof/<span className='upload_proof' onClick={() => idproofcontrller(true)}>upload</span></p>
+                                <div className='upload_radio_button'>
+                                    <div className='parent'>
+                                        <input type='radio' checked={false} readOnly>
+                                        </input>
+                                        <div className='childpopup'>
 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className='hotel_flight_others'>
+                                <h6>hotel</h6>
+                                <h6>Flight</h6>
+                                <h6>others</h6>
+                            </div>
+                            <div className='vouchers_upload'>
+                                <p>Voucher's/<span className='upload_proof' onClick={() => setuploader(true)}>upload</span></p>
+                                <div className='upload_radio_button'>
+                                    <div className='parent'>
+                                        <input type='radio' checked={latestData.Vouchers_hotels.length != 0} readOnly></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.Vouchers_hotels.map((hotel, index) => (
+                                                    <>
+                                                        <div className='hover_popup_main_div'>
+                                                            <p>
+                                                                {hotel.name}
+                                                            </p>
+                                                            <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio' checked={latestData.Vouchers_flight.length != 0} readOnly></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.Vouchers_flight.map((flight, index) => (
+                                                    <>
+                                                        <div className='hover_popup_main_div'>
+                                                            <p>
+                                                                {flight.name}
+                                                            </p>
+                                                            <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio' checked={latestData.Vouchers_others.length != 0} readOnly></input>
+                                        <div className='childpopup'>
+                                        {
+                                                latestData.Vouchers_others.map((others, index) => (
+                                                    <>
+                                                        <div className='hover_popup_main_div'>
+                                                            <p>
+                                                                {others.name}
+                                                            </p>
+                                                            <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className='vouchers_upload'>
+                                <p>Payment's/<span className='upload_proof' >upload</span ></p>
+                                <div className='upload_radio_button'>
+                                    <div className='parent'>
+                                        <input type='radio'></input>
+                                        <div className='childpopup'></div>
+
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio'></input>
+                                        <div className='childpopup'></div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio'></input>
+                                        <div className='childpopup'>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        {/* <button
+                            onClick={() => handleSubmit()}>
+                            uploaded
+                        </button> */}
                     </div>
-                    <img src='https://firebasestorage.googleapis.com/v0/b/jrtestweb-12e4f.appspot.com/o/files%2Freview5.jpg?alt=media&token=452f05e8-6019-4677-9749-b8cc3d8b3378' width='100px'/>
 
                 </> : <>
                 </>
             }
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openuploader} onClose={uploaderpopup} >
+                <div className='uploaderPopUp'>
+                    <select className='optionChoose' onChange={(e) => optionHandler(e)}>
+                        <option value={0}>choose here</option>
+                        <option value='flights'>flights</option>
+                        <option value='hotels'>hotel</option>
+                        <option value='others' >others</option>
+                    </select>
+                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => handleSubmit()}>upload</button>
+                </div>
+            </Modal>
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={idproof} onClose={closeidproof} >
+                <div className='uploaderPopUp'>
+                    <select className='optionChoose' onChange={(e) => optionHandler(e)}>
+                        <option value={0}>choose here</option>
+                        <option value='flights'>Passport</option>
+                        <option value='hotels'>Aadhar card</option>
+                        <option value='others' >pan card</option>
+                        <option value='others' >others</option>
+                    </select>
+                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => handleSubmit()}>upload</button>
+
+                </div>
+            </Modal>
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "19rem",marginLeft:'20rem' }} open={loading} >
+                {/* <img alt='loading' src='public/assets/img/loading.gif' /> */}
+                <CircularProgress/>
+            </Modal>
 
         </div>
     );

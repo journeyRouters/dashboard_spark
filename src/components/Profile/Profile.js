@@ -60,12 +60,14 @@ const Profile = (props) => {
                     inclusion_data: props.inclusion_data,
                 }
             });
+
         }
     }
 
     async function update_quotation_flg() {
+        debugger
         let quotation_new = parseInt(props.travel_data.quotation) + 1
-        await updateDoc(doc(db, "Trip", `${props.travel_data.trip_doc}`), {
+        await updateDoc(doc(db, "Trip", `${props.travel_data.TripId}`), {
             quotation: quotation_new,
             quotation_flg: true,
             month: month,
@@ -76,26 +78,19 @@ const Profile = (props) => {
 
     function handleExportWithComponent() {
         pdfExportComponent.current.save();
-        // pdfgenrator
+
     };
     function pdfgenrator() {
         handleExportWithComponent()
         update_quotation_flg()
-        // doc.html(document.querySelector("#sample"), {
-        //     // autoPaging:'text',
-        //     // pagesplit:true,
-        //     format: 'letter',
-        //     callback: function (pdf) {
-        //         pdf.save(Data.Traveller_name)
-        //     }
-        // })
 
-        // try {
-        //     props.closePDF()
-        // }
-        // catch (e) {
-        //     console.log(e)
-        // }
+
+        try {
+            props.datahandle()
+        }
+        catch (e) {
+            console.log(e)
+        }
 
         try {
 
@@ -119,6 +114,9 @@ const Profile = (props) => {
             <PDFExport
                 ref={pdfExportComponent}
                 fileName={`${Data.Traveller_name}`}
+                scale={0.6}
+                paperSize="A4"
+                margin="2cm"
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div id='sample'>
@@ -131,10 +129,10 @@ const Profile = (props) => {
                         </div>
                         <div className='pdf_Header'>
                             {/* <img alt="JR_image" src='/assets/img/jr_.png' width="41px" height="38px" /> */}
-                            <img alt='star_img' src="/assets/img/Journey_Routers_Logo.png" width="208px" height="38px" />
+                            <img alt='star_img' src="/assets/img/Journey_Routers_Logo.png" width="270px" height="50px" />
                         </div>
                         <div className='addressOfJr'>
-                            <p className='name'>Journey Routers</p>
+                            {/* <p className='name'>Journey Routers</p> */}
                             <p>
                                 2nd Floor, 258, Kuldeep
                                 House, Lane 3,, Champagali,
@@ -164,10 +162,10 @@ const Profile = (props) => {
                                 <div>
                                     <p>
 
-                                        Departure City : {props.travel_data.Departure_City}
+                                        Departure City :{props.travel_data.Departure_City}
                                     </p>
                                     <p>
-                                        Travelers: {props.travel_data.Traveller_name} ({props.travel_data.Pax} Adult ,Child{props.travel_data.Child})
+                                        Travelers:{props.travel_data.Traveller_name}
                                     </p>
                                 </div>
                                 <div>
@@ -187,12 +185,12 @@ const Profile = (props) => {
 
                             <div className='details1'>
                                 <div className='flightImgAliner'>
-                                    <p >Flight</p>
-                                    <img alt='plane' src='/assets/img/airplane.png' width='45px' height='35px' style={{ margin: "1rem", marginTop: "-0.4rem", marginBottom: "-0.7rem" }} />
+                                    <p className='headProfile' >Flight</p>
+                                    <img alt='plane' src='/assets/img/flight_image_setter.jpg' width='65px' height='55px' style={{ margin: "1rem", marginTop: "-1.5rem", marginBottom: "-0.7rem", marginLeft: "0.4rem" }} />
                                 </div>
                                 <p>{props.flights}</p>
                                 <div className='flightImgAliner'>
-                                    <p >Cabs</p>
+                                    <p className='headProfile' >Cabs</p>
                                     <img alt='plane' src='/assets/img/taxi.png' width='50px' height='50px' style={{ margin: "1rem", marginTop: "-0.7rem", marginBottom: "-1rem" }} />
                                 </div>
                                 <p>{props.cabDetailsData}</p>
@@ -216,8 +214,8 @@ const Profile = (props) => {
                             </div>
                             <div>
                                 <h1 className='travel_info1'>
-                                    <img alt='' src='/assets/img/hotel.png' width='55px' height='55px' />
-                                    <p>
+                                    <img alt='' src='/assets/img/hotel_img_setter.png' width='55px' height='55px' />
+                                    <p className='hotel_font'>
                                         Hotel
                                     </p>
                                 </h1>
@@ -295,7 +293,7 @@ const Profile = (props) => {
                             <div className='jraccountdetails'>
                                 <div className='accounts_and_bank'>
                                     Bank Transfer options
-                                    <img alt='icici' src='/assets/img/icici_image.jpg' width='59px' height='61px' />
+                                    <img alt='icici' src='/assets/img/icici_image.jpg' width='90px' height='61px' />
                                 </div>
                                 <div className='acc_details'>
                                     <span>Name:Journey Routers </span>
@@ -352,7 +350,7 @@ const Profile = (props) => {
 
                                     </p>
                                     <h5>
-                                        What kind of Visa Assistance would be provided by Pickyourtrail ?
+                                        What kind of Visa Assistance would be provided by Journey Routers ?
 
                                     </h5>
                                     <p className='answer'>
@@ -384,24 +382,28 @@ const Profile = (props) => {
                             <div className='cutomerCare'>
 
                                 <img src='/assets/img/customercare.png' width='90px' height='80px' />
-                                <div>
+                                <div className='contact_help_details'>
                                     <p>
                                         e-mail:
                                         <a href={'mailto:' + props.userProfile.email} target="_blank"> {props.userProfile.email}</a>
 
                                     </p>
-                                    <p>
-                                        contact:
-                                        <a href={'tel:' + props.userProfile.contact_number} target="_blank"> {props.userProfile.contact_number}</a>
+                                    <div className='aline_displayer'>
 
-                                    </p>
-                                    <a href={"https://wa.me/91" + props.userProfile.WhatsApp_number + "?text= Hi " + props.userProfile.name + " i want to plan a vaction, can you help me"} target="_blank">
-                                        <img alt="what's app" src="/assets/img/whatsapp-social-media-svgrepo-com.svg" width='32px' />
-                                    </a>
+                                        <p>
+                                            contact:
+                                            <a href={'tel:' + props.userProfile.contact_number} target="_blank"> {props.userProfile.contact_number}</a>
+
+                                        </p>
+                                        <a href={"https://wa.me/91" + props.userProfile.WhatsApp_number + "?text= Hi " + props.userProfile.name + " i want to plan a vaction, can you help me"} target="_blank">
+                                            <img alt="what's app" src="/assets/img/whatsapp-social-media-svgrepo-com.svg" width='32px' />
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
+
 
                     </div>
 

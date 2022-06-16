@@ -28,14 +28,14 @@
     margin-top: 0.3rem;
 }
 
-.TripId {
+.Tripid {
     color: brown;
     border: 0.1rem solid green;
     width: 15rem;
     margin-left: 2rem;
 }
 
-.TripId:hover {
+.Tripid:hover {
     transform: scale(1.1);
 }
 
@@ -51,6 +51,8 @@
 .AllDetailsOfTripQuoteComments {
     /* height: 5rem; */
     /* background: black; */
+    display: flex;
+    justify-content: space-between;
 }
 
 .allComments {
@@ -68,4 +70,102 @@
     align-items: center;
     justify-content: space-between;
     padding-left: 0.3rem;
+}
+
+.voucher_and_payments {
+    width: 29rem;
+    /* background: aqua; */
+}
+
+.hotel_flight_others {
+    display: flex;
+    justify-content: space-between;
+    width: 13rem;
+    margin-left: 15rem;
+}
+
+.vouchers_upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.upload_radio_button {
+    width: 13rem;
+    justify-content: space-between;
+    display: flex;
+    margin-right: 1rem;
+}
+
+.upload_proof {
+    color: blue;
+
+}
+
+.upload_proof:hover {
+    cursor: pointer;
+}
+
+.uploaderPopUp {
+    background: aliceblue;
+    width: 12rem;
+    height: 12rem;
+    margin: 7rem;
+    border-radius: 0.5rem;
+}
+
+.optionChoose {
+    width: 8rem;
+    height: 2rem;
+    margin: 2rem;
+}
+
+.upload_button {
+    margin: 1rem;
+    margin-left: 4rem;
+}
+
+.childpopup {
+    background: #983b9d;
+    display: none;
+    width: 400px;
+    height: 200px;
+    margin: -13rem;
+    margin-left: -25rem;
+    backface-visibility: hidden;
+    overflow-y: scroll;
+}
+
+.parent {
+    width: 15px;
+    /* height: 5px; */
+    background-color: #FFFFFF;
+}
+
+.childpopup {
+    display: none;
+}
+
+.parent:hover .childpopup {
+    display: block;
+}
+
+.hover_popup_main_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-left: 1rem;
+
+}
+.delete_button{
+    width: 3rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    cursor: pointer;
+    border: none;
 }

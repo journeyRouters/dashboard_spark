@@ -313,3 +313,36 @@
 //   );
 // }
 
+import React, { useState } from 'react';
+
+const Test = () => {
+    const[input,setinput]=useState('')
+    const[key,setkey]=useState(0)
+    function keychanges(e){
+        if(e.keyCode===13){
+            setkey(13)
+        }
+
+    }
+   function handleChange(e){
+    setinput(e.target.value)
+    if (key === 13) {
+        var temp=input
+        var newInput=temp+"\n*"+e.target.value
+        setinput(newInput)
+        // document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
+        return false;
+    }
+
+   }
+    return (
+        <div>
+            <textarea onChange={(e)=>handleChange(e)} onKeyDown={(e)=>keychanges(e)}></textarea>
+            <div>
+               {input}
+                </div>
+        </div>
+    );
+}
+
+export default Test;

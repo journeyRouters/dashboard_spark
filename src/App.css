@@ -65,7 +65,7 @@
 }
 .mainContaint{
   width: 80%;
-  height: 41rem;
+  height: 45rem;
   overflow-y: scroll;
 }
 .mainContaint::-webkit-scrollbar {

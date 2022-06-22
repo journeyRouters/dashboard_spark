@@ -123,7 +123,7 @@ const Row = (props) => {
         setopenupdater(false)
     }
     async function latestComments() {
-        const docRef = doc(db, "Trip", `${row.trip_doc}`);
+        const docRef = doc(db, "Trip", `${row.TripId}`);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -152,7 +152,7 @@ const Row = (props) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
+                // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
             } else {
                 console.log("No such document!");
                 // setinvocice({})
@@ -169,7 +169,7 @@ const Row = (props) => {
             let allComments = row.comments
             let comment_holder = {
                 comments: comments,
-                time: moment(today).format('MMMM DD YYYY'),
+                time: moment(today).format('YYYY-MM-DD'),
                 date: moment(today).format('h:mm:ss')
             }
             allComments.push(comment_holder)
@@ -185,9 +185,7 @@ const Row = (props) => {
             setcomments()
             props.datahandle()
         }
-        else {
-            // console.log("input please")
-        }
+       
 
     }
 
@@ -380,7 +378,7 @@ const Row = (props) => {
                                         {
                                             invoice ?
                                                 <>
-                                                    <p className='invoice_id'>{moment(invoice.created_at.toDate()).format('DD MM YYYY')}</p>
+                                                    <p className='invoice_id'>{moment(invoice.created_at.toDate()).format('YYYY-MM-DD')}</p>
                                                     <GetAppIcon onClick={() => setdownload(!download)} />
                                                     <EditIcon onClick={() => setEdit_flg()} />
                                                 </> :

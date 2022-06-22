@@ -1,5 +1,5 @@
 import { CircularProgress, makeStyles, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Row from './Row';
@@ -18,6 +18,67 @@ const FollowUp = (props) => {
     const [lead, setLead] = useState([])
     const [agent, setagent] = useState([])
     const animatedComponents = makeAnimated();
+    const [profile, setProfile] = useState(null)
+
+    /**these function are for 2nd run */
+    // async function getProfile(auth) {
+    //     try {
+    //         const docRef = doc(db, "Profile", auth.uid);
+    //         const docSnap = await getDoc(docRef);
+    //         if (docSnap.exists()) {
+    //             setProfile(docSnap.data())
+    //         } else {
+    //             console.log("No such document!");
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log({ error })
+    //     }
+    // }
+    // async function getLeadOnBoard() {
+    //     let list = []
+    //     var q;
+    //     if (profile.access_type === 'User') {
+    //         q = query(collection(db, "Trip"), where('TripId', 'in', props.profile.Lead_followUp));
+    //     }
+    //     var querySnapshot;
+    //     try {
+    //         if (profile.Lead_followUp.lenght!== 0) {
+
+    //             querySnapshot = await getDocs(q);
+    //         }
+    //         else {
+    //             setLead_data([])
+    //         }
+    //     }
+    //     catch {
+    //         setopen(false)
+    //     }
+
+    // }
+    // async function updateprofile_Lead_followUp(tripid){
+    //     var pre_Lead_followUp=profile.Lead_followUp
+    //     var elementIndex=pre_Lead_followUp.indexOf(tripid)
+    //     var new_Lead_followUp=pre_Lead_followUp.splice(elementIndex,1)
+    //     const docref=doc(db,"Profile",profile.uid)
+    //     await updateDoc(docref,{
+    //         "Lead_followUp":new_Lead_followUp
+    //     })
+    // }
+    // async function updateprofile_Lead_Vouchers(tripid){
+    //     var pre_Lead_Vouchers=profile.Lead_Vouchers
+    //     var new_Lead_Vouchers=pre_Lead_Vouchers.push(tripid)
+    //     const docref=doc(db,"Profile",profile.uid)
+    //     await updateDoc(docref,{
+    //         "Lead_Vouchers":new_Lead_Vouchers
+    //     })
+    // }
+    // function updateTableDataAfterConversion(tripid){
+    //     var pre_tableData=lead_data
+    //    var new_tableData= pre_tableData.filter((data)=>data.TripId!==tripid)
+    //    setLead_data(new_tableData)
+
+    // }
 
 
     async function datahandle() {
@@ -393,7 +454,10 @@ const FollowUp = (props) => {
                                                 <Row
                                                     auth={props.auth}
                                                     profile={props.profile}
-                                                    key={index} row={row} datahandle={datahandle} />
+                                                    key={index}
+                                                    row={row}
+                                                    datahandle={datahandle}
+                                                />
                                             ))}
                                     </TableBody>
                                 </Table>

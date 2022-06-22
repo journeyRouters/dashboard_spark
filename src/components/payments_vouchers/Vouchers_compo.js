@@ -9,9 +9,9 @@ import app from '../required';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const VouchersCompo = ({ data, datahandle }) => {
+const VouchersCompo = ({ data }) => {
     const [latestData, setlatestData] = useState(null)
-    const[loading,setloading]=useState(false)
+    const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
     const [details, setDetails] = useState(false)
     const [target, settarget] = useState(0)
@@ -21,7 +21,7 @@ const VouchersCompo = ({ data, datahandle }) => {
         setuploader(!openuploader)
         settarget(0)
     }
-    function stoploading(){
+    function stoploading() {
         setloading(false)
     }
     const [idproof, idproofcontrller] = useState(false)
@@ -63,7 +63,7 @@ const VouchersCompo = ({ data, datahandle }) => {
 
         }
         if (target === 'hotels') {
-            let previousData = data.Vouchers_hotels
+            let previousData = latestData.Vouchers_hotels
             console.log(data.Vouchers_hotels)
             let content =
             {
@@ -80,7 +80,7 @@ const VouchersCompo = ({ data, datahandle }) => {
 
         }
         if (target === 'others') {
-            let previousData = data.Vouchers_others
+            let previousData = latestData.Vouchers_others
             console.log(data.Vouchers_others)
             let content =
             {
@@ -95,6 +95,19 @@ const VouchersCompo = ({ data, datahandle }) => {
                 "Vouchers_others": previousData
             });
 
+        }
+        else {
+            let previousData = latestData.vouchers_idproof
+            let content = {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            await updateDoc(docref, {
+                "vouchers_idproof": previousData
+            })
         }
 
     }
@@ -154,6 +167,52 @@ const VouchersCompo = ({ data, datahandle }) => {
         delete_vouchers_from_firebase_firestore(target, index)
         getdatalatest()
     }
+    async function uploadIdProof() {
+        /**this function will upload the file in firebase storage
+           vouchers/tripid/flight,hotel,others/filename 
+         */
+        const handles = await window.showOpenFilePicker({ multiple: false });
+        const file = await fromEvent(handles);
+        uploaderpopup()
+        setloading(true)
+        if (!file) return;
+        const storageRef = ref(storage, `vouchers/${data.TripId}/id_proof/${target}/${file[0].name}`);
+        const path = `vouchers/${data.TripId}/id_proof/${target}/${file[0].name}`
+        const name = file[0].name
+        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // console.log(snapshot)
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        // console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        break;
+                    case 'storage/canceled':
+                        break;
+                    case 'storage/unknown':
+                        break;
+                }
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                    updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
+                    getdatalatest()
+                    stoploading()
+
+                });
+            }
+        );
+    }
     async function delete_vouchers_from_firebase_firestore(target, del_index) {
         const docref = doc(db, "Trip", data.TripId);
         console.log(target)
@@ -182,6 +241,13 @@ const VouchersCompo = ({ data, datahandle }) => {
                 "Vouchers_others": previousData
             });
 
+        }
+        else{
+            let previousData = data.vouchers_idproof
+            previousData.splice(del_index, 1)
+            await updateDoc(docref, {
+                "vouchers_idproof": previousData
+            });
         }
     }
     function deleteuploadedvoucher_from_firebase_storage(path) {
@@ -258,10 +324,21 @@ const VouchersCompo = ({ data, datahandle }) => {
                                 <p>ID proof/<span className='upload_proof' onClick={() => idproofcontrller(true)}>upload</span></p>
                                 <div className='upload_radio_button'>
                                     <div className='parent'>
-                                        <input type='radio' checked={false} readOnly>
+                                        <input type='radio' checked={latestData.vouchers_idproof.length != 0} readOnly>
                                         </input>
                                         <div className='childpopup'>
-
+                                            {
+                                                latestData.vouchers_idproof.map((id, index) => (
+                                                    <>
+                                                        <div className='hover_popup_main_div'>
+                                                            <p>
+                                                                {id.name}
+                                                            </p>
+                                                            <a href={id.link} download={id.name}  target="_blank">download</a>
+                                                            <button onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
                                         </div>
                                     </div>
                                 </div>
@@ -285,6 +362,8 @@ const VouchersCompo = ({ data, datahandle }) => {
                                                             <p>
                                                                 {hotel.name}
                                                             </p>
+                                                            <a href={hotel.link} download={hotel.name}  target="_blank">download</a>
+
                                                             <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
@@ -301,6 +380,7 @@ const VouchersCompo = ({ data, datahandle }) => {
                                                             <p>
                                                                 {flight.name}
                                                             </p>
+                                                            <a href={flight.link} download={flight.name}  target="_blank">download</a>
                                                             <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
@@ -310,13 +390,14 @@ const VouchersCompo = ({ data, datahandle }) => {
                                     <div className='parent'>
                                         <input type='radio' checked={latestData.Vouchers_others.length != 0} readOnly></input>
                                         <div className='childpopup'>
-                                        {
+                                            {
                                                 latestData.Vouchers_others.map((others, index) => (
                                                     <>
                                                         <div className='hover_popup_main_div'>
                                                             <p>
                                                                 {others.name}
                                                             </p>
+                                                            <a href={others.link} download={others.name}  target="_blank">download</a>
                                                             <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
@@ -374,18 +455,18 @@ const VouchersCompo = ({ data, datahandle }) => {
                 <div className='uploaderPopUp'>
                     <select className='optionChoose' onChange={(e) => optionHandler(e)}>
                         <option value={0}>choose here</option>
-                        <option value='flights'>Passport</option>
-                        <option value='hotels'>Aadhar card</option>
-                        <option value='others' >pan card</option>
+                        <option value='Passport'>Passport</option>
+                        <option value='Aadhar card'>Aadhar card</option>
+                        <option value='pan card' >pan card</option>
                         <option value='others' >others</option>
                     </select>
-                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => handleSubmit()}>upload</button>
+                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => uploadIdProof()}>upload</button>
 
                 </div>
             </Modal>
-            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "19rem",marginLeft:'20rem' }} open={loading} >
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "19rem", marginLeft: '20rem' }} open={loading} >
                 {/* <img alt='loading' src='public/assets/img/loading.gif' /> */}
-                <CircularProgress/>
+                <CircularProgress />
             </Modal>
 
         </div>

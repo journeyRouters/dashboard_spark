@@ -65,7 +65,7 @@ const Profile = (props) => {
     }
 
     async function update_quotation_flg() {
-        debugger
+        // debugger
         let quotation_new = parseInt(props.travel_data.quotation) + 1
         await updateDoc(doc(db, "Trip", `${props.travel_data.TripId}`), {
             quotation: quotation_new,
@@ -114,9 +114,7 @@ const Profile = (props) => {
             <PDFExport
                 ref={pdfExportComponent}
                 fileName={`${Data.Traveller_name}`}
-                scale={0.6}
-                paperSize="A4"
-                margin="2cm"
+            
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div id='sample'>

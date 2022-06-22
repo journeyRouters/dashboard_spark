@@ -15,6 +15,8 @@ import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import Vouchers from './components/payments_vouchers/Vouchers'
 import TestTable from './components/tester/TestTable';
+import Driver from './components/leadDriver/Driver';
+import moment from 'moment';
 
 
 function App() {
@@ -26,12 +28,6 @@ function App() {
   const [auth, setauth] = useState()
   const [Page, setPage] = React.useState("")
   const oauth = getAuth();
-  // const [inProgress,setInProgress]=React.useState(false)
-  // const unsub = onSnapshot(doc(db, "cities", "LA"), (doc) => {
-  //   // console.log("Current data: ", doc.data());
-  //   // setData(doc.data())
-
-  // });
 
   function setAuthFirebase(args) {
     console.log("setting auth")
@@ -51,12 +47,10 @@ function App() {
       readXlsxFile(files[0]).then((rows) => {
         for (let i = 1; i <= rows.length - 1; i++) {
           let Row = rows[i]
-          let id = `trp00${i}`
           let any=Math.random()
           let tripid=`TRP${any}`
           setDoc(doc(db, "Trip", tripid), {
             TripId: tripid,
-            trip_doc: id,
             Lead_Status: Row[0],
             Campaign_code: Row[1],
             Date_of_lead: Row[2],
@@ -76,7 +70,7 @@ function App() {
             Follow_Up_date: Row[16],
             uploaded_by: auth.email,
             Quoted_by: null,
-            uploaded_date: `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`,
+            uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
             uploaded_time: `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}:${currentdate.getMilliseconds()}`,
             quotation: 0,
             quotation_flg: false,
@@ -85,11 +79,19 @@ function App() {
            Vouchers_flight:[],
            Vouchers_hotels:[],
            Vouchers_others:[],
-           vouchers_idproof:[]
+           vouchers_idproof:[],
+           transfer_request:false,
+           transfer_request_reason:[],  
+           assign_to:{
+            uid:null,
+            name:null
+           },
+           updated_last:null,
+           assign_flg:false
           });
         }
         // console.log(rows[1][0])
-        uploadFileOnStorage(path,'dingdong')
+        // uploadFileOnStorage(path,'dingdong')
       })
     }
     else {
@@ -260,6 +262,12 @@ function App() {
               <p>Profile</p>
             </div>
           </div>
+          <div className='sidebarCard' onClick={(() => page("Driver"))}>
+            <div className='sidebarCardContaint'>
+              <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
+              <p>Driver</p>
+            </div>
+          </div>
 
           {
             profile ?
@@ -327,7 +335,14 @@ function App() {
           {
             Page === "profile" ?
               <>
-                {/* <Test /> */}
+                <Test />
+              </>
+              : <></>
+          }
+          {
+            Page === "Driver" ?
+              <>
+                <Driver/>
               </>
               : <></>
           }

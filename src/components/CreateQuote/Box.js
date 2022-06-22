@@ -52,6 +52,8 @@ const Box = (props) => {
     function closeInclusion() {
         setInclusion(false)
     }
+   
+    
     function handleOptionOfNights() {
         // console.log('run')
         var list = []

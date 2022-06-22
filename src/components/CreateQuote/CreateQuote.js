@@ -90,7 +90,7 @@ const Createquote = (props) => {
         console.log(profile.Lead_Current)
         let list = []
         var q;
-        if (profile.access_type === 'User') {
+        if (profile) {
             q = query(collection(db, "Trip"), where('TripId', 'in', profile.Lead_Current));
         }
         var querySnapshot;
@@ -128,6 +128,7 @@ const Createquote = (props) => {
 
     /**//////////////////////////////////////////////////// */
     useEffect(() => {
+        window.scrollTo(0, 0);
         console.log(props.auth.uid)
         getProfile(props.auth)
     }, [popupopener]);

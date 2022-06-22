@@ -1,17 +1,17 @@
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 3.5rem;
   color: #3e3e3e;
- text-transform: uppercase;
-  background-color:#56c4c1;
+  text-transform: uppercase;
+  background-color: #56c4c1;
   position: sticky;
   top: 0;
 }
 
-.sidebars{
+.sidebars {
   width: 20%;
   height: 41rem;
   /* background-color:#dfd2d2; */
@@ -19,9 +19,11 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  border: 1px solid green;
 
-} 
-.button{
+}
+
+.button {
   /* width: 4rem; */
   /* height: 1.5rem; */
   /* background-color: #8a8abbb3; */
@@ -29,15 +31,18 @@
   /* border-radius: 10px; */
   margin-right: 1rem;
 }
-.button:hover{
+
+.button:hover {
   transform: scale(1.5);
 }
-.headLine{
+
+.headLine {
   width: 9rem;
- font-family: 'Courier New', Courier, monospace;
- margin-left: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 2rem;
 }
-.sidebarCardContaint{
+
+.sidebarCardContaint {
   margin-left: 1rem;
   width: 55%;
   display: flex;
@@ -45,32 +50,42 @@
   justify-content: flex-start;
   font-family: Montserrat;
 }
-.sidebarCard{
+
+.sidebarCard {
   width: 100%;
   height: 5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  background-image: linear-gradient(to right, #554c4c, #00ffc2);
+  color: white;
 }
-.sidebarCard:hover{
+
+.sidebarCard:hover {
   color: #56c2c4;
   background: #f8f8f8;
   cursor: pointer;
 }
-.assembler{
+
+.assembler {
   display: flex;
   overflow: hidden;
 
 }
-.mainContaint{
+
+.mainContaint {
   width: 80%;
   height: 45rem;
   overflow-y: scroll;
+  margin-left: 19.3rem;
 }
+
 .mainContaint::-webkit-scrollbar {
-  display:none;}
-.popUp{
+  display: none;
+}
+
+.popUp {
   width: 20rem;
   height: 25rem;
   display: flex;
@@ -80,7 +95,8 @@
   background-color: #56c2c4;
   align-items: center;
 }
-.popUp_{
+
+.popUp_ {
   width: 20rem;
   height: 35rem;
   display: flex;
@@ -88,28 +104,32 @@
   border-radius: 1rem;
   justify-content: flex-start;
   background-color: #56c2c4;
-  align-items: center; 
+  align-items: center;
 }
-.inputEmail{
+
+.inputEmail {
   margin-top: 2rem;
   width: 17rem;
   height: 2rem;
   border-radius: 1rem;
 }
-.inputEmailerror{
+
+.inputEmailerror {
   margin-top: 2rem;
   width: 17rem;
   height: 2rem;
   border-radius: 1rem;
   border: 0.2rem solid rgb(202, 6, 6);
 }
-.inputPassword{
+
+.inputPassword {
   margin-top: 2rem;
   width: 17rem;
   height: 2rem;
   border-radius: 1rem;
 }
-.inputPassworderror{
+
+.inputPassworderror {
   margin-top: 2rem;
   width: 17rem;
   height: 2rem;
@@ -117,7 +137,8 @@
   border: 0.2rem solid rgb(202, 6, 6);
 
 }
-.signInWithGoogle{
+
+.signInWithGoogle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,10 +150,12 @@
   font-family: Montserrat;
   /* background: #da4733; */
 }
-.signInWithGoogleText{
+
+.signInWithGoogleText {
   margin-left: 1rem;
 }
-.signIn{
+
+.signIn {
   margin-top: 3rem;
   width: 7rem;
   height: 2rem;
@@ -140,17 +163,20 @@
   background: rgb(22, 191, 221);
   border-radius: 1rem;
 }
-.top{
+
+.top {
   width: 4rem;
   height: 3rem;
   background-color: rgb(28, 212, 59);
   border-radius: 1rem;
   display: flex;
 }
-.create_new_account{
+
+.create_new_account {
   color: rgb(20, 20, 190);
 }
-.create_new_account:hover{
+
+.create_new_account:hover {
   cursor: pointer;
 
 }

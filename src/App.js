@@ -1,4 +1,4 @@
-import { BackupOutlined, FileCopyOutlined, Fingerprint, Speed, PersonOutlineOutlined } from '@material-ui/icons';
+import { BackupOutlined, FileCopyOutlined, Fingerprint, Speed, PersonOutlineOutlined,SearchTwoTone,TrendingUp,SwapCalls,AccountBalanceWalletTwoTone,AccountTreeTwoTone } from '@material-ui/icons';
 import { fromEvent } from "file-selector";
 import { getAuth, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
@@ -17,6 +17,7 @@ import Vouchers from './components/payments_vouchers/Vouchers'
 import TestTable from './components/tester/TestTable';
 import Driver from './components/leadDriver/Driver';
 import moment from 'moment';
+import Investigation from './components/Investigation/investigation';
 
 
 function App() {
@@ -252,7 +253,7 @@ function App() {
           </div>
           <div className='sidebarCard' onClick={(() => page("voucher"))}>
             <div className='sidebarCardContaint'>
-              <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
+              <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
               <p>voucher & payments</p>
             </div>
           </div>
@@ -264,8 +265,14 @@ function App() {
           </div>
           <div className='sidebarCard' onClick={(() => page("Driver"))}>
             <div className='sidebarCardContaint'>
-              <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
+              <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
               <p>Driver</p>
+            </div>
+          </div>
+          <div className='sidebarCard' onClick={(() => page("transfer_request"))}>
+            <div className='sidebarCardContaint'>
+              <TrendingUp style={{ marginRight: "1rem" }} />
+              <p>Transfer Requests</p>
             </div>
           </div>
 
@@ -277,7 +284,7 @@ function App() {
                     <>
                       <div className='sidebarCard' onClick={() => page("User_Controller")}>
                         <div className='sidebarCardContaint'>
-                          <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                          <SwapCalls style={{ marginRight: "1rem" }} />
                           <p>User Controller</p>
                         </div>
                       </div>
@@ -285,6 +292,12 @@ function App() {
                         <div className='sidebarCardContaint'>
                           <BackupOutlined style={{ marginRight: "1rem" }} />
                           <p>Feed The Lead</p>
+                        </div>
+                      </div>
+                      <div className='sidebarCard' onClick={() => page("Investigation")}>
+                        <div className='sidebarCardContaint'>
+                          <SearchTwoTone style={{ marginRight: "1rem" }} />
+                          <p>Investigation</p>
                         </div>
                       </div>
                     </>
@@ -306,6 +319,11 @@ function App() {
           {
             Page === "rapid_fire" ?
               <Rapid />
+              : <></>
+          }
+          {
+            Page === "Investigation" ?
+              <Investigation />
               : <></>
           }
           {

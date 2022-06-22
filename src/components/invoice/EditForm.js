@@ -136,7 +136,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile ,installm
                         {
                             installment.map((data, index) => (
                                 <>
-                                    <div className=''>
+                                    <div key={index} className=''>
                                         <label>INSTALLMENT{index + 1}</label>
 
                                     </div>

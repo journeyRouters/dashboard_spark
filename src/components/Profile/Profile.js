@@ -267,7 +267,7 @@ const Profile = (props) => {
                                     <p className='comments_details'>
                                         {
                                             comment_inclusion.map((comment, index) => (
-                                                <p>
+                                                <p key={index}>
                                                     * {`${comment.toString()}`}
                                                 </p>
                                             ))
@@ -277,7 +277,7 @@ const Profile = (props) => {
                                     <p className='comments_details'>
                                         {
                                             Comment_Exclusion.map((comment, index) => (
-                                                <p>
+                                                <p key={index}>
                                                     *{comment}
                                                 </p>
                                             ))

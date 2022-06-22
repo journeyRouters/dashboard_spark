@@ -316,7 +316,7 @@ const Box = (props) => {
                                 NightDataFields.map((form, index) => {
                                     return (
                                         <>
-                                            <div className='costOption_estimatiom'>
+                                            <div key={index} className='costOption_estimatiom'>
                                                 <div className='unitComponent'>
                                                     <label>Night</label><br />
                                                     <Select
@@ -458,7 +458,7 @@ const Box = (props) => {
                                 days_total &&
                                 days_total.map((data, index) => {
                                     return (
-                                        <div className='days'>
+                                        <div key={index} className='days'>
                                             <label className='title'>Day{index + 1}:Title</label><br />
                                             <input className='dayByitineary' placeholder='Enter Title of the day' name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                             <div>

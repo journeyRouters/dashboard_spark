@@ -5,15 +5,22 @@ import app from '../required';
 import './Driver.css';
 
 
-const DriverComponents = ({ data, profile, index,getLeadByDate }) => {
+const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
     function handlebackendProfileAndtrip(tripid, uid, Name) {
-        update_lead_field(uid,Name)
-        getLeadByDate(currentdate)
+        update_lead_field(uid, Name)
         assignTask(tripid)
+        if (selectedDate !== null) {
+            getLeadByDate(selectedDate)
+        }
+        else {
+
+            getLeadByDate(currentdate)
+        }
+
     }
     async function assignTask(tripid) {
         /**this function will update the lead_current feild in profile with new trip id */
@@ -77,7 +84,7 @@ const DriverComponents = ({ data, profile, index,getLeadByDate }) => {
                     {
                         profile.map((data, index) => (<>
                             {/* {console.log(data.Lead_Current)} */}
-                            <option value={data.uid}>{data.name}</option>
+                            <option key={index} value={data.uid}>{data.name}</option>
 
                         </>))
                     }

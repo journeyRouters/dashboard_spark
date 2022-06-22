@@ -144,7 +144,7 @@ const Redownload = (props) => {
                                                 <span className='index'>Room Type:- </span>{data.HotelType}
                                                 <p className='set_in_line'>nights :-{
                                                     data.Night.map((value, index) => (
-                                                        <div> {value}, </div>
+                                                        <div key={index}> {value}, </div>
                                                     ))
                                                 }</p>
                                                 <h1 className='pdfImg'>
@@ -187,7 +187,7 @@ const Redownload = (props) => {
                                         <p className='comments_details'>
                                             {
                                                 comment_inclusion.map((comment, index) => (
-                                                    <p>
+                                                    <p key={index}>
                                                         * {`${comment.toString()}`}
                                                     </p>
                                                 ))
@@ -197,7 +197,7 @@ const Redownload = (props) => {
                                         <p className='comments_details'>
                                             {
                                                 Comment_Exclusion.map((comment, index) => (
-                                                    <p>
+                                                    <p key={index}>
                                                         *{comment}
                                                     </p>
                                                 ))

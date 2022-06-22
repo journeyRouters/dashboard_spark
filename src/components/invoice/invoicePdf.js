@@ -95,7 +95,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                                 installment.length != 0 ? <>
                                     {
                                         installment.map((installment, index) => (
-                                            <p className='dataMapper_jr_invoice'>
+                                            <p key={index} className='dataMapper_jr_invoice'>
                                                 <span>{installment.Date}</span>
                                                 <span>Pending</span>
                                                 <span>{installment.amount}</span>
@@ -156,7 +156,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                             <h5>Hotel Details</h5>
                             {
                                 selected_pdf_data.NightDataFields.map((data, index) => (
-                                    <div className='hotel_desc_jr_invoice'>
+                                    <div key={index} className='hotel_desc_jr_invoice'>
                                         <span>*{data.City}({data.Night})</span><br />
                                         <span>{data.HotelName}</span><br />
                                         <span>{data.HotelType}({data.Category})</span><br />
@@ -191,7 +191,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                                     <p className='comments_details'>
                                         {
                                             comment_inclusion.map((comment, index) => (
-                                                <p>
+                                                <p key={index}>
                                                     * {`${comment.toString()}`}
                                                 </p>
                                             ))
@@ -201,7 +201,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                                     <p className='comments_details'>
                                         {
                                             Comment_Exclusion.map((comment, index) => (
-                                                <p>
+                                                <p key={index}>
                                                     *{comment}
                                                 </p>
                                             ))
@@ -227,7 +227,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                                 <h4>Document(s) required from you</h4>
                                 {
                                     documents.map((data, index) => (<>
-                                        <span>*{data}</span><br />
+                                        <span key={index}>*{data}</span><br />
                                     </>))
                                 }
                             </div>

@@ -20,8 +20,12 @@ const Createquote = (props) => {
     const time = new Date()
     const [profile, setProfile] = useState(null)
     const Current = time.getSeconds()
-    const [lastVisible, setlastVisible] = useState()
+    const [transfermodal, settransfermodal] = useState(false)
+    const [lastVisible, setlastVisible] = useState(null)
 
+    function handletransfermodal() {
+        settransfermodal(!transfermodal)
+    }
     let tHead = [
         "TripId",
         "NAME",
@@ -30,7 +34,7 @@ const Createquote = (props) => {
         "Budget",
         "Email",
         "Lead_Status",
-        "Delete",
+        "Action",
         "Quote",
     ];
     let col = [
@@ -41,7 +45,7 @@ const Createquote = (props) => {
         "Budget",
         "Email",
         "Lead_Status",
-        "delete",
+        "Transfer",
         "Quote",
     ];
     // /**new logic solution be apart from previous one */
@@ -53,7 +57,8 @@ const Createquote = (props) => {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setProfile(docSnap.data())
-                getLeadOnBoard(docSnap.data())
+                getdocandmergetolist(docSnap.data().Lead_Current)
+                // getLeadOnBoard(docSnap.data())
                 // console.log("Document data:", docSnap.data());
             } else {
                 console.log("No such document!");
@@ -86,45 +91,63 @@ const Createquote = (props) => {
             "Lead_Current": new_Lead_Current
         })
     }
-    async function getLeadOnBoard(profile) {
-        console.log(profile.Lead_Current)
-        let list = []
-        var q;
-        if (profile) {
-            q = query(collection(db, "Trip"), where('TripId', 'in', profile.Lead_Current));
-        }
-        var querySnapshot;
-        try {
-            if (profile.Lead_Current.lenght !== 0) {
-
-                querySnapshot = await getDocs(q);
-                try {
-
-                    if (querySnapshot.docs.length == 0) {
-                        setopen(false)
-                    }
-
-                    querySnapshot.forEach((doc) => {
-                        list.push(doc.data())
-                        // doc.data() is never undefined for query doc snapshots
-                    });
-                    setLead_data(list)
-                    console.log(list);
-                    setopen(false)
-                }
-                catch (error) {
-                    console.log(error)
-                }
-            }
-            else {
-                setLead_data([])
+    async function getdocandmergetolist(list) {
+        console.log(list.length)
+        let list_ = []
+        for (let index = 0; index < list.length; index++) {
+            const docRef = doc(db, "Trip", list[index]);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                list_.push(docSnap.data())
+                console.log("Document data:", docSnap.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
             }
         }
-        catch {
-            setopen(false)
-        }
+        setLead_data(list_)
+        setopen(false)
 
     }
+    // async function getLeadOnBoard(profile) {
+    //     console.log(profile.Lead_Current)
+    //     let list = []
+    //     var q;
+    //     if (profile) {
+    //         q = query(collection(db, "Trip"), where('TripId', 'in', profile.Lead_Current));
+    //     }
+    //     var querySnapshot;
+    //     try {
+    //         if (profile.Lead_Current.lenght !== 0) {
+
+    //             querySnapshot = await getDocs(q);
+    //             try {
+
+    //                 if (querySnapshot.docs.length == 0) {
+    //                     setopen(false)
+    //                 }
+
+    //                 querySnapshot.forEach((doc) => {
+    //                     list.push(doc.data())
+    //                     // doc.data() is never undefined for query doc snapshots
+    //                 });
+    //                 setLead_data(list)
+    //                 console.log(list);
+    //                 setopen(false)
+    //             }
+    //             catch (error) {
+    //                 console.log(error)
+    //             }
+    //         }
+    //         else {
+    //             setLead_data([])
+    //         }
+    //     }
+    //     catch {
+    //         setopen(false)
+    //     }
+
+    // }
 
     /**//////////////////////////////////////////////////// */
     useEffect(() => {
@@ -189,6 +212,7 @@ const Createquote = (props) => {
     //     }
 
     // }
+
     class BaseProductDeleteComponent extends React.Component {
         constructor(props) {
             super(props);
@@ -204,8 +228,8 @@ const Createquote = (props) => {
                     <input
                         type="button"
                         className="btn btn-danger"
-                        value="Delete"
-                        onClick={this.deleteItem}
+                        value="Transfer"
+                        onClick={() => handletransfermodal()}
                     />
                 </td>
             );
@@ -285,6 +309,12 @@ const Createquote = (props) => {
         <div>
             {
                 props.auth ? <>
+                    <Modal open={transfermodal} onClose={handletransfermodal}>
+                        <>
+                            transfer
+                        </>
+
+                    </Modal>
                     {
                         lead_data.length == 0 ? <>
                             {
@@ -320,7 +350,7 @@ const Createquote = (props) => {
                                         customTd={[
                                             // { custd: BaseProductTblImageComponent, keyItem: "imageUrl" },
                                             { custd: BaseProductEditComponent, keyItem: "Quote" },
-                                            { custd: BaseProductDeleteComponent, keyItem: "delete" },
+                                            { custd: BaseProductDeleteComponent, keyItem: "Transfer" },
                                         ]}
                                         dKey={col}
                                     />

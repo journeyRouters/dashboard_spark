@@ -24,6 +24,7 @@ const Driver = () => {
     async function getLeadByDate(date) {
         var list = []
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', date));
+        console.log(date)
         try {
             var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
@@ -52,8 +53,10 @@ const Driver = () => {
 
     }, []);
     useEffect(() => {
-        window.scrollTo(0, 0);
+        setSeletctedDate(currentdate)
+        console.log(selectedDate)
         getLeadByDate(currentdate)
+        // window.scrollTo(0, 0);
     }, []);
 
     return (
@@ -91,7 +94,7 @@ const Driver = () => {
             </Modal>
             <div className='Driver_header'>
                 <div>
-                    <input onChange={(e) => setSeletctedDate(e.target.value)} type='date'></input>
+                    <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>
                     <button onClick={() => getLeadByDate(selectedDate)}>Search</button>
                 </div>
                 <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>
@@ -99,7 +102,7 @@ const Driver = () => {
             </div>
             <div>
                 {lead_data.map((data, index) => (
-                    <DriverComponents profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} />
+                    <DriverComponents key={index} profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} selectedDate={selectedDate}/>
                 ))}
             </div>
         </div>

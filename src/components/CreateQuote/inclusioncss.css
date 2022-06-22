@@ -74,3 +74,9 @@
     justify-content: space-between;
     /* float: right; */
 }
+.kRKnx{
+    background-color: yellow !important;
+}
+.kRKnx.defaultCSS .search-box{
+    background-color: #FFFFFF !important;
+}

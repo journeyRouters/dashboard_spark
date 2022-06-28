@@ -7,6 +7,7 @@ import Box from './Box';
 import './TripComponent.css';
 import SortableTbl from 'react-sort-search-table';
 import Profile from '../Profile/Profile';
+import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -310,9 +311,10 @@ const Createquote = (props) => {
             {
                 props.auth ? <>
                     <Modal open={transfermodal} onClose={handletransfermodal}>
-                        <>
-                            transfer
-                        </>
+                        <div className='transferLead'>
+                            <textarea style={{height:'6rem'}} placeholder='please explain your reason to do so....'></textarea>
+                          <SendIcon className='sendqueryButton' />
+                        </div>
 
                     </Modal>
                     {

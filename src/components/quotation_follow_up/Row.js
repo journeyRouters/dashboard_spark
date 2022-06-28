@@ -333,7 +333,7 @@ const Row = (props) => {
                                                         <p key={index}>{data.value.pdf_name}</p>
                                                         <button onClick={() => showPDF(data.value)} className='download_requote'>
                                                             downloadURL</button>
-                                                        <button className='download_requote' onClick={() => Controller_reqoute()}>Requote</button>
+                                                        <button className='download_requote' onClick={() => Controller_reqoute()}>Edit</button>
                                                         {
                                                             Reqoute_flg ? <>
                                                                 <Reqoute

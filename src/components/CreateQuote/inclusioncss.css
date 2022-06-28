@@ -80,3 +80,16 @@
 .kRKnx.defaultCSS .search-box{
     background-color: #FFFFFF !important;
 }
+.transferLead{
+    margin: 12rem;
+    width: 24rem;
+    height: 10rem;
+    background: #FFFFFF;
+    margin-left: 53rem;
+    display: flex;
+    flex-direction: column;
+}
+.sendqueryButton{
+    margin-left: 21rem;
+    margin-top: 1rem;
+}

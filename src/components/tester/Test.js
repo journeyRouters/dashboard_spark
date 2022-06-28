@@ -41,7 +41,7 @@
 //       <div className="box wide hidden-on-narrow">
 //         <div className="box-col">
 //           <h4>Select a Page Size</h4>
-          
+
 //         </div>
 //         <div className="box-col">
 //           <h4>Export PDF</h4>
@@ -313,35 +313,258 @@
 //   );
 // }
 
-import React, { useState } from 'react';
+import { PDFExport } from "@progress/kendo-react-pdf";
+import { useRef, useState } from 'react';
+import '../Profile/profile.css';
+import '../Profile/pdfcss.css';
 
 const Test = () => {
-    const[input,setinput]=useState('')
-    const[key,setkey]=useState(0)
-    function keychanges(e){
-        if(e.keyCode===13){
+    const pdfExportComponent = useRef(null);
+    const [layoutSelection, setLayoutSelection] = useState({
+        text: "A4",
+        value: "size-a4"
+    });
+    const [input, setinput] = useState('')
+    const [key, setkey] = useState(0)
+    function keychanges(e) {
+        if (e.keyCode === 13) {
             setkey(13)
         }
 
     }
-   function handleChange(e){
-    setinput(e.target.value)
-    if (key === 13) {
-        var temp=input
-        var newInput=temp+"\n*"+e.target.value
-        setinput(newInput)
-        // document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
-        return false;
-    }
+    function handleExportWithComponent() {
+        pdfExportComponent.current.save();
 
-   }
+    };
+    function handleChange(e) {
+        setinput(e.target.value)
+        if (key === 13) {
+            var temp = input
+            var newInput = temp + "\n*" + e.target.value
+            setinput(newInput)
+            // document.getElementById("txtArea").value = document.getElementById("txtArea").value + "\n*";
+            return false;
+        }
+
+    }
     return (
-        <div>
-            <textarea onChange={(e)=>handleChange(e)} onKeyDown={(e)=>keychanges(e)}></textarea>
-            <div>
-               {input}
+        <>
+            <PDFExport
+                ref={pdfExportComponent}
+                fileName={`${'Traveller_name'}`}
+                forcePageBreak=".page-break"
+            >
+                <div className={`pre ${layoutSelection.value}`}>
+                    <div className={'page1'}>
+                        <div>
+                            <a href={"https://wa.me/919304247331"} target="_blank">
+                                <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
+                            </a>
+                        </div>
+                        <div className="footer">
+                            <div className="footer_img_with_text">
+                                <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
+
+                                <div className="footer_call_for_more_info">
+                                    <span>Call for More Information</span>
+                                    <span>
+                                        <a className="href" href="tel:9304247331">
+                                            +91-9304247331
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="DividerLine"></div>
+                            <div className="footer_web_info">
+                                <div>
+                                    <img src="/assets/pdfDefaultImage/weblogo.png" height='63px' />
+                                </div>
+                                <div className="web_info_text">
+                                    <span>Visit Us  At</span><br />
+                                    <span>
+                                        <a className="href" href="https://www.journeyrouters.com/" target="_blank">
+                                            www.journeyrouters.com
+                                        </a>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="page2" style={{
+                            backgroundImage: "url(/assets/pdfDefaultImage/package.png)",
+                            backgroundPosition: "top",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            // color:"white"
+                        }}>
+
+                            <div className="package_details">
+                                <div>
+                                    <span>Destination</span><br />
+                                    <span>Date</span><br />
+                                    <span>Duration</span><br />
+                                    <span>Traveler</span>
+                                </div>
+                                <div >
+                                    <span>- BALI</span><br />
+                                    <span>- 24 Apri 2022</span><br />
+                                    <span>- 6 Day 5 Nights</span><br />
+                                    <span>- 2 Adult</span><br />
+                                </div>
+
+                            </div>
+                            <div className="yellow_details">
+                                <p className="dayDetails">6 Days 5 Nights</p>
+                                <p className="setPara">at just</p>
+                                <h4 className="seth4">INR 3,00,000/-</h4>
+                                <p className="setPara_">Per Person</p>
+                            </div>
+                            <div >
+                                <div className="bottom_media_details">Follow Us At
+                                    <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
+                                    <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
+                                    <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
+                                    <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+                                    @journeyrouters
+                                    <a href={"https://wa.me/919304247331"} target="_blank">
+                                        <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
+                                    </a>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/jrgoogleReview.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div></div>
+                            <div className="google_review_bottom">
+                                <div className="reiew_c1">
+                                    <a href="https://g.co/kgs/VwbmYT" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://g.co/kgs/ZK68wZ" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://g.co/kgs/qM1e2f" target="_blank">
+
+                                        <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img" />
+                                    </a>
+
+                                </div>
+                                <div className="reiew_c2">
+                                    <a href="https://www.journeyrouters.com/" target='_blank' className="link">
+                                        <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
+                                        <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
+                                        <span> 300 & Counting Google Review</span>
+                                    </a>
+                                    <a href="https://g.co/kgs/ReZyXo" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://g.co/kgs/ByT5hQ" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Stephen Raj.PNG" className="review_img" />
+                                    </a>
+
+
+                                </div>
+                                <div className="reiew_c3">
+                                    <a href="https://g.co/kgs/iD3DvX" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://g.co/kgs/iD3DvX" target="_blank" >
+                                        <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://g.co/kgs/kXdzCU" target="_blank" >
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img" />
+                                    </a>
+                                    <a href="https://wa.me/919304247331" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/whatApp.png" className="whatsapp" />
+                                    </a>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/paymentspage.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div>
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/journeyRouters_about.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div>
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div>
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-        </div>
+            </PDFExport>
+
+            <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>
+            {/* <button className='download_button' onClick={() => pdfgenrator()}>save Quote</button> */}
+
+
+
+        </>
     );
 }
 

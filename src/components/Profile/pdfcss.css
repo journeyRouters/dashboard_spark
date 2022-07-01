@@ -2,7 +2,7 @@
     width: 54.85rem;
     height: 78rem;
     background-color: #FFFFFF;
-    background-image: url("/public/assets/destination/BALI.png");
+    /* background-image: url("/public/assets/destination/BALI.png"); */
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -79,12 +79,31 @@
     margin-left: 0.3rem;
     color: #FFFFFF;
     text-decoration: none;
+    display: flex;
 }
 .page2{
     width: 55rem;
     height: 78rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.itinearypage{
+    width: 55rem;
+    /* height: 78rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.inclusion{
+    width: 55rem;
+    height: 78rem;
     justify-content: space-between;
     background-position: top;
     background-repeat: no-repeat;
@@ -126,21 +145,25 @@
     margin-top: 72rem;
 }
 .bottom_media_details{
+    margin-bottom: -0.3rem;
     display: flex;
+    width: 44rem;
     height: 3rem;
     align-items: center;
     font-size: 1.7rem;
-    margin-left: 12rem;
+    margin-left: 10rem;
+    justify-content: space-evenly
 }
 .overviewpackage{
     
 }
 .google_review_bottom{
+    margin-top: 52rem;
     display: flex;
     height: 24rem;
     /* background: green; */
     justify-content: space-between ;
-    color: red;
+    /* color: red; */
 }
 .review_img{
     width: 12rem;
@@ -150,6 +173,52 @@
     border-radius: 1rem;
 
 }
+.review_img1{
+    margin-left: 5rem;
+    width: 12rem;
+    margin-bottom: 2.4rem;
+    margin-top: 1rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+
+}
+.review_img2{
+    margin-left: 8rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+
+}
+.review_img3{
+    margin-left: -4rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+
+}
+.review_img4{
+    width: 12rem;
+    margin-bottom: 2rem;
+    margin-left: -6rem;
+    margin-top: 1.3rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+
+}
+.review_img5{
+    margin-left: 1.2rem;
+    width: 12rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+
+}
+
 .reiew_c1{
     width: 24%;
 }
@@ -203,4 +272,61 @@
 }
 .dayDetails{
     margin: 1rem;
+}
+.inclusionPage_blocks{
+    font-size: 3rem;
+    display: flex;
+    color: #FFFFFF;
+    justify-content: space-around;
+    font-family: 'verdana';
+}
+.inclusionPage_img{
+    width: 100%;
+}
+.inclusionExclusionDetails{
+    display: flex;
+    justify-content: space-evenly;
+    color: #FFFFFF;
+    margin-top: 1rem;
+    height: 35rem;
+
+}
+.sepratorLineForInclusionExclusion{
+    width: 0.2rem;
+    height: 27rem;
+    background-color: #FFFFFF;
+}
+.aliner_{
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    width: 18rem;
+    justify-content: space-between;
+    font-family: verdana;
+    margin-left: 4rem;
+}
+.setInsta{
+    width: 25rem;
+    margin-left: 15rem;
+    margin-top: -1.5rem;
+}
+.headLineDaywiseItineary{
+    color: white;
+    font-size: 4rem;
+    font-family: Comic Sans Ms;
+    margin-left: 4rem;
+}
+.mapitineary{
+    color: #FFFF;
+    display: flex;
+    justify-content: space-between;
+    /* width: 100%; */
+    align-items: center;
+    font-family: Comic Sans Ms;
+}
+.itinearyDiv{
+    margin-left: 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
 }

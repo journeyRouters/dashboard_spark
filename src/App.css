@@ -12,11 +12,11 @@
 }
 
 .sidebars {
-  position: fixed;
+  /* position: relative; */
   width: 20%;
   height: 45rem;
   background-color:#dfd2d2;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -76,10 +76,10 @@
 }
 
 .mainContaint {
-  width: 100%;
+  width: 80%;
   height: 45rem;
   overflow-y: scroll;
-  margin-left: 19.3rem;
+  /* margin-left: 19.3rem; */
 }
 
 .mainContaint::-webkit-scrollbar {

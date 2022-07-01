@@ -1,32 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import './inclusioncss.css'
+import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
+import { useState } from 'react';
+import './inclusioncss.css';
 
 const Inclusion = (props) => {
-    const [storeData, setStoreData] = useState(null)
     const [btn_flg, setflg] = useState(false)
-    const [inclusionFeed, setFeed] = useState({
-        breakfast:'',
-        lunch:'',
-        lunch_comments:'',
-        dinner:'',
-        dinner_comments:'',
-        airport_arival:'',
-        airport_departure:'',
-        cab_SIC:'',
-        cab_Private:'',
-        cab_Private_comments:'',
-        Gst:'',
-        airfair:'',
-        siteseeing:'',
-        siteseeing_comments:'',
-        Visa:'',
-        Visa_comments:'',
-        Entrance_fee:'',
-        Entrance_comments:'',
-        other_Inclusion:'',
-        other_Exclusion:''
-    })
-    function isNullish() {/* this function check  every key value in object for null value*/ 
+    console.log(props.inclusion_data)
+    const [inclusionFeed, setFeed] = useState(props.inclusion_data)
+    console.log(inclusionFeed)
+
+    function isNullish() {/* this function check  every key value in object for null value*/
         Object.values(inclusionFeed).every(value => {
             if (value === false) {
                 // console.log(value)
@@ -35,22 +17,18 @@ const Inclusion = (props) => {
             return false;
         });
     }
-    useEffect(() => {
 
-        setStoreData(props.Inclusion_data)
-
-    });
 
     function handleSave() {
         // let confirm=isNullish()
         // console.log(confirm)
         // if (confirm === null || confirm === undefined || confirm === '') {
         //     setflg(true)
-        
+
         // }
-            props.setinclusion(inclusionFeed)
-            props.onClose()
-        
+        props.setinclusion(inclusionFeed)
+        props.onClose()
+
     }
     function handleData_inclusion(e) {
         // console.log(e.target)
@@ -120,6 +98,12 @@ const Inclusion = (props) => {
             setFeed(prevState => ({
                 ...prevState,
                 Gst: e.target.value
+            }))
+        }
+        if (e.target.name === "TCS") {
+            setFeed(prevState => ({
+                ...prevState,
+                Tcs: e.target.value
             }))
         }
         if (e.target.name === "siteseeing") {
@@ -195,33 +179,38 @@ const Inclusion = (props) => {
                     <p className='tag_heading'>Meal plan</p>
                     <div className='breakfast'>
                         Breakfast
-                        <div onChange={(event) => handleData_inclusion(event)} value={inclusionFeed.breakfast} className='settingToSide'>
-
-                            <input name='Breakfast' type='radio' value='Breakfast' />
-                            <input name='Breakfast' type='radio' value='Breakfast is not included' />
+                        <div  className='settingToSide'>
+                            <RadioGroup className='radiogroup' name='Breakfast' value={inclusionFeed.breakfast} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
 
                         </div>
 
                     </div>
                     <div >
-                        <div onChange={(event) => handleData_inclusion(event)} className='breakfast'>
+                        <div  className='breakfast'>
                             Lunch
                             <div className='settingToSide'>
-                                <input name='Lunch' type='radio' value="Lunch" />
-                                <input name='Lunch' type='radio' value='Lunch is not included' />
+                            <RadioGroup className='radiogroup' name='Lunch' value={inclusionFeed.lunch} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                             </div>
                         </div>
-                        <textarea onChange={(event) => handleData_inclusion(event)} name='lunch_comments' className='comments_from' placeholder='Please write comments'></textarea>
+                        <textarea onChange={(event) => handleData_inclusion(event)} name='lunch_comments' className='comments_from' placeholder='Please write comments' value={inclusionFeed.lunch_comments}></textarea>
                     </div>
                     <div >
-                        <div onChange={(event) => handleData_inclusion(event)} className='breakfast'>
+                        <div  className='breakfast'>
                             Dinner
                             <div className='settingToSide'>
-                                <input name='Dinner' type='radio' value="Dinner" />
-                                <input name='Dinner' type='radio' value='Dinner is not included' />
+                            <RadioGroup className='radiogroup' name='Dinner' value={inclusionFeed.dinner} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                             </div>
                         </div>
-                        <textarea onChange={(event) => handleData_inclusion(event)} name='dinner_comments' className='comments_from' placeholder='Please write comments'></textarea>
+                        <textarea onChange={(event) => handleData_inclusion(event)} name='dinner_comments' value={inclusionFeed.dinner_comments} className='comments_from' placeholder='Please write comments'></textarea>
                     </div>
                 </div>
             </div>
@@ -230,16 +219,20 @@ const Inclusion = (props) => {
                     <p className='tag_heading'>airport transfer</p>
                     <div className='breakfast'>
                         Arival
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='Arival' type='radio' value='Arival' />
-                            <input name='Arival' type='radio' value='Arival is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_arival} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
                     <div className='breakfast'>
                         Departure
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='Departure' type='radio' value='Departure' />
-                            <input name='Departure' type='radio' value='Departure is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_departure} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
                 </div>
@@ -249,19 +242,23 @@ const Inclusion = (props) => {
                     <p className='tag_heading'>Cab Type</p>
                     <div className='breakfast'>
                         SIC
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='SIC' type='radio' value='SIC CAB' />
-                            <input name='SIC' type='radio' value='SIC is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='SIC' value={inclusionFeed.cab_SIC} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
                     <div className='breakfast'>
                         Private
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='Private' type='radio' value='Private cab' />
-                            <input name='Private' type='radio' value='Private cab is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='Private' value={inclusionFeed.cab_Private} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='Private_cab' className='comments_from' placeholder='Please write comments'></textarea>
+                    <textarea onChange={(event) => handleData_inclusion(event)} name='Private_cab' value={inclusionFeed.cab_Private_comments} className='comments_from' placeholder='Please write comments'></textarea>
                 </div>
 
 
@@ -270,42 +267,61 @@ const Inclusion = (props) => {
                 <div className='setaline'>
                     <div className='breakfast'>
                         airfair
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='airfair' type='radio' value='airfair' />
-                            <input name='airfair' type='radio' value='airfair is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.airfair} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
                     <div className='breakfast'>
                         GST
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='GST' type='radio' value='GST' />
-                            <input name='GST' type='radio' value='GST is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='GST' value={inclusionFeed.Gst} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
+                        </div>
+                    </div>
+                    <div className='breakfast'>
+                        TCS
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='TCS' value={inclusionFeed.Tcs} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
                     <div className='breakfast'>
                         siteseeing
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='siteseeing' type='radio' value='siteseeing' />
-                            <input name='siteseeing' type='radio' value='siteseeing is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='siteseeing' value={inclusionFeed.siteseeing} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='siteseeing_comments' className='comments_from' placeholder='Please write comments'></textarea>
+                    <textarea onChange={(event) => handleData_inclusion(event)} name='siteseeing_comments' value={inclusionFeed.siteseeing_comments} className='comments_from' placeholder='Please write comments'></textarea>
                     <div className='breakfast'>
                         Visa
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='Visa' type='radio' value='Visa' />
-                            <input name='Visa' type='radio' value='Visa is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='Visa' value={inclusionFeed.Visa} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='visa_comments' className='comments_from' placeholder='Please write comments'></textarea>
+                    <textarea onChange={(event) => handleData_inclusion(event)} name='visa_comments' value={inclusionFeed.Visa_comments} className='comments_from' placeholder='Please write comments'></textarea>
                     <div className='breakfast'>
                         Entrance Fee/Extra activity
-                        <div onChange={(event) => handleData_inclusion(event)} className='settingToSide'>
-                            <input name='Entrance' type='radio' value='Entrance fee' />
-                            <input name='Entrance' type='radio' value='Entrance fee is not included' />
+                        <div  className='settingToSide'>
+                        <RadioGroup className='radiogroup' name='Entrance' value={inclusionFeed.Entrance_fee} onChange={(event) => handleData_inclusion(event)}>
+                                <FormControlLabel control={<Radio />} value='true' />
+                                <FormControlLabel control={<Radio />} value='false' />
+                            </RadioGroup >
                         </div>
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='Entrance_comments' className='comments_from' placeholder='Please write comments'></textarea>
+                    <textarea onChange={(event) => handleData_inclusion(event)} name='Entrance_comments' value={inclusionFeed.Entrance_comments} className='comments_from' placeholder='Please write comments'></textarea>
                 </div>
 
 
@@ -316,11 +332,11 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         other Inclusion
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='other_inclusion' className='other_inclusion' placeholder='Please write comments'></textarea>
+                    <textarea onChange={(event) => handleData_inclusion(event)} name='other_inclusion' value={inclusionFeed.other_Inclusion} className='other_inclusion' placeholder='Please write comments'></textarea>
                     <div className='breakfast'>
                         other Exclusion
                     </div>
-                    <textarea className='other_exclusion' onChange={(event) => handleData_inclusion(event)} name='other_Exclusion' placeholder='Please write comments'></textarea>
+                    <textarea className='other_exclusion' onChange={(event) => handleData_inclusion(event)} value={inclusionFeed.other_Exclusion} name='other_Exclusion' placeholder='Please write comments'></textarea>
                 </div>
             </div>
             <div className='cancel_button_div'>

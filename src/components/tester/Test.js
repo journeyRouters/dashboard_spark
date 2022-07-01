@@ -314,11 +314,13 @@
 // }
 
 import { PDFExport } from "@progress/kendo-react-pdf";
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../Profile/profile.css';
 import '../Profile/pdfcss.css';
 
 const Test = () => {
+    const [inclusionlist, setinclusion] = useState([])
+    const [exclusionlist, setexclusion] = useState([])
     const pdfExportComponent = useRef(null);
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
@@ -336,6 +338,44 @@ const Test = () => {
         pdfExportComponent.current.save();
 
     };
+    const inclusion = {
+        breakfast: true,
+        lunch: false,
+        lunch_comments: null,
+        dinner: true,
+        dinner_comments: null,
+        airport_arival: true,
+        airport_departure: true,
+        cab_SIC: false,
+        cab_Private: true,
+        cab_Private_comments: null,
+        Gst: true,
+        airfair: true,
+        siteseeing: false,
+        siteseeing_comments: "hhiih",
+        Visa: true,
+        Visa_comments: null,
+        Entrance_fee: true,
+        Entrance_comments: null,
+        other_Inclusion: null,
+        other_Exclusion: null
+    }
+
+    function fiterInclusion() {
+        var keys = Object.keys(inclusion).filter(function (k) { return inclusion[k] == true && typeof (inclusion[k]) !== "string" && inclusion[k] !== null });
+        console.log(keys)
+        setinclusion(keys)
+    }
+    function filterExclusion() {
+        var keys = Object.keys(inclusion).filter(function (k) { return inclusion[k] == false && typeof (inclusion[k]) !== "string" && inclusion[k] !== null });
+        console.log(keys)
+        setexclusion(keys)
+    }
+    useEffect(() => {
+        fiterInclusion()
+        filterExclusion()
+
+    }, []);
     function handleChange(e) {
         setinput(e.target.value)
         if (key === 13) {
@@ -347,6 +387,8 @@ const Test = () => {
         }
 
     }
+    var name = "BALI.png"
+    var link = `/assets/destination/${name}`
     return (
         <>
             <PDFExport
@@ -355,39 +397,50 @@ const Test = () => {
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
-                    <div className={'page1'}>
+                    <div className={'page1'}
+                        style={{
+                            backgroundImage: `url(${link})`,
+                            backgroundPosition: "top",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            // color:"white"
+                        }}
+                    >
                         <div>
                             <a href={"https://wa.me/919304247331"} target="_blank">
                                 <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
                             </a>
                         </div>
                         <div className="footer">
-                            <div className="footer_img_with_text">
-                                <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
+                            <a className="href" href="tel:9304247331">
+                                <div className="footer_img_with_text">
 
-                                <div className="footer_call_for_more_info">
-                                    <span>Call for More Information</span>
-                                    <span>
-                                        <a className="href" href="tel:9304247331">
+                                    <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
+
+                                    <div className="footer_call_for_more_info">
+                                        <span>Call for More Information</span>
+                                        <span>
                                             +91-9304247331
-                                        </a>
-                                    </span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+
                             <div className="DividerLine"></div>
                             <div className="footer_web_info">
-                                <div>
-                                    <img src="/assets/pdfDefaultImage/weblogo.png" height='63px' />
-                                </div>
-                                <div className="web_info_text">
-                                    <span>Visit Us  At</span><br />
-                                    <span>
-                                        <a className="href" href="https://www.journeyrouters.com/" target="_blank">
+                                <a className="href" href="https://www.journeyrouters.com/" target="_blank">
+                                    <div>
+                                        <img src="/assets/pdfDefaultImage/weblogo.png" height='63px' />
+                                    </div>
+                                    <div className="web_info_text">
+                                        <span>Visit Us  At</span><br />
+                                        <span>
                                             www.journeyrouters.com
-                                        </a>
-                                    </span>
+                                        </span>
 
-                                </div>
+                                    </div>
+                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -423,22 +476,76 @@ const Test = () => {
                             </div>
                             <div >
                                 <div className="bottom_media_details">Follow Us At
-                                    <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                    <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                    <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                    <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+                                    <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
+                                    </a>
+                                    <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
+                                    </a>
+                                    <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
+                                    </a>
+                                    <a href="https://twitter.com/JourneyRouters" target="_blank">
+                                        <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+                                    </a>
                                     @journeyrouters
                                     <a href={"https://wa.me/919304247331"} target="_blank">
                                         <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
                                     </a>
                                 </div>
                             </div>
-
-
-
-
                         </div>
 
+                    </div>
+                    <div className="page-break">
+                        <div className="inclusion"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover",
+                            }}
+                        >
+                            <div>
+                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
+                            </div>
+                            <div className="inclusionPage_blocks" >
+                                <span> Inclusion</span>
+                                <span>Exclusion</span>
+                            </div>
+                            <div className="inclusionExclusionDetails">
+                                <div>
+                                    {
+                                        inclusionlist.map((data, index) => (
+                                            <div className="aliner_">
+                                                <span key={index}>
+                                                    <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{marginRight:"0.3rem"}} />
+                                                    {data}</span>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                <div className="sepratorLineForInclusionExclusion"></div>
+                                <div>
+                                    {
+                                        exclusionlist.map((data, index) => (
+                                            <div className="aliner_">
+                                                <span key={index}>
+                                                <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{marginRight:"0.3rem"}}/>
+                                                    
+                                                     {data}</span>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            {/* <div>
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
+                            </div> */}
+
+                        </div>
                     </div>
 
 
@@ -455,22 +562,24 @@ const Test = () => {
                             <div className="google_review_bottom">
                                 <div className="reiew_c1">
                                     <a href="https://g.co/kgs/VwbmYT" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img" />
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img5" />
                                     </a>
                                     <a href="https://g.co/kgs/ZK68wZ" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img" />
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img1" />
                                     </a>
                                     <a href="https://g.co/kgs/qM1e2f" target="_blank">
 
-                                        <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img" />
+                                        <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img2" />
                                     </a>
 
                                 </div>
                                 <div className="reiew_c2">
-                                    <a href="https://www.journeyrouters.com/" target='_blank' className="link">
+                                    <a
+                                        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x390ce1d4b9237199:0x7b102f107dc6a192?source=g.page.m._"
+                                        target='_blank' className="link">
                                         <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
                                         <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
-                                        <span> 300 & Counting Google Review</span>
+                                        <span> 400 & Counting Google Review</span>
                                     </a>
                                     <a href="https://g.co/kgs/ReZyXo" target="_blank">
                                         <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
@@ -486,18 +595,31 @@ const Test = () => {
                                         <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
                                     </a>
                                     <a href="https://g.co/kgs/iD3DvX" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img" />
+                                        <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img3" />
                                     </a>
                                     <a href="https://g.co/kgs/kXdzCU" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img" />
+                                        <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img4" />
                                     </a>
-                                    <a href="https://wa.me/919304247331" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/whatApp.png" className="whatsapp" />
-                                    </a>
-
 
                                 </div>
-
+                            </div>
+                            <div className="bottom_media_details">Follow Us At
+                                <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
+                                    <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
+                                </a>
+                                <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
+                                    <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
+                                </a>
+                                <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
+                                    <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
+                                </a>
+                                <a href="https://twitter.com/JourneyRouters" target="_blank">
+                                    <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+                                </a>
+                                @journeyrouters
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
                             </div>
 
 

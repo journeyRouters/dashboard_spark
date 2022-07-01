@@ -53,10 +53,10 @@ const Driver = () => {
 
     }, []);
     useEffect(() => {
+        window.scrollTo(0, 0);
         setSeletctedDate(currentdate)
         console.log(selectedDate)
         getLeadByDate(currentdate)
-        // window.scrollTo(0, 0);
     }, []);
 
     return (

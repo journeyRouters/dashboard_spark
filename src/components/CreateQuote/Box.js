@@ -31,10 +31,36 @@ const Box = (props) => {
     const [selected_date, set_selected_date] = useState()
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
-    const [inclusion_data, setinclusion] = useState(null)
     const [flights, setflights] = useState(null)
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
+    const [inclusion_data, setinclusion] = useState(
+        {
+            Hotels:'',
+            accommodation:'',
+            breakfast:'',
+            lunch:'',
+            lunch_comments:'',
+            dinner:'',
+            dinner_comments:'',
+            airport_arival:'',
+            airport_departure:'',
+            cab_SIC:'',
+            cab_Private:'',
+            cab_Private_comments:'',
+            Gst:'',
+            Tcs:'',
+            airfair:'',
+            siteseeing:'',
+            siteseeing_comments:'',
+            Visa:'',
+            Visa_comments:'',
+            Entrance_fee:'',
+            Entrance_comments:'',
+            other_Inclusion:'',
+            other_Exclusion:''
+        }
+    )
 
 
     function cabDetails(e) {
@@ -446,6 +472,7 @@ const Box = (props) => {
                             </div>
                             <Modal open={opennclusion}  style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
                                 <>
+                                {/* {console.log(inclusion_data)} */}
                                     <Inclusion onClose={closeInclusion} setinclusion={setinclusion} inclusion_data={inclusion_data}></Inclusion>
                                 </>
                             </Modal>

@@ -8,50 +8,50 @@ import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import { Image } from '@material-ui/icons';
 const db = getFirestore(app);
 
-const Profile = (props) => {
+const Profile = (
+    {
+        SelectedpackageType,
+        email,
+        userProfileuserProfile,
+        indicator,
+        inclusion_data,
+        travel_data,
+        cabDetailsData,
+        flights,
+        closePDF,
+        datahandle,
+        closeHandler,
+        itineary,
+        NightDataFields,
+        selected_Travel_date,
+        flightcost,
+        visacost,
+        landPackage,
+        Allquote
+    }
+) => {
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
     });
-    console.log(props.itineary)
-    const Data = props.travel_data
+    console.log(selected_Travel_date)
+    const Data = travel_data
     const [callback, setcallback] = useState(false)
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
     const pdfExportComponent = useRef(null);
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
-    console.log(props.userProfile)
-    const inclusion = {
-        breakfast: false,
-        lunch: true,
-        lunch_comments: null,
-        dinner: true,
-        dinner_comments: null,
-        airport_arival: true,
-        airport_departure: true,
-        cab_SIC: true,
-        cab_Private: true,
-        cab_Private_comments: null,
-        Gst: true,
-        airfair: true,
-        siteseeing: true,
-        siteseeing_comments: "hhiih",
-        Visa: true,
-        Visa_comments: null,
-        Entrance_fee: true,
-        Entrance_comments: null,
-        other_Inclusion: null,
-        other_Exclusion: null
-    }
+    // console.log(userProfile)
+    
 
     function fiterInclusion() {
-        var keys = Object.keys(inclusion).filter(function (k) { return inclusion[k] == true && typeof (inclusion[k]) !== "string" && inclusion[k] !== null });
+        var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         console.log(keys)
         setinclusion(keys)
     }
     function filterExclusion() {
-        var keys = Object.keys(inclusion).filter(function (k) { return inclusion[k] == false && typeof (inclusion[k]) !== "string" && inclusion[k] !== null });
+        var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == false && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         console.log(keys)
         setexclusion(keys)
     }
@@ -61,17 +61,17 @@ const Profile = (props) => {
 
     }, []);
     useEffect(() => {
-        // console.log(props.inclusion_data.other_Inclusion, props.inclusion_data.other_Exclusion)
+        // console.log(inclusion_data.other_Inclusion, inclusion_data.other_Exclusion)
         try {
 
-            set_comment_inclusion(props.inclusion_data.other_Inclusion.split("."))
+            set_comment_inclusion(inclusion_data.other_Inclusion.split("."))
         }
         catch {
             set_comment_inclusion([])
         }
         try {
 
-            set_Comment_Exclusion(props.inclusion_data.other_Exclusion.split("."))
+            set_Comment_Exclusion(inclusion_data.other_Exclusion.split("."))
         }
         catch {
             set_Comment_Exclusion([])
@@ -84,22 +84,24 @@ const Profile = (props) => {
     const month = currentdate.toLocaleString('default', { month: 'long' })
 
     async function dataSetter() {
-        if (props.indicator) {
+        if (indicator) {
 
         }
         else {
             await addDoc(collection(db, "Quote"), {
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
-                    travel_data: props.travel_data,
-                    cost: props.cost,
-                    itineary: props.itineary,
-                    followUpDate: String(props.selected_date),
-                    NightDataFields: props.NightDataFields,
+                    travel_data: travel_data,
+                    flightcost:flightcost,
+                    visacost:visacost,
+                    landPackage:landPackage,
+                    itineary: itineary,
+                    followUpDate: String(selected_Travel_date),
+                    NightDataFields: NightDataFields,
                     pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
-                    cabDetailsData: props.cabDetailsData,
-                    flights: props.flights,
-                    inclusion_data: props.inclusion_data,
+                    cabDetailsData: cabDetailsData,
+                    flights: flights,
+                    inclusion_data: inclusion_data,
                 }
             });
 
@@ -108,13 +110,13 @@ const Profile = (props) => {
 
     async function update_quotation_flg() {
         // debugger
-        let quotation_new = parseInt(props.travel_data.quotation) + 1
-        await updateDoc(doc(db, "Trip", `${props.travel_data.TripId}`), {
+        let quotation_new = parseInt(travel_data.quotation) + 1
+        await updateDoc(doc(db, "Trip", `${travel_data.TripId}`), {
             quotation: quotation_new,
             quotation_flg: true,
             month: month,
-            Follow_Up_date: String(props.selected_date),
-            Quoted_by: props.email
+            Follow_Up_date: String(selected_Travel_date),
+            Quoted_by: email
         });
     }
 
@@ -128,7 +130,7 @@ const Profile = (props) => {
 
 
         try {
-            props.datahandle()
+            datahandle()
         }
         catch (e) {
             console.log(e)
@@ -142,7 +144,7 @@ const Profile = (props) => {
             console.log(e)
         }
         try {
-            props.Allquote()
+            Allquote()
         }
         catch (error) {
             console.log(error)
@@ -183,7 +185,7 @@ const Profile = (props) => {
                                     <div className="footer_call_for_more_info">
                                         <span>Call for More Information</span>
                                         <span>
-                                            +91-9304247331
+                                            +91-{travel_data.Contact_Number}
                                         </span>
                                     </div>
                                 </div>
@@ -224,18 +226,18 @@ const Profile = (props) => {
                                     <span>Traveler</span>
                                 </div>
                                 <div >
-                                    <span>- BALI</span><br />
-                                    <span>- 24 Apri 2022</span><br />
-                                    <span>- 6 Day 5 Nights</span><br />
-                                    <span>- 2 Adult</span><br />
+                                    <span>- {travel_data.Destination}</span><br />
+                                    <span>- {selected_Travel_date}</span><br />
+                                    <span>- {travel_data.Travel_Duration} Days, {travel_data.Travel_Duration-1} Nights</span><br />
+                                    <span>- {travel_data.Pax} Adults , {travel_data.Child?travel_data.Child:0} Child</span><br />
                                 </div>
 
                             </div>
                             <div className="yellow_details">
-                                <p className="dayDetails">6 Days 5 Nights</p>
+                                <p className="dayDetails">{travel_data.Travel_Duration} Days, {travel_data.Travel_Duration-1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR 3,00,000/-</h4>
-                                <p className="setPara_">Per Person</p>
+                                <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
                                 <div className="bottom_media_details">Follow Us At
@@ -420,7 +422,7 @@ const Profile = (props) => {
                                 <span className='headLineDaywiseItineary'>Itineary</span>
                                 <div className='itinearyDiv'>
                                     {
-                                        props.itineary.map((data, index) => (
+                                        itineary.map((data, index) => (
                                             <div className='mapitineary'>
                                                 <span style={{ width: '5rem' }}>Day {index + 1}  -</span>
                                                 <p style={{ width: '91%' }}>{data.Day}</p>
@@ -437,7 +439,7 @@ const Profile = (props) => {
                                         height: '6rem',
                                     }}
                                 >
-                                    <div className="bottom_media_details" style={{ paddingTop :'2.8rem' }}>Follow Us At
+                                    <div className="bottom_media_details" style={{ paddingTop: '2.8rem' }}>Follow Us At
                                         <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
                                             <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
                                         </a>

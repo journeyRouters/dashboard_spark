@@ -8,54 +8,41 @@ const Inclusion = (props) => {
     const [inclusionFeed, setFeed] = useState(props.inclusion_data)
     console.log(inclusionFeed)
 
-    function isNullish() {/* this function check  every key value in object for null value*/
-        Object.values(inclusionFeed).every(value => {
-            if (value === false) {
-                // console.log(value)
-                return true;
-            }
-            return false;
-        });
-    }
+   
 
 
     function handleSave() {
-        // let confirm=isNullish()
-        // console.log(confirm)
-        // if (confirm === null || confirm === undefined || confirm === '') {
-        //     setflg(true)
-
-        // }
         props.setinclusion(inclusionFeed)
+        console.log(inclusionFeed)
         props.onClose()
 
     }
     function handleData_inclusion(e) {
-        // console.log(e.target)
+        console.log(typeof(Boolean(e.target.value)))
         // debugger
 
         if (e.target.name === "Breakfast") {
             setFeed(prevState => ({
                 ...prevState,
-                breakfast: e.target.value
+                breakfast: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "Lunch") {
             setFeed(prevState => ({
                 ...prevState,
-                lunch: e.target.value
+                lunch: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "Dinner") {
             setFeed(prevState => ({
                 ...prevState,
-                dinner: e.target.value
+                dinner: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "lunch_comments") {
             setFeed(prevState => ({
                 ...prevState,
-                lunch_comments: e.target.value
+                lunch_comments: (e.target.value)
             }))
         }
         if (e.target.name === "dinner_comments") {
@@ -67,49 +54,49 @@ const Inclusion = (props) => {
         if (e.target.name === "Arival") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_arival: e.target.value
+                airport_arival: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "Departure") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_departure: e.target.value
+                airport_departure: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "SIC") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_SIC: e.target.value
+                cab_SIC: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "Private") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_Private: e.target.value
+                cab_Private: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "airfair") {
             setFeed(prevState => ({
                 ...prevState,
-                airfair: e.target.value
+                airfair: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "GST") {
             setFeed(prevState => ({
                 ...prevState,
-                Gst: e.target.value
+                Gst: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "TCS") {
             setFeed(prevState => ({
                 ...prevState,
-                Tcs: e.target.value
+                Tcs: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "siteseeing") {
             setFeed(prevState => ({
                 ...prevState,
-                siteseeing: e.target.value
+                siteseeing: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "siteseeing_comments") {
@@ -121,19 +108,19 @@ const Inclusion = (props) => {
         if (e.target.name === "Visa") {
             setFeed(prevState => ({
                 ...prevState,
-                Visa: e.target.value
+                Visa: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "visa_comments") {
             setFeed(prevState => ({
                 ...prevState,
-                Visa_comments: e.target.value
+                Visa_comments: (e.target.value)
             }))
         }
         if (e.target.name === "Entrance") {
             setFeed(prevState => ({
                 ...prevState,
-                Entrance_fee: e.target.value
+                Entrance_fee: Boolean(e.target.value)
             }))
         }
         if (e.target.name === "Entrance_comments") {
@@ -157,7 +144,7 @@ const Inclusion = (props) => {
         if (e.target.name === "Private_cab") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_Private_comments: e.target.value
+                cab_Private_comments: (e.target.value)
             }))
         }
         console.log(inclusionFeed)
@@ -181,8 +168,8 @@ const Inclusion = (props) => {
                         Breakfast
                         <div  className='settingToSide'>
                             <RadioGroup className='radiogroup' name='Breakfast' value={inclusionFeed.breakfast} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
 
                         </div>
@@ -193,8 +180,8 @@ const Inclusion = (props) => {
                             Lunch
                             <div className='settingToSide'>
                             <RadioGroup className='radiogroup' name='Lunch' value={inclusionFeed.lunch} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                             </div>
                         </div>
@@ -205,8 +192,8 @@ const Inclusion = (props) => {
                             Dinner
                             <div className='settingToSide'>
                             <RadioGroup className='radiogroup' name='Dinner' value={inclusionFeed.dinner} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                             </div>
                         </div>
@@ -221,8 +208,8 @@ const Inclusion = (props) => {
                         Arival
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_arival} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -230,8 +217,8 @@ const Inclusion = (props) => {
                         Departure
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_departure} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -244,8 +231,8 @@ const Inclusion = (props) => {
                         SIC
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='SIC' value={inclusionFeed.cab_SIC} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -253,8 +240,8 @@ const Inclusion = (props) => {
                         Private
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='Private' value={inclusionFeed.cab_Private} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -269,8 +256,8 @@ const Inclusion = (props) => {
                         airfair
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.airfair} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -278,8 +265,8 @@ const Inclusion = (props) => {
                         GST
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='GST' value={inclusionFeed.Gst} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -287,8 +274,8 @@ const Inclusion = (props) => {
                         TCS
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='TCS' value={inclusionFeed.Tcs} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -296,8 +283,8 @@ const Inclusion = (props) => {
                         siteseeing
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='siteseeing' value={inclusionFeed.siteseeing} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -306,8 +293,8 @@ const Inclusion = (props) => {
                         Visa
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='Visa' value={inclusionFeed.Visa} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
@@ -316,8 +303,8 @@ const Inclusion = (props) => {
                         Entrance Fee/Extra activity
                         <div  className='settingToSide'>
                         <RadioGroup className='radiogroup' name='Entrance' value={inclusionFeed.Entrance_fee} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value='true' />
-                                <FormControlLabel control={<Radio />} value='false' />
+                                <FormControlLabel control={<Radio />} value={true} />
+                                <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>

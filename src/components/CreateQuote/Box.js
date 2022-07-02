@@ -15,7 +15,7 @@ const Box = (props) => {
     // console.log(Data)
     const [Travel_Duration, setTravel_Duration] = useState(Data.Travel_Duration)
     const [open, setOpen] = useState(true)
-    const [SelectedValue, setSelectedValue] = useState("perPerson")
+    const [SelectedpackageType, setSelectedpackageType] = useState("per Person")
     const [flightcost, setFlightcost] = useState(0)
     const [visacost, setvisacost] = useState(0)
     const [landPackage, setlandpackage] = useState(0)
@@ -28,7 +28,7 @@ const Box = (props) => {
     const [cont_days, setDayscounter] = useState(parseInt(Data.Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState([
         { Night: [], HotelName: '', City: '', Category: '', HotelType: '', comments: '' },])
-    const [selected_date, set_selected_date] = useState()
+    const [selected_Travel_date, set_selected_Travel_date] = useState()
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
     const [flights, setflights] = useState(null)
@@ -36,29 +36,29 @@ const Box = (props) => {
     const [nights, setnights] = useState([])
     const [inclusion_data, setinclusion] = useState(
         {
-            Hotels:'',
-            accommodation:'',
-            breakfast:'',
-            lunch:'',
-            lunch_comments:'',
-            dinner:'',
-            dinner_comments:'',
-            airport_arival:'',
-            airport_departure:'',
-            cab_SIC:'',
-            cab_Private:'',
-            cab_Private_comments:'',
-            Gst:'',
-            Tcs:'',
-            airfair:'',
-            siteseeing:'',
-            siteseeing_comments:'',
-            Visa:'',
-            Visa_comments:'',
-            Entrance_fee:'',
-            Entrance_comments:'',
-            other_Inclusion:'',
-            other_Exclusion:''
+            Hotels: false,
+            accommodation: false,
+            breakfast: false,
+            lunch: false,
+            lunch_comments: '',
+            dinner: false,
+            dinner_comments: '',
+            airport_arival: false,
+            airport_departure: false,
+            cab_SIC: false,
+            cab_Private: false,
+            cab_Private_comments: '',
+            Gst: false,
+            Tcs: false,
+            airfair: false,
+            siteseeing: false,
+            siteseeing_comments: '',
+            Visa: false,
+            Visa_comments: '',
+            Entrance_fee: false,
+            Entrance_comments: '',
+            other_Inclusion: '',
+            other_Exclusion: ''
         }
     )
 
@@ -78,8 +78,8 @@ const Box = (props) => {
     function closeInclusion() {
         setInclusion(false)
     }
-   
-    
+
+
     function handleOptionOfNights() {
         // console.log('run')
         var list = []
@@ -214,14 +214,14 @@ const Box = (props) => {
         props.set_popupopner(false)
     }
     function handleChange(event) {
-        setSelectedValue(event.target.value);
+        setSelectedpackageType(event.target.value);
     };
     function Save_download() {
-        console.log(NightDataFields)
+        // console.log(NightDataFields)
         showPDF()
     }
     function select_date(e) {
-        set_selected_date(e.target.value)
+        set_selected_Travel_date(e.target.value)
     }
     function flightDetails(e) {
         setflights(e.target.value)
@@ -232,6 +232,7 @@ const Box = (props) => {
         <>
             <Modal open={openPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <Profile
+                    SelectedpackageType={SelectedpackageType}
                     email={props.email}
                     userProfile={props.userProfile}
                     indicator={false}
@@ -244,8 +245,11 @@ const Box = (props) => {
                     closeHandler={closeHandler}
                     itineary={itineary}
                     NightDataFields={NightDataFields}
-                    selected_date={selected_date}
-                    cost={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} />
+                    selected_Travel_date={selected_Travel_date}
+                    flightcost={flightcost}
+                    visacost={visacost}
+                    landPackage={landPackage}
+                />
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                 <div className='popUp_body'>
@@ -269,9 +273,9 @@ const Box = (props) => {
                             <div className='costOption'>
                                 <div>
                                     <Radio
-                                        checked={SelectedValue === 'perPerson'}
+                                        checked={SelectedpackageType === 'per Person'}
                                         onChange={handleChange}
-                                        value="perPerson"
+                                        value="per Person"
                                         name="radio-button"
                                         color='primary'
                                     // inputProps={{ 'aria-label': 'A' }}
@@ -280,9 +284,9 @@ const Box = (props) => {
                                 </div>
                                 <div>
                                     <Radio
-                                        checked={SelectedValue === 'total'}
+                                        checked={SelectedpackageType === 'Total'}
                                         onChange={handleChange}
-                                        value="total"
+                                        value="Total"
                                         name="radio-button"
                                         color='primary'
                                     // inputProps={{ 'aria-label': 'A' }}
@@ -373,7 +377,7 @@ const Box = (props) => {
                                                         // list="programmingLanguages"
                                                         name='HotelName'
                                                         onChange={(event) => handleFormChange(event, index)}
-                                                        // list="suggestions"
+                                                    // list="suggestions"
                                                     >
                                                     </input>
 
@@ -400,7 +404,7 @@ const Box = (props) => {
                                                         <option value="4 star">4 star</option>
                                                         <option value="5 star">5 star</option>
                                                         <option value="7 star">Java</option>
-                                                        
+
                                                     </datalist>
                                                 </div>
                                                 <div className='unitComponent'>
@@ -470,9 +474,9 @@ const Box = (props) => {
                                 <ExtensionSharp />
                                 <button onClick={() => openInclusion()}>Inclusion/Exclusion</button>
                             </div>
-                            <Modal open={opennclusion}  style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
+                            <Modal open={opennclusion} style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
                                 <>
-                                {/* {console.log(inclusion_data)} */}
+                                    {/* {console.log(inclusion_data)} */}
                                     <Inclusion onClose={closeInclusion} setinclusion={setinclusion} inclusion_data={inclusion_data}></Inclusion>
                                 </>
                             </Modal>
@@ -487,7 +491,13 @@ const Box = (props) => {
                                     return (
                                         <div key={index} className='days'>
                                             <label className='title'>Day{index + 1}:Title</label><br />
-                                            <input className='dayByitineary' placeholder='Enter Title of the day' name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
+                                            <div style={{display:'flex', alignItems:'center'}} >
+                                                <input className='dayByitineary' placeholder='Enter Title of the day' name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
+                                                <input name='attraction'
+                                                placeholder='special for'
+                                                    datalist='attraction'>
+                                                </input>
+                                            </div>
                                             <div>
                                                 <label className='title'>Description</label><br />
                                                 <textarea placeholder=' Write Description' name='Description' onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>

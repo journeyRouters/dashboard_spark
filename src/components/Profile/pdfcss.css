@@ -93,9 +93,9 @@
 }
 .itinearypage{
     width: 55rem;
-    /* height: 78rem; */
     display: flex;
-    flex-direction: column;
+
+    /* height: 78rem; */
     justify-content: space-between;
     background-position: top;
     background-repeat: no-repeat;
@@ -152,7 +152,9 @@
     align-items: center;
     font-size: 1.7rem;
     margin-left: 10rem;
+    font-size: 1.1rem;
     justify-content: space-evenly
+    
 }
 .overviewpackage{
     
@@ -312,9 +314,9 @@
     margin-top: -1.5rem;
 }
 .headLineDaywiseItineary{
-    color: white;
+    color: yellow;
     font-size: 4rem;
-    font-family: Comic Sans Ms;
+    font-family: Arial;
     margin-left: 4rem;
 }
 .mapitineary{
@@ -323,10 +325,42 @@
     justify-content: space-between;
     /* width: 100%; */
     align-items: center;
-    font-family: Comic Sans Ms;
+    font-family: Arial;
 }
 .itinearyDiv{
     margin-left: 2rem;
     margin-top: 2rem;
     font-size: 1.2rem;
+}
+.DaywiseItinearyDiv{
+    display: flex;
+    justify-content: space-between;
+    color: #FFFFFF;
+    align-items: center;
+}
+.DaywiseItinearyDivReverse{
+    display: flex;
+    justify-content: space-between;
+    color: #FFFFFF;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.DaywiseItinearyDivleft{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.DaywiseItinearyDivRight{
+    /* width: 20%; */
+
+}
+.dayheader{
+    color: yellow;
+    font-family: arial;
+    text-transform: capitalize;
+}
+.dayDetailsitineary{
+    color: #FFFFFF;
+    font-family: arial;
+    text-transform: capitalize;
 }

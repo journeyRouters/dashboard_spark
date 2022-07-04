@@ -6,13 +6,11 @@ import Profile from '../Profile/Profile';
 import Inclusion from './Inclusion';
 import makeAnimated from 'react-select/animated';
 import './TripComponent.css';
+import { ActivityResolver } from '../Profile/Activity';
 
 const Box = (props) => {
     const animatedComponents = makeAnimated();
-
-    // console.log(props.TripId)
     const Data = props.data
-    // console.log(Data)
     const [Travel_Duration, setTravel_Duration] = useState(Data.Travel_Duration)
     const [open, setOpen] = useState(true)
     const [SelectedpackageType, setSelectedpackageType] = useState("per Person")
@@ -22,7 +20,7 @@ const Box = (props) => {
     const [countNight, setCountnight] = useState(0)
     const [flight, setflight] = useState(true)
     const [cab, setcab] = useState(true)
-    const [itineary, setItineary] = useState([{ Day: '', Description: '' },])
+    const [itineary, setItineary] = useState([{ Day: '', Description: '',Activity:'' },])
     const days = Array(Data.Travel_Duration).fill('a');
     const [days_total, setTotalDays] = useState(days);
     const [cont_days, setDayscounter] = useState(parseInt(Data.Travel_Duration))
@@ -34,6 +32,7 @@ const Box = (props) => {
     const [flights, setflights] = useState(null)
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
+    const [activity, setActivity] = useState([])
     const [inclusion_data, setinclusion] = useState(
         {
             Hotels: false,
@@ -81,15 +80,12 @@ const Box = (props) => {
 
 
     function handleOptionOfNights() {
-        // console.log('run')
         var list = []
         for (let start = 1; start <= days_total.length - 1; start++) {
             var tmp = { value: '', label: '' }
             tmp.value = ` N${start}`
             tmp.label = ` N${start}`
-            console.log(tmp)
             list.push(tmp)
-            console.log(list)
         }
         setnights(list)
     }
@@ -100,7 +96,6 @@ const Box = (props) => {
         let len = parseInt(event.target.value)
         var temp = Array(len).fill('a');
         setTotalDays(temp)
-        console.log('target', temp)
         if (len > days_total.length) {
             itinearyDaysincrease()
         }
@@ -108,7 +103,6 @@ const Box = (props) => {
             itinearyDaydecrease()
         }
         if (countNight < len) {
-            // console.log(NightDataFields.length)
             setCountnight(countNight - 1)
         }
         else if (countNight > len) {
@@ -118,7 +112,7 @@ const Box = (props) => {
 
     }
     function itinearyDaysincrease() {
-        let data = { Day: '', Description: '' }
+        let data = { Day: '', Description: '',Activity:'' }
         setItineary([...itineary, data])
     }
     function itinearyDaydecrease() {
@@ -128,33 +122,36 @@ const Box = (props) => {
     }
     function setVar() {
         for (let s = 0; s < Travel_Duration - 1; s++) {
-            let data = { Day: '', Description: '' }
+            let data = { Day: '', Description: '',Activity:'' }
             let temp = itineary
             temp.push(data)
             setItineary(temp)
         }
-        console.log(itineary)
     }
     useEffect(() => {
         setVar()
+        setActivity(ActivityResolver('Bali'))
     }, []);
 
     const handleFormChangeItineary = (event, index) => {
         let data = [...itineary];
-        // console.log(data[index][event.target.name])
-        data[index][event.target.name] = event.target.value;
+        try{
+
+            data[index][event.target.name] = event.target.value;
+        }
+        catch{
+            data[index]['Activity']=event.value
+        }
         setItineary(data);
-        // console.log(itineary)
+        console.log(data)
+
     }
     function addFields() {
         if (countNight < Travel_Duration - 2) {
-            // console.log('hiii')
             let object = { Night: '', HotelName: '', City: '', Category: '', HotelType: '', comments: '' }
             setNightDataFields([...NightDataFields, object])
             setCountnight(countNight + 1)
-            // console.log(NightDataFields)
         }
-
     }
     function removeFields(index) {
         let data = [...NightDataFields];
@@ -176,7 +173,6 @@ const Box = (props) => {
         let data = [...NightDataFields];
         data[index][event.target.name] = event.target.value;
         setNightDataFields(data);
-        // console.log(data)
     }
 
     function flightcostChange(e) {
@@ -189,27 +185,12 @@ const Box = (props) => {
         setlandpackage(e.target.value)
     }
 
-    const currency = [
-        "INR",
-        "ILS",
-        "CNY",
-        "KWD",
-        "AFN",
-        "MYR",
-        "NPR",
-        "PHP",
-        "AMD",
-        "EUR",
-        "ISK",
-        "USD",
-        "CLP"
-    ]
+    const currency = ["INR", "ILS", "CNY", "KWD", "AFN", "MYR", "NPR", "PHP", "AMD", "EUR", "ISK", "USD", "CLP"]
     function openHandler() {
         setOpen(true)
 
     }
     function closeHandler() {
-        console.log(days_total, itineary)
         setOpen(false)
         props.set_popupopner(false)
     }
@@ -217,7 +198,6 @@ const Box = (props) => {
         setSelectedpackageType(event.target.value);
     };
     function Save_download() {
-        // console.log(NightDataFields)
         showPDF()
     }
     function select_date(e) {
@@ -356,20 +336,7 @@ const Box = (props) => {
                                                         options={nights}
                                                         onChange={(e) => advance_controller_nights(e, index)}
                                                     />
-                                                    {/* <select placeholder='select'
-                                                        name='Night'
-                                                        onChange={(event) =>
-                                                            handleFormChange(event, index)
-                                                        }
 
-
-                                                    >
-                                                        {days_total.map((option, index) => (
-                                                            <option value={index + 1}>{index + 1}  night</option>
-                                                        ))}
-
-
-                                                    </select> */}
                                                 </div>
                                                 <div className='unitComponent'>
                                                     <label>Hotel Name</label><br />
@@ -476,7 +443,6 @@ const Box = (props) => {
                             </div>
                             <Modal open={opennclusion} style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
                                 <>
-                                    {/* {console.log(inclusion_data)} */}
                                     <Inclusion onClose={closeInclusion} setinclusion={setinclusion} inclusion_data={inclusion_data}></Inclusion>
                                 </>
                             </Modal>
@@ -491,12 +457,16 @@ const Box = (props) => {
                                     return (
                                         <div key={index} className='days'>
                                             <label className='title'>Day{index + 1}:Title</label><br />
-                                            <div style={{display:'flex', alignItems:'center'}} >
+                                            <div style={{ display: 'flex', alignItems: 'center' }} >
                                                 <input className='dayByitineary' placeholder='Enter Title of the day' name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
-                                                <input name='attraction'
-                                                placeholder='special for'
-                                                    datalist='attraction'>
-                                                </input>
+                                                <Select
+                                                    placeholder='Activity'
+                                                    name='Activity'
+                                                    closeMenuOnSelect={false}
+                                                    components={animatedComponents}
+                                                    options={activity}
+                                                    onChange={(event) => handleFormChangeItineary(event, index)}
+                                                />
                                             </div>
                                             <div>
                                                 <label className='title'>Description</label><br />
@@ -505,10 +475,7 @@ const Box = (props) => {
                                         </div>
                                     )
                                 })
-
-
                             }
-
                         </div>
                     </div>
                 </div>
@@ -516,5 +483,4 @@ const Box = (props) => {
         </>
     );
 }
-
 export default Box;

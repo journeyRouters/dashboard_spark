@@ -6,13 +6,14 @@ import './pdfcss.css';
 import './profile.css';
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import { Image } from '@material-ui/icons';
+import Footer, { GoogleReviews } from './footer';
 const db = getFirestore(app);
 
 const Profile = (
     {
         SelectedpackageType,
         email,
-        userProfileuserProfile,
+        userProfile,
         indicator,
         inclusion_data,
         travel_data,
@@ -43,7 +44,7 @@ const Profile = (
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
     // console.log(userProfile)
-    
+
 
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
@@ -92,9 +93,9 @@ const Profile = (
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
                     travel_data: travel_data,
-                    flightcost:flightcost,
-                    visacost:visacost,
-                    landPackage:landPackage,
+                    flightcost: flightcost,
+                    visacost: visacost,
+                    landPackage: landPackage,
                     itineary: itineary,
                     followUpDate: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
@@ -228,36 +229,19 @@ const Profile = (
                                 <div >
                                     <span>- {travel_data.Destination}</span><br />
                                     <span>- {selected_Travel_date}</span><br />
-                                    <span>- {travel_data.Travel_Duration} Days, {travel_data.Travel_Duration-1} Nights</span><br />
-                                    <span>- {travel_data.Pax} Adults , {travel_data.Child?travel_data.Child:0} Child</span><br />
+                                    <span>- {travel_data.Travel_Duration} Days, {travel_data.Travel_Duration - 1} Nights</span><br />
+                                    <span>- {travel_data.Pax} Adults , {travel_data.Child ? travel_data.Child : 0} Child</span><br />
                                 </div>
 
                             </div>
                             <div className="yellow_details">
-                                <p className="dayDetails">{travel_data.Travel_Duration} Days, {travel_data.Travel_Duration-1} Nights</p>
+                                <p className="dayDetails">{travel_data.Travel_Duration} Days, {travel_data.Travel_Duration - 1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR 3,00,000/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
-                                <div className="bottom_media_details">Follow Us At
-                                    <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                    </a>
-                                    <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                    </a>
-                                    <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                    </a>
-                                    <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                    </a>
-                                    @journeyrouters
-                                    <a href={"https://wa.me/919304247331"} target="_blank">
-                                        <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                    </a>
-                                </div>
+                                <Footer />
                             </div>
                         </div>
 
@@ -308,24 +292,7 @@ const Profile = (
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
                             <div style={{ marginTop: '3.9rem' }} >
-                                <div className="bottom_media_details">Follow Us At
-                                    <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                    </a>
-                                    <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                    </a>
-                                    <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                    </a>
-                                    <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                    </a>
-                                    @journeyrouters
-                                    <a href={"https://wa.me/919304247331"} target="_blank">
-                                        <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                    </a>
-                                </div>
+                                <Footer />
                             </div>
 
                         </div>
@@ -342,84 +309,20 @@ const Profile = (
                             }}
                         >
                             <div></div>
-                            <div className="google_review_bottom">
-                                <div className="reiew_c1">
-                                    <a href="https://g.co/kgs/VwbmYT" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img5" />
-                                    </a>
-                                    <a href="https://g.co/kgs/ZK68wZ" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img1" />
-                                    </a>
-                                    <a href="https://g.co/kgs/qM1e2f" target="_blank">
-
-                                        <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img2" />
-                                    </a>
-
-                                </div>
-                                <div className="reiew_c2">
-                                    <a
-                                        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x390ce1d4b9237199:0x7b102f107dc6a192?source=g.page.m._"
-                                        target='_blank' className="link">
-                                        <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
-                                        <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
-                                        <span> 400 & Counting Google Review</span>
-                                    </a>
-                                    <a href="https://g.co/kgs/ReZyXo" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
-                                    </a>
-                                    <a href="https://g.co/kgs/ByT5hQ" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Stephen Raj.PNG" className="review_img" />
-                                    </a>
-
-
-                                </div>
-                                <div className="reiew_c3">
-                                    <a href="https://g.co/kgs/iD3DvX" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
-                                    </a>
-                                    <a href="https://g.co/kgs/iD3DvX" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img3" />
-                                    </a>
-                                    <a href="https://g.co/kgs/kXdzCU" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img4" />
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div className="bottom_media_details">Follow Us At
-                                <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                </a>
-                                <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                </a>
-                                <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                </a>
-                                <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                </a>
-                                @journeyrouters
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div>
+                            <GoogleReviews />
+                            <Footer />
                         </div>
                     </div>
                     <div className="page-break">
                         <div className="itinearypage"
                             style={{
-                                // backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
-                                // backgroundPosition: "top",
-                                // backgroundRepeat: "no-repeat",
-                                // backgroundSize: "cover"
                                 background: 'black'
                             }}
                         >
                             <div>
                                 <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
 
-                                <span className='headLineDaywiseItineary'>Itineary</span>
+                                <span className='headLineDaywiseItineary'> Day wise Itineary</span>
                                 <div className='itinearyDiv'>
                                     {
                                         itineary.map((data, index) => (
@@ -436,32 +339,60 @@ const Profile = (
                                         backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover",
-                                        height: '6rem',
+                                        height: '5.5rem',
+                                        display: 'flex',
+                                        flexDirection: 'column-reverse'
                                     }}
                                 >
-                                    <div className="bottom_media_details" style={{ paddingTop: '2.8rem' }}>Follow Us At
-                                        <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                            <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                        </a>
-                                        <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                            <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                        </a>
-                                        <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                            <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                        </a>
-                                        <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                            <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                        </a>
-                                        @journeyrouters
-                                        <a href={"https://wa.me/919304247331"} target="_blank">
-                                            <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                        </a>
-                                    </div>
+                                    <Footer />
                                 </div>
-
                             </div>
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="itinearypage"
+                            style={{
+                                background: 'black'
+                            }}
+                        >
+                            <div>
+                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/daywiseheadingimage.png" />
 
-
+                                <span className='headLineDaywiseItineary'>Detail  Itineary</span>
+                                <div className='itinearyDiv'>
+                                    {
+                                        itineary.map((data, index) => (
+                                            <div className={(index+1)%2==0?'DaywiseItinearyDiv':'DaywiseItinearyDivReverse'}>
+                                                <div className='DaywiseItinearyDivleft'>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                        <span className='dayheader'>
+                                                            Day{index + 1} - {data.Day}
+                                                        </span>
+                                                    </div>
+                                                    <p className='dayDetailsitineary'>{data.Description}</p>
+                                                </div>
+                                                <div className='DaywiseItinearyDivRight'>
+                                                    <img src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/BALI ACTIVITIES IMAGES/SamplerNusa.png'
+                                                        style={{ width: "14rem", height: "14rem" }} />
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                <div
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                        backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        height: '5.5rem',
+                                        display: 'flex',
+                                        flexDirection: 'column-reverse'
+                                    }}
+                                >
+                                    <Footer />
+                                </div>
+                            </div>
 
                         </div>
                     </div>

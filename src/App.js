@@ -1,23 +1,22 @@
-import { BackupOutlined, FileCopyOutlined, Fingerprint, Speed, PersonOutlineOutlined, SearchTwoTone, TrendingUp, SwapCalls, AccountBalanceWalletTwoTone, AccountTreeTwoTone } from '@material-ui/icons';
+import { AccountBalanceWalletTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
 import { fromEvent } from "file-selector";
 import { getAuth, signOut } from 'firebase/auth';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable, uploadString } from "firebase/storage";
+import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import readXlsxFile from 'read-excel-file';
 import './App.css';
+import Createquote from './components/CreateQuote/CreateQuote';
+import Loginform from './components/CreateQuote/loginForm';
+import Investigation from './components/Investigation/investigation';
+import Driver from './components/leadDriver/Driver';
+import Vouchers from './components/payments_vouchers/Vouchers';
 import FollowUp from './components/quotation_follow_up/Follow_up';
 import Rapid from './components/Rapid/Rapid';
 import app from './components/required';
 import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
-import Createquote from './components/CreateQuote/CreateQuote';
-import Loginform from './components/CreateQuote/loginForm';
-import Vouchers from './components/payments_vouchers/Vouchers'
-import TestTable from './components/tester/TestTable';
-import Driver from './components/leadDriver/Driver';
-import moment from 'moment';
-import Investigation from './components/Investigation/investigation';
 
 
 function App() {
@@ -28,6 +27,7 @@ function App() {
   const db = getFirestore(app);
   const [auth, setauth] = useState()
   const [Page, setPage] = React.useState("")
+  const[live,setlive]=useState([])
   const oauth = getAuth();
 
   function setAuthFirebase(args) {
@@ -77,7 +77,7 @@ function App() {
             quotation: 0,
             quotation_flg: false,
             month: '',
-            Lead_status_change_date:null,
+            Lead_status_change_date: null,
             comments: [],
             Vouchers_flight: [],
             Vouchers_hotels: [],
@@ -136,6 +136,17 @@ function App() {
 
   }
 
+  async function Livesanp() {
+    const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date","==",moment(currentdate).format('YYYY-MM-DD') ) );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const liveData = [];
+        querySnapshot.forEach((doc) => {
+            liveData.push(doc.data().TripId);
+        });
+        setlive(liveData)
+        // console.log("Current cities in CA: ", cities.join(","));
+    });
+  }
   async function fetch_profile(args) {
     console.log(args)
     try {
@@ -202,6 +213,9 @@ function App() {
       fetch_profile(auth)
     }
   }, [auth]);
+  useEffect(() => {
+    Livesanp()
+  }, []);
 
   function refreshPage() {
     window.location.reload(false);
@@ -273,30 +287,34 @@ function App() {
                 }
                 {
                   profile.access_type === "Accounts" ? <>
-                    <div className='sidebarCard' onClick={() => page("Payments")}>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Payments</p>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire {live.length}</p>
                       </div>
                     </div>
+
                     <div className='sidebarCard' onClick={() => page("converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>converted</p>
                       </div>
                     </div>
+
+                    <div className='sidebarCard' onClick={() => page("Payments")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Payments</p>
+                      </div>
+                    </div>
+                    
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire</p>
-                      </div>
-                    </div>
+
                   </> : <></>
                 }
                 {
@@ -398,42 +416,6 @@ function App() {
                 }
               </>
               : <></>
-          }
-
-
-
-
-
-
-          {
-            profile ?
-              <>
-                {
-                  profile.access_type === "admin" ?
-                    <>
-                      <div className='sidebarCard' onClick={() => page("User_Controller")}>
-                        <div className='sidebarCardContaint'>
-                          <SwapCalls style={{ marginRight: "1rem" }} />
-                          <p>User Controller</p>
-                        </div>
-                      </div>
-                      <div className='sidebarCard' onClick={() => UploadFile()}>
-                        <div className='sidebarCardContaint'>
-                          <BackupOutlined style={{ marginRight: "1rem" }} />
-                          <p>Feed The Lead</p>
-                        </div>
-                      </div>
-                      <div className='sidebarCard' onClick={() => page("Investigation")}>
-                        <div className='sidebarCardContaint'>
-                          <SearchTwoTone style={{ marginRight: "1rem" }} />
-                          <p>Investigation</p>
-                        </div>
-                      </div>
-                    </>
-                    :
-                    <></>
-                }
-              </> : <></>
           }
         </div>
         <div className='mainContaint'>

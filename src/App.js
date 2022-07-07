@@ -7,6 +7,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import readXlsxFile from 'read-excel-file';
 import './App.css';
+import Account_converted from './components/AdminController/Account_converted';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import Investigation from './components/Investigation/investigation';
@@ -27,7 +28,7 @@ function App() {
   const db = getFirestore(app);
   const [auth, setauth] = useState()
   const [Page, setPage] = React.useState("")
-  const[live,setlive]=useState([])
+  const [live, setlive] = useState([])
   const oauth = getAuth();
 
   function setAuthFirebase(args) {
@@ -133,19 +134,6 @@ function App() {
         });
       }
     );
-
-  }
-
-  async function Livesanp() {
-    const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date","==",moment(currentdate).format('YYYY-MM-DD') ) );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const liveData = [];
-        querySnapshot.forEach((doc) => {
-            liveData.push(doc.data().TripId);
-        });
-        setlive(liveData)
-        // console.log("Current cities in CA: ", cities.join(","));
-    });
   }
   async function fetch_profile(args) {
     console.log(args)
@@ -213,9 +201,7 @@ function App() {
       fetch_profile(auth)
     }
   }, [auth]);
-  useEffect(() => {
-    Livesanp()
-  }, []);
+
 
   function refreshPage() {
     window.location.reload(false);
@@ -290,11 +276,11 @@ function App() {
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire {live.length}</p>
+                        <p>Rapid Fire </p>
                       </div>
                     </div>
 
-                    <div className='sidebarCard' onClick={() => page("converted")}>
+                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>converted</p>
@@ -307,7 +293,7 @@ function App() {
                         <p>Payments</p>
                       </div>
                     </div>
-                    
+
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -319,7 +305,7 @@ function App() {
                 }
                 {
                   profile.access_type === "Operation" ? <>
-                    <div className='sidebarCard' onClick={() => page("converted")}>
+                    <div className='sidebarCard' onClick={() => page("Operation_converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>converted</p>
@@ -474,6 +460,11 @@ function App() {
                 <Driver />
               </>
               : <></>
+          }
+          {
+            Page ==="Operation_converted"?<>
+            <Account_converted auth={auth}/>
+            </>:<></>
           }
         </div>
       </div>

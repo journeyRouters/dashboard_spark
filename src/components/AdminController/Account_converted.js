@@ -11,10 +11,8 @@ const Account_converted = () => {
     var times = 0
     const[lead_data,set_lead_data]=useState([])
     const [selectedDate, setDate] = useState(moment(currentDate).format('YYYY-MM-DD'))
-    async function getConvertedData() {
-        /**this function will fetch the data
-         * which have travel date is next to current date
-         */
+    
+    useEffect(() => {
         const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date", "==", selectedDate));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const converted = [];
@@ -27,16 +25,13 @@ const Account_converted = () => {
             set_lead_data(converted)
         });
         return unsubscribe
-    }
-    useEffect(() => {
-        getConvertedData()
     }, []);
     return (
         <div>
          {
               lead_data.map((data, index) => (
                 <>
-                    <VouchersCompo key={index} data={data} datahandle={getConvertedData} />
+                    <VouchersCompo key={index} data={data}  />
                 </>
             ))
          }

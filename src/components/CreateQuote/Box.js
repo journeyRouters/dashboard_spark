@@ -8,10 +8,18 @@ import makeAnimated from 'react-select/animated';
 import './TripComponent.css';
 import { ActivityResolver } from '../Profile/Activity';
 
-const Box = (props) => {
+const Box = ({
+    email,
+    data,
+    updateprofile_LeadFollowup,
+    updateprofile_Lead_Current,
+    updateTableDataAfterQuote,
+    set_popupopner,
+    userProfile,
+    profile
+}) => {
     const animatedComponents = makeAnimated();
-    const Data = props.data
-    const [Travel_Duration, setTravel_Duration] = useState(Data.Travel_Duration)
+    const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
     const [SelectedpackageType, setSelectedpackageType] = useState("per Person")
     const [flightcost, setFlightcost] = useState(0)
@@ -20,10 +28,10 @@ const Box = (props) => {
     const [countNight, setCountnight] = useState(0)
     const [flight, setflight] = useState(true)
     const [cab, setcab] = useState(true)
-    const [itineary, setItineary] = useState([{ Day: '', Description: '',Activity:'' },])
-    const days = Array(Data.Travel_Duration).fill('a');
+    const [itineary, setItineary] = useState([{ Day: '', Description: '', Activity: '' },])
+    const days = Array(data.Travel_Duration).fill('a');
     const [days_total, setTotalDays] = useState(days);
-    const [cont_days, setDayscounter] = useState(parseInt(Data.Travel_Duration))
+    const [count_days, setDayscounter] = useState(parseInt(data.Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState([
         { Night: [], HotelName: '', City: '', Category: '', HotelType: '', comments: '' },])
     const [selected_Travel_date, set_selected_Travel_date] = useState()
@@ -95,6 +103,7 @@ const Box = (props) => {
     function daysChanges(event) {
         let len = parseInt(event.target.value)
         var temp = Array(len).fill('a');
+        setDayscounter(len)
         setTotalDays(temp)
         if (len > days_total.length) {
             itinearyDaysincrease()
@@ -112,7 +121,7 @@ const Box = (props) => {
 
     }
     function itinearyDaysincrease() {
-        let data = { Day: '', Description: '',Activity:'' }
+        let data = { Day: '', Description: '', Activity: '' }
         setItineary([...itineary, data])
     }
     function itinearyDaydecrease() {
@@ -122,7 +131,7 @@ const Box = (props) => {
     }
     function setVar() {
         for (let s = 0; s < Travel_Duration - 1; s++) {
-            let data = { Day: '', Description: '',Activity:'' }
+            let data = { Day: '', Description: '', Activity: '' }
             let temp = itineary
             temp.push(data)
             setItineary(temp)
@@ -130,17 +139,17 @@ const Box = (props) => {
     }
     useEffect(() => {
         setVar()
-        setActivity(ActivityResolver('Bali'))
+        setActivity(ActivityResolver(data.Destination))
     }, []);
 
     const handleFormChangeItineary = (event, index) => {
         let data = [...itineary];
-        try{
+        try {
 
             data[index][event.target.name] = event.target.value;
         }
-        catch{
-            data[index]['Activity']=event.value
+        catch {
+            data[index]['Activity'] = event.value
         }
         setItineary(data);
         console.log(data)
@@ -192,7 +201,7 @@ const Box = (props) => {
     }
     function closeHandler() {
         setOpen(false)
-        props.set_popupopner(false)
+        set_popupopner(false)
     }
     function handleChange(event) {
         setSelectedpackageType(event.target.value);
@@ -213,15 +222,15 @@ const Box = (props) => {
             <Modal open={openPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <Profile
                     SelectedpackageType={SelectedpackageType}
-                    email={props.email}
-                    userProfile={props.userProfile}
+                    email={email}
+                    userProfile={userProfile}
                     indicator={false}
+                    count_days={count_days}
                     inclusion_data={inclusion_data}
-                    travel_data={Data}
+                    travel_data={data}
                     cabDetailsData={cabDetailsData}
                     flights={flights}
                     closePDF={closePDF}
-                    datahandle={props.datahandle}
                     closeHandler={closeHandler}
                     itineary={itineary}
                     NightDataFields={NightDataFields}
@@ -229,6 +238,10 @@ const Box = (props) => {
                     flightcost={flightcost}
                     visacost={visacost}
                     landPackage={landPackage}
+                    updateprofile_LeadFollowup={updateprofile_LeadFollowup}
+                    updateprofile_Lead_Current={updateprofile_Lead_Current}
+                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                    profile={profile}
                 />
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >

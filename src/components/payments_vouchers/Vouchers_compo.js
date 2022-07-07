@@ -242,7 +242,7 @@ const VouchersCompo = ({ data }) => {
             });
 
         }
-        else{
+        else {
             let previousData = data.vouchers_idproof
             previousData.splice(del_index, 1)
             await updateDoc(docref, {
@@ -261,7 +261,7 @@ const VouchersCompo = ({ data }) => {
         settarget(e.target.value)
     }
     return (
-        <div className='details_of_specific_trip'>
+        <div className='details_of_specific_trip' onClick={() => detailsFlgactive()}>
             <div className='client_detail'>
                 <div className='personal-details'>
                     <div className='TripId'>
@@ -285,16 +285,13 @@ const VouchersCompo = ({ data }) => {
                     <p>Travel Duration:-
                         {data.Travel_Duration}
                     </p>
-                    <p>Follow Up date:-
+                    <p>Travel date:-
                         {data.Follow_Up_date}
                     </p>
                     <p>Budget:-
                         {data.Budget}
                     </p>
-                    <button
-                        onClick={() => detailsFlgactive()}>
-                        Show More
-                    </button>
+                   
 
                 </div>
 
@@ -334,7 +331,7 @@ const VouchersCompo = ({ data }) => {
                                                             <p>
                                                                 {id.name}
                                                             </p>
-                                                            <a href={id.link} download={id.name}  target="_blank">download</a>
+                                                            <a href={id.link} download={id.name} target="_blank">download</a>
                                                             <button onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
@@ -362,7 +359,7 @@ const VouchersCompo = ({ data }) => {
                                                             <p>
                                                                 {hotel.name}
                                                             </p>
-                                                            <a href={hotel.link} download={hotel.name}  target="_blank">download</a>
+                                                            <a href={hotel.link} download={hotel.name} target="_blank">download</a>
 
                                                             <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
                                                         </div>
@@ -380,7 +377,7 @@ const VouchersCompo = ({ data }) => {
                                                             <p>
                                                                 {flight.name}
                                                             </p>
-                                                            <a href={flight.link} download={flight.name}  target="_blank">download</a>
+                                                            <a href={flight.link} download={flight.name} target="_blank">download</a>
                                                             <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
@@ -397,7 +394,7 @@ const VouchersCompo = ({ data }) => {
                                                             <p>
                                                                 {others.name}
                                                             </p>
-                                                            <a href={others.link} download={others.name}  target="_blank">download</a>
+                                                            <a href={others.link} download={others.name} target="_blank">download</a>
                                                             <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>

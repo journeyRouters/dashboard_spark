@@ -317,6 +317,12 @@ import { PDFExport } from "@progress/kendo-react-pdf";
 import { useEffect, useRef, useState } from 'react';
 import '../Profile/profile.css';
 import '../Profile/pdfcss.css';
+import { collection, getFirestore, onSnapshot, query, where } from "firebase/firestore";
+import app from "../required";
+import moment from "moment";
+const db = getFirestore(app);
+const currentdate = new Date();
+
 
 const Test = () => {
     const [inclusionlist, setinclusion] = useState([])
@@ -387,6 +393,19 @@ const Test = () => {
         }
 
     }
+    async function sanp() {
+        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date","==",moment(currentdate).format('YYYY-MM-DD') ) );
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const cities = [];
+            querySnapshot.forEach((doc) => {
+                cities.push(doc.data().TripId);
+            });
+            console.log("Current cities in CA: ", cities.join(","));
+        });
+    }
+    useEffect(() => {
+      sanp()
+    }, []);
     var name = "BALI.png"
     var link = `/assets/destination/${name}`
     return (
@@ -519,7 +538,7 @@ const Test = () => {
                                         inclusionlist.map((data, index) => (
                                             <div className="aliner_">
                                                 <span key={index}>
-                                                    <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{marginRight:"0.3rem"}} />
+                                                    <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
                                                     {data}</span>
                                             </div>
                                         ))
@@ -531,9 +550,9 @@ const Test = () => {
                                         exclusionlist.map((data, index) => (
                                             <div className="aliner_">
                                                 <span key={index}>
-                                                <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{marginRight:"0.3rem"}}/>
-                                                    
-                                                     {data}</span>
+                                                    <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+
+                                                    {data}</span>
                                             </div>
                                         ))
                                     }

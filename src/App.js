@@ -1,4 +1,4 @@
-import { BackupOutlined, FileCopyOutlined, Fingerprint, Speed, PersonOutlineOutlined,SearchTwoTone,TrendingUp,SwapCalls,AccountBalanceWalletTwoTone,AccountTreeTwoTone } from '@material-ui/icons';
+import { BackupOutlined, FileCopyOutlined, Fingerprint, Speed, PersonOutlineOutlined, SearchTwoTone, TrendingUp, SwapCalls, AccountBalanceWalletTwoTone, AccountTreeTwoTone } from '@material-ui/icons';
 import { fromEvent } from "file-selector";
 import { getAuth, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
@@ -48,8 +48,9 @@ function App() {
       readXlsxFile(files[0]).then((rows) => {
         for (let i = 1; i <= rows.length - 1; i++) {
           let Row = rows[i]
-          let any=Math.random()
-          let tripid=`TRP${any}`
+          console.log(Row)
+          let any = Math.random()
+          let tripid = `TRP${any}`
           setDoc(doc(db, "Trip", tripid), {
             TripId: tripid,
             Lead_Status: Row[0],
@@ -68,7 +69,7 @@ function App() {
             Child: Row[13],
             Email: Row[14],
             Remark: Row[15],
-            Follow_Up_date: Row[16],
+            Lead_genrate_date: Row[16],
             uploaded_by: auth.email,
             Quoted_by: null,
             uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
@@ -76,19 +77,20 @@ function App() {
             quotation: 0,
             quotation_flg: false,
             month: '',
+            Lead_status_change_date:null,
             comments: [],
-           Vouchers_flight:[],
-           Vouchers_hotels:[],
-           Vouchers_others:[],
-           vouchers_idproof:[],
-           transfer_request:false,
-           transfer_request_reason:[],  
-           assign_to:{
-            uid:null,
-            name:null
-           },
-           updated_last:null,
-           assign_flg:false
+            Vouchers_flight: [],
+            Vouchers_hotels: [],
+            Vouchers_others: [],
+            vouchers_idproof: [],
+            transfer_request: false,
+            transfer_request_reason: [],
+            assign_to: {
+              uid: null,
+              name: null
+            },
+            updated_last: null,
+            assign_flg: false
           });
         }
         // console.log(rows[1][0])
@@ -231,50 +233,177 @@ function App() {
       </div>
       <div className='assembler'>
         <div className='sidebars'>
-          <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-            <div className='sidebarCardContaint'>
-              <Speed style={{ marginRight: "1rem" }} />
-              <p>Rapid Fire</p>
-            </div>
-          </div>
+          {
+            profile ?
+              <>
+                {
+                  profile.access_type === "User" ? <>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Create Quote</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Quotation Followup</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>voucher & payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+
+                  </> : <></>
+                }
+                {
+                  profile.access_type === "Accounts" ? <>
+                    <div className='sidebarCard' onClick={() => page("Payments")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("converted")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>converted</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire</p>
+                      </div>
+                    </div>
+                  </> : <></>
+                }
+                {
+                  profile.access_type === "Operation" ? <>
+                    <div className='sidebarCard' onClick={() => page("converted")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>converted</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("During_Stay"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>During Stay</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Post_Stay"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Post Stay</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+                  </> : <></>
+                }
+                {
+                  profile.access_type === "admin" ? <>
+                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Driver</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("transfer_request"))}>
+                      <div className='sidebarCardContaint'>
+                        <TrendingUp style={{ marginRight: "1rem" }} />
+                        <p>Transfer Requests</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("profile"))}>
+                      <div className='sidebarCardContaint'>
+                        <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
+                        <p>Profile</p>
+                      </div>
+                    </div>
+                  </> : <></>
+                }
+                {
+                  profile.access_type === "Super Admin" ? <>
+                    <div className='sidebarCard' onClick={() => page("Payments")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("converted")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>converted</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("During_Stay"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>During Stay</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Post_Stay"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Post Stay</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>switch user</p>
+                      </div>
+                    </div>
+
+                  </> : <></>
+                }
+              </>
+              : <></>
+          }
 
 
-          <div className='sidebarCard' onClick={() => page("create_quote")}>
-            <div className='sidebarCardContaint'>
-              <FileCopyOutlined style={{ marginRight: "1rem" }} />
-              <p>Create Quote</p>
-            </div>
-          </div>
-          <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
-            <div className='sidebarCardContaint'>
-              <FileCopyOutlined style={{ marginRight: "1rem" }} />
-              <p>Quotation Followup</p>
-            </div>
-          </div>
-          <div className='sidebarCard' onClick={(() => page("voucher"))}>
-            <div className='sidebarCardContaint'>
-              <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-              <p>voucher & payments</p>
-            </div>
-          </div>
-          <div className='sidebarCard' onClick={(() => page("profile"))}>
-            <div className='sidebarCardContaint'>
-              <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
-              <p>Profile</p>
-            </div>
-          </div>
-          <div className='sidebarCard' onClick={(() => page("Driver"))}>
-            <div className='sidebarCardContaint'>
-              <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-              <p>Driver</p>
-            </div>
-          </div>
-          <div className='sidebarCard' onClick={(() => page("transfer_request"))}>
-            <div className='sidebarCardContaint'>
-              <TrendingUp style={{ marginRight: "1rem" }} />
-              <p>Transfer Requests</p>
-            </div>
-          </div>
+
+
+
 
           {
             profile ?
@@ -353,14 +482,14 @@ function App() {
           {
             Page === "profile" ?
               <>
-                {/* <Test /> */}
+                <Test />
               </>
               : <></>
           }
           {
             Page === "Driver" ?
               <>
-                <Driver/>
+                <Driver />
               </>
               : <></>
           }

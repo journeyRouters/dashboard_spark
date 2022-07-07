@@ -4,27 +4,27 @@ export const avtivityList = {
     Bali: [
         {
             label: 'Kintamani Ubud Tour',
-            value: 'Kintamani Ubud Tour'
+            value: 'KintamaniUbud'
         },
         {
             label: 'Bali Swing',
-            value: 'Bali Swing'
+            value: 'BaliSwing'
         },
         {
             label: 'Water Sports Activities',
-            value: 'Water Sports Activities'
+            value: 'WaterSportsActivities'
         },
         {
             label: 'Uluwatu Temple',
-            value: 'Uluwatu Temple'
+            value: 'UluwatuTemple'
         },
         {
             label: 'Tanah Lot',
-            value: 'Tanah Lot'
+            value: 'TanahLot'
         },
         {
             label: 'Lempuyang Temple',
-            value: 'Lempuyang Temple'
+            value: 'LempuyangTemple'
         },
         {
             label: 'Nusa Penida Island',
@@ -32,52 +32,99 @@ export const avtivityList = {
         },
         {
             label: 'Ayung River Rafting',
-            value: 'Ayung River Rafting'
+            value: 'AyungRiverRafting'
         },
         {
             label: 'Dolphin Watching Lovina Beach',
-            value: 'Dolphin Watching Lovina Beach'
+            value: 'DolphinWatchingLovinaBeach'
         },
         {
             label: 'Mount Batur Trekking',
-            value: 'Mount Batur Trekking'
+            value: 'MountBaturTrekking'
         },
         {
-            label: 'Dinner Cruise Bali Hai',
-            value: 'Dinner Cruise Bali Hai'
+            label: 'Dinner Cruise Bali Hai', 
+            value: 'DinnerCruiseBaliHai' 
         },
         {
             label: 'Dinner Cruise Bounty',
-            value: 'Dinner Cruise Bounty'
+            value: 'DinnerCruiseBounty'
         },
         {
             label: 'Lembongan Island Day Cruise by Bali Hai',
-            value: 'Lembongan Island Day Cruise by Bali Hai'
+            value: 'LembonganIslandDayCruise'
         },
         {
             label: 'Lembongan Island Day Cruise by Bounty',
-            value: 'Lembongan Island Day Cruise by Bounty'
+            value: 'LembonganIslandDayCruisebyBounty'
         },
         {
             label: 'Monkey Forest',
-            value: 'Monkey Forest'
+            value: 'MonkeyForest'
         },
         {
             label: 'Besakih Temple',
-            value: 'Besakih Temple'
+            value: 'BesakihTemple'
         },
         {
             label: 'Dream Land Beach',
-            value: 'Dream Land Beach'
+            value: 'DreamLandBeach'
         },
         {
             label: 'Balinese Spa',
-            value: 'Balinese Spa'
+            value: 'BalineseSpa'
         },
         {
             label: 'Candle Light Dinner with Setup at Beach',
-            value: 'Candle Light Dinner with Setup at Beach'
+            value: 'CandleLightDinnerwithSetupatBeach'
         },
+    ],
+    Manali:[
+        {
+            label:'Solang Valley ',
+            value:'SolangValley '
+        },
+        {
+            label:'Old Manali',
+            value:'OldManali'
+        },
+        {
+            label:'Naggar castle',
+            value:'Naggarcastle'
+        },
+        {
+            label:'kasol',
+            value:'kasol'
+        },
+        {
+            label:'Rohtang Pass',
+            value:'RohtangPass'
+        },
+        {
+            label:'Attal Tunnel',
+            value:'AttalTunnel'
+        },
+        {
+            label:'Hadima',
+            value:'Hadima'
+        },
+        {
+            label:'Vashisht Temple',
+            value:'VashishtTemple'
+        },
+        {
+            label:'Van Vihar',
+            value:'VanVihar'
+        },
+        {
+            label:'Tibetan monastery',
+            value:'Tibetanmonastery'
+        },
+        {
+            label:'Manu Temple',
+            value:'ManuTemple'
+        },
+
     ]
 }
 export function ActivityResolver(destination) {

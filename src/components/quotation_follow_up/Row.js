@@ -118,8 +118,16 @@ const Row = (props) => {
     function closeUpdater() {
         setopenupdater(false)
     }
+    function updateDataBase(TripId){
+        props.updateprofile_Lead_followUp(TripId)
+        props.updateprofile_Lead_converted(TripId)
+    }
     function closeOnstatusComments() {
         update_comments()
+        if(Lead_Status=="Converted"){
+            updateDataBase(row.TripId)
+            props.updateTableDataAfterConversion(row.TripId)
+        }
         setopenupdater(false)
     }
     async function latestComments() {
@@ -169,21 +177,22 @@ const Row = (props) => {
             let allComments = row.comments
             let comment_holder = {
                 comments: comments,
-                time: moment(today).format('YYYY-MM-DD'),
-                date: moment(today).format('h:mm:ss')
+                date: moment(today).format('YYYY-MM-DD'),
+                time: moment(today).format('h:mm:ss')
             }
             allComments.push(comment_holder)
             // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
-                Lead_Status: Lead_Status
+                Lead_Status: Lead_Status,
+                Lead_status_change_date:moment(today).format('YYYY-MM-DD')
 
             }, { merge: true });
 
             latestComments()
             dochange()
             setcomments()
-            props.datahandle()
+            // props.getProfile(props.auth)
         }
        
 

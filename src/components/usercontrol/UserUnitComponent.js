@@ -119,7 +119,7 @@ const Userunitcomponent = (props) => {
             </div>
             {
                 edit ?
-                    <Modal style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }} open={edit} onClose={handelClose} >
+                    <Modal style={{ display: "flex", justifyContent: "center"}} open={edit} onClose={handelClose} >
                         <div className='edit_main'>
                             <PersonOutlined
                                 color='primary'
@@ -150,6 +150,9 @@ const Userunitcomponent = (props) => {
                                             <FormControlLabel value="User" control={<Radio />} label="User" />
                                             <FormControlLabel value="Unauthorise" control={<Radio />} label="Unauthorise" />
                                             <FormControlLabel value="Block" control={<Radio />} label="Block" />
+                                            <FormControlLabel value="Operation" control={<Radio />} label="Operation" />
+                                            <FormControlLabel value="Super Admin" control={<Radio />} label="Super Admin" />
+                                            <FormControlLabel value="Accounts" control={<Radio />} label="Accounts" />
                                         </RadioGroup>
                                     </FormControl>
                                 </div>

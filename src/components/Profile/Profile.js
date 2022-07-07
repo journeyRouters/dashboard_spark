@@ -11,6 +11,7 @@ const db = getFirestore(app);
 
 const Profile = (
     {
+        count_days,
         SelectedpackageType,
         email,
         userProfile,
@@ -20,7 +21,6 @@ const Profile = (
         cabDetailsData,
         flights,
         closePDF,
-        datahandle,
         closeHandler,
         itineary,
         NightDataFields,
@@ -28,24 +28,52 @@ const Profile = (
         flightcost,
         visacost,
         landPackage,
-        Allquote
+        Allquote,
+        updateTableDataAfterQuote,
+        profile
     }
 ) => {
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
     });
-    console.log(selected_Travel_date)
     const Data = travel_data
     const [callback, setcallback] = useState(false)
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
     const pdfExportComponent = useRef(null);
-    const [comment_inclusion, set_comment_inclusion] = useState([])
-    const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
-    // console.log(userProfile)
+    const currentdate = new Date();
+    const TripId = Data.TripId
+    const month = currentdate.toLocaleString('default', { month: 'long' })
 
-
+    async function updateprofile_LeadFollowup(tripid) {
+        const docref = doc(db, "Profile", profile.uid);
+        var pre_Lead_followUp = profile.Lead_followUp
+        console.log(pre_Lead_followUp)
+        pre_Lead_followUp.push(tripid)
+        var unique = [...new Set(pre_Lead_followUp)]
+        console.log(unique)
+        await updateDoc(docref, {
+            "Lead_followUp": unique
+        });
+    }
+    async function updateprofile_Lead_Current(tripid) {
+        console.log(tripid)
+        var deleted_Lead = []
+        var pre_Lead_Current = profile.Lead_Current
+        console.log(pre_Lead_Current)
+        var elementIndex = pre_Lead_Current.indexOf(tripid)
+        console.log(elementIndex)
+        if (elementIndex > -1) {
+            deleted_Lead = pre_Lead_Current.splice(elementIndex, 1)
+            console.log('after deletion',pre_Lead_Current)
+        }
+        const docref = doc(db, "Profile", profile.uid)
+        await updateDoc(docref, {
+            "Lead_Current": pre_Lead_Current
+        })
+        console.log('done')
+    }
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         console.log(keys)
@@ -61,30 +89,9 @@ const Profile = (
         filterExclusion()
 
     }, []);
-    useEffect(() => {
-        // console.log(inclusion_data.other_Inclusion, inclusion_data.other_Exclusion)
-        try {
 
-            set_comment_inclusion(inclusion_data.other_Inclusion.split("."))
-        }
-        catch {
-            set_comment_inclusion([])
-        }
-        try {
 
-            set_Comment_Exclusion(inclusion_data.other_Exclusion.split("."))
-        }
-        catch {
-            set_Comment_Exclusion([])
-        }
-    }, []);
-    const currentdate = new Date();
-    // console.log(currentdate)
-    // var doc = new jsPDF("p", "pt", "a4");
-    const TripId = Data.TripId
-    const month = currentdate.toLocaleString('default', { month: 'long' })
-
-    async function dataSetter() {
+    async function setQuotationData() {
         if (indicator) {
 
         }
@@ -117,7 +124,8 @@ const Profile = (
             quotation_flg: true,
             month: month,
             Follow_Up_date: String(selected_Travel_date),
-            Quoted_by: email
+            Quoted_by: email,
+            Travel_Duration: count_days
         });
     }
 
@@ -127,19 +135,27 @@ const Profile = (
     };
     function pdfgenrator() {
         handleExportWithComponent()
-        update_quotation_flg()
-
-
         try {
-            datahandle()
+            try {
+                updateprofile_LeadFollowup(travel_data.TripId)
+            }
+            catch (e) { console.log(e) }
+            try {
+                updateprofile_Lead_Current(travel_data.TripId)
+            }
+            catch (e) { console.log(e) }
+            try {
+                update_quotation_flg()
+            }
+            catch (e) { console.log(e) }
         }
         catch (e) {
             console.log(e)
-        }
 
+        }
         try {
 
-            dataSetter()
+            setQuotationData()
         }
         catch (e) {
             console.log(e)
@@ -150,6 +166,7 @@ const Profile = (
         catch (error) {
             console.log(error)
         }
+        // closePDF()
     }
 
     var name = "BALI.png"
@@ -165,7 +182,7 @@ const Profile = (
                 <div className={`pre ${layoutSelection.value}`}>
                     <div className={'page1'}
                         style={{
-                            backgroundImage: `url(${link})`,
+                            backgroundImage: `url(/assets/destination/${name})`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -229,13 +246,13 @@ const Profile = (
                                 <div >
                                     <span>- {travel_data.Destination}</span><br />
                                     <span>- {selected_Travel_date}</span><br />
-                                    <span>- {travel_data.Travel_Duration} Days, {travel_data.Travel_Duration - 1} Nights</span><br />
+                                    <span>- {count_days} Days, {count_days - 1} Nights</span><br />
                                     <span>- {travel_data.Pax} Adults , {travel_data.Child ? travel_data.Child : 0} Child</span><br />
                                 </div>
 
                             </div>
                             <div className="yellow_details">
-                                <p className="dayDetails">{travel_data.Travel_Duration} Days, {travel_data.Travel_Duration - 1} Nights</p>
+                                <p className="dayDetails">{count_days} Days, {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR 3,00,000/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
@@ -362,7 +379,7 @@ const Profile = (
                                 <div className='itinearyDiv'>
                                     {
                                         itineary.map((data, index) => (
-                                            <div className={(index+1)%2==0?'DaywiseItinearyDiv':'DaywiseItinearyDivReverse'}>
+                                            <div className={(index + 1) % 2 == 0 ? 'DaywiseItinearyDiv' : 'DaywiseItinearyDivReverse'}>
                                                 <div className='DaywiseItinearyDivleft'>
                                                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                         <span className='dayheader'>
@@ -372,7 +389,7 @@ const Profile = (
                                                     <p className='dayDetailsitineary'>{data.Description}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
-                                                    <img src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/BALI ACTIVITIES IMAGES/SamplerNusa.png'
+                                                    <img src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/BALI ACTIVITIES IMAGES/TestImage copy.png'
                                                         style={{ width: "14rem", height: "14rem" }} />
                                                 </div>
                                             </div>

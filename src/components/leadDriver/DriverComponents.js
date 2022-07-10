@@ -10,39 +10,41 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
-    function handlebackendProfileAndtrip(tripid, uid, Name) {
-        update_lead_field(uid, Name)
-        assignTask(tripid)
-        if (selectedDate !== null) {
-            getLeadByDate(selectedDate)
-        }
-        else {
+    // function handlebackendProfileAndtrip(tripid, uid, Name) {
+    //     update_lead_field(uid, Name)
+    //     // assignTask(tripid)
+    //     // if (selectedDate !== null) {
+    //     //     getLeadByDate(selectedDate)
+    //     // }
+    //     // else {
 
-            getLeadByDate(currentdate)
-        }
+    //     //     getLeadByDate(currentdate)
+    //     // }
 
-    }
-    async function assignTask(tripid) {
-        /**this function will update the lead_current feild in profile with new trip id */
-        console.log(currentUser)
-        const Databaseref = doc(db, "Profile", currentUser[0].uid);
-        var Lead_Current = currentUser[0].Lead_Current
-        // console.log(Lead_Current)
-        Lead_Current.push(tripid)
-        // console.log(Lead_Current)
-        await updateDoc(Databaseref, {
-            "Lead_Current": Lead_Current
-        });
+    // }
+    // async function assignTask(tripid) {
+    //     /**this function will update the lead_current feild in profile with new trip id */
+    //     console.log(currentUser)
+    //     const Databaseref = doc(db, "Profile", currentUser[0].uid);
+    //     var Lead_Current = currentUser[0].Lead_Current
+    //     // console.log(Lead_Current)
+    //     Lead_Current.push(tripid)
+    //     // console.log(Lead_Current)
+    //     await updateDoc(Databaseref, {
+    //         "Lead_Current": Lead_Current
+    //     });
 
-    }
+    // }
     async function update_lead_field(uid, name) {
-        /**this function is to update the assigned user in lead data foe ref and to be identify */
+        /**this function is to update the assigned user in lead data for ref and to be identify */
         const Databaseref = doc(db, "Trip", data.TripId);
         await updateDoc(Databaseref, {
             "assign_to.uid": uid,
             "assign_to.name": name,
-            "assign_flg": true
+            "assign_flg": true,
+            "assigned_date_time":today
         });
+        getLeadByDate(currentdate)
     }
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
@@ -90,7 +92,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                     }
                 </select>
             </div>
-            <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => handlebackendProfileAndtrip(data.TripId, currentUser[0].uid, currentUser[0].name)} ></input>
+            <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
         </div>
 
     );

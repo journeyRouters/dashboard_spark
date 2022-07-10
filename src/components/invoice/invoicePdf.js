@@ -1,9 +1,9 @@
 import { PDFExport } from "@progress/kendo-react-pdf";
-import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
 
-const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile ,hint,getinvoice}) => {
+const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile, hint, getinvoice }) => {
     const pdfExportComponent = useRef(null);
     console.log(selected_pdf_data)
     const db = getFirestore(app);
@@ -11,31 +11,39 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
         text: "A4",
         value: "size-a4"
     });
-    var today=new Date();
+    var today = new Date();
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
     function handleExportWithComponent() {
         pdfExportComponent.current.save();
-        if(hint){
+        if (hint) {
             setInvoice()
             getinvoice()
+          
         }
         // pdfgenrator
     };
     const inclusion_data = selected_pdf_data.inclusion_data
-    
+
     async function setInvoice() {
         await setDoc(doc(db, "invoice", `${selected_pdf_data.travel_data.TripId}`), {
-            installment:installment,
-            NightDataFields:selected_pdf_data.NightDataFields,
-            documents:documents,
-            deliverable_item:deliverable_item,
-            created_at:today,
-            updated_at:today,
-            updated_by:profile.email,
-            selected_pdf_data:selected_pdf_data
+            installment: installment,
+            NightDataFields: selected_pdf_data.NightDataFields,
+            documents: documents,
+            deliverable_item: deliverable_item,
+            created_at: today,
+            updated_at: today,
+            updated_by: profile.email,
+            selected_pdf_data: selected_pdf_data,
+            finalPackageId:selected_pdf_data.pdf_name
         });
     }
+    // async function updateTrip() {
+    //     const database = doc(db, "Trip", selected_pdf_data.travel_data.TripId);
+    //     await updateDoc(database, {
+    //         final_package:selected_pdf_data.docId
+    //     });
+    // }
     useEffect(() => {
         // console.log(props.inclusion_data.other_Inclusion, props.inclusion_data.other_Exclusion)
         try {

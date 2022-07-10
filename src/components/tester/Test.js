@@ -394,7 +394,7 @@ const Test = () => {
 
     }
     async function sanp() {
-        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date","==",moment(currentdate).format('YYYY-MM-DD') ) );
+        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date", "==", moment(currentdate).format('YYYY-MM-DD')));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const cities = [];
             querySnapshot.forEach((doc) => {
@@ -403,309 +403,344 @@ const Test = () => {
             console.log("Current cities in CA: ", cities.join(","));
         });
     }
+    function testcall() {
+        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            console.log(snapshot.docChanges())
+            snapshot.docChanges().forEach((change) => {
+                switch (change.type) {
+                    case 'added':
+                        console.log("New : ", change.doc.data());
+                        break;
+                    case 'modified':
+                        console.log("modified : ", change.doc.data());
+                        break;
+                    case 'removed':
+                        console.log("removed : ", change.doc.data());
+                        break;
+
+
+
+                }
+                // if (change.type === "added") {
+                //     console.log("New : ", change.doc.data());
+                //     return
+                // }
+                // else if (change.type === "modified") {
+                //     console.log("Modified : ", change.doc.data());
+                //     return
+                // }
+                // else if (change.type === "removed") {
+                //     console.log("Removed : ", change.doc.data());
+                //     return
+                // }
+            });
+        });
+    }
     useEffect(() => {
-      sanp()
+        testcall()
     }, []);
     var name = "BALI.png"
     var link = `/assets/destination/${name}`
     return (
-        <>
-            <PDFExport
-                ref={pdfExportComponent}
-                fileName={`${'Traveller_name'}`}
-                forcePageBreak=".page-break"
-            >
-                <div className={`pre ${layoutSelection.value}`}>
-                    <div className={'page1'}
-                        style={{
-                            backgroundImage: `url(${link})`,
-                            backgroundPosition: "top",
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            // color:"white"
-                        }}
-                    >
-                        <div>
-                            <a href={"https://wa.me/919304247331"} target="_blank">
-                                <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
-                            </a>
-                        </div>
-                        <div className="footer">
-                            <a className="href" href="tel:9304247331">
-                                <div className="footer_img_with_text">
+        <></>
+        // <>
+        //     <PDFExport
+        //         ref={pdfExportComponent}
+        //         fileName={`${'Traveller_name'}`}
+        //         forcePageBreak=".page-break"
+        //     >
+        //         <div className={`pre ${layoutSelection.value}`}>
+        //             <div className={'page1'}
+        //                 style={{
+        //                     backgroundImage: `url(${link})`,
+        //                     backgroundPosition: "top",
+        //                     backgroundRepeat: "no-repeat",
+        //                     backgroundSize: "cover",
+        //                     // color:"white"
+        //                 }}
+        //             >
+        //                 <div>
+        //                     <a href={"https://wa.me/919304247331"} target="_blank">
+        //                         <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
+        //                     </a>
+        //                 </div>
+        //                 <div className="footer">
+        //                     <a className="href" href="tel:9304247331">
+        //                         <div className="footer_img_with_text">
 
-                                    <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
+        //                             <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
 
-                                    <div className="footer_call_for_more_info">
-                                        <span>Call for More Information</span>
-                                        <span>
-                                            +91-9304247331
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
+        //                             <div className="footer_call_for_more_info">
+        //                                 <span>Call for More Information</span>
+        //                                 <span>
+        //                                     +91-9304247331
+        //                                 </span>
+        //                             </div>
+        //                         </div>
+        //                     </a>
 
-                            <div className="DividerLine"></div>
-                            <div className="footer_web_info">
-                                <a className="href" href="https://www.journeyrouters.com/" target="_blank">
-                                    <div>
-                                        <img src="/assets/pdfDefaultImage/weblogo.png" height='63px' />
-                                    </div>
-                                    <div className="web_info_text">
-                                        <span>Visit Us  At</span><br />
-                                        <span>
-                                            www.journeyrouters.com
-                                        </span>
+        //                     <div className="DividerLine"></div>
+        //                     <div className="footer_web_info">
+        //                         <a className="href" href="https://www.journeyrouters.com/" target="_blank">
+        //                             <div>
+        //                                 <img src="/assets/pdfDefaultImage/weblogo.png" height='63px' />
+        //                             </div>
+        //                             <div className="web_info_text">
+        //                                 <span>Visit Us  At</span><br />
+        //                                 <span>
+        //                                     www.journeyrouters.com
+        //                                 </span>
 
-                                    </div>
-                                </a>
+        //                             </div>
+        //                         </a>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="page-break">
-                        <div className="page2" style={{
-                            backgroundImage: "url(/assets/pdfDefaultImage/package.png)",
-                            backgroundPosition: "top",
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            // color:"white"
-                        }}>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //             <div className="page-break">
+        //                 <div className="page2" style={{
+        //                     backgroundImage: "url(/assets/pdfDefaultImage/package.png)",
+        //                     backgroundPosition: "top",
+        //                     backgroundRepeat: "no-repeat",
+        //                     backgroundSize: "cover",
+        //                     // color:"white"
+        //                 }}>
 
-                            <div className="package_details">
-                                <div>
-                                    <span>Destination</span><br />
-                                    <span>Date</span><br />
-                                    <span>Duration</span><br />
-                                    <span>Traveler</span>
-                                </div>
-                                <div >
-                                    <span>- BALI</span><br />
-                                    <span>- 24 Apri 2022</span><br />
-                                    <span>- 6 Day 5 Nights</span><br />
-                                    <span>- 2 Adult</span><br />
-                                </div>
+        //                     <div className="package_details">
+        //                         <div>
+        //                             <span>Destination</span><br />
+        //                             <span>Date</span><br />
+        //                             <span>Duration</span><br />
+        //                             <span>Traveler</span>
+        //                         </div>
+        //                         <div >
+        //                             <span>- BALI</span><br />
+        //                             <span>- 24 Apri 2022</span><br />
+        //                             <span>- 6 Day 5 Nights</span><br />
+        //                             <span>- 2 Adult</span><br />
+        //                         </div>
 
-                            </div>
-                            <div className="yellow_details">
-                                <p className="dayDetails">6 Days 5 Nights</p>
-                                <p className="setPara">at just</p>
-                                <h4 className="seth4">INR 3,00,000/-</h4>
-                                <p className="setPara_">Per Person</p>
-                            </div>
-                            <div >
-                                <div className="bottom_media_details">Follow Us At
-                                    <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                    </a>
-                                    <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                    </a>
-                                    <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                    </a>
-                                    <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                    </a>
-                                    @journeyrouters
-                                    <a href={"https://wa.me/919304247331"} target="_blank">
-                                        <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+        //                     </div>
+        //                     <div className="yellow_details">
+        //                         <p className="dayDetails">6 Days 5 Nights</p>
+        //                         <p className="setPara">at just</p>
+        //                         <h4 className="seth4">INR 3,00,000/-</h4>
+        //                         <p className="setPara_">Per Person</p>
+        //                     </div>
+        //                     <div >
+        //                         <div className="bottom_media_details">Follow Us At
+        //                             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
+        //                             </a>
+        //                             <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
+        //                             </a>
+        //                             <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
+        //                             </a>
+        //                             <a href="https://twitter.com/JourneyRouters" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+        //                             </a>
+        //                             @journeyrouters
+        //                             <a href={"https://wa.me/919304247331"} target="_blank">
+        //                                 <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                             </a>
+        //                         </div>
+        //                     </div>
+        //                 </div>
 
-                    </div>
-                    <div className="page-break">
-                        <div className="inclusion"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover",
-                            }}
-                        >
-                            <div>
-                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
-                            </div>
-                            <div className="inclusionPage_blocks" >
-                                <span> Inclusion</span>
-                                <span>Exclusion</span>
-                            </div>
-                            <div className="inclusionExclusionDetails">
-                                <div>
-                                    {
-                                        inclusionlist.map((data, index) => (
-                                            <div className="aliner_">
-                                                <span key={index}>
-                                                    <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                    {data}</span>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                                <div className="sepratorLineForInclusionExclusion"></div>
-                                <div>
-                                    {
-                                        exclusionlist.map((data, index) => (
-                                            <div className="aliner_">
-                                                <span key={index}>
-                                                    <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+        //             </div>
+        //             <div className="page-break">
+        //                 <div className="inclusion"
+        //                     style={{
+        //                         backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
+        //                         backgroundPosition: "top",
+        //                         backgroundRepeat: "no-repeat",
+        //                         backgroundSize: "cover",
+        //                     }}
+        //                 >
+        //                     <div>
+        //                         <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
+        //                     </div>
+        //                     <div className="inclusionPage_blocks" >
+        //                         <span> Inclusion</span>
+        //                         <span>Exclusion</span>
+        //                     </div>
+        //                     <div className="inclusionExclusionDetails">
+        //                         <div>
+        //                             {
+        //                                 inclusionlist.map((data, index) => (
+        //                                     <div className="aliner_">
+        //                                         <span key={index}>
+        //                                             <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+        //                                             {data}</span>
+        //                                     </div>
+        //                                 ))
+        //                             }
+        //                         </div>
+        //                         <div className="sepratorLineForInclusionExclusion"></div>
+        //                         <div>
+        //                             {
+        //                                 exclusionlist.map((data, index) => (
+        //                                     <div className="aliner_">
+        //                                         <span key={index}>
+        //                                             <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
 
-                                                    {data}</span>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                            {/* <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div> */}
+        //                                             {data}</span>
+        //                                     </div>
+        //                                 ))
+        //                             }
+        //                         </div>
+        //                     </div>
+        //                     {/* <div>
+        //                         <a href={"https://wa.me/919304247331"} target="_blank">
+        //                             <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                         </a>
+        //                     </div> */}
 
-                        </div>
-                    </div>
-
-
-                    <div className="page-break">
-                        <div className="page2"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/jrgoogleReview.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover"
-                            }}
-                        >
-                            <div></div>
-                            <div className="google_review_bottom">
-                                <div className="reiew_c1">
-                                    <a href="https://g.co/kgs/VwbmYT" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img5" />
-                                    </a>
-                                    <a href="https://g.co/kgs/ZK68wZ" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img1" />
-                                    </a>
-                                    <a href="https://g.co/kgs/qM1e2f" target="_blank">
-
-                                        <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img2" />
-                                    </a>
-
-                                </div>
-                                <div className="reiew_c2">
-                                    <a
-                                        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x390ce1d4b9237199:0x7b102f107dc6a192?source=g.page.m._"
-                                        target='_blank' className="link">
-                                        <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
-                                        <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
-                                        <span> 400 & Counting Google Review</span>
-                                    </a>
-                                    <a href="https://g.co/kgs/ReZyXo" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
-                                    </a>
-                                    <a href="https://g.co/kgs/ByT5hQ" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Stephen Raj.PNG" className="review_img" />
-                                    </a>
+        //                 </div>
+        //             </div>
 
 
-                                </div>
-                                <div className="reiew_c3">
-                                    <a href="https://g.co/kgs/iD3DvX" target="_blank">
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
-                                    </a>
-                                    <a href="https://g.co/kgs/iD3DvX" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img3" />
-                                    </a>
-                                    <a href="https://g.co/kgs/kXdzCU" target="_blank" >
-                                        <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img4" />
-                                    </a>
+        //             <div className="page-break">
+        //                 <div className="page2"
+        //                     style={{
+        //                         backgroundImage: "url(/assets/pdfDefaultImage/jrgoogleReview.png)",
+        //                         backgroundPosition: "top",
+        //                         backgroundRepeat: "no-repeat",
+        //                         backgroundSize: "cover"
+        //                     }}
+        //                 >
+        //                     <div></div>
+        //                     <div className="google_review_bottom">
+        //                         <div className="reiew_c1">
+        //                             <a href="https://g.co/kgs/VwbmYT" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img5" />
+        //                             </a>
+        //                             <a href="https://g.co/kgs/ZK68wZ" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img1" />
+        //                             </a>
+        //                             <a href="https://g.co/kgs/qM1e2f" target="_blank">
 
-                                </div>
-                            </div>
-                            <div className="bottom_media_details">Follow Us At
-                                <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
-                                </a>
-                                <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
-                                </a>
-                                <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
-                                </a>
-                                <a href="https://twitter.com/JourneyRouters" target="_blank">
-                                    <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
-                                </a>
-                                @journeyrouters
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div>
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img2" />
+        //                             </a>
+
+        //                         </div>
+        //                         <div className="reiew_c2">
+        //                             <a
+        //                                 href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x390ce1d4b9237199:0x7b102f107dc6a192?source=g.page.m._"
+        //                                 target='_blank' className="link">
+        //                                 <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
+        //                                 <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
+        //                                 <span> 400 & Counting Google Review</span>
+        //                             </a>
+        //                             <a href="https://g.co/kgs/ReZyXo" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
+        //                             </a>
+        //                             <a href="https://g.co/kgs/ByT5hQ" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Stephen Raj.PNG" className="review_img" />
+        //                             </a>
 
 
+        //                         </div>
+        //                         <div className="reiew_c3">
+        //                             <a href="https://g.co/kgs/iD3DvX" target="_blank">
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
+        //                             </a>
+        //                             <a href="https://g.co/kgs/iD3DvX" target="_blank" >
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img3" />
+        //                             </a>
+        //                             <a href="https://g.co/kgs/kXdzCU" target="_blank" >
+        //                                 <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img4" />
+        //                             </a>
 
-                        </div>
-                    </div>
-                    <div className="page-break">
-                        <div className="page2"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/paymentspage.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover"
-                            }}
-                        >
-                            <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="page-break">
-                        <div className="page2"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/journeyRouters_about.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover"
-                            }}
-                        >
-                            <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="page-break">
-                        <div className="page2"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover"
-                            }}
-                        >
-                            <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </PDFExport>
-
-            <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>
-            {/* <button className='download_button' onClick={() => pdfgenrator()}>save Quote</button> */}
+        //                         </div>
+        //                     </div>
+        //                     <div className="bottom_media_details">Follow Us At
+        //                         <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
+        //                             <img src="/assets/pdfDefaultImage/instagram.png" width="40px" />
+        //                         </a>
+        //                         <a href="https://www.facebook.com/JourneyRouters/" target="_blank">
+        //                             <img src="/assets/pdfDefaultImage/facebook.png" width="40px" />
+        //                         </a>
+        //                         <a href="https://in.linkedin.com/company/journeyrouters" target="_blank">
+        //                             <img src="/assets/pdfDefaultImage/linkedin.png" width="40px" />
+        //                         </a>
+        //                         <a href="https://twitter.com/JourneyRouters" target="_blank">
+        //                             <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
+        //                         </a>
+        //                         @journeyrouters
+        //                         <a href={"https://wa.me/919304247331"} target="_blank">
+        //                             <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                         </a>
+        //                     </div>
 
 
 
-        </>
+        //                 </div>
+        //             </div>
+        //             <div className="page-break">
+        //                 <div className="page2"
+        //                     style={{
+        //                         backgroundImage: "url(/assets/pdfDefaultImage/paymentspage.png)",
+        //                         backgroundPosition: "top",
+        //                         backgroundRepeat: "no-repeat",
+        //                         backgroundSize: "cover"
+        //                     }}
+        //                 >
+        //                     <div>
+        //                         <a href={"https://wa.me/919304247331"} target="_blank">
+        //                             <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                         </a>
+        //                     </div>
+
+        //                 </div>
+        //             </div>
+        //             <div className="page-break">
+        //                 <div className="page2"
+        //                     style={{
+        //                         backgroundImage: "url(/assets/pdfDefaultImage/journeyRouters_about.png)",
+        //                         backgroundPosition: "top",
+        //                         backgroundRepeat: "no-repeat",
+        //                         backgroundSize: "cover"
+        //                     }}
+        //                 >
+        //                     <div>
+        //                         <a href={"https://wa.me/919304247331"} target="_blank">
+        //                             <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                         </a>
+        //                     </div>
+
+        //                 </div>
+        //             </div>
+        //             <div className="page-break">
+        //                 <div className="page2"
+        //                     style={{
+        //                         backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
+        //                         backgroundPosition: "top",
+        //                         backgroundRepeat: "no-repeat",
+        //                         backgroundSize: "cover"
+        //                     }}
+        //                 >
+        //                     <div>
+        //                         <a href={"https://wa.me/919304247331"} target="_blank">
+        //                             <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+        //                         </a>
+        //                     </div>
+
+        //                 </div>
+        //             </div>
+
+        //         </div>
+        //     </PDFExport>
+
+        //     <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>
+        //     {/* <button className='download_button' onClick={() => pdfgenrator()}>save Quote</button> */}
+
+
+
+        // </>
     );
 }
 

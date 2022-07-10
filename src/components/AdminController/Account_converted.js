@@ -13,7 +13,7 @@ const Account_converted = () => {
     const [selectedDate, setDate] = useState(moment(currentDate).format('YYYY-MM-DD'))
     
     useEffect(() => {
-        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"), where("Lead_status_change_date", "==", selectedDate));
+        const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const converted = [];
             console.log(times)

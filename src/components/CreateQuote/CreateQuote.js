@@ -51,23 +51,23 @@ const Createquote = (props) => {
     ];
     // /**new logic solution be apart from previous one */
 
-    async function getProfile(args) {
-        console.log(args)
-        try {
-            const docRef = doc(db, "Profile", args.uid);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                setProfile(docSnap.data())
-                getdocandmergetolist(docSnap.data().Lead_Current)
-            } else {
-                console.log("No such document!");
-                // alert("Developer issue")
-            }
-        }
-        catch (error) {
-            console.log({ error })
-        }
-    }
+    // async function getProfile(args) {
+    //     console.log(args)
+    //     try {
+    //         const docRef = doc(db, "Profile", args.uid);
+    //         const docSnap = await getDoc(docRef);
+    //         if (docSnap.exists()) {
+    //             setProfile(docSnap.data())
+    //             getdocandmergetolist(docSnap.data().Lead_Current)
+    //         } else {
+    //             console.log("No such document!");
+    //             // alert("Developer issue")
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log({ error })
+    //     }
+    // }
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
         console.log(lead_data)
@@ -75,92 +75,79 @@ const Createquote = (props) => {
         setLead_data(new_tableData)
 
     }
-    async function updateprofile_LeadFollowup(tripid) {
-        const docref = doc(db, "Profile", profile.uid);
-        var pre_Lead_followUp = profile.Lead_followUp
-        var new_Lead_followUp = pre_Lead_followUp.push(tripid)
-        console.log(new_Lead_followUp)
-        await updateDoc(docref, {
-            "Lead_followUp": new_Lead_followUp
-        });
-    }
-    async function updateprofile_Lead_Current(tripid) {
-        var pre_Lead_Current = profile.Lead_Current
-        var elementIndex = pre_Lead_Current.indexOf(tripid)
-        var new_Lead_Current = pre_Lead_Current.splice(elementIndex, 1)
-        const docref = doc(db, "Profile", profile.uid)
-        await updateDoc(docref, {
-            "Lead_Current": pre_Lead_Current
-        })
-    }
-    async function getdocandmergetolist(list) {
-        /** this function is getting the list of trips from
-         * user profile and fetching the doc from firebase one by one.
-         * beacause the list query is limited to 10 elements in a single list
-         */
-        console.log(list.length)
-        let list_ = []
-        for (let index = 0; index < list.length; index++) {
-            const docRef = doc(db, "Trip", list[index]);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                list_.push(docSnap.data())
-                console.log("Document data:", docSnap.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }
-        setLead_data(list_)
-        setopen(false)
-
-    }
-    // async function getLeadOnBoard(profile) {
-    //     console.log(profile.Lead_Current)
-    //     let list = []
-    //     var q;
-    //     if (profile) {
-    //         q = query(collection(db, "Trip"), where('TripId', 'in', profile.Lead_Current));
-    //     }
-    //     var querySnapshot;
-    //     try {
-    //         if (profile.Lead_Current.lenght !== 0) {
-
-    //             querySnapshot = await getDocs(q);
-    //             try {
-
-    //                 if (querySnapshot.docs.length == 0) {
-    //                     setopen(false)
-    //                 }
-
-    //                 querySnapshot.forEach((doc) => {
-    //                     list.push(doc.data())
-    //                     // doc.data() is never undefined for query doc snapshots
-    //                 });
-    //                 setLead_data(list)
-    //                 console.log(list);
-    //                 setopen(false)
-    //             }
-    //             catch (error) {
-    //                 console.log(error)
-    //             }
-    //         }
-    //         else {
-    //             setLead_data([])
+    // async function updateprofile_LeadFollowup(tripid) {
+    //     const docref = doc(db, "Profile", profile.uid);
+    //     var pre_Lead_followUp = profile.Lead_followUp
+    //     var new_Lead_followUp = pre_Lead_followUp.push(tripid)
+    //     console.log(new_Lead_followUp)
+    //     await updateDoc(docref, {
+    //         "Lead_followUp": new_Lead_followUp
+    //     });
+    // }
+    // async function updateprofile_Lead_Current(tripid) {
+    //     var pre_Lead_Current = profile.Lead_Current
+    //     var elementIndex = pre_Lead_Current.indexOf(tripid)
+    //     var new_Lead_Current = pre_Lead_Current.splice(elementIndex, 1)
+    //     const docref = doc(db, "Profile", profile.uid)
+    //     await updateDoc(docref, {
+    //         "Lead_Current": pre_Lead_Current
+    //     })
+    // }
+    // async function getdocandmergetolist(list) {
+    //     /** this function is getting the list of trips from
+    //      * user profile and fetching the doc from firebase one by one.
+    //      * beacause the list query is limited to 10 elements in a single list
+    //      */
+    //     console.log(list.length)
+    //     let list_ = []
+    //     for (let index = 0; index < list.length; index++) {
+    //         const docRef = doc(db, "Trip", list[index]);
+    //         const docSnap = await getDoc(docRef);
+    //         if (docSnap.exists()) {
+    //             list_.push(docSnap.data())
+    //             console.log("Document data:", docSnap.data());
+    //         } else {
+    //             // doc.data() will be undefined in this case
+    //             console.log("No such document!");
     //         }
     //     }
-    //     catch {
-    //         setopen(false)
-    //     }
+    //     setLead_data(list_)
+    //     setopen(false)
 
     // }
+    async function getLeadOnBoard() {
+        // console.log(props.auth.uid)
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid), where('Lead_Status', '!=', 'Dump'),where("quotation_flg","==",false));
+            var querySnapshot;
 
-    /**//////////////////////////////////////////////////// */
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                setopen(false)
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+                // console.log(list);
+                setopen(false)
+            }
+        }
+        catch (erorr){
+            console.log(erorr)
+            setopen(false)
+        }
+
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        // console.log('back')
-        console.log(props.auth.uid)
-        getProfile(props.auth)
+        getLeadOnBoard()
+        // console.log(props.auth.uid)
+
     }, [popupopener]);
 
     class BaseProductDeleteComponent extends React.Component {
@@ -194,7 +181,7 @@ const Createquote = (props) => {
             /**this set uni data function is setting the row data for box.js explanation */
             set_uni_data(this.props.rowData)
             set_popupopner(true)
-            console.log(this.props.rowData, this.props.tdData);
+            // console.log(this.props.rowData, this.props.tdData);
         }
         render() {
             return (
@@ -217,8 +204,8 @@ const Createquote = (props) => {
                 props.auth ? <>
                     <Modal open={transfermodal} onClose={handletransfermodal}>
                         <div className='transferLead'>
-                            <textarea style={{height:'6rem'}} placeholder='please explain your reason to do so....'></textarea>
-                          <SendIcon className='sendqueryButton' />
+                            <textarea style={{ height: '6rem' }} placeholder='please explain your reason to do so....'></textarea>
+                            <SendIcon className='sendqueryButton' />
                         </div>
 
                     </Modal>
@@ -243,11 +230,8 @@ const Createquote = (props) => {
                                     <Box
                                         email={props.auth.email}
                                         data={user_uni_data}
-                                        updateprofile_LeadFollowup={updateprofile_LeadFollowup}
-                                        updateprofile_Lead_Current={updateprofile_Lead_Current}
                                         updateTableDataAfterQuote={updateTableDataAfterQuote}
                                         set_popupopner={set_popupopner}
-                                        userProfile={props.userProfile}
                                         profile={profile}
                                     /> :
                                     <SortableTbl

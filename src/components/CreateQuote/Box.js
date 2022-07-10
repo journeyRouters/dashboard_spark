@@ -11,12 +11,12 @@ import { ActivityResolver } from '../Profile/Activity';
 const Box = ({
     email,
     data,
-    updateprofile_LeadFollowup,
-    updateprofile_Lead_Current,
     updateTableDataAfterQuote,
     set_popupopner,
     userProfile,
-    profile
+    profile,
+    indicator,
+    inclusion_data_
 }) => {
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
@@ -41,35 +41,35 @@ const Box = ({
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
-    const [inclusion_data, setinclusion] = useState(
-        {
-            Hotels: false,
-            accommodation: false,
-            breakfast: false,
-            lunch: false,
-            lunch_comments: '',
-            dinner: false,
-            dinner_comments: '',
-            airport_arival: false,
-            airport_departure: false,
-            cab_SIC: false,
-            cab_Private: false,
-            cab_Private_comments: '',
-            Gst: false,
-            Tcs: false,
-            airfair: false,
-            siteseeing: false,
-            siteseeing_comments: '',
-            Visa: false,
-            Visa_comments: '',
-            Entrance_fee: false,
-            Entrance_comments: '',
-            other_Inclusion: '',
-            other_Exclusion: ''
-        }
-    )
+    const inclusion={
+        Hotels: false,
+        accommodation: false,
+        breakfast: false,
+        lunch: false,
+        lunch_comments: '',
+        dinner: false,
+        dinner_comments: '',
+        airport_arival: false,
+        airport_departure: false,
+        cab_SIC: false,
+        cab_Private: false,
+        cab_Private_comments: '',
+        Gst: false,
+        Tcs: false,
+        airfair: false,
+        siteseeing: false,
+        siteseeing_comments: '',
+        Visa: false,
+        Visa_comments: '',
+        Entrance_fee: false,
+        Entrance_comments: '',
+        other_Inclusion: '',
+        other_Exclusion: ''
+    }
+    const [inclusion_data, setinclusion] = useState(indicator?inclusion_data_:inclusion)
 
 
+console.log(inclusion_data,inclusion_data_)
     function cabDetails(e) {
         setcabDetails(e.target.value)
     }
@@ -98,6 +98,7 @@ const Box = ({
         setnights(list)
     }
     useEffect(() => {
+    console.log(data)
         handleOptionOfNights()
     }, [countNight]);
     function daysChanges(event) {
@@ -223,7 +224,6 @@ const Box = ({
                 <Profile
                     SelectedpackageType={SelectedpackageType}
                     email={email}
-                    userProfile={userProfile}
                     indicator={false}
                     count_days={count_days}
                     inclusion_data={inclusion_data}
@@ -238,8 +238,6 @@ const Box = ({
                     flightcost={flightcost}
                     visacost={visacost}
                     landPackage={landPackage}
-                    updateprofile_LeadFollowup={updateprofile_LeadFollowup}
-                    updateprofile_Lead_Current={updateprofile_Lead_Current}
                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                     profile={profile}
                 />

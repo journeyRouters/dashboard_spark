@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import '../../App.css';
 import moment from 'moment';
 import app from '../required';
+import { isAdmin } from '@firebase/util';
 
 
 const Loginform = (props) => {
@@ -51,7 +52,7 @@ const Loginform = (props) => {
 
     }
     function set_profile(args) {
-        console.log("called", args)
+        // console.log("called", args)
         try {
             setDoc(doc(db, "Profile", args.uid), {
                 name: userName,
@@ -77,7 +78,7 @@ const Loginform = (props) => {
         catch (error) {
             console.log(error)
         }
-
+        // SetCustomUserClaims(args.uid)
     }
     function newAccount() {
         sethasaccount(!hasaccount)
@@ -137,7 +138,9 @@ const Loginform = (props) => {
         props.setopen(false)
     }
     const auth = getAuth();
-
+//   function SetCustomUserClaims(uid){
+//     admin.auth.setCustomUserClaims(uid, { admin: true }).then(()=>{})
+//   }
     async function create_id() {
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -164,8 +167,6 @@ const Loginform = (props) => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     fetch_profile(user)
-                    props.setauth(user)
-                    // console.log(user)
                     handelClose()
                 })
                 .catch((error) => {
@@ -173,7 +174,6 @@ const Loginform = (props) => {
                     const errorMessage = error.message;
                     setEmail_flg(true)
                     setpassword_flg(true)
-                    // console.log(errorMessage)
                 });
         }
         catch (errorSignIn) {

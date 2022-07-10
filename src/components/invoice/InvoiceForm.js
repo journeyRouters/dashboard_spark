@@ -10,7 +10,7 @@ import makeAnimated from 'react-select/animated';
 
 
 
-const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile,getinvoice }) => {
+const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoice }) => {
     // console.log(pdfHolder)
     const animatedComponents = makeAnimated();
     const [installment, setinstallment] = useState([
@@ -23,14 +23,14 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile,getinvoic
     const [documents, setdocuments] = useState([])
     const [invoice, setInvoice] = useState(false)
     const [selected_pdf_data, setpdf] = useState([])
-    const[pdfseletcted_flg,setpdf_flg]=useState(false)
+    const [pdfseletcted_flg, setpdf_flg] = useState(false)
     const db = getFirestore(app);
     function showinvoice() {
-        if(selected_pdf_data.length!=0){
+        if (selected_pdf_data.length != 0) {
             setpdf_flg(false)
             setInvoice(true)
         }
-        else{
+        else {
             setpdf_flg(true)
             setInvoice(false)
         }
@@ -124,7 +124,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile,getinvoic
                             <div>
                                 <label> select qoute to gen invoice</label>
                                 <Select
-                                className={pdfseletcted_flg?'slectingpdf_':'slectingpdf'}
+                                    className={pdfseletcted_flg ? 'slectingpdf_' : 'slectingpdf'}
                                     // closeMenuOnSelect={false}
                                     components={animatedComponents}
                                     // isMulti
@@ -260,7 +260,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile,getinvoic
                         <Modal open={invoice} onClose={closeinvoice_} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                             <div>
                                 <InvoicePdf
-                                installment={installment}
+                                    installment={installment}
                                     deliverable_item={deliverable_item}
                                     selected_pdf_data={selected_pdf_data}
                                     documents={documents}

@@ -4,9 +4,10 @@ import './Payments.css'
 import { Modal } from '@material-ui/core';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { fromEvent } from 'file-selector';
-import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import app from '../required';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Profile from '../Profile/Profile';
 
 
 const VouchersCompo = ({ data }) => {
@@ -17,9 +18,43 @@ const VouchersCompo = ({ data }) => {
     const [target, settarget] = useState(0)
     const storage = getStorage();
     const [openuploader, setuploader] = useState(false)
+    const [finalPackage, setFinalPackage] = useState()
+    const [invoice, setinvocice] = useState()
+    const [packageOpner, setpackageOpener] = useState(false)
+    const [invoiceOpener, setinvociceOpener] = useState(false)
+    function finalPackageOpen() {
+        console.log(finalPackage)
+        setpackageOpener(true)
+    }
+    function closePackage() {
+        setpackageOpener(false)
+    }
+    function invoiceOpen() {
+        setinvociceOpener(true)
+    }
     function uploaderpopup() {
         setuploader(!openuploader)
         settarget(0)
+    }
+    async function getinvoice() {
+        try {
+            const docRef = doc(db, "invoice", data.TripId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                setinvocice(docSnap.data())
+                console.log(docSnap.data().finalPackageId)
+                getFinalPackage(docSnap.data().finalPackageId)
+            } else {
+                console.log("No such document!");
+                // setinvocice({})
+
+            }
+        }
+        catch (error) {
+
+        }
+
     }
     function stoploading() {
         setloading(false)
@@ -31,7 +66,24 @@ const VouchersCompo = ({ data }) => {
         idproofcontrller(false)
         settarget(0)
     }
-    async function getdatalatest() {
+
+    async function getFinalPackage(finalPackageId) {
+        try {
+            console.log(finalPackageId)
+            const q = query(collection(db, "Quote"), where("label", "==", finalPackageId));
+            var collect = []
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                collect.push(doc.data())
+            });
+            setFinalPackage(collect[0].value)
+            console.log(collect[0].value)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    async function getdatalatest_for_voucher() {
         const docRef = doc(db, "Trip", data.TripId);
         const docSnap = await getDoc(docRef);
 
@@ -152,7 +204,7 @@ const VouchersCompo = ({ data }) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
-                    getdatalatest()
+                    getdatalatest_for_voucher()
                     stoploading()
 
                 });
@@ -160,12 +212,13 @@ const VouchersCompo = ({ data }) => {
         );
     }
     useEffect(() => {
-        getdatalatest()
+        getinvoice()
+        getdatalatest_for_voucher()
     }, [details]);
     function ondelete(target, path, index) {
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)
-        getdatalatest()
+        getdatalatest_for_voucher()
     }
     async function uploadIdProof() {
         /**this function will upload the file in firebase storage
@@ -206,7 +259,7 @@ const VouchersCompo = ({ data }) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
-                    getdatalatest()
+                    getdatalatest_for_voucher()
                     stoploading()
 
                 });
@@ -261,7 +314,7 @@ const VouchersCompo = ({ data }) => {
         settarget(e.target.value)
     }
     return (
-        <div className='details_of_specific_trip' onClick={() => detailsFlgactive()}>
+        <div className='details_of_specific_trip' >
             <div className='client_detail'>
                 <div className='personal-details'>
                     <div className='TripId'>
@@ -276,8 +329,19 @@ const VouchersCompo = ({ data }) => {
                     <p>Email:-
                         {data.Email}
                     </p>
+                    {
+                        details?<>
+                        <button onClick={() => finalPackageOpen()}>Final Package</button>
+                        <button onClick={() => invoiceOpen()}>Invoice</button>
+                        </>:<></>
+                    }
+
+
                 </div>
                 <div className='trip_details'>
+                    <button onClick={() => detailsFlgactive()}>
+                        <img className={details ? 'expand_details_' : 'expand_details'} src='/assets/img/expand.png' />
+                    </button>
                     <p> Package:-
                         {data.Departure_City} ----
                         {data.Destination}
@@ -291,14 +355,33 @@ const VouchersCompo = ({ data }) => {
                     <p>Budget:-
                         {data.Budget}
                     </p>
-                   
+
 
                 </div>
 
             </div>
             {
                 details ? <>
+                    <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
+                        {/* <div>hihihihiihhihihi</div> */}
+                        <Profile
+                            indicator={true}
+                            inclusion_data={finalPackage.inclusion_data}
+                            travel_data={finalPackage.travel_data}
+                            count_days={finalPackage.count_days}
+                            cabDetailsData={finalPackage.cabDetailsData}
+                            flights={finalPackage.flights}
+                            SelectedpackageType={finalPackage.SelectedpackageType}
+                            itineary={finalPackage.itineary}
+                            NightDataFields={finalPackage.NightDataFields}
+                            selected_Travel_date={finalPackage.selected_Travel_date}
+                            flightcost={finalPackage.flightcost}
+                            visacost={finalPackage.visacost}
+                            landPackage={finalPackage.landPackage}
+                        />
+                    </Modal>
                     <div className='AllDetailsOfTripQuoteComments'>
+                       
                         <div className='allComments'>
                             {
                                 data.comments.slice(0).reverse().map((U_data, index) => (<>

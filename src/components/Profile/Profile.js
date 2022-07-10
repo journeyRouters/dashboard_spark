@@ -14,7 +14,6 @@ const Profile = (
         count_days,
         SelectedpackageType,
         email,
-        userProfile,
         indicator,
         inclusion_data,
         travel_data,
@@ -66,7 +65,7 @@ const Profile = (
         console.log(elementIndex)
         if (elementIndex > -1) {
             deleted_Lead = pre_Lead_Current.splice(elementIndex, 1)
-            console.log('after deletion',pre_Lead_Current)
+            console.log('after deletion', pre_Lead_Current)
         }
         const docref = doc(db, "Profile", profile.uid)
         await updateDoc(docref, {
@@ -87,6 +86,7 @@ const Profile = (
     useEffect(() => {
         fiterInclusion()
         filterExclusion()
+        console.log(travel_data)
 
     }, []);
 
@@ -100,16 +100,18 @@ const Profile = (
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
                     travel_data: travel_data,
+                    count_days:count_days,
                     flightcost: flightcost,
                     visacost: visacost,
                     landPackage: landPackage,
                     itineary: itineary,
-                    followUpDate: String(selected_Travel_date),
+                    selected_Travel_date: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
                     pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                     cabDetailsData: cabDetailsData,
                     flights: flights,
                     inclusion_data: inclusion_data,
+                    SelectedpackageType: SelectedpackageType,
                 }
             });
 
@@ -136,18 +138,7 @@ const Profile = (
     function pdfgenrator() {
         handleExportWithComponent()
         try {
-            try {
-                updateprofile_LeadFollowup(travel_data.TripId)
-            }
-            catch (e) { console.log(e) }
-            try {
-                updateprofile_Lead_Current(travel_data.TripId)
-            }
-            catch (e) { console.log(e) }
-            try {
-                update_quotation_flg()
-            }
-            catch (e) { console.log(e) }
+            update_quotation_flg()
         }
         catch (e) {
             console.log(e)
@@ -176,7 +167,7 @@ const Profile = (
         <>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={`${'Traveller_name'}`}
+                fileName={`${travel_data.Traveller_name}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
@@ -254,7 +245,7 @@ const Profile = (
                             <div className="yellow_details">
                                 <p className="dayDetails">{count_days} Days, {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
-                                <h4 className="seth4">INR 3,00,000/-</h4>
+                                <h4 className="seth4">INR {parseInt(landPackage)+parseInt(flightcost)+parseInt(visacost)}/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
@@ -467,8 +458,14 @@ const Profile = (
 
                 </div>
             </PDFExport>
+            {
+                indicator ? <>
+                    <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>
 
-            <button className='download_button' onClick={() => pdfgenrator()}>downloadURL</button>
+                </> : <>
+                    <button className='download_button' onClick={() => pdfgenrator()}>downloadURL</button>
+                </>
+            }
             {/* <button className='download_button' onClick={() => pdfgenrator()}>save Quote</button> */}
 
 

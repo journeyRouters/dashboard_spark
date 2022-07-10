@@ -168,3 +168,14 @@
     cursor: pointer;
     border: none;
 }
+.expand_details{
+    width: 1rem;
+}
+.expand_details_{
+    width: 1rem;
+    transform: rotate(180deg);
+}
+.packageAndInvoice{
+    display: flex;
+    flex-direction: column;
+}

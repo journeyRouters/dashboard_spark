@@ -15,6 +15,9 @@ import './quote.css';
 import Redownload from './ReDownload';
 import Reqoute from './Reqoute';
 import InvoicePdf from '../invoice/invoicePdf';
+import Profile from '../Profile/Profile';
+import Box from '../CreateQuote/Box';
+const db = getFirestore(app);
 
 
 
@@ -23,7 +26,6 @@ const Row = (props) => {
     // console.log(row)
     const [invoice, setinvocice] = useState()
     const [Invoice_flg, setInvoice] = useState(false)
-    const db = getFirestore(app);
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
     const [openUpdater, setopenupdater] = useState(false)
     const [comments, setcomments] = useState([])
@@ -36,6 +38,7 @@ const Row = (props) => {
     const [data, setdata] = useState()
     const [Reqoute_flg, setReqoute_flg] = useState(false)
     const [download, setdownload] = useState(false)
+    const[tripData,setTripData]=useState(null)
     var today = new Date();
     const [edit_flg, set_edit] = useState(false)
     function setEdit_flg() {
@@ -49,7 +52,8 @@ const Row = (props) => {
     }
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
-    function Controller_reqoute() {
+    function Controller_reqoute(data) {
+        // console.log(data)
         setReqoute_flg(true)
     }
     function closeReqoute_flg() {
@@ -118,30 +122,28 @@ const Row = (props) => {
     function closeUpdater() {
         setopenupdater(false)
     }
-    function updateDataBase(TripId){
-        props.updateprofile_Lead_followUp(TripId)
-        props.updateprofile_Lead_converted(TripId)
-    }
+
     function closeOnstatusComments() {
         update_comments()
-        if(Lead_Status=="Converted"){
-            updateDataBase(row.TripId)
+        if (Lead_Status == "Converted") {
             props.updateTableDataAfterConversion(row.TripId)
         }
         setopenupdater(false)
     }
-    async function latestComments() {
+    async function latestTripData() {
         const docRef = doc(db, "Trip", `${row.TripId}`);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
             setLatestComment(docSnap.data().comments)
-            console.log(docSnap.id)
+            setTripData(docSnap.data())
+            // console.log(docSnap.id)
         } else {
             console.log("No such document!");
         }
 
     }
+    
     async function Allquote() {
         let list = []
         const q = query(collection(db, "Quote"), where("value.travel_data.TripId", "==", row.TripId));
@@ -185,21 +187,21 @@ const Row = (props) => {
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
                 Lead_Status: Lead_Status,
-                Lead_status_change_date:moment(today).format('YYYY-MM-DD')
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
 
             }, { merge: true });
 
-            latestComments()
+            latestTripData()
             dochange()
             setcomments()
             // props.getProfile(props.auth)
         }
-       
+
 
     }
 
     useEffect(() => {
-        latestComments()
+        latestTripData()
         Allquote()
         getinvoice()
 
@@ -328,7 +330,21 @@ const Row = (props) => {
                                         viewPDF ? <>
                                             <Modal open={viewPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
 
-                                                <Redownload profile={props.profile} travel_data={data.travel_data} inclusion_data={data.inclusion_data} cabDetailsData={data.cabDetailsData} flights={data.flights} indicator={true} closePDF={closePDF} closeHandler={closePDF} itineary={data.itineary} NightDataFields={data.NightDataFields} selected_date={data.followUpDate} cost={data.cost} />
+                                                <Profile
+                                                    SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
+                                                    indicator={true}
+                                                    inclusion_data={data.inclusion_data}
+                                                    travel_data={tripData}
+                                                    count_days={data.count_days}
+                                                    cabDetailsData={data.cabDetailsData}
+                                                    flights={data.flights}
+                                                    itineary={data.itineary}
+                                                    NightDataFields={data.NightDataFields}
+                                                    selected_Travel_date={data.selected_Travel_date}
+                                                    flightcost={data.flightcost}
+                                                    visacost={data.visacost}
+                                                    landPackage={data.landPackage}
+                                                />
                                             </Modal>
                                         </> : <></>
                                     }
@@ -342,23 +358,19 @@ const Row = (props) => {
                                                         <p key={index}>{data.value.pdf_name}</p>
                                                         <button onClick={() => showPDF(data.value)} className='download_requote'>
                                                             downloadURL</button>
-                                                        <button className='download_requote' onClick={() => Controller_reqoute()}>Edit</button>
+                                                        <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>
                                                         {
                                                             Reqoute_flg ? <>
-                                                                <Reqoute
-                                                                    Allquote={Allquote}
-                                                                    closeReqoute_flg={closeReqoute_flg}
-                                                                    data={data.value.travel_data}
-                                                                    inclusion_data={data.value.inclusion_data}
-                                                                    cabDetailsData={data.value.cabDetailsData}
-                                                                    flights={data.value.flights}
-                                                                    indicator={false}
-                                                                    closePDF={closePDF}
-                                                                    closeHandler={closePDF}
-                                                                    itineary={data.value.itineary}
-                                                                    NightDataFields={data.value.NightDataFields}
-                                                                    selected_date={data.value.followUpDate}
-                                                                    cost={data.value.cost} />
+                                                                <Box
+                                                                    email={props.auth.email}
+                                                                    data={tripData}
+                                                                    inclusion_data_={data.value.inclusion_data}
+                                                                    updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                    set_popupopner={setReqoute_flg}
+                                                                    userProfile={props.profile }
+                                                                    indicator={true}
+                                                                />
+                                                                
                                                             </> : <></>
                                                         }
                                                     </div>

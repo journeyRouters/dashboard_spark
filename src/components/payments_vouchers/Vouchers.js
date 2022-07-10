@@ -9,56 +9,45 @@ const Vouchers = (props) => {
     const [profile, setProfile] = useState(null)
     const db = getFirestore(app);
 
-    async function getProfile(auth) {
+
+
+    async function getLeadOnBoard() {
+        console.log(props.auth.uid)
         try {
-            const docRef = doc(db, "Profile", auth.uid);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                setProfile(docSnap.data())
-                getLeadOnBoard(docSnap.data().Lead_converted)
-                console.log(docSnap.data())
-            } else {
-                console.log("No such document!");
+            let list = []
+            var q = query(collection(db, "Trip"), 
+            where("assign_to.uid", "==", props.auth.uid),
+             where('Lead_Status', '==', 'Converted'),
+             where("quotation_flg","==",true));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                setopen(false)
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+                console.log(list);
+                setopen(false)
             }
         }
-        catch (error) {
-            console.log({ error })
+        catch (erorr){ 
+            console.log(erorr)
+            setopen(false)
         }
-    }
-    async function getLeadOnBoard(list) {
-        let list_ = []
-        console.log(profile)
-
-        for (let index = 0; index < list.length; index++) {
-            const docRef = doc(db, "Trip", list[index]);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                list_.push(docSnap.data())
-                console.log("ps:", docSnap.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }
-        setLead_data(list_)
-        setopen(false)
-
-
 
     }
-    async function updateprofile_Lead_followUp(tripid) {
-        var pre_Lead_followUp = profile.Lead_followUp
-        var elementIndex = pre_Lead_followUp.indexOf(tripid)
-        var new_Lead_followUp = pre_Lead_followUp.splice(elementIndex, 1)
-        const docref = doc(db, "Profile", profile.uid)
-        await updateDoc(docref, {
-            "Lead_followUp": pre_Lead_followUp
-        })
-    }
+    
+    
+   
     
     
     useEffect(() => {
-        getProfile(props.auth)
+        getLeadOnBoard()
     }, []);
     return (
         <div>
@@ -81,7 +70,7 @@ const Vouchers = (props) => {
                 {
                     lead_data.map((data, index) => (
                         <>
-                            <VouchersCompo key={index} data={data} datahandle={getProfile} />
+                            <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} />
                         </>
                     ))
                 }

@@ -3,28 +3,95 @@ import { useEffect, useState } from 'react';
 import './Driver.css';
 import React from 'react';
 import moment from 'moment';
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
 import app from '../required';
 import DriverComponents from './DriverComponents';
+import readXlsxFile from 'read-excel-file';
+import { fromEvent } from "file-selector";
 const db = getFirestore(app);
 
 
-const Driver = () => {
+
+const Driver = (props) => {
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
-    const [selectedDate, setSeletctedDate] = useState(null)
+    const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     // console.log(print)
     const [openlistOfUsers, setopenlistOfUsers] = useState(false)
     function handleListChange() {
         setopenlistOfUsers(!openlistOfUsers)
     }
-
-    async function getLeadByDate(date) {
+    async function UploadFile() {
+        if (props.auth) {
+        //   console.log(auth)
+          const handles = await window.showOpenFilePicker({ multiple: false });
+          const files = await fromEvent(handles);
+          const path = files[0].path
+          // setInProgress(true)
+          readXlsxFile(files[0]).then((rows) => {
+            for (let i = 1; i <= rows.length - 1; i++) {
+              let Row = rows[i]
+              console.log(Row)
+              let any = Math.random()
+              let tripid = `TRP${any}`
+              setDoc(doc(db, "Trip", tripid), {
+                TripId: tripid,
+                Lead_Status: Row[0],
+                Campaign_code: Row[1],
+                Date_of_lead: Row[2],
+                Traveller_name: Row[3],
+                Extra_Info: Row[4],
+                Contact_Number: Row[5],
+                Destination: Row[6],
+                Comment: Row[7],
+                Departure_City: Row[8],
+                Travel_Date: Row[9],
+                Travel_Duration: Row[10],
+                Budget: Row[11],
+                Pax: Row[12],
+                Child: Row[13],
+                Email: Row[14],
+                Remark: Row[15],
+                Lead_genrate_date: Row[16],
+                uploaded_by: props.auth.email,
+                Quoted_by: null,
+                uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
+                uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,
+                quotation: 0,
+                quotation_flg: false,
+                month: '',
+                Lead_status_change_date: null,
+                comments: [],
+                Vouchers_flight: [],
+                Vouchers_hotels: [],
+                Vouchers_others: [],
+                vouchers_idproof: [],
+                transfer_request: false,
+                transfer_request_reason: [],
+                assign_to: {
+                  uid: null,
+                  name: null
+                },
+                updated_last: null,
+                assign_flg: false,
+                final_package:null
+              });
+            }
+            getLeadByDate()
+            // console.log(rows[1][0])
+            // uploadFileOnStorage(path,'dingdong')
+          })
+        }
+        else {
+        //   setopen(true)
+        }
+      }
+    async function getLeadByDate() {
         var list = []
-        var q = query(collection(db, "Trip"), where('uploaded_date', '==', date));
-        console.log(date)
+        var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
+        // console.log(date)
         try {
             var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
@@ -54,7 +121,6 @@ const Driver = () => {
     }, []);
     useEffect(() => {
         window.scrollTo(0, 0);
-        setSeletctedDate(currentdate)
         console.log(selectedDate)
         getLeadByDate(currentdate)
     }, []);
@@ -99,6 +165,7 @@ const Driver = () => {
                 </div>
                 <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>
                 <button className='userlist_button' onClick={handleListChange}>All listed User</button>
+                <button onClick={()=>UploadFile()}>upload the Leads</button>
             </div>
             <div>
                 {lead_data.map((data, index) => (

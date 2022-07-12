@@ -12,7 +12,7 @@ const Vouchers = (props) => {
 
 
     async function getLeadOnBoard() {
-        console.log(props.auth.uid)
+        // console.log(props.auth.uid)
         try {
             let list = []
             var q = query(collection(db, "Trip"), 
@@ -41,11 +41,6 @@ const Vouchers = (props) => {
         }
 
     }
-    
-    
-   
-    
-    
     useEffect(() => {
         getLeadOnBoard()
     }, []);

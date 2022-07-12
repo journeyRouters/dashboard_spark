@@ -37,6 +37,7 @@ const Profile = (
         value: "size-a4"
     });
     const Data = travel_data
+    console.log(Data)
     const [callback, setcallback] = useState(false)
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
@@ -56,23 +57,7 @@ const Profile = (
             "Lead_followUp": unique
         });
     }
-    async function updateprofile_Lead_Current(tripid) {
-        console.log(tripid)
-        var deleted_Lead = []
-        var pre_Lead_Current = profile.Lead_Current
-        console.log(pre_Lead_Current)
-        var elementIndex = pre_Lead_Current.indexOf(tripid)
-        console.log(elementIndex)
-        if (elementIndex > -1) {
-            deleted_Lead = pre_Lead_Current.splice(elementIndex, 1)
-            console.log('after deletion', pre_Lead_Current)
-        }
-        const docref = doc(db, "Profile", profile.uid)
-        await updateDoc(docref, {
-            "Lead_Current": pre_Lead_Current
-        })
-        console.log('done')
-    }
+
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         console.log(keys)
@@ -99,7 +84,7 @@ const Profile = (
             await addDoc(collection(db, "Quote"), {
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
-                    travel_data: travel_data,
+                    travel_data: Data,
                     count_days:count_days,
                     flightcost: flightcost,
                     visacost: visacost,

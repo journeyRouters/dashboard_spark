@@ -16,25 +16,32 @@ const Box = ({
     userProfile,
     profile,
     indicator,
-    inclusion_data_
+    inclusion_data_,
+    Edit_itineary,
+    Edit_NightDataFields,
+    Edit_selected_Travel_date,
+    Edit_visacost,
+    Edit_flightcost,
+    Edit_landPackage,
+    Edit_count_days
 }) => {
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
     const [SelectedpackageType, setSelectedpackageType] = useState("per Person")
-    const [flightcost, setFlightcost] = useState(0)
-    const [visacost, setvisacost] = useState(0)
-    const [landPackage, setlandpackage] = useState(0)
+    const [flightcost, setFlightcost] = useState(Edit_flightcost?Edit_flightcost:0)
+    const [visacost, setvisacost] = useState(Edit_visacost?Edit_visacost:0)
+    const [landPackage, setlandpackage] = useState(Edit_landPackage?Edit_landPackage:0)
     const [countNight, setCountnight] = useState(0)
     const [flight, setflight] = useState(true)
     const [cab, setcab] = useState(true)
-    const [itineary, setItineary] = useState([{ Day: '', Description: '', Activity: '' },])
+    const [itineary, setItineary] = useState(Edit_itineary?Edit_itineary:[{ Day: '', Description: '', Activity: '' },])
     const days = Array(data.Travel_Duration).fill('a');
-    const [days_total, setTotalDays] = useState(days);
-    const [count_days, setDayscounter] = useState(parseInt(data.Travel_Duration))
-    const [NightDataFields, setNightDataFields] = useState([
-        { Night: [], HotelName: '', City: '', Category: '', HotelType: '', comments: '' },])
-    const [selected_Travel_date, set_selected_Travel_date] = useState()
+    const [days_total, setTotalDays] = useState(Edit_itineary?Edit_itineary:days);
+    const [count_days, setDayscounter] = useState(parseInt(Edit_count_days))
+    const [NightDataFields, setNightDataFields] = useState(Edit_NightDataFields?Edit_NightDataFields:[
+        { Night: [], HotelName: '', City: '', Category: '', RoomType: '', comments: '' },])
+    const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date?Edit_selected_Travel_date:null)
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
     const [flights, setflights] = useState(null)
@@ -67,9 +74,9 @@ const Box = ({
         other_Exclusion: ''
     }
     const [inclusion_data, setinclusion] = useState(indicator?inclusion_data_:inclusion)
-
-
-console.log(inclusion_data,inclusion_data_)
+// console.log(
+//     itineary
+// )
     function cabDetails(e) {
         setcabDetails(e.target.value)
     }
@@ -158,7 +165,7 @@ console.log(inclusion_data,inclusion_data_)
     }
     function addFields() {
         if (countNight < Travel_Duration - 2) {
-            let object = { Night: '', HotelName: '', City: '', Category: '', HotelType: '', comments: '' }
+            let object = { Night: '', HotelName: '', City: '', Category: '', RoomType: '', comments: '' }
             setNightDataFields([...NightDataFields, object])
             setCountnight(countNight + 1)
         }
@@ -308,18 +315,19 @@ console.log(inclusion_data,inclusion_data_)
                                     <input type="number"
                                         className='input_filed'
                                         placeholder='0'
+                                        value={Edit_flightcost}
                                         onChange={(e) => flightcostChange(e)}
                                     ></input>
                                     <text className='spacer'>+</text>
                                 </div>
                                 <div>
                                     <label>Visa Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' onChange={(e) => visacostChange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='0' value={Edit_visacost} onChange={(e) => visacostChange(e)}></input>
                                     <text className='spacer'>+</text>
                                 </div>
                                 <div>
                                     <label>Land Package Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' onChange={(e) => landPackagechange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='0' value={Edit_landPackage} onChange={(e) => landPackagechange(e)}></input>
                                     <text className='spacer'>=</text>
                                 </div>
 
@@ -334,7 +342,7 @@ console.log(inclusion_data,inclusion_data_)
                             <p className='HotelDetailsheading'>Hotel Details</p>
                             {
                                 NightDataFields &&
-                                NightDataFields.map((form, index) => {
+                                NightDataFields.map((data, index) => {
                                     return (
                                         <>
                                             <div key={index} className='costOption_estimatiom'>
@@ -352,10 +360,9 @@ console.log(inclusion_data,inclusion_data_)
                                                 <div className='unitComponent'>
                                                     <label>Hotel Name</label><br />
                                                     <input placeholder='hotel Name'
-                                                        // list="programmingLanguages"
                                                         name='HotelName'
+                                                        value={data.HotelName}
                                                         onChange={(event) => handleFormChange(event, index)}
-                                                    // list="suggestions"
                                                     >
                                                     </input>
 
@@ -365,6 +372,7 @@ console.log(inclusion_data,inclusion_data_)
                                                     <label>City</label><br />
                                                     <input placeholder='city'
                                                         name='City'
+                                                        value={data.City}
                                                         onChange={(event) => handleFormChange(event, index)}
                                                     ></input>
                                                 </div>
@@ -373,6 +381,7 @@ console.log(inclusion_data,inclusion_data_)
                                                     <input placeholder='Category'
                                                         list="programmingLanguages"
                                                         name='Category'
+                                                        value={data.Category}
                                                         onChange={(event) => handleFormChange(event, index)}
                                                     />
                                                     <datalist id="programmingLanguages">
@@ -387,7 +396,7 @@ console.log(inclusion_data,inclusion_data_)
                                                 </div>
                                                 <div className='unitComponent'>
                                                     <label>Room Type</label><br />
-                                                    <select defaultValue='normal' name='HotelType' onChange={(event) => handleFormChange(event, index)}>
+                                                    <select defaultValue='normal' name='RoomType' value={data.RoomType} onChange={(event) => handleFormChange(event, index)}>
                                                         <option value='standrad'>standrad</option>
                                                         <option value='delux'>delux</option>
                                                         <option value='super delux'>super delux</option>
@@ -407,6 +416,7 @@ console.log(inclusion_data,inclusion_data_)
                                             <textarea
                                                 className='comments'
                                                 name='comments'
+                                                value={data.comments}
                                                 onChange={(event) => handleFormChange(event, index)}
                                                 placeholder='Additional information'
                                             ></textarea>
@@ -460,16 +470,17 @@ console.log(inclusion_data,inclusion_data_)
 
                             <div className='itineary'>
                                 <p>Itinerary Start date</p>
-                                <input type='date' onChange={(e) => select_date(e)}></input>
+                                <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
                             </div>
                             {
                                 days_total &&
                                 days_total.map((data, index) => {
+                                    console.log(data)
                                     return (
                                         <div key={index} className='days'>
                                             <label className='title'>Day{index + 1}:Title</label><br />
                                             <div style={{ display: 'flex', alignItems: 'center' }} >
-                                                <input className='dayByitineary' placeholder='Enter Title of the day' name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
+                                                <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                                 <Select
                                                     placeholder='Activity'
                                                     name='Activity'
@@ -481,7 +492,7 @@ console.log(inclusion_data,inclusion_data_)
                                             </div>
                                             <div>
                                                 <label className='title'>Description</label><br />
-                                                <textarea placeholder=' Write Description' name='Description' onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>
+                                                <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>
                                             </div>
                                         </div>
                                     )

@@ -1,6 +1,6 @@
 import { CircularProgress, Modal } from '@material-ui/core';
 import { Flag } from '@material-ui/icons';
-import { collection, doc, getDoc, getDocs, getFirestore, limit, orderBy, query, startAfter, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, limit, orderBy, Query, query, startAfter, updateDoc, where } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Box from './Box';
@@ -8,6 +8,7 @@ import './TripComponent.css';
 import SortableTbl from 'react-sort-search-table';
 import Profile from '../Profile/Profile';
 import SendIcon from '@material-ui/icons/Send';
+import SuggestionQuotes from './suggestionQuotes';
 
 
 
@@ -21,11 +22,12 @@ const Createquote = (props) => {
     const time = new Date()
     const [profile, setProfile] = useState(null)
     const Current = time.getSeconds()
-    const [transfermodal, settransfermodal] = useState(false)
+    const [SuggestionModal, settransfermodal] = useState(false)
     const [lastVisible, setlastVisible] = useState(null)
+    const [sampleQuotes, setsampleQuotes] = useState([])
 
-    function handletransfermodal() {
-        settransfermodal(!transfermodal)
+    function handleSuggestion() {
+        settransfermodal(!SuggestionModal)
     }
     let tHead = [
         "TripId",
@@ -119,7 +121,7 @@ const Createquote = (props) => {
         // console.log(props.auth.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid), where('Lead_Status', '!=', 'Dump'),where("quotation_flg","==",false));
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid), where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -136,7 +138,7 @@ const Createquote = (props) => {
                 setopen(false)
             }
         }
-        catch (erorr){
+        catch (erorr) {
             console.log(erorr)
             setopen(false)
         }
@@ -146,6 +148,7 @@ const Createquote = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getLeadOnBoard()
+        
         // console.log(props.auth.uid)
 
     }, [popupopener]);
@@ -166,7 +169,7 @@ const Createquote = (props) => {
                         type="button"
                         className="btn btn-danger"
                         value="Transfer"
-                        onClick={() => handletransfermodal()}
+                        onClick={() => handleSuggestion()}
                     />
                 </td>
             );
@@ -196,17 +199,14 @@ const Createquote = (props) => {
             );
         }
     }
-
+  
     return (
 
         <div>
             {
                 props.auth ? <>
-                    <Modal open={transfermodal} onClose={handletransfermodal}>
-                        <div className='transferLead'>
-                            <textarea style={{ height: '6rem' }} placeholder='please explain your reason to do so....'></textarea>
-                            <SendIcon className='sendqueryButton' />
-                        </div>
+                    <Modal open={SuggestionModal} onClose={handleSuggestion} >
+                     <SuggestionQuotes  handleSuggestion={handleSuggestion}/>
 
                     </Modal>
                     {

@@ -38,7 +38,7 @@ const Row = (props) => {
     const [data, setdata] = useState()
     const [Reqoute_flg, setReqoute_flg] = useState(false)
     const [download, setdownload] = useState(false)
-    const[tripData,setTripData]=useState(null)
+    const [tripData, setTripData] = useState(null)
     var today = new Date();
     const [edit_flg, set_edit] = useState(false)
     function setEdit_flg() {
@@ -53,7 +53,8 @@ const Row = (props) => {
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
     function Controller_reqoute(data) {
-        // console.log(data)
+        console.log(data)
+        setTripData(data.value)
         setReqoute_flg(true)
     }
     function closeReqoute_flg() {
@@ -143,7 +144,7 @@ const Row = (props) => {
         }
 
     }
-    
+
     async function Allquote() {
         let list = []
         const q = query(collection(db, "Quote"), where("value.travel_data.TripId", "==", row.TripId));
@@ -231,11 +232,6 @@ const Row = (props) => {
                                         <FormControlLabel value="Active" control={<Radio />} label="Active" />
                                         <FormControlLabel value="Cold" control={<Radio />} label="Cold" />
                                         <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
-                                        <FormControlLabel value="Invoiced" control={<Radio />} label="Invoiced" />
-                                        <FormControlLabel value="In Progress" control={<Radio />} label="In Progress" />
-                                        <FormControlLabel value="Book Now" control={<Radio />} label="Book Now" />
-                                        <FormControlLabel value="No Response" control={<Radio />} label="No Response" />
-                                        <FormControlLabel value="Hidden Lead" control={<Radio />} label="Hidden Lead" />
                                         <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
                                         <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
 
@@ -363,14 +359,24 @@ const Row = (props) => {
                                                             Reqoute_flg ? <>
                                                                 <Box
                                                                     email={props.auth.email}
-                                                                    data={tripData}
+                                                                    data={tripData.travel_data}
                                                                     inclusion_data_={data.value.inclusion_data}
+                                                                    Edit_NightDataFields={data.value.NightDataFields}
+                                                                    SelectedpackageTyp={data.value.SelectedpackageType}
+                                                                    Edit_itineary={data.value.itineary}
                                                                     updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                     set_popupopner={setReqoute_flg}
-                                                                    userProfile={props.profile }
+                                                                    userProfile={props.profile}
                                                                     indicator={true}
+                                                                    Edit_selected_Travel_date={data.value.selected_Travel_date}
+                                                                    Edit_visacost={data.value.visacost}
+                                                                    Edit_flightcost={data.value.flightcost}
+                                                                    Edit_landPackage={data.value.landPackage}
+                                                                    Edit_count_days={data.value.count_days}
+                                                                    Allquote={Allquote}
+                                                                    
                                                                 />
-                                                                
+
                                                             </> : <></>
                                                         }
                                                     </div>

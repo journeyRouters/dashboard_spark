@@ -130,15 +130,17 @@ function App() {
 
   useEffect(() => {
     authListener()
-
-  }, [auth])
-
-  useEffect(() => {
     if (profile) {
     }
     else {
       fetch_profile(auth)
     }
+
+  }, [auth])
+
+  useEffect(() => {
+
+
   }, [auth]);
 
 
@@ -365,7 +367,7 @@ function App() {
           }
           {
             Page === "Investigation" ?
-              <Test/>
+              <Test />
               : <></>
           }
           {

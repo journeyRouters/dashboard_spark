@@ -80,12 +80,8 @@
 .kRKnx.defaultCSS .search-box{
     background-color: #FFFFFF !important;
 }
-.transferLead{
-    margin: 12rem;
-    width: 24rem;
-    height: 10rem;
+.Suggestions{
     background: #FFFFFF;
-    margin-left: 53rem;
     display: flex;
     flex-direction: column;
 }
@@ -98,4 +94,85 @@
     display: flex;
     flex-direction: row !important;
     justify-content: space-between !important;
+}
+.samplequotes_components{
+    font-weight: 800;
+    /* display: flex;
+    justify-content: space-between; */
+}
+.Topsamplequotes_components{
+    border: 1px solid greenyellow;
+}
+.Topsamplequotes_components:hover{
+    cursor: pointer;
+}
+.searchOption{
+    display: flex;
+
+}
+.sampleQuoteHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.divContainsThreeDiv{
+    display: flex;
+    justify-content: space-between;
+}
+.highglight{
+    font-weight: 800;
+    font-size: medium;
+    color: #27a52d;
+}
+.highglight2{
+    font-weight: 800;
+    font-size: medium;
+    color: #ec220f;
+}
+.tripIdDetails{
+    border-bottom: 1px solid gray;
+    font-weight: 800;
+}
+.basicInfo{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+
+}
+.hotelDetails{
+    border-bottom: 1px solid gray;
+
+}
+.inclusionExclusionDetails_{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    height: 35rem;
+
+}
+.LeadLookUp{
+    width: 14%;
+}
+.lookupaliner{
+    display: flex;
+    justify-content: space-between;
+}
+.QuotesMapperDiv{
+    height: 42rem;
+    overflow-y: scroll;
+}
+.QuotesDetails{
+    height: 42rem;
+    overflow-y: scroll;
+    border: 3px solid gray;
+}
+.SuggestionInclusion{
+    border-bottom: 1px solid gray;
+}
+.inclusionExclusion{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+}
+.sepratorLineForInclusionExclusion_{
+
 }

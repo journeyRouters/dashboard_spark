@@ -150,10 +150,12 @@
 
 }
 .LeadLookUp{
-    width: 14%;
+    width: 22%;
+    border: 2px solid gray;
 }
 .lookupaliner{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 .QuotesMapperDiv{
@@ -168,11 +170,23 @@
 .SuggestionInclusion{
     border-bottom: 1px solid gray;
 }
-.inclusionExclusion{
+.inclusionExclusion__{
     display: flex;
     justify-content: space-evenly;
     margin-top: 1rem;
+    border-bottom: 1px solid gray;
 }
 .sepratorLineForInclusionExclusion_{
+
+}
+.tripInfoP{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted gray;
+}
+.suggestionmapItineary{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px dotted gray;
 
 }

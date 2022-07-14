@@ -5,6 +5,7 @@ import app from '../required';
 import './pdfcss.css';
 import './profile.css';
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import moment from 'moment';
 import { Image } from '@material-ui/icons';
 import Footer, { GoogleReviews } from './footer';
 const db = getFirestore(app);
@@ -37,7 +38,7 @@ const Profile = (
         value: "size-a4"
     });
     const Data = travel_data
-    console.log(Data)
+    console.log(NightDataFields)
     const [callback, setcallback] = useState(false)
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
@@ -45,6 +46,7 @@ const Profile = (
     const currentdate = new Date();
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
+    const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
 
     async function updateprofile_LeadFollowup(tripid) {
         const docref = doc(db, "Profile", profile.uid);
@@ -60,18 +62,27 @@ const Profile = (
 
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
-        console.log(keys)
+        // console.log(keys)
         setinclusion(keys)
     }
     function filterExclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == false && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
-        console.log(keys)
+        // console.log(keys)
         setexclusion(keys)
     }
+    async function convertObjectToLink() {
+        const file = flights
+        console.log(file)
+        // debugger
+        const url = URL.createObjectURL(file[0])
+        console.log('url', url)
+        setflightsLocalUrl(url)
+
+    }
     useEffect(() => {
+        convertObjectToLink()
         fiterInclusion()
         filterExclusion()
-        console.log(travel_data)
 
     }, []);
 
@@ -85,7 +96,7 @@ const Profile = (
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
                     travel_data: Data,
-                    count_days:count_days,
+                    count_days: count_days,
                     flightcost: flightcost,
                     visacost: visacost,
                     landPackage: landPackage,
@@ -94,7 +105,7 @@ const Profile = (
                     NightDataFields: NightDataFields,
                     pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                     cabDetailsData: cabDetailsData,
-                    flights: flights,
+                    // flights: flights,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                 }
@@ -144,9 +155,7 @@ const Profile = (
         }
         // closePDF()
     }
-
-    var name = "BALI.png"
-    var link = `/assets/destination/${name}`
+    var name = (travel_data.Destination).toUpperCase()
 
     return (
         <>
@@ -158,7 +167,7 @@ const Profile = (
                 <div className={`pre ${layoutSelection.value}`}>
                     <div className={'page1'}
                         style={{
-                            backgroundImage: `url(/assets/destination/${name})`,
+                            backgroundImage: `url(/assets/destination/${name}/Header.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -168,6 +177,8 @@ const Profile = (
                         <div>
                             <a href={"https://wa.me/919304247331"} target="_blank">
                                 <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
+                                {/* <img className='page1whatsApp' src={flightsLocalUrl} /> */}
+
                             </a>
                         </div>
                         <div className="footer">
@@ -230,7 +241,7 @@ const Profile = (
                             <div className="yellow_details">
                                 <p className="dayDetails">{count_days} Days, {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
-                                <h4 className="seth4">INR {parseInt(landPackage)+parseInt(flightcost)+parseInt(visacost)}/-</h4>
+                                <h4 className="seth4">INR {parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
@@ -249,7 +260,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
+                                <img className="inclusionPage_img" src={`/assets/destination/${name}/InclusionExclusion.png`} />
                             </div>
                             <div className="inclusionPage_blocks" >
                                 <span> Inclusion</span>
@@ -313,11 +324,11 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/Singapre Header.png" />
+                                <img className="inclusionPage_img" src={`/assets/destination/${name}/DayWiseItineary.png`} />
 
                                 <span className='headLineDaywiseItineary'> Day wise Itineary</span>
                                 <div className='itinearyDiv'>
-                                    {
+                                    {itineary &&
                                         itineary.map((data, index) => (
                                             <div className='mapitineary'>
                                                 <span style={{ width: '5rem' }}>Day {index + 1}  -</span>
@@ -349,7 +360,9 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/daywiseheadingimage.png" />
+                                <img className="inclusionPage_img"
+                                    src={`/assets/destination/${name}/DetailItineary.png`}
+                                />
 
                                 <span className='headLineDaywiseItineary'>Detail  Itineary</span>
                                 <div className='itinearyDiv'>
@@ -365,7 +378,9 @@ const Profile = (
                                                     <p className='dayDetailsitineary'>{data.Description}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
-                                                    <img src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/BALI ACTIVITIES IMAGES/TestImage copy.png'
+                                                    <img
+                                                        // src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/SolangValleym (1).png'
+                                                        src={`/assets/destination/${name}/${data.Activity}.png`}
                                                         style={{ width: "14rem", height: "14rem" }} />
                                                 </div>
                                             </div>
@@ -381,6 +396,96 @@ const Profile = (
                                         height: '5.5rem',
                                         display: 'flex',
                                         flexDirection: 'column-reverse'
+                                    }}
+                                >
+                                    <Footer />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="HotelPage"
+                            style={{
+                                background: 'black'
+
+                            }}
+                        >
+                            <div>
+                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/hotel header.png" />
+                                <span className='headLineDaywiseItineary'>Accommodation</span>
+
+                                {
+                                    NightDataFields.map((data, index) => (
+                                        // console.log('hihi'),
+                                        <div key={index} className='hotelUni'>
+                                            <div>
+                                                <img src={`/assets/pdfDefaultImage/demoHotel${index + 1}.png`} width="320px" />
+                                            </div>
+                                            <div className='hotelUniRight'>
+                                                <h4 style={{ color: 'yellow' }}>{
+                                                    data.Night.map((data_, index) => (<span key={index}>{data_},</span>))
+                                                } Stay at {data.City}</h4>
+
+                                                <span>Hotel-{data.HotelName}</span><br />
+                                                <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__},</span>))}</span>  <br />
+                                                <span>Room-{data.RoomType}</span><br />
+                                                <h4></h4>
+                                                <span style={{ color: 'pink' }}>check In-{moment(selected_Travel_date).format('DD MMMM YYYY')}</span><br />
+                                                <span style={{ color: 'pink' }}>check Out-{moment(selected_Travel_date).format('DD MMMM YYYY')}</span>
+
+
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+
+                                <div
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                        // backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        height: '5.5rem',
+                                        display: 'flex',
+                                        flexDirection: 'column-reverse',
+                                        marginTop:'2rem'
+                                    }}
+                                >
+                                    <Footer />
+                                </div>
+                            </div>
+                            {/* <div>
+                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
+                                </a>
+                            </div> */}
+
+                        </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="HotelPage"
+                            style={{
+                                background: 'black'
+
+                            }}
+                        >
+                            <div>
+                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/FlightsHeader.png" />
+                                <span className='headLineDaywiseItineary'>Flight</span>
+
+                                <img className='flightsImgcss' src={flightsLocalUrl}/>
+
+                                <div
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                        // backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        height: '5.5rem',
+                                        display: 'flex',
+                                        flexDirection: 'column-reverse',
+                                        marginTop:'2rem'
                                     }}
                                 >
                                     <Footer />

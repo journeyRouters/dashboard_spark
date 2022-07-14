@@ -202,6 +202,10 @@
     display: flex;
     justify-content: space-between;
 }
+.flightdetailsDrop{
+    width: 74% !important;
+    margin-left: 2rem
+}
 
 .flightdetails {
     margin-left: 2rem;

@@ -91,6 +91,15 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.HotelPage{
+    width: 55rem;
+    /* height: 78rem; */
+    display: flex;
+    justify-content: space-between;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .itinearypage{
     width: 55rem;
     display: flex;
@@ -283,7 +292,7 @@
     font-family: 'verdana';
 }
 .inclusionPage_img{
-    width: 100%;
+    width: 55rem;
 }
 .inclusionExclusionDetails{
     display: flex;
@@ -363,4 +372,18 @@
     color: #FFFFFF;
     font-family: arial;
     text-transform: capitalize;
+}
+.hotelUni{
+    color: #FFFFFF;
+    display: flex;
+    /* justify-content: space-between; */
+}
+.hotelUniRight{
+    margin-left: 3rem;
+    font-size: 1.4rem;
+    font-family: monospace;
+}
+.flightsImgcss{
+    width: 55rem;
+    height: 39rem;
 }

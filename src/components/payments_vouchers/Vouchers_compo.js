@@ -43,7 +43,7 @@ const VouchersCompo = ({ data }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                console.log(docSnap.data().finalPackageId)
+                // console.log(docSnap.data().finalPackageId)
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
@@ -69,7 +69,7 @@ const VouchersCompo = ({ data }) => {
 
     async function getFinalPackage(finalPackageId) {
         try {
-            console.log(finalPackageId)
+            // console.log(finalPackageId)
             const q = query(collection(db, "Quote"), where("label", "==", finalPackageId));
             var collect = []
             const querySnapshot = await getDocs(q);
@@ -170,6 +170,7 @@ const VouchersCompo = ({ data }) => {
          */
         const handles = await window.showOpenFilePicker({ multiple: false });
         const file = await fromEvent(handles);
+        console.log('sufficient',file[0].name,file[0])
         uploaderpopup()
         setloading(true)
         if (!file) return;

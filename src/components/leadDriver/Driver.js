@@ -17,7 +17,7 @@ const Driver = (props) => {
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
     var check=moment(currentdate).add(25, 'days').calendar(); 
-    console.log(moment(check).format('YYYY-MM-DD'))
+    console.log(moment(check).format('DD MMMM YYYY'))
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     // console.log(print)

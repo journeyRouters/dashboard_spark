@@ -4,23 +4,35 @@ import HotelIcon from '@material-ui/icons/Hotel';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
 import app from '../required';
+import Box from './Box';
 import './TripComponent.css';
 
 
 const db = getFirestore(app)
-const SuggestionQuotes = ({ destination,handleSuggestion }) => {
+const SuggestionQuotes = ({
+    destination,
+    handleSuggestion,
+    Lead_data_to_be_quoted,
+    profile,
+    updateTableDataAfterQuote,
+    email
+
+}) => {
     const [sampleQuotes, setsampleQuotes] = useState([])
     const [searchKey, setSearchKey] = useState(0)
     const [selectedData, setselectedData] = useState()
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
     const [lead_data, setLead_data] = useState()
+    const [usethisKey, setusethisKey] = useState(false)
     useEffect(() => {
         getSampleQuotes('Manali')
 
     }, []);
 
-
+    function usethisquoteHandler() {
+        setusethisKey(!usethisKey)
+    }
     function handleSearchOption(e) {
         console.log(typeof (e.target.value))
         setSearchKey(parseInt(e.target.value))
@@ -45,6 +57,7 @@ const SuggestionQuotes = ({ destination,handleSuggestion }) => {
             });
             setsampleQuotes(list)
             setselectedData(list[0])
+            console.log(list[0].value.itineary)
             setLead_data(list[0].value.travel_data)
         }
         console.log(list)
@@ -55,20 +68,47 @@ const SuggestionQuotes = ({ destination,handleSuggestion }) => {
 
     return (
         <div className='Suggestions'>
+            {
+                usethisKey ?
+                    <Box
+                        email={email}
+                        data={Lead_data_to_be_quoted}
+                        inclusion_data_={selectedData.value.inclusion_data}
+                        SelectedpackageTyp={selectedData.value.SelectedpackageType}
+                        updateTableDataAfterQuote={updateTableDataAfterQuote}
+                        set_popupopner={usethisquoteHandler}
+                        profile={profile}
+                        indicator={true}
+                        Edit_NightDataFields={selectedData.value.NightDataFields}
+                        Edit_itineary={selectedData.value.itineary}
+                        Edit_selected_Travel_date={selectedData.value.selected_Travel_date}
+                        Edit_visacost={selectedData.value.visacost}
+                        Edit_flightcost={selectedData.value.flightcost}
+                        Edit_landPackage={selectedData.value.landPackage}
+                        Edit_count_days={selectedData.value.count_days}
+                    // Allquote={Allquote}
+                    /> :
+                    <>
+
+                    </>
+            }
             <div className='sampleQuoteHeader'>
                 <RadioGroup row className='searchOption' name='searchOption' value={searchKey} onChange={(e) => handleSearchOption(e)}>
                     <FormControlLabel control={<Radio />} value={0} label="10 recent Quote" />
                     <FormControlLabel control={<Radio />} value={1} label="most Matched Quote" />
                     <FormControlLabel control={<Radio />} value={2} label="Search by TripId" />
                 </RadioGroup >
-                <button onClick={()=>handleSuggestion()}>Cancel</button>
+                <div>
+                    <button onClick={() => usethisquoteHandler()}>USE THIS QUOTE</button>
+                    <button onClick={() => handleSuggestion()}>Cancel</button>
+                </div>
             </div>
             <div className='divContainsThreeDiv'>
                 <div className='QuotesMapperDiv'>
                     {
                         sampleQuotes.map((data, index) => (
 
-                            <div key={index} className='Topsamplequotes_components' onClick={()=>setselectedData(data)}>
+                            <div key={index} className='Topsamplequotes_components' onClick={() => setselectedData(data)}>
                                 <div className='samplequotes_components'>
                                     <span className='highglight2'>{data.value.travel_data.TripId}</span><br />
                                     <span>{data.value.travel_data.Traveller_name}</span><br />
@@ -120,12 +160,12 @@ const SuggestionQuotes = ({ destination,handleSuggestion }) => {
                                     <ExtensionSharp />
                                     <span>inclusion/Exclusion</span>
                                 </p>
-                                <div className="inclusionExclusion">
+                                <div className="inclusionExclusion__">
                                     <div>
                                         {
                                             Object.keys(selectedData.value.inclusion_data)
                                                 .filter(function (k) {
-                                                    return selectedData.value.inclusion_data[k] == false &&
+                                                    return selectedData.value.inclusion_data[k] == true &&
                                                         typeof (selectedData.value.inclusion_data[k]) !== "string" && selectedData
                                                             .value.inclusion_data[k] !== null
                                                 }).map((data, index) => (
@@ -156,21 +196,50 @@ const SuggestionQuotes = ({ destination,handleSuggestion }) => {
                                         }
                                     </div>
                                 </div>
+                                <div className=''>
+                                    {
+                                        selectedData.value.itineary.map((data, index) => (
+                                            <div key={index} className='suggestionmapItineary'>
+                                                <span>Day:-{index + 1}</span>
+                                                <p>{data.Day}</p>
+                                                <div>{data.Description}</div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </> : <></>
                     }
                 </div>
-                <div className='LeadLookUp'>{console.log(lead_data)}
-                    {
-                        selectedData ? <>
-                            <span>Trip Details</span>
-                            <p className='lookupaliner'>
-                                <span>Starting date</span>
-                                <span>22/06/2022</span>
-                            </p>
+                <div className='LeadLookUp'>
 
-                        </> : <></>
-                    }
+                    <span>Trip Details</span>
+                    <p className='lookupaliner'>
+                        <p className='tripInfoP'>
+                            <span>Starting date</span>
+                            <span>{Lead_data_to_be_quoted.Travel_Date}</span>
+                        </p>
+                        <p className='tripInfoP'>
+                            <span>Travel Duration</span>
+                            <span>{Lead_data_to_be_quoted.Travel_Duration} Days, {Lead_data_to_be_quoted.Travel_Duration - 1} Nights</span>
+                        </p>
+                        <p className='tripInfoP'>
+                            <span>Destination</span>
+                            <span>{Lead_data_to_be_quoted.Destination}</span>
+                        </p>
+                        <p className='tripInfoP'>
+                            <span>Budget</span>
+                            <span>{Lead_data_to_be_quoted.Budget}</span>
+                        </p>
+                        <p className='tripInfoP'>
+                            <span>Number of Traveller</span>
+                            <span>{Lead_data_to_be_quoted.Pax} Adult, {Lead_data_to_be_quoted.Child ? Lead_data_to_be_quoted.Child : 0} Child</span>
+                        </p>
+
+
+                    </p>
+
+
 
                 </div>
 

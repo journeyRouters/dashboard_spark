@@ -361,18 +361,18 @@ const Row = (props) => {
                                                                     email={props.auth.email}
                                                                     data={tripData.travel_data}
                                                                     inclusion_data_={data.value.inclusion_data}
-                                                                    Edit_NightDataFields={data.value.NightDataFields}
                                                                     SelectedpackageTyp={data.value.SelectedpackageType}
-                                                                    Edit_itineary={data.value.itineary}
                                                                     updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                     set_popupopner={setReqoute_flg}
                                                                     userProfile={props.profile}
                                                                     indicator={true}
+                                                                    Edit_NightDataFields={data.value.NightDataFields}
+                                                                    Edit_itineary={data.value.itineary}
                                                                     Edit_selected_Travel_date={data.value.selected_Travel_date}
                                                                     Edit_visacost={data.value.visacost}
                                                                     Edit_flightcost={data.value.flightcost}
                                                                     Edit_landPackage={data.value.landPackage}
-                                                                    Edit_count_days={data.value.count_days}
+                                                                    Edit_count_days={data.value.count_days} 
                                                                     Allquote={Allquote}
                                                                     
                                                                 />

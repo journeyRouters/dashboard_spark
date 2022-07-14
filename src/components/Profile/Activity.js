@@ -28,7 +28,7 @@ export const avtivityList = {
         },
         {
             label: 'Nusa Penida Island',
-            value: 'Nusa Penida Island'
+            value: 'NusaPenidaIsland'
         },
         {
             label: 'Ayung River Rafting',
@@ -52,7 +52,7 @@ export const avtivityList = {
         },
         {
             label: 'Lembongan Island Day Cruise by Bali Hai',
-            value: 'LembonganIslandDayCruise'
+            value: 'LembonganIslandDayCruiseByBaliHai'
         },
         {
             label: 'Lembongan Island Day Cruise by Bounty',
@@ -79,10 +79,14 @@ export const avtivityList = {
             value: 'CandleLightDinnerwithSetupatBeach'
         },
     ],
-    Manali:[
+    Himachal:[
+        {
+            label:'HipHipHurrayAmusementPark ',
+            value:'HipHipHurrayAmusementPark'
+        },
         {
             label:'Solang Valley ',
-            value:'SolangValley '
+            value:'SolangValley'
         },
         {
             label:'Old Manali',

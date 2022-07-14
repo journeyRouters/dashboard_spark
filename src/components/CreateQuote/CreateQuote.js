@@ -26,7 +26,8 @@ const Createquote = (props) => {
     const [lastVisible, setlastVisible] = useState(null)
     const [sampleQuotes, setsampleQuotes] = useState([])
 
-    function handleSuggestion() {
+    function handleSuggestion(data) {
+        set_uni_data(data)
         settransfermodal(!SuggestionModal)
     }
     let tHead = [
@@ -148,7 +149,7 @@ const Createquote = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getLeadOnBoard()
-        
+
         // console.log(props.auth.uid)
 
     }, [popupopener]);
@@ -156,11 +157,12 @@ const Createquote = (props) => {
     class BaseProductDeleteComponent extends React.Component {
         constructor(props) {
             super(props);
-            this.deleteItem = this.deleteItem.bind(this);
+            this.suggestedQuotes = this.suggestedQuotes.bind(this);
         }
-        deleteItem() {
-            alert("delete " + this.props.rowData.name);
-            console.log(this.props.rowData, this.props.tdData);
+        suggestedQuotes() {
+
+            // alert("delete " + this.props.rowData.name);
+            // console.log(this.props.rowData, this.props.tdData);
         }
         render() {
             return (
@@ -169,7 +171,7 @@ const Createquote = (props) => {
                         type="button"
                         className="btn btn-danger"
                         value="Transfer"
-                        onClick={() => handleSuggestion()}
+                        onClick={() => handleSuggestion(this.props.rowData)}
                     />
                 </td>
             );
@@ -199,14 +201,22 @@ const Createquote = (props) => {
             );
         }
     }
-  
+
     return (
 
         <div>
             {
                 props.auth ? <>
                     <Modal open={SuggestionModal} onClose={handleSuggestion} >
-                     <SuggestionQuotes  handleSuggestion={handleSuggestion}/>
+                        <SuggestionQuotes
+                            handleSuggestion={handleSuggestion}
+                            Lead_data_to_be_quoted={user_uni_data}
+                            email={props.auth.email}
+                            profile={profile}
+                            updateTableDataAfterQuote={updateTableDataAfterQuote}
+
+                        />
+
 
                     </Modal>
                     {

@@ -15,9 +15,8 @@ const db = getFirestore(app);
 const Driver = (props) => {
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
+    today = today.setDate(today.getDate() + 2)
     var currentdate = moment(today).format('YYYY-MM-DD')
-    var check=moment(currentdate).add(25, 'days').calendar(); 
-    console.log(moment(check).format('DD MMMM YYYY'))
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     // console.log(print)
@@ -27,69 +26,69 @@ const Driver = (props) => {
     }
     async function UploadFile() {
         if (props.auth) {
-        //   console.log(auth)
-          const handles = await window.showOpenFilePicker({ multiple: false });
-          const files = await fromEvent(handles);
-          const path = files[0].path
-          // setInProgress(true)
-          readXlsxFile(files[0]).then((rows) => {
-            for (let i = 1; i <= rows.length - 1; i++) {
-              let Row = rows[i]
-              console.log(Row)
-              let any = Math.random()
-              let tripid = `TRP${any}`
-              setDoc(doc(db, "Trip", tripid), {
-                TripId: tripid,
-                Lead_Status: Row[0],
-                Campaign_code: Row[1],
-                Date_of_lead: Row[2],
-                Traveller_name: Row[3],
-                Extra_Info: Row[4],
-                Contact_Number: Row[5],
-                Destination: Row[6],
-                Comment: Row[7],
-                Departure_City: Row[8],
-                Travel_Date: Row[9],
-                Travel_Duration: Row[10],
-                Budget: Row[11],
-                Pax: Row[12],
-                Child: Row[13],
-                Email: Row[14],
-                Remark: Row[15],
-                Lead_genrate_date: Row[16],
-                uploaded_by: props.auth.email,
-                Quoted_by: null,
-                uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
-                uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,
-                quotation: 0,
-                quotation_flg: false,
-                month: '',
-                Lead_status_change_date: null,
-                comments: [],
-                Vouchers_flight: [],
-                Vouchers_hotels: [],
-                Vouchers_others: [],
-                vouchers_idproof: [],
-                transfer_request: false,
-                transfer_request_reason: [],
-                assign_to: {
-                  uid: null,
-                  name: null
-                },
-                updated_last: null,
-                assign_flg: false,
-                final_package:null
-              });
-            }
-            getLeadByDate()
-            // console.log(rows[1][0])
-            // uploadFileOnStorage(path,'dingdong')
-          })
+            //   console.log(auth)
+            const handles = await window.showOpenFilePicker({ multiple: false });
+            const files = await fromEvent(handles);
+            const path = files[0].path
+            // setInProgress(true)
+            readXlsxFile(files[0]).then((rows) => {
+                for (let i = 1; i <= rows.length - 1; i++) {
+                    let Row = rows[i]
+                    console.log(Row)
+                    let any = Math.random()
+                    let tripid = `TRP${any}`
+                    setDoc(doc(db, "Trip", tripid), {
+                        TripId: tripid,
+                        Lead_Status: Row[0],
+                        Campaign_code: Row[1],
+                        Date_of_lead: Row[2],
+                        Traveller_name: Row[3],
+                        Extra_Info: Row[4],
+                        Contact_Number: Row[5],
+                        Destination: Row[6],
+                        Comment: Row[7],
+                        Departure_City: Row[8],
+                        Travel_Date: Row[9],
+                        Travel_Duration: Row[10],
+                        Budget: Row[11],
+                        Pax: Row[12],
+                        Child: Row[13],
+                        Email: Row[14],
+                        Remark: Row[15],
+                        Lead_genrate_date: Row[16],
+                        uploaded_by: props.auth.email,
+                        Quoted_by: null,
+                        uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
+                        uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,
+                        quotation: 0,
+                        quotation_flg: false,
+                        month: '',
+                        Lead_status_change_date: null,
+                        comments: [],
+                        Vouchers_flight: [],
+                        Vouchers_hotels: [],
+                        Vouchers_others: [],
+                        vouchers_idproof: [],
+                        transfer_request: false,
+                        transfer_request_reason: [],
+                        assign_to: {
+                            uid: null,
+                            name: null
+                        },
+                        updated_last: null,
+                        assign_flg: false,
+                        final_package: null
+                    });
+                }
+                getLeadByDate()
+                // console.log(rows[1][0])
+                // uploadFileOnStorage(path,'dingdong')
+            })
         }
         else {
-        //   setopen(true)
+            //   setopen(true)
         }
-      }
+    }
     async function getLeadByDate() {
         var list = []
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
@@ -101,7 +100,7 @@ const Driver = (props) => {
                 // doc.data() is never undefined for query doc snapshots
             });
             setLead_data(list)
-            console.log(list);
+            // console.log(list);
         }
         catch (error) {
             console.log(error)
@@ -116,14 +115,22 @@ const Driver = (props) => {
                 Profile.push(doc.data());
             });
             setprofile(Profile)
-            console.log(Profile,);
+            // console.log(Profile,);
         });
         return () => unsubscribe()
 
     }, []);
+    function test(days) {
+        let date = new Date();
+        date.setDate(date.getDate() + days);
+        moment(date).format('DD MMMM YYYY')
+        return date;
+    }
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log(selectedDate)
+        // var check = moment(today,'DD MMMM YYYY').add(5, 'days').calendar()
+        console.log(moment(test(3)).format('DD MMMM YYYY'))
+        // console.log(selectedDate)
         getLeadByDate(currentdate)
     }, []);
 
@@ -132,7 +139,7 @@ const Driver = (props) => {
             <Modal open={openlistOfUsers} onClose={handleListChange} >
                 <>
                     <div className='listofuser'>
-                       
+
                         <table style={{ width: "100%" }}>
                             <tr>
                                 <th>name</th>
@@ -167,11 +174,11 @@ const Driver = (props) => {
                 </div>
                 <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>
                 <button className='userlist_button' onClick={handleListChange}>All listed User</button>
-                <button onClick={()=>UploadFile()}>upload the Leads</button>
+                <button onClick={() => UploadFile()}>upload the Leads</button>
             </div>
             <div>
                 {lead_data.map((data, index) => (
-                    <DriverComponents key={index} profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} selectedDate={selectedDate}/>
+                    <DriverComponents key={index} profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} selectedDate={selectedDate} />
                 ))}
             </div>
         </div>

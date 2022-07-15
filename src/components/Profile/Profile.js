@@ -9,6 +9,7 @@ import moment from 'moment';
 import { Image } from '@material-ui/icons';
 import Footer, { GoogleReviews } from './footer';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import NightsController from './subcomponents/NightsController';
 const db = getFirestore(app);
 const storage = getStorage();
 
@@ -42,7 +43,7 @@ const Profile = (
         value: "size-a4"
     });
     const Data = travel_data
-    console.log(NightDataFields)
+    // console.log(NightDataFields)
     const [callback, setcallback] = useState(false)
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
@@ -51,9 +52,12 @@ const Profile = (
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
-    const[allUploadFlights,setlinkforFlights]=useState(flightsLinkfromstorage?flightsLinkfromstorage:[])
+    const[checkIn,setcheckIn]=useState(selected_Travel_date)
+    const [allUploadFlights, setlinkforFlights] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : [])
 
-
+function controlsetCheckIn(value){
+    setcheckIn(value)
+}
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         // console.log(keys)
@@ -70,9 +74,9 @@ const Profile = (
         // debugger
         var local_link_list = []
         for (var start = 0; start < flightsObject.length; start++) {
-            var temp={ Link:'',path:''}
+            var temp = { Link: '', path: '' }
             const url = URL.createObjectURL(file[start])
-            temp.Link=url
+            temp.Link = url
             local_link_list.push(temp)
             // console.log('url', url)
         }
@@ -80,7 +84,7 @@ const Profile = (
 
     }
     useEffect(() => {
-        if(!flightsLinkfromstorage){
+        if (!flightsLinkfromstorage) {
             convertObjectToLink()
         }
         fiterInclusion()
@@ -129,9 +133,10 @@ const Profile = (
         });
     }
 
+
     function uploadFlightsScreenShots(files, TripId) {
         for (var loadIndex = 0; loadIndex < files.length; loadIndex++) {
-            var tempMemo={Link:'',path:''}
+            var tempMemo = { Link: '', path: '' }
             const storageRef = ref(storage, `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`);
             const path = `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`
             const uploadTask = uploadBytesResumable(storageRef, files[loadIndex]);
@@ -160,8 +165,8 @@ const Profile = (
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
-                        tempMemo.Link=downloadURL
-                        tempMemo.path=path
+                        tempMemo.Link = downloadURL
+                        tempMemo.path = path
                         // updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                         // getdatalatest_for_voucher()
                         // stoploading()
@@ -171,7 +176,7 @@ const Profile = (
             );
             allUploadFlights.push(tempMemo)
             setlinkforFlights(allUploadFlights)
-            
+
         }
     }
 
@@ -201,7 +206,12 @@ const Profile = (
         catch (error) {
             console.log(error)
         }
-        // closePDF()
+        try {
+
+            localStorage.setItem('Journeydate',null)
+            closePDF()
+        }
+        catch (e) { console.log(e) }
     }
     var name = (travel_data.Destination).toUpperCase()
 
@@ -290,7 +300,7 @@ const Profile = (
 
                             </div>
                             <div className="yellow_details">
-                                <p className="dayDetails">{count_days} Days, {count_days - 1} Nights</p>
+                                <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR {parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
@@ -390,7 +400,7 @@ const Profile = (
                                     {itineary &&
                                         itineary.map((data, index) => (
                                             <div className='mapitineary'>
-                                                <span style={{ width: '5rem' }}>Day {index + 1}  -</span>
+                                                <span style={{ width: '5rem' }}><span> Day </span> {index + 1} -</span>
                                                 <p style={{ width: '91%' }}>{data.Day}</p>
                                             </div>
                                         ))
@@ -434,7 +444,7 @@ const Profile = (
                                                 <div className='DaywiseItinearyDivleft'>
                                                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                         <span className='dayheader'>
-                                                            Day{index + 1} - {data.Day}
+                                                            Day {index + 1} - {data.Day}
                                                         </span>
                                                     </div>
                                                     <p className='dayDetailsitineary'>{data.Description}</p>
@@ -495,8 +505,11 @@ const Profile = (
                                                 <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <h4></h4>
-                                                <span style={{ color: 'pink' }}>check In-{moment(selected_Travel_date).format('DD MMMM YYYY')}</span><br />
-                                                <span style={{ color: 'pink' }}>check Out-{moment(selected_Travel_date).format('DD MMMM YYYY')}</span>
+                                                <NightsController
+                                                    nights={data.Night.length}
+                                                    checkIn={checkIn}
+                                                    controlsetCheckIn={controlsetCheckIn}
+                                                />
 
 
                                             </div>
@@ -544,7 +557,7 @@ const Profile = (
                                     flightsLocalUrl ? <>
                                         {
                                             flightsLocalUrl.map((link, index) => (
-                                                <img  key={index} className='flightsImgcss' src={link.Link} />
+                                                <img key={index} className='flightsImgcss' src={link.Link} />
                                             ))
                                         }
                                     </> : <></>

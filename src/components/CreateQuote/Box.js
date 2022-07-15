@@ -8,6 +8,8 @@ import makeAnimated from 'react-select/animated';
 import './TripComponent.css';
 import { ActivityResolver } from '../Profile/Activity';
 import { DropzoneArea } from 'material-ui-dropzone';
+import moment from 'moment';
+import RoomType from './subComponents/RoomType';
 
 
 const Box = ({
@@ -31,7 +33,7 @@ const Box = ({
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
-    const [SelectedpackageType, setSelectedpackageType] = useState("per Person")
+    const [SelectedpackageType, setSelectedpackageType] = useState("Per Person")
     const [flightcost, setFlightcost] = useState(Edit_flightcost ? Edit_flightcost : 0)
     const [visacost, setvisacost] = useState(Edit_visacost ? Edit_visacost : 0)
     const [landPackage, setlandpackage] = useState(Edit_landPackage ? Edit_landPackage : 0)
@@ -43,7 +45,7 @@ const Box = ({
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
     const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState(Edit_NightDataFields ? Edit_NightDataFields : [
-        { Night: [],HotelMeal:[], HotelName: '', City: '', Category: '', RoomType: '', comments: '' },])
+        { Night: [], HotelMeal: [], HotelName: '', City: '', Category: '', RoomType: '', comments: '' },])
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
@@ -51,7 +53,6 @@ const Box = ({
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
-    const [showDefaultRoomTypeFlg, setshowDefaultRoomTypeFlg] = useState(true)
     const inclusion = {
         Hotels: false,
         accommodation: false,
@@ -78,22 +79,22 @@ const Box = ({
         other_Exclusion: ''
     }
     const [inclusion_data, setinclusion] = useState(indicator ? inclusion_data_ : inclusion)
-    const HotelMeals=[
+    const HotelMeals = [
         {
-            label:"BreakFast",
-            value:"BreakFast"
+            label: "BreakFast",
+            value: "BreakFast"
         },
         {
-            label:"Lunch",
-            value:"Lunch"
+            label: "Lunch",
+            value: "Lunch"
         },
         {
-            label:"Dinner",
-            value:"Dinner"
+            label: "Dinner",
+            value: "Dinner"
         },
         {
-            label:"Drinks",
-            value:"Drinks"
+            label: "Drinks",
+            value: "Drinks"
         }
     ]
     function cabDetails(e) {
@@ -132,10 +133,14 @@ const Box = ({
         if (!Edit_itineary) {
             setVar()
         }
+
         setActivity(ActivityResolver(data.Destination))
         // console.log(Edit_itineary)
 
     }, []);
+    useEffect(() => {
+        localStorage.setItem('Journeydate', selected_Travel_date);
+    }, [openPDF]);
     function daysChanges(event) {
         let len = parseInt(event.target.value)
         var temp = Array(len).fill('a');
@@ -191,7 +196,7 @@ const Box = ({
     }
     function addFields() {
         if (countNight < Travel_Duration - 2) {
-            let object = { Night: [],HotelMeal:[], HotelName: '', City: '', Category: '', RoomType: '', comments: '' }
+            let object = { Night: [], HotelMeal: [], HotelName: '', City: '', Category: '', RoomType: '', comments: '' }
             setNightDataFields([...NightDataFields, object])
             setCountnight(countNight + 1)
         }
@@ -252,8 +257,17 @@ const Box = ({
     function Save_download() {
         showPDF()
     }
+    // function test(date,days) {
+    //     let date_= new Date(date);
+    //     date_.setDate(date_.getDate() + days);
+    //     console.log(moment(date_).format('DD MMMM YYYY'))
+    //     return date_;
+    // }
     function select_date(e) {
-        set_selected_Travel_date(e.target.value)
+        var date = e.target.value
+        // console.log(test(date,2))
+        set_selected_Travel_date(date)
+        localStorage.setItem('Journeydate', date);
     }
     function flightDetails(files) {
         console.log(files)
@@ -397,7 +411,7 @@ const Box = ({
                                                         components={animatedComponents}
                                                         isMulti
                                                         options={HotelMeals}
-                                                        onChange={(e) => advance_controller_Hotel_meals (e, index)}
+                                                        onChange={(e) => advance_controller_Hotel_meals(e, index)}
                                                     />
                                                 </div>
                                                 <div className='unitComponent'>
@@ -439,25 +453,10 @@ const Box = ({
                                                 </div>
                                                 <div className='unitComponent'>
                                                     <label>Room Type</label>
-                                                    <input type={'checkbox'} checked={showDefaultRoomTypeFlg} onChange={() => setshowDefaultRoomTypeFlg(!showDefaultRoomTypeFlg)} ></input><br />
-                                                    {
-                                                        showDefaultRoomTypeFlg ? <>
-                                                            <textarea name='RoomType' onChange={(event) => handleFormChange(event, index)}></textarea>
-                                                        </> : <>
-                                                            <select defaultValue='normal' name='RoomType' onChange={(event) => handleFormChange(event, index)}>
-                                                                <option value='standrad'>standrad</option>
-                                                                <option value='delux'>delux</option>
-                                                                <option value='super delux'>super delux</option>
-                                                                <option value='Premium'>Premium</option>
-                                                                <option value='Luxury'>Luxury</option>
-                                                                <option value='duplex'>duplex</option>
-                                                                <option value='family suite'>family suite</option>
-                                                                <option value='Excutive suite'>Excutive suite</option>
-                                                                <option value='grand suite'>grand suite</option>
-
-                                                            </select>
-                                                        </>
-                                                    }
+                                                    <RoomType
+                                                    handleFormChange={handleFormChange}
+                                                    index={index}
+                                                    />
                                                 </div>
                                                 <button onClick={() => removeFields(index)}>Remove</button>
                                             </div>

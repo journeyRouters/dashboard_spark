@@ -4,39 +4,49 @@ import './inclusioncss.css';
 
 const Inclusion = (props) => {
     const [btn_flg, setflg] = useState(false)
-    console.log(props.inclusion_data)
+    // console.log(props.inclusion_data)
     const [inclusionFeed, setFeed] = useState(props.inclusion_data)
-    console.log(inclusionFeed)
+    // console.log(inclusionFeed)
 
    
 
 
     function handleSave() {
         props.setinclusion(inclusionFeed)
-        console.log(inclusionFeed)
+        // console.log(inclusionFeed)
         props.onClose()
 
     }
+    function BooleanCaseResolver(value){
+        /**a case is not working
+         * when it should parse string value to boolean
+         * Boolean(value) returns true always
+         * so this function will handle the vaue
+         */
+        if(value=='true') return true
+        return false
+    }
     function handleData_inclusion(e) {
-        console.log(typeof(Boolean(e.target.value)))
+        var firevalue=BooleanCaseResolver(e.target.value)
+        // console.log((e.target.value),e.target.checked)
         // debugger
 
         if (e.target.name === "Breakfast") {
             setFeed(prevState => ({
                 ...prevState,
-                breakfast: Boolean(e.target.value)
+                breakfast: firevalue
             }))
         }
         if (e.target.name === "Lunch") {
             setFeed(prevState => ({
                 ...prevState,
-                lunch: Boolean(e.target.value)
+                lunch: firevalue
             }))
         }
         if (e.target.name === "Dinner") {
             setFeed(prevState => ({
                 ...prevState,
-                dinner: Boolean(e.target.value)
+                dinner: firevalue
             }))
         }
         if (e.target.name === "lunch_comments") {
@@ -54,49 +64,49 @@ const Inclusion = (props) => {
         if (e.target.name === "Arival") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_arival: Boolean(e.target.value)
+                airport_arival: firevalue
             }))
         }
         if (e.target.name === "Departure") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_departure: Boolean(e.target.value)
+                airport_departure: firevalue
             }))
         }
         if (e.target.name === "SIC") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_SIC: Boolean(e.target.value)
+                cab_SIC: firevalue
             }))
         }
         if (e.target.name === "Private") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_Private: Boolean(e.target.value)
+                cab_Private: firevalue
             }))
         }
         if (e.target.name === "airfair") {
             setFeed(prevState => ({
                 ...prevState,
-                airfair: Boolean(e.target.value)
+                airfair: firevalue
             }))
         }
         if (e.target.name === "GST") {
             setFeed(prevState => ({
                 ...prevState,
-                Gst: Boolean(e.target.value)
+                Gst: firevalue
             }))
         }
         if (e.target.name === "TCS") {
             setFeed(prevState => ({
                 ...prevState,
-                Tcs: Boolean(e.target.value)
+                Tcs: firevalue
             }))
         }
         if (e.target.name === "siteseeing") {
             setFeed(prevState => ({
                 ...prevState,
-                siteseeing: Boolean(e.target.value)
+                siteseeing: firevalue
             }))
         }
         if (e.target.name === "siteseeing_comments") {
@@ -108,7 +118,7 @@ const Inclusion = (props) => {
         if (e.target.name === "Visa") {
             setFeed(prevState => ({
                 ...prevState,
-                Visa: Boolean(e.target.value)
+                Visa: firevalue
             }))
         }
         if (e.target.name === "visa_comments") {
@@ -120,7 +130,7 @@ const Inclusion = (props) => {
         if (e.target.name === "Entrance") {
             setFeed(prevState => ({
                 ...prevState,
-                Entrance_fee: Boolean(e.target.value)
+                Entrance_fee: firevalue
             }))
         }
         if (e.target.name === "Entrance_comments") {
@@ -147,7 +157,7 @@ const Inclusion = (props) => {
                 cab_Private_comments: (e.target.value)
             }))
         }
-        console.log(inclusionFeed)
+        // console.log(inclusionFeed)
 
     }
     return (

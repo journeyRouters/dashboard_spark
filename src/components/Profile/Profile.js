@@ -8,7 +8,10 @@ import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import moment from 'moment';
 import { Image } from '@material-ui/icons';
 import Footer, { GoogleReviews } from './footer';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 const db = getFirestore(app);
+const storage = getStorage();
+
 
 const Profile = (
     {
@@ -19,7 +22,7 @@ const Profile = (
         inclusion_data,
         travel_data,
         cabDetailsData,
-        flights,
+        flightsObject,
         closePDF,
         closeHandler,
         itineary,
@@ -30,7 +33,8 @@ const Profile = (
         landPackage,
         Allquote,
         updateTableDataAfterQuote,
-        profile
+        profile,
+        flightsLinkfromstorage
     }
 ) => {
     const [layoutSelection, setLayoutSelection] = useState({
@@ -47,18 +51,8 @@ const Profile = (
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
+    const[allUploadFlights,setlinkforFlights]=useState(flightsLinkfromstorage?flightsLinkfromstorage:[])
 
-    async function updateprofile_LeadFollowup(tripid) {
-        const docref = doc(db, "Profile", profile.uid);
-        var pre_Lead_followUp = profile.Lead_followUp
-        console.log(pre_Lead_followUp)
-        pre_Lead_followUp.push(tripid)
-        var unique = [...new Set(pre_Lead_followUp)]
-        console.log(unique)
-        await updateDoc(docref, {
-            "Lead_followUp": unique
-        });
-    }
 
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
@@ -71,16 +65,24 @@ const Profile = (
         setexclusion(keys)
     }
     async function convertObjectToLink() {
-        const file = flights
+        const file = flightsObject
         console.log(file)
         // debugger
-        const url = URL.createObjectURL(file[0])
-        console.log('url', url)
-        setflightsLocalUrl(url)
+        var local_link_list = []
+        for (var start = 0; start < flightsObject.length; start++) {
+            var temp={ Link:'',path:''}
+            const url = URL.createObjectURL(file[start])
+            temp.Link=url
+            local_link_list.push(temp)
+            // console.log('url', url)
+        }
+        setflightsLocalUrl(local_link_list)
 
     }
     useEffect(() => {
-        convertObjectToLink()
+        if(!flightsLinkfromstorage){
+            convertObjectToLink()
+        }
         fiterInclusion()
         filterExclusion()
 
@@ -127,6 +129,52 @@ const Profile = (
         });
     }
 
+    function uploadFlightsScreenShots(files, TripId) {
+        for (var loadIndex = 0; loadIndex < files.length; loadIndex++) {
+            var tempMemo={Link:'',path:''}
+            const storageRef = ref(storage, `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`);
+            const path = `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`
+            const uploadTask = uploadBytesResumable(storageRef, files[loadIndex]);
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // console.log(snapshot)
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            // console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    switch (error.code) {
+                        case 'storage/unauthorized':
+                            break;
+                        case 'storage/canceled':
+                            break;
+                        case 'storage/unknown':
+                            break;
+                    }
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        tempMemo.Link=downloadURL
+                        tempMemo.path=path
+                        // updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
+                        // getdatalatest_for_voucher()
+                        // stoploading()
+
+                    });
+                }
+            );
+            allUploadFlights.push(tempMemo)
+            setlinkforFlights(allUploadFlights)
+            
+        }
+    }
+
     function handleExportWithComponent() {
         pdfExportComponent.current.save();
 
@@ -165,6 +213,7 @@ const Profile = (
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
+                    {/* this is the first page for introduction to the destination */}
                     <div className={'page1'}
                         style={{
                             backgroundImage: `url(/assets/destination/${name}/Header.png)`,
@@ -214,13 +263,15 @@ const Profile = (
                             </div>
                         </div>
                     </div>
+                    {/* end of 1st page(introduction page)*/}
+
+                    {/* page2 start (Package Details)*/}
                     <div className="page-break">
                         <div className="page2" style={{
-                            backgroundImage: "url(/assets/pdfDefaultImage/package.png)",
+                            backgroundImage: `url(/assets/destination/${name}/PackageDetails.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
-                            // color:"white"
                         }}>
 
                             <div className="package_details">
@@ -250,6 +301,9 @@ const Profile = (
                         </div>
 
                     </div>
+                    {/* end of 2st page(Package Details page)*/}
+
+                    {/* 3rd page start (inclusionAndExclusion page))*/}
                     <div className="page-break">
                         <div className="inclusion"
                             style={{
@@ -301,8 +355,10 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of 3rd page(inclusion Exclusion page)*/}
 
 
+                    {/* 4th page started(google review page )*/}
                     <div className="page-break">
                         <div className="page2"
                             style={{
@@ -317,6 +373,9 @@ const Profile = (
                             <Footer />
                         </div>
                     </div>
+                    {/* end of 4th page(Google Review page)*/}
+
+                    {/* start of 5th page DayWise Itineary*/}
                     <div className="page-break">
                         <div className="itinearypage"
                             style={{
@@ -353,6 +412,9 @@ const Profile = (
                             </div>
                         </div>
                     </div>
+                    {/* end of 5th page(DayWiseitineary page)*/}
+
+                    {/* start of 6th page (DetailItineary page)*/}
                     <div className="page-break">
                         <div className="itinearypage"
                             style={{
@@ -404,6 +466,9 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of 6th page(detail itineary page)*/}
+
+                    {/*start of 7th page (hotel page)*/}
                     <div className="page-break">
                         <div className="HotelPage"
                             style={{
@@ -417,7 +482,6 @@ const Profile = (
 
                                 {
                                     NightDataFields.map((data, index) => (
-                                        // console.log('hihi'),
                                         <div key={index} className='hotelUni'>
                                             <div>
                                                 <img src={`/assets/pdfDefaultImage/demoHotel${index + 1}.png`} width="320px" />
@@ -449,7 +513,7 @@ const Profile = (
                                         height: '5.5rem',
                                         display: 'flex',
                                         flexDirection: 'column-reverse',
-                                        marginTop:'2rem'
+                                        marginTop: '2rem'
                                     }}
                                 >
                                     <Footer />
@@ -463,6 +527,9 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/*end of 7th page (hotel page)*/}
+
+                    {/* start of 8th page(Flights page) */}
                     <div className="page-break">
                         <div className="HotelPage"
                             style={{
@@ -473,8 +540,15 @@ const Profile = (
                             <div>
                                 <img className="inclusionPage_img" src="/assets/pdfDefaultImage/FlightsHeader.png" />
                                 <span className='headLineDaywiseItineary'>Flight</span>
-
-                                <img className='flightsImgcss' src={flightsLocalUrl}/>
+                                {
+                                    flightsLocalUrl ? <>
+                                        {
+                                            flightsLocalUrl.map((link, index) => (
+                                                <img  key={index} className='flightsImgcss' src={link.Link} />
+                                            ))
+                                        }
+                                    </> : <></>
+                                }
 
                                 <div
                                     style={{
@@ -485,7 +559,7 @@ const Profile = (
                                         height: '5.5rem',
                                         display: 'flex',
                                         flexDirection: 'column-reverse',
-                                        marginTop:'2rem'
+                                        marginTop: '2rem'
                                     }}
                                 >
                                     <Footer />
@@ -494,6 +568,9 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of 8th page(Flights page) */}
+
+                    {/* start of 9th page(payments details) */}
                     <div className="page-break">
                         <div className="page2"
                             style={{
@@ -511,6 +588,9 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of 9th page(payments details) */}
+
+                    {/* start of jr info page */}
                     <div className="page-break">
                         <div className="page2"
                             style={{
@@ -528,6 +608,9 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of jr info page */}
+
+                    {/* start of jr FAQ page */}
                     <div className="page-break">
                         <div className="page2"
                             style={{
@@ -545,6 +628,8 @@ const Profile = (
 
                         </div>
                     </div>
+                    {/* end of jr FAQ page */}
+
 
                 </div>
             </PDFExport>

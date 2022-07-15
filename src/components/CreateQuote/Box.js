@@ -47,7 +47,7 @@ const Box = ({
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
-    const [flights, setflights] = useState(null)
+    const [flightsObject, setflightsObject] = useState(null)
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
@@ -256,7 +256,8 @@ const Box = ({
         set_selected_Travel_date(e.target.value)
     }
     function flightDetails(files) {
-        setflights(files)
+        console.log(files)
+        setflightsObject(files)
     }
 
 
@@ -271,7 +272,7 @@ const Box = ({
                     inclusion_data={inclusion_data}
                     travel_data={data}
                     cabDetailsData={cabDetailsData}
-                    flights={flights}
+                    flightsObject={flightsObject}
                     closePDF={closePDF}
                     closeHandler={closeHandler}
                     itineary={itineary}

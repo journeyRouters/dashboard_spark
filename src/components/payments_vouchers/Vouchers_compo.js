@@ -164,13 +164,14 @@ const VouchersCompo = ({ data }) => {
 
     }
 
+ 
     async function handleSubmit() {
         /**this function will upload the file in firebase storage
            vouchers/tripid/flight,hotel,others/filename 
          */
         const handles = await window.showOpenFilePicker({ multiple: false });
         const file = await fromEvent(handles);
-        console.log('sufficient',file[0].name,file[0])
+        // console.log('sufficient',file[0].name,file[0])
         uploaderpopup()
         setloading(true)
         if (!file) return;
@@ -331,10 +332,10 @@ const VouchersCompo = ({ data }) => {
                         {data.Email}
                     </p>
                     {
-                        details?<>
-                        <button onClick={() => finalPackageOpen()}>Final Package</button>
-                        <button onClick={() => invoiceOpen()}>Invoice</button>
-                        </>:<></>
+                        details ? <>
+                            <button onClick={() => finalPackageOpen()}>Final Package</button>
+                            <button onClick={() => invoiceOpen()}>Invoice</button>
+                        </> : <></>
                     }
 
 
@@ -382,7 +383,7 @@ const VouchersCompo = ({ data }) => {
                         />
                     </Modal>
                     <div className='AllDetailsOfTripQuoteComments'>
-                       
+
                         <div className='allComments'>
                             {
                                 data.comments.slice(0).reverse().map((U_data, index) => (<>

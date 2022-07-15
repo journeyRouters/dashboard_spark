@@ -2,21 +2,19 @@ import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, Tex
 import Collapse from '@material-ui/core/Collapse';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import GetAppIcon from '@material-ui/icons/GetApp';
 import EditIcon from '@material-ui/icons/Edit';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import PictureAsPdfTwoToneIcon from '@material-ui/icons/PictureAsPdfTwoTone';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import Box from '../CreateQuote/Box';
 import Invoice from '../invoice/InvoiceForm';
-import app from '../required';
-import './quote.css';
-import Redownload from './ReDownload';
-import Reqoute from './Reqoute';
 import InvoicePdf from '../invoice/invoicePdf';
 import Profile from '../Profile/Profile';
-import Box from '../CreateQuote/Box';
+import app from '../required';
+import './quote.css';
 const db = getFirestore(app);
 
 

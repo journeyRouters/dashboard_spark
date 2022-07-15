@@ -43,8 +43,8 @@ export const avtivityList = {
             value: 'MountBaturTrekking'
         },
         {
-            label: 'Dinner Cruise Bali Hai', 
-            value: 'DinnerCruiseBaliHai' 
+            label: 'Dinner Cruise Bali Hai',
+            value: 'DinnerCruiseBaliHai'
         },
         {
             label: 'Dinner Cruise Bounty',
@@ -79,56 +79,238 @@ export const avtivityList = {
             value: 'CandleLightDinnerwithSetupatBeach'
         },
     ],
-    Himachal:[
+    Himachal: [
         {
-            label:'HipHipHurrayAmusementPark ',
-            value:'HipHipHurrayAmusementPark'
+            label: 'HipHipHurrayAmusementPark ',
+            value: 'HipHipHurrayAmusementPark'
         },
         {
-            label:'Solang Valley ',
-            value:'SolangValley'
+            label: 'Solang Valley ',
+            value: 'SolangValley'
         },
         {
-            label:'Old Manali',
-            value:'OldManali'
+            label: 'Old Manali',
+            value: 'OldManali'
         },
         {
-            label:'Naggar castle',
-            value:'Naggarcastle'
+            label: 'Naggar castle',
+            value: 'Naggarcastle'
         },
         {
-            label:'kasol',
-            value:'kasol'
+            label: 'kasol',
+            value: 'kasol'
         },
         {
-            label:'Rohtang Pass',
-            value:'RohtangPass'
+            label: 'Rohtang Pass',
+            value: 'RohtangPass'
         },
         {
-            label:'Attal Tunnel',
-            value:'AttalTunnel'
+            label: 'Attal Tunnel',
+            value: 'AttalTunnel'
         },
         {
-            label:'Hadima',
-            value:'Hadima'
+            label: 'Hadima',
+            value: 'Hadima'
         },
         {
-            label:'Vashisht Temple',
-            value:'VashishtTemple'
+            label: 'Vashisht Temple',
+            value: 'VashishtTemple'
         },
         {
-            label:'Van Vihar',
-            value:'VanVihar'
+            label: 'Van Vihar',
+            value: 'VanVihar'
         },
         {
-            label:'Tibetan monastery',
-            value:'Tibetanmonastery'
+            label: 'Tibetan monastery',
+            value: 'Tibetanmonastery'
         },
         {
-            label:'Manu Temple',
-            value:'ManuTemple'
+            label: 'Manu Temple',
+            value: 'ManuTemple'
         },
 
+    ],
+    Thailand: [
+        {
+            label: "Art In Paradise",
+            value: "ArtInParadise",
+        },
+        {
+            label: "ChaoPhrayaDinnerCruise",
+            value: "ChaoPhrayaDinnerCruise",
+        },
+        {
+            label: "CoralIsland",
+            value: "CoralIsland",
+        },
+        {
+            label: "DreamWorldAndSnowTown",
+            value: "DreamWorldAndSnowTown",
+        },
+        {
+            label: "FantaSeaShow",
+            value: "FantaSeaShow",
+        },
+        {
+            label: "FloatingMarket",
+            value: "FloatingMarket",
+        },
+        {
+            label: "GoldenBuddhaMarket",
+            value: "GoldenBuddhaMarket",
+        },
+        {
+            label: "HotSpringJungleTour",
+            value: "HotSpringJungleTour",
+        },
+        {
+            label: "JamesBondIsland",
+            value: "JamesBondIsland",
+        },
+        {
+            label: "KaronViewPoint",
+            value: "KaronViewPoint",
+        },
+        {
+            label: "KrabiIslandTour",
+            value: "KrabiIslandTour",
+        },
+        {
+            label: "PhiPhiIslandTour",
+            value: "PhiPhiIslandTour",
+        },
+        {
+            label: "SafariWorldAndMarinePark",
+            value: "SafariWorldAndMarinePark",
+        },
+        {
+            label: "SeaLifeOceanWorld",
+            value: "SeaLifeOceanWorld",
+        },
+        {
+            label: "TigerPark",
+            value: "TigerPark",
+        },
+        {
+            label: "TigerTemple",
+            value: "TigerTemple",
+        },
+        {
+            label: "UnderWaterWorld",
+            value: "UnderWaterWorld",
+        },
+        {
+            label: "MadameTussauds",
+            value: "MadameTussauds",
+        }
+    ],
+    Singapore:[
+        {
+            label:"GardenByTheBay",
+            value:"GardenByTheBay",
+            },
+            {
+            label:"JurongBirdPark",
+            value:"JurongBirdPark",
+            },
+            {
+            label:"MerlionPark",
+            value:"MerlionPark",
+            },
+            {
+            label:"NightSafari",
+            value:"NightSafari",
+            },
+            {
+            label:"RiverSafari",
+            value:"RiverSafari",
+            },
+            {
+            label:"RoyalCaribbeanCruise",
+            value:"RoyalCaribbeanCruise",
+            },
+            {
+            label:"SentosaIsland",
+            value:"SentosaIsland",
+            },
+            {
+            label:"SingaporeZoo",
+            value:"SingaporeZoo",
+            },
+            {
+            label:"UniversalStudio",
+            value:"UniversalStudio",
+            },
+    ],
+    Dubai:[
+        {
+            label:"AquaventureAndLostChamber",
+            value:"AquaventureAndLostChamber",
+            },
+            {
+            label:"BollywoodThemePark",
+            value:"BollywoodThemePark",
+            },
+            {
+            label:"BurjKhalifa",
+            value:"BurjKhalifa",
+            },
+            {
+            label:"DesertSafari",
+            value:"DesertSafari",
+            },
+            {
+            label:"DubaiCityTourJumeriahBeach",
+            value:"DubaiCityTourJumeriahBeach",
+            },
+            {
+            label:"DubaiCityTourAtlantisThePalm",
+            value:"DubaiCityTourAtlantisThePalm",
+            },
+            {
+            label:"DubaiEye",
+            value:"DubaiEye",
+            },
+            {
+            label:"EmiratesPalace",
+            value:"EmiratesPalace",
+            },
+            {
+            label:"FerrariWorld",
+            value:"FerrariWorld",
+            },
+            {
+            label:"GlobalVillage",
+            value:"GlobalVillage",
+            },
+            {
+            label:"ImgWorld",
+            value:"ImgWorld",
+            },
+            {
+            label:"LimousineRide",
+            value:"LimousineRide",
+            },
+            {
+            label:"MarinaDinnerCruise",
+            value:"MarinaDinnerCruise",
+            },
+            {
+            label:"MiracleGarden",
+            value:"MiracleGarden",
+            },
+            {
+            label:"MuseumOfTheFuture",
+            value:"MuseumOfTheFuture",
+            },
+            {
+            label:"SkiDubaiMallOfEmirates",
+            value:"SkiDubaiMallOfEmirates",
+            },
+            {
+            label:"SkyDiveOverAtlantis",
+            value:"SkyDiveOverAtlantis",
+            },
     ]
 }
 export function ActivityResolver(destination) {

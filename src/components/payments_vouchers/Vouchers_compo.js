@@ -18,7 +18,7 @@ const VouchersCompo = ({ data }) => {
     const [target, settarget] = useState(0)
     const storage = getStorage();
     const [openuploader, setuploader] = useState(false)
-    const [finalPackage, setFinalPackage] = useState()
+    const [finalPackage, setFinalPackage] = useState(null)
     const [invoice, setinvocice] = useState()
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)

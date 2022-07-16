@@ -10,6 +10,8 @@ import { Image } from '@material-ui/icons';
 import Footer, { GoogleReviews } from './footer';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import NightsController from './subcomponents/NightsController';
+import { Modal } from '@material-ui/core';
+import { wait } from '@testing-library/user-event/dist/utils';
 const db = getFirestore(app);
 const storage = getStorage();
 
@@ -35,7 +37,8 @@ const Profile = (
         Allquote,
         updateTableDataAfterQuote,
         profile,
-        flightsLinkfromstorage
+        flightsLinkfromstorage,
+        flight
     }
 ) => {
     const [layoutSelection, setLayoutSelection] = useState({
@@ -52,12 +55,13 @@ const Profile = (
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
-    const[checkIn,setcheckIn]=useState(selected_Travel_date)
+    const [checkIn, setcheckIn] = useState(selected_Travel_date)
+    const[wait,setwait]=useState(false)
     const [allUploadFlights, setlinkforFlights] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : [])
 
-function controlsetCheckIn(value){
-    setcheckIn(value)
-}
+    function controlsetCheckIn(value) {
+        setcheckIn(value)
+    }
     function fiterInclusion() {
         var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
         // console.log(keys)
@@ -95,7 +99,7 @@ function controlsetCheckIn(value){
 
     async function setQuotationData() {
         if (indicator) {
-
+            closePDF()
         }
         else {
             await addDoc(collection(db, "Quote"), {
@@ -179,9 +183,19 @@ function controlsetCheckIn(value){
 
         }
     }
+     function closeFormAndPdf(){
+        setwait(false)
+        closePDF()
+        updateTableDataAfterQuote(TripId)
+        closeHandler()
 
-    function handleExportWithComponent() {
+     }
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    async function handleExportWithComponent() {
+        setwait(true)
         pdfExportComponent.current.save();
+        await delay(10000);
+        closeFormAndPdf()
 
     };
     function pdfgenrator() {
@@ -206,17 +220,17 @@ function controlsetCheckIn(value){
         catch (error) {
             console.log(error)
         }
-        try {
 
-            localStorage.setItem('Journeydate',null)
-            closePDF()
-        }
-        catch (e) { console.log(e) }
     }
     var name = (travel_data.Destination).toUpperCase()
 
     return (
         <>
+            <Modal open={wait}  style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                <>
+                <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'}/>
+                </>
+            </Modal>
             <PDFExport
                 ref={pdfExportComponent}
                 fileName={`${travel_data.Traveller_name}`}
@@ -543,44 +557,49 @@ function controlsetCheckIn(value){
                     {/*end of 7th page (hotel page)*/}
 
                     {/* start of 8th page(Flights page) */}
-                    <div className="page-break">
-                        <div className="HotelPage"
-                            style={{
-                                background: 'black'
-
-                            }}
-                        >
-                            <div>
-                                <img className="inclusionPage_img" src="/assets/pdfDefaultImage/FlightsHeader.png" />
-                                <span className='headLineDaywiseItineary'>Flight</span>
-                                {
-                                    flightsLocalUrl ? <>
-                                        {
-                                            flightsLocalUrl.map((link, index) => (
-                                                <img key={index} className='flightsImgcss' src={link.Link} />
-                                            ))
-                                        }
-                                    </> : <></>
-                                }
-
-                                <div
+                    {
+                        flight ? <>
+                            <div className="page-break">
+                                <div className="HotelPage"
                                     style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
-                                        // backgroundPosition: "top",
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundSize: "cover",
-                                        height: '5.5rem',
-                                        display: 'flex',
-                                        flexDirection: 'column-reverse',
-                                        marginTop: '2rem'
+                                        background: 'black'
+
                                     }}
                                 >
-                                    <Footer />
+                                    <div>
+                                        <img className="inclusionPage_img" src="/assets/pdfDefaultImage/FlightsHeader.png" />
+                                        <span className='headLineDaywiseItineary'>Flight</span>
+                                        {
+                                            flightsLocalUrl ? <>
+                                                {
+                                                    flightsLocalUrl.map((link, index) => (
+                                                        <img key={index} className='flightsImgcss' src={link.Link} />
+                                                    ))
+                                                }
+                                            </> : <></>
+                                        }
+
+                                        <div
+                                            style={{
+                                                backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                                // backgroundPosition: "top",
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundSize: "cover",
+                                                height: '5.5rem',
+                                                display: 'flex',
+                                                flexDirection: 'column-reverse',
+                                                marginTop: '2rem'
+                                            }}
+                                        >
+                                            <Footer />
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                        </> : <></>
+                    }
 
-                        </div>
-                    </div>
                     {/* end of 8th page(Flights page) */}
 
                     {/* start of 9th page(payments details) */}

@@ -15,7 +15,7 @@ const db = getFirestore(app);
 const Driver = (props) => {
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
-    today = today.setDate(today.getDate() + 2)
+    // today = today.setDate(today.getDate() + 2)
     var currentdate = moment(today).format('YYYY-MM-DD')
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])

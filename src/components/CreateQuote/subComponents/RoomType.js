@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RoomType = ({handleFormChange,index}) => {
+const RoomType = ({handleFormChange,index,value}) => {
     const [showDefaultRoomTypeFlg, setshowDefaultRoomTypeFlg] = useState(true)
 
     return (
@@ -8,7 +8,7 @@ const RoomType = ({handleFormChange,index}) => {
             <input type={'checkbox'} checked={showDefaultRoomTypeFlg} onChange={() => setshowDefaultRoomTypeFlg(!showDefaultRoomTypeFlg)} ></input><br />
             {
                 showDefaultRoomTypeFlg ? <>
-                    <textarea name='RoomType' onChange={(event) => handleFormChange(event, index)}></textarea>
+                    <textarea name='RoomType' value={value}  onChange={(event) => handleFormChange(event, index)}></textarea>
                 </> : <>
                     <select defaultValue='normal' name='RoomType' onChange={(event) => handleFormChange(event, index)}>
                         <option value='standrad'>standrad</option>

@@ -297,6 +297,7 @@ const Box = ({
                     landPackage={landPackage}
                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                     profile={profile}
+                    flight={flight}
                 />
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
@@ -456,6 +457,7 @@ const Box = ({
                                                     <RoomType
                                                     handleFormChange={handleFormChange}
                                                     index={index}
+                                                    value={data.RoomType}
                                                     />
                                                 </div>
                                                 <button onClick={() => removeFields(index)}>Remove</button>

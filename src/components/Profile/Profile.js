@@ -56,8 +56,8 @@ const Profile = (
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
-    const[wait,setwait]=useState(false)
-    const [allUploadFlights, setlinkforFlights] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : [])
+    const [wait, setwait] = useState(false)
+    const [allUploadFlights, setlinkforFlights] = useState([])
 
     function controlsetCheckIn(value) {
         setcheckIn(value)
@@ -73,18 +73,21 @@ const Profile = (
         setexclusion(keys)
     }
     async function convertObjectToLink() {
-        const file = flightsObject
-        console.log(file)
-        // debugger
-        var local_link_list = []
-        for (var start = 0; start < flightsObject.length; start++) {
-            var temp = { Link: '', path: '' }
-            const url = URL.createObjectURL(file[start])
-            temp.Link = url
-            local_link_list.push(temp)
-            // console.log('url', url)
+        try {
+            const file = flightsObject
+            // console.log(file)
+            // debugger
+            var local_link_list = []
+            for (var start = 0; start < flightsObject.length; start++) {
+                var temp = { Link: '', path: '' }
+                const url = URL.createObjectURL(file[start])
+                temp.Link = url
+                local_link_list.push(temp)
+                // console.log('url', url)
+            }
+            setflightsLocalUrl(local_link_list)
         }
-        setflightsLocalUrl(local_link_list)
+        catch (e) { console.log(e) }
 
     }
     useEffect(() => {
@@ -102,6 +105,7 @@ const Profile = (
             closePDF()
         }
         else {
+            uploadFlightsScreenShots(flightsObject, Data.TripId)
             await addDoc(collection(db, "Quote"), {
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
@@ -118,6 +122,7 @@ const Profile = (
                     // flights: flights,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
+                    flightsImagesLinks: allUploadFlights
                 }
             });
 
@@ -139,8 +144,9 @@ const Profile = (
 
 
     function uploadFlightsScreenShots(files, TripId) {
+        var localList = []
+        var tempMemo = { Link: '', path: '' }
         for (var loadIndex = 0; loadIndex < files.length; loadIndex++) {
-            var tempMemo = { Link: '', path: '' }
             const storageRef = ref(storage, `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`);
             const path = `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`
             const uploadTask = uploadBytesResumable(storageRef, files[loadIndex]);
@@ -152,7 +158,7 @@ const Profile = (
                             console.log('Upload is paused');
                             break;
                         case 'running':
-                            // console.log('Upload is running');
+                            console.log('Upload is running');
                             break;
                     }
                 },
@@ -167,10 +173,12 @@ const Profile = (
                     }
                 },
                 () => {
+
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
                         tempMemo.Link = downloadURL
                         tempMemo.path = path
+                        console.log(tempMemo, downloadURL)
                         // updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                         // getdatalatest_for_voucher()
                         // stoploading()
@@ -178,18 +186,21 @@ const Profile = (
                     });
                 }
             );
-            allUploadFlights.push(tempMemo)
-            setlinkforFlights(allUploadFlights)
-
+            localList.push(tempMemo)
         }
+        console.log(localList)
+        setlinkforFlights(localList)
     }
-     function closeFormAndPdf(){
+    useEffect(() => {
+        console.log(allUploadFlights)
+    }, [allUploadFlights]);
+    function closeFormAndPdf() {
         setwait(false)
         closePDF()
         updateTableDataAfterQuote(TripId)
         closeHandler()
 
-     }
+    }
     const delay = ms => new Promise(res => setTimeout(res, ms));
     async function handleExportWithComponent() {
         setwait(true)
@@ -205,8 +216,8 @@ const Profile = (
         }
         catch (e) {
             console.log(e)
-
         }
+       
         try {
 
             setQuotationData()
@@ -226,9 +237,9 @@ const Profile = (
 
     return (
         <>
-            <Modal open={wait}  style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+            <Modal open={wait} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <>
-                <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'}/>
+                    <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
                 </>
             </Modal>
             <PDFExport

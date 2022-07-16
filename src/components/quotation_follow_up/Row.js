@@ -123,8 +123,8 @@ const Row = (props) => {
     }
 
     function closeOnstatusComments() {
-        update_comments()
         if (Lead_Status == "Converted") {
+            updateStatus()
             props.updateTableDataAfterConversion(row.TripId)
         }
         setopenupdater(false)
@@ -172,6 +172,12 @@ const Row = (props) => {
 
         }
 
+    }
+    async function updateStatus(){
+        setDoc(doc(db, "Trip", row.TripId), {
+            Lead_Status: Lead_Status,
+            Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+        }, { merge: true });
     }
     async function update_comments() {
         if (comments) {
@@ -232,22 +238,9 @@ const Row = (props) => {
                                         <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
                                         <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
                                         <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
-
-
                                     </RadioGroup>
                                 </FormControl>
                                 <div>
-
-                                    <Autocomplete
-                                        key={change}
-                                        className='Autocomplete'
-                                        freeSolo={true}
-                                        onChange={(e) => handlecomment(e)}
-                                        options={reasons.map((option) => option.title)}
-                                        renderInput={(params) => (
-                                            <TextField {...params} placeholder='Comments' margin="normal" variant="outlined" />
-                                        )}
-                                    />
                                     <button className='button_save' onClick={() => closeOnstatusComments()}>save</button>
                                 </div>
                             </div> : <></>
@@ -370,9 +363,9 @@ const Row = (props) => {
                                                                     Edit_visacost={data.value.visacost}
                                                                     Edit_flightcost={data.value.flightcost}
                                                                     Edit_landPackage={data.value.landPackage}
-                                                                    Edit_count_days={data.value.count_days} 
+                                                                    Edit_count_days={data.value.count_days}
                                                                     Allquote={Allquote}
-                                                                    
+
                                                                 />
 
                                                             </> : <></>

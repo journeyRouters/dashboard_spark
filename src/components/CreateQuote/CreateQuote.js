@@ -36,6 +36,8 @@ const Createquote = (props) => {
         "Contact_Number",
         "Destination",
         "Budget",
+        "Pax",
+        'Child',
         "Email",
         "Lead_Status",
         "Action",
@@ -47,10 +49,13 @@ const Createquote = (props) => {
         "Contact_Number",
         "Destination",
         "Budget",
+        "Pax",
+        'Child',
         "Email",
         "Lead_Status",
-        "Transfer",
+        "Last 10 Quote",
         "Quote",
+        
     ];
     // /**new logic solution be apart from previous one */
 
@@ -170,7 +175,7 @@ const Createquote = (props) => {
                     <input
                         type="button"
                         className="btn btn-danger"
-                        value="Transfer"
+                        value="Last 10 Quote"
                         onClick={() => handleSuggestion(this.props.rowData)}
                     />
                 </td>
@@ -252,7 +257,7 @@ const Createquote = (props) => {
                                         customTd={[
                                             // { custd: BaseProductTblImageComponent, keyItem: "imageUrl" },
                                             { custd: BaseProductEditComponent, keyItem: "Quote" },
-                                            { custd: BaseProductDeleteComponent, keyItem: "Transfer" },
+                                            { custd: BaseProductDeleteComponent, keyItem: "Last 10 Quote" },
                                         ]}
                                         dKey={col}
                                     />

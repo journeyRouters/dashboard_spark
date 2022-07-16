@@ -41,7 +41,7 @@
 }
 .status{
     width: 25rem;
-    height: 35rem;
+    height: 21rem;
     background-color: aliceblue;
     display: flex;
     flex-direction: column;

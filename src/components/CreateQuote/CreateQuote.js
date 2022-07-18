@@ -247,7 +247,7 @@ const Createquote = (props) => {
                                         data={user_uni_data}
                                         updateTableDataAfterQuote={updateTableDataAfterQuote}
                                         set_popupopner={set_popupopner}
-                                        profile={profile}
+                                        profile={props.userProfile}
                                     /> :
                                     <SortableTbl
                                         tblData={lead_data}

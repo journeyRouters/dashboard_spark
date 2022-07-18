@@ -1,16 +1,16 @@
-import { Details } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
-import './Payments.css'
 import { Modal } from '@material-ui/core';
-import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { fromEvent } from 'file-selector';
 import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
-import app from '../required';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import Profile from '../Profile/Profile';
+import app from '../required';
+import './Payments.css';
 
 
-const VouchersCompo = ({ data }) => {
+const VouchersCompo = ({ data,profile }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
@@ -63,7 +63,7 @@ const VouchersCompo = ({ data }) => {
     const db = getFirestore(app);
     const today = new Date()
     function closeidproof() {
-        idproofcontrller(false)
+        idproofcontrller(!idproof)
         settarget(0)
     }
 
@@ -164,7 +164,7 @@ const VouchersCompo = ({ data }) => {
 
     }
 
- 
+
     async function handleSubmit() {
         /**this function will upload the file in firebase storage
            vouchers/tripid/flight,hotel,others/filename 
@@ -228,7 +228,7 @@ const VouchersCompo = ({ data }) => {
          */
         const handles = await window.showOpenFilePicker({ multiple: false });
         const file = await fromEvent(handles);
-        uploaderpopup()
+        closeidproof()
         setloading(true)
         if (!file) return;
         const storageRef = ref(storage, `vouchers/${data.TripId}/id_proof/${target}/${file[0].name}`);
@@ -310,6 +310,8 @@ const VouchersCompo = ({ data }) => {
         deleteObject(deleteItem).then(() => { }).catch((error) => { console.log(error) })
     }
     function detailsFlgactive() {
+        var date = new Date()
+        // console.log(moment(date).format('DDMMYYYY'))
         setDetails(!details)
     }
     function optionHandler(e) {
@@ -365,22 +367,36 @@ const VouchersCompo = ({ data }) => {
             {
                 details ? <>
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
-                        {/* <div>hihihihiihhihihi</div> */}
-                        <Profile
-                            indicator={true}
-                            inclusion_data={finalPackage.inclusion_data}
-                            travel_data={finalPackage.travel_data}
-                            count_days={finalPackage.count_days}
-                            cabDetailsData={finalPackage.cabDetailsData}
-                            flights={finalPackage.flights}
-                            SelectedpackageType={finalPackage.SelectedpackageType}
-                            itineary={finalPackage.itineary}
-                            NightDataFields={finalPackage.NightDataFields}
-                            selected_Travel_date={finalPackage.selected_Travel_date}
-                            flightcost={finalPackage.flightcost}
-                            visacost={finalPackage.visacost}
-                            landPackage={finalPackage.landPackage}
-                        />
+                        {
+                            finalPackage ? <>
+                                <Profile
+                                    indicator={true}
+                                    inclusion_data={finalPackage.inclusion_data}
+                                    travel_data={finalPackage.travel_data}
+                                    count_days={finalPackage.count_days}
+                                    cabDetailsData={finalPackage.cabDetailsData}
+                                    flights={finalPackage.flights}
+                                    SelectedpackageType={finalPackage.SelectedpackageType}
+                                    itineary={finalPackage.itineary}
+                                    NightDataFields={finalPackage.NightDataFields}
+                                    selected_Travel_date={finalPackage.selected_Travel_date}
+                                    flightcost={finalPackage.flightcost}
+                                    visacost={finalPackage.visacost}
+                                    profile={profile}
+                                    flight={true}
+                                    flightsLinkfromstorage={finalPackage.flightsImagesLinks}
+                                    landPackage={finalPackage.landPackage}
+                                />
+                            </> : <>
+                            <div style={{background:'white'}}>
+                                <h1> there is no any Invoiced Pdf</h1>
+                                <h1> Report is updated to Admin</h1>
+                            </div>
+
+                            </>
+                        }
+
+
                     </Modal>
                     <div className='AllDetailsOfTripQuoteComments'>
 
@@ -403,7 +419,7 @@ const VouchersCompo = ({ data }) => {
                         </div>
                         <div className='voucher_and_payments'>
                             <div className='vouchers_upload'>
-                                <p>ID proof/<span className='upload_proof' onClick={() => idproofcontrller(true)}>upload</span></p>
+                                <p>ID proof/<span className='upload_proof' onClick={() => closeidproof()}>upload</span></p>
                                 <div className='upload_radio_button'>
                                     <div className='parent'>
                                         <input type='radio' checked={latestData.vouchers_idproof.length != 0} readOnly>

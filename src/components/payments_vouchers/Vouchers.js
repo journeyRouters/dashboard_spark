@@ -65,7 +65,7 @@ const Vouchers = (props) => {
                 {
                     lead_data.map((data, index) => (
                         <>
-                            <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} />
+                            <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={props.profile}/>
                         </>
                     ))
                 }

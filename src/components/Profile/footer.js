@@ -2,7 +2,7 @@ import React from 'react';
 import './pdfcss.css';
 import './profile.css';
 
-export const Footer = () => {
+export const Footer = ({whatsApp}) => {
     return (
         <div className="bottom_media_details">Follow Us At
             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
@@ -18,7 +18,7 @@ export const Footer = () => {
                 <img src="/assets/pdfDefaultImage/twiter.png" width="40px" />
             </a>
             @journeyrouters
-            <a href={"https://wa.me/919304247331"} target="_blank">
+            <a href={"https://wa.me/"+whatsApp} target="_blank">
                 <img className="whatsAppOnInclusionExclusionPage_" src='/assets/pdfDefaultImage/whatApp.png' />
             </a>
         </div>

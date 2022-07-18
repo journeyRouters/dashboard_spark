@@ -321,7 +321,7 @@ const Row = (props) => {
                                                     SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
                                                     indicator={true}
                                                     inclusion_data={data.inclusion_data}
-                                                    travel_data={tripData}
+                                                    travel_data={data.travel_data}
                                                     count_days={data.count_days}
                                                     cabDetailsData={data.cabDetailsData}
                                                     flights={data.flights}
@@ -331,6 +331,9 @@ const Row = (props) => {
                                                     flightcost={data.flightcost}
                                                     visacost={data.visacost}
                                                     landPackage={data.landPackage}
+                                                    profile={props.profile}
+                                                    flight={true}
+                                                    flightsLinkfromstorage={data.flightsImagesLinks}
                                                 />
                                             </Modal>
                                         </> : <></>
@@ -355,7 +358,7 @@ const Row = (props) => {
                                                                     SelectedpackageTyp={data.value.SelectedpackageType}
                                                                     updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                     set_popupopner={setReqoute_flg}
-                                                                    userProfile={props.profile}
+                                                                    profile={props.profile}
                                                                     indicator={true}
                                                                     Edit_NightDataFields={data.value.NightDataFields}
                                                                     Edit_itineary={data.value.itineary}

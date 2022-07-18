@@ -389,7 +389,7 @@ function App() {
             <>
               {
                 auth &&
-                <Vouchers auth={auth} />
+                <Vouchers auth={auth}  profile={profile}/>
               }
             </>
             : <></>

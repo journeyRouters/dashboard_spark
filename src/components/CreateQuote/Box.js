@@ -29,7 +29,7 @@ const Box = ({
     Edit_landPackage,
     Edit_count_days
 }) => {
-    // console.log(Edit_itineary)
+    console.log(profile)    
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)

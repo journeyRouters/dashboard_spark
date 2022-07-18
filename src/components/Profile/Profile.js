@@ -6,7 +6,7 @@ import './pdfcss.css';
 import './profile.css';
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 import moment from 'moment';
-import { Image } from '@material-ui/icons';
+import { Call, CallMissedOutgoing, ContactlessOutlined, Image } from '@material-ui/icons';
 import Footer, { GoogleReviews } from './footer';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import NightsController from './subcomponents/NightsController';
@@ -46,32 +46,25 @@ const Profile = (
         value: "size-a4"
     });
     const Data = travel_data
-    // console.log(NightDataFields)
-    const [callback, setcallback] = useState(false)
-    const [inclusionlist, setinclusion] = useState([])
-    const [exclusionlist, setexclusion] = useState([''])
     const pdfExportComponent = useRef(null);
     const currentdate = new Date();
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
-    const [flightsLocalUrl, setflightsLocalUrl] = useState(null)
+    const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
     const [wait, setwait] = useState(false)
-    const [allUploadFlights, setlinkforFlights] = useState([])
+    const [ImgLinks, setImgLinks] = useState([])
+    const [name, setname] = useState((travel_data.Destination).toUpperCase())
+    const[whatsApp,setwhatsApp]=useState(profile.WhatsApp_number)
+    const[Call,setCalling]=useState(profile.contact_number)
+    function controllLinks(args) {
+        setImgLinks(args)
+    }
 
     function controlsetCheckIn(value) {
         setcheckIn(value)
     }
-    function fiterInclusion() {
-        var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == true && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
-        // console.log(keys)
-        setinclusion(keys)
-    }
-    function filterExclusion() {
-        var keys = Object.keys(inclusion_data).filter(function (k) { return inclusion_data[k] == false && typeof (inclusion_data[k]) !== "string" && inclusion_data[k] !== null });
-        // console.log(keys)
-        setexclusion(keys)
-    }
+
     async function convertObjectToLink() {
         try {
             const file = flightsObject
@@ -94,18 +87,19 @@ const Profile = (
         if (!flightsLinkfromstorage) {
             convertObjectToLink()
         }
-        fiterInclusion()
-        filterExclusion()
+        if (!indicator) {
+            uploadFlightsScreenShots()
+        }
+        console.log(travel_data.Destination)
 
     }, []);
 
-
     async function setQuotationData() {
+        console.log(ImgLinks)
+        // debugger
         if (indicator) {
-            closePDF()
         }
         else {
-            uploadFlightsScreenShots(flightsObject, Data.TripId)
             await addDoc(collection(db, "Quote"), {
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
                 value: {
@@ -122,7 +116,7 @@ const Profile = (
                     // flights: flights,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
-                    flightsImagesLinks: allUploadFlights
+                    flightsImagesLinks: ImgLinks
                 }
             });
 
@@ -143,7 +137,9 @@ const Profile = (
     }
 
 
-    function uploadFlightsScreenShots(files, TripId) {
+    function uploadFlightsScreenShots() {
+        var files = flightsObject
+        var TripId = Data.TripId
         var localList = []
         var tempMemo = { Link: '', path: '' }
         for (var loadIndex = 0; loadIndex < files.length; loadIndex++) {
@@ -178,10 +174,6 @@ const Profile = (
                         console.log('File available at', downloadURL);
                         tempMemo.Link = downloadURL
                         tempMemo.path = path
-                        console.log(tempMemo, downloadURL)
-                        // updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
-                        // getdatalatest_for_voucher()
-                        // stoploading()
 
                     });
                 }
@@ -189,23 +181,20 @@ const Profile = (
             localList.push(tempMemo)
         }
         console.log(localList)
-        setlinkforFlights(localList)
+        controllLinks(localList)
     }
-    useEffect(() => {
-        console.log(allUploadFlights)
-    }, [allUploadFlights]);
     function closeFormAndPdf() {
         setwait(false)
-        closePDF()
         updateTableDataAfterQuote(TripId)
         closeHandler()
+        closePDF()
 
     }
     const delay = ms => new Promise(res => setTimeout(res, ms));
     async function handleExportWithComponent() {
         setwait(true)
         pdfExportComponent.current.save();
-        await delay(10000);
+        await delay(20000);
         closeFormAndPdf()
 
     };
@@ -217,9 +206,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-       
         try {
-
             setQuotationData()
         }
         catch (e) {
@@ -233,7 +220,6 @@ const Profile = (
         }
 
     }
-    var name = (travel_data.Destination).toUpperCase()
 
     return (
         <>
@@ -259,22 +245,20 @@ const Profile = (
                         }}
                     >
                         <div>
-                            <a href={"https://wa.me/919304247331"} target="_blank">
+                            <a href={"https://wa.me/"+whatsApp} target="_blank">
                                 <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
                                 {/* <img className='page1whatsApp' src={flightsLocalUrl} /> */}
 
                             </a>
                         </div>
                         <div className="footer">
-                            <a className="href" href="tel:9304247331">
+                            <a className="href" href={"tel:"+Call}>
                                 <div className="footer_img_with_text">
-
                                     <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
-
                                     <div className="footer_call_for_more_info">
                                         <span>Call for More Information</span>
                                         <span>
-                                            +91-{travel_data.Contact_Number}
+                                            +91-{Call}
                                         </span>
                                     </div>
                                 </div>
@@ -331,7 +315,7 @@ const Profile = (
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
-                                <Footer />
+                                <Footer whatsApp={whatsApp}/>
                             </div>
                         </div>
 
@@ -358,7 +342,12 @@ const Profile = (
                             <div className="inclusionExclusionDetails">
                                 <div>
                                     {
-                                        inclusionlist.map((data, index) => (
+                                        Object.keys(inclusion_data).filter(function (k) {
+                                            return inclusion_data[k]
+                                                == true && typeof (inclusion_data[k]) !==
+                                                "string" && inclusion_data[k] !== null
+                                        }
+                                        ).map((data, index) => (
                                             <div className="aliner_">
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
@@ -370,7 +359,11 @@ const Profile = (
                                 <div className="sepratorLineForInclusionExclusion"></div>
                                 <div>
                                     {
-                                        exclusionlist.map((data, index) => (
+                                        Object.keys(inclusion_data).filter(function (k) {
+                                            return inclusion_data[k] ==
+                                                false && typeof (inclusion_data[k]) !==
+                                                "string" && inclusion_data[k] !== null
+                                        }).map((data, index) => (
                                             <div className="aliner_">
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
@@ -385,7 +378,7 @@ const Profile = (
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
                             <div style={{ marginTop: '3.9rem' }} >
-                                <Footer />
+                                <Footer  whatsApp={whatsApp}/>
                             </div>
 
                         </div>
@@ -405,7 +398,7 @@ const Profile = (
                         >
                             <div></div>
                             <GoogleReviews />
-                            <Footer />
+                            <Footer whatsApp={whatsApp}/>
                         </div>
                     </div>
                     {/* end of 4th page(Google Review page)*/}
@@ -442,7 +435,7 @@ const Profile = (
                                         flexDirection: 'column-reverse'
                                     }}
                                 >
-                                    <Footer />
+                                    <Footer whatsApp={whatsApp}/>
                                 </div>
                             </div>
                         </div>
@@ -495,7 +488,7 @@ const Profile = (
                                         flexDirection: 'column-reverse'
                                     }}
                                 >
-                                    <Footer />
+                                    <Footer whatsApp={whatsApp}/>
                                 </div>
                             </div>
 
@@ -554,11 +547,11 @@ const Profile = (
                                         marginTop: '2rem'
                                     }}
                                 >
-                                    <Footer />
+                                    <Footer whatsApp={whatsApp}/>
                                 </div>
                             </div>
                             {/* <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                <a href={"https://wa.me/"+whatsApp} target="_blank">
                                     <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
                                 </a>
                             </div> */}
@@ -602,7 +595,7 @@ const Profile = (
                                                 marginTop: '2rem'
                                             }}
                                         >
-                                            <Footer />
+                                            <Footer whatsApp={whatsApp}/>
                                         </div>
                                     </div>
 
@@ -624,7 +617,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                <a href={"https://wa.me/"+whatsApp} target="_blank">
                                     <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
                                 </a>
                             </div>
@@ -644,7 +637,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                <a href={"https://wa.me/"+whatsApp} target="_blank">
                                     <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
                                 </a>
                             </div>
@@ -664,7 +657,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <a href={"https://wa.me/919304247331"} target="_blank">
+                                <a href={"https://wa.me/"+whatsApp} target="_blank">
                                     <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
                                 </a>
                             </div>

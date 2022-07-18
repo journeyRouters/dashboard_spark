@@ -7,6 +7,14 @@ export const avtivityList = {
             value: 'KintamaniUbud'
         },
         {
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
             label: 'Bali Swing',
             value: 'BaliSwing'
         },
@@ -81,6 +89,14 @@ export const avtivityList = {
     ],
     Himachal: [
         {
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
             label: 'HipHipHurrayAmusementPark ',
             value: 'HipHipHurrayAmusementPark'
         },
@@ -131,6 +147,14 @@ export const avtivityList = {
 
     ],
     Thailand: [
+        {
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
         {
             label: "Art In Paradise",
             value: "ArtInParadise",
@@ -204,113 +228,129 @@ export const avtivityList = {
             value: "MadameTussauds",
         }
     ],
-    Singapore:[
+    Singapore: [
         {
-            label:"GardenByTheBay",
-            value:"GardenByTheBay",
-            },
-            {
-            label:"JurongBirdPark",
-            value:"JurongBirdPark",
-            },
-            {
-            label:"MerlionPark",
-            value:"MerlionPark",
-            },
-            {
-            label:"NightSafari",
-            value:"NightSafari",
-            },
-            {
-            label:"RiverSafari",
-            value:"RiverSafari",
-            },
-            {
-            label:"RoyalCaribbeanCruise",
-            value:"RoyalCaribbeanCruise",
-            },
-            {
-            label:"SentosaIsland",
-            value:"SentosaIsland",
-            },
-            {
-            label:"SingaporeZoo",
-            value:"SingaporeZoo",
-            },
-            {
-            label:"UniversalStudio",
-            value:"UniversalStudio",
-            },
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: "GardenByTheBay",
+            value: "GardenByTheBay",
+        },
+        {
+            label: "JurongBirdPark",
+            value: "JurongBirdPark",
+        },
+        {
+            label: "MerlionPark",
+            value: "MerlionPark",
+        },
+        {
+            label: "NightSafari",
+            value: "NightSafari",
+        },
+        {
+            label: "RiverSafari",
+            value: "RiverSafari",
+        },
+        {
+            label: "RoyalCaribbeanCruise",
+            value: "RoyalCaribbeanCruise",
+        },
+        {
+            label: "SentosaIsland",
+            value: "SentosaIsland",
+        },
+        {
+            label: "SingaporeZoo",
+            value: "SingaporeZoo",
+        },
+        {
+            label: "UniversalStudio",
+            value: "UniversalStudio",
+        },
     ],
-    Dubai:[
+    Dubai: [
         {
-            label:"AquaventureAndLostChamber",
-            value:"AquaventureAndLostChamber",
-            },
-            {
-            label:"BollywoodThemePark",
-            value:"BollywoodThemePark",
-            },
-            {
-            label:"BurjKhalifa",
-            value:"BurjKhalifa",
-            },
-            {
-            label:"DesertSafari",
-            value:"DesertSafari",
-            },
-            {
-            label:"DubaiCityTourJumeriahBeach",
-            value:"DubaiCityTourJumeriahBeach",
-            },
-            {
-            label:"DubaiCityTourAtlantisThePalm",
-            value:"DubaiCityTourAtlantisThePalm",
-            },
-            {
-            label:"DubaiEye",
-            value:"DubaiEye",
-            },
-            {
-            label:"EmiratesPalace",
-            value:"EmiratesPalace",
-            },
-            {
-            label:"FerrariWorld",
-            value:"FerrariWorld",
-            },
-            {
-            label:"GlobalVillage",
-            value:"GlobalVillage",
-            },
-            {
-            label:"ImgWorld",
-            value:"ImgWorld",
-            },
-            {
-            label:"LimousineRide",
-            value:"LimousineRide",
-            },
-            {
-            label:"MarinaDinnerCruise",
-            value:"MarinaDinnerCruise",
-            },
-            {
-            label:"MiracleGarden",
-            value:"MiracleGarden",
-            },
-            {
-            label:"MuseumOfTheFuture",
-            value:"MuseumOfTheFuture",
-            },
-            {
-            label:"SkiDubaiMallOfEmirates",
-            value:"SkiDubaiMallOfEmirates",
-            },
-            {
-            label:"SkyDiveOverAtlantis",
-            value:"SkyDiveOverAtlantis",
-            },
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: "AquaventureAndLostChamber",
+            value: "AquaventureAndLostChamber",
+        },
+        {
+            label: "BollywoodThemePark",
+            value: "BollywoodThemePark",
+        },
+        {
+            label: "BurjKhalifa",
+            value: "BurjKhalifa",
+        },
+        {
+            label: "DesertSafari",
+            value: "DesertSafari",
+        },
+        {
+            label: "DubaiCityTourJumeriahBeach",
+            value: "DubaiCityTourJumeriahBeach",
+        },
+        {
+            label: "DubaiCityTourAtlantisThePalm",
+            value: "DubaiCityTourAtlantisThePalm",
+        },
+        {
+            label: "DubaiEye",
+            value: "DubaiEye",
+        },
+        {
+            label: "EmiratesPalace",
+            value: "EmiratesPalace",
+        },
+        {
+            label: "FerrariWorld",
+            value: "FerrariWorld",
+        },
+        {
+            label: "GlobalVillage",
+            value: "GlobalVillage",
+        },
+        {
+            label: "ImgWorld",
+            value: "ImgWorld",
+        },
+        {
+            label: "LimousineRide",
+            value: "LimousineRide",
+        },
+        {
+            label: "MarinaDinnerCruise",
+            value: "MarinaDinnerCruise",
+        },
+        {
+            label: "MiracleGarden",
+            value: "MiracleGarden",
+        },
+        {
+            label: "MuseumOfTheFuture",
+            value: "MuseumOfTheFuture",
+        },
+        {
+            label: "SkiDubaiMallOfEmirates",
+            value: "SkiDubaiMallOfEmirates",
+        },
+        {
+            label: "SkyDiveOverAtlantis",
+            value: "SkyDiveOverAtlantis",
+        },
     ]
 }
 export function ActivityResolver(destination) {

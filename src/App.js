@@ -280,6 +280,12 @@ function App() {
                 }
                 {
                   profile.access_type === "admin" ? <>
+                    <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>User Controller</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Driver"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />

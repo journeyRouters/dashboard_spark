@@ -30,14 +30,14 @@ export const GoogleReviews = () => {
         <div className="google_review_bottom">
             <div className="reiew_c1">
                 <a href="https://g.co/kgs/VwbmYT" target="_blank">
-                    <img src="/assets/pdfDefaultImage/google_reviews/Aashishsingh.PNG" className="review_img5" />
+                    <img src="/assets/google_reviews/Aashishsingh.PNG" className="review_img5" />
                 </a>
                 <a href="https://g.co/kgs/ZK68wZ" target="_blank">
-                    <img src="/assets/pdfDefaultImage/google_reviews/Amit singh.PNG" className="review_img1" />
+                    <img src="/assets/google_reviews/Amit singh.PNG" className="review_img1" />
                 </a>
                 <a href="https://g.co/kgs/qM1e2f" target="_blank">
 
-                    <img src="/assets/pdfDefaultImage/google_reviews/imran.PNG" className="review_img2" />
+                    <img src="/assets/google_reviews/imran.PNG" className="review_img2" />
                 </a>
 
             </div>
@@ -50,23 +50,23 @@ export const GoogleReviews = () => {
                     <span> 400 & Counting Google Review</span>
                 </a>
                 <a href="https://g.co/kgs/ReZyXo" target="_blank">
-                    <img src="/assets/pdfDefaultImage/google_reviews/Tanmay.PNG" className="review_img" />
+                    <img src="/assets/google_reviews/Tanmay.PNG" className="review_img" />
                 </a>
                 <a href="https://g.co/kgs/ByT5hQ" target="_blank">
-                    <img src="/assets/pdfDefaultImage/google_reviews/Stephen Raj.PNG" className="review_img" />
+                    <img src="/assets/google_reviews/Stephen Raj.PNG" className="review_img" />
                 </a>
 
 
             </div>
             <div className="reiew_c3">
                 <a href="https://g.co/kgs/iD3DvX" target="_blank">
-                    <img src="/assets/pdfDefaultImage/google_reviews/Kajal.PNG" className="review_img" />
+                    <img src="/assets/google_reviews/Kajal.PNG" className="review_img" />
                 </a>
                 <a href="https://g.co/kgs/iD3DvX" target="_blank" >
-                    <img src="/assets/pdfDefaultImage/google_reviews/manoj.PNG" className="review_img3" />
+                    <img src="/assets/google_reviews/manoj.PNG" className="review_img3" />
                 </a>
                 <a href="https://g.co/kgs/kXdzCU" target="_blank" >
-                    <img src="/assets/pdfDefaultImage/google_reviews/Naveen.PNG" className="review_img4" />
+                    <img src="/assets/google_reviews/Naveen.PNG" className="review_img4" />
                 </a>
 
             </div>

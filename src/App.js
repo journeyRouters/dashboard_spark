@@ -32,9 +32,9 @@ function App() {
   const oauth = getAuth();
 
   function setAuthFirebase(args) {
-    console.log("setting auth")
+    // console.log("setting auth")
     setauth(args)
-    console.log("auth set")
+    // console.log("auth set")
   }
   function openPopUp() {
     setopen(true)
@@ -46,13 +46,13 @@ function App() {
     const uploadTask = uploadBytes(storageRef, Filepath[0]);
     uploadTask.on('state_changed',
       (snapshot) => {
-        console.log(snapshot)
+        // console.log(snapshot)
         switch (snapshot.state) {
           case 'paused':
-            console.log('Upload is paused');
+            // console.log('Upload is paused');
             break;
           case 'running':
-            console.log('Upload is running');
+            // console.log('Upload is running');
             break;
         }
       },
@@ -68,13 +68,13 @@ function App() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
+          // console.log('File available at', downloadURL);
         });
       }
     );
   }
   async function fetch_profile(args) {
-    console.log(args)
+    // console.log(args)
     try {
       const docRef = doc(db, "Profile", args.uid);
       const docSnap = await getDoc(docRef);
@@ -82,7 +82,7 @@ function App() {
         setData(docSnap.data())
         // console.log("Document data:", docSnap.data());
       } else {
-        console.log("No such document!");
+        // console.log("No such document!");
       }
     }
     catch (error) {

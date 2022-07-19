@@ -470,7 +470,7 @@ const Profile = (
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img
                                                         // src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/SolangValleym (1).png'
-                                                        src={`/assets/destination/${name}/${data.Activity}.png`}
+                                                        src={`/assets/destination/${name}/${data.Activity.value}.png`}
                                                         style={{ width: "14rem", height: "14rem" }} />
                                                 </div>
                                             </div>
@@ -516,11 +516,11 @@ const Profile = (
                                             </div>
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{
-                                                    data.Night.map((data_, index) => (<span key={index}>{data_},</span>))
+                                                    data.Night.map((data_, index) => (<span key={index}>{data_.value},</span>))
                                                 } Stay at {data.City}</h4>
 
                                                 <span>Hotel-{data.HotelName}</span><br />
-                                                <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__},</span>))}</span>  <br />
+                                                <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__.value},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <h4></h4>
                                                 <NightsController

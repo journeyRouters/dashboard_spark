@@ -29,7 +29,7 @@ const Box = ({
     Edit_landPackage,
     Edit_count_days
 }) => {
-    console.log(profile)    
+    // console.log(Edit_NightDataFields)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -40,7 +40,7 @@ const Box = ({
     const [countNight, setCountnight] = useState(0)
     const [flight, setflight] = useState(true)
     const [cab, setcab] = useState(true)
-    const [itineary, setItineary] = useState(Edit_itineary ? Edit_itineary : [{ Day: '', Description: '', Activity: '' },])
+    const [itineary, setItineary] = useState(Edit_itineary ? Edit_itineary : [{ Day: '', Description: '', Activity: {} },])
     const days = Array(data.Travel_Duration).fill('a');
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
     const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : Travel_Duration))
@@ -162,7 +162,7 @@ const Box = ({
 
     }
     function itinearyDaysincrease() {
-        let data = { Day: '', Description: '', Activity: '' }
+        let data = { Day: '', Description: '', Activity:{}}
         setItineary([...itineary, data])
     }
     function itinearyDaydecrease() {
@@ -173,23 +173,22 @@ const Box = ({
     function setVar() {
         // console.log('hey')
         for (let s = 0; s < Travel_Duration - 1; s++) {
-            let data = { Day: '', Description: '', Activity: '' }
+            let data = { Day: '', Description: '', Activity: {} }
             let temp = itineary
             temp.push(data)
             setItineary(temp)
         }
     }
-
+    function advance_controller_Activity(e, index) {
+        let data = [...itineary];
+        // console.log(e,data)    
+        data[index]['Activity'] = e;
+        setItineary(data);
+    }
 
     const handleFormChangeItineary = (event, index) => {
         let data = [...itineary];
-        try {
-
-            data[index][event.target.name] = event.target.value;
-        }
-        catch {
-            data[index]['Activity'] = event.value
-        }
+        data[index][event.target.name] = event.target.value;
         setItineary(data);
         // console.log(data)
 
@@ -212,7 +211,10 @@ const Box = ({
         let data = [...NightDataFields];
         let local_list = []
         for (var i = 0; i < e.length; i++) {
-            local_list.push(e[i].value)
+            let Local_Object = { label: '', value: '' }
+            Local_Object.label = e[i].value
+            Local_Object.value = e[i].value
+            local_list.push(Local_Object)
         }
         data[index]['Night'] = local_list;
         setNightDataFields(data);
@@ -221,7 +223,10 @@ const Box = ({
         let data = [...NightDataFields];
         let local_list = []
         for (var i = 0; i < e.length; i++) {
-            local_list.push(e[i].value)
+            let Local_Object = { label: '', value: '' }
+            Local_Object.label = e[i].value
+            Local_Object.value = e[i].value
+            local_list.push(Local_Object)
         }
         data[index]['HotelMeal'] = local_list;
         setNightDataFields(data);
@@ -270,7 +275,7 @@ const Box = ({
         localStorage.setItem('Journeydate', date);
     }
     function flightDetails(files) {
-        console.log(files)
+        // console.log(files)
         setflightsObject(files)
     }
 
@@ -366,19 +371,19 @@ const Box = ({
                                     <input type="number"
                                         className='input_filed'
                                         placeholder='0'
-                                        value={Edit_flightcost}
+                                        value={flightcost}
                                         onChange={(e) => flightcostChange(e)}
                                     ></input>
                                     <text className='spacer'>+</text>
                                 </div>
                                 <div>
                                     <label>Visa Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' value={Edit_visacost} onChange={(e) => visacostChange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
                                     <text className='spacer'>+</text>
                                 </div>
                                 <div>
                                     <label>Land Package Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' value={Edit_landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
                                     <text className='spacer'>=</text>
                                 </div>
 
@@ -392,6 +397,7 @@ const Box = ({
                         <div className='cost_estimation_body'>
                             <p className='HotelDetailsheading'>Hotel Details</p>
                             {
+                                // console.log(NightDataFields),
                                 NightDataFields &&
                                 NightDataFields.map((data, index) => {
                                     return (
@@ -404,6 +410,7 @@ const Box = ({
                                                         components={animatedComponents}
                                                         isMulti
                                                         options={nights}
+                                                        defaultValue={Edit_NightDataFields ? data.Night: null}
                                                         onChange={(e) => advance_controller_nights(e, index)}
                                                     />
                                                     <label>HotelMeal</label><br />
@@ -411,6 +418,7 @@ const Box = ({
                                                         closeMenuOnSelect={false}
                                                         components={animatedComponents}
                                                         isMulti
+                                                        defaultValue={Edit_NightDataFields ? data.HotelMeal: null}
                                                         options={HotelMeals}
                                                         onChange={(e) => advance_controller_Hotel_meals(e, index)}
                                                     />
@@ -455,9 +463,9 @@ const Box = ({
                                                 <div className='unitComponent'>
                                                     <label>Room Type</label>
                                                     <RoomType
-                                                    handleFormChange={handleFormChange}
-                                                    index={index}
-                                                    value={data.RoomType}
+                                                        handleFormChange={handleFormChange}
+                                                        index={index}
+                                                        value={data.RoomType}
                                                     />
                                                 </div>
                                                 <button onClick={() => removeFields(index)}>Remove</button>
@@ -541,7 +549,8 @@ const Box = ({
                                                     closeMenuOnSelect={true}
                                                     components={animatedComponents}
                                                     options={activity}
-                                                    onChange={(event) => handleFormChangeItineary(event, index)}
+                                                    defaultValue={Edit_itineary ? data.Activity: null}
+                                                    onChange={(event) => advance_controller_Activity(event, index)}
                                                 />
                                             </div>
                                             <div>

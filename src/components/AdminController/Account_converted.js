@@ -16,12 +16,12 @@ const Account_converted = () => {
         const q = query(collection(db, "Trip"), where("Lead_Status", "==", "Converted"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const converted = [];
-            console.log(times)
+            // console.log(times)
             times = times + 1
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            console.log(converted)
+            // console.log(converted)
             set_lead_data(converted)
         });
         return unsubscribe

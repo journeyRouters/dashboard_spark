@@ -185,12 +185,6 @@ function App() {
                         <p>Rapid Fire</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Driver</p>
-                      </div>
-                    </div>
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />

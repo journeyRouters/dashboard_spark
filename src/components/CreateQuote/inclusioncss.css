@@ -190,3 +190,7 @@
     border-bottom: 1px dotted gray;
 
 }
+.roomTypealiner{
+    display: flex;
+    flex-direction: row-reverse;
+}

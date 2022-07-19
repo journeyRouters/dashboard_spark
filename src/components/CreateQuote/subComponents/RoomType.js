@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import '../inclusioncss.css';
 
 const RoomType = ({handleFormChange,index,value}) => {
     const [showDefaultRoomTypeFlg, setshowDefaultRoomTypeFlg] = useState(true)
 
     return (
-        <div>
+    <div className='roomTypealiner'>
             <input type={'checkbox'} checked={showDefaultRoomTypeFlg} onChange={() => setshowDefaultRoomTypeFlg(!showDefaultRoomTypeFlg)} ></input><br />
             {
                 showDefaultRoomTypeFlg ? <>

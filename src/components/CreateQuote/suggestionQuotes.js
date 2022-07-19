@@ -29,9 +29,9 @@ const SuggestionQuotes = ({
     function syncDataToMapper(data)
     {
         let list=[]
-        console.log(data.value.travel_data)
+        console.log(data.value.NightDataFields)
         list.push(data)
-        setselectedData(list)
+        setselectedData(data)
     }
     useEffect(() => {
         getSampleQuotes('Dubai')
@@ -158,7 +158,8 @@ const SuggestionQuotes = ({
                                 </p>
                                 {
                                     selectedData.value.NightDataFields.map((data, index) => (
-                                        <div key={index}>{data.Night},{data.HotelName}, {data.City} , {data.RoomType} Room</div>
+                                    
+                                        <div key={index}>{data.Night.map((Ndata,index)=>(<span>{Ndata.value},</span>))} {data.HotelName}, {data.City} , {data.RoomType} Room</div>
                                     ))
                                 }
                             </div>

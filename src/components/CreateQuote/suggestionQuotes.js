@@ -20,13 +20,21 @@ const SuggestionQuotes = ({
 }) => {
     const [sampleQuotes, setsampleQuotes] = useState([])
     const [searchKey, setSearchKey] = useState(0)
-    const [selectedData, setselectedData] = useState()
+    const [selectedData, setselectedData] = useState([])
     const [inclusionlist, setinclusion] = useState([])
     const [exclusionlist, setexclusion] = useState([''])
     const [lead_data, setLead_data] = useState()
     const [usethisKey, setusethisKey] = useState(false)
+
+    function syncDataToMapper(data)
+    {
+        let list=[]
+        console.log(data.value.travel_data)
+        list.push(data)
+        setselectedData(list)
+    }
     useEffect(() => {
-        getSampleQuotes('Manali')
+        getSampleQuotes('Dubai')
 
     }, []);
 
@@ -38,6 +46,7 @@ const SuggestionQuotes = ({
         setSearchKey(parseInt(e.target.value))
     }
     async function getSampleQuotes(Destination) {
+        // console.log(Destination)
         var quotesref = collection(db, "Quote")
         const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination)
             // , where("value.selected_Travel_date",">","2022-07-12") 
@@ -47,23 +56,21 @@ const SuggestionQuotes = ({
         try {
 
             querySnapshot = await getDocs(queryQuotes);
+            if (querySnapshot.docs.length != 0) {
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setsampleQuotes(list)
+                // setselectedData(list[0])
+                // console.log(list[0].value.itineary)
+                // setLead_data(list[0].value.travel_data)
+            }
         }
         catch (e) {
             console.log(e)
         }
-        if (querySnapshot.docs.length != 0) {
-            querySnapshot.forEach((doc) => {
-                list.push(doc.data())
-            });
-            setsampleQuotes(list)
-            setselectedData(list[0])
-            console.log(list[0].value.itineary)
-            setLead_data(list[0].value.travel_data)
-        }
+        
         console.log(list)
-
-
-
     }
 
     return (
@@ -108,7 +115,7 @@ const SuggestionQuotes = ({
                     {
                         sampleQuotes.map((data, index) => (
 
-                            <div key={index} className='Topsamplequotes_components' onClick={() => setselectedData(data)}>
+                            <div key={index} className='Topsamplequotes_components' onClick={() => syncDataToMapper(data)}>
                                 <div className='samplequotes_components'>
                                     <span className='highglight2'>{data.value.travel_data.TripId}</span><br />
                                     <span>{data.value.travel_data.Traveller_name}</span><br />
@@ -124,7 +131,7 @@ const SuggestionQuotes = ({
                 </div>
                 <div className='QuotesDetails'>
                     {
-                        selectedData ? <>
+                        selectedData.length !=0 ? <>
                             <div className='tripIdDetails'>{selectedData.value.travel_data.TripId}</div>
                             <div className='basicInfo'>
                                 <p>

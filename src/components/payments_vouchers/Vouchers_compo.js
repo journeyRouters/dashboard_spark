@@ -400,7 +400,7 @@ const VouchersCompo = ({ data,profile }) => {
                     </Modal>
                     <div className='AllDetailsOfTripQuoteComments'>
 
-                        <div className='allComments'>
+                        <div className='allComments' >
                             {
                                 data.comments.slice(0).reverse().map((U_data, index) => (<>
                                     <p key={index} className='comment_'>

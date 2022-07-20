@@ -2,11 +2,12 @@ import { PDFExport } from "@progress/kendo-react-pdf";
 import { addDoc, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
+const db = getFirestore(app);
+    
 
 const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile, hint, getinvoice }) => {
     const pdfExportComponent = useRef(null);
     console.log(selected_pdf_data)
-    const db = getFirestore(app);
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
@@ -165,7 +166,7 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
                             {
                                 selected_pdf_data.NightDataFields.map((data, index) => (
                                     <div key={index} className='hotel_desc_jr_invoice'>
-                                        <span>*{data.City}({data.Night})</span><br />
+                                        <span>*{data.City}({data.Night.map((NightCount,index)=><span>{NightCount.value}</span>)})</span><br />
                                         <span>{data.HotelName}</span><br />
                                         <span>{data.HotelType}({data.Category})</span><br />
                                         <span></span><br />

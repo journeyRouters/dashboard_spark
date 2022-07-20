@@ -413,7 +413,9 @@ const Box = ({
                                                         defaultValue={Edit_NightDataFields ? data.Night: null}
                                                         onChange={(e) => advance_controller_nights(e, index)}
                                                     />
-                                                    <label>HotelMeal</label><br />
+                                                </div>
+                                                <div className='unitComponent'>
+                                                <label>HotelMeal</label><br />
                                                     <Select
                                                         closeMenuOnSelect={false}
                                                         components={animatedComponents}
@@ -445,12 +447,12 @@ const Box = ({
                                                 <div className='unitComponent'>
                                                     <label>Category</label><br />
                                                     <input placeholder='Category'
-                                                        list="programmingLanguages"
+                                                        list="HotelCategory"
                                                         name='Category'
                                                         value={data.Category}
                                                         onChange={(event) => handleFormChange(event, index)}
                                                     />
-                                                    <datalist id="programmingLanguages">
+                                                    <datalist id="HotelCategory">
                                                         <option value="1 star">1 star</option>
                                                         <option value="2 star">2 star</option>
                                                         <option value="3 Star">3 star</option>
@@ -468,15 +470,15 @@ const Box = ({
                                                         value={data.RoomType}
                                                     />
                                                 </div>
-                                                <button onClick={() => removeFields(index)}>Remove</button>
+                                                <button style={{height:'32px'}} onClick={() => removeFields(index)}>Remove</button>
                                             </div>
-                                            <textarea
+                                            {/* <textarea
                                                 className='comments'
                                                 name='comments'
                                                 value={data.comments}
                                                 onChange={(event) => handleFormChange(event, index)}
                                                 placeholder='Additional information'
-                                            ></textarea>
+                                            ></textarea> */}
                                         </>
                                     );
                                 }
@@ -504,7 +506,7 @@ const Box = ({
                                     :
                                     <></>
                             }
-                            <div className='FlightDetails'>
+                            {/* <div className='FlightDetails'>
                                 <EmojiTransportation />
                                 <p>
                                     <input type='checkbox' onChange={() => setcab(!cab)}></input>
@@ -519,7 +521,7 @@ const Box = ({
                                     </>
                                     :
                                     <></>
-                            }
+                            } */}
                             <div className='inclusionExclusion'>
                                 <ExtensionSharp />
                                 <button onClick={() => openInclusion()}>Inclusion/Exclusion</button>

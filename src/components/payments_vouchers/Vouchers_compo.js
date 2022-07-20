@@ -218,6 +218,8 @@ const VouchersCompo = ({ data,profile }) => {
         getdatalatest_for_voucher()
     }, [details]);
     function ondelete(target, path, index) {
+        console.log(target, path, index)
+        
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)
         getdatalatest_for_voucher()
@@ -270,7 +272,7 @@ const VouchersCompo = ({ data,profile }) => {
     }
     async function delete_vouchers_from_firebase_firestore(target, del_index) {
         const docref = doc(db, "Trip", data.TripId);
-        console.log(target)
+        console.log(target, del_index)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
             previousData.splice(del_index, 1);
@@ -299,7 +301,10 @@ const VouchersCompo = ({ data,profile }) => {
         }
         else {
             let previousData = data.vouchers_idproof
+            
             previousData.splice(del_index, 1)
+            console.log(previousData)
+            
             await updateDoc(docref, {
                 "vouchers_idproof": previousData
             });
@@ -388,7 +393,7 @@ const VouchersCompo = ({ data,profile }) => {
                                     landPackage={finalPackage.landPackage}
                                 />
                             </> : <>
-                            <div style={{background:'white'}}>
+                            <div style={{background:'white', borderRadius:'32px',height:'141px'}}>
                                 <h1> there is no any Invoiced Pdf</h1>
                                 <h1> Report is updated to Admin</h1>
                             </div>

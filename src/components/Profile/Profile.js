@@ -54,7 +54,7 @@ const Profile = (
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
     const [wait, setwait] = useState(false)
     const [ImgLinks, setImgLinks] = useState([])
-    const [name, setname] = useState((travel_data.Destination).toUpperCase())
+    const [destinationName, setname] = useState((travel_data.Destination).toUpperCase())
     const[whatsApp,setwhatsApp]=useState(profile.WhatsApp_number)
     const[Call,setCalling]=useState(profile.contact_number)
     function controllLinks(args) {
@@ -116,7 +116,8 @@ const Profile = (
                     // flights: flights,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
-                    flightsImagesLinks: ImgLinks
+                    flightsImagesLinks: ImgLinks,
+                    Quoted_by:profile.name
                 }
             });
 
@@ -143,8 +144,8 @@ const Profile = (
         var localList = []
         var tempMemo = { Link: '', path: '' }
         for (var loadIndex = 0; loadIndex < files.length; loadIndex++) {
-            const storageRef = ref(storage, `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`);
-            const path = `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].name}`
+            const storageRef = ref(storage, `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].destinationName}`);
+            const path = `vouchers/${TripId}/flightsScreenShots/${files[loadIndex].destinationName}`
             const uploadTask = uploadBytesResumable(storageRef, files[loadIndex]);
             uploadTask.on('state_changed',
                 (snapshot) => {
@@ -237,7 +238,7 @@ const Profile = (
                     {/* this is the first page for introduction to the destination */}
                     <div className={'page1'}
                         style={{
-                            backgroundImage: `url(/assets/destination/${name}/Header.png)`,
+                            backgroundImage: `url(/assets/destination/${destinationName}/Header.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -287,7 +288,7 @@ const Profile = (
                     {/* page2 start (Package Details)*/}
                     <div className="page-break">
                         <div className="page2" style={{
-                            backgroundImage: `url(/assets/destination/${name}/PackageDetails.png)`,
+                            backgroundImage: `url(/assets/destination/${destinationName}/PackageDetails.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -333,7 +334,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src={`/assets/destination/${name}/InclusionExclusion.png`} />
+                                <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/InclusionExclusion.png`} />
                             </div>
                             <div className="inclusionPage_blocks" >
                                 <span> Inclusion</span>
@@ -411,7 +412,7 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src={`/assets/destination/${name}/DayWiseItineary.png`} />
+                                <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/DayWiseItineary.png`} />
 
                                 <span className='headLineDaywiseItineary'> Day wise Itineary</span>
                                 <div className='itinearyDiv'>
@@ -451,7 +452,7 @@ const Profile = (
                         >
                             <div>
                                 <img className="inclusionPage_img"
-                                    src={`/assets/destination/${name}/DetailItineary.png`}
+                                    src={`/assets/destination/${destinationName}/DetailItineary.png`}
                                 />
 
                                 <span className='headLineDaywiseItineary'>Detail  Itineary</span>
@@ -470,7 +471,7 @@ const Profile = (
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img
                                                         // src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/SolangValleym (1).png'
-                                                        src={`/assets/destination/${name}/${data.Activity.value}.png`}
+                                                        src={`/assets/destination/${destinationName}/${data.Activity.value}.png`}
                                                         style={{ width: "14rem", height: "14rem" }} />
                                                 </div>
                                             </div>
@@ -522,6 +523,7 @@ const Profile = (
                                                 <span>Hotel-{data.HotelName}</span><br />
                                                 <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__.value},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
+                                                <span>Hotel Category-{data.Category}</span><br />
                                                 <h4></h4>
                                                 <NightsController
                                                     nights={data.Night.length}

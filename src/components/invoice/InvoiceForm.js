@@ -25,6 +25,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [selected_pdf_data, setpdf] = useState([])
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
     const db = getFirestore(app);
+    // console.log(selected_pdf_data)
     function showinvoice() {
         if (selected_pdf_data.length != 0) {
             setpdf_flg(false)
@@ -91,8 +92,11 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     }
     function handleselectedPdf(data) {
         setpdf_flg(false)
-        // console.log(data)
         setpdf(data)
+        setFlight_cost(data.flightcost)
+        set_visa_cost(data.visacost)
+        setlandpackage(data.landPackage)
+        
     }
     function getTotalamount() {
 
@@ -161,17 +165,23 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                         </div>
                         <div className='BillingAddress'>
                             <label>Flight Cost</label>
-                            <input className='txtArea' name='Flight_cost' defaultValue={0} value={flight_cost} onChange={(event) => handleFlightCost(event)} >
+                            <input className='txtArea' name='Flight_cost' defaultValue={0} value={flight_cost} 
+                            // onChange={(event) => handleFlightCost(event)} 
+                            >
                             </input>
                         </div>
                         <div className='BillingAddress'>
                             <label>VISA Cost</label>
-                            <input className='txtArea' name='visa_cost' defaultValue={0} value={visa_cost} onChange={(event) => handlevisaCost(event)} >
+                            <input className='txtArea' name='visa_cost' defaultValue={0} value={visa_cost} 
+                            // onChange={(event) => handlevisaCost(event)} 
+                            >
                             </input>
                         </div>
                         <div className='BillingAddress'>
                             <label>Land Package</label>
-                            <input className='txtArea' name="Land_package" defaultValue={0} value={land_package} onChange={(event) => handlelandPAckage(event)} >
+                            <input className='txtArea' name="Land_package" defaultValue={0} value={land_package} 
+                            // onChange={(event) => handlelandPAckage(event)} 
+                            >
                             </input>
                         </div>
                         <div className='BillingAddress'>

@@ -86,34 +86,10 @@ const Row = (props) => {
     }
 
     function handlecomment(e) {
-        console.log('e')
-        if (e.target.outerText) {
-            if (e.target.outerText.length === 0) {
-                alert('comments')
-            }
-            else {
-                setcomments(e.target.outerText)
-                console.log(e.target.outerText)
-            }
-        }
-        else {
-            if (e.target.value.length === 0) {
-                alert('comments')
-            }
-            else {
-                setcomments(e.target.value)
-                console.log(e.target.value)
-            }
-        }
-
-
+        setcomments(e.target.value)
+        console.log(e.target.value)
     }
-    const reasons = [
-        { title: 'Traveler not Reachable' },
-        { title: "Won't book with me" },
-        { title: 'Talk in progress with traveler' },
-        { title: "Traveler will Finalize and it's my hot" },
-    ]
+   
     const [open, setOpen] = React.useState(false);
     // function changeStatus(Status) {
     //     setLead_Status(Status)
@@ -173,7 +149,7 @@ const Row = (props) => {
         }
 
     }
-    async function updateStatus(){
+    async function updateStatus() {
         setDoc(doc(db, "Trip", row.TripId), {
             Lead_Status: Lead_Status,
             Lead_status_change_date: moment(today).format('YYYY-MM-DD')
@@ -198,7 +174,7 @@ const Row = (props) => {
 
             latestTripData()
             dochange()
-            setcomments()
+            setcomments('')
             // props.getProfile(props.auth)
         }
 
@@ -383,7 +359,21 @@ const Row = (props) => {
                                 </div>
                                 <div className='remark_set'>
                                     <div className='comments_box'>
-                                        <Autocomplete
+                                        <input className='Autocomplete'
+                                        list='Comments'
+                                        value={comments}
+                                            onChange={(e) => handlecomment(e)}
+                                        ></input>
+                                        <datalist id="Comments">
+                                                        <option value="Traveler not Reachable">Traveler not Reachable</option>
+                                                        <option value="Won't book with me">Won't book with me</option>
+                                                        <option value="Talk in progress with traveler">Talk in progress with traveler</option>
+                                                        <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
+                                                        <option value="Call not connecting">Call not connecting</option>
+                                                        <option value="Travler change their mind">Travler change their mind</option>
+
+                                                    </datalist>
+                                        {/* <Autocomplete
                                             key={change}
                                             className='Autocomplete'
                                             freeSolo={true}
@@ -392,7 +382,7 @@ const Row = (props) => {
                                             renderInput={(params) => (
                                                 <TextField {...params} placeholder='Comments' margin="normal" variant="outlined" />
                                             )}
-                                        />
+                                        /> */}
                                         <button className='button_save_comments' onClick={() => update_comments()}>save</button>
                                     </div>
                                     <div className='invoicing' >

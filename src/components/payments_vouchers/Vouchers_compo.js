@@ -10,7 +10,7 @@ import app from '../required';
 import './Payments.css';
 
 
-const VouchersCompo = ({ data,profile }) => {
+const VouchersCompo = ({ data,profile,datahandle }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
@@ -299,7 +299,7 @@ const VouchersCompo = ({ data,profile }) => {
             });
 
         }
-        else {
+        if(target =='id') {
             let previousData = data.vouchers_idproof
             
             previousData.splice(del_index, 1)
@@ -309,6 +309,7 @@ const VouchersCompo = ({ data,profile }) => {
                 "vouchers_idproof": previousData
             });
         }
+        datahandle()
     }
     function deleteuploadedvoucher_from_firebase_storage(path) {
         const deleteItem = ref(storage, path)
@@ -438,7 +439,7 @@ const VouchersCompo = ({ data,profile }) => {
                                                                 {id.name}
                                                             </p>
                                                             <a href={id.link} download={id.name} target="_blank">download</a>
-                                                            <button onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
+                                                            <button disabled onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
                                                         </div>
                                                     </>
                                                 ))}

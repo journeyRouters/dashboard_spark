@@ -4,7 +4,7 @@ export const avtivityList = {
     Bali: [
         {
             label: 'Kintamani Ubud Tour',
-            value: 'KintamaniUbud'
+            value: 'KintamaniUbudTour'
         },
         {
             label: 'Arival',

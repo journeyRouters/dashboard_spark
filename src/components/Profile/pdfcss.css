@@ -92,6 +92,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.paymentsPage{
+   margin-top: 75rem;
+}
 .HotelPage{
     width: 55rem;
     /* height: 78rem; */

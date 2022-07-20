@@ -41,6 +41,7 @@ const Profile = (
         flight
     }
 ) => {
+    console.log(profile)
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"

@@ -18,6 +18,7 @@ const SuggestionQuotes = ({
     email
 
 }) => {
+    console.log(Lead_data_to_be_quoted.Destination)
     const [sampleQuotes, setsampleQuotes] = useState([])
     const [searchKey, setSearchKey] = useState(0)
     const [selectedData, setselectedData] = useState([])
@@ -34,7 +35,7 @@ const SuggestionQuotes = ({
         setselectedData(data)
     }
     useEffect(() => {
-        getSampleQuotes('Dubai')
+        getSampleQuotes(Lead_data_to_be_quoted.Destination)
 
     }, []);
 

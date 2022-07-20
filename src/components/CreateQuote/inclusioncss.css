@@ -163,6 +163,7 @@
     overflow-y: scroll;
 }
 .QuotesDetails{
+    width: 60rem;
     height: 42rem;
     overflow-y: scroll;
     border: 3px solid gray;

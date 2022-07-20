@@ -31,7 +31,7 @@ const SuggestionQuotes = ({
         let list=[]
         console.log(data.value.travel_data)
         list.push(data)
-        setselectedData(list)
+        setselectedData(data)
     }
     useEffect(() => {
         getSampleQuotes('Dubai')
@@ -158,7 +158,7 @@ const SuggestionQuotes = ({
                                 </p>
                                 {
                                     selectedData.value.NightDataFields.map((data, index) => (
-                                        <div key={index}>{data.Night},{data.HotelName}, {data.City} , {data.RoomType} Room</div>
+                                        <div key={index}>{data.Night.map((data,index)=>(<span>{data.value}</span>))},{data.HotelName}, {data.City} , {data.RoomType} Room</div>
                                     ))
                                 }
                             </div>

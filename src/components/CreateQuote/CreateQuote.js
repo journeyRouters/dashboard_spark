@@ -176,7 +176,7 @@ const Createquote = (props) => {
                         type="button"
                         className="btn btn-danger"
                         value="Last 10 Quote"
-                        disabled
+                        // disabled
                         onClick={() => handleSuggestion(this.props.rowData)}
                     />
                 </td>
@@ -210,7 +210,7 @@ const Createquote = (props) => {
 
     return (
 
-        <div>
+        <div className='tableAliner'>
             {
                 props.auth ? <>
                     <Modal open={SuggestionModal} onClose={handleSuggestion} >

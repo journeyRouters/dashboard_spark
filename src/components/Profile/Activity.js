@@ -7,6 +7,10 @@ export const avtivityList = {
             value: 'KintamaniUbudTour'
         },
         {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
             label: 'Arival',
             value: 'Arival'
         },
@@ -101,6 +105,10 @@ export const avtivityList = {
             value: 'HipHipHurrayAmusementPark'
         },
         {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
             label: 'Solang Valley ',
             value: 'SolangValley'
         },
@@ -162,6 +170,10 @@ export const avtivityList = {
         {
             label: "ChaoPhrayaDinnerCruise",
             value: "ChaoPhrayaDinnerCruise",
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: "CoralIsland",
@@ -238,6 +250,10 @@ export const avtivityList = {
             value: 'Departure'
         },
         {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
             label: "GardenByTheBay",
             value: "GardenByTheBay",
         },
@@ -278,6 +294,10 @@ export const avtivityList = {
         {
             label: 'Arival',
             value: 'Arival'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: 'Departure',

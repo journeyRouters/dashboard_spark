@@ -546,6 +546,7 @@ const Box = ({
                                             <div style={{ display: 'flex', alignItems: 'center' }} >
                                                 <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                                 <Select
+                                                className='Autocomplete'
                                                     placeholder='Activity'
                                                     name='Activity'
                                                     closeMenuOnSelect={true}
@@ -554,7 +555,7 @@ const Box = ({
                                                     defaultValue={Edit_itineary ? data.Activity: null}
                                                     onChange={(event) => advance_controller_Activity(event, index)}
                                                 />
-                                            </div>
+                                            </div> 
                                             <div>
                                                 <label className='title'>Description</label><br />
                                                 <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>

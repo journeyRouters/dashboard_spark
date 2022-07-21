@@ -518,7 +518,7 @@ const Profile = (
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{
                                                     data.Night.map((data_, index) => (<span key={index}>{data_.value},</span>))
-                                                } Stay at {data.City}</h4>
+                                                } Stay at {data.City} </h4>
 
                                                 <span>Hotel-{data.HotelName}</span><br />
                                                 <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__.value},</span>))}</span>  <br />

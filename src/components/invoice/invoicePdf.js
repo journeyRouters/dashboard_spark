@@ -15,14 +15,19 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     var today = new Date();
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
-    const[invoicedDate,setInvoiceDate]=useState(hint?Invoicedata.date:date?date:selected_pdf_data.date)
-    const[address,setaddress]=useState(hint?Invoicedata.BillingAddress:BillingAddress?BillingAddress:selected_pdf_data.BillingAddress)
+    const[invoicedDate,setInvoiceDate]=useState(date?date:selected_pdf_data.date)
+    const[EditinvoicedDate,setEditinvoicedDate]=useState()
+    const[editaddress,setEditaddress]=useState()
+    const[address,setaddress]=useState(BillingAddress?BillingAddress:selected_pdf_data.BillingAddress)
     function handleExportWithComponent() {
         pdfExportComponent.current.save();
         if (hint) {
             setInvoice()
             getinvoice()
 
+        }
+        else{
+            
         }
         // pdfgenrator
     };
@@ -34,7 +39,9 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
 
             if (docSnap.exists()) {
                 setInvoiceData(docSnap.data())
-                console.log(docSnap.data())
+                console.log((docSnap.data()))
+                setEditinvoicedDate(docSnap.data().date)
+                setEditaddress(docSnap.data().BillingAddress)
             } else {
                 console.log("No such document!");
                 // setinvocice({})
@@ -68,6 +75,9 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     //     });
     // }
     useEffect(() => {
+        if (!hint) {
+            getinvoice()
+        }
         // console.log(props.inclusion_data.other_Inclusion, props.inclusion_data.other_Exclusion)
         try {
 
@@ -117,9 +127,9 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                                     </div>
                                     <div className="TitleValue">
                                         <p>:- {selected_pdf_data.travel_data.Traveller_name}</p>
-                                        <p>:- {invoicedDate}</p>
+                                        <p>:- {hint?invoicedDate:EditinvoicedDate}</p>
                                         <p>:- {selected_pdf_data.travel_data.TripId}</p>
-                                        <p>:- {address}</p>
+                                        <p>:- {hint?address:editaddress}</p>
 
                                     </div>
                                 </div>

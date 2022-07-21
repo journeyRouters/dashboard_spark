@@ -1,13 +1,13 @@
 import { PDFExport } from "@progress/kendo-react-pdf";
-import { addDoc, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
 const db = getFirestore(app);
-    
 
-const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, documents, profile, hint, getinvoice }) => {
+
+const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_item,BillingAddress,documents, profile, hint, getinvoice }) => {
     const pdfExportComponent = useRef(null);
-    console.log(selected_pdf_data)
+    const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
@@ -15,17 +15,37 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
     var today = new Date();
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
+    const[invoicedDate,setInvoiceDate]=useState(hint?Invoicedata.date:date?date:selected_pdf_data.date)
+    const[address,setaddress]=useState(hint?Invoicedata.BillingAddress:BillingAddress?BillingAddress:selected_pdf_data.BillingAddress)
     function handleExportWithComponent() {
         pdfExportComponent.current.save();
         if (hint) {
             setInvoice()
             getinvoice()
-          
+
         }
         // pdfgenrator
     };
     const inclusion_data = selected_pdf_data.inclusion_data
+    async function getinvoice() {
+        try {
+            const docRef = doc(db, "invoice", selected_pdf_data.travel_data.TripId);
+            const docSnap = await getDoc(docRef);
 
+            if (docSnap.exists()) {
+                setInvoiceData(docSnap.data())
+                console.log(docSnap.data())
+            } else {
+                console.log("No such document!");
+                // setinvocice({})
+
+            }
+        }
+        catch (error) {
+
+        }
+
+    }
     async function setInvoice() {
         await setDoc(doc(db, "invoice", `${selected_pdf_data.travel_data.TripId}`), {
             installment: installment,
@@ -36,7 +56,9 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
             updated_at: today,
             updated_by: profile.email,
             selected_pdf_data: selected_pdf_data,
-            finalPackageId:selected_pdf_data.pdf_name
+            finalPackageId: selected_pdf_data.pdf_name,
+            BillingAddress:BillingAddress,
+            date:date
         });
     }
     // async function updateTrip() {
@@ -63,231 +85,132 @@ const InvoicePdf = ({ selected_pdf_data, installment, auth, deliverable_item, do
         }
 
     }, []);
-
+    let val = (2500000).toLocaleString('en');
+    var formatter = new Intl.NumberFormat('en-US', {
+    })
+    let flight_cost=parseInt(selected_pdf_data.flightcost)
+    let land_package=parseInt(selected_pdf_data.landPackage)
+    let visa_cost=parseInt(selected_pdf_data.visacost)
+    var total=flight_cost+land_package+visa_cost
     return (
         <>
             <PDFExport
                 ref={pdfExportComponent}
+                forcePageBreak=".page-break"
                 fileName={`${selected_pdf_data.travel_data.Traveller_name}`}
             >
-                <div className={`invoic_main_div ${layoutSelection.value}`}>
-                    <div className='header_jr_invoice'>
-                        <img alt='star_img' src="/assets/img/Journey_Routers_Logo.png" width="208px" height="38px" />
-                        <div className='addressOfJr'>
-                            <p >
-                                2nd Floor, 258, Kuldeep
-                                House, Lane 3,, Champagali,
-                                Saket, New Delhi - 110030
-                            </p>
-                        </div>
-                    </div>
-                    <div className='invoice_jr_explanation_body'>
-                        <p className='Booking_details_invoice'>
-                            <span>Booking Date <br />{selected_pdf_data.followUpDate}</span>
-                            <span>Booking ID<br />{selected_pdf_data.travel_data.TripId}</span>
-                        </p>
-                        <div className='agent_details_jr_invoice'>
-                            <h4>Travel Agent Details
-                            </h4><br />
-                            <span> {profile.name} | {profile.contact_number} | {auth.email} </span>
-
-                        </div>
-                        <div className='installments_details_jr_invoice'>
-                            <h4>Payment Details</h4>
-                            <div className='installment_data_header_jr_invoice'>
-                                <h5>Due Date</h5>
-                                <h5 style={{ marginLeft: '80px' }}>Status</h5>
-                                <h5>installment Amount</h5>
-                            </div>
-
-                            {
-                                installment.length != 0 ? <>
-                                    {
-                                        installment.map((installment, index) => (
-                                            <p key={index} className='dataMapper_jr_invoice'>
-                                                <span>{installment.Date}</span>
-                                                <span>Pending</span>
-                                                <span>{installment.amount}</span>
-                                            </p>
-                                        ))
-                                    }
-                                </> : <></>
-
-                            }
-
-                        </div>
-                        <div className='Grand_total_installments_jr_invoice'>
-                            <span className='total_amount_jr_invoice'>
-                                <h5>Grand Total</h5>
-                                <h3>total</h3>
-                            </span>
-                            <div className='batches_controller_jr_invoice'>
-                                <img className='batches' alt='batches' src='/assets/img/batches.svg' />
-                                <span>Best Price Guaranteed
-                                </span>
-
-                            </div>
-                            <p style={{ fontSize: 'x-small' }}>
-                                (Cash payments are not accepted by Journey Routers.
-                                Journey Routers never promotes direct to agent
-                                payments.)
-
-                            </p>
-
-                        </div>
-                        <div className='Booking_summary_jr_invoice'>
-                            <h5>Booking Summary
-                            </h5>
-                            <div className='client_details_jr_invoice'>
-                                <div>
-                                    <h5>Name</h5>
-                                    <p className='font_jr_invoice'></p>
-                                </div>
-                                <div>
-                                    <h5>Destination</h5>
-                                    <p className='font_jr_invoice'></p>
-                                </div>
-                                <div>
-                                    <h5>Travel Date</h5>
-                                    <p className='font_jr_invoice'></p>
-                                </div>
-                                <div>
-                                    <h5>Traveler</h5>
-                                    <p className='font_jr_invoice'>Adults</p>
-                                </div>
-                                <div>
-                                    <h5>Duration</h5>
-                                    <p className='font_jr_invoice'> days, Nights</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h5>Hotel Details</h5>
-                            {
-                                selected_pdf_data.NightDataFields.map((data, index) => (
-                                    <div key={index} className='hotel_desc_jr_invoice'>
-                                        <span>*{data.City}({data.Night.map((NightCount,index)=><span>{NightCount.value}</span>)})</span><br />
-                                        <span>{data.HotelName}</span><br />
-                                        <span>{data.HotelType}({data.Category})</span><br />
-                                        <span></span><br />
+                <div className={`pre ${layoutSelection.value}`}>
+                    <div>
+                        <div className="page"
+                            style={{
+                                background: "#FFFFFF"
+                            }}
+                        >
+                            <div className="setHeaderOfInvoice"></div>
+                            <div className="Details">
+                                <div className="ClientDetails">
+                                    <div className="Title">
+                                        <p>Guest Name</p>
+                                        <p>Date</p>
+                                        <p>Booking Id</p>
+                                        <p>Address</p>
                                     </div>
-                                ))
-                            }
+                                    <div className="TitleValue">
+                                        <p>:- {selected_pdf_data.travel_data.Traveller_name}</p>
+                                        <p>:- {invoicedDate}</p>
+                                        <p>:- {selected_pdf_data.travel_data.TripId}</p>
+                                        <p>:- {address}</p>
 
-                        </div>
-                        <div className='inclusion_exclusion_jr_invoice'>
-                            <div className='details1'>
-                                {inclusion_data ? <>
-                                    <span className='comments_'>{inclusion_data.breakfast}</span><br />
-                                    <span className='comments_'>{inclusion_data.lunch}</span>
-                                    <p className='comments_details'>{inclusion_data.lunch_comments}</p>
-                                    <span className='comments_'>{inclusion_data.dinner}</span>
-                                    <p className='comments_details'>{inclusion_data.dinner_comments}</p>
-                                    <span className='comments_'>{inclusion_data.airport_arival}</span><br /><br />
-                                    <span className='comments_'>{inclusion_data.airport_departure}</span><br /><br />
-                                    <span className='comments_'>{inclusion_data.cab_SIC}</span><br /><br />
-                                    <span className='comments_'>{inclusion_data.cab_Private}</span>
-                                    <p className='comments_details'>{inclusion_data.cab_Private_comments}</p>
-                                    <span className='comments_'>{inclusion_data.Gst}</span><br /><br />
-                                    <span className='comments_'>{inclusion_data.airfair}</span><br /><br />
-                                    <span className='comments_'> {inclusion_data.siteseeing}</span>
-                                    <p className='comments_details'>{inclusion_data.siteseeing_comments}</p>
-                                    <span className='comments_'>{inclusion_data.Visa}</span>
-                                    <p className='comments_details'>{inclusion_data.Visa_comments}</p>
-                                    <span className='comments_'>{inclusion_data.Entrance_fee}</span>
-                                    <p className='comments_details'>{inclusion_data.Entrance_comments}</p>
-                                    <span className='comments_'>other_Inclusion</span>
-                                    <p className='comments_details'>
-                                        {
-                                            comment_inclusion.map((comment, index) => (
-                                                <p key={index}>
-                                                    * {`${comment.toString()}`}
-                                                </p>
-                                            ))
-                                        }
-                                    </p>
-                                    <span className='comments_'>other_Exclusion</span>
-                                    <p className='comments_details'>
-                                        {
-                                            Comment_Exclusion.map((comment, index) => (
-                                                <p key={index}>
-                                                    *{comment}
-                                                </p>
-                                            ))
-                                        }
-                                    </p>
-                                </> : <></>
-                                }
+                                    </div>
+                                </div>
+                                <div className="line"></div>
+                                <div>
+                                    <div className="officeDetails">
+                                        <p>GST:-  07BQSPK6324C1ZS</p>
+                                        <p>2nd Floor, 258 Kuldeep House</p>
+                                        <p>Lane 3, Westend Marg,</p>
+                                        <p>Saket, Delh110031</p>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
+                            <div className="paymentsSchedual"></div>
+                            <div className="mappingArea">
+                                <div className="reducer">
+                                    <div className="Date">
+                                        <span>DATE</span>
+                                    </div>
+                                    {
+                                        installment.length != 0 ? <>
+                                            {
+                                                installment.map((data, index) => (<>
+                                                    <div className="DateValue">
+                                                        <span>{data.Date}</span>
 
-                        <div className='deliverable_documents_jr_invoice'>
-                            <div>
+                                                    </div>
 
-                                <h4>Deliverables</h4>
-                                <span>From Agent (within 3 Days of Payment)</span><br />
-                                {
-                                    deliverable_item.map((item, index) => (<>
-                                        <span>*{item}</span><br />
-                                    </>))
-                                }
+                                                </>))
+                                            }
+
+                                        </> : <></>
+
+                                    }
+                                </div>
+                                <div className="reducer">
+                                    <div className="Date">
+                                        <span>INSTALLMENTS</span>
+                                    </div>
+                                    {
+                                        installment.length != 0 ? <>
+                                            {
+                                                installment.map((data, index) => (<>
+                                                    <div className="DateValue">
+                                                        <p>{formatter.format(data.amount)}</p>
+
+                                                    </div>
+
+                                                </>))
+                                            }
+
+                                        </> : <></>
+
+                                    }
+                                </div>
+                                <div>
+                                    <div className="Date">
+                                        <span>STATUS</span>
+                                    </div>
+                                    {
+                                        installment.length != 0 ? <>
+                                            {
+                                                installment.map((data, index) => (<>
+                                                    <div className="DateValue   ">
+                                                        <span>
+                                                            {/* <img src="/assets/InvoiceAssets/TestingLogo.png" width='35px'/> */}
+                                                            PENDING</span>
+                                                    </div>
+                                                </>))
+                                            }
+
+                                        </> : <></>
+
+                                    }
+                                </div>
+
+
                             </div>
-                            <div>
-                                <h4>Document(s) required from you</h4>
-                                {
-                                    documents.map((data, index) => (<>
-                                        <span key={index}>*{data}</span><br />
-                                    </>))
-                                }
+                            <div className="grandtotal">
+                                <div className="total">
+                                    <h1>Grand Total  :- INR  {formatter.format(total)}/-</h1>
+                                    {/* <h1>-</h1> */}
+                                </div>
+
                             </div>
+                            <img src="/assets/InvoiceAssets/footer.png" width='880px' />
                         </div>
-
-                        <div className='terms_and_condition'>
-                            <ul>
-                                <h5>T&C of Travel Agent</h5>
-                                <li>Flight and Hotels are Subject to Availability</li>
-                                <h5>Cancellation Policy</h5>
-                                <li>Flight – As Per Airline Policy</li>
-                                <li>Hotel – As Per Hotel Policy</li>
-                                <li>Land Part – 25% Before 25 Days of Travel</li>
-                                <li>Land Part - within 20 days of Travel No Refund</li>
-                                <li>Any TCS, Taxes, Remittance charges paid will be Non refundable</li>
-                                <li>Journey Routers Cancellation Charges- INR 3000 Per Pax.</li>
-                            </ul>
-
-                        </div>
-                        <div className='acc_details'>
-                            <h5>Accounts Details</h5>
-                            <span>Name:Journey Routers </span>
-                            <span> Account:113605000773</span>
-                            <span> Branch:Malviya Nagar</span>
-                            <span> IFSCode:ICIC0001136</span>
-                            <span> Account-Type:Current Account</span>
-                        </div>
-                        <div className='cutomerservice'>
-                            <img src='/assets/img/customercare.png' width='90px' height='80px' />
-                            <div className="customer_care_details_jr_invoice">
-                                <p>
-                                    <a href={'mailto:' + profile.email} target="_blank">
-                                        {profile.email}
-                                    </a>
-                                </p>
-                                <p>contact:
-                                    <a href={'tel:' + profile.contact_number}>
-
-                                        {profile.contact_number}
-                                    </a>
-                                </p>
-                                <a href={"https://wa.me/91" + profile.whatsapp_number + "?text= Hi " + profile.name + " i want to plan a vaction, can you help me"} target="_blank">
-                                    <img alt="what's app" src="/assets/img/whatsapp-social-media-svgrepo-com.svg" width='32px' />
-                                </a>
-                            </div>
-
-                        </div>
-
-
                     </div>
                 </div>
+
             </PDFExport>
             <button className="invoiceDownload_jr_invoice" onClick={handleExportWithComponent}>downloadURL</button>
         </>

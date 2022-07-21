@@ -189,6 +189,12 @@ const Profile = (
         setwait(false)
         updateTableDataAfterQuote(TripId)
         closeHandler()
+        try{
+            Allquote()
+        }
+        catch(e){
+            console.log(e)
+        }
         closePDF()
 
     }
@@ -214,13 +220,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-        try {
-            Allquote()
-        }
-        catch (error) {
-            console.log(error)
-        }
-
+     
     }
 
     return (

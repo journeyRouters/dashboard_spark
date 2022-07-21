@@ -27,7 +27,8 @@ const Box = ({
     Edit_visacost,
     Edit_flightcost,
     Edit_landPackage,
-    Edit_count_days
+    Edit_count_days,
+    Allquote
 }) => {
     console.log(profile)
     const animatedComponents = makeAnimated();
@@ -54,7 +55,6 @@ const Box = ({
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
     const inclusion = {
-        Hotels: false,
         accommodation: false,
         breakfast: false,
         lunch: false,
@@ -63,11 +63,10 @@ const Box = ({
         dinner_comments: '',
         airport_arival: false,
         airport_departure: false,
-        cab_SIC: false,
-        cab_Private: false,
+        CAB: false,
         cab_Private_comments: '',
-        Gst: false,
-        Tcs: false,
+        // Gst: false,
+        // Tcs: false,
         airfair: false,
         siteseeing: false,
         siteseeing_comments: '',
@@ -270,7 +269,7 @@ const Box = ({
     // }
     function select_date(e) {
         var date = e.target.value
-        // console.log(test(date,2))
+        console.log(date)
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
@@ -303,6 +302,7 @@ const Box = ({
                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                     profile={profile}
                     flight={flight}
+                    Allquote={Allquote}
                 />
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >

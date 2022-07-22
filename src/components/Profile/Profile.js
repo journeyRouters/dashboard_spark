@@ -515,7 +515,7 @@ const Profile = (
                                     NightDataFields.map((data, index) => (
                                         <div key={index} className='hotelUni'>
                                             <div>
-                                                <img src={`/assets/pdfDefaultImage/hotel${index + 1}.png`} width="320px" />
+                                                <img src={`/assets/pdfDefaultImage/hotel${index+1}.png`} width="320px" />
                                             </div>
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{

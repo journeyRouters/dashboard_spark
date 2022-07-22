@@ -133,6 +133,7 @@ const Profile = (
             quotation_flg: true,
             month: month,
             Follow_Up_date: String(selected_Travel_date),
+            time:currentdate,
             Quoted_by: email,
             Travel_Duration: count_days
         });

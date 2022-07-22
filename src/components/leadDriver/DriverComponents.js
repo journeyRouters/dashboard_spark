@@ -9,6 +9,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     var today = new Date()
+    // console.log(moment(data.Travel_Date.toDate()).format('YYYY-MM-DD'))
     var currentdate = moment(today).format('YYYY-MM-DD')
     // function handlebackendProfileAndtrip(tripid, uid, Name) {
     //     update_lead_field(uid, Name)
@@ -78,7 +79,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
 
                     </select>
                 </span><br />
-                <span>Date of travel:-{data.Travel_Date}</span><br />
+                <span>Date of travel:-{moment(data.Travel_Date.toDate()).format('YYYY-MM-DD')}</span><br />
                 <span>Assign to:-</span>
 
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>

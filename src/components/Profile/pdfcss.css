@@ -96,6 +96,7 @@
    margin-top: 75rem;
 }
 .HotelPage{
+    word-break: break-all;
     width: 55rem;
     /* height: 78rem; */
     display: flex;
@@ -346,6 +347,7 @@
 
 }
 .itinearyDiv{
+    word-break: break-all;
     margin-left: 2rem;
     margin-top: 2rem;
     font-size: 1.2rem;

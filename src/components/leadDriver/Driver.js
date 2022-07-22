@@ -15,11 +15,9 @@ const db = getFirestore(app);
 const Driver = (props) => {
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
-    // today = today.setDate(today.getDate() + 2)
     var currentdate = moment(today).format('YYYY-MM-DD')
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
-    // console.log(print)
     const [openlistOfUsers, setopenlistOfUsers] = useState(false)
     function handleListChange() {
         setopenlistOfUsers(!openlistOfUsers)
@@ -32,6 +30,7 @@ const Driver = (props) => {
             const path = files[0].path
             // setInProgress(true)
             readXlsxFile(files[0]).then((rows) => {
+                console.log(rows)
                 for (let i = 1; i <= rows.length - 1; i++) {
                     let Row = rows[i]
                     console.log(Row)
@@ -90,20 +89,25 @@ const Driver = (props) => {
         }
     }
     async function getLeadByDate() {
-        var list = []
+        let list = []
+        console.log(selectedDate)
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
         // console.log(date)
         try {
             var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
-                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.data())
             });
-            setLead_data(list)
-            // console.log(list);
+            try{
+                console.log(list)
+                setLead_data(list)
+            }
+            catch(e){console.log(e)}
+            console.log(list);
         }
         catch (error) {
-            console.log(error)
+            console.log(error.message)
         }
 
     }
@@ -129,14 +133,14 @@ const Driver = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         // var check = moment(today,'DD MMMM YYYY').add(5, 'days').calendar()
-        console.log(moment(test(3)).format('DD MMMM YYYY'))
+        // console.log(moment(test(3)).format('DD MMMM YYYY'))
         // console.log(selectedDate)
         getLeadByDate(currentdate)
     }, []);
 
     return (
         <div>
-            <Modal open={openlistOfUsers} onClose={handleListChange} >
+            {/* <Modal open={openlistOfUsers} onClose={handleListChange} >
                 <>
                     <div className='listofuser'>
 
@@ -166,7 +170,7 @@ const Driver = (props) => {
                         </table>
                     </div>
                 </>
-            </Modal>
+            </Modal> */}
             <div className='Driver_header'>
                 <div>
                     <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>

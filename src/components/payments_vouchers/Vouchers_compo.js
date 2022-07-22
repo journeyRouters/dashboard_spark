@@ -5,12 +5,13 @@ import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import InvoicePdf from '../invoice/invoicePdf';
 import Profile from '../Profile/Profile';
 import app from '../required';
 import './Payments.css';
 
 
-const VouchersCompo = ({ data,profile,datahandle }) => {
+const VouchersCompo = ({ data, profile, datahandle }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
@@ -31,6 +32,9 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
     }
     function invoiceOpen() {
         setinvociceOpener(true)
+    }
+    function closeInvoice(){
+        setinvociceOpener(false)
     }
     function uploaderpopup() {
         setuploader(!openuploader)
@@ -83,6 +87,25 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
             console.log(e)
         }
     }
+    // async function getinvoice() {
+    //     try {
+    //         const docRef = doc(db, "invoice", data.TripId);
+    //         const docSnap = await getDoc(docRef);
+
+    //         if (docSnap.exists()) {
+    //             console.log(docSnap.data())
+    //             // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
+    //         } else {
+    //             console.log("No such document!");
+    //             // setinvocice({})
+
+    //         }
+    //     }
+    //     catch (error) {
+
+    //     }
+
+    // }
     async function getdatalatest_for_voucher() {
         const docRef = doc(db, "Trip", data.TripId);
         const docSnap = await getDoc(docRef);
@@ -219,7 +242,7 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
     }, [details]);
     function ondelete(target, path, index) {
         console.log(target, path, index)
-        
+
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)
         getdatalatest_for_voucher()
@@ -299,12 +322,12 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
             });
 
         }
-        if(target =='id') {
+        if (target == 'id') {
             let previousData = data.vouchers_idproof
-            
+
             previousData.splice(del_index, 1)
             console.log(previousData)
-            
+
             await updateDoc(docref, {
                 "vouchers_idproof": previousData
             });
@@ -372,6 +395,17 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
             </div>
             {
                 details ? <>
+                    <Modal open={invoiceOpener} onClose={closeInvoice} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                        <div>
+                            <InvoicePdf
+                                installment={invoice.installment}
+                                deliverable_item={invoice.deliverable_item}
+                                selected_pdf_data={invoice.selected_pdf_data}
+                                documents={invoice.documents}
+                                hint={false}
+                            />
+                        </div>
+                    </Modal>
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
                         {
                             finalPackage ? <>
@@ -394,10 +428,10 @@ const VouchersCompo = ({ data,profile,datahandle }) => {
                                     landPackage={finalPackage.landPackage}
                                 />
                             </> : <>
-                            <div style={{background:'white', borderRadius:'32px',height:'141px'}}>
-                                <h1> there is no any Invoiced Pdf</h1>
-                                <h1> Report is updated to Admin</h1>
-                            </div>
+                                <div style={{ background: 'white', borderRadius: '32px', height: '141px' }}>
+                                    <h1> there is no any Invoiced Pdf</h1>
+                                    <h1> Report is updated to Admin</h1>
+                                </div>
 
                             </>
                         }

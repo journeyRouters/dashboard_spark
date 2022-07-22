@@ -5,7 +5,7 @@ import app from "../required";
 const db = getFirestore(app);
 
 
-const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_item,BillingAddress,documents, profile, hint, getinvoice }) => {
+const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_item,BillingAddress,documents, profile, hint, getinvoice:invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
@@ -23,7 +23,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
         pdfExportComponent.current.save();
         if (hint) {
             setInvoice()
-            getinvoice()
+            invoiceOnPrepage()
 
         }
         else{
@@ -218,6 +218,10 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                             </div>
                             <img src="/assets/InvoiceAssets/footer.png" width='880px' />
                         </div>
+                    </div>
+                    <div className="page-break">
+                        <div className="secondpage"></div>
+
                     </div>
                 </div>
 

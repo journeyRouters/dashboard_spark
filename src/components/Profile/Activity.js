@@ -90,6 +90,12 @@ export const avtivityList = {
             label: 'Candle Light Dinner with Setup at Beach',
             value: 'CandleLightDinnerwithSetupatBeach'
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
+
     ],
     Himachal: [
         {
@@ -152,6 +158,11 @@ export const avtivityList = {
             label: 'Manu Temple',
             value: 'ManuTemple'
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
 
     ],
     Thailand: [
@@ -238,6 +249,11 @@ export const avtivityList = {
         {
             label: "MadameTussauds",
             value: "MadameTussauds",
+        },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
         }
     ],
     Singapore: [
@@ -289,6 +305,11 @@ export const avtivityList = {
             label: "UniversalStudio",
             value: "UniversalStudio",
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
     ],
     Dubai: [
         {
@@ -371,6 +392,11 @@ export const avtivityList = {
             label: "SkyDiveOverAtlantis",
             value: "SkyDiveOverAtlantis",
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
     ]
 }
 export function ActivityResolver(destination) {

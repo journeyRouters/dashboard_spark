@@ -416,7 +416,7 @@ const Profile = (
                             <div>
                                 <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/DayWiseItineary.png`} />
 
-                                <span className='headLineDaywiseItineary'> Day wise Itineary</span>
+                                <span className='headLineDaywiseItineary'> Day wise Itinerary</span>
                                 <div className='itinearyDiv'>
                                     {itineary &&
                                         itineary.map((data, index) => (

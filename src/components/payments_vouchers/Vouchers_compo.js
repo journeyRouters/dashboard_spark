@@ -33,7 +33,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     function invoiceOpen() {
         setinvociceOpener(true)
     }
-    function closeInvoice(){
+    function closeInvoice() {
         setinvociceOpener(false)
     }
     function uploaderpopup() {
@@ -396,15 +396,26 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             {
                 details ? <>
                     <Modal open={invoiceOpener} onClose={closeInvoice} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
-                        <div>
-                            <InvoicePdf
-                                installment={invoice.installment}
-                                deliverable_item={invoice.deliverable_item}
-                                selected_pdf_data={invoice.selected_pdf_data}
-                                documents={invoice.documents}
-                                hint={false}
-                            />
-                        </div>
+                        {
+                            invoice ? <>
+                                <div>
+                                    <InvoicePdf
+                                        installment={invoice.installment}
+                                        deliverable_item={invoice.deliverable_item}
+                                        selected_pdf_data={invoice.selected_pdf_data}
+                                        documents={invoice.documents}
+                                        hint={false}
+                                    />
+                                </div>
+
+                            </> : <>
+                                <div style={{ background: 'white', borderRadius: '32px', height: '141px' }}>
+                                    <h1> there is no any Invoice</h1>
+                                    <h1> Report is updated to Admin</h1>
+                                </div>
+                            </>
+                        }
+
                     </Modal>
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
                         {

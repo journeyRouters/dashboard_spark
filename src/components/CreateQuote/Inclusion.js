@@ -64,26 +64,26 @@ const Inclusion = (props) => {
         if (e.target.name === "Arival") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_arival: firevalue
+                airport_Arival: firevalue
             }))
         }
         if (e.target.name === "Departure") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_departure: firevalue
+                airport_Departure: firevalue
             }))
         }
         if (e.target.name === "CAB") {
             setFeed(prevState => ({
                 ...prevState,
-                CAB: firevalue
+                Transfer: firevalue
             }))
         }
        
         if (e.target.name === "airfair") {
             setFeed(prevState => ({
                 ...prevState,
-                airfair: firevalue
+                Flight: firevalue
             }))
         }
         if (e.target.name === "GST") {
@@ -233,7 +233,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Arival
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_arival} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_Arival} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
@@ -242,7 +242,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Departure
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_departure} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_Departure} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
@@ -256,7 +256,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         CAB
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='CAB' value={inclusionFeed.CAB} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='CAB' value={inclusionFeed.Transfer} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
@@ -272,7 +272,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Flights
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.airfair} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.Flight} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >

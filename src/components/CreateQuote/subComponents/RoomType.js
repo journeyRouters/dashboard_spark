@@ -11,7 +11,8 @@ const RoomType = ({handleFormChange,index,value}) => {
                 showDefaultRoomTypeFlg ? <>
                     <textarea name='RoomType' value={value}  onChange={(event) => handleFormChange(event, index)}></textarea>
                 </> : <>
-                    <select defaultValue='normal' name='RoomType' onChange={(event) => handleFormChange(event, index)}>
+                    <select  name='RoomType' onChange={(event) => handleFormChange(event, index)}>
+                    <option >select Type</option>
                         <option value='standrad'>standrad</option>
                         <option value='delux'>delux</option>
                         <option value='super delux'>super delux</option>

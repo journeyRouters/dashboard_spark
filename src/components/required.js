@@ -26,3 +26,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export default app
+// https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyARcPADJJdnYGjcRJMr9FO9C2Gk6nmk7Oc

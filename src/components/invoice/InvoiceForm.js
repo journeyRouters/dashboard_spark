@@ -7,11 +7,14 @@ import InvoicePdf from './invoicePdf';
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import app from '../required';
 import makeAnimated from 'react-select/animated';
+import moment from 'moment';
 
 
 
 const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoice }) => {
     // console.log(pdfHolder)
+    const today = new Date()
+    const [currentdate, setcurrentday] = useState(moment(today).format('YYYY-MM-DD'))
     const animatedComponents = makeAnimated();
     const [installment, setinstallment] = useState([
         { Date: '', amount: 0 },])
@@ -26,6 +29,9 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
     const db = getFirestore(app);
     // console.log(selected_pdf_data)
+    function controllDate(e){
+        setcurrentday(e.target.value)
+    }
     function showinvoice() {
         if (selected_pdf_data.length != 0) {
             setpdf_flg(false)
@@ -96,7 +102,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
         setFlight_cost(data.flightcost)
         set_visa_cost(data.visacost)
         setlandpackage(data.landPackage)
-        
+
     }
     function getTotalamount() {
 
@@ -125,6 +131,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                                 <option value="CND">CND</option>
 
                             </select>
+
                             <div>
                                 <label> select qoute to gen invoice</label>
                                 <Select
@@ -155,7 +162,9 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             ))
                         }
                         <button className='addmoreInstallments' onClick={addMOreInstallments}>+</button>
+
                     </div>
+
                     <div>
 
                         <div className='BillingAddress'>
@@ -165,21 +174,21 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                         </div>
                         <div className='BillingAddress'>
                             <label>Flight Cost</label>
-                            <input className='txtArea' name='Flight_cost' defaultValue={0} value={flight_cost} 
+                            <input className='txtArea' name='Flight_cost' defaultValue={0} value={flight_cost}
                             // onChange={(event) => handleFlightCost(event)} 
                             >
                             </input>
                         </div>
                         <div className='BillingAddress'>
                             <label>VISA Cost</label>
-                            <input className='txtArea' name='visa_cost' defaultValue={0} value={visa_cost} 
+                            <input className='txtArea' name='visa_cost' defaultValue={0} value={visa_cost}
                             // onChange={(event) => handlevisaCost(event)} 
                             >
                             </input>
                         </div>
                         <div className='BillingAddress'>
                             <label>Land Package</label>
-                            <input className='txtArea' name="Land_package" defaultValue={0} value={land_package} 
+                            <input className='txtArea' name="Land_package" defaultValue={0} value={land_package}
                             // onChange={(event) => handlelandPAckage(event)} 
                             >
                             </input>
@@ -190,7 +199,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </input>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <div className='deliverable' onChange={(event) => handleDeliverable(event)}>
                             <h5>Select Deliverables (if any)</h5>
                             <label>
@@ -265,6 +274,10 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </lable>
 
                         </div>
+                        <div>
+                            <label>Pick a invoicing Date (default today)</label>
+                            <input type={'date'} value={currentdate}></input>
+                        </div>
                         <button onClick={() => showinvoice()} disabled={pdfseletcted_flg}>Invoice</button>
                         <button style={{ marginLeft: '16px' }} onClick={closeinvoice}>Cancel</button>
                         <Modal open={invoice} onClose={closeinvoice_} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
@@ -275,15 +288,39 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                                     selected_pdf_data={selected_pdf_data}
                                     documents={documents}
                                     auth={auth}
+                                    date={currentdate}
                                     profile={profile}
                                     hint={true}
                                     getinvoice={getinvoice}
+                                    BillingAddress={BillingAddress}
                                 />
                             </div>
                         </Modal>
 
 
+                    </div> */}
+                    <div>
+                        <label>Pick a invoicing Date (default today)</label>
+                        <input type={'date'} value={currentdate} onChange={(e)=>controllDate(e)}></input>
+                        <button onClick={() => showinvoice()} disabled={pdfseletcted_flg}>Invoice</button>
+                        <button style={{ marginLeft: '16px' }} onClick={closeinvoice}>Cancel</button>
                     </div>
+                    <Modal open={invoice} onClose={closeinvoice_} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                        <div>
+                            <InvoicePdf
+                                installment={installment}
+                                deliverable_item={deliverable_item}
+                                selected_pdf_data={selected_pdf_data}
+                                documents={documents}
+                                auth={auth}
+                                date={currentdate}
+                                profile={profile}
+                                hint={true}
+                                getinvoice={getinvoice}
+                                BillingAddress={BillingAddress}
+                            />
+                        </div>
+                    </Modal>
                 </div>
             </Modal>
         </div>

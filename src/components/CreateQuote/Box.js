@@ -27,9 +27,10 @@ const Box = ({
     Edit_visacost,
     Edit_flightcost,
     Edit_landPackage,
-    Edit_count_days
+    Edit_count_days,
+    Allquote
 }) => {
-    // console.log(Edit_NightDataFields)
+    console.log(profile)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -54,21 +55,19 @@ const Box = ({
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
     const inclusion = {
-        Hotels: false,
         accommodation: false,
         breakfast: false,
         lunch: false,
         lunch_comments: '',
         dinner: false,
         dinner_comments: '',
-        airport_arival: false,
-        airport_departure: false,
-        cab_SIC: false,
-        cab_Private: false,
+        airport_Arival: false,
+        airport_Departure: false,
+        Transfer: false,
         cab_Private_comments: '',
-        Gst: false,
-        Tcs: false,
-        airfair: false,
+        // Gst: false,
+        // Tcs: false,
+        Flight: false,
         siteseeing: false,
         siteseeing_comments: '',
         Visa: false,
@@ -270,7 +269,7 @@ const Box = ({
     // }
     function select_date(e) {
         var date = e.target.value
-        // console.log(test(date,2))
+        console.log(date)
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
@@ -303,6 +302,7 @@ const Box = ({
                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                     profile={profile}
                     flight={flight}
+                    Allquote={Allquote}
                 />
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
@@ -546,6 +546,7 @@ const Box = ({
                                             <div style={{ display: 'flex', alignItems: 'center' }} >
                                                 <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                                 <Select
+                                                className='Autocomplete'
                                                     placeholder='Activity'
                                                     name='Activity'
                                                     closeMenuOnSelect={true}
@@ -554,7 +555,7 @@ const Box = ({
                                                     defaultValue={Edit_itineary ? data.Activity: null}
                                                     onChange={(event) => advance_controller_Activity(event, index)}
                                                 />
-                                            </div>
+                                            </div> 
                                             <div>
                                                 <label className='title'>Description</label><br />
                                                 <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>

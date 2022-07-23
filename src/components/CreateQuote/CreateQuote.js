@@ -210,7 +210,7 @@ const Createquote = (props) => {
 
     return (
 
-        <div>
+        <div className='tableAliner'>
             {
                 props.auth ? <>
                     <Modal open={SuggestionModal} onClose={handleSuggestion} >
@@ -218,7 +218,7 @@ const Createquote = (props) => {
                             handleSuggestion={handleSuggestion}
                             Lead_data_to_be_quoted={user_uni_data}
                             email={props.auth.email}
-                            profile={profile}
+                            profile={props.userProfile}
                             updateTableDataAfterQuote={updateTableDataAfterQuote}
 
                         />

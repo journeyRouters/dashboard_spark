@@ -127,7 +127,7 @@
 }
 
 .childpopup {
-    background: #983b9d;
+    background: #cda2d0;
     display: none;
     width: 400px;
     height: 200px;
@@ -164,7 +164,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    /* background-color: red; */
     cursor: pointer;
     border: none;
 }

@@ -28,8 +28,8 @@ const NightsController = ({nights}) => {
     }, []);
     return (
         <div >
-                <span style={{ color: 'pink' }}>check In-{moment(checkIndate).format('DD MMMM YYYY')}</span><br />
-                <span style={{ color: 'pink' }}>check Out-{moment(checkOut).format('DD MMMM YYYY')}</span>
+                <span style={{ color: 'pink' }}>Check In-{moment(checkIndate).format('DD MMMM YYYY')}</span><br />
+                <span style={{ color: 'pink' }}>Check Out-{moment(checkOut).format('DD MMMM YYYY')}</span>
         </div>
     );
 }

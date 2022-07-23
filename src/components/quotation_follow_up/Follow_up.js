@@ -1,5 +1,5 @@
 import { CircularProgress, makeStyles, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Row from './Row';
@@ -25,7 +25,9 @@ const FollowUp = (props) => {
         console.log(props.auth.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid), where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true));
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true),orderBy("Lead_Status")
+             ,orderBy("Lead_status_change_date"));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -49,70 +51,7 @@ const FollowUp = (props) => {
 
     }
 
-    /**these function are for 2nd run */
-    // async function getProfile(auth) {
-    //     try {
-    //         const docRef = doc(db, "Profile", auth.uid);
-    //         const docSnap = await getDoc(docRef);
-    //         if (docSnap.exists()) {
-    //             setProfile(docSnap.data())
-    //             getLeadOnBoard(docSnap.data().Lead_followUp)
-    //             console.log(docSnap.data())
-    //         } else {
-    //             console.log("No such document!");
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log({ error })
-    //     }
-    // }
-    // async function getLeadOnBoard(list) {
-    //     let list_ = []
-    //     console.log(profile)
-
-    //     for (let index = 0; index < list.length; index++) {
-    //         const docRef = doc(db, "Trip", list[index]);
-    //         const docSnap = await getDoc(docRef);
-    //         if (docSnap.exists()) {
-    //             list_.push(docSnap.data())
-    //             console.log("ps:", docSnap.data());
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    //         }
-    //     }
-    //     setLead_data(list_)
-    //     setopen(false)
-
-
-
-    // }
-    // async function updateprofile_Lead_followUp(tripid) {
-    //     var pre_Lead_followUp = profile.Lead_followUp
-    //     var elementIndex = pre_Lead_followUp.indexOf(tripid)
-    //     var new_Lead_followUp = pre_Lead_followUp.splice(elementIndex, 1)
-    //     const docref = doc(db, "Profile", profile.uid)
-    //     await updateDoc(docref, {
-    //         "Lead_followUp": pre_Lead_followUp
-    //     })
-    // }
-    // async function updateprofile_Lead_Vouchers(tripid) {
-    //     var pre_Lead_Vouchers = profile.Lead_Vouchers
-    //     var new_Lead_Vouchers = pre_Lead_Vouchers.push(tripid)
-    //     const docref = doc(db, "Profile", profile.uid)
-    //     await updateDoc(docref, {
-    //         "Lead_Vouchers": new_Lead_Vouchers
-    //     })
-    // }
-    // async function updateprofile_Lead_converted(tripid) {
-    //     var pre_Lead_converted = profile.Lead_converted
-    //     var new_Lead_converted = pre_Lead_converted.push(tripid)
-    //     const docref = doc(db, "Profile", profile.uid)
-    //     console.log(pre_Lead_converted)
-    //     await updateDoc(docref, {
-    //         "Lead_converted": pre_Lead_converted
-    //     })
-    // }
+   
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
@@ -122,7 +61,6 @@ const FollowUp = (props) => {
     }
 
     useEffect(() => {
-        // console.log("create quote")
         getLeadOnBoard()
     }, [props.auth])
 

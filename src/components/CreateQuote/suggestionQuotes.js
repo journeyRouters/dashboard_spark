@@ -2,6 +2,7 @@ import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { ExtensionSharp } from '@material-ui/icons';
 import HotelIcon from '@material-ui/icons/Hotel';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Box from './Box';
@@ -18,6 +19,7 @@ const SuggestionQuotes = ({
     email
 
 }) => {
+    console.log(Lead_data_to_be_quoted.Destination)
     const [sampleQuotes, setsampleQuotes] = useState([])
     const [searchKey, setSearchKey] = useState(0)
     const [selectedData, setselectedData] = useState([])
@@ -34,7 +36,7 @@ const SuggestionQuotes = ({
         setselectedData(data)
     }
     useEffect(() => {
-        getSampleQuotes('Dubai')
+        getSampleQuotes(Lead_data_to_be_quoted.Destination)
 
     }, []);
 
@@ -225,7 +227,7 @@ const SuggestionQuotes = ({
                     <p className='lookupaliner'>
                         <p className='tripInfoP'>
                             <span>Starting date</span>
-                            <span>{Lead_data_to_be_quoted.Travel_Date}</span>
+                            <span>{moment(Lead_data_to_be_quoted.Travel_Date.toDate()).format('YYYY-MM-DD')}</span>
                         </p>
                         <p className='tripInfoP'>
                             <span>Travel Duration</span>

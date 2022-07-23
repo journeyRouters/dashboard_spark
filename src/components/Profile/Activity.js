@@ -4,7 +4,11 @@ export const avtivityList = {
     Bali: [
         {
             label: 'Kintamani Ubud Tour',
-            value: 'KintamaniUbud'
+            value: 'KintamaniUbudTour'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: 'Arival',
@@ -86,6 +90,12 @@ export const avtivityList = {
             label: 'Candle Light Dinner with Setup at Beach',
             value: 'CandleLightDinnerwithSetupatBeach'
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
+
     ],
     Himachal: [
         {
@@ -99,6 +109,10 @@ export const avtivityList = {
         {
             label: 'HipHipHurrayAmusementPark ',
             value: 'HipHipHurrayAmusementPark'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: 'Solang Valley ',
@@ -144,6 +158,11 @@ export const avtivityList = {
             label: 'Manu Temple',
             value: 'ManuTemple'
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
 
     ],
     Thailand: [
@@ -162,6 +181,10 @@ export const avtivityList = {
         {
             label: "ChaoPhrayaDinnerCruise",
             value: "ChaoPhrayaDinnerCruise",
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: "CoralIsland",
@@ -226,6 +249,11 @@ export const avtivityList = {
         {
             label: "MadameTussauds",
             value: "MadameTussauds",
+        },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
         }
     ],
     Singapore: [
@@ -236,6 +264,10 @@ export const avtivityList = {
         {
             label: 'Departure',
             value: 'Departure'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: "GardenByTheBay",
@@ -273,11 +305,20 @@ export const avtivityList = {
             label: "UniversalStudio",
             value: "UniversalStudio",
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
     ],
     Dubai: [
         {
             label: 'Arival',
             value: 'Arival'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
         },
         {
             label: 'Departure',
@@ -351,6 +392,11 @@ export const avtivityList = {
             label: "SkyDiveOverAtlantis",
             value: "SkyDiveOverAtlantis",
         },
+        {
+            label:"Leisureday",
+            value:"Leisureday"
+
+        }
     ]
 }
 export function ActivityResolver(destination) {

@@ -41,6 +41,7 @@ const Profile = (
         flight
     }
 ) => {
+    console.log(profile)
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
@@ -55,8 +56,8 @@ const Profile = (
     const [wait, setwait] = useState(false)
     const [ImgLinks, setImgLinks] = useState([])
     const [destinationName, setname] = useState((travel_data.Destination).toUpperCase())
-    const[whatsApp,setwhatsApp]=useState(profile.WhatsApp_number)
-    const[Call,setCalling]=useState(profile.contact_number)
+    const [whatsApp, setwhatsApp] = useState(profile.WhatsApp_number)
+    const [Call, setCalling] = useState(profile.contact_number)
     function controllLinks(args) {
         setImgLinks(args)
     }
@@ -117,7 +118,7 @@ const Profile = (
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                     flightsImagesLinks: ImgLinks,
-                    Quoted_by:profile.name
+                    Quoted_by: profile.name
                 }
             });
 
@@ -132,6 +133,7 @@ const Profile = (
             quotation_flg: true,
             month: month,
             Follow_Up_date: String(selected_Travel_date),
+            time:currentdate,
             Quoted_by: email,
             Travel_Duration: count_days
         });
@@ -188,6 +190,12 @@ const Profile = (
         setwait(false)
         updateTableDataAfterQuote(TripId)
         closeHandler()
+        try{
+            Allquote()
+        }
+        catch(e){
+            console.log(e)
+        }
         closePDF()
 
     }
@@ -213,13 +221,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-        try {
-            Allquote()
-        }
-        catch (error) {
-            console.log(error)
-        }
-
+     
     }
 
     return (
@@ -246,14 +248,14 @@ const Profile = (
                         }}
                     >
                         <div>
-                            <a href={"https://wa.me/"+whatsApp} target="_blank">
+                            <a href={"https://wa.me/" + whatsApp} target="_blank">
                                 <img className='page1whatsApp' src='/assets/pdfDefaultImage/whatApp.png' />
                                 {/* <img className='page1whatsApp' src={flightsLocalUrl} /> */}
 
                             </a>
                         </div>
                         <div className="footer">
-                            <a className="href" href={"tel:"+Call}>
+                            <a className="href" href={"tel:" + Call}>
                                 <div className="footer_img_with_text">
                                     <img src="/assets/pdfDefaultImage/callinglogo.png" height='63px' />
                                     <div className="footer_call_for_more_info">
@@ -316,7 +318,7 @@ const Profile = (
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
-                                <Footer whatsApp={whatsApp}/>
+                                <Footer whatsApp={whatsApp} />
                             </div>
                         </div>
 
@@ -379,7 +381,7 @@ const Profile = (
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
                             <div style={{ marginTop: '3.9rem' }} >
-                                <Footer  whatsApp={whatsApp}/>
+                                <Footer whatsApp={whatsApp} />
                             </div>
 
                         </div>
@@ -399,7 +401,7 @@ const Profile = (
                         >
                             <div></div>
                             <GoogleReviews />
-                            <Footer whatsApp={whatsApp}/>
+                            <Footer whatsApp={whatsApp} />
                         </div>
                     </div>
                     {/* end of 4th page(Google Review page)*/}
@@ -414,7 +416,7 @@ const Profile = (
                             <div>
                                 <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/DayWiseItineary.png`} />
 
-                                <span className='headLineDaywiseItineary'> Day wise Itineary</span>
+                                <span className='headLineDaywiseItineary'> Day wise Itinerary</span>
                                 <div className='itinearyDiv'>
                                     {itineary &&
                                         itineary.map((data, index) => (
@@ -436,7 +438,7 @@ const Profile = (
                                         flexDirection: 'column-reverse'
                                     }}
                                 >
-                                    <Footer whatsApp={whatsApp}/>
+                                    <Footer whatsApp={whatsApp} />
                                 </div>
                             </div>
                         </div>
@@ -489,7 +491,7 @@ const Profile = (
                                         flexDirection: 'column-reverse'
                                     }}
                                 >
-                                    <Footer whatsApp={whatsApp}/>
+                                    <Footer whatsApp={whatsApp} />
                                 </div>
                             </div>
 
@@ -513,7 +515,7 @@ const Profile = (
                                     NightDataFields.map((data, index) => (
                                         <div key={index} className='hotelUni'>
                                             <div>
-                                                <img src={`/assets/pdfDefaultImage/demoHotel${index + 1}.png`} width="320px" />
+                                                <img src={`/assets/pdfDefaultImage/hotel${index+1}.png`} width="320px" />
                                             </div>
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{
@@ -549,7 +551,7 @@ const Profile = (
                                         marginTop: '2rem'
                                     }}
                                 >
-                                    <Footer whatsApp={whatsApp}/>
+                                    <Footer whatsApp={whatsApp} />
                                 </div>
                             </div>
                             {/* <div>
@@ -597,7 +599,7 @@ const Profile = (
                                                 marginTop: '2rem'
                                             }}
                                         >
-                                            <Footer whatsApp={whatsApp}/>
+                                            <Footer whatsApp={whatsApp} />
                                         </div>
                                     </div>
 
@@ -618,11 +620,10 @@ const Profile = (
                                 backgroundSize: "cover"
                             }}
                         >
-                            <div>
-                                <a href={"https://wa.me/"+whatsApp} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
+                            <div className='paymentsPage'>
+                            <Footer  whatsApp={whatsApp} />
                             </div>
+
 
                         </div>
                     </div>
@@ -638,10 +639,8 @@ const Profile = (
                                 backgroundSize: "cover"
                             }}
                         >
-                            <div>
-                                <a href={"https://wa.me/"+whatsApp} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
+                            <div className='paymentsPage'>
+                            <Footer  whatsApp={whatsApp} />
                             </div>
 
                         </div>
@@ -658,10 +657,8 @@ const Profile = (
                                 backgroundSize: "cover"
                             }}
                         >
-                            <div>
-                                <a href={"https://wa.me/"+whatsApp} target="_blank">
-                                    <img className="whatsAppOnInclusionExclusionPage" src='/assets/pdfDefaultImage/whatApp.png' />
-                                </a>
+                            <div className='paymentsPage'>
+                            <Footer  whatsApp={whatsApp} />
                             </div>
 
                         </div>

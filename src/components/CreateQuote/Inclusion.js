@@ -64,31 +64,26 @@ const Inclusion = (props) => {
         if (e.target.name === "Arival") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_arival: firevalue
+                airport_Arival: firevalue
             }))
         }
         if (e.target.name === "Departure") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_departure: firevalue
+                airport_Departure: firevalue
             }))
         }
-        if (e.target.name === "SIC") {
+        if (e.target.name === "CAB") {
             setFeed(prevState => ({
                 ...prevState,
-                cab_SIC: firevalue
+                Transfer: firevalue
             }))
         }
-        if (e.target.name === "Private") {
-            setFeed(prevState => ({
-                ...prevState,
-                cab_Private: firevalue
-            }))
-        }
+       
         if (e.target.name === "airfair") {
             setFeed(prevState => ({
                 ...prevState,
-                airfair: firevalue
+                Flight: firevalue
             }))
         }
         if (e.target.name === "GST") {
@@ -238,7 +233,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Arival
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_arival} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_Arival} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
@@ -247,7 +242,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Departure
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_departure} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Departure' value={inclusionFeed.airport_Departure} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
@@ -259,24 +254,15 @@ const Inclusion = (props) => {
                 <div className='setaline'>
                     <p className='tag_heading'>Cab Type</p>
                     <div className='breakfast'>
-                        SIC
+                        CAB
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='SIC' value={inclusionFeed.cab_SIC} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='CAB' value={inclusionFeed.Transfer} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
-                    <div className='breakfast'>
-                        Private
-                        <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Private' value={inclusionFeed.cab_Private} onChange={(event) => handleData_inclusion(event)}>
-                                <FormControlLabel control={<Radio />} value={true} />
-                                <FormControlLabel control={<Radio />} value={false} />
-                            </RadioGroup >
-                        </div>
-                    </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='Private_cab' value={inclusionFeed.cab_Private_comments} className='comments_from' placeholder='Please write comments'></textarea>
+                    {/* <textarea onChange={(event) => handleData_inclusion(event)} name='Private_cab' value={inclusionFeed.cab_Private_comments} className='comments_from' placeholder='Please write comments'></textarea> */}
                 </div>
 
 
@@ -286,13 +272,13 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Flights
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.airfair} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='airfair' value={inclusionFeed.Flight} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
                     </div>
-                    <div className='breakfast'>
+                    {/* <div className='breakfast'>
                         GST
                         <div className='settingToSide'>
                             <RadioGroup className='radiogroup' name='GST' value={inclusionFeed.Gst} onChange={(event) => handleData_inclusion(event)}>
@@ -309,7 +295,7 @@ const Inclusion = (props) => {
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className='inclusionContaint1'>

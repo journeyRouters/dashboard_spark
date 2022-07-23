@@ -99,10 +99,15 @@ const Row = (props) => {
     }
 
     function closeOnstatusComments() {
-        if (Lead_Status == "Converted") {
+        if (Lead_Status == "Dump","Converted") {
             updateStatus()
             props.updateTableDataAfterConversion(row.TripId)
         }
+        else{
+            updateStatus()
+            props.getLeadOnBoard()
+        }
+
         setopenupdater(false)
     }
     async function latestTripData() {

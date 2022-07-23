@@ -65,7 +65,7 @@
     background-color: #fafdfe;
 }
 
-.addressOfJr_{
+.addressOfJr_ {
     width: 9rem;
     font-size: 6px;
     font-weight: 700;
@@ -94,92 +94,109 @@
     border: 1px solid;
     margin: 1rem;
 }
-.agent_details_jr_invoice{
+
+.agent_details_jr_invoice {
     justify-content: space-between;
     font-weight: 500;
     font-size: x-small;
     width: 94%;
     display: flex;
-    margin-left: 1rem; 
+    margin-left: 1rem;
     align-items: center;
     border-bottom: 1px solid;
 }
-.dataMapper_jr_invoice{
+
+.dataMapper_jr_invoice {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid;
 }
-.installment_data_header_jr_invoice{
+
+.installment_data_header_jr_invoice {
     /* width: 88%; */
     display: flex;
     justify-content: space-between;
     border: 1px solid;
 }
-.Grand_total_installments_jr_invoice{
+
+.Grand_total_installments_jr_invoice {
     /* background: #acdede; */
     border: 1px solid;
     width: 38%;
     margin-left: 30rem;
 }
-.total_amount_jr_invoice{
+
+.total_amount_jr_invoice {
     display: flex;
     justify-content: space-evenly;
     /* background: #acdede; */
 }
-.batches{
+
+.batches {
     width: 33px;
     height: 30px;
     margin-left: 6rem;
     /* margin-top: -1rem; */
 }
-.batches_controller_jr_invoice{
+
+.batches_controller_jr_invoice {
     color: #106d6d;
     display: flex;
     margin-top: -1rem;
 }
-.client_details_jr_invoice{
+
+.client_details_jr_invoice {
     display: flex;
     justify-content: space-around;
 }
-.font_jr_invoice{
+
+.font_jr_invoice {
     margin-top: -1.5rem;
 }
-.hotel_desc_jr_invoice{
+
+.hotel_desc_jr_invoice {
     border: 1px solid;
     padding-left: 1rem;
     text-transform: capitalize;
 }
-.deliverable_documents_jr_invoice{
+
+.deliverable_documents_jr_invoice {
     display: flex;
     justify-content: space-between;
     font-size: x-small;
     font-weight: 600;
 }
-.inclusion_exclusion_jr_invoice{
+
+.inclusion_exclusion_jr_invoice {
     margin-top: 1rem;
     border: 1px solid;
 }
-.itineary_jr_invoice{
+
+.itineary_jr_invoice {
     margin-top: 1rem;
     border: 1px solid;
 }
-.terms_and_condition{
+
+.terms_and_condition {
     border: 1px solid;
     margin-top: 2rem;
 }
-.whats_app{
+
+.whats_app {
     background: #7ad97a;
     border: none;
     border-radius: 1rem;
 }
-.cutomerservice{
+
+.cutomerservice {
     display: flex;
     justify-content: space-evenly;
     font-size: x-small;
     color: rgb(145, 140, 140);
     margin-bottom: 2rem;
 }
-.invoiceDownload_jr_invoice{
+
+.invoiceDownload_jr_invoice {
     width: 13%;
     font-weight: 600;
     background: #e4fe1e;
@@ -189,15 +206,131 @@
     align-items: center;
     justify-content: center;
 }
-.customer_care_details_jr_invoice{
+
+.customer_care_details_jr_invoice {
     display: flex;
     justify-content: space-around;
     width: 23rem;
     align-items: center;
 }
-.slectingpdf{
+
+.slectingpdf {
     border: 1px solid;
 }
-.slectingpdf_{
+
+.slectingpdf_ {
     border: 1px solid red;
+}
+
+.setHeaderOfInvoice {
+    /* width: 10rem; */
+    height: 19rem;
+    background-image: url("/public/assets/InvoiceAssets/header1.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Details {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.page {
+    width: 55rem;
+    /* height: 78rem; */
+}
+
+.ClientDetails {
+    display: flex;
+    justify-content: space-around;
+    /* width: 19rem; */
+    font-weight: 700;
+    font-family: arial;
+}
+
+.officeDetails {
+    width: 19rem;
+    font-weight: 700;
+    font-family: arial;
+}
+
+.line {
+    margin-top: 0rem;
+    width: 1px;
+    height: 10rem;
+    background: black;
+}
+
+
+
+
+.paymentsSchedual{
+    height: 5rem;
+    width: 44.5rem;
+    margin-left: 4rem;
+    background-image: url("/public/assets/InvoiceAssets/PaymentsSchedual.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Date{
+    border: 2px solid black;
+    margin-left: 4rem;
+    height: 2rem;
+    width: 14.6rem;
+    font-weight: 700;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.DateValue{
+    border: 2px solid black;
+    margin-left: 4rem;
+    height: 3rem;
+    width: 14.6rem;
+    font-weight: 700;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.PaymentsSchedualLine{
+    width: 1px;
+    background: black;
+}
+.mappingArea{
+    display: flex;
+}
+.reducer{
+    margin-right: -4rem;
+}
+.grandtotal{
+    height: 10rem;
+    width: 40rem;
+    margin-left: 11rem;
+    margin-top: 2rem;
+    background-image: url("/public/assets/InvoiceAssets/grandtotal.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.total{
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 1.5rem;
+
+}
+.secondpage{
+    width: 55rem;
+    height: 78rem;
+    background-image: url("/public/assets/InvoiceAssets/JRINVOICEPAGE2.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

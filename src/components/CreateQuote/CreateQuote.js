@@ -57,25 +57,7 @@ const Createquote = (props) => {
         "Quote",
         
     ];
-    // /**new logic solution be apart from previous one */
-
-    // async function getProfile(args) {
-    //     console.log(args)
-    //     try {
-    //         const docRef = doc(db, "Profile", args.uid);
-    //         const docSnap = await getDoc(docRef);
-    //         if (docSnap.exists()) {
-    //             setProfile(docSnap.data())
-    //             getdocandmergetolist(docSnap.data().Lead_Current)
-    //         } else {
-    //             console.log("No such document!");
-    //             // alert("Developer issue")
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log({ error })
-    //     }
-    // }
+   
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
         console.log(lead_data)
@@ -83,46 +65,7 @@ const Createquote = (props) => {
         setLead_data(new_tableData)
 
     }
-    // async function updateprofile_LeadFollowup(tripid) {
-    //     const docref = doc(db, "Profile", profile.uid);
-    //     var pre_Lead_followUp = profile.Lead_followUp
-    //     var new_Lead_followUp = pre_Lead_followUp.push(tripid)
-    //     console.log(new_Lead_followUp)
-    //     await updateDoc(docref, {
-    //         "Lead_followUp": new_Lead_followUp
-    //     });
-    // }
-    // async function updateprofile_Lead_Current(tripid) {
-    //     var pre_Lead_Current = profile.Lead_Current
-    //     var elementIndex = pre_Lead_Current.indexOf(tripid)
-    //     var new_Lead_Current = pre_Lead_Current.splice(elementIndex, 1)
-    //     const docref = doc(db, "Profile", profile.uid)
-    //     await updateDoc(docref, {
-    //         "Lead_Current": pre_Lead_Current
-    //     })
-    // }
-    // async function getdocandmergetolist(list) {
-    //     /** this function is getting the list of trips from
-    //      * user profile and fetching the doc from firebase one by one.
-    //      * beacause the list query is limited to 10 elements in a single list
-    //      */
-    //     console.log(list.length)
-    //     let list_ = []
-    //     for (let index = 0; index < list.length; index++) {
-    //         const docRef = doc(db, "Trip", list[index]);
-    //         const docSnap = await getDoc(docRef);
-    //         if (docSnap.exists()) {
-    //             list_.push(docSnap.data())
-    //             console.log("Document data:", docSnap.data());
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    //         }
-    //     }
-    //     setLead_data(list_)
-    //     setopen(false)
-
-    // }
+    
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
         try {

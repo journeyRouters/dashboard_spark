@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import './Driver.css';
 import React from 'react';
 import moment from 'moment';
-import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import app from '../required';
 import DriverComponents from './DriverComponents';
 import readXlsxFile from 'read-excel-file';
 import { fromEvent } from "file-selector";
+import { async } from '@firebase/util';
+import objectHash from 'object-hash';
 const db = getFirestore(app);
 
 
@@ -19,6 +21,8 @@ const Driver = (props) => {
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     const [openlistOfUsers, setopenlistOfUsers] = useState(false)
+    const[TripCounter,setTripCount]=useState()
+    const[Hash,setHash]=useState()
     function handleListChange() {
         setopenlistOfUsers(!openlistOfUsers)
     }
@@ -30,12 +34,21 @@ const Driver = (props) => {
             const path = files[0].path
             // setInProgress(true)
             readXlsxFile(files[0]).then((rows) => {
-                console.log(rows)
+                let countUpdater=TripCounter
+                let HashTable=Hash
                 for (let i = 1; i <= rows.length - 1; i++) {
                     let Row = rows[i]
-                    console.log(Row)
-                    let any = Math.random()
-                    let tripid = `TRP${any}`
+                    // console.log(Row)
+                    let TripHash=objectHash({foo: Row[3]+Row[5]+today})
+                    let contactString=Row[5]+''
+                    let last4=contactString.slice(contactString.length-4)
+                    let tripid = countUpdater+''+last4
+                    countUpdater=countUpdater+1
+                    // console.log(TripHash)
+                    try{
+                        HashTable[`${tripid}`]=TripHash
+                    }
+                    catch(e){console.log(e)}
                     setDoc(doc(db, "Trip", tripid), {
                         TripId: tripid,
                         Lead_Status: Row[0],
@@ -79,6 +92,8 @@ const Driver = (props) => {
                         final_package: null
                     });
                 }
+                updateTripCounter(countUpdater)
+                updateHash(HashTable    )
                 getLeadByDate()
                 // console.log(rows[1][0])
                 // uploadFileOnStorage(path,'dingdong')
@@ -90,21 +105,21 @@ const Driver = (props) => {
     }
     async function getLeadByDate() {
         let list = []
-        console.log(selectedDate)
+        // console.log(selectedDate)
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
         // console.log(date)
         try {
             var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
-                console.log(doc.data())
+                // console.log(doc.data())
             });
             try{
-                console.log(list)
+                // console.log(list)
                 setLead_data(list)
             }
             catch(e){console.log(e)}
-            console.log(list);
+            // console.log(list);
         }
         catch (error) {
             console.log(error.message)
@@ -124,20 +139,63 @@ const Driver = (props) => {
         return () => unsubscribe()
 
     }, []);
-    function test(days) {
+    function test() {
         let date = new Date();
-        date.setDate(date.getDate() + days);
-        moment(date).format('DD MMMM YYYY')
-        return date;
+        // date.setDate(date.getDate() + days);
+        // console.log(objectHash({foo: 'nand'+date}))
+        // console.log(moment(date).format('DD-MM-YYYY-HH-mm-ss-a'))
     }
     useEffect(() => {
         window.scrollTo(0, 0);
+        getTripCounter()
+        getHashTable()
         // var check = moment(today,'DD MMMM YYYY').add(5, 'days').calendar()
         // console.log(moment(test(3)).format('DD MMMM YYYY'))
         // console.log(selectedDate)
         getLeadByDate(currentdate)
     }, []);
+    async function getTripCounter(){
+        const TripRef = doc(db, "Support", "tripCount");
+        let SupportSnap;
+        try{
+             SupportSnap = await getDoc(TripRef);
+        }
+        catch(e){console.log(e)}
+        if(SupportSnap.exists()){
+            setTripCount(SupportSnap.data().tripCount)
+            // console.log(SupportSnap.data().tripCount)
 
+        }
+    }
+    async function getHashTable(){
+        const TripRef = doc(db, "Support", "Hash");
+        let SupportSnap;
+        try{
+             SupportSnap = await getDoc(TripRef);
+        }
+        catch(e){console.log(e)}
+        if(SupportSnap.exists()){
+            setHash(SupportSnap.data().hash)
+            // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
+
+
+        }
+    }
+    async function updateTripCounter(counted){
+        const TripRef = doc(db, "Support", "tripCount");
+        await updateDoc(TripRef, {
+            tripCount: counted
+          });
+
+    }
+    async function updateHash(json){
+        const TripRef = doc(db, "Support", "Hash");
+        // console.log(Object.keys(json).length)
+        await updateDoc(TripRef, {
+            hash: json
+          },{ merge: true });
+
+    }
     return (
         <div>
             {/* <Modal open={openlistOfUsers} onClose={handleListChange} >

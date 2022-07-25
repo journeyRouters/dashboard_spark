@@ -195,9 +195,10 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                                             {
                                                 installment.map((data, index) => (<>
                                                     <div className="DateValue   ">
-                                                        <span>
-                                                            {/* <img src="/assets/InvoiceAssets/TestingLogo.png" width='35px'/> */}
-                                                            PENDING</span>
+                                                        {/* <span>
+                                                            <img src="/assets/InvoiceAssets/TestingLogo.png" width='35px'/>
+                                                            PENDING</span> */}
+                                                            <p>{data.Status}</p>
                                                     </div>
                                                 </>))
                                             }

@@ -417,6 +417,128 @@ export const avtivityList = {
             value: "Leisureday"
 
         }
+    ],
+    Malaysia: [
+        {
+            label: "BotanicalGardenAndButterflyFarm",
+            value: "BotanicalGardenAndButterflyFarm",
+        },
+        {
+            label: "BukitTinggiTour",
+            value: "BukitTinggiTour",
+        },
+        {
+            label: "CameronHighlandsTour",
+            value: "CameronHighlandsTour",
+        },
+        {
+            label: "CityExplorer",
+            value: "CityExplorer",
+        },
+        {
+            label: "CraftAndCultureTour",
+            value: "CraftAndCultureTour",
+        },
+        {
+            label: "DayCruise",
+            value: "DayCruise",
+        },
+        {
+            label: "DiscoverLangkawi",
+            value: "DiscoverLangkawi",
+        },
+        {
+            label: "ElephantSanctuaryTour",
+            value: "ElephantSanctuaryTour",
+        },
+        {
+            label: "EveningWalkingTourOfChinaTown",
+            value: "EveningWalkingTourOfChinaTown",
+        },
+        {
+            label: "FireFliesTour",
+            value: "FireFliesTour",
+        },
+        {
+            label: "GardenAndParkTour",
+            value: "GardenAndParkTour",
+        },
+        {
+            label: "GentingHighlandsTour",
+            value: "GentingHighlandsTour",
+        },
+        {
+            label: "HalfDayCityTour",
+            value: "HalfDayCityTour",
+        },
+        {
+            label: "HillAndTempleSightseeing",
+            value: "HillAndTempleSightseeing",
+        },
+        {
+            label: "IslandExperience",
+            value: "IslandExperience",
+        },
+        {
+            label: "IslandHopping",
+            value: "IslandHopping",
+        },
+        {
+            label: "LangkawiGrandTour",
+            value: "LangkawiGrandTour",
+        },
+        {
+            label: "LostWorldOfTambun",
+            value: "LostWorldOfTambun",
+        },
+        {
+            label: "MangroveIsland",
+            value: "MangroveIsland",
+        },
+        {
+            label: "MelakaTour",
+            value: "MelakaTour",
+        },
+        {
+            label: "NatureCruise",
+            value: "NatureCruise",
+        },
+        {
+            label: "PulauPayarSnorklingBeach",
+            value: "PulauPayarSnorklingBeach",
+        },
+        {
+            label: "PutrajayaTour",
+            value: "PutrajayaTour",
+        },
+        {
+            label: "RoundIslandDiscovery",
+            value: "RoundIslandDiscovery",
+        },
+        {
+            label: "StreetArtTour",
+            value: "StreetArtTour",
+        },
+        {
+            label: "SunsetCruise",
+            value: "SunsetCruise",
+        },
+        {
+            label: "SunwayLagoon",
+            value: "SunwayLagoon",
+        },
+        {
+            label: "TemplersParkTour",
+            value: "TemplersParkTour",
+        },
+        {
+            label: "WarMuseumAdventure",
+            value: "WarMuseumAdventure",
+        },
+        {
+            label: "ZooNegara",
+            value: "ZooNegara",
+        },
     ]
 }
 export function ActivityResolver(destination) {

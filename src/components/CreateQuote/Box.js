@@ -316,7 +316,7 @@ const Box = ({
                         <div className='basicDetails'>
                             <div>
                                 <label>Days</label>
-                                <input type="number" min="1" max="5" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length}/>
+                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length}/>
                             </div>
                             <div>
                                 <label>Night</label>

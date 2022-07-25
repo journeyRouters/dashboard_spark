@@ -30,7 +30,7 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    console.log(profile)
+    // console.log(profile)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -269,7 +269,7 @@ const Box = ({
     // }
     function select_date(e) {
         var date = e.target.value
-        console.log(date)
+        // console.log(date)
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
@@ -316,7 +316,7 @@ const Box = ({
                         <div className='basicDetails'>
                             <div>
                                 <label>Days</label>
-                                <input type="number" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length}></input>
+                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length}/>
                             </div>
                             <div>
                                 <label>Night</label>

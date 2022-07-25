@@ -108,6 +108,7 @@ function App() {
 
   }
   function page(args) {
+    // console.log(args)
     setPage(args)
   }
 
@@ -415,7 +416,7 @@ function App() {
               : <></>
           }
           {
-            Page === "Operation_converted" ? <>
+            Page === "Account_Converted" ? <>
               <Account_converted auth={auth} />
             </> : <></>
           }

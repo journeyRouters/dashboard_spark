@@ -17,7 +17,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [currentdate, setcurrentday] = useState(moment(today).format('YYYY-MM-DD'))
     const animatedComponents = makeAnimated();
     const [installment, setinstallment] = useState([
-        { Date: '', amount: 0 },])
+        { Date: '', amount: 0 ,Status:'Pending',TransactionId:'',amountRecived:'',yourname:''},])
     const [BillingAddress, setBillingAddress] = useState('')
     const [flight_cost, setFlight_cost] = useState(0)
     const [visa_cost, set_visa_cost] = useState(0)
@@ -86,7 +86,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
 
     }
     function addMOreInstallments() {
-        let newInstallment = { Date: '', amount: 0 }
+        let newInstallment = { Date: '', amount: 0,Status:'Pending',TransactionId:'',amountRecived:'',yourname:'' }
         setinstallment([...installment, newInstallment])
         console.log(documents)
     }

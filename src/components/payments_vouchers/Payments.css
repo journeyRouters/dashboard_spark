@@ -138,6 +138,7 @@
 }
 
 .parent {
+    height: 1rem;
     width: 15px;
     background-color: #FFFFFF;
 }
@@ -178,4 +179,13 @@
 .packageAndInvoice{
     display: flex;
     flex-direction: column;
+}
+/* Payments Block for Accounts */
+.paymentsConfirmer{
+
+}
+.uni_installments{
+    display: flex;
+    width: 47rem;
+    justify-content: space-between;
 }

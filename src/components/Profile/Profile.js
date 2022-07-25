@@ -41,7 +41,7 @@ const Profile = (
         flight
     }
 ) => {
-    console.log(profile)
+    // console.log(profile)
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
         value: "size-a4"
@@ -96,7 +96,7 @@ const Profile = (
     }, []);
 
     async function setQuotationData() {
-        console.log(ImgLinks)
+        // console.log(ImgLinks)
         // debugger
         if (indicator) {
         }
@@ -174,7 +174,7 @@ const Profile = (
                 () => {
 
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log('File available at', downloadURL);
+                        // console.log('File available at', downloadURL);
                         tempMemo.Link = downloadURL
                         tempMemo.path = path
 
@@ -183,7 +183,7 @@ const Profile = (
             );
             localList.push(tempMemo)
         }
-        console.log(localList)
+        // console.log(localList)
         controllLinks(localList)
     }
     function closeFormAndPdf() {
@@ -380,7 +380,7 @@ const Profile = (
                             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
-                            <div style={{ marginTop: '3.9rem' }} >
+                            <div style={{ marginTop: '1.9rem' }} >
                                 <Footer whatsApp={whatsApp} />
                             </div>
 

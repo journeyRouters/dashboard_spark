@@ -55,7 +55,7 @@ const Driver = (props) => {
                         Campaign_code: Row[1],
                         Date_of_lead: Row[2],
                         Traveller_name: Row[3],
-                        Extra_Info: Row[4],
+                        InstaId: Row[4],
                         Contact_Number: Row[5],
                         Destination: Row[6],
                         Comment: Row[7],

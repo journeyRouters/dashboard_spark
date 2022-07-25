@@ -91,8 +91,8 @@ export const avtivityList = {
             value: 'CandleLightDinnerwithSetupatBeach'
         },
         {
-            label:"Leisureday",
-            value:"Leisureday"
+            label: "Leisureday",
+            value: "Leisureday"
 
         }
 
@@ -159,8 +159,8 @@ export const avtivityList = {
             value: 'ManuTemple'
         },
         {
-            label:"Leisureday",
-            value:"Leisureday"
+            label: "Leisureday",
+            value: "Leisureday"
 
         }
 
@@ -251,8 +251,8 @@ export const avtivityList = {
             value: "MadameTussauds",
         },
         {
-            label:"Leisureday",
-            value:"Leisureday"
+            label: "Leisureday",
+            value: "Leisureday"
 
         }
     ],
@@ -306,8 +306,8 @@ export const avtivityList = {
             value: "UniversalStudio",
         },
         {
-            label:"Leisureday",
-            value:"Leisureday"
+            label: "Leisureday",
+            value: "Leisureday"
 
         }
     ],
@@ -315,6 +315,26 @@ export const avtivityList = {
         {
             label: 'Arival',
             value: 'Arival'
+        },
+        {
+            label: "DubaiFrame",
+            value: "DubaiFrame",
+        },
+        {
+            label: "SheikhZayedMosque",
+            value: "SheikhZayedMosque",
+        },
+        {
+            label: "YasIsland",
+            value: "YasIsland",
+        },
+        {
+            label: "DolphinAquarium",
+            value: "DolphinAquarium",
+        },
+        {
+            label: "MotionGate",
+            value: "MotionGate",
         },
         {
             label: 'Transfer',
@@ -393,8 +413,8 @@ export const avtivityList = {
             value: "SkyDiveOverAtlantis",
         },
         {
-            label:"Leisureday",
-            value:"Leisureday"
+            label: "Leisureday",
+            value: "Leisureday"
 
         }
     ]

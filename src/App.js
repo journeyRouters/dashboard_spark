@@ -287,6 +287,12 @@ function App() {
                         <p>User Controller</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Create Quote</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Driver"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -396,7 +402,7 @@ function App() {
             <>
               {
                 auth &&
-                <Vouchers auth={auth}  profile={profile}/>
+                <Vouchers auth={auth} profile={profile} />
               }
             </>
             : <></>

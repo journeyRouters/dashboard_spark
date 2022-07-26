@@ -161,7 +161,7 @@ const Box = ({
 
     }
     function itinearyDaysincrease() {
-        let data = { Day: '', Description: '', Activity:{}}
+        let data = { Day: '', Description: '', Activity: {} }
         setItineary([...itineary, data])
     }
     function itinearyDaydecrease() {
@@ -307,16 +307,56 @@ const Box = ({
             </Modal>
             <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                 <div className='popUp_body'>
+
                     <div className='save_close'>
                         <button className='compo_button' onClick={() => closeHandler()} >close</button>
                         <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                     </div>
                     <div>
+                        <div style={{ display: 'flex' }} >
+                            <div>
+                                <h4>
+                                    <span>Trip id:- </span>
+                                    <span>{data.TripId}</span>
+                                </h4>
+                                <h4>
+                                    <span>Budget:-</span>
+                                    <span>INR {data.Budget}/-</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Date:- </span>
+                                    <span>{moment(data.Travel_Date.toDate()).format('DD-MM-YYYY')}</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Duration :- </span>
+                                    <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>No of pax:- </span>
+                                    <span>{data.Pax}</span>
+                                </h4>
+                                <h4>
+                                    <span>No of child:- </span>
+                                    <span>{data.Child ? data.Child : 0}</span>
+                                </h4>
+                                <h4>
+                                    <span>Contact:- </span>
+                                    <span>{data.Contact_Number}</span>
+                                </h4>
+                            </div>
+                            <div>
+                                {data.comments.map((data, index) => (<>
+                                    <span>{data}</span><br />
+                                </>))}
+                            </div>
+                        </div>
                         <p className='basicDetailsheading'>Basic Details</p>
                         <div className='basicDetails'>
                             <div>
                                 <label>Days</label>
-                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length}/>
+                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
                             </div>
                             <div>
                                 <label>Night</label>
@@ -410,17 +450,17 @@ const Box = ({
                                                         components={animatedComponents}
                                                         isMulti
                                                         options={nights}
-                                                        defaultValue={Edit_NightDataFields ? data.Night: null}
+                                                        defaultValue={Edit_NightDataFields ? data.Night : null}
                                                         onChange={(e) => advance_controller_nights(e, index)}
                                                     />
                                                 </div>
                                                 <div className='unitComponent'>
-                                                <label>HotelMeal</label><br />
+                                                    <label>HotelMeal</label><br />
                                                     <Select
                                                         closeMenuOnSelect={false}
                                                         components={animatedComponents}
                                                         isMulti
-                                                        defaultValue={Edit_NightDataFields ? data.HotelMeal: null}
+                                                        defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
                                                         options={HotelMeals}
                                                         onChange={(e) => advance_controller_Hotel_meals(e, index)}
                                                     />
@@ -470,7 +510,7 @@ const Box = ({
                                                         value={data.RoomType}
                                                     />
                                                 </div>
-                                                <button style={{height:'32px'}} onClick={() => removeFields(index)}>Remove</button>
+                                                <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
                                             </div>
                                             {/* <textarea
                                                 className='comments'
@@ -546,16 +586,16 @@ const Box = ({
                                             <div style={{ display: 'flex', alignItems: 'center' }} >
                                                 <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                                 <Select
-                                                className='Autocomplete'
+                                                    className='Autocomplete'
                                                     placeholder='Activity'
                                                     name='Activity'
                                                     closeMenuOnSelect={true}
                                                     components={animatedComponents}
                                                     options={activity}
-                                                    defaultValue={Edit_itineary ? data.Activity: null}
+                                                    defaultValue={Edit_itineary ? data.Activity : null}
                                                     onChange={(event) => advance_controller_Activity(event, index)}
                                                 />
-                                            </div> 
+                                            </div>
                                             <div>
                                                 <label className='title'>Description</label><br />
                                                 <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>

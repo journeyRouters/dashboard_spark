@@ -11,7 +11,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     var today = new Date()
     const testdate=data.Travel_Date
   
-    console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
+    // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
     var currentdate = moment(today).format('YYYY-MM-DD')
     // function handlebackendProfileAndtrip(tripid, uid, Name) {
     //     update_lead_field(uid, Name)
@@ -81,7 +81,11 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
 
                     </select>
                 </span><br />
-                <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />
+                {
+                    testdate?<>
+                    <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />                    
+                    </>:<></>
+                }
                 <span>Assign to:-</span>
 
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>

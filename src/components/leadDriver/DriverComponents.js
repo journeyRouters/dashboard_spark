@@ -1,6 +1,6 @@
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import app from '../required';
 import './Driver.css';
 
@@ -9,7 +9,9 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     var today = new Date()
-    // console.log(moment(data.Travel_Date.toDate()).format('YYYY-MM-DD'))
+    const testdate=data.Travel_Date
+  
+    console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
     var currentdate = moment(today).format('YYYY-MM-DD')
     // function handlebackendProfileAndtrip(tripid, uid, Name) {
     //     update_lead_field(uid, Name)
@@ -79,7 +81,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
 
                     </select>
                 </span><br />
-                <span>Date of travel:-{moment(data.Travel_Date.toDate()).format('YYYY-MM-DD')}</span><br />
+                <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />
                 <span>Assign to:-</span>
 
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>

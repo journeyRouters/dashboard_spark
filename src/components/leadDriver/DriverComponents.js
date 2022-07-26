@@ -1,4 +1,4 @@
-import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
@@ -38,6 +38,13 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     //     });
 
     // }
+    async function deletelead(tripid){
+        try{
+            await deleteDoc(doc(db, "Trip", tripid));
+            getLeadByDate()
+        }
+        catch(e){console.log(e)}
+    }
     async function update_lead_field(uid, name) {
         /**this function is to update the assigned user in lead data for ref and to be identify */
         const Databaseref = doc(db, "Trip", data.TripId);
@@ -100,6 +107,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 </select>
             </div>
             <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
+            <button disabled={data.assign_flg} onClick={()=>deletelead(data.TripId)}>delete</button>
         </div>
 
     );

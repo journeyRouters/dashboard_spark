@@ -1,11 +1,8 @@
-export const Aashishsingh='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FAashishsingh.PNG?alt=media&token=580d649e-b8bc-414c-881c-b9e48d97e212'
-export const Amit='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FAmit%20singh.PNG?alt=media&token=e5eef425-48e0-4fc0-a394-b2df8675b8f5'
-export const imran='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FImran.PNG?alt=media&token=92390e26-98f9-4f47-b78d-ccac1cf5d82e'
-export const Kajal='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FKajal.PNG?alt=media&token=2e4eb2e1-9504-4bce-a059-2ea58ac231f9'
-export const manoj='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FManoj.PNG?alt=media&token=1bb4c8c8-da93-4463-93f5-831006110443'
-export const Naveen='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FNaveen.PNG?alt=media&token=633ae27e-bbe6-49a0-b4d2-9bccd66f09b0'
-export const Stephen='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FStephen%20Raj.PNG?alt=media&token=a10f723f-7fe2-47c8-a8bc-784dd84c9de6'
-export const Tanmay='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/review_Img%2FTanmay.PNG?alt=media&token=0a30c125-83d7-4ba9-9770-055fc371d524'
-
-
-
+export const NehaGupta='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2FNeha.PNG?alt=media&token=f51fb534-24d4-4f70-ab83-6d8692a10876'
+export const Saumil='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2FSaumil.PNG?alt=media&token=ad519140-e2dc-4bd4-964a-ec8dff126e39'
+export const Akriti='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Fakriti.PNG?alt=media&token=e38e452e-8666-4167-865c-8b7c0cf0871f'
+export const Akshat='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Fakshat.PNG?alt=media&token=4661c495-dda0-4eef-b647-022d4d129b1f'
+export const Himanshu='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Fhimanshu.PNG?alt=media&token=7544a7a6-85cf-46fe-a82d-58316da2e0cb'
+export const Manjit='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Fmanjit.PNG?alt=media&token=17724148-28a1-46bb-a623-3d1a5d93ea91'
+export const Sanu='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Fsanu%20lawrence.PNG?alt=media&token=64f03346-22e1-4209-a179-cf659ea32630'
+export const Tanmay='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/Review_img%2Ftanmay.PNG?alt=media&token=93f157b6-ff29-4463-88f7-cda5e7ba9069'

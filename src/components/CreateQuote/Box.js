@@ -68,7 +68,7 @@ const Box = ({
         // Gst: false,
         // Tcs: false,
         Flight: false,
-        siteseeing: false,
+        sightseeing: false,
         siteseeing_comments: '',
         Visa: false,
         Visa_comments: '',

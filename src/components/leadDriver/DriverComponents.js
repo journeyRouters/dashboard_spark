@@ -11,7 +11,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     var today = new Date()
     const testdate=data.Travel_Date
   
-    // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
+    console.log(data)
     var currentdate = moment(today).format('YYYY-MM-DD')
     // function handlebackendProfileAndtrip(tripid, uid, Name) {
     //     update_lead_field(uid, Name)

@@ -1,7 +1,10 @@
 import { Modal, Radio } from '@material-ui/core';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Maldives.css'
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 
 const Maldives = ({ set_popupopner, data,
     Edit_itineary
@@ -13,6 +16,7 @@ const Maldives = ({ set_popupopner, data,
     , Edit_visacost
     , Edit_landPackage
 }) => {
+    const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
     console.log(data)
     const days = Array(data.Travel_Duration).fill('a');
@@ -20,13 +24,58 @@ const Maldives = ({ set_popupopner, data,
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
     const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState(Edit_NightDataFields ? Edit_NightDataFields : [
-        { Night: [], HotelMeal: [], HotelName: '', City: '', Category: '', RoomType: '', comments: '' },])
+        { Night: [], MealPlan: [], PropertyName: '', RoomCategory: '', Transfer: '', comments: '' },])
     const [itineary, setItineary] = useState(Edit_itineary ? Edit_itineary : [{ Day: '', Description: '', Activity: {} },])
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [flightcost, setFlightcost] = useState(Edit_flightcost ? Edit_flightcost : 0)
     const [SelectedpackageType, setSelectedpackageType] = useState("Per Person")
     const [visacost, setvisacost] = useState(Edit_visacost ? Edit_visacost : 0)
     const [landPackage, setlandpackage] = useState(Edit_landPackage ? Edit_landPackage : 0)
+    const [nights, setnights] = useState([])
+    const HotelMeals = [
+        {
+            label: "BreakFast",
+            value: "BreakFast"
+        },
+        {
+            label: "Lunch",
+            value: "Lunch"
+        },
+        {
+            label: "Dinner",
+            value: "Dinner"
+        },
+        {
+            label: "Drinks",
+            value: "Drinks"
+        }
+    ]
+    function addFields() {
+        let object = { Night: [], MealPlan: [], PropertyName: '', RoomCategory: '', Transfer: '', comments: '' }
+        setNightDataFields([...NightDataFields, object])
+        setCountnight(countNight + 1)
+
+    }
+    function removeFields(index) {
+        let data = [...NightDataFields];
+        data.splice(index, 1)
+        setNightDataFields(data)
+        setCountnight(countNight - 1)
+
+    }
+    useEffect(() => {
+        handleOptionOfNights()
+    }, []);
+    function handleOptionOfNights() {
+        var list = []
+        for (let start = 1; start <= days_total.length - 1; start++) {
+            var tmp = { value: '', label: '' }
+            tmp.value = `N${start}`
+            tmp.label = `N${start}`
+            list.push(tmp)
+        }
+        setnights(list)
+    }
     function closeHandler() {
         setopen(false)
         set_popupopner(false)
@@ -75,6 +124,42 @@ const Maldives = ({ set_popupopner, data,
 
         }
 
+    }
+    function advance_controller_Hotel_meals(e, index) {
+        let data = [...NightDataFields];
+        let local_list = []
+        for (var i = 0; i < e.length; i++) {
+            let Local_Object = { label: '', value: '' }
+            Local_Object.label = e[i].value
+            Local_Object.value = e[i].value
+            local_list.push(Local_Object)
+        }
+        data[index]['HotelMeal'] = local_list;
+        setNightDataFields(data);
+    }
+    const handleFormChange = (event, index) => {
+        let data = [...NightDataFields];
+        data[index][event.target.name] = event.target.value;
+        setNightDataFields(data);
+    }
+    function removeFields(index) {
+        let data = [...NightDataFields];
+        data.splice(index, 1)
+        setNightDataFields(data)
+        setCountnight(countNight - 1)
+
+    }
+    function advance_controller_nights(e, index) {
+        let data = [...NightDataFields];
+        let local_list = []
+        for (var i = 0; i < e.length; i++) {
+            let Local_Object = { label: '', value: '' }
+            Local_Object.label = e[i].value
+            Local_Object.value = e[i].value
+            local_list.push(Local_Object)
+        }
+        data[index]['Night'] = local_list;
+        setNightDataFields(data);
     }
     function select_date(e) {
         var date = e.target.value
@@ -177,8 +262,99 @@ const Maldives = ({ set_popupopner, data,
                         </div>
                     </div>
                 </div>
-                <label className='san-serif'>select Travel Date</label><br/>
-                    <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                <label className='san-serif'>select Travel Date</label><br />
+                <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                <div>
+                    {
+                        // console.log(NightDataFields),
+                        NightDataFields &&
+                        NightDataFields.map((data, index) => {
+                            return (
+                                <>
+                                    <div key={index} className='costOption_estimatiom'>
+                                        <div className='unitComponent'>
+                                            <label>Night</label><br />
+                                            <Select
+                                                closeMenuOnSelect={false}
+                                                components={animatedComponents}
+                                                isMulti
+                                                options={nights}
+                                                defaultValue={Edit_NightDataFields ? data.Night : null}
+                                                onChange={(e) => advance_controller_nights(e, index)}
+                                            />
+                                        </div>
+                                        <div className='unitComponent'>
+                                            <label>HotelMeal</label><br />
+                                            <Select
+                                                closeMenuOnSelect={false}
+                                                components={animatedComponents}
+                                                isMulti
+                                                defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
+                                                options={HotelMeals}
+                                                onChange={(e) => advance_controller_Hotel_meals(e, index)}
+                                            />
+                                        </div>
+                                        <div className='unitComponent'>
+                                            <label>Hotel Name</label><br />
+                                            <input placeholder='hotel Name'
+                                                name='HotelName'
+                                                value={data.HotelName}
+                                                onChange={(event) => handleFormChange(event, index)}
+                                            >
+                                            </input>
+
+                                        </div>
+
+                                        <div className='unitComponent'>
+                                            <label>City</label><br />
+                                            <input placeholder='city'
+                                                name='City'
+                                                value={data.City}
+                                                onChange={(event) => handleFormChange(event, index)}
+                                            ></input>
+                                        </div>
+                                        <div className='unitComponent'>
+                                            <label>Category</label><br />
+                                            <input placeholder='Category'
+                                                list="HotelCategory"
+                                                name='Category'
+                                                value={data.Category}
+                                                onChange={(event) => handleFormChange(event, index)}
+                                            />
+                                            <datalist id="HotelCategory">
+                                                <option value="1 star">1 star</option>
+                                                <option value="2 star">2 star</option>
+                                                <option value="3 Star">3 star</option>
+                                                <option value="4 star">4 star</option>
+                                                <option value="5 star">5 star</option>
+                                                <option value="7 star">Java</option>
+
+                                            </datalist>
+                                        </div>
+                                        <div className='unitComponent'>
+                                            <label>Room Category</label>
+                                            <input
+                                                handleFormChange={handleFormChange}
+                                                index={index}
+                                                value={data.RoomCategory}
+                                            />
+                                        </div>
+                                        <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
+                                    </div>
+                                    {/* <textarea
+                                                className='comments'
+                                                name='comments'
+                                                value={data.comments}
+                                                onChange={(event) => handleFormChange(event, index)}
+                                                placeholder='Additional information'
+                                            ></textarea> */}
+                                </>
+                            );
+                        }
+                        )
+                    }
+                    <button className='addMore' onClick={() => addFields()}>Add More..</button>
+                </div>
             </div>
 
         </Modal>

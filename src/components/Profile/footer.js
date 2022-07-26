@@ -1,7 +1,8 @@
 import React from 'react';
-import { Aashishsingh, Amit, imran, Kajal, manoj, Naveen, Stephen, Tanmay } from './ImgDispathcher';
+import { Aashishsingh, Akriti, Akshat, Amit, Himanshu, imran, Kajal, Manjit, manoj, Naveen, NehaGupta, Sanu, Saumil, Stephen, Tanmay } from './ImgDispathcher';
 import './pdfcss.css';
 import './profile.css';
+import { Akriti_Dogra, Akshat_Aggarwal, Himanshu_Gangwar, Manjit_, Neha, Sanu_lawrence, Saumil_, Tanmay_, } from './ReviewLinkDispatcher';
 
 export const Footer = ({whatsApp}) => {
     return (
@@ -30,15 +31,15 @@ export const GoogleReviews = () => {
     return (
         <div className="google_review_bottom">
             <div className="reiew_c1">
-                <a href="https://g.co/kgs/VwbmYT" target="_blank">
-                    <img src={Aashishsingh} className="review_img5" />
+                <a href={Neha} target="_blank">
+                    <img src={NehaGupta} className="review_img5" />
                 </a>
-                <a href="https://g.co/kgs/ZK68wZ" target="_blank">
-                    <img src={Amit} className="review_img1" />
+                <a href={Saumil_} target="_blank">
+                    <img src={Saumil} className="review_img1" />
                 </a>
-                <a href="https://g.co/kgs/qM1e2f" target="_blank">
+                <a href={Akriti_Dogra} target="_blank">
 
-                    <img src={imran} className="review_img2" />
+                    <img src={Akriti} className="review_img2" />
                 </a>
 
             </div>
@@ -50,24 +51,24 @@ export const GoogleReviews = () => {
                     <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
                     <span> 400 & Counting Google Review</span>
                 </a>
-                <a href="https://g.co/kgs/ReZyXo" target="_blank">
-                    <img src={Tanmay} className="review_img" />
+                <a href={Akshat_Aggarwal} target="_blank">
+                    <img src={Akshat} className="review_img" />
                 </a>
-                <a href="https://g.co/kgs/ByT5hQ" target="_blank">
-                    <img src={Stephen} className="review_img" />
+                <a href={Himanshu_Gangwar} target="_blank">
+                    <img src={Himanshu} className="review_img" />
                 </a>
 
 
             </div>
             <div className="reiew_c3">
-                <a href="https://g.co/kgs/iD3DvX" target="_blank">
-                    <img src={Kajal} className="review_img" />
+                <a href={Manjit_} target="_blank">
+                    <img src={Manjit} className="review_img" />
                 </a>
-                <a href="https://g.co/kgs/iD3DvX" target="_blank" >
-                    <img src={manoj} className="review_img3" />
+                <a href={Sanu_lawrence} target="_blank" >
+                    <img src={Sanu} className="review_img3" />
                 </a>
-                <a href="https://g.co/kgs/kXdzCU" target="_blank" >
-                    <img src={Naveen} className="review_img4" />
+                <a href={Tanmay_} target="_blank" >
+                    <img src={Tanmay} className="review_img4" />
                 </a>
 
             </div>

@@ -1,0 +1,8 @@
+export const Akshat_Aggarwal = 'https://www.google.com/maps/contrib/114054657794613769103/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@20.6930866,71.5869704,5z/data=!4m6!1m5!8m4!1e1!2s114054657794613769103!3m1!1e1?hl=en-US'
+export const Akriti_Dogra = 'https://www.google.com/maps/contrib/112011118039489198056/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@28.5175702,77.1644103,13z/data=!4m6!1m5!8m4!1e1!2s112011118039489198056!3m1!1e1?hl=en-US'
+export const Himanshu_Gangwar = 'https://www.google.com/maps/contrib/111139591822628657910/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@28.5175749,77.1972405,16z/data=!4m6!1m5!8m4!1e1!2s111139591822628657910!3m1!1e1?hl=en-US'
+export const Neha = 'https://www.google.com/maps/contrib/105013595707533872424/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@28.5175702,77.1994292,17z/data=!4m6!1m5!8m4!1e1!2s105013595707533872424!3m1!1e1?hl=en-US'
+export const Tanmay_ = 'https://www.google.com/maps/contrib/110806836815105144572/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@22.0906394,66.4911255,5z/data=!4m6!1m5!8m4!1e1!2s110806836815105144572!3m1!1e1?hl=en-US'
+export const Sanu_lawrence = 'https://www.google.com/maps/contrib/109852970650089016279/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@19.0972436,70.1958286,5z/data=!4m6!1m5!8m4!1e1!2s109852970650089016279!3m1!1e1?hl=en-US'
+export const Manjit_ = 'https://www.google.com/maps/contrib/102470258562240953767/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@28.5175702,68.2345855,5z/data=!4m6!1m5!8m4!1e1!2s102470258562240953767!3m1!1e1?hl=en-US'
+export const Saumil_ = 'https://www.google.com/maps/contrib/109263882016123067497/place/ChIJmXEjudThDDkRkqHGfRAvEHs/@28.5175702,72.7170073,6z/data=!4m6!1m5!8m4!1e1!2s109263882016123067497!3m1!1e1?hl=en-US'

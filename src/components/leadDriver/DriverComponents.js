@@ -9,41 +9,18 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     var today = new Date()
-    const testdate=data.Travel_Date
-  
-    console.log(data)
+    const[testdate,setvtestdate]=useState(data.Travel_Date?data.Travel_Date:false)
+    // const testdate = data.Travel_Date
+
+    console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
     var currentdate = moment(today).format('YYYY-MM-DD')
-    // function handlebackendProfileAndtrip(tripid, uid, Name) {
-    //     update_lead_field(uid, Name)
-    //     // assignTask(tripid)
-    //     // if (selectedDate !== null) {
-    //     //     getLeadByDate(selectedDate)
-    //     // }
-    //     // else {
-
-    //     //     getLeadByDate(currentdate)
-    //     // }
-
-    // }
-    // async function assignTask(tripid) {
-    //     /**this function will update the lead_current feild in profile with new trip id */
-    //     console.log(currentUser)
-    //     const Databaseref = doc(db, "Profile", currentUser[0].uid);
-    //     var Lead_Current = currentUser[0].Lead_Current
-    //     // console.log(Lead_Current)
-    //     Lead_Current.push(tripid)
-    //     // console.log(Lead_Current)
-    //     await updateDoc(Databaseref, {
-    //         "Lead_Current": Lead_Current
-    //     });
-
-    // }
-    async function deletelead(tripid){
-        try{
+  
+    async function deletelead(tripid) {
+        try {
             await deleteDoc(doc(db, "Trip", tripid));
             getLeadByDate()
         }
-        catch(e){console.log(e)}
+        catch (e) { console.log(e) }
     }
     async function update_lead_field(uid, name) {
         /**this function is to update the assigned user in lead data for ref and to be identify */
@@ -52,7 +29,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assign_to.uid": uid,
             "assign_to.name": name,
             "assign_flg": true,
-            "assigned_date_time":today
+            "assigned_date_time": today
         });
         getLeadByDate(currentdate)
     }
@@ -89,9 +66,9 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                     </select>
                 </span><br />
                 {
-                    testdate?<>
-                    <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />                    
-                    </>:<></>
+                    testdate.toDate() ? <>
+                        <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />
+                    </> : <></>
                 }
                 <span>Assign to:-</span>
 
@@ -107,7 +84,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 </select>
             </div>
             <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
-            <button disabled={data.assign_flg} onClick={()=>deletelead(data.TripId)}>delete</button>
+            <button disabled={data.assign_flg} onClick={() => deletelead(data.TripId)}>delete</button>
         </div>
 
     );

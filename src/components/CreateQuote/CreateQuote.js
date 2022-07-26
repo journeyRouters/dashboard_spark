@@ -9,6 +9,7 @@ import SortableTbl from 'react-sort-search-table';
 import Profile from '../Profile/Profile';
 import SendIcon from '@material-ui/icons/Send';
 import SuggestionQuotes from './suggestionQuotes';
+import Maldives from './Maldives';
 
 
 
@@ -185,14 +186,27 @@ const Createquote = (props) => {
 
                         </> : <>
                             {
-                                popupopener ?
+                                popupopener ?<>
+                                {
+                                    user_uni_data.Destination==="Maldives"?<>
+                                    <Maldives
+                                    email={props.auth.email}
+                                    data={user_uni_data}
+                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                    set_popupopner={set_popupopner}
+                                    profile={props.userProfile}
+                                    />
+                                    </>:<>
                                     <Box
                                         email={props.auth.email}
                                         data={user_uni_data}
                                         updateTableDataAfterQuote={updateTableDataAfterQuote}
                                         set_popupopner={set_popupopner}
                                         profile={props.userProfile}
-                                    /> :
+                                    />
+                                    </>
+                                }
+                                    </> :
                                     <SortableTbl
                                         tblData={lead_data}
                                         tHead={tHead}

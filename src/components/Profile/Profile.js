@@ -133,7 +133,7 @@ const Profile = (
             quotation_flg: true,
             month: month,
             Follow_Up_date: String(selected_Travel_date),
-            time:currentdate,
+            time: currentdate,
             Quoted_by: email,
             Travel_Duration: count_days
         });
@@ -190,10 +190,10 @@ const Profile = (
         setwait(false)
         updateTableDataAfterQuote(TripId)
         closeHandler()
-        try{
+        try {
             Allquote()
         }
-        catch(e){
+        catch (e) {
             console.log(e)
         }
         closePDF()
@@ -221,7 +221,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-     
+
     }
 
     return (
@@ -358,6 +358,13 @@ const Profile = (
                                             </div>
                                         ))
                                     }
+                                    <div className='otherInclusion'>
+                                        {inclusion_data.other_Inclusion.split(".").map((data, index) => (<>
+                                            <span>
+                                            <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+                                                {data.trim()}</span><br />
+                                        </>))}
+                                    </div>
                                 </div>
                                 <div className="sepratorLineForInclusionExclusion"></div>
                                 <div>
@@ -375,6 +382,15 @@ const Profile = (
                                             </div>
                                         ))
                                     }
+                                    <div className='otherInclusion'>
+                                        {inclusion_data.other_Exclusion.split(".").map((data, index) => (<>
+                                            <span>
+                                                <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+
+                                                {data.trim()}</span><br />
+                                        </>))}
+                                    </div>
+
                                 </div>
                             </div>
                             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
@@ -515,7 +531,7 @@ const Profile = (
                                     NightDataFields.map((data, index) => (
                                         <div key={index} className='hotelUni'>
                                             <div>
-                                                <img src={`/assets/pdfDefaultImage/hotel${index+1}.png`} width="320px" />
+                                                <img src={`/assets/pdfDefaultImage/hotel${index + 1}.png`} width="320px" />
                                             </div>
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{
@@ -621,7 +637,7 @@ const Profile = (
                             }}
                         >
                             <div className='paymentsPage'>
-                            <Footer  whatsApp={whatsApp} />
+                                <Footer whatsApp={whatsApp} />
                             </div>
 
 
@@ -640,7 +656,7 @@ const Profile = (
                             }}
                         >
                             <div className='paymentsPage'>
-                            <Footer  whatsApp={whatsApp} />
+                                <Footer whatsApp={whatsApp} />
                             </div>
 
                         </div>
@@ -658,7 +674,7 @@ const Profile = (
                             }}
                         >
                             <div className='paymentsPage'>
-                            <Footer  whatsApp={whatsApp} />
+                                <Footer whatsApp={whatsApp} />
                             </div>
 
                         </div>

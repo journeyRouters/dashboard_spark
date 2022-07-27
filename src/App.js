@@ -10,9 +10,11 @@ import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
+import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Investigation from './components/Investigation/investigation';
 import Driver from './components/leadDriver/Driver';
 import Vouchers from './components/payments_vouchers/Vouchers';
+import AdminFollow from './components/quotation_follow_up/AdminFollow';
 import FollowUp from './components/quotation_follow_up/Follow_up';
 import Rapid from './components/Rapid/Rapid';
 import app from './components/required';
@@ -108,7 +110,7 @@ function App() {
 
   }
   function page(args) {
-    // console.log(args)
+    console.log(args)
     setPage(args)
   }
 
@@ -286,7 +288,7 @@ function App() {
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>User Controller</p>
                       </div>
-                    </div>
+                    </div>                    
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -315,12 +317,31 @@ function App() {
                 }
                 {
                   profile.access_type === "Super Admin" ? <>
+                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Driver</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("Payments")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Payments</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Current Lead</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Admin_Follow_up")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>followed Lead</p>
+                      </div>
+                    </div>
+                    
                     <div className='sidebarCard' onClick={() => page("converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -398,6 +419,17 @@ function App() {
               </>
               : <></>
           }
+           {
+            Page === "Admin_Follow_up" ?
+              <>
+                {
+                  auth &&
+                  <AdminFollow auth={auth} profile={profile} />
+                }
+              </>
+              : <></>
+          }
+          
           {Page === "voucher" ?
             <>
               {
@@ -421,9 +453,15 @@ function App() {
               </>
               : <></>
           }
+          {/* Investigate Current Lead */}
           {
             Page === "Account_Converted" ? <>
               <Account_converted auth={auth} />
+            </> : <></>
+          }
+          {
+            Page === "Investigate Current Lead" ? <>
+              <SuperAdmin auth={auth} profile={profile} />
             </> : <></>
           }
         </div>

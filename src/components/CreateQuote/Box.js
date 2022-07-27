@@ -30,7 +30,7 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    // console.log(profile)
+    console.log(profile)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)

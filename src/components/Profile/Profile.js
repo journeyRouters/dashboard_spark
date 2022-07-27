@@ -329,10 +329,7 @@ const Profile = (
                     <div className="page-break">
                         <div className="inclusion"
                             style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover",
+                                background: 'black'
                             }}
                         >
                             <div>
@@ -359,12 +356,16 @@ const Profile = (
                                         ))
                                     }
                                     <div className='otherInclusion'>
-                                        {inclusion_data.other_Inclusion.split(".").map((data, index) => (<>
-                                            <span>
-                                            <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                
-                                                {data.trim()}</span><br />
-                                        </>))}
+                                        {
+                                            inclusion_data.other_Inclusion ? <>
+                                                {inclusion_data.other_Inclusion.split(".").map((data, index) => (<>
+                                                    <span>
+                                                        <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+                                                        {data.trim()}</span><br />
+                                                </>))}
+                                            </> : <></>
+                                        }
+
                                     </div>
                                 </div>
 
@@ -385,19 +386,35 @@ const Profile = (
                                         ))
                                     }
                                     <div className='otherInclusion'>
-                                        {inclusion_data.other_Exclusion.split(".").map((data, index) => (<>
-                                            <span>
-                                                <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+                                        {
+                                            inclusion_data.other_Exclusion ? <>
+                                                {inclusion_data.other_Exclusion.split(".").map((data, index) => (<>
+                                                    <span>
+                                                        <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
 
-                                                {data.trim()}</span><br />
-                                        </>))}
+                                                        {data.trim()}</span><br />
+                                                </>))}
+                                            </> : <></>
+                                        }
+
                                     </div>
+
                                 </div>
                             </div>
                             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
-                            <div style={{ marginTop: '1.9rem' }} >
+                            <div
+                                style={{
+                                    backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                    backgroundPosition: "top",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    height: '5.3rem',
+                                    display: 'flex',
+                                    flexDirection: 'column-reverse'
+                                }}
+                            >
                                 <Footer whatsApp={whatsApp} />
                             </div>
 
@@ -485,7 +502,7 @@ const Profile = (
                                                             Day {index + 1} - {data.Day}
                                                         </span>
                                                     </div>
-                                                    <p className='dayDetailsitineary'>{data.Description}</p>
+                                                    <p className='dayDetailsitineary'>{data.Description.split('#').map((data, index) => (<><div style={{ marginBottom: '0rem' }}>{data}</div><br /></>))}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img

@@ -272,7 +272,7 @@ const Maldives = ({ set_popupopner, data,
                             return (
                                 <>
                                     <div key={index} className='costOption_estimatiom'>
-                                        <div className='unitComponent'>
+                                        <div className='unitComponent_'>
                                             <label>Night</label><br />
                                             <Select
                                                 closeMenuOnSelect={false}
@@ -283,7 +283,7 @@ const Maldives = ({ set_popupopner, data,
                                                 onChange={(e) => advance_controller_nights(e, index)}
                                             />
                                         </div>
-                                        <div className='unitComponent'>
+                                        <div className='unitComponent_'>
                                             <label>HotelMeal</label><br />
                                             <Select
                                                 closeMenuOnSelect={false}
@@ -294,7 +294,7 @@ const Maldives = ({ set_popupopner, data,
                                                 onChange={(e) => advance_controller_Hotel_meals(e, index)}
                                             />
                                         </div>
-                                        <div className='unitComponent'>
+                                        <div className='unitComponent_'>
                                             <label>Hotel Name</label><br />
                                             <input placeholder='hotel Name'
                                                 name='HotelName'
@@ -305,7 +305,7 @@ const Maldives = ({ set_popupopner, data,
 
                                         </div>
 
-                                        <div className='unitComponent'>
+                                        <div className='unitComponent_'>
                                             <label>City</label><br />
                                             <input placeholder='city'
                                                 name='City'
@@ -313,7 +313,7 @@ const Maldives = ({ set_popupopner, data,
                                                 onChange={(event) => handleFormChange(event, index)}
                                             ></input>
                                         </div>
-                                        <div className='unitComponent'>
+                                        <div className='unitComponent_'>
                                             <label>Category</label><br />
                                             <input placeholder='Category'
                                                 list="HotelCategory"
@@ -327,12 +327,12 @@ const Maldives = ({ set_popupopner, data,
                                                 <option value="3 Star">3 star</option>
                                                 <option value="4 star">4 star</option>
                                                 <option value="5 star">5 star</option>
-                                                <option value="7 star">Java</option>
+                                                <option value="7 star">7 star</option>
 
                                             </datalist>
                                         </div>
-                                        <div className='unitComponent'>
-                                            <label>Room Category</label>
+                                        <div className='unitComponent_'>
+                                            <label>Room Category</label><br/>
                                             <input
                                                 handleFormChange={handleFormChange}
                                                 index={index}

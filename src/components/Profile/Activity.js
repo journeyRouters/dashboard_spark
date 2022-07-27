@@ -183,6 +183,26 @@ export const avtivityList = {
             value: "ChaoPhrayaDinnerCruise",
         },
         {
+            label: "AlcazarShow",
+            value: "AlcazarShow",
+        },
+        {
+            label: "BangkokCityTour",
+            value: "BangkokCityTour",
+        },
+        {
+            label: "PhuketCityTour",
+            value: "PhuketCityTour",
+        },
+        {
+            label: "DolphinShowPattaya",
+            value: "DolphinShowPattaya",
+        },
+        {
+            label: "DolphinShowPhuket",
+            value: "DolphinShowPhuket",
+        },
+        {
             label: 'Transfer',
             value: 'Transfer'
         },

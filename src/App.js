@@ -321,7 +321,19 @@ function App() {
                         <p>Payments</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("converted")}>
+                    <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>User Controller</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Driver</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>converted</p>

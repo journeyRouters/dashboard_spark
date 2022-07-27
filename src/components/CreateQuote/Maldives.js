@@ -32,6 +32,22 @@ const Maldives = ({ set_popupopner, data,
     const [visacost, setvisacost] = useState(Edit_visacost ? Edit_visacost : 0)
     const [landPackage, setlandpackage] = useState(Edit_landPackage ? Edit_landPackage : 0)
     const [nights, setnights] = useState([])
+    const [Transfer, settransfer] = useState([])
+    const TransferOption = [
+        {
+            label: "Speed Boat",
+            value: "Speed Boat"
+        },
+        {
+            label: "Domestic Flights",
+            value: "Domestic Flights"
+        },
+        {
+            label: "Sea Plane",
+            value: "Sea Plane"
+        },
+
+    ]
     const HotelMeals = [
         {
             label: "BreakFast",
@@ -265,6 +281,17 @@ const Maldives = ({ set_popupopner, data,
                 <label className='san-serif'>select Travel Date</label><br />
                 <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
                 <div>
+                    <div style={{width:"12rem"}}>
+                        <h4>Transfer Selection</h4>
+                        <Select
+                            closeMenuOnSelect={false}
+                            components={animatedComponents}
+                            isMulti
+                            options={TransferOption}
+                            // defaultValue={Edit_NightDataFields ? data.Night : null}
+                            // onChange={(e) => advance_controller_nights(e, index)}
+                        />
+                    </div>
                     {
                         // console.log(NightDataFields),
                         NightDataFields &&
@@ -332,7 +359,7 @@ const Maldives = ({ set_popupopner, data,
                                             </datalist>
                                         </div>
                                         <div className='unitComponent_'>
-                                            <label>Room Category</label><br/>
+                                            <label>Room Category</label><br />
                                             <input
                                                 handleFormChange={handleFormChange}
                                                 index={index}

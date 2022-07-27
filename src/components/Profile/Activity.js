@@ -539,6 +539,52 @@ export const avtivityList = {
             label: "ZooNegara",
             value: "ZooNegara",
         },
+    ],
+    Ladakh: [
+        {
+            label: "ChanglaPass",
+            value: "ChanglaPass",
+        },
+        {
+            label: "HemisMonastery",
+            value: "HemisMonastery",
+        },
+        {
+            label: "Arival/Departure",
+            value: "Arival/Departure",
+        },
+        {
+            label: "Kargil",
+            value: "Kargil",
+        },
+        {
+            label: "Khardungla",
+            value: "Khardungla",
+        },
+        {
+            label: "MagenticHill",
+            value: "MagenticHill",
+        },
+        {
+            label: "Pangong",
+            value: "Pangong",
+        },
+        {
+            label: "ShantiStupa",
+            value: "ShantiStupa",
+        },
+        {
+            label: "SheyMonastery",
+            value: "SheyMonastery",
+        },
+        {
+            label: "SiachenGlacier",
+            value: "SiachenGlacier",
+        },
+        {
+            label: "TurtukVillage",
+            value: "TurtukVillage",
+        },
     ]
 }
 export function ActivityResolver(destination) {

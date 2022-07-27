@@ -95,7 +95,7 @@
    margin-top: 75rem;
 }
 .HotelPage{
-    word-break: break-all;
+    word-break: break-word;
     width: 55rem;
     /* height: 78rem; */
     display: flex;
@@ -116,7 +116,7 @@
 }
 .inclusion{
     width: 55rem;
-    height: 78rem;
+    /* height: 78rem; */
     justify-content: space-between;
     background-position: top;
     background-repeat: no-repeat;
@@ -308,12 +308,12 @@
     justify-content: space-evenly;
     color: #FFFFFF;
     margin-top: 1rem;
-    height: 35rem;
+    /* height: 35rem; */
 
 }
 .sepratorLineForInclusionExclusion{
     width: 0.2rem;
-    height: 27rem;
+    /* height: 27rem; */
     background-color: #FFFFFF;
 }
 .aliner_{
@@ -350,7 +350,7 @@
 
 }
 .itinearyDiv{
-    word-break: break-all;
+    word-break: break-word;
     margin-left: 2rem;
     margin-top: 2rem;
     font-size: 1.2rem;

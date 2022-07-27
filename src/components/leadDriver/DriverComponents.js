@@ -33,6 +33,13 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         });
         getLeadByDate(currentdate)
     }
+    async function reassign() {
+        const Databaseref = doc(db, "Trip", data.TripId);
+        await updateDoc(Databaseref, {
+            "assign_flg": false,
+        });
+        getLeadByDate(currentdate)
+    }
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
@@ -85,6 +92,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             </div>
             <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
             <button disabled={data.assign_flg} onClick={() => deletelead(data.TripId)}>delete</button>
+            <button onClick={()=>reassign()}>Reset</button>
         </div>
 
     );

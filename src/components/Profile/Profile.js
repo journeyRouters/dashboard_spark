@@ -329,10 +329,7 @@ const Profile = (
                     <div className="page-break">
                         <div className="inclusion"
                             style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/blank_border-bottom.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover",
+                                background: 'black'
                             }}
                         >
                             <div>
@@ -406,7 +403,17 @@ const Profile = (
                             <a href="https://www.instagram.com/journeyrouters/?hl=en" target="_blank">
                                 <img className='setInsta' src='/assets/pdfDefaultImage/insta2.png' />
                             </a>
-                            <div style={{ marginTop: '1.9rem' }} >
+                            <div
+                                style={{
+                                    backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
+                                    backgroundPosition: "top",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    height: '5.3rem',
+                                    display: 'flex',
+                                    flexDirection: 'column-reverse'
+                                }}
+                            >
                                 <Footer whatsApp={whatsApp} />
                             </div>
 
@@ -494,7 +501,7 @@ const Profile = (
                                                             Day {index + 1} - {data.Day}
                                                         </span>
                                                     </div>
-                                                    <p className='dayDetailsitineary'>{data.Description}</p>
+                                                    <p className='dayDetailsitineary'>{data.Description.split('#').map((data, index) => (<><div style={{ marginBottom: '0rem' }}>{data}</div><br /></>))}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img

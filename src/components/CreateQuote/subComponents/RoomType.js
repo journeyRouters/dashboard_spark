@@ -14,8 +14,8 @@ const RoomType = ({handleFormChange,index,value}) => {
                     <select  name='RoomType' onChange={(event) => handleFormChange(event, index)}>
                     <option >select Type</option>
                         <option value='standrad'>standrad</option>
-                        <option value='delux'>delux</option>
-                        <option value='super delux'>super delux</option>
+                        <option value='deluxe'>deluxe</option>
+                        <option value='super deluxe'>super deluxe</option>
                         <option value='Premium'>Premium</option>
                         <option value='Luxury'>Luxury</option>
                         <option value='duplex'>duplex</option>

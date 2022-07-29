@@ -10,8 +10,10 @@ import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } 
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Box from '../CreateQuote/Box';
+import Maldives from '../CreateQuote/Maldives';
 import Invoice from '../invoice/InvoiceForm';
 import InvoicePdf from '../invoice/invoicePdf';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import Profile from '../Profile/Profile';
 import app from '../required';
 import './quote.css';
@@ -62,7 +64,7 @@ const Row = (props) => {
         setPDF(false)
     }
     function showPDF(args) {
-        console.log("args", args)
+        console.log("args", args.Property)
         setdata(args)
         setPDF(true)
 
@@ -89,7 +91,7 @@ const Row = (props) => {
         setcomments(e.target.value)
         console.log(e.target.value)
     }
-   
+
     const [open, setOpen] = React.useState(false);
     // function changeStatus(Status) {
     //     setLead_Status(Status)
@@ -99,11 +101,13 @@ const Row = (props) => {
     }
 
     function closeOnstatusComments() {
-        if (Lead_Status == "Dump","Converted") {
+        if (Lead_Status === "Dump", "Converted") {
             updateStatus()
-            props.updateTableDataAfterConversion(row.TripId)
+            props.getLeadOnBoard()
+
+            // props.updateTableDataAfterConversion(row.TripId)
         }
-        else{
+        else {
             updateStatus()
             props.getLeadOnBoard()
         }
@@ -297,25 +301,54 @@ const Row = (props) => {
                                     {
                                         viewPDF ? <>
                                             <Modal open={viewPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                                                {
+                                                    data.travel_data.Destination == 'Maldives' ? <>
+                                                        <Maldivespdf
+                                                            data={data}
+                                                            no_rooms={data.no_rooms}
+                                                            selected_Travel_date={data.selected_Travel_date}
+                                                            MealPlan={data.MealPlan}
+                                                            Transfer={data.Transfer}
+                                                            NightDataFields={data.NightDataFields}
+                                                            count_days={data.count_days}
+                                                            flightcost={data.flightcost}
+                                                            visacost={data.visacost}
+                                                            landPackage={data.landPackage}
+                                                            SelectedpackageType={data.SelectedpackageType}
+                                                            Property={data.Property}
+                                                            flightsLinkfromstorage={data.flightImgLinks}
+                                                            inclusionLinkfromstorage={data.inclusionLinks}
+                                                            flightFlg={data.flightImgLinks ? true : false}
+                                                            inclusionImgFlg={data.inclusionLinks ? true : false}
+                                                            Pax={data.Pax}
+                                                            Child={data.Child}
+                                                            inclusion_data={data.inclusion_data}
+                                                            profile={props.profile}
+                                                            indicator={false}
 
-                                                <Profile
-                                                    SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
-                                                    indicator={true}
-                                                    inclusion_data={data.inclusion_data}
-                                                    travel_data={data.travel_data}
-                                                    count_days={data.count_days}
-                                                    cabDetailsData={data.cabDetailsData}
-                                                    flights={data.flights}
-                                                    itineary={data.itineary}
-                                                    NightDataFields={data.NightDataFields}
-                                                    selected_Travel_date={data.selected_Travel_date}
-                                                    flightcost={data.flightcost}
-                                                    visacost={data.visacost}
-                                                    landPackage={data.landPackage}
-                                                    profile={props.profile}
-                                                    flight={true}
-                                                    flightsLinkfromstorage={data.flightsImagesLinks}
-                                                />
+                                                        />
+                                                    </> : <>
+                                                        <Profile
+                                                            SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
+                                                            indicator={true}
+                                                            inclusion_data={data.inclusion_data}
+                                                            travel_data={data.travel_data}
+                                                            count_days={data.count_days}
+                                                            cabDetailsData={data.cabDetailsData}
+                                                            flights={data.flights}
+                                                            itineary={data.itineary}
+                                                            NightDataFields={data.NightDataFields}
+                                                            selected_Travel_date={data.selected_Travel_date}
+                                                            flightcost={data.flightcost}
+                                                            visacost={data.visacost}
+                                                            landPackage={data.landPackage}
+                                                            profile={props.profile}
+                                                            flight={true}
+                                                            flightsLinkfromstorage={data.flightsImagesLinks}
+                                                        />
+                                                    </>
+                                                }
+
                                             </Modal>
                                         </> : <></>
                                     }
@@ -332,25 +365,57 @@ const Row = (props) => {
                                                         <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>
                                                         {
                                                             Reqoute_flg ? <>
-                                                                <Box
-                                                                    email={props.auth.email}
-                                                                    data={tripData.travel_data}
-                                                                    inclusion_data_={data.value.inclusion_data}
-                                                                    SelectedpackageTyp={data.value.SelectedpackageType}
-                                                                    updateTableDataAfterQuote={props.updateTableDataAfterConversion}
-                                                                    set_popupopner={setReqoute_flg}
-                                                                    profile={props.profile}
-                                                                    indicator={true}
-                                                                    Edit_NightDataFields={data.value.NightDataFields}
-                                                                    Edit_itineary={data.value.itineary}
-                                                                    Edit_selected_Travel_date={data.value.selected_Travel_date}
-                                                                    Edit_visacost={data.value.visacost}
-                                                                    Edit_flightcost={data.value.flightcost}
-                                                                    Edit_landPackage={data.value.landPackage}
-                                                                    Edit_count_days={data.value.count_days}
-                                                                    Allquote={Allquote}
+                                                                {
+                                                                    tripData.travel_data.Destination == 'Maldives' ? <>
+                                                                        <Maldives
+                                                                            email={props.auth.email}
+                                                                            data={tripData.travel_data}
+                                                                            inclusion_data_={tripData.inclusion_data}
+                                                                            Edit_SelectedpackageType={tripData.SelectedpackageType}
+                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            set_popupopner={setReqoute_flg}
+                                                                            profile={props.profile}
+                                                                            E_indicator={true}
+                                                                            Edit_no_rooms={tripData.no_rooms}
+                                                                            Edit_NightDataFields={tripData.NightDataFields}
+                                                                            Edit_itineary={tripData.itineary}
+                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                            Edit_visacost={tripData.visacost}
+                                                                            Edit_flightcost={tripData.flightcost}
+                                                                            Edit_landPackage={tripData.landPackage}
+                                                                            Edit_count_days={tripData.count_days}
+                                                                            Edit_Property={tripData.Property}
+                                                                            Edit_MealPlan={tripData.MealPlan}
+                                                                            Edit_Transfer={tripData.Transfer}
+                                                                            pre_flightImgLinks={tripData.flightImgLinks}
+                                                                            pre_inclusionLinks={tripData.inclusionLinks}
+                                                                            Allquote={Allquote}
 
-                                                                />
+                                                                           
+                                                                        />
+                                                                    </> : <>
+                                                                        <Box
+                                                                            email={props.auth.email}
+                                                                            data={tripData.travel_data}
+                                                                            inclusion_data_={data.value.inclusion_data}
+                                                                            SelectedpackageTyp={data.value.SelectedpackageType}
+                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            set_popupopner={setReqoute_flg}
+                                                                            profile={props.profile}
+                                                                            indicator={true}
+                                                                            Edit_NightDataFields={data.value.NightDataFields}
+                                                                            Edit_itineary={data.value.itineary}
+                                                                            Edit_selected_Travel_date={data.value.selected_Travel_date}
+                                                                            Edit_visacost={data.value.visacost}
+                                                                            Edit_flightcost={data.value.flightcost}
+                                                                            Edit_landPackage={data.value.landPackage}
+                                                                            Edit_count_days={data.value.count_days}
+                                                                            Allquote={Allquote}
+
+                                                                        />
+                                                                    </>
+                                                                }
+
 
                                                             </> : <></>
                                                         }
@@ -365,19 +430,19 @@ const Row = (props) => {
                                 <div className='remark_set'>
                                     <div className='comments_box'>
                                         <input className='Autocomplete'
-                                        list='Comments'
-                                        value={comments}
+                                            list='Comments'
+                                            value={comments}
                                             onChange={(e) => handlecomment(e)}
                                         ></input>
                                         <datalist id="Comments">
-                                                        <option value="Traveler not Reachable">Traveler not Reachable</option>
-                                                        <option value="Won't book with me">Won't book with me</option>
-                                                        <option value="Talk in progress with traveler">Talk in progress with traveler</option>
-                                                        <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
-                                                        <option value="Call not connecting">Call not connecting</option>
-                                                        <option value="Travler change their mind">Travler change their mind</option>
+                                            <option value="Traveler not Reachable">Traveler not Reachable</option>
+                                            <option value="Won't book with me">Won't book with me</option>
+                                            <option value="Talk in progress with traveler">Talk in progress with traveler</option>
+                                            <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
+                                            <option value="Call not connecting">Call not connecting</option>
+                                            <option value="Travler change their mind">Travler change their mind</option>
 
-                                                    </datalist>
+                                        </datalist>
                                         {/* <Autocomplete
                                             key={change}
                                             className='Autocomplete'

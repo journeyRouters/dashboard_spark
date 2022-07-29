@@ -4,12 +4,14 @@
     background-color: #FFFFFF;
     overflow-y: scroll;
 }
+
 .save_close {
     display: flex;
     justify-content: space-between;
     position: sticky;
     top: 0;
 }
+
 .compo_button {
     text-align: right;
     position: relative;
@@ -19,6 +21,7 @@
     padding: 2px 10px;
     cursor: pointer;
 }
+
 .cost_body {
 
     /* width: 27rem; */
@@ -29,16 +32,61 @@
     margin-top: 0.4rem;
 
 }
-.san-serif{
-    font-size: 2rem;
+
+.san-serif {
+    font-size: 1.3rem;
     font-weight: 600;
     font-family: sans-serif;
 }
-.unitComponent_{
+
+.unitComponent_ {
     display: flex;
     flex-direction: column;
+    width: 14rem;
 }
-.costOption_estimatiom{
-    border-top: 1px solid;
+
+.costOption_estimatiom_ {
+    /* border-top: 1px solid; */
     border-bottom: 1px solid;
+    display: flex;
+}
+
+/* pdf css */
+.Header {
+    width: 54.85rem;
+    height: 78rem;
+    border: 1px solid;
+}
+
+.footer_ {
+    margin-top: 4rem;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: Verdana;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.table {
+    border-collapse: collapse;
+  }
+
+.table_ {
+    color: white;
+    margin-top: 27rem;
+    margin-left: 4rem;
+    width: 86%;
+    height: 11rem;
+
+}
+.pricing{
+    width: 12rem;
+    height: 10rem;
+    /* background: white; */
+    margin: 13rem;
+    margin-left: 23rem;
+    font-size: 1.4rem;
+    font-weight: 600;
 }

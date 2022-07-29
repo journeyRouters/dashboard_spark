@@ -161,6 +161,7 @@
     justify-content: space-evenly;
     font-weight: 600;
     margin-bottom: 2rem;
+    align-items: flex-end;
 
 }
 
@@ -255,3 +256,8 @@
 .tableAliner{
     overflow-x: scroll;
 }
+.Autocomplete{
+  border: linear-gradient(to right, red , yellow);
+}
+
+ 

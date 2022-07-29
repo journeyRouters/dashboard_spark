@@ -583,7 +583,7 @@ const Box = ({
                                     return (
                                         <div key={index} className='days'>
                                             <label className='title'>Day{index + 1}:Title</label><br />
-                                            <div style={{ display: 'flex', alignItems: 'center' }} >
+                                            <div style={{ display: 'flex', alignItems: 'baseline' }} >
                                                 <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
                                                 <Select
                                                     className='Autocomplete'

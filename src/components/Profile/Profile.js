@@ -46,18 +46,18 @@ const Profile = (
         text: "A4",
         value: "size-a4"
     });
-    const Data = travel_data
     const pdfExportComponent = useRef(null);
+    const Data = travel_data
     const currentdate = new Date();
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
     const [wait, setwait] = useState(false)
-    const [ImgLinks, setImgLinks] = useState([])
     const [destinationName, setname] = useState((travel_data.Destination).toUpperCase())
     const [whatsApp, setwhatsApp] = useState(profile.WhatsApp_number)
     const [Call, setCalling] = useState(profile.contact_number)
+    const [ImgLinks, setImgLinks] = useState([])
     function controllLinks(args) {
         setImgLinks(args)
     }
@@ -91,7 +91,7 @@ const Profile = (
         if (!indicator) {
             uploadFlightsScreenShots()
         }
-        console.log(travel_data.Destination)
+        console.log(destinationName)
 
     }, []);
 
@@ -314,7 +314,7 @@ const Profile = (
                             <div className="yellow_details">
                                 <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
-                                <h4 className="seth4">INR {parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
+                                <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
                                 <p className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
@@ -557,7 +557,7 @@ const Profile = (
                                                 } Stay at {data.City} </h4>
 
                                                 <span>Hotel-{data.HotelName}</span><br />
-                                                <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__.value},</span>))}</span>  <br />
+                                                <span>Meal-{data.HotelMeal.map((data__, index) => (<span>{data__.value},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <span>Hotel Category-{data.Category}</span><br />
                                                 <h4></h4>

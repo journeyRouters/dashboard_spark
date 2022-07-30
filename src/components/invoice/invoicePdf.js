@@ -95,9 +95,8 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
         }
 
     }, []);
-    let val = (2500000).toLocaleString('en');
-    var formatter = new Intl.NumberFormat('en-US', {
-    })
+    // let val = (2500000).toLocaleString('en');
+    var formatter = new Intl.NumberFormat('en-US', {})
     let flight_cost=parseInt(selected_pdf_data.flightcost)
     let land_package=parseInt(selected_pdf_data.landPackage)
     let visa_cost=parseInt(selected_pdf_data.visacost)

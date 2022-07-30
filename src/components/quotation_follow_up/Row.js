@@ -53,7 +53,7 @@ const Row = (props) => {
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
     function Controller_reqoute(data) {
-        console.log(data)
+        console.log('jhggjkdfhgj',data)
         setTripData(data.value)
         setReqoute_flg(true)
     }
@@ -387,19 +387,19 @@ const Row = (props) => {
                                                                         <Box
                                                                             email={props.auth.email}
                                                                             data={tripData.travel_data}
-                                                                            inclusion_data_={data.value.inclusion_data}
-                                                                            SelectedpackageTyp={data.value.SelectedpackageType}
+                                                                            inclusion_data_={tripData.inclusion_data}
+                                                                            SelectedpackageTyp={tripData.SelectedpackageType}
                                                                             updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                             set_popupopner={setReqoute_flg}
                                                                             profile={props.profile}
                                                                             indicator={true}
-                                                                            Edit_NightDataFields={data.value.NightDataFields}
-                                                                            Edit_itineary={data.value.itineary}
-                                                                            Edit_selected_Travel_date={data.value.selected_Travel_date}
-                                                                            Edit_visacost={data.value.visacost}
-                                                                            Edit_flightcost={data.value.flightcost}
-                                                                            Edit_landPackage={data.value.landPackage}
-                                                                            Edit_count_days={data.value.count_days}
+                                                                            Edit_NightDataFields={tripData.NightDataFields}
+                                                                            Edit_itineary={tripData.itineary}
+                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                            Edit_visacost={tripData.visacost}
+                                                                            Edit_flightcost={tripData.flightcost}
+                                                                            Edit_landPackage={tripData.landPackage}
+                                                                            Edit_count_days={tripData.count_days}
                                                                             Allquote={Allquote}
 
                                                                         />
@@ -431,7 +431,9 @@ const Row = (props) => {
                                             <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
                                             <option value="Call not connecting">Call not connecting</option>
                                             <option value="Travler change their mind">Travler change their mind</option>
-
+                                            <option value="Quote shared on what's app">Quote shared on what's app</option>
+                                            <option value="Travel not responding">Travel not responding</option>
+                                            <option value="Booking form somewhere else">Booking form somewhere else</option>
                                         </datalist>
                                         {/* <Autocomplete
                                             key={change}

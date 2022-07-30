@@ -54,6 +54,8 @@ const Box = ({
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
+    const [Pax, setPax] = useState(data.Pax)
+    const [Child, setChild] = useState(data.Child ? data.Child : 0)
     const inclusion = {
         accommodation: false,
         breakfast: false,
@@ -159,6 +161,15 @@ const Box = ({
 
         }
 
+    }
+    function changePax(event) {
+        setPax(event.target.value)
+        data.Pax = event.target.value
+    }
+    function changechild(event) {
+        setChild(event.target.value)
+        data.Child = event.target.value
+        // console.log(data)
     }
     function itinearyDaysincrease() {
         let data = { Day: '', Description: '', Activity: {} }
@@ -278,6 +289,7 @@ const Box = ({
         setflightsObject(files)
     }
 
+    var formatter = new Intl.NumberFormat('en-US', {})
 
     return (
         <>
@@ -312,8 +324,8 @@ const Box = ({
                         <button className='compo_button' onClick={() => closeHandler()} >close</button>
                         <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                     </div>
-                    <div>
-                        <div style={{ display: 'flex' }} >
+                    <div >
+                        <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
                             <div>
                                 <h4>
                                     <span>Trip id:- </span>
@@ -321,7 +333,7 @@ const Box = ({
                                 </h4>
                                 <h4>
                                     <span>Budget:-</span>
-                                    <span>INR {data.Budget}/-</span>
+                                    <span>INR {formatter.format(data.Budget)}/-</span>
                                 </h4>
                                 <h4>
                                     <span>Travel Date:- </span>
@@ -345,6 +357,20 @@ const Box = ({
                                     <span>Contact:- </span>
                                     <span>{data.Contact_Number}</span>
                                 </h4>
+                                <h4>
+                                    <span>Destination:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Destination}</span>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>Departure City:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
+                                </h4>
+                                <h4>
+                                    <span>Traveler:- </span>
+                                    <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
+                                </h4>
                             </div>
                             <div>
                                 {data.comments.map((data, index) => (<>
@@ -355,12 +381,20 @@ const Box = ({
                         <p className='basicDetailsheading'>Basic Details</p>
                         <div className='basicDetails'>
                             <div>
-                                <label>Days</label>
+                                <label className='san-serif'>Days</label><br />
                                 <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
                             </div>
                             <div>
-                                <label>Night</label>
+                                <label className='san-serif'>Night</label><br />
                                 <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
+                            </div>
+                            <div>
+                                <lable className='san-serif'>number of Pax</lable><br />
+                                <input value={Pax} onChange={(e) => changePax(e)}></input>
+                            </div>
+                            <div>
+                                <label className='san-serif'>number of Child</label><br />
+                                <input onChange={(e) => changechild(e)} value={Child}></input>
                             </div>
                         </div>
                         <div className='cost_estimation_body'>
@@ -375,6 +409,17 @@ const Box = ({
                                     // inputProps={{ 'aria-label': 'A' }}
                                     />
                                     <label>per Person</label>
+                                </div>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'per Couple'}
+                                        onChange={handleChange}
+                                        value="per Couple"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>per Couple</label>
                                 </div>
                                 <div>
                                     <Radio

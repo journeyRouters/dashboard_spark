@@ -34,7 +34,7 @@ const Maldives = ({
     , pre_flightImgLinks
     , pre_inclusionLinks
     , E_indicator
-    ,Allquote
+    , Allquote
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
@@ -78,7 +78,7 @@ const Maldives = ({
         other_Exclusion: ''
     }
     const [InclusionExclusion, setInclusionExclusion] = useState(inclusion_data_ ? inclusion_data_ : inclusion)
-    const[EditController,setEditController]=useState(E_indicator?E_indicator:false)
+    const [EditController, setEditController] = useState(E_indicator ? E_indicator : false)
 
     const TransferOption = [
         {
@@ -264,7 +264,7 @@ const Maldives = ({
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
-    function newImageObjectWilAppear(e){
+    function newImageObjectWilAppear(e) {
         setEditController(false)
     }
     return (<>
@@ -323,7 +323,7 @@ const Maldives = ({
                         </h4>
                         <h4>
                             <span>Travel Date:- </span>
-                            <span>{moment(data.Travel_Date.toDate()).format('DD-MM-YYYY')}</span>
+                            <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
                         </h4>
                         <h4>
                             <span>Travel Duration :- </span>
@@ -346,6 +346,16 @@ const Maldives = ({
                         <h4>
                             <span>Destination:- </span>
                             <span style={{ border: "2px solid green" }}>{data.Destination}</span>
+                        </h4>
+                    </div>
+                    <div>
+                        <h4>
+                            <span>Departure City:- </span>
+                            <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
+                        </h4>
+                        <h4>
+                            <span>Traveler:- </span>
+                            <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
                         </h4>
                     </div>
                     <div>
@@ -376,6 +386,17 @@ const Maldives = ({
                             // inputProps={{ 'aria-label': 'A' }}
                             />
                             <label>per Person</label>
+                        </div>
+                        <div>
+                            <Radio
+                                checked={SelectedpackageType === 'per Couple'}
+                                onChange={handleChange}
+                                value="per Couple"
+                                name="radio-button"
+                                color='primary'
+                            // inputProps={{ 'aria-label': 'A' }}
+                            />
+                            <label>per Couple</label>
                         </div>
                         <div>
                             <Radio
@@ -522,7 +543,7 @@ const Maldives = ({
                 </div>
                 <div>
                     {
-                       EditController? <>
+                        EditController ? <>
                             <label>Do not use previous image( default using previous images)</label>
                             <input checked={E_indicator} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
                         </> : <></>

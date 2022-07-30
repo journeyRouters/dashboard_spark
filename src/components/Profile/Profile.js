@@ -188,7 +188,7 @@ const Profile = (
     }
     function closeFormAndPdf() {
         setwait(false)
-        updateTableDataAfterQuote(TripId)
+        // updateTableDataAfterQuote(TripId)
         closeHandler()
         try {
             Allquote()
@@ -315,7 +315,7 @@ const Profile = (
                                 <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
-                                <p className="setPara_">{SelectedpackageType}</p>
+                                <p   style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div >
                                 <Footer whatsApp={whatsApp} />

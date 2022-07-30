@@ -189,3 +189,10 @@
     width: 47rem;
     justify-content: space-between;
 }
+
+.glow {
+    font-size: 80px;
+    color: rgb(217, 243, 28);
+
+  }
+  

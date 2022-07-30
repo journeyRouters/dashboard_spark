@@ -26,7 +26,7 @@ const Maldives = ({
     , Edit_flightcost
     , Edit_visacost
     , Edit_landPackage
-    , PreLoadInclusionData
+    , inclusion_data_
     , profile
     , Edit_Property
     , Edit_MealPlan
@@ -38,7 +38,7 @@ const Maldives = ({
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
-    console.log(Edit_Property)
+    console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
@@ -77,7 +77,7 @@ const Maldives = ({
         other_Inclusion: '',
         other_Exclusion: ''
     }
-    const [InclusionExclusion, setInclusionExclusion] = useState(PreLoadInclusionData ? PreLoadInclusionData : inclusion)
+    const [InclusionExclusion, setInclusionExclusion] = useState(inclusion_data_ ? inclusion_data_ : inclusion)
     const[EditController,setEditController]=useState(E_indicator?E_indicator:false)
 
     const TransferOption = [

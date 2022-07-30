@@ -39,7 +39,7 @@ const   Maldivespdf = ({
     E_indicator,
     Allquote
 }) => {
-    // console.log(Property)    
+    console.log(profile)    
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
@@ -266,8 +266,8 @@ const   Maldivespdf = ({
     };
     const pdfExportComponent = useRef(null);
     // console.log(count_days)
-    let whatsApp = '9304247331'
-    let Call = '9304247331'
+    let whatsApp = profile.WhatsApp_number
+    let Call = profile.contact_number
     return (
         <div>
             <Modal open={wait} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >

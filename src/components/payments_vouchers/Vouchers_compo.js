@@ -420,6 +420,10 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
                         {
                             finalPackage ? <>
+                            {
+                                finalPackage.travel_data.Destination=='Maldives'?<>
+                                <h1 className='glow'>wait dev in progress</h1>
+                                </>:<>
                                 <Profile
                                     indicator={true}
                                     inclusion_data={finalPackage.inclusion_data}
@@ -438,6 +442,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                     flightsLinkfromstorage={finalPackage.flightsImagesLinks}
                                     landPackage={finalPackage.landPackage}
                                 />
+                                </>
+                            }
+                                
                             </> : <>
                                 <div style={{ background: 'white', borderRadius: '32px', height: '141px' }}>
                                     <h1> there is no any Invoiced Pdf</h1>

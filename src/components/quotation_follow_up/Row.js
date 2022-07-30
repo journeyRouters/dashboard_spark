@@ -64,7 +64,7 @@ const Row = (props) => {
         setPDF(false)
     }
     function showPDF(args) {
-        console.log("args", args.Property)
+        console.log("args", args)
         setdata(args)
         setPDF(true)
 
@@ -101,17 +101,9 @@ const Row = (props) => {
     }
 
     function closeOnstatusComments() {
-        if (Lead_Status === "Dump", "Converted") {
-            updateStatus()
-            props.getLeadOnBoard()
 
-            // props.updateTableDataAfterConversion(row.TripId)
-        }
-        else {
-            updateStatus()
-            props.getLeadOnBoard()
-        }
-
+        updateStatus()
+        props.getLeadOnBoard()
         setopenupdater(false)
     }
     async function latestTripData() {
@@ -320,8 +312,8 @@ const Row = (props) => {
                                                             inclusionLinkfromstorage={data.inclusionLinks}
                                                             flightFlg={data.flightImgLinks ? true : false}
                                                             inclusionImgFlg={data.inclusionLinks ? true : false}
-                                                            Pax={data.Pax}
-                                                            Child={data.Child}
+                                                            Pax={data.travel_data.Pax}
+                                                            Child={data.travel_data.Child}
                                                             inclusion_data={data.inclusion_data}
                                                             profile={props.profile}
                                                             indicator={false}
@@ -391,7 +383,7 @@ const Row = (props) => {
                                                                             pre_inclusionLinks={tripData.inclusionLinks}
                                                                             Allquote={Allquote}
 
-                                                                           
+
                                                                         />
                                                                     </> : <>
                                                                         <Box

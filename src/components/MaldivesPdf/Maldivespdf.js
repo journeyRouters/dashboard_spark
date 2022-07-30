@@ -37,7 +37,8 @@ const   Maldivespdf = ({
     profile,
     indicator,
     E_indicator,
-    Allquote
+    Allquote,
+    onClosePdf
 }) => {
     console.log(profile)    
     const currentdate = new Date();
@@ -251,8 +252,12 @@ const   Maldivespdf = ({
         }
       
     }, []);
-    function downloadPdfOnly() {
+    async function downloadPdfOnly() {
         pdfExportComponent.current.save();
+        setWait(true)
+        await delay(6000);
+        setWait(false)
+        onClosePdf()
 
     }
     async function handleExportWithComponent() {
@@ -263,6 +268,7 @@ const   Maldivespdf = ({
         setQuotationData()
         setWait(false)
         Allquote()
+        onClosePdf()
     };
     const pdfExportComponent = useRef(null);
     // console.log(count_days)
@@ -331,7 +337,7 @@ const   Maldivespdf = ({
                     <div className="page-break">
                         <div className={'Header'}
                             style={{
-                                backgroundImage: `url(/assets/pdfDefaultImage/PackageDetailsMaldives.png)`,
+                                backgroundImage: `url(/assets/pdfDefaultImage/PackageDetailsMaldives3.png)`,
                                 backgroundPosition: "top",
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",

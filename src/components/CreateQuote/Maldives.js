@@ -295,6 +295,7 @@ const Maldives = ({
                 flightsLinkfromstorage={pre_flightImgLinks}
                 inclusionLinkfromstorage={pre_inclusionLinks}
                 Allquote={Allquote}
+                onClosePdf={onClosePdf}
             />
         </Modal>
         <Modal open={inclusionflg} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>

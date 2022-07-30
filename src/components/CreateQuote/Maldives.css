@@ -83,10 +83,10 @@
 }
 .pricing{
     width: 12rem;
-    height: 10rem;
+    height: 16rem;
     /* background: white; */
-    margin: 13rem;
-    margin-left: 23rem;
+    margin: 10rem;
+    margin-left: 24rem;
     font-size: 1.4rem;
     font-weight: 600;
 }

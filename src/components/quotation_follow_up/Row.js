@@ -382,8 +382,6 @@ const Row = (props) => {
                                                                             pre_flightImgLinks={tripData.flightImgLinks}
                                                                             pre_inclusionLinks={tripData.inclusionLinks}
                                                                             Allquote={Allquote}
-
-
                                                                         />
                                                                     </> : <>
                                                                         <Box

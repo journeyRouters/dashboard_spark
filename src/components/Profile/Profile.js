@@ -102,7 +102,7 @@ const Profile = (
         }
         else {
             await addDoc(collection(db, "Quote"), {
-                label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                label: currentdate,
                 value: {
                     travel_data: Data,
                     count_days: count_days,
@@ -112,7 +112,7 @@ const Profile = (
                     itineary: itineary,
                     selected_Travel_date: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
-                    pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                    pdf_name: currentdate,
                     cabDetailsData: cabDetailsData,
                     // flights: flights,
                     inclusion_data: inclusion_data,
@@ -295,15 +295,18 @@ const Profile = (
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                         }}>
+                            <div className='trip_summary'>TRIP ID:- JR-{travel_data.TripId}</div>
 
                             <div className="package_details">
                                 <div>
+                                    <span>Name</span><br />
                                     <span>Destination</span><br />
                                     <span>Date</span><br />
                                     <span>Duration</span><br />
                                     <span>Traveler</span>
                                 </div>
                                 <div >
+                                    <span>- {travel_data.Traveller_name}</span><br />
                                     <span>- {travel_data.Destination}</span><br />
                                     <span>- {selected_Travel_date}</span><br />
                                     <span>- {count_days} Days, {count_days - 1} Nights</span><br />
@@ -315,9 +318,9 @@ const Profile = (
                                 <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
                                 <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
-                                <p   style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
+                                <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
-                            <div >
+                            <div style={{marginTop:'12.3rem'}}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>

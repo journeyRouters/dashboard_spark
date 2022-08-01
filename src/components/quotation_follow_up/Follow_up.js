@@ -26,8 +26,8 @@ console.log(props.adminFlg,lead_data)
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==",props.auth.uid),
-             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true),orderBy("Lead_Status")
-             ,orderBy("Lead_status_change_date"));
+             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true)
+             );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

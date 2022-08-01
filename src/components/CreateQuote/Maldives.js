@@ -38,7 +38,7 @@ const Maldives = ({
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
-    console.log(inclusion_data_)
+    // console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
@@ -220,7 +220,7 @@ const Maldives = ({
     }
     const handleFormChangePropety = (event, index) => {
         setRoomTye(RoomTypeReflector(event.value))
-        // console.log(RoomTypeReflector(event.value))
+        console.log(RoomTypeReflector(event.value))
         setproperty(event)
     }
     function handleMealPlan(e) {

@@ -12,7 +12,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const[testdate,setvtestdate]=useState(data.Travel_Date?data.Travel_Date:false)
     // const testdate = data.Travel_Date
 
-    console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
+    // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
     var currentdate = moment(today).format('YYYY-MM-DD')
   
     async function deletelead(tripid) {
@@ -72,11 +72,11 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
 
                     </select>
                 </span><br />
-                {
+                {/* {
                     testdate.toDate() ? <>
                         <span>Date of travel:-{moment(testdate.toDate()).format('DD-MM-YYYY')}</span><br />
                     </> : <></>
-                }
+                } */}
                 <span>Assign to:-</span>
 
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>

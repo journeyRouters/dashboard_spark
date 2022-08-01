@@ -106,7 +106,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
             <PDFExport
                 ref={pdfExportComponent}
                 forcePageBreak=".page-break"
-                fileName={`${selected_pdf_data.travel_data.Traveller_name}`}
+                fileName={`${selected_pdf_data.travel_data.Traveller_name} Invoice`}
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div>

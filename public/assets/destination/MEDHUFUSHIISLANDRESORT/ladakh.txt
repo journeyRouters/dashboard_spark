@@ -1,0 +1,23 @@
+MEDHUFUSHI ISLAND AND RESORT
+
+{
+label:"BeachVilla",
+value:"BeachVilla",
+},
+{
+label:"BeachVillaSuite",
+value:"BeachVillaSuite",
+},
+{
+label:"LagoonSuites",
+value:"LagoonSuites",
+},
+{
+label:"SemiDetachedBeachVilla",
+value:"SemiDetachedBeachVilla",
+},
+{
+label:"WaterVilla",
+value:"WaterVilla",
+},
+

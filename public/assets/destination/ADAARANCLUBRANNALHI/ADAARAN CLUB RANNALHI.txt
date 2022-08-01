@@ -1,0 +1,10 @@
+ADAARAN CLUB RANNALHI
+
+{
+label:"StandardRoom",
+value:"StandardRoom",
+},
+{
+label:"WaterBungalow",
+value:"WaterBungalow",
+},

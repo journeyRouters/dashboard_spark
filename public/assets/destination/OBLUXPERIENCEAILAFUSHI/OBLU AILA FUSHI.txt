@@ -1,0 +1,19 @@
+OBLU AILA FUSHI
+
+{
+label:"BeachVilla",
+value:"BeachVilla",
+},
+{
+label:"OceanViewFamilyRoom",
+value:"OceanViewFamilyRoom",
+},
+{
+label:"OceanViewRoom",
+value:"OceanViewRoom",
+},
+{
+label:"WaterVilla",
+value:"WaterVilla",
+},
+

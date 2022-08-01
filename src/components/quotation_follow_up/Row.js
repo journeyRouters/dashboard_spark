@@ -162,7 +162,7 @@ const Row = (props) => {
             let comment_holder = {
                 comments: comments,
                 date: moment(today).format('YYYY-MM-DD'),
-                time: moment(today).format('h:mm:ss')
+                time: moment(today).calendar()
             }
             allComments.push(comment_holder)
             // console.log('allcoments new', allComments, row.trip_doc)
@@ -273,12 +273,12 @@ const Row = (props) => {
                                             reverse.map((text, index) => (
                                                 <div key={index} className='comments_maping'>
                                                     {/* {console.log("comments data",text)} */}
-                                                    <p>
+                                                    <p style={{fontSize:'10px',borderRight:'1px solid'}}>
                                                         {text.comments}
                                                     </p>
                                                     <div className='time_date'>
+                                                        <p>{moment(text.date).format('DD-MMM-YYYY')}</p>
                                                         <p>{text.time}</p>
-                                                        <p>{text.date}</p>
 
                                                     </div>
                                                 </div>
@@ -348,10 +348,19 @@ const Row = (props) => {
                                         {
 
                                             pdfHolder.map((data, index) => (
+                                                console.log(typeof(data.value.pdf_name)),
                                                 <>
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
-                                                        <p key={index}>{data.value.pdf_name}</p>
+                                                        <p key={index}>{
+                                                        typeof(data.value.pdf_name)==='string'?<>
+                                                        {data.value.pdf_name}
+                                                        </>:<>
+                                                        {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
+                                                        {moment(data.value.pdf_name.toDate()).format('lll')}
+                                                        </>
+                                                        }
+                                                        </p>
                                                         <button onClick={() => showPDF(data.value)} className='download_requote'>
                                                             downloadURL</button>
                                                         <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>

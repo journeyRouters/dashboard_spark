@@ -1,0 +1,18 @@
+OBLU NATURE HELENGELI
+
+{
+label:"BeachVilla",
+value:"BeachVilla",
+},
+{
+label:"WatervillaWithPool",
+value:"WatervillaWithPool",
+},
+{
+label:"DeluxeBeachVilla",
+value:"DeluxeBeachVilla",
+},
+{
+label:"TwoBedroomBeachPoolSuite",
+value:"TwoBedroomBeachPoolSuite",
+},

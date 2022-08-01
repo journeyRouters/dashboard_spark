@@ -1,0 +1,22 @@
+AMAYA KUDA RAH
+
+{
+label:"BeachSuite",
+value:"BeachSuite",
+},
+{
+label:"BeachVilla",
+value:"BeachVilla",
+},
+{
+label:"FamilyDuplexBeachVilla",
+value:"FamilyDuplexBeachVilla",
+},
+{
+label:"WaterVilla",
+value:"WaterVilla",
+},
+{
+label:"WaterVillaSuite",
+value:"WaterVillaSuite",
+},

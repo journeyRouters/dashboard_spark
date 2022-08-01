@@ -1,0 +1,18 @@
+COCOGIRI ISLAND RESORT
+
+{
+label:"BeachVilla",
+value:"BeachVilla",
+},
+{
+label:"WaterVilla",
+value:"WaterVilla",
+},
+{
+label:"WaterVillaJacuzzi",
+value:"WaterVillaJacuzzi",
+},
+{
+label:"WaterVillaPoolJacuzzi",
+value:"WaterVillaPoolJacuzzi",
+},

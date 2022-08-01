@@ -1,0 +1,14 @@
+ANGAGA ISLAND RESORT
+
+{
+label:"SuperiorBeachBungalow",
+value:"SuperiorBeachBungalow",
+},
+{
+label:"SuperiorWaterBungalow",
+value:"SuperiorWaterBungalow",
+},
+{
+label:"WaterBungalow",
+value:"WaterBungalow",
+},

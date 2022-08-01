@@ -12,7 +12,7 @@ const storage = getStorage();
 
 
 
-const   Maldivespdf = ({
+const Maldivespdf = ({
     flightsLinkfromstorage,
     inclusionLinkfromstorage,
     data, no_rooms,
@@ -40,7 +40,7 @@ const   Maldivespdf = ({
     Allquote,
     onClosePdf
 }) => {
-    console.log(data)    
+    // console.log(E_indicator,data)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
@@ -117,8 +117,8 @@ const   Maldivespdf = ({
     async function setQuotationData() {
         // console.log(ImgLinks)
         // debugger
-        
-        if (indicator){
+
+        if (indicator) {
             // console.log(flightImgLinks, inclusionLinks)
             await addDoc(collection(db, "Quote"), {
                 label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
@@ -139,8 +139,8 @@ const   Maldivespdf = ({
                     MealPlan: MealPlan,
                     Transfer: Transfer,
                     Property: Property,
-                    flightImgLinks: E_indicator?flightsLinkfromstorage:flightImgLinks,
-                    inclusionLinks: E_indicator?inclusionLinkfromstorage:inclusionLinks
+                    flightImgLinks: E_indicator ? flightsLinkfromstorage : flightImgLinks,
+                    inclusionLinks: E_indicator ? inclusionLinkfromstorage : inclusionLinks
                 }
             });
 
@@ -180,7 +180,7 @@ const   Maldivespdf = ({
                 () => {
 
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log('File available at', downloadURL);
+                        // console.log('File available at', downloadURL);
                         tempMemo.Link = downloadURL
                         tempMemo.path = path
 
@@ -226,7 +226,7 @@ const   Maldivespdf = ({
                 () => {
 
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log('File available at', downloadURL);
+                        // console.log('File available at', downloadURL);
                         tempMemo.Link = downloadURL
                         tempMemo.path = path
 
@@ -240,10 +240,10 @@ const   Maldivespdf = ({
     }
     useEffect(() => {
         if (indicator) {
-            if(E_indicator){
+            if (E_indicator) {
 
             }
-            else{
+            else {
                 console.log(E_indicator)
                 convertObjectToLink()
                 inclusionImgconvertObjectToLink()
@@ -251,7 +251,7 @@ const   Maldivespdf = ({
                 uploadInclusionScreenShots()
             }
         }
-      
+
     }, []);
     async function downloadPdfOnly() {
         pdfExportComponent.current.save();
@@ -284,11 +284,12 @@ const   Maldivespdf = ({
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={`${data.Traveller_name}`}
+                fileName={E_indicator ? `${data.travel_data.Traveller_name}` : `${data.Traveller_name}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div className={'Header'}
+                    // RoomType
                         style={{
                             backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
                             backgroundPosition: "top",
@@ -345,8 +346,13 @@ const   Maldivespdf = ({
                                 // color:"white"
                             }}
                         >
+                            <div className='trip_summary'>TRIP ID:- JR-{E_indicator ? `${data.travel_data.TripId}` : `${data.TripId}`}</div>
                             <div>
-                                <table style={{ border: '1px solid', color: 'white', marginTop: '26rem', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
+                                <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
+                                    <tr >
+                                        <th style={{ border: '1px solid white' }}>Name</th>
+                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{E_indicator ? `${data.travel_data.Traveller_name}` : `${data.Traveller_name}`}</td>
+                                    </tr>
                                     <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
                                         <th style={{ border: '1px solid white' }}>HOTEL</th>
                                         <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Property.value}</td>
@@ -384,6 +390,7 @@ const   Maldivespdf = ({
                                         <th style={{ border: '1px solid white' }}>NO OF ROOMS</th>
                                         <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{no_rooms ? no_rooms : 0}</td>
                                     </tr>
+
                                 </table>
                             </div>
 
@@ -414,7 +421,7 @@ const   Maldivespdf = ({
                                         NightDataFields.map((data, index) => (
                                             <>
                                                 <span style={{ color: 'yellow', fontSize: '1.5rem', marginLeft: '1rem' }} >{data.Night.map((data_, index_) => (<>{data_.value},</>))}</span><br />
-                                                <img className="inclusionPage_img" src='/assets/pdfDefaultImage/sampleDeleteIt.png' />
+                                                <img className="inclusionPage_img" src={`assets/destination/${Property.value}/${data.RoomType}.png`} />
                                             </>
                                         ))
                                     }
@@ -665,8 +672,8 @@ const   Maldivespdf = ({
             </PDFExport>
             {
                 indicator ?
-                <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>:
-                    <button className='download_button' onClick={() => downloadPdfOnly()}>ReDownload</button> 
+                    <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button> :
+                    <button className='download_button' onClick={() => downloadPdfOnly()}>ReDownload</button>
 
             }
 

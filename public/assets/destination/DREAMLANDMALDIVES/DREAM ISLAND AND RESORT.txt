@@ -1,0 +1,11 @@
+DREAM ISLAND AND RESORT
+
+{
+label:"BeachBungalow",
+value:"BeachBungalow",
+},
+{
+label:"WaterBungalow",
+value:"WaterBungalow",
+},
+

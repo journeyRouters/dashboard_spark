@@ -91,6 +91,7 @@ const SuperAdmin = (props) => {
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
                 setopen(false)
+                setLead_data([])
             }
             else {
 

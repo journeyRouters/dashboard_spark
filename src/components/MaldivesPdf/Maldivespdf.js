@@ -40,7 +40,7 @@ const   Maldivespdf = ({
     Allquote,
     onClosePdf
 }) => {
-    console.log(profile)    
+    console.log(data)    
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
@@ -139,8 +139,8 @@ const   Maldivespdf = ({
                     MealPlan: MealPlan,
                     Transfer: Transfer,
                     Property: Property,
-                    flightImgLinks: flightsLinkfromstorage?flightsLinkfromstorage:flightImgLinks,
-                    inclusionLinks: inclusionLinkfromstorage?inclusionLinkfromstorage:inclusionLinks
+                    flightImgLinks: E_indicator?flightsLinkfromstorage:flightImgLinks,
+                    inclusionLinks: E_indicator?inclusionLinkfromstorage:inclusionLinks
                 }
             });
 
@@ -244,6 +244,7 @@ const   Maldivespdf = ({
 
             }
             else{
+                console.log(E_indicator)
                 convertObjectToLink()
                 inclusionImgconvertObjectToLink()
                 uploadFlightsScreenShots()
@@ -283,7 +284,7 @@ const   Maldivespdf = ({
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={'test'}
+                fileName={`${data.Traveller_name}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>

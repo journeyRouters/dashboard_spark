@@ -11,7 +11,7 @@ import makeAnimated from 'react-select/animated';
 
 const FollowUp = (props) => {
     const db = getFirestore(app);
-    const [lead_data, setLead_data] = useState([])
+    const [lead_data, setLead_data] = useState(props.adminFlg?props.data:[])
     const [open, setopen] = useState(true)
     const [Destination, SetDestination_list] = useState([])
     const [month, setMonths] = useState([])
@@ -20,7 +20,7 @@ const FollowUp = (props) => {
     const animatedComponents = makeAnimated();
     const [profile, setProfile] = useState(null)
 
-
+console.log(props.adminFlg,lead_data)
     async function getLeadOnBoard() {
         // console.log(props.target.uid)
         try {
@@ -57,11 +57,16 @@ const FollowUp = (props) => {
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
         console.log(remaining_data,pre_tableData)
         setLead_data(remaining_data)
-
     }
 
     useEffect(() => {
-        getLeadOnBoard()
+        if(props.adminFlg){
+            setopen(false)
+        }
+        else
+        {
+            getLeadOnBoard()
+        }
     }, [props.auth])
 
 

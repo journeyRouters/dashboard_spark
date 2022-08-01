@@ -1,4 +1,4 @@
-import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, onSnapshot, orderBy, Query, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import FollowUp from './Follow_up';
@@ -7,7 +7,8 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
     const [profile, setprofile] = useState(null)
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
-    const [flg, setflg] = useState(true)
+    const [flg, setflg] = useState(false)
+    const [lead_data, setLead_data] = useState([])
 
     useEffect(() => {
         const q = query(collection(db, "Profile"));
@@ -25,13 +26,44 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
     }, []);
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
+        setflg(false)
         var profile_of_user = profile.filter((data) => data.uid === uid)
-        console.log(profile_of_user)
+        console.log(profile_of_user[0].uid)
         setCurrentuser(profile_of_user[0])
 
     }
     function updateCurrentUser() {
-        setflg(!flg)
+        getLeadOnBoard()
+    }
+    async function getLeadOnBoard() {
+        // console.log(props.target.uid)
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", currentUser.uid),
+                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true), orderBy("Lead_Status")
+                , orderBy("Lead_status_change_date"));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                // setopen(false)
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+                console.log(list);
+                // setopen(false)
+                setflg(true)
+            }
+        }
+        catch (erorr) {
+            console.log(erorr)
+            // setopen(false)
+        }
+
     }
 
     return (
@@ -54,11 +86,13 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
                 }
             </div>
             {
-                flg ?
-                    <FollowUp auth={auth} profile={profile_} target={currentUser} />
-                    :
-                    <FollowUp auth={auth} profile={profile_} target={currentUser} />
+                flg ? <>
+                    <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} />
 
+                </> : <>
+                <div className='no_data'></div>
+                    {/* <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} /> */}
+                </>
             }
         </div>
     );

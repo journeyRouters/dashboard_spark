@@ -40,7 +40,7 @@ const Maldivespdf = ({
     Allquote,
     onClosePdf
 }) => {
-    // console.log(E_indicator,data)
+    console.log(E_indicator,data)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         text: "A4",
@@ -284,14 +284,15 @@ const Maldivespdf = ({
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={E_indicator ? `${data.travel_data.Traveller_name}` : `${data.Traveller_name}`}
+                fileName={`${data.Traveller_name}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div className={'Header'}
                         // RoomType
                         style={{
-                            backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
+                            // backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
+                            backgroundImage:`url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2FHeader.png?alt=media)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -346,12 +347,12 @@ const Maldivespdf = ({
                                 // color:"white"
                             }}
                         >
-                            <div className='trip_summary'>TRIP ID:- JR-{E_indicator ? `${data.travel_data.TripId}` : `${data.TripId}`}</div>
+                            <div className='trip_summary'>TRIP ID:- JR-{`${data.TripId}`}</div>
                             <div>
                                 <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
                                     <tr >
                                         <th style={{ border: '1px solid white' }}>Name</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{E_indicator ? `${data.travel_data.Traveller_name}` : `${data.Traveller_name}`}</td>
+                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{`${data.Traveller_name}`}</td>
                                     </tr>
                                     <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
                                         <th style={{ border: '1px solid white' }}>HOTEL</th>
@@ -422,7 +423,11 @@ const Maldivespdf = ({
                                             <>
                                                 {console.log(data)},
                                                 <span style={{ color: 'yellow', fontSize: '1.5rem', marginLeft: '1rem' }} >{data.Night.map((data_, index_) => (<>{data_.value},</>))}</span><br />
-                                                <img className="inclusionPage_img" src={`assets/destination/${Property.value}/${data.RoomType.value}.png`} />
+                                                <img className="inclusionPage_img" 
+                                                // src={`assets/destination/${Property.value}/${data.RoomType.value}.png`}
+                                                src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2F${data.RoomType.value}.png?alt=media`}
+                                                // src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2${data.RoomType.value}.png?alt=media`}
+                                                />
                                             </>
                                         ))
                                     }

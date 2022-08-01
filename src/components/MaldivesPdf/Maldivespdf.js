@@ -289,7 +289,7 @@ const Maldivespdf = ({
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div className={'Header'}
-                    // RoomType
+                        // RoomType
                         style={{
                             backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
                             backgroundPosition: "top",
@@ -401,7 +401,7 @@ const Maldivespdf = ({
                                 <span style={SelectedpackageType == 'Total' ? { marginLeft: '2.4rem' } : {}} >{SelectedpackageType}</span>
                                 {/* margin-left: 2.4rem; */}
                             </div>
-                            <div style={{ marginTop: '-7rem' }}>
+                            <div style={{ marginTop: '-9rem' }}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>
@@ -420,8 +420,9 @@ const Maldivespdf = ({
                                     {
                                         NightDataFields.map((data, index) => (
                                             <>
+                                                {console.log(data)},
                                                 <span style={{ color: 'yellow', fontSize: '1.5rem', marginLeft: '1rem' }} >{data.Night.map((data_, index_) => (<>{data_.value},</>))}</span><br />
-                                                <img className="inclusionPage_img" src={`assets/destination/${Property.value}/${data.RoomType}.png`} />
+                                                <img className="inclusionPage_img" src={`assets/destination/${Property.value}/${data.RoomType.value}.png`} />
                                             </>
                                         ))
                                     }

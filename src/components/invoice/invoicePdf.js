@@ -9,7 +9,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     var today = new Date();

@@ -12,7 +12,7 @@
     overflow-y: scroll;
     padding-left: 10px;
     padding-right: 10px;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
     /* background-image: url("https://www.planetware.com/wpimages/2019/10/malaysia-best-beaches-mersing.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -42,7 +42,7 @@
     font-size: 20px;
     /* font-weight: 1300; */
     font-family: monospaces;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
 
 }
 
@@ -124,7 +124,7 @@
     color: rgb(59 70 220);
     /* font-size: 20px; */
     /* font-family: monospaces; */
-    text-transform: capitalize;
+    sapn-transform: capitalize;
 }
 
 .pdfImg {
@@ -138,7 +138,7 @@
 .day_ {
     font-family: Arial, Helvetica, sans-serif;
     /* font-weight: 600; */
-    text-decoration: underline;
+    sapn-decoration: underline;
     color:black;
     font-weight: bold;
     background-color: yellow;
@@ -177,7 +177,7 @@
     color: rgb(59 70 220);
     /* font-size: 20px; */
     font-family: monospaces;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
 
 }
 .night_details {
@@ -200,12 +200,12 @@
 
 .inclusion {
     margin-bottom: -0.4rem;
-    text-decoration: underline;
+    sapn-decoration: underline;
 }
 
 .comments_ {
     margin-bottom: -0.7rem;
-    /* text-decoration: underline; */
+    /* sapn-decoration: underline; */
     color: rgb(45, 45, 211);
     font-weight: bold;
 

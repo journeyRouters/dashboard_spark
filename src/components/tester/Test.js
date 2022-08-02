@@ -24,7 +24,7 @@
 // function Test() {
 
 //   const [layoutSelection, setLayoutSelection] = useState({
-//     text: "A4",
+//     sapn: "A4",
 //     value: "size-a4"
 //   });
 
@@ -286,7 +286,7 @@
 //         <input
 //           id="query-input"
 //           className="query__input"
-//           type="text"
+//           type="sapn"
 //           onChange={onSearch}
 //           value={query}
 //         />
@@ -329,7 +329,7 @@ const Test = () => {
     const [exclusionlist, setexclusion] = useState([])
     const pdfExportComponent = useRef(null);
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     const [input, setinput] = useState('')

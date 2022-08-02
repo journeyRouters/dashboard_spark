@@ -43,7 +43,7 @@ const Profile = (
 ) => {
     // console.log(profile)
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     const pdfExportComponent = useRef(null);
@@ -102,7 +102,7 @@ const Profile = (
         }
         else {
             await addDoc(collection(db, "Quote"), {
-                label: currentdate,
+                label: moment(currentdate).format('lll'),
                 value: {
                     travel_data: Data,
                     count_days: count_days,
@@ -112,7 +112,7 @@ const Profile = (
                     itineary: itineary,
                     selected_Travel_date: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
-                    pdf_name: currentdate,
+                    pdf_name: moment(currentdate).format('lll'),
                     cabDetailsData: cabDetailsData,
                     // flights: flights,
                     inclusion_data: inclusion_data,
@@ -221,7 +221,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-
+        closeFormAndPdf()
     }
 
     return (

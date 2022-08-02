@@ -12,6 +12,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import { Flight } from '@material-ui/icons';
 import MaldivesInclusion from './MaldivesInclusion';
 import RoomType from './subComponents/RoomType';
+import Box from './Box';
 
 const Maldives = ({
     set_popupopner
@@ -35,6 +36,8 @@ const Maldives = ({
     , pre_inclusionLinks
     , E_indicator
     , Allquote
+    ,updateTableDataAfterQuote
+    ,email
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
@@ -66,6 +69,7 @@ const Maldives = ({
     const [Pax, setPax] = useState(data.Pax)
     const [Child, setChild] = useState(data.Child ? data.Child : 0)
     const [inclusionflg, setinclusion] = useState(false)
+    const [Destination, setDestination] = useState(data.Destination)
     const inclusion = {
         accommodation: false,
         MealPlan: false,
@@ -267,6 +271,11 @@ const Maldives = ({
     function newImageObjectWilAppear(e) {
         setEditController(false)
     }
+    function changingDestination(Destination) {
+        console.log(Destination.target.value)
+        setDestination(Destination.target.value)
+        data.Destination = Destination.target.value
+    }
     return (<>
         <Modal open={pdfFlg} onClose={onClosePdf} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>
             <Maldivespdf
@@ -305,297 +314,320 @@ const Maldives = ({
                 inclusion_data={InclusionExclusion}
             />
         </Modal>
-        <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
-            <div className='popUp_body'>
-                <div className='save_close'>
-                    <button className='compo_button' onClick={() => closeHandler()} >close</button>
-                    <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
-                </div>
-                <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
-                    <div>
-                        <h4>
-                            <span>Trip id:- </span>
-                            <span>{data.TripId}</span>
-                        </h4>
-                        <h4>
-                            <span>Budget:-</span>
-                            <span>INR {data.Budget}/-</span>
-                        </h4>
-                        <h4>
-                            <span>Travel Date:- </span>
-                            <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
-                        </h4>
-                        <h4>
-                            <span>Travel Duration :- </span>
-                            <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
-                        </h4>
-                    </div>
-                    <div>
-                        <h4>
-                            <span>No of pax:- </span>
-                            <span>{data.Pax}</span>
-                        </h4>
-                        <h4>
-                            <span>No of child:- </span>
-                            <span>{data.Child ? data.Child : 0}</span>
-                        </h4>
-                        <h4>
-                            <span>Contact:- </span>
-                            <span>{data.Contact_Number}</span>
-                        </h4>
-                        <h4>
-                            <span>Destination:- </span>
-                            <span style={{ border: "2px solid green" }}>{data.Destination}</span>
-                        </h4>
-                    </div>
-                    <div>
-                        <h4>
-                            <span>Departure City:- </span>
-                            <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
-                        </h4>
-                        <h4>
-                            <span>Traveler:- </span>
-                            <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
-                        </h4>
-                    </div>
-                    <div>
-                        {data.comments.map((data, index) => (<>
-                            <span>{data}</span><br />
-                        </>))}
-                    </div>
-                </div>
-                <div className='basicDetails'>
-                    <div>
-                        <label>Days</label>
-                        <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
-                    </div>
-                    <div>
-                        <label>Night</label>
-                        <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
-                    </div>
-                </div>
-                <div className='cost_body'>
-                    <div className='costOption'>
-                        <div>
-                            <Radio
-                                checked={SelectedpackageType === 'per Person'}
-                                onChange={handleChange}
-                                value="per Person"
-                                name="radio-button"
-                                color='primary'
-                            // inputProps={{ 'aria-label': 'A' }}
-                            />
-                            <label>per Person</label>
+        {
+            Destination === "Maldives" ? <>
+                <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
+                    <div className='popUp_body'>
+                        <div className='save_close'>
+                            <button className='compo_button' onClick={() => closeHandler()} >close</button>
+                            <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                         </div>
-                        <div>
-                            <Radio
-                                checked={SelectedpackageType === 'per Couple'}
-                                onChange={handleChange}
-                                value="per Couple"
-                                name="radio-button"
-                                color='primary'
-                            // inputProps={{ 'aria-label': 'A' }}
-                            />
-                            <label>per Couple</label>
+                        <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
+                            <div>
+                                <h4>
+                                    <span>Trip id:- </span>
+                                    <span>{data.TripId}</span>
+                                </h4>
+                                <h4>
+                                    <span>Budget:-</span>
+                                    <span>INR {data.Budget}/-</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Date:- </span>
+                                    <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Duration :- </span>
+                                    <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>No of pax:- </span>
+                                    <span>{data.Pax}</span>
+                                </h4>
+                                <h4>
+                                    <span>No of child:- </span>
+                                    <span>{data.Child ? data.Child : 0}</span>
+                                </h4>
+                                <h4>
+                                    <span>Contact:- </span>
+                                    <span>{data.Contact_Number}</span>
+                                </h4>
+                                <h4>
+                                    <span>Destination:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Destination}</span>
+                                    <select onChange={(destination) => changingDestination(destination)}>
+                                        <option value={'Dubai'}>Dubai</option>
+                                        <option value={'Maldives'}>Maldives</option>
+                                        <option value={'Thailand'}>Thailand</option>
+                                        <option value={'Singapore'}>Singapore</option>
+                                        <option value={'Malaysia'}>Malaysia</option>
+                                        <option value={'Bali'}>Bali</option>
+                                        <option value={'Himachal'}>Himachal</option>
+                                        <option value={'Ladakh'}>Ladakh</option>
+                                    </select>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>Departure City:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
+                                </h4>
+                                <h4>
+                                    <span>Traveler:- </span>
+                                    <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
+                                </h4>
+                            </div>
+                            <div>
+                                {data.comments.map((data, index) => (<>
+                                    <span>{data}</span><br />
+                                </>))}
+                            </div>
                         </div>
-                        <div>
-                            <Radio
-                                checked={SelectedpackageType === 'Total'}
-                                onChange={handleChange}
-                                value="Total"
-                                name="radio-button"
-                                color='primary'
-                            // inputProps={{ 'aria-label': 'A' }}
-                            />
-                            <label>total</label>
+                        <div className='basicDetails'>
+                            <div>
+                                <label>Days</label>
+                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
+                            </div>
+                            <div>
+                                <label>Night</label>
+                                <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
+                            </div>
                         </div>
+                        <div className='cost_body'>
+                            <div className='costOption'>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'per Person'}
+                                        onChange={handleChange}
+                                        value="per Person"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>per Person</label>
+                                </div>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'per Couple'}
+                                        onChange={handleChange}
+                                        value="per Couple"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>per Couple</label>
+                                </div>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'Total'}
+                                        onChange={handleChange}
+                                        value="Total"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>total</label>
+                                </div>
 
-                    </div>
-                    <div className='costOption_estimatiom'>
-                        <div>
-                            <label >Flight Cost</label><br />
-                            <input type="number"
-                                className='input_filed'
-                                placeholder='0'
-                                value={flightcost}
-                                onChange={(e) => flightcostChange(e)}
-                            ></input>
-                            <text className='spacer'>+</text>
-                        </div>
-                        <div>
-                            <label>Visa Cost</label><br />
-                            <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
-                            <text className='spacer'>+</text>
-                        </div>
-                        <div>
-                            <label>Land Package Cost</label><br />
-                            <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
-                            <text className='spacer'>=</text>
-                        </div>
+                            </div>
+                            <div className='costOption_estimatiom'>
+                                <div>
+                                    <label >Flight Cost</label><br />
+                                    <input type="number"
+                                        className='input_filed'
+                                        placeholder='0'
+                                        value={flightcost}
+                                        onChange={(e) => flightcostChange(e)}
+                                    ></input>
+                                    <sapn className='spacer'>+</sapn>
+                                </div>
+                                <div>
+                                    <label>Visa Cost</label><br />
+                                    <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
+                                    <sapn className='spacer'>+</sapn>
+                                </div>
+                                <div>
+                                    <label>Land Package Cost</label><br />
+                                    <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                    <sapn className='spacer'>=</sapn>
+                                </div>
 
-                        <div className='totalSeprator'>
-                            <label>Quotation price</label><br />
-                            <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
+                                <div className='totalSeprator'>
+                                    <label>Quotation price</label><br />
+                                    <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid' }}>
-                    <div>
-                        <label className='san-serif'>select Travel Date</label><br />
-                        <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
-                    </div>
-                    <div>
-                        <lable className='san-serif'>number of Pax</lable><br />
-                        <input value={Pax} onChange={(e) => changePax(e)}></input>
-                    </div>
-                    <div>
-                        <label className='san-serif'>number of Child</label><br />
-                        <input onChange={(e) => changechild(e)} value={Child}></input>
-                    </div>
-                    <div>
-                        <lable className='san-serif'>INCLUSION/EXCLUSION</lable><br />
-                        <button onClick={(e) => setinclusion(true)} >INCLUSION/EXCLUSION</button>
-                    </div>
-                </div>
-                <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '58rem' }}>
-                        <div className='unitComponent_'>
-                            <h4>property</h4>
-                            <Select
-                                components={animatedComponents}
-                                options={propertyAvail}
-                                defaultValue={Edit_Property ? Edit_Property : null}
-                                onChange={(e) => handleFormChangePropety(e)}
-                            />
-                        </div>
-                        <div className='unitComponent_'>
-                            <h4>Transfer Selection</h4>
-                            <Select
-                                closeMenuOnSelect={false}
-                                components={animatedComponents}
-                                options={TransferOption}
-                                defaultValue={Edit_Transfer ? Edit_Transfer : null}
-                                onChange={(e) => handleTransfer(e)}
-                            />
-                        </div>
-                        <div className='unitComponent_'>
-                            <h4>MealPlan</h4>
-                            <Select
-                                components={animatedComponents}
-                                options={HotelMeals}
-                                defaultValue={MealPlan ? MealPlan : null}
-                                onChange={(e) => handleMealPlan(e)}
-                            />
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid',borderTop:'1px dotted' }}>
+                            <div>
+                                <label className='san-serif'>select Travel Date</label><br />
+                                <input width={'80px'} type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                            </div>
+                            <div>
+                                <label className='san-serif'>number of Pax</label><br />
+                                <input value={Pax} onChange={(e) => changePax(e)}></input>
+                            </div>
+                            <div>
+                                <label className='san-serif'>number of Child</label><br />
+                                <input onChange={(e) => changechild(e)} value={Child}></input>
+                            </div>
+                            <div>
+                                {/* <lable className='san-serif'>INCLUSION/EXCLUSION</lable><br /> */}
+                                <button className='inclusionButtoon' onClick={(e) => setinclusion(true)} >Inclusion / Exclusion</button>
+                            </div>
                         </div>
                         <div>
-                            <h4>No of rooms</h4>
-                            <input style={{ height: '2rem' }} onChange={(e) => NO_ofRooms(e)} value={no_rooms}></input>
-                        </div>
-                    </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '58rem' }}>
+                                <div className='unitComponent_'>
+                                    <h4>property</h4>
+                                    <Select
+                                        components={animatedComponents}
+                                        options={propertyAvail}
+                                        defaultValue={Edit_Property ? Edit_Property : null}
+                                        onChange={(e) => handleFormChangePropety(e)}
+                                    />
+                                </div>
+                                <div className='unitComponent_'>
+                                    <h4>Transfer Selection</h4>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        components={animatedComponents}
+                                        options={TransferOption}
+                                        defaultValue={Edit_Transfer ? Edit_Transfer : null}
+                                        onChange={(e) => handleTransfer(e)}
+                                    />
+                                </div>
+                                <div className='unitComponent_'>
+                                    <h4>MealPlan</h4>
+                                    <Select
+                                        components={animatedComponents}
+                                        options={HotelMeals}
+                                        defaultValue={MealPlan ? MealPlan : null}
+                                        onChange={(e) => handleMealPlan(e)}
+                                    />
+                                </div>
+                                <div>
+                                    <h4>No of rooms</h4>
+                                    <input style={{ height: '2rem' }} onChange={(e) => NO_ofRooms(e)} value={no_rooms}></input>
+                                </div>
+                            </div>
 
 
-                    {
-                        // console.log(NightDataFields),
-                        NightDataFields &&
-                        NightDataFields.map((data, index) => {
-                            return (
-                                <>
-                                    <div key={index} className='costOption_estimatiom'>
+                            {
+                                // console.log(NightDataFields),
+                                NightDataFields &&
+                                NightDataFields.map((data, index) => {
+                                    return (
+                                        <>
+                                            <div key={index} className='costOption_estimatiom'>
 
-                                        <div className='unitComponent_'>
-                                            <label>Room Type</label><br />
-                                            <Select
-                                                components={animatedComponents}
-                                                // isMulti
-                                                options={roomTypeAvail}
-                                                defaultValue={Edit_NightDataFields ? data.RoomType : null}
-                                                onChange={(e) => handleFormChange(e, index)}
-                                            />
+                                                <div className='unitComponent_'>
+                                                    <label>Room Type</label><br />
+                                                    <Select
+                                                        components={animatedComponents}
+                                                        // isMulti
+                                                        options={roomTypeAvail}
+                                                        defaultValue={Edit_NightDataFields ? data.RoomType : null}
+                                                        onChange={(e) => handleFormChange(e, index)}
+                                                    />
 
-                                        </div>
-                                        <div className='unitComponent_'>
-                                            <label>Night</label><br />
-                                            <Select
-                                                closeMenuOnSelect={false}
-                                                components={animatedComponents}
-                                                isMulti
-                                                options={nights}
-                                                defaultValue={Edit_NightDataFields ? data.Night : null}
-                                                onChange={(e) => advance_controller_nights(e, index)}
-                                            />
-                                        </div>
+                                                </div>
+                                                <div className='unitComponent_'>
+                                                    <label>Night</label><br />
+                                                    <Select
+                                                        closeMenuOnSelect={false}
+                                                        components={animatedComponents}
+                                                        isMulti
+                                                        options={nights}
+                                                        defaultValue={Edit_NightDataFields ? data.Night : null}
+                                                        onChange={(e) => advance_controller_nights(e, index)}
+                                                    />
+                                                </div>
 
-                                        <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
-                                    </div>
-                                    {/* <textarea
+                                                <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
+                                            </div>
+                                            {/* <textarea
                                                 className='comments'
                                                 name='comments'
                                                 value={data.comments}
                                                 onChange={(event) => handleFormChange(event, index)}
                                                 placeholder='Additional information'
                                             ></textarea> */}
+                                        </>
+                                    );
+                                }
+                                )
+                            }
+                            <button className='addMore' onClick={() => addFields()}>Add More..</button>
+                        </div>
+                        <div>
+                            {
+                                EditController ? <>
+                                    <label>Do not use previous image( default using previous images)</label>
+                                    <input checked={E_indicator} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
+                                </> : <></>
+                            }
+
+                        </div>
+                        <div className='FlightDetails'>
+                            <Flight />
+                            <p>
+                                <input type='checkbox' onChange={() => setflightFlg(!flightFlg)}></input>
+                                <label>Flight Not Included</label>
+                            </p>
+                        </div>
+                        {
+                            flightFlg ?
+                                <>
+                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
+                                        </textarea> */}
+                                    <div className='flightdetailsDrop'>
+                                        <DropzoneArea
+                                            onChange={(files) => flightDetails(files)}
+                                        />
+                                    </div>
                                 </>
-                            );
+                                :
+                                <></>
                         }
-                        )
-                    }
-                    <button className='addMore' onClick={() => addFields()}>Add More..</button>
-                </div>
-                <div>
-                    {
-                        EditController ? <>
-                            <label>Do not use previous image( default using previous images)</label>
-                            <input checked={E_indicator} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
-                        </> : <></>
-                    }
 
-                </div>
-                <div className='FlightDetails'>
-                    <Flight />
-                    <p>
-                        <input type='checkbox' onChange={() => setflightFlg(!flightFlg)}></input>
-                        <label>Flight Not Included</label>
-                    </p>
-                </div>
-                {
-                    flightFlg ?
-                        <>
-                            {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
+                        <div className='FlightDetails' style={{ marginTop: '2rem' }} >
+                            <DeckIcon />
+                            <p>
+                                <input type='checkbox' onChange={() => setinclusionImgFlg(!inclusionImgFlg)}></input>
+                                <label>inclusionImg Not Included</label>
+                            </p>
+                        </div>
+                        {
+                            inclusionImgFlg ?
+                                <>
+                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
                                         </textarea> */}
-                            <div className='flightdetailsDrop'>
-                                <DropzoneArea
-                                    onChange={(files) => flightDetails(files)}
-                                />
-                            </div>
-                        </>
-                        :
-                        <></>
-                }
+                                    <div className='flightdetailsDrop'>
+                                        <DropzoneArea
+                                            onChange={(files) => inclusionDetails(files)}
+                                        />
+                                    </div>
+                                </>
+                                :
+                                <></>
+                        }
+                    </div>
 
-                <div className='FlightDetails' style={{ marginTop: '2rem' }} >
-                    <DeckIcon />
-                    <p>
-                        <input type='checkbox' onChange={() => setinclusionImgFlg(!inclusionImgFlg)}></input>
-                        <label>inclusionImg Not Included</label>
-                    </p>
-                </div>
-                {
-                    inclusionImgFlg ?
-                        <>
-                            {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
-                                        </textarea> */}
-                            <div className='flightdetailsDrop'>
-                                <DropzoneArea
-                                    onChange={(files) => inclusionDetails(files)}
-                                />
-                            </div>
-                        </>
-                        :
-                        <></>
-                }
-            </div>
+                </Modal>
+            </> : <>
+                <Box
+                    email={email}
+                    data={data}
+                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                    set_popupopner={set_popupopner}
+                    profile={profile}
+                />
+            </>
+        }
 
-        </Modal>
     </>
     );
 }

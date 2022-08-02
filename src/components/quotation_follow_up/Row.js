@@ -53,7 +53,7 @@ const Row = (props) => {
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
     function Controller_reqoute(data) {
-        console.log('jhggjkdfhgj',data)
+        // console.log('jhggjkdfhgj', data)
         setTripData(data.value)
         setReqoute_flg(true)
     }
@@ -270,15 +270,15 @@ const Row = (props) => {
                                 <div className='follow_up'>
                                     <div className='remark' >
                                         {
-                                            reverse.map((text, index) => (
+                                            reverse.map((sapn, index) => (
                                                 <div key={index} className='comments_maping'>
-                                                    {/* {console.log("comments data",text)} */}
-                                                    <p style={{fontSize:'10px',borderRight:'1px solid'}}>
-                                                        {text.comments}
+                                                    {/* {console.log("comments data",sapn)} */}
+                                                    <p style={{ fontSize: '10px', borderRight: '1px solid' }}>
+                                                        {sapn.comments}
                                                     </p>
                                                     <div className='time_date'>
-                                                        <p>{moment(text.date).format('DD-MMM-YYYY')}</p>
-                                                        <p>{text.time}</p>
+                                                        <p>{moment(sapn.date).format('DD-MMM-YYYY')}</p>
+                                                        <p>{sapn.time}</p>
 
                                                     </div>
                                                 </div>
@@ -296,7 +296,7 @@ const Row = (props) => {
                                                 {
                                                     data.travel_data.Destination == 'Maldives' ? <>
                                                         <Maldivespdf
-                                                            data={data}
+                                                            data={data.travel_data}
                                                             no_rooms={data.no_rooms}
                                                             selected_Travel_date={data.selected_Travel_date}
                                                             MealPlan={data.MealPlan}
@@ -317,6 +317,7 @@ const Row = (props) => {
                                                             inclusion_data={data.inclusion_data}
                                                             profile={props.profile}
                                                             indicator={false}
+                                                            onClosePdf={closePDF}
 
                                                         />
                                                     </> : <>
@@ -348,18 +349,18 @@ const Row = (props) => {
                                         {
 
                                             pdfHolder.map((data, index) => (
-                                                console.log(typeof(data.value.pdf_name)),
                                                 <>
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
-                                                        <p key={index}>{
-                                                        typeof(data.value.pdf_name)==='string'?<>
-                                                        {data.value.pdf_name}
-                                                        </>:<>
-                                                        {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
-                                                        {moment(data.value.pdf_name.toDate()).format('lll')}
-                                                        </>
-                                                        }
+                                                        <p key={index}>
+                                                            {
+                                                                typeof (data.value.pdf_name) === 'string' ? <>
+                                                                    {data.value.pdf_name}
+                                                                </> : <>
+                                                                    {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
+                                                                    {moment(data.value.pdf_name.toDate()).format('lll')}
+                                                                </>
+                                                            }
                                                         </p>
                                                         <button onClick={() => showPDF(data.value)} className='download_requote'>
                                                             downloadURL</button>
@@ -444,16 +445,7 @@ const Row = (props) => {
                                             <option value="Travel not responding">Travel not responding</option>
                                             <option value="Booking form somewhere else">Booking form somewhere else</option>
                                         </datalist>
-                                        {/* <Autocomplete
-                                            key={change}
-                                            className='Autocomplete'
-                                            freeSolo={true}
-                                            onChange={(e) => handlecomment(e)}
-                                            options={reasons.map((option) => option.title)}
-                                            renderInput={(params) => (
-                                                <TextField {...params} placeholder='Comments' margin="normal" variant="outlined" />
-                                            )}
-                                        /> */}
+                                      
                                         <button className='button_save_comments' onClick={() => update_comments()}>save</button>
                                     </div>
                                     <div className='invoicing' >

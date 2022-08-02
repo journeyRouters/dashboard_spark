@@ -71,14 +71,14 @@
 .link{
     display: flex;
     flex-direction: column;
-    text-decoration: none;
+    sapn-decoration: none;
     color: #FFFFFF;
     align-items: center;
 }
 .href{
     margin-left: 0.3rem;
     color: #FFFFFF;
-    text-decoration: none;
+    sapn-decoration: none;
     display: flex;
 }
 .page2{
@@ -282,7 +282,7 @@
     font-size: 2.3rem;
 }
 .setPara_{
-    text-transform: capitalize;
+    sapn-transform: capitalize;
     margin-left: 3rem;
     margin-top: -2rem;
 }
@@ -293,7 +293,7 @@
     font-size: 4rem;
     display: flex;
     color: #FFFFFF;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
     justify-content: space-around;
     font-family: sans-serif;
     font-weight: 900;
@@ -303,7 +303,7 @@
 }
 .inclusionExclusionDetails{
     font-family: Glacial Indifference;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
     display: flex;
     justify-content: space-evenly;
     color: #FFFFFF;
@@ -334,13 +334,13 @@
 .headLineDaywiseItineary{
     font-family: sans-serif;
     font-weight: 900;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
     color:#FFFFFF;
     font-size: 4rem;
     margin-left: 1.5rem;
 }
 .mapitineary{
-    text-transform: uppercase;
+    sapn-transform: uppercase;
     color: #FFFFFF;
     display: flex;
     justify-content: space-between;
@@ -380,13 +380,13 @@
 .dayheader{
     color: yellow;
     font-family: Glacial Indifference;
-    text-transform: uppercase;
+    sapn-transform: uppercase;
 }
 .dayDetailsitineary{
     color: #FFFFFF;
     font-family: arial;
     font-family: Glacial Indifference;
-    text-transform: capitalize;
+    sapn-transform: capitalize;
 }
 .hotelUni{
     color: #FFFFFF;

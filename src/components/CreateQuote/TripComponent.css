@@ -18,13 +18,13 @@
     align-items: center;
 }
 
-.text {
-    text-decoration: underline !important;
+.sapn {
+    sapn-decoration: underline !important;
     font-weight: 500;
 }
 
 .compo_button {
-    text-align: right;
+    sapn-align: right;
     position: relative;
     background: none repeat scroll 0 0 #fe7774;
     border: 0;

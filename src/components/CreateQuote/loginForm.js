@@ -189,7 +189,7 @@ const Loginform = (props) => {
                         hasaccount ? <>
                         </> :
                             <>
-                                <input type="text" className={userName_flg ? 'inputEmailerror' : 'inputEmail'} placeholder='Name' value={userName} onChange={(e) => userNameOnChange(e)}></input>
+                                <input type="sapn" className={userName_flg ? 'inputEmailerror' : 'inputEmail'} placeholder='Name' value={userName} onChange={(e) => userNameOnChange(e)}></input>
                                 <input type="tel" className={userWhatsApp_number_flg ? 'inputEmailerror' : 'inputEmail'} placeholder="What's App" value={userWhatsApp_number} onChange={(e) => userWhatsAppNumberOnChange(e)}></input>
                                 <input type="tel" className={contact_flg ? 'inputEmailerror' : 'inputEmail'} placeholder='Contact' value={contact} onChange={(e) => userContactOnChange(e)}></input>
                             </>

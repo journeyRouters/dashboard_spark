@@ -13,7 +13,7 @@
 }
 
 .compo_button {
-    text-align: right;
+    sapn-align: right;
     position: relative;
     background: none repeat scroll 0 0 #fe7774;
     border: 0;
@@ -34,10 +34,15 @@
 }
 
 .san-serif {
-    font-size: 1.3rem;
+    font-size: 0.8rem;
+    sapn-transform: uppercase;
     font-weight: 600;
     font-family: sans-serif;
+    background-color: #ff0000;
+    background-image: linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+    
 }
+
 
 .unitComponent_ {
     display: flex;
@@ -71,7 +76,7 @@
 
 .table {
     border-collapse: collapse;
-  }
+}
 
 .table_ {
     color: white;
@@ -81,7 +86,8 @@
     height: 11rem;
 
 }
-.pricing{
+
+.pricing {
     width: 12rem;
     height: 16rem;
     /* background: white; */
@@ -89,4 +95,15 @@
     margin-left: 24rem;
     font-size: 1.4rem;
     font-weight: 600;
+}
+
+.inclusionButtoon {
+    height: 3rem;
+    width: 14rem;
+    /* background: yellow; */
+    background-color: #ff0000;
+    background-image: linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 30px;
 }

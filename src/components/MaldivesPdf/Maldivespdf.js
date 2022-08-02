@@ -40,16 +40,15 @@ const Maldivespdf = ({
     Allquote,
     onClosePdf
 }) => {
-    console.log(E_indicator,data)
+    console.log(E_indicator, data)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [inclusionImgUrl, setinclusionImgUrl] = useState(inclusionLinkfromstorage ? inclusionLinkfromstorage : null)
-
-
+    const [clientName, setClientName] = useState(data.Traveller_name)
     const [wait, setWait] = useState(false)
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const [flightImgLinks, setflightImgLinks] = useState([])
@@ -121,7 +120,7 @@ const Maldivespdf = ({
         if (indicator) {
             // console.log(flightImgLinks, inclusionLinks)
             await addDoc(collection(db, "Quote"), {
-                label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                label: moment(currentdate).format('lll'),
                 value: {
                     travel_data: data,
                     count_days: count_days,
@@ -130,7 +129,7 @@ const Maldivespdf = ({
                     landPackage: landPackage,
                     selected_Travel_date: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
-                    pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                    pdf_name: moment(currentdate).format('lll'),
                     // flights: flights,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
@@ -254,8 +253,10 @@ const Maldivespdf = ({
 
     }, []);
     async function downloadPdfOnly() {
-        pdfExportComponent.current.save();
+        // console.log(data.travel_data.Traveller_name)
+        // setClientName(data.travel_data.Traveller_name)
         setWait(true)
+        pdfExportComponent.current.save();
         await delay(6000);
         setWait(false)
         onClosePdf()
@@ -292,7 +293,7 @@ const Maldivespdf = ({
                         // RoomType
                         style={{
                             // backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
-                            backgroundImage:`url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2FHeader.png?alt=media)`,
+                            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2FHeader.png?alt=media)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -350,48 +351,49 @@ const Maldivespdf = ({
                             <div className='trip_summary'>TRIP ID:- JR-{`${data.TripId}`}</div>
                             <div>
                                 <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>Name</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{`${data.Traveller_name}`}</td>
-                                    </tr>
-                                    <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
-                                        <th style={{ border: '1px solid white' }}>HOTEL</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Property.value}</td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>STAY</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>
-                                            {
-                                                NightDataFields.map((data, index) => (
-                                                    <> <span>{
-                                                        data.Night.map((data_, index) => (<span>{data_.value},</span>))
-                                                    } at {data.RoomType.value}</span><br /></>
-                                                ))
-                                            }
+                                    <tbody>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>Name</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{`${data.Traveller_name}`}</td>
+                                        </tr>
+                                        <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
+                                            <th style={{ border: '1px solid white' }}>HOTEL</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Property.value}</td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>STAY</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>
+                                                {
+                                                    NightDataFields.map((data, index) => (
+                                                        <> <span>{
+                                                            data.Night.map((data_, index) => (<span>{data_.value},</span>))
+                                                        } at {data.RoomType.value}</span><br /></>
+                                                    ))
+                                                }
 
-                                        </td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>TRANSFER</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Transfer ? Transfer.value : ''}</td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>MEAL PLAN</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{MealPlan ? MealPlan.value : ''}</td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>DATE</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{selected_Travel_date ? moment(selected_Travel_date).format('DD-MMMM-YYYY') : ''}</td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>NO OF PAX</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Pax} Adult, {Child}Child</td>
-                                    </tr>
-                                    <tr >
-                                        <th style={{ border: '1px solid white' }}>NO OF ROOMS</th>
-                                        <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{no_rooms ? no_rooms : 0}</td>
-                                    </tr>
-
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>TRANSFER</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Transfer ? Transfer.value : ''}</td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>MEAL PLAN</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{MealPlan ? MealPlan.value : ''}</td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>DATE</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{selected_Travel_date ? moment(selected_Travel_date).format('DD-MMMM-YYYY') : ''}</td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>NO OF PAX</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Pax} Adult, {Child}Child</td>
+                                        </tr>
+                                        <tr >
+                                            <th style={{ border: '1px solid white' }}>NO OF ROOMS</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{no_rooms ? no_rooms : 0}</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
 
@@ -423,9 +425,9 @@ const Maldivespdf = ({
                                             <>
                                                 {console.log(data)},
                                                 <span style={{ color: 'yellow', fontSize: '1.5rem', marginLeft: '1rem' }} >{data.Night.map((data_, index_) => (<>{data_.value},</>))}</span><br />
-                                                <img className="inclusionPage_img" 
-                                                // src={`assets/destination/${Property.value}/${data.RoomType.value}.png`}
-                                                src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2F${data.RoomType.value}.png?alt=media`}
+                                                <img className="inclusionPage_img"
+                                                    // src={`assets/destination/${Property.value}/${data.RoomType.value}.png`}
+                                                    src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2F${data.RoomType.value}.png?alt=media`}
                                                 // src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2${data.RoomType.value}.png?alt=media`}
                                                 />
                                             </>

@@ -165,7 +165,7 @@ function App() {
         {
           auth ? <>
             <div>
-              <img className='button' width={'85px'} onClick={() => logOut()} src='/assets/pdfDefaultImage/logout3.png' >
+              <img className='button' width={'85px'} onClick={() => logOut()} src='/assets/pdfDefaultImage/Logout3.png' >
               </img>
             </div>
           </> : <>

@@ -119,7 +119,7 @@ const RoomType = {
             value: "WaterVillaSuite",
         },
     ],
-    AngagaIslandResortSpa: [
+    AngagaIslandResort_Spa: [
         {
             label: "SuperiorBeachBungalow",
             value: "SuperiorBeachBungalow",
@@ -315,7 +315,7 @@ const RoomType = {
             value: "WaterVilla",
         }
     ],
-    CentaraGrandIslandResortSpa: [
+    CentaraGrandIslandResort_Spa: [
         {
             label: "DeluxeOverwaterVilla",
             value: "DeluxeOverwaterVilla",
@@ -341,7 +341,7 @@ const RoomType = {
             value: "TwoBedroomBeachVillaWithPrivatePool",
         },
     ],
-    CentaraRasFushiResortSpa: [
+    CentaraRasFushiResort_Spa: [
         {
             label: "BeachVilla",
             value: "BeachVilla",

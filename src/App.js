@@ -165,7 +165,7 @@ function App() {
         {
           auth ? <>
             <div>
-              <img className='button' width={'85px'} onClick={() => logOut()} src='/assets/pdfDefaultImage/Logout3.png' >
+              <img className='button' width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
               </img>
             </div>
           </> : <>

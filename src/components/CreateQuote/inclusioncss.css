@@ -159,6 +159,7 @@
     justify-content: space-between;
 }
 .QuotesMapperDiv{
+    width: 20rem;
     height: 42rem;
     overflow-y: scroll;
 }

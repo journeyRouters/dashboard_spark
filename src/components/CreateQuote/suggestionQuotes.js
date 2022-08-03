@@ -81,6 +81,7 @@ const SuggestionQuotes = ({
                 usethisKey ?
                     <Box
                         email={email}
+                        usingLastQuotes={true}
                         data={Lead_data_to_be_quoted}
                         inclusion_data_={selectedData.value.inclusion_data}
                         SelectedpackageTyp={selectedData.value.SelectedpackageType}
@@ -124,7 +125,7 @@ const SuggestionQuotes = ({
                                     <span className='highglight'>{data.value.count_days} day, {data.value.count_days - 1} Nights</span><br />
                                     <span>{data.value.travel_data.Destination}</span><br />
                                     <span className='highglight'>INR:-{parseInt(data.value.flightcost) + parseInt(data.value.visacost) + parseInt(data.value.landPackage)}</span><br />
-                                    <span>By:- kishor</span>
+                                    <span>By:- {data.value.Quoted_by}</span>
                                 </div>
                             </div>
 

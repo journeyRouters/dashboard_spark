@@ -442,7 +442,429 @@ const RoomType = {
             value: "TwoBedroomLagoonPoolVillawithSlide",
         },
     ],
+    DhigufaruIslandResort: [
+        {
+            label: "BeachVillaVeliAndBoaku",
+            value: "BeachVillaVeliAndBoaku",
+        },
+        {
+            label: "BodhanfulhuWaterPoolVilla",
+            value: "BodhanfulhuWaterPoolVilla",
+        },
+        {
+            label: "FindhanfulhuWaterVilla",
+            value: "FindhanfulhuWaterVilla",
+        },
+        {
+            label: "SanguSuite",
+            value: "SanguSuite",
+        },
+        {
+            label: "SemiWaterVilla",
+            value: "SemiWaterVilla",
+        },
+        {
+            label: "TwoBedroomFamilyVilla",
+            value: "TwoBedroomFamilyVilla",
+        },
+        {
+            label: "VeliBeachPoolVilla",
+            value: "VeliBeachPoolVilla",
+        },
 
+    ],
+    DreamlandMaldives: [
+        {
+            label: "BeachBungalow",
+            value: "BeachBungalow",
+        },
+        {
+            label: "WaterBungalow",
+            value: "WaterBungalow",
+        },
+
+    ],
+    DusitThaniMaldives: [
+        {
+            label: "BeachDeluxeVillaWithPool",
+            value: "BeachDeluxeVillaWithPool",
+        },
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "BeachVillaWithPool",
+            value: "BeachVillaWithPool",
+        },
+        {
+            label: "ThreeBedroomBeachResidence",
+            value: "ThreeBedroomBeachResidence",
+        },
+        {
+            label: "TwoBedroomBeachResidence",
+            value: "TwoBedroomBeachResidence",
+        },
+        {
+            label: "TwoBedroomFamilyBeachVilla",
+            value: "TwoBedroomFamilyBeachVilla",
+        },
+        {
+            label: "TwoBedroomOceanPavilion",
+            value: "TwoBedroomOceanPavilion",
+        },
+        {
+            label: "WaterVillaWithPool",
+            value: "WaterVillaWithPool",
+        },
+        {
+            label: "OceanVillaWithPool",
+            value: "OceanVillaWithPool",
+        },
+
+    ],
+    EmbuduVillageMaldives: [
+        {
+            label: "SuperiorBeachBungalow",
+            value: "SuperiorBeachBungalow",
+        },
+        {
+            label: "WaterBungalow",
+            value: "WaterBungalow",
+        },
+    ],
+    EmeraldMaldivesResort_Spa: [
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "BeachVillaWithPool",
+            value: "BeachVillaWithPool",
+        },
+        {
+            label: "FamilyBeachVillaWithPool",
+            value: "FamilyBeachVillaWithPool",
+        },
+        {
+            label: "JacuzziBeachVilla",
+            value: "JacuzziBeachVilla",
+        },
+        {
+            label: "JacuzziWaterVilla",
+            value: "JacuzziWaterVilla",
+        },
+        {
+            label: "MarinaBeachVillaWithPool",
+            value: "MarinaBeachVillaWithPool",
+        },
+        {
+            label: "PresidentialWaterVilla",
+            value: "PresidentialWaterVilla",
+        },
+        {
+            label: "RoyalBeachVilla",
+            value: "RoyalBeachVilla",
+        },
+        {
+            label: "SuperiorBeachVillaWithPool",
+            value: "SuperiorBeachVillaWithPool",
+        },
+        {
+            label: "SuperiorWaterVillaWithPool",
+            value: "SuperiorWaterVillaWithPool",
+        },
+        {
+            label: "WaterVilla",
+            value: "WaterVilla",
+        },
+        {
+            label: "WaterVillaWithPool",
+            value: "WaterVillaWithPool",
+        },
+
+
+    ],
+    FuraveriMaldives: [
+        {
+            label: "BeachPoolVilla",
+            value: "BeachPoolVilla",
+        },
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "DhoniPoolVilla",
+            value: "DhoniPoolVilla",
+        },
+        {
+            label: "GardenVilla",
+            value: "GardenVilla",
+        },
+        {
+            label: "OceanPoolVilla",
+            value: "OceanPoolVilla",
+        },
+        {
+            label: "OceanVilla",
+            value: "OceanVilla",
+        },
+        {
+            label: "SunsetOceanPoolVilla",
+            value: "SunsetOceanPoolVilla",
+        },
+        {
+            label: "TwoBedroomBeachResidenceWithPool",
+            value: "TwoBedroomBeachResidenceWithPool",
+        },
+        {
+            label: "TwoBedroomReefResidenceWithPool",
+            value: "TwoBedroomReefResidenceWithPool",
+        },
+        {
+            label: "WaterVilla",
+            value: "WaterVilla",
+        },
+
+    ],
+    GrandParkKodhipparu: [
+        {
+            label: "BeachPoolVilla",
+            value: "BeachPoolVilla",
+        },
+        {
+            label: "GrandResidence",
+            value: "GrandResidence",
+        },
+        {
+            label: "LagoonWaterVilla",
+            value: "LagoonWaterVilla",
+        },
+        {
+            label: "OceanWaterVilla",
+            value: "OceanWaterVilla",
+        },
+        {
+            label: "PoolWaterVilla",
+            value: "PoolWaterVilla",
+        },
+        {
+            label: "ReefPoolWaterVilla",
+            value: "ReefPoolWaterVilla",
+        },
+
+    ],
+    HardRockMaldives: [
+        {
+            label: "GoldBeachPoolVilla",
+            value: "GoldBeachPoolVilla",
+        },
+        {
+            label: "GoldBeachVilla",
+            value: "GoldBeachVilla",
+        },
+        {
+            label: "PlatinumOverwaterPoolVilla",
+            value: "PlatinumOverwaterPoolVilla",
+        },
+        {
+            label: "PlatinumOverwaterVilla",
+            value: "PlatinumOverwaterVilla",
+        },
+        {
+            label: "RockRoyaltyOverwaterPoolVilla",
+            value: "RockRoyaltyOverwaterPoolVilla",
+        },
+        {
+            label: "RockStarVilla",
+            value: "RockStarVilla",
+        },
+        {
+            label: "SilverBeachStudio",
+            value: "SilverBeachStudio",
+        },
+        {
+            label: "SilverFamilySuite",
+            value: "SilverFamilySuite",
+        },
+    ],
+    HeritanceAarah: [
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "FamilyBeachVilla",
+            value: "FamilyBeachVilla",
+        },
+        {
+            label: "FamilyPoolBeachVilla",
+            value: "FamilyPoolBeachVilla",
+        },
+        {
+            label: "OceanResidence",
+            value: "OceanResidence",
+        },
+        {
+            label: "OceanSuites",
+            value: "OceanSuites",
+        },
+        {
+            label: "OceanVilla",
+            value: "OceanVilla",
+        },
+        {
+            label: "PoolBeachVilla",
+            value: "PoolBeachVilla",
+        },
+    ],
+    HideawayBeachResort_Spa: [
+        {
+            label: "BeachResidenceWithPlungePool",
+            value: "BeachResidenceWithPlungePool",
+        },
+        {
+            label: "DeluxeBeachResidenceWithLapPool",
+            value: "DeluxeBeachResidenceWithLapPool",
+        },
+        {
+            label: "DeluxeSunsetBeachVillaWithPool",
+            value: "DeluxeSunsetBeachVillaWithPool",
+        },
+        {
+            label: "DeluxeWaterVillaWithPool",
+            value: "DeluxeWaterVillaWithPool",
+        },
+        {
+            label: "FamilyVillaWithPool",
+            value: "FamilyVillaWithPool",
+        },
+        {
+            label: "OceanVillaWithPool",
+            value: "OceanVillaWithPool",
+        },
+        {
+            label: "SunsetBeachVilla",
+            value: "SunsetBeachVilla",
+        },
+        {
+            label: "TwoBedroomFamilyVillaWithPool",
+            value: "TwoBedroomFamilyVillaWithPool",
+        },
+        {
+            label: "TwoBedroomOceanVillaWithPool",
+            value: "TwoBedroomOceanVillaWithPool",
+        },
+
+    ],
+    HolidayInnKandooma: [
+        {
+            label: 'under development',
+            value: ''
+        }
+
+    ],
+    KandimaMaldives: [
+        {
+            label: "AquaVilla",
+            value: "AquaVilla",
+        },
+        {
+            label: "AquaVillaWithSwirlPool",
+            value: "AquaVillaWithSwirlPool",
+        },
+        {
+            label: "BeachAndSkyStudio",
+            value: "BeachAndSkyStudio",
+        },
+        {
+            label: "BeachVillaWithSwirlPool",
+            value: "BeachVillaWithSwirlPool",
+        },
+        {
+            label: "OceanPoolVilla",
+            value: "OceanPoolVilla",
+        },
+        {
+            label: "SunsetAquaPoolVilla",
+            value: "SunsetAquaPoolVilla",
+        },
+        {
+            label: "SunsetBeachPoolVillaWithSwirlPool",
+            value: "SunsetBeachPoolVillaWithSwirlPool",
+        },
+        {
+            label: "TwoBedroomFamilySkySuite",
+            value: "TwoBedroomFamilySkySuite",
+        },
+
+    ],
+    KuramathiMaldives: [
+        {
+            label: 'under development',
+            value: ''
+        }
+    ],
+    MedhufushiIslandResort: [
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "BeachVillaSuite",
+            value: "BeachVillaSuite",
+        },
+        {
+            label: "LagoonSuites",
+            value: "LagoonSuites",
+        },
+        {
+            label: "SemiDetachedBeachVilla",
+            value: "SemiDetachedBeachVilla",
+        },
+        {
+            label: "WaterVilla",
+            value: "WaterVilla",
+        },
+    ],
+    ObluXperienceAilafushi: [
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "OceanViewFamilyRoom",
+            value: "OceanViewFamilyRoom",
+        },
+        {
+            label: "OceanViewRoom",
+            value: "OceanViewRoom",
+        },
+        {
+            label: "WaterVilla",
+            value: "WaterVilla",
+        },
+    ],
+    ObluNatureHelengeli: [
+        {
+            label: "BeachVilla",
+            value: "BeachVilla",
+        },
+        {
+            label: "WatervillaWithPool",
+            value: "WatervillaWithPool",
+        },
+        {
+            label: "DeluxeBeachVilla",
+            value: "DeluxeBeachVilla",
+        },
+        {
+            label: "TwoBedroomBeachPoolSuite",
+            value: "TwoBedroomBeachPoolSuite",
+        },
+    ],
+    
 }
 export function RoomTypeReflector(property) {
     // console.log(RoomType[property])

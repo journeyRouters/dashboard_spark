@@ -17,7 +17,7 @@ import Box from './Box';
 const Maldives = ({
     set_popupopner
     , Edit_no_rooms
-    , data
+    , data: PassData
     , Edit_SelectedpackageType
     , Edit_itineary
     , Edit_count_days
@@ -36,11 +36,12 @@ const Maldives = ({
     , pre_inclusionLinks
     , E_indicator
     , Allquote
-    ,updateTableDataAfterQuote
-    ,email
+    , updateTableDataAfterQuote
+    , email
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
+    const [data, setdata] = useState(PassData)
     // console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
@@ -166,6 +167,10 @@ const Maldives = ({
         handleOptionOfNights()
     }, [countNight]);
     function closeHandler() {
+        try {
+            Allquote()
+        }
+        catch (error) { console.log(error) }
         setopen(false)
         set_popupopner(false)
     }
@@ -358,8 +363,8 @@ const Maldives = ({
                                     <span>Destination:- </span>
                                     <span style={{ border: "2px solid green" }}>{data.Destination}</span>
                                     <select onChange={(destination) => changingDestination(destination)}>
-                                        <option value={'Dubai'}>Dubai</option>
                                         <option value={'Maldives'}>Maldives</option>
+                                        <option value={'Dubai'}>Dubai</option>
                                         <option value={'Thailand'}>Thailand</option>
                                         <option value={'Singapore'}>Singapore</option>
                                         <option value={'Malaysia'}>Malaysia</option>
@@ -460,7 +465,7 @@ const Maldives = ({
                                 </div>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid',borderTop:'1px dotted' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid', borderTop: '1px dotted' }}>
                             <div>
                                 <label className='san-serif'>select Travel Date</label><br />
                                 <input width={'80px'} type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>

@@ -16,6 +16,7 @@ import Maldives from './Maldives';
 const Box = ({
     email,
     data,
+    usingLastQuotes,
     updateTableDataAfterQuote,
     set_popupopner,
     userProfile,
@@ -270,6 +271,10 @@ const Box = ({
 
     }
     function closeHandler() {
+        try {
+            Allquote()
+        }
+        catch (error) { console.log(error) }
         setOpen(false)
         set_popupopner(false)
     }
@@ -365,6 +370,7 @@ const Box = ({
                                             <span>Destination:- </span>
                                             <span style={{ border: "2px solid green" }}>{data.Destination}</span>
                                             <select onChange={(destination) => changingDestination(destination)}>
+                                                <option value={'change Destination'}>change Destination</option>
                                                 <option value={'Dubai'}>Dubai</option>
                                                 <option value={'Maldives'}>Maldives</option>
                                                 <option value={'Thailand'}>Thailand</option>

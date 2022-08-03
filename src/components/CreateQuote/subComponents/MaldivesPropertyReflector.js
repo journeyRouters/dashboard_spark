@@ -131,74 +131,74 @@ export const propertyMaldives = [
         label: 'OBLU SELECT LOBIGILI',
         value: 'ObluSelectLobigili'
     },
-    {
-        label: 'OBLU SELECT SANGELI',
-        value: 'ObluSelectSangeli'
-    },
-    {
-        label: 'PARADISE ISLAND RESORT',
-        value: 'ParadiseIslandResort'
-    },
-    {
-        label: 'REETHI FARU RESORT',
-        value: 'ReethiFaruResort'
-    },
-    {
-        label: 'SAII LAGOON MALDIVES',
-        value: 'SaiiLagoonMaldives'
-    },
-    {
-        label: 'SHERATON MALDIVES FULL MOON RESORT AND SPA',
-        value: 'SheratonMaldivesFullMoonResort_Spa'
-    },
-    {
-        label: 'SIYAM WORLD MALDIVES',
-        value: 'SiyamWorldMaldives'
-    },
-    {
-        label: 'SUN ISLAND RESORT AND SPA',
-        value: 'SunIslandResort_Spa'
-    },
-    {
-        label: 'SUN SIYAM IRU FUSHI',
-        value: 'SunSiyamIruFushi'
-    },
-    {
-        label: 'SUN SIYAM IRU VELI',
-        value: 'SunSiyamIruVeli'
-    },
-    {
-        label: 'SUN SIYAM OLHUVELI',
-        value: 'SunSiyamOlhuveli'
-    },
-    {
-        label: 'SUN SIYAM VILU REEF',
-        value: 'SunSiyamViluReef'
-    },
-    {
-        label: 'TAJ CORAL REEF RESORT AND SPA',
-        value: 'TajCoralReefResort_Spa'
-    },
-    {
-        label: 'TAJ EXOTICA RESORT AND SPA',
-        value: 'TajExoticaResort_Spa'
-    },
-    {
-        label: 'THE STANDARD MALDIVES',
-        value: 'TheStandardMaldives'
-    },
-    {
-        label: 'THULHAGIRI ISLAND RESORT AND SPA',
-        value: 'ThulhagiriIslandResort_Spa'
-    },
-    {
-        label: 'VARU BY ATMOSPHERE',
-        value: 'VaruByAtmosphere'
-    },
-    {
-        label: 'YOU AND ME BY COCOON',
-        value: 'YouAndMeByCocoon'
-    }
+    // {
+    //     label: 'OBLU SELECT SANGELI',
+    //     value: 'ObluSelectSangeli'
+    // },
+    // {
+    //     label: 'PARADISE ISLAND RESORT',
+    //     value: 'ParadiseIslandResort'
+    // },
+    // {
+    //     label: 'REETHI FARU RESORT',
+    //     value: 'ReethiFaruResort'
+    // },
+    // {
+    //     label: 'SAII LAGOON MALDIVES',
+    //     value: 'SaiiLagoonMaldives'
+    // },
+    // {
+    //     label: 'SHERATON MALDIVES FULL MOON RESORT AND SPA',
+    //     value: 'SheratonMaldivesFullMoonResort_Spa'
+    // },
+    // {
+    //     label: 'SIYAM WORLD MALDIVES',
+    //     value: 'SiyamWorldMaldives'
+    // },
+    // {
+    //     label: 'SUN ISLAND RESORT AND SPA',
+    //     value: 'SunIslandResort_Spa'
+    // },
+    // {
+    //     label: 'SUN SIYAM IRU FUSHI',
+    //     value: 'SunSiyamIruFushi'
+    // },
+    // {
+    //     label: 'SUN SIYAM IRU VELI',
+    //     value: 'SunSiyamIruVeli'
+    // },
+    // {
+    //     label: 'SUN SIYAM OLHUVELI',
+    //     value: 'SunSiyamOlhuveli'
+    // },
+    // {
+    //     label: 'SUN SIYAM VILU REEF',
+    //     value: 'SunSiyamViluReef'
+    // },
+    // {
+    //     label: 'TAJ CORAL REEF RESORT AND SPA',
+    //     value: 'TajCoralReefResort_Spa'
+    // },
+    // {
+    //     label: 'TAJ EXOTICA RESORT AND SPA',
+    //     value: 'TajExoticaResort_Spa'
+    // },
+    // {
+    //     label: 'THE STANDARD MALDIVES',
+    //     value: 'TheStandardMaldives'
+    // },
+    // {
+    //     label: 'THULHAGIRI ISLAND RESORT AND SPA',
+    //     value: 'ThulhagiriIslandResort_Spa'
+    // },
+    // {
+    //     label: 'VARU BY ATMOSPHERE',
+    //     value: 'VaruByAtmosphere'
+    // },
+    // {
+    //     label: 'YOU AND ME BY COCOON',
+    //     value: 'YouAndMeByCocoon'
+    // }
 ]
 
 

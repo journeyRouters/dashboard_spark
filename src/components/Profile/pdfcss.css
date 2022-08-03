@@ -71,14 +71,14 @@
 .link{
     display: flex;
     flex-direction: column;
-    sapn-decoration: none;
+    text-decoration: none;
     color: #FFFFFF;
     align-items: center;
 }
 .href{
     margin-left: 0.3rem;
     color: #FFFFFF;
-    sapn-decoration: none;
+    text-decoration: none;
     display: flex;
 }
 .page2{
@@ -407,8 +407,10 @@
     font-size: 1.6rem;
 }
 .trip_summary{
-    margin-top: 25.5rem;
+    width: 29rem;
+    margin-top: 25.2rem;
     color: #05e0e9;
     font-size: 2rem;
     margin-left: 3.5rem;
+    margin-bottom: 0.5rem;
 }

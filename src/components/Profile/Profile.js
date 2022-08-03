@@ -636,6 +636,7 @@ const Profile = (
                                                 marginTop: '2rem'
                                             }}
                                         >
+                                            <sapn style={{color:'white'}}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
                                             <Footer whatsApp={whatsApp} />
                                         </div>
                                     </div>

@@ -120,12 +120,14 @@ const SuggestionQuotes = ({
 
                             <div key={index} className='Topsamplequotes_components' onClick={() => syncDataToMapper(data)}>
                                 <div className='samplequotes_components'>
-                                    <span className='highglight2'>{data.value.travel_data.TripId}</span><br />
-                                    <span>{data.value.travel_data.Traveller_name}</span><br />
-                                    <span className='highglight'>{data.value.count_days} day, {data.value.count_days - 1} Nights</span><br />
-                                    <span>{data.value.travel_data.Destination}</span><br />
-                                    <span className='highglight'>INR:-{parseInt(data.value.flightcost) + parseInt(data.value.visacost) + parseInt(data.value.landPackage)}</span><br />
-                                    <span>By:- {data.value.Quoted_by}</span>
+                                    <span className='highglight2' >TRIP ID:-{data.value.travel_data.TripId}</span><br />
+                                    <span style={{color:'white',marginLeft:'1rem'}} >{data.value.travel_data.Traveller_name}</span><br />
+                                    <ul>
+                                        <li style={{color:'white',fontSize:'15px',marginBottom:'4px'}}>{data.value.travel_data.Destination}</li>
+                                        <li  style={{color:'white',fontSize:'15px',marginBottom:'4px'}}>{data.value.count_days} day, {data.value.count_days - 1} Nights</li>
+                                        <li style={{color:'white',fontSize:'15px',marginBottom:'4px'}}>INR:-{parseInt(data.value.flightcost) + parseInt(data.value.visacost) + parseInt(data.value.landPackage)} / {data.value.SelectedpackageType}</li>
+                                        <li style={{color:'white',fontSize:'15px'}}>By:- {data.value.Quoted_by}</li>
+                                    </ul>
                                 </div>
                             </div>
 

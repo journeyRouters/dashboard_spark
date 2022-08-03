@@ -96,12 +96,16 @@
     justify-content: space-between !important;
 }
 .samplequotes_components{
-    font-weight: 800;
+    background-color: black;
+    height: 10rem;
+    margin-bottom: 0.1rem;
+    /* font-family: serif; */
+    font-family: Trebuchet MS;
     /* display: flex;
     justify-content: space-between; */
 }
 .Topsamplequotes_components{
-    border: 1px solid greenyellow;
+    /* border: 1px solid greenyellow; */
 }
 .Topsamplequotes_components:hover{
     cursor: pointer;
@@ -113,6 +117,7 @@
 .sampleQuoteHeader{
     display: flex;
     justify-content: space-between;
+    background-color: #c7e8f5;
 }
 .divContainsThreeDiv{
     display: flex;
@@ -124,9 +129,11 @@
     color: #27a52d;
 }
 .highglight2{
-    font-weight: 800;
     font-size: medium;
-    color: #ec220f;
+    color: yellow;
+    margin-left: 1rem;
+    font-family: Trebuchet MS;
+    margin-bottom: 4px;
 }
 .tripIdDetails{
     border-bottom: 1px solid gray;
@@ -152,6 +159,7 @@
 .LeadLookUp{
     width: 22%;
     border: 2px solid gray;
+    background-color: #c7e8f5;
 }
 .lookupaliner{
     display: flex;
@@ -162,6 +170,7 @@
     width: 20rem;
     height: 42rem;
     overflow-y: scroll;
+    background-color: #c7e8f5;
 }
 .QuotesDetails{
     width: 60rem;

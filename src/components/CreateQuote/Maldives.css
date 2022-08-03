@@ -13,7 +13,7 @@
 }
 
 .compo_button {
-    sapn-align: right;
+    text-align: right;
     position: relative;
     background: none repeat scroll 0 0 #fe7774;
     border: 0;
@@ -35,7 +35,7 @@
 
 .san-serif {
     font-size: 0.8rem;
-    sapn-transform: uppercase;
+    text-transform: uppercase;
     font-weight: 600;
     font-family: sans-serif;
     background-color: #ff0000;

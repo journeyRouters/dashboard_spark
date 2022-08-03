@@ -19,12 +19,12 @@
 }
 
 .sapn {
-    sapn-decoration: underline !important;
+    text-decoration: underline !important;
     font-weight: 500;
 }
 
 .compo_button {
-    sapn-align: right;
+    text-align: right;
     position: relative;
     background: none repeat scroll 0 0 #fe7774;
     border: 0;

@@ -72,15 +72,15 @@ const Maldives = ({
     const [inclusionflg, setinclusion] = useState(false)
     const [Destination, setDestination] = useState(data.Destination)
     const inclusion = {
-        accommodation: false,
+        Accommodation: false,
         MealPlan: false,
         Transfer: false,
         Gst: false,
         Tcs: false,
         Visa: false,
         GreenTax: false,
-        other_Inclusion: '',
-        other_Exclusion: ''
+        Other_Inclusion: '',
+        Other_Exclusion: ''
     }
     const [InclusionExclusion, setInclusionExclusion] = useState(inclusion_data_ ? inclusion_data_ : inclusion)
     const [EditController, setEditController] = useState(E_indicator ? E_indicator : false)

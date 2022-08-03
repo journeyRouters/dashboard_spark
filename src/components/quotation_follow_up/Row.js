@@ -350,8 +350,10 @@ const Row = (props) => {
 
                                             pdfHolder.map((data, index) => (
                                                 <>
+                                                {console.log(data)}
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
+                                                    <span style={{color:'red'}}>{data.value.travel_data.Destination}</span>
                                                         <p key={index}>
                                                             {
                                                                 typeof (data.value.pdf_name) === 'string' ? <>

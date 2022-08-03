@@ -207,8 +207,10 @@ const Profile = (
         closeFormAndPdf()
 
     };
-    function pdfgenrator() {
-        handleExportWithComponent()
+    async function pdfgenrator() {
+        setwait(true)
+        pdfExportComponent.current.save();
+        await delay(20000);
         try {
             update_quotation_flg()
         }
@@ -459,7 +461,7 @@ const Profile = (
                                         itineary.map((data, index) => (
                                             <div className='mapitineary'>
                                                 <span style={{ width: '5rem' }}><span> Day </span> {index + 1} -</span>
-                                                <p style={{ width: '91%' }}>{data.Day}</p>
+                                                <p style={{ width: '91%',textTransform:'uppercase' }}>{data.Day}</p>
                                             </div>
                                         ))
                                     }
@@ -623,6 +625,7 @@ const Profile = (
                                                 }
                                             </> : <></>
                                         }
+                                            <sapn style={{textDecoration:'underline', color:'#bbc9ef',marginLeft:'13rem',fontSize:'13px',fontStyle:'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
 
                                         <div
                                             style={{
@@ -636,7 +639,6 @@ const Profile = (
                                                 marginTop: '2rem'
                                             }}
                                         >
-                                            <sapn style={{color:'white'}}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
                                             <Footer whatsApp={whatsApp} />
                                         </div>
                                     </div>

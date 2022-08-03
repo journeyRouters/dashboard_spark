@@ -46,7 +46,7 @@ color: darkcyan;
     flex-direction: column;
     align-items: center;
     font-family: Montserrat;
-    sapn-transform: capitalize;
+    text-transform: capitalize;
     color: rgb(48, 205, 233);;
 
 }
@@ -77,6 +77,6 @@ color: darkcyan;
     font-family: Montserrat;
     font-weight: 600;
     color: green;
-    sapn-transform: capitalize;
+    text-transform: capitalize;
     letter-spacing: 0.1rem;
 }

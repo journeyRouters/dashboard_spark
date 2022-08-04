@@ -93,6 +93,14 @@ const Row = (props) => {
     }
 
     const [open, setOpen] = React.useState(false);
+    useEffect(() => {
+        Allquote()
+    }, [open]);
+    useEffect(() => {
+        if(Reqoute_flg==false){
+            Allquote()
+        }
+    }, [Reqoute_flg]);
     // function changeStatus(Status) {
     //     setLead_Status(Status)
     // }
@@ -350,10 +358,10 @@ const Row = (props) => {
 
                                             pdfHolder.map((data, index) => (
                                                 <>
-                                                {console.log(data)}
+                                                    {console.log(data)}
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
-                                                    <span style={{color:'red'}}>{data.value.travel_data.Destination}</span>
+                                                        <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>
                                                         <p key={index}>
                                                             {
                                                                 typeof (data.value.pdf_name) === 'string' ? <>
@@ -372,6 +380,7 @@ const Row = (props) => {
                                                                 {
                                                                     tripData.travel_data.Destination == 'Maldives' ? <>
                                                                         <Maldives
+                                                                            Allquote={Allquote}
                                                                             email={props.auth.email}
                                                                             data={tripData.travel_data}
                                                                             inclusion_data_={tripData.inclusion_data}
@@ -393,7 +402,6 @@ const Row = (props) => {
                                                                             Edit_Transfer={tripData.Transfer}
                                                                             pre_flightImgLinks={tripData.flightImgLinks}
                                                                             pre_inclusionLinks={tripData.inclusionLinks}
-                                                                            Allquote={Allquote}
                                                                         />
                                                                     </> : <>
                                                                         <Box
@@ -447,7 +455,7 @@ const Row = (props) => {
                                             <option value="Travel not responding">Travel not responding</option>
                                             <option value="Booking form somewhere else">Booking form somewhere else</option>
                                         </datalist>
-                                      
+
                                         <button className='button_save_comments' onClick={() => update_comments()}>save</button>
                                     </div>
                                     <div className='invoicing' >

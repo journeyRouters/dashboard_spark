@@ -322,7 +322,7 @@ const Profile = (
                                 <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
                                 <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
-                            <div style={{marginTop:'12.3rem'}}>
+                            <div style={{marginTop:'8.3rem'}}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>

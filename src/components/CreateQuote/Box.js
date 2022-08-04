@@ -411,7 +411,7 @@ const Box = ({
                                     <div className='costOption'>
                                         <div>
                                             <Radio
-                                                checked={SelectedpackageType === 'per Person'}
+                                                checked={SelectedpackageType === 'Per Person'}
                                                 onChange={handleChange}
                                                 value="per Person"
                                                 name="radio-button"
@@ -422,7 +422,7 @@ const Box = ({
                                         </div>
                                         <div>
                                             <Radio
-                                                checked={SelectedpackageType === 'per Couple'}
+                                                checked={SelectedpackageType === 'Per Couple'}
                                                 onChange={handleChange}
                                                 value="per Couple"
                                                 name="radio-button"

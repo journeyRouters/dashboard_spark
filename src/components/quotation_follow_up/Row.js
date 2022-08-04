@@ -213,11 +213,11 @@ const Row = (props) => {
                             <div className='status'>
                                 <FormControl onChange={(e) => changeLead_Status(e)}>
                                     <FormLabel >Status</FormLabel>
-                                    <RadioGroup value={Lead_Status} >
+                                    <RadioGroup defaultValue={row.Lead_Status} >
+                                        <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
                                         <FormControlLabel value="Active" control={<Radio />} label="Active" />
                                         <FormControlLabel value="Cold" control={<Radio />} label="Cold" />
                                         <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
-                                        <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
                                         <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
                                     </RadioGroup>
                                 </FormControl>
@@ -262,7 +262,7 @@ const Row = (props) => {
                         <Collapse in={open} >
                             <div className='collaps'>
                                 <div className='client_details_'>
-                                    <p className='p' onClick={() => sethint('status')}>{Lead_Status}</p>
+                                    <p className='p' onClick={() => sethint('status')}>{row.Lead_Status}</p>
                                     <p className='p1' >{row.Traveller_name}</p>
                                     <p>{row.Email}</p>
                                     <p>{row.Budget}</p>

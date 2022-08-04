@@ -65,7 +65,7 @@
 
 .comment_ {
     background-color: rgb(220 201 201);
-    height: 3rem;
+    /* height: 3rem; */
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -345,7 +345,7 @@ function App() {
                       </div>
                     </div>
                     
-                    <div className='sidebarCard' onClick={() => page("converted")}>
+                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Converted</p>

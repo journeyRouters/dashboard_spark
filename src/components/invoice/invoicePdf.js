@@ -9,7 +9,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     var today = new Date();
@@ -95,9 +95,8 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
         }
 
     }, []);
-    let val = (2500000).toLocaleString('en');
-    var formatter = new Intl.NumberFormat('en-US', {
-    })
+    // let val = (2500000).toLocaleString('en');
+    var formatter = new Intl.NumberFormat('en-US', {})
     let flight_cost=parseInt(selected_pdf_data.flightcost)
     let land_package=parseInt(selected_pdf_data.landPackage)
     let visa_cost=parseInt(selected_pdf_data.visacost)
@@ -107,7 +106,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
             <PDFExport
                 ref={pdfExportComponent}
                 forcePageBreak=".page-break"
-                fileName={`${selected_pdf_data.travel_data.Traveller_name}`}
+                fileName={`${selected_pdf_data.travel_data.Traveller_name} Invoice`}
             >
                 <div className={`pre ${layoutSelection.value}`}>
                     <div>

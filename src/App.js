@@ -159,11 +159,14 @@ function App() {
       }
 
       <div className='header'>
-        <p className='headLine'>Journey Router</p>
+        <p className='headLine'>
+          <img width={'276px'} style={{marginLeft:'-4rem'}} src='/assets/pdfDefaultImage/JrLOGO_.png'/>
+        </p>
         {
           auth ? <>
             <div>
-              <button className='button' onClick={() => logOut()} >logout</button>
+              <img className='button' width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
+              </img>
             </div>
           </> : <>
             <div className='button' onClick={() => openPopUp()}>
@@ -209,7 +212,7 @@ function App() {
                     <div className='sidebarCard' onClick={(() => page("voucher"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>voucher & payments</p>
+                        <p>Vouchers & payments</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
@@ -233,7 +236,7 @@ function App() {
                     <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>converted</p>
+                        <p>Converted</p>
                       </div>
                     </div>
 
@@ -338,14 +341,14 @@ function App() {
                     <div className='sidebarCard' onClick={() => page("Admin_Follow_up")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>followed Lead</p>
+                        <p>Followed Lead</p>
                       </div>
                     </div>
                     
-                    <div className='sidebarCard' onClick={() => page("converted")}>
+                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>converted</p>
+                        <p>Converted</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
@@ -375,7 +378,7 @@ function App() {
                     <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>switch user</p>
+                        <p>Switch user</p>
                       </div>
                     </div>
 

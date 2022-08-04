@@ -10,8 +10,10 @@ import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } 
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Box from '../CreateQuote/Box';
+import Maldives from '../CreateQuote/Maldives';
 import Invoice from '../invoice/InvoiceForm';
 import InvoicePdf from '../invoice/invoicePdf';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import Profile from '../Profile/Profile';
 import app from '../required';
 import './quote.css';
@@ -51,7 +53,7 @@ const Row = (props) => {
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
     function Controller_reqoute(data) {
-        console.log(data)
+        // console.log('jhggjkdfhgj', data)
         setTripData(data.value)
         setReqoute_flg(true)
     }
@@ -89,8 +91,16 @@ const Row = (props) => {
         setcomments(e.target.value)
         console.log(e.target.value)
     }
-   
+
     const [open, setOpen] = React.useState(false);
+    useEffect(() => {
+        Allquote()
+    }, [open]);
+    useEffect(() => {
+        if(Reqoute_flg==false){
+            Allquote()
+        }
+    }, [Reqoute_flg]);
     // function changeStatus(Status) {
     //     setLead_Status(Status)
     // }
@@ -99,15 +109,9 @@ const Row = (props) => {
     }
 
     function closeOnstatusComments() {
-        if (Lead_Status == "Dump","Converted") {
-            updateStatus()
-            props.updateTableDataAfterConversion(row.TripId)
-        }
-        else{
-            updateStatus()
-            props.getLeadOnBoard()
-        }
 
+        updateStatus()
+        props.getLeadOnBoard()
         setopenupdater(false)
     }
     async function latestTripData() {
@@ -166,7 +170,7 @@ const Row = (props) => {
             let comment_holder = {
                 comments: comments,
                 date: moment(today).format('YYYY-MM-DD'),
-                time: moment(today).format('h:mm:ss')
+                time: moment(today).calendar()
             }
             allComments.push(comment_holder)
             // console.log('allcoments new', allComments, row.trip_doc)
@@ -274,15 +278,15 @@ const Row = (props) => {
                                 <div className='follow_up'>
                                     <div className='remark' >
                                         {
-                                            reverse.map((text, index) => (
+                                            reverse.map((sapn, index) => (
                                                 <div key={index} className='comments_maping'>
-                                                    {/* {console.log("comments data",text)} */}
-                                                    <p>
-                                                        {text.comments}
+                                                    {/* {console.log("comments data",sapn)} */}
+                                                    <p style={{ fontSize: '10px', borderRight: '1px solid' }}>
+                                                        {sapn.comments}
                                                     </p>
                                                     <div className='time_date'>
-                                                        <p>{text.time}</p>
-                                                        <p>{text.date}</p>
+                                                        <p>{moment(sapn.date).format('DD-MMM-YYYY')}</p>
+                                                        <p>{sapn.time}</p>
 
                                                     </div>
                                                 </div>
@@ -297,25 +301,55 @@ const Row = (props) => {
                                     {
                                         viewPDF ? <>
                                             <Modal open={viewPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                                                {
+                                                    data.travel_data.Destination == 'Maldives' ? <>
+                                                        <Maldivespdf
+                                                            data={data.travel_data}
+                                                            no_rooms={data.no_rooms}
+                                                            selected_Travel_date={data.selected_Travel_date}
+                                                            MealPlan={data.MealPlan}
+                                                            Transfer={data.Transfer}
+                                                            NightDataFields={data.NightDataFields}
+                                                            count_days={data.count_days}
+                                                            flightcost={data.flightcost}
+                                                            visacost={data.visacost}
+                                                            landPackage={data.landPackage}
+                                                            SelectedpackageType={data.SelectedpackageType}
+                                                            Property={data.Property}
+                                                            flightsLinkfromstorage={data.flightImgLinks}
+                                                            inclusionLinkfromstorage={data.inclusionLinks}
+                                                            flightFlg={data.flightImgLinks ? true : false}
+                                                            inclusionImgFlg={data.inclusionLinks ? true : false}
+                                                            Pax={data.travel_data.Pax}
+                                                            Child={data.travel_data.Child}
+                                                            inclusion_data={data.inclusion_data}
+                                                            profile={props.profile}
+                                                            indicator={false}
+                                                            onClosePdf={closePDF}
 
-                                                <Profile
-                                                    SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
-                                                    indicator={true}
-                                                    inclusion_data={data.inclusion_data}
-                                                    travel_data={data.travel_data}
-                                                    count_days={data.count_days}
-                                                    cabDetailsData={data.cabDetailsData}
-                                                    flights={data.flights}
-                                                    itineary={data.itineary}
-                                                    NightDataFields={data.NightDataFields}
-                                                    selected_Travel_date={data.selected_Travel_date}
-                                                    flightcost={data.flightcost}
-                                                    visacost={data.visacost}
-                                                    landPackage={data.landPackage}
-                                                    profile={props.profile}
-                                                    flight={true}
-                                                    flightsLinkfromstorage={data.flightsImagesLinks}
-                                                />
+                                                        />
+                                                    </> : <>
+                                                        <Profile
+                                                            SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
+                                                            indicator={true}
+                                                            inclusion_data={data.inclusion_data}
+                                                            travel_data={data.travel_data}
+                                                            count_days={data.count_days}
+                                                            cabDetailsData={data.cabDetailsData}
+                                                            flights={data.flights}
+                                                            itineary={data.itineary}
+                                                            NightDataFields={data.NightDataFields}
+                                                            selected_Travel_date={data.selected_Travel_date}
+                                                            flightcost={data.flightcost}
+                                                            visacost={data.visacost}
+                                                            landPackage={data.landPackage}
+                                                            profile={props.profile}
+                                                            flight={true}
+                                                            flightsLinkfromstorage={data.flightsImagesLinks}
+                                                        />
+                                                    </>
+                                                }
+
                                             </Modal>
                                         </> : <></>
                                     }
@@ -324,33 +358,74 @@ const Row = (props) => {
 
                                             pdfHolder.map((data, index) => (
                                                 <>
+                                                    {console.log(data)}
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
-                                                        <p key={index}>{data.value.pdf_name}</p>
+                                                        <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>
+                                                        <p key={index}>
+                                                            {
+                                                                typeof (data.value.pdf_name) === 'string' ? <>
+                                                                    {data.value.pdf_name}
+                                                                </> : <>
+                                                                    {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
+                                                                    {moment(data.value.pdf_name.toDate()).format('lll')}
+                                                                </>
+                                                            }
+                                                        </p>
                                                         <button onClick={() => showPDF(data.value)} className='download_requote'>
                                                             downloadURL</button>
                                                         <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>
                                                         {
                                                             Reqoute_flg ? <>
-                                                                <Box
-                                                                    email={props.auth.email}
-                                                                    data={tripData.travel_data}
-                                                                    inclusion_data_={data.value.inclusion_data}
-                                                                    SelectedpackageTyp={data.value.SelectedpackageType}
-                                                                    updateTableDataAfterQuote={props.updateTableDataAfterConversion}
-                                                                    set_popupopner={setReqoute_flg}
-                                                                    profile={props.profile}
-                                                                    indicator={true}
-                                                                    Edit_NightDataFields={data.value.NightDataFields}
-                                                                    Edit_itineary={data.value.itineary}
-                                                                    Edit_selected_Travel_date={data.value.selected_Travel_date}
-                                                                    Edit_visacost={data.value.visacost}
-                                                                    Edit_flightcost={data.value.flightcost}
-                                                                    Edit_landPackage={data.value.landPackage}
-                                                                    Edit_count_days={data.value.count_days}
-                                                                    Allquote={Allquote}
+                                                                {
+                                                                    tripData.travel_data.Destination == 'Maldives' ? <>
+                                                                        <Maldives
+                                                                            Allquote={Allquote}
+                                                                            email={props.auth.email}
+                                                                            data={tripData.travel_data}
+                                                                            inclusion_data_={tripData.inclusion_data}
+                                                                            Edit_SelectedpackageType={tripData.SelectedpackageType}
+                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            set_popupopner={setReqoute_flg}
+                                                                            profile={props.profile}
+                                                                            E_indicator={true}
+                                                                            Edit_no_rooms={tripData.no_rooms}
+                                                                            Edit_NightDataFields={tripData.NightDataFields}
+                                                                            Edit_itineary={tripData.itineary}
+                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                            Edit_visacost={tripData.visacost}
+                                                                            Edit_flightcost={tripData.flightcost}
+                                                                            Edit_landPackage={tripData.landPackage}
+                                                                            Edit_count_days={tripData.count_days}
+                                                                            Edit_Property={tripData.Property}
+                                                                            Edit_MealPlan={tripData.MealPlan}
+                                                                            Edit_Transfer={tripData.Transfer}
+                                                                            pre_flightImgLinks={tripData.flightImgLinks}
+                                                                            pre_inclusionLinks={tripData.inclusionLinks}
+                                                                        />
+                                                                    </> : <>
+                                                                        <Box
+                                                                            email={props.auth.email}
+                                                                            data={tripData.travel_data}
+                                                                            inclusion_data_={tripData.inclusion_data}
+                                                                            SelectedpackageTyp={tripData.SelectedpackageType}
+                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            set_popupopner={setReqoute_flg}
+                                                                            profile={props.profile}
+                                                                            indicator={true}
+                                                                            Edit_NightDataFields={tripData.NightDataFields}
+                                                                            Edit_itineary={tripData.itineary}
+                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                            Edit_visacost={tripData.visacost}
+                                                                            Edit_flightcost={tripData.flightcost}
+                                                                            Edit_landPackage={tripData.landPackage}
+                                                                            Edit_count_days={tripData.count_days}
+                                                                            Allquote={Allquote}
 
-                                                                />
+                                                                        />
+                                                                    </>
+                                                                }
+
 
                                                             </> : <></>
                                                         }
@@ -365,29 +440,22 @@ const Row = (props) => {
                                 <div className='remark_set'>
                                     <div className='comments_box'>
                                         <input className='Autocomplete'
-                                        list='Comments'
-                                        value={comments}
+                                            list='Comments'
+                                            value={comments}
                                             onChange={(e) => handlecomment(e)}
                                         ></input>
                                         <datalist id="Comments">
-                                                        <option value="Traveler not Reachable">Traveler not Reachable</option>
-                                                        <option value="Won't book with me">Won't book with me</option>
-                                                        <option value="Talk in progress with traveler">Talk in progress with traveler</option>
-                                                        <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
-                                                        <option value="Call not connecting">Call not connecting</option>
-                                                        <option value="Travler change their mind">Travler change their mind</option>
+                                            <option value="Traveler not Reachable">Traveler not Reachable</option>
+                                            <option value="Won't book with me">Won't book with me</option>
+                                            <option value="Talk in progress with traveler">Talk in progress with traveler</option>
+                                            <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
+                                            <option value="Call not connecting">Call not connecting</option>
+                                            <option value="Travler change their mind">Travler change their mind</option>
+                                            <option value="Quote shared on what's app">Quote shared on what's app</option>
+                                            <option value="Travel not responding">Travel not responding</option>
+                                            <option value="Booking form somewhere else">Booking form somewhere else</option>
+                                        </datalist>
 
-                                                    </datalist>
-                                        {/* <Autocomplete
-                                            key={change}
-                                            className='Autocomplete'
-                                            freeSolo={true}
-                                            onChange={(e) => handlecomment(e)}
-                                            options={reasons.map((option) => option.title)}
-                                            renderInput={(params) => (
-                                                <TextField {...params} placeholder='Comments' margin="normal" variant="outlined" />
-                                            )}
-                                        /> */}
                                         <button className='button_save_comments' onClick={() => update_comments()}>save</button>
                                     </div>
                                     <div className='invoicing' >

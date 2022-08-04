@@ -206,7 +206,7 @@
                                         {profile.contact_number}
                                     </a>
                                 </p>
-                                <a href={"https://wa.me/91" + profile.whatsapp_number + "?text= Hi " + profile.name + " i want to plan a vaction, can you help me"} target="_blank">
+                                <a href={"https://wa.me/91" + profile.whatsapp_number + "?sapn= Hi " + profile.name + " i want to plan a vaction, can you help me"} target="_blank">
                                     <img alt="what's app" src="/assets/img/whatsapp-social-media-svgrepo-com.svg" width='32px' />
                                 </a>
                             </div>

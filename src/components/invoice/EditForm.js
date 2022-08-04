@@ -156,7 +156,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile ,installm
 
                         <div className='BillingAddress'>
                             <label>Billing Address</label>
-                            <input className='txtArea' type='text' name='Billing_Address' value={BillingAddress} onChange={(event) => handleBillingaddress(event)} >
+                            <input className='txtArea' type='sapn' name='Billing_Address' value={BillingAddress} onChange={(event) => handleBillingaddress(event)} >
                             </input>
                         </div>
                         <div className='BillingAddress'>
@@ -211,11 +211,11 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile ,installm
                                     Sight Seeing/Activities Tickets
                                 </span>
                             </label>
-                            <lable>
+                            <label>
                                 <input type='checkbox' name='Others' ></input>
                                 <span>Others</span><br />
                                 <input className='txtArea'></input>
-                            </lable>
+                            </label>
 
                         </div>
                         <div className='deliverable' onChange={(event) => handleDocuments(event)}>
@@ -248,11 +248,11 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile ,installm
                                     Scanned Copy Of PAN Card
                                 </span>
                             </label>
-                            <lable>
+                            <label>
                                 <input type='checkbox' name='Others' ></input>
                                 <span>Others</span><br />
                                 <input className='txtArea'></input>
-                            </lable>
+                            </label>
 
                         </div>
                         <button onClick={() => showinvoice()} disabled={pdfseletcted_flg}>Invoice</button>

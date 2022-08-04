@@ -127,7 +127,7 @@ const Userunitcomponent = (props) => {
                             />
                             <div className='input_slot'>
                                 <label>name</label>
-                                <input className='input' type="text" placeholder='Name' value={name} onChange={(e) => onChangeName(e)}></input>
+                                <input className='input' type="sapn" placeholder='Name' value={name} onChange={(e) => onChangeName(e)}></input>
                             </div>
                             <div className='input_slot'>
                                 <label>email</label>

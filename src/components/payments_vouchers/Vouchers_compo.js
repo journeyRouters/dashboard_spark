@@ -5,7 +5,9 @@ import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import Maldives from '../CreateQuote/Maldives';
 import InvoicePdf from '../invoice/invoicePdf';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import Profile from '../Profile/Profile';
 import app from '../required';
 import './Payments.css';
@@ -420,24 +422,55 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
                         {
                             finalPackage ? <>
-                                <Profile
-                                    indicator={true}
-                                    inclusion_data={finalPackage.inclusion_data}
-                                    travel_data={finalPackage.travel_data}
-                                    count_days={finalPackage.count_days}
-                                    cabDetailsData={finalPackage.cabDetailsData}
-                                    flights={finalPackage.flights}
-                                    SelectedpackageType={finalPackage.SelectedpackageType}
-                                    itineary={finalPackage.itineary}
-                                    NightDataFields={finalPackage.NightDataFields}
-                                    selected_Travel_date={finalPackage.selected_Travel_date}
-                                    flightcost={finalPackage.flightcost}
-                                    visacost={finalPackage.visacost}
-                                    profile={profile}
-                                    flight={true}
-                                    flightsLinkfromstorage={finalPackage.flightsImagesLinks}
-                                    landPackage={finalPackage.landPackage}
-                                />
+                                {
+                                    finalPackage.travel_data.Destination == 'Maldives' ? <>
+                                        {/* <h1 className='glow'>wait dev in progress</h1> */}
+                                        <Maldivespdf
+                                            data={finalPackage}
+                                            no_rooms={finalPackage.no_rooms}
+                                            selected_Travel_date={finalPackage.selected_Travel_date}
+                                            MealPlan={finalPackage.MealPlan}
+                                            Transfer={finalPackage.Transfer}
+                                            NightDataFields={finalPackage.NightDataFields}
+                                            count_days={finalPackage.count_days}
+                                            flightcost={finalPackage.flightcost}
+                                            visacost={finalPackage.visacost}
+                                            landPackage={finalPackage.landPackage}
+                                            SelectedpackageType={finalPackage.SelectedpackageType}
+                                            Property={finalPackage.Property}
+                                            flightsLinkfromstorage={finalPackage.flightImgLinks}
+                                            inclusionLinkfromstorage={finalPackage.inclusionLinks}
+                                            flightFlg={finalPackage.flightImgLinks ? true : false}
+                                            inclusionImgFlg={finalPackage.inclusionLinks ? true : false}
+                                            Pax={finalPackage.travel_data.Pax}
+                                            Child={finalPackage.travel_data.Child}
+                                            inclusion_data={finalPackage.inclusion_data}
+                                            profile={profile}
+                                            indicator={false}
+
+                                        />
+                                    </> : <>
+                                        <Profile
+                                            indicator={true}
+                                            inclusion_data={finalPackage.inclusion_data}
+                                            travel_data={finalPackage.travel_data}
+                                            count_days={finalPackage.count_days}
+                                            cabDetailsData={finalPackage.cabDetailsData}
+                                            flights={finalPackage.flights}
+                                            SelectedpackageType={finalPackage.SelectedpackageType}
+                                            itineary={finalPackage.itineary}
+                                            NightDataFields={finalPackage.NightDataFields}
+                                            selected_Travel_date={finalPackage.selected_Travel_date}
+                                            flightcost={finalPackage.flightcost}
+                                            visacost={finalPackage.visacost}
+                                            profile={profile}
+                                            flight={true}
+                                            flightsLinkfromstorage={finalPackage.flightsImagesLinks}
+                                            landPackage={finalPackage.landPackage}
+                                        />
+                                    </>
+                                }
+
                             </> : <>
                                 <div style={{ background: 'white', borderRadius: '32px', height: '141px' }}>
                                     <h1> there is no any Invoiced Pdf</h1>

@@ -43,21 +43,21 @@ const Profile = (
 ) => {
     // console.log(profile)
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
-    const Data = travel_data
     const pdfExportComponent = useRef(null);
+    const Data = travel_data
     const currentdate = new Date();
     const TripId = Data.TripId
     const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
     const [wait, setwait] = useState(false)
-    const [ImgLinks, setImgLinks] = useState([])
     const [destinationName, setname] = useState((travel_data.Destination).toUpperCase())
     const [whatsApp, setwhatsApp] = useState(profile.WhatsApp_number)
     const [Call, setCalling] = useState(profile.contact_number)
+    const [ImgLinks, setImgLinks] = useState([])
     function controllLinks(args) {
         setImgLinks(args)
     }
@@ -91,7 +91,7 @@ const Profile = (
         if (!indicator) {
             uploadFlightsScreenShots()
         }
-        console.log(travel_data.Destination)
+        console.log(destinationName)
 
     }, []);
 
@@ -102,7 +102,7 @@ const Profile = (
         }
         else {
             await addDoc(collection(db, "Quote"), {
-                label: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                label: moment(currentdate).format('lll'),
                 value: {
                     travel_data: Data,
                     count_days: count_days,
@@ -112,7 +112,7 @@ const Profile = (
                     itineary: itineary,
                     selected_Travel_date: String(selected_Travel_date),
                     NightDataFields: NightDataFields,
-                    pdf_name: `${currentdate.getDate()}:${currentdate.getMonth() + 1}:${(currentdate.getFullYear())}:${currentdate.getHours()}:${currentdate.getMinutes()}`,
+                    pdf_name: moment(currentdate).format('lll'),
                     cabDetailsData: cabDetailsData,
                     // flights: flights,
                     inclusion_data: inclusion_data,
@@ -188,7 +188,7 @@ const Profile = (
     }
     function closeFormAndPdf() {
         setwait(false)
-        updateTableDataAfterQuote(TripId)
+        // updateTableDataAfterQuote(TripId)
         closeHandler()
         try {
             Allquote()
@@ -207,8 +207,10 @@ const Profile = (
         closeFormAndPdf()
 
     };
-    function pdfgenrator() {
-        handleExportWithComponent()
+    async function pdfgenrator() {
+        setwait(true)
+        pdfExportComponent.current.save();
+        await delay(20000);
         try {
             update_quotation_flg()
         }
@@ -221,7 +223,7 @@ const Profile = (
         catch (e) {
             console.log(e)
         }
-
+        closeFormAndPdf()
     }
 
     return (
@@ -295,15 +297,18 @@ const Profile = (
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                         }}>
+                            <div className='trip_summary'>TRIP ID:- JR-{travel_data.TripId}</div>
 
                             <div className="package_details">
                                 <div>
+                                    <span>Name</span><br />
                                     <span>Destination</span><br />
                                     <span>Date</span><br />
                                     <span>Duration</span><br />
                                     <span>Traveler</span>
                                 </div>
                                 <div >
+                                    <span>- {travel_data.Traveller_name}</span><br />
                                     <span>- {travel_data.Destination}</span><br />
                                     <span>- {selected_Travel_date}</span><br />
                                     <span>- {count_days} Days, {count_days - 1} Nights</span><br />
@@ -314,10 +319,10 @@ const Profile = (
                             <div className="yellow_details">
                                 <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
-                                <h4 className="seth4">INR {parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
-                                <p className="setPara_">{SelectedpackageType}</p>
+                                <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
+                                <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
-                            <div >
+                            <div style={{marginTop:'8.3rem'}}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>
@@ -368,6 +373,7 @@ const Profile = (
 
                                     </div>
                                 </div>
+
                                 <div className="sepratorLineForInclusionExclusion"></div>
                                 <div>
                                     {
@@ -455,7 +461,7 @@ const Profile = (
                                         itineary.map((data, index) => (
                                             <div className='mapitineary'>
                                                 <span style={{ width: '5rem' }}><span> Day </span> {index + 1} -</span>
-                                                <p style={{ width: '91%' }}>{data.Day}</p>
+                                                <p style={{ width: '91%',textTransform:'uppercase' }}>{data.Day}</p>
                                             </div>
                                         ))
                                     }
@@ -556,7 +562,7 @@ const Profile = (
                                                 } Stay at {data.City} </h4>
 
                                                 <span>Hotel-{data.HotelName}</span><br />
-                                                <span>Meal-{data.HotelMeal.map((data__, index) => (console.log(data__), <span>{data__.value},</span>))}</span>  <br />
+                                                <span>Meal-{data.HotelMeal.map((data__, index) => (<span>{data__.value},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <span>Hotel Category-{data.Category}</span><br />
                                                 <h4></h4>
@@ -619,6 +625,7 @@ const Profile = (
                                                 }
                                             </> : <></>
                                         }
+                                            <sapn style={{textDecoration:'underline', color:'#bbc9ef',marginLeft:'13rem',fontSize:'13px',fontStyle:'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
 
                                         <div
                                             style={{

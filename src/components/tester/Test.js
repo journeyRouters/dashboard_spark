@@ -24,7 +24,7 @@
 // function Test() {
 
 //   const [layoutSelection, setLayoutSelection] = useState({
-//     text: "A4",
+//     sapn: "A4",
 //     value: "size-a4"
 //   });
 
@@ -286,7 +286,7 @@
 //         <input
 //           id="query-input"
 //           className="query__input"
-//           type="text"
+//           type="sapn"
 //           onChange={onSearch}
 //           value={query}
 //         />
@@ -329,7 +329,7 @@ const Test = () => {
     const [exclusionlist, setexclusion] = useState([])
     const pdfExportComponent = useRef(null);
     const [layoutSelection, setLayoutSelection] = useState({
-        text: "A4",
+        sapn: "A4",
         value: "size-a4"
     });
     const [input, setinput] = useState('')
@@ -438,7 +438,9 @@ const Test = () => {
         });
     }
     useEffect(() => {
-        testcall()
+        fetch('https://script.googleusercontent.com/macros/echo?user_content_key=Z0iyrtrz0VZHHFkftxnI5gGiR9XrFpQSe-eXai7HUMZw3pQWTM-obCcz4Qo6sicG6VaMxB2aKVbWxS6KWMIwgt8-U0rWVv8om5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnCq7BfKwHVNWJIhF5IZUPJJ-AlPu-rXOzG9usvx7BdjDmJezhmnQeuaPp0y2MizrbujCBPFjnRjf87_1pQit6GstLfBuYq4ZSw&lib=M38TL66tBKta-3qCGUuIlJdi165N2UV80')
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     }, []);
     var name = "BALI.png"
     var link = `/assets/destination/${name}`

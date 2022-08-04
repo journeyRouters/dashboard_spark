@@ -278,6 +278,10 @@ export const avtivityList = {
     ],
     Singapore: [
         {
+            label:'cityTour',
+            value:'cityTour'
+        },
+        {
             label: 'Arival',
             value: 'Arival'
         },

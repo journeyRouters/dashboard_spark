@@ -56,9 +56,9 @@ const Createquote = (props) => {
         "Lead_Status",
         "Last 10 Quote",
         "Quote",
-        
+
     ];
-   
+
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
         console.log(lead_data)
@@ -66,7 +66,7 @@ const Createquote = (props) => {
         setLead_data(new_tableData)
 
     }
-    
+
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
         try {
@@ -186,27 +186,27 @@ const Createquote = (props) => {
 
                         </> : <>
                             {
-                                popupopener ?<>
-                                {
-                                    user_uni_data.Destination==="Maldives"?<>
-                                    <Maldives
-                                    email={props.auth.email}
-                                    data={user_uni_data}
-                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
-                                    set_popupopner={set_popupopner}
-                                    profile={props.userProfile}
-                                    />
-                                    </>:<>
-                                    <Box
-                                        email={props.auth.email}
-                                        data={user_uni_data}
-                                        updateTableDataAfterQuote={updateTableDataAfterQuote}
-                                        set_popupopner={set_popupopner}
-                                        profile={props.userProfile}
-                                    />
-                                    </>
-                                }
-                                    </> :
+                                popupopener ? <>
+                                    {
+                                        user_uni_data.Destination === "Maldives" ? <>
+                                            <Maldives
+                                                email={props.auth.email}
+                                                data={user_uni_data}
+                                                updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                                set_popupopner={set_popupopner}
+                                                profile={props.userProfile}
+                                            />
+                                        </> : <>
+                                            <Box
+                                                email={props.auth.email}
+                                                data={user_uni_data}
+                                                updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                                set_popupopner={set_popupopner}
+                                                profile={props.userProfile}
+                                            />
+                                        </>
+                                    }
+                                </> :
                                     <SortableTbl
                                         tblData={lead_data}
                                         tHead={tHead}

@@ -65,7 +65,7 @@
 
 .comment_ {
     background-color: rgb(220 201 201);
-    height: 3rem;
+    /* height: 3rem; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -189,3 +189,10 @@
     width: 47rem;
     justify-content: space-between;
 }
+
+.glow {
+    font-size: 80px;
+    color: rgb(217, 243, 28);
+
+  }
+  

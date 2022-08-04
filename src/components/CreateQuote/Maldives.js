@@ -1,13 +1,25 @@
 import { Modal, Radio } from '@material-ui/core';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import DeckIcon from '@material-ui/icons/Deck';
 import './Maldives.css'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { RoomTypeReflector } from './MaldivesRoomTypeReflector';
+import { propertyMaldives } from './subComponents/MaldivesPropertyReflector';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
+import { DropzoneArea } from 'material-ui-dropzone';
+import { Flight } from '@material-ui/icons';
+import MaldivesInclusion from './MaldivesInclusion';
+import RoomType from './subComponents/RoomType';
+import Box from './Box';
 
-
-const Maldives = ({ set_popupopner, data,
-    Edit_itineary
+const Maldives = ({
+    set_popupopner
+    , Edit_no_rooms
+    , data: PassData
+    , Edit_SelectedpackageType
+    , Edit_itineary
     , Edit_count_days
     , Edit_NightDataFields
     , Edit_selected_Travel_date
@@ -15,43 +27,108 @@ const Maldives = ({ set_popupopner, data,
     , Edit_flightcost
     , Edit_visacost
     , Edit_landPackage
+    , inclusion_data_
+    , profile
+    , Edit_Property
+    , Edit_MealPlan
+    , Edit_Transfer
+    , pre_flightImgLinks
+    , pre_inclusionLinks
+    , E_indicator
+    , Allquote
+    , updateTableDataAfterQuote
+    , email
 }) => {
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
-    console.log(data)
+    const [data, setdata] = useState(PassData)
+    // console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
-    const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : Travel_Duration))
+    const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : data.Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState(Edit_NightDataFields ? Edit_NightDataFields : [
-        { Night: [], MealPlan: [], PropertyName: '', RoomCategory: '', Transfer: '', comments: '' },])
+        { Night: [], RoomType: '' }])
     const [itineary, setItineary] = useState(Edit_itineary ? Edit_itineary : [{ Day: '', Description: '', Activity: {} },])
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [flightcost, setFlightcost] = useState(Edit_flightcost ? Edit_flightcost : 0)
-    const [SelectedpackageType, setSelectedpackageType] = useState("Per Person")
     const [visacost, setvisacost] = useState(Edit_visacost ? Edit_visacost : 0)
     const [landPackage, setlandpackage] = useState(Edit_landPackage ? Edit_landPackage : 0)
+    const [SelectedpackageType, setSelectedpackageType] = useState(Edit_SelectedpackageType ? Edit_SelectedpackageType : "Per Person")
     const [nights, setnights] = useState([])
+    const [Transfer, settransfer] = useState(Edit_Transfer ? Edit_Transfer : [])
+    const [propertyAvail, setpropertyAvail] = useState(propertyMaldives)
+    const [roomTypeAvail, setRoomTye] = useState([])
+    const [property, setproperty] = useState(Edit_Property ? Edit_Property : null)
+    const [MealPlan, setmealplan] = useState(Edit_MealPlan ? Edit_MealPlan : null)
+    const [pdfFlg, setpdfFlg] = useState(false)
+    const [no_rooms, setrooms] = useState(Edit_no_rooms ? Edit_no_rooms : 0)
+    const [flightFlg, setflightFlg] = useState(true)
+    const [inclusionImgFlg, setinclusionImgFlg] = useState(true)
+    const [flightsObject, setflightsObject] = useState(null)
+    const [inclusionObject, setinclusionObject] = useState(null)
+    const [Pax, setPax] = useState(data.Pax)
+    const [Child, setChild] = useState(data.Child ? data.Child : 0)
+    const [inclusionflg, setinclusion] = useState(false)
+    const [Destination, setDestination] = useState(data.Destination)
+    const inclusion = {
+        Accommodation: false,
+        MealPlan: false,
+        Transfer: false,
+        Gst: false,
+        Tcs: false,
+        Visa: false,
+        GreenTax: false,
+        Other_Inclusion: '',
+        Other_Exclusion: ''
+    }
+    const [InclusionExclusion, setInclusionExclusion] = useState(inclusion_data_ ? inclusion_data_ : inclusion)
+    const [EditController, setEditController] = useState(E_indicator ? E_indicator : false)
+
+    const TransferOption = [
+        {
+            label: "Speed Boat",
+            value: "Speed Boat"
+        },
+        {
+            label: "Domestic Flights",
+            value: "Domestic Flights"
+        },
+        {
+            label: "Sea Plane",
+            value: "Sea Plane"
+        },
+
+    ]
     const HotelMeals = [
         {
             label: "BreakFast",
             value: "BreakFast"
         },
         {
-            label: "Lunch",
-            value: "Lunch"
+            label: "Half Board",
+            value: "Half Board"
         },
         {
-            label: "Dinner",
-            value: "Dinner"
+            label: "Full Board",
+            value: "Full Board"
         },
         {
-            label: "Drinks",
-            value: "Drinks"
+            label: "All Inclusive",
+            value: "All Inclusive"
         }
     ]
+    function closeInclusion() {
+        setinclusion(false)
+    }
+    function NO_ofRooms(e) {
+        setrooms(e.target.value)
+    }
+    function onClosePdf() {
+        setpdfFlg(!pdfFlg)
+    }
     function addFields() {
-        let object = { Night: [], MealPlan: [], PropertyName: '', RoomCategory: '', Transfer: '', comments: '' }
+        let object = { Night: [], RoomType: '' }
         setNightDataFields([...NightDataFields, object])
         setCountnight(countNight + 1)
 
@@ -65,7 +142,16 @@ const Maldives = ({ set_popupopner, data,
     }
     useEffect(() => {
         handleOptionOfNights()
+
     }, []);
+
+    function flightDetails(files) {
+        // console.log(files)
+        setflightsObject(files)
+    }
+    function inclusionDetails(file) {
+        setinclusionObject(file)
+    }
     function handleOptionOfNights() {
         var list = []
         for (let start = 1; start <= days_total.length - 1; start++) {
@@ -76,13 +162,24 @@ const Maldives = ({ set_popupopner, data,
         }
         setnights(list)
     }
+    useEffect(() => {
+        // console.log(data)
+        handleOptionOfNights()
+    }, [countNight]);
     function closeHandler() {
+        try {
+            Allquote()
+        }
+        catch (error) { console.log(error) }
         setopen(false)
         set_popupopner(false)
     }
 
     function Save_download() {
-        // showPDF()
+        if (property) {
+            setpdfFlg(true)
+        }
+        else { alert('select a property') }
     }
     function itinearyDaysincrease() {
         let data = { Day: '', Description: '', Activity: {} }
@@ -125,22 +222,18 @@ const Maldives = ({ set_popupopner, data,
         }
 
     }
-    function advance_controller_Hotel_meals(e, index) {
-        let data = [...NightDataFields];
-        let local_list = []
-        for (var i = 0; i < e.length; i++) {
-            let Local_Object = { label: '', value: '' }
-            Local_Object.label = e[i].value
-            Local_Object.value = e[i].value
-            local_list.push(Local_Object)
-        }
-        data[index]['HotelMeal'] = local_list;
-        setNightDataFields(data);
-    }
     const handleFormChange = (event, index) => {
         let data = [...NightDataFields];
-        data[index][event.target.name] = event.target.value;
+        data[index]['RoomType'] = event;
         setNightDataFields(data);
+    }
+    const handleFormChangePropety = (event, index) => {
+        setRoomTye(RoomTypeReflector(event.value))
+        console.log(RoomTypeReflector(event.value))
+        setproperty(event)
+    }
+    function handleMealPlan(e) {
+        setmealplan(e)
     }
     function removeFields(index) {
         let data = [...NightDataFields];
@@ -148,6 +241,19 @@ const Maldives = ({ set_popupopner, data,
         setNightDataFields(data)
         setCountnight(countNight - 1)
 
+    }
+    function handleTransfer(e) {
+        // console.log(e)
+        settransfer(e)
+    }
+    function changePax(event) {
+        setPax(event.target.value)
+        data.Pax = event.target.value
+    }
+    function changechild(event) {
+        setChild(event.target.value)
+        data.Child = event.target.value
+        // console.log(data)
     }
     function advance_controller_nights(e, index) {
         let data = [...NightDataFields];
@@ -167,197 +273,367 @@ const Maldives = ({ set_popupopner, data,
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
-    return (
-        <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
-            <div className='popUp_body'>
-                <div className='save_close'>
-                    <button className='compo_button' onClick={() => closeHandler()} >close</button>
-                    <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
-                </div>
-                <h1>Basic Info</h1>
-                <div>
-                    <h4>
-                        <span>Trip id:- </span>
-                        <span>{data.TripId}</span>
-                    </h4>
-                    <h4>
-                        <span>Budget:-</span>
-                        <span>INR {data.Budget}/-</span>
-                    </h4>
-                    <h4>
-                        <span>Travel Date:- </span>
-                        <span>{moment(data.Travel_Date.toDate()).format('DD-MM-YYYY')}</span>
-                    </h4>
-                    <h4>
-                        <span>Travel Duration :- </span>
-                        <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
-                    </h4>
-                    <div>
-                        {data.comments.map((data, index) => (<>
-                            <span>{data}</span><br />
-                        </>))}
-                    </div>
-                </div>
-                <div className='basicDetails'>
-                    <div>
-                        <label>Days</label>
-                        <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
-                    </div>
-                    <div>
-                        <label>Night</label>
-                        <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
-                    </div>
-                </div>
-                <div className='cost_body'>
-                    <div className='costOption'>
-                        <div>
-                            <Radio
-                                checked={SelectedpackageType === 'per Person'}
-                                onChange={handleChange}
-                                value="per Person"
-                                name="radio-button"
-                                color='primary'
-                            // inputProps={{ 'aria-label': 'A' }}
-                            />
-                            <label>per Person</label>
+    function newImageObjectWilAppear(e) {
+        setEditController(false)
+    }
+    function changingDestination(Destination) {
+        console.log(Destination.target.value)
+        setDestination(Destination.target.value)
+        data.Destination = Destination.target.value
+    }
+    return (<>
+        <Modal open={pdfFlg} onClose={onClosePdf} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>
+            <Maldivespdf
+                data={data}
+                no_rooms={no_rooms}
+                selected_Travel_date={selected_Travel_date}
+                MealPlan={MealPlan}
+                Transfer={Transfer}
+                NightDataFields={NightDataFields}
+                count_days={count_days}
+                flightcost={flightcost}
+                visacost={visacost}
+                landPackage={landPackage}
+                SelectedpackageType={SelectedpackageType}
+                Property={property}
+                flightsObject={flightsObject}
+                inclusionObject={inclusionObject}
+                flightFlg={flightFlg}
+                inclusionImgFlg={inclusionImgFlg}
+                Pax={Pax}
+                Child={Child}
+                inclusion_data={InclusionExclusion}
+                profile={profile}
+                indicator={true}
+                E_indicator={EditController}
+                flightsLinkfromstorage={pre_flightImgLinks}
+                inclusionLinkfromstorage={pre_inclusionLinks}
+                Allquote={Allquote}
+                onClosePdf={onClosePdf}
+            />
+        </Modal>
+        <Modal open={inclusionflg} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>
+            <MaldivesInclusion
+                setinclusion={setInclusionExclusion}
+                onClose={closeInclusion}
+                inclusion_data={InclusionExclusion}
+            />
+        </Modal>
+        {
+            Destination === "Maldives" ? <>
+                <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
+                    <div className='popUp_body'>
+                        <div className='save_close'>
+                            <button className='compo_button' onClick={() => closeHandler()} >close</button>
+                            <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                         </div>
-                        <div>
-                            <Radio
-                                checked={SelectedpackageType === 'Total'}
-                                onChange={handleChange}
-                                value="Total"
-                                name="radio-button"
-                                color='primary'
-                            // inputProps={{ 'aria-label': 'A' }}
-                            />
-                            <label>total</label>
+                        <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
+                            <div>
+                                <h4>
+                                    <span>Trip id:- </span>
+                                    <span>{data.TripId}</span>
+                                </h4>
+                                <h4>
+                                    <span>Budget:-</span>
+                                    <span>INR {data.Budget}/-</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Date:- </span>
+                                    <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
+                                </h4>
+                                <h4>
+                                    <span>Travel Duration :- </span>
+                                    <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>No of pax:- </span>
+                                    <span>{data.Pax}</span>
+                                </h4>
+                                <h4>
+                                    <span>No of child:- </span>
+                                    <span>{data.Child ? data.Child : 0}</span>
+                                </h4>
+                                <h4>
+                                    <span>Contact:- </span>
+                                    <span>{data.Contact_Number}</span>
+                                </h4>
+                                <h4>
+                                    <span>Destination:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Destination}</span>
+                                    <select onChange={(destination) => changingDestination(destination)}>
+                                        <option value={'Maldives'}>Maldives</option>
+                                        <option value={'Dubai'}>Dubai</option>
+                                        <option value={'Thailand'}>Thailand</option>
+                                        <option value={'Singapore'}>Singapore</option>
+                                        <option value={'Malaysia'}>Malaysia</option>
+                                        <option value={'Bali'}>Bali</option>
+                                        <option value={'Himachal'}>Himachal</option>
+                                        <option value={'Ladakh'}>Ladakh</option>
+                                    </select>
+                                </h4>
+                            </div>
+                            <div>
+                                <h4>
+                                    <span>Departure City:- </span>
+                                    <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
+                                </h4>
+                                <h4>
+                                    <span>Traveler:- </span>
+                                    <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
+                                </h4>
+                            </div>
+                            <div>
+                                {data.comments.map((data, index) => (<>
+                                    <span>{data}</span><br />
+                                </>))}
+                            </div>
                         </div>
+                        <div className='basicDetails'>
+                            <div>
+                                <label>Days</label>
+                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
+                            </div>
+                            <div>
+                                <label>Night</label>
+                                <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
+                            </div>
+                        </div>
+                        <div className='cost_body'>
+                            <div className='costOption'>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'per Person'}
+                                        onChange={handleChange}
+                                        value="per Person"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>per Person</label>
+                                </div>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'per Couple'}
+                                        onChange={handleChange}
+                                        value="per Couple"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>per Couple</label>
+                                </div>
+                                <div>
+                                    <Radio
+                                        checked={SelectedpackageType === 'Total'}
+                                        onChange={handleChange}
+                                        value="Total"
+                                        name="radio-button"
+                                        color='primary'
+                                    // inputProps={{ 'aria-label': 'A' }}
+                                    />
+                                    <label>total</label>
+                                </div>
 
-                    </div>
-                    <div className='costOption_estimatiom'>
-                        <div>
-                            <label >Flight Cost</label><br />
-                            <input type="number"
-                                className='input_filed'
-                                placeholder='0'
-                                value={flightcost}
-                                onChange={(e) => flightcostChange(e)}
-                            ></input>
-                            <text className='spacer'>+</text>
+                            </div>
+                            <div className='costOption_estimatiom'>
+                                <div>
+                                    <label >Flight Cost</label><br />
+                                    <input type="number"
+                                        className='input_filed'
+                                        placeholder='0'
+                                        value={flightcost}
+                                        onChange={(e) => flightcostChange(e)}
+                                    ></input>
+                                    <sapn className='spacer'>+</sapn>
+                                </div>
+                                <div>
+                                    <label>Visa Cost</label><br />
+                                    <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
+                                    <sapn className='spacer'>+</sapn>
+                                </div>
+                                <div>
+                                    <label>Land Package Cost</label><br />
+                                    <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                    <sapn className='spacer'>=</sapn>
+                                </div>
+
+                                <div className='totalSeprator'>
+                                    <label>Quotation price</label><br />
+                                    <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid', borderTop: '1px dotted' }}>
+                            <div>
+                                <label className='san-serif'>select Travel Date</label><br />
+                                <input width={'80px'} type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                            </div>
+                            <div>
+                                <label className='san-serif'>number of Pax</label><br />
+                                <input value={Pax} onChange={(e) => changePax(e)}></input>
+                            </div>
+                            <div>
+                                <label className='san-serif'>number of Child</label><br />
+                                <input onChange={(e) => changechild(e)} value={Child}></input>
+                            </div>
+                            <div>
+                                {/* <lable className='san-serif'>INCLUSION/EXCLUSION</lable><br /> */}
+                                <button className='inclusionButtoon' onClick={(e) => setinclusion(true)} >Inclusion / Exclusion</button>
+                            </div>
                         </div>
                         <div>
-                            <label>Visa Cost</label><br />
-                            <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
-                            <text className='spacer'>+</text>
-                        </div>
-                        <div>
-                            <label>Land Package Cost</label><br />
-                            <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
-                            <text className='spacer'>=</text>
-                        </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '58rem' }}>
+                                <div className='unitComponent_'>
+                                    <h4>property</h4>
+                                    <Select
+                                        components={animatedComponents}
+                                        options={propertyAvail}
+                                        defaultValue={Edit_Property ? Edit_Property : null}
+                                        onChange={(e) => handleFormChangePropety(e)}
+                                    />
+                                </div>
+                                <div className='unitComponent_'>
+                                    <h4>Transfer Selection</h4>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        components={animatedComponents}
+                                        options={TransferOption}
+                                        defaultValue={Edit_Transfer ? Edit_Transfer : null}
+                                        onChange={(e) => handleTransfer(e)}
+                                    />
+                                </div>
+                                <div className='unitComponent_'>
+                                    <h4>MealPlan</h4>
+                                    <Select
+                                        components={animatedComponents}
+                                        options={HotelMeals}
+                                        defaultValue={MealPlan ? MealPlan : null}
+                                        onChange={(e) => handleMealPlan(e)}
+                                    />
+                                </div>
+                                <div>
+                                    <h4>No of rooms</h4>
+                                    <input style={{ height: '2rem' }} onChange={(e) => NO_ofRooms(e)} value={no_rooms}></input>
+                                </div>
+                            </div>
 
-                        <div className='totalSeprator'>
-                            <label>Quotation price</label><br />
-                            <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
-                        </div>
-                    </div>
-                </div>
-                <label className='san-serif'>select Travel Date</label><br />
-                <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
-                <div>
-                    {
-                        // console.log(NightDataFields),
-                        NightDataFields &&
-                        NightDataFields.map((data, index) => {
-                            return (
-                                <>
-                                    <div key={index} className='costOption_estimatiom'>
-                                        <div className='unitComponent'>
-                                            <label>Night</label><br />
-                                            <Select
-                                                closeMenuOnSelect={false}
-                                                components={animatedComponents}
-                                                isMulti
-                                                options={nights}
-                                                defaultValue={Edit_NightDataFields ? data.Night : null}
-                                                onChange={(e) => advance_controller_nights(e, index)}
-                                            />
-                                        </div>
-                                        <div className='unitComponent'>
-                                            <label>HotelMeal</label><br />
-                                            <Select
-                                                closeMenuOnSelect={false}
-                                                components={animatedComponents}
-                                                isMulti
-                                                defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
-                                                options={HotelMeals}
-                                                onChange={(e) => advance_controller_Hotel_meals(e, index)}
-                                            />
-                                        </div>
-                                        <div className='unitComponent'>
-                                            <label>Hotel Name</label><br />
-                                            <input placeholder='hotel Name'
-                                                name='HotelName'
-                                                value={data.HotelName}
-                                                onChange={(event) => handleFormChange(event, index)}
-                                            >
-                                            </input>
 
-                                        </div>
+                            {
+                                // console.log(NightDataFields),
+                                NightDataFields &&
+                                NightDataFields.map((data, index) => {
+                                    return (
+                                        <>
+                                            <div key={index} className='costOption_estimatiom'>
 
-                                        <div className='unitComponent'>
-                                            <label>City</label><br />
-                                            <input placeholder='city'
-                                                name='City'
-                                                value={data.City}
-                                                onChange={(event) => handleFormChange(event, index)}
-                                            ></input>
-                                        </div>
-                                        <div className='unitComponent'>
-                                            <label>Category</label><br />
-                                            <input placeholder='Category'
-                                                list="HotelCategory"
-                                                name='Category'
-                                                value={data.Category}
-                                                onChange={(event) => handleFormChange(event, index)}
-                                            />
-                                            <datalist id="HotelCategory">
-                                                <option value="1 star">1 star</option>
-                                                <option value="2 star">2 star</option>
-                                                <option value="3 Star">3 star</option>
-                                                <option value="4 star">4 star</option>
-                                                <option value="5 star">5 star</option>
-                                                <option value="7 star">Java</option>
+                                                <div className='unitComponent_'>
+                                                    <label>Room Type</label><br />
+                                                    <Select
+                                                        components={animatedComponents}
+                                                        // isMulti
+                                                        options={roomTypeAvail}
+                                                        defaultValue={Edit_NightDataFields ? data.RoomType : null}
+                                                        onChange={(e) => handleFormChange(e, index)}
+                                                    />
 
-                                            </datalist>
-                                        </div>
-                                        <div className='unitComponent'>
-                                            <label>Room Category</label>
-                                            <input
-                                                handleFormChange={handleFormChange}
-                                                index={index}
-                                                value={data.RoomCategory}
-                                            />
-                                        </div>
-                                        <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
-                                    </div>
-                                    {/* <textarea
+                                                </div>
+                                                <div className='unitComponent_'>
+                                                    <label>Night</label><br />
+                                                    <Select
+                                                        closeMenuOnSelect={false}
+                                                        components={animatedComponents}
+                                                        isMulti
+                                                        options={nights}
+                                                        defaultValue={Edit_NightDataFields ? data.Night : null}
+                                                        onChange={(e) => advance_controller_nights(e, index)}
+                                                    />
+                                                </div>
+
+                                                <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
+                                            </div>
+                                            {/* <textarea
                                                 className='comments'
                                                 name='comments'
                                                 value={data.comments}
                                                 onChange={(event) => handleFormChange(event, index)}
                                                 placeholder='Additional information'
                                             ></textarea> */}
-                                </>
-                            );
-                        }
-                        )
-                    }
-                    <button className='addMore' onClick={() => addFields()}>Add More..</button>
-                </div>
-            </div>
+                                        </>
+                                    );
+                                }
+                                )
+                            }
+                            <button className='addMore' onClick={() => addFields()}>Add More..</button>
+                        </div>
+                        <div>
+                            {
+                                EditController ? <>
+                                    <label>Do not use previous image( default using previous images)</label>
+                                    <input checked={E_indicator} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
+                                </> : <></>
+                            }
 
-        </Modal>
+                        </div>
+                        <div className='FlightDetails'>
+                            <Flight />
+                            <p>
+                                <input type='checkbox' onChange={() => setflightFlg(!flightFlg)}></input>
+                                <label>Flight Not Included</label>
+                            </p>
+                        </div>
+                        {
+                            flightFlg ?
+                                <>
+                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
+                                        </textarea> */}
+                                    <div className='flightdetailsDrop'>
+                                        <DropzoneArea
+                                            onChange={(files) => flightDetails(files)}
+                                        />
+                                    </div>
+                                </>
+                                :
+                                <></>
+                        }
+
+                        <div className='FlightDetails' style={{ marginTop: '2rem' }} >
+                            <DeckIcon />
+                            <p>
+                                <input type='checkbox' onChange={() => setinclusionImgFlg(!inclusionImgFlg)}></input>
+                                <label>inclusionImg Not Included</label>
+                            </p>
+                        </div>
+                        {
+                            inclusionImgFlg ?
+                                <>
+                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
+                                        </textarea> */}
+                                    <div className='flightdetailsDrop'>
+                                        <DropzoneArea
+                                            onChange={(files) => inclusionDetails(files)}
+                                        />
+                                    </div>
+                                </>
+                                :
+                                <></>
+                        }
+                    </div>
+
+                </Modal>
+            </> : <>
+                <Box
+                    email={email}
+                    data={data}
+                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                    set_popupopner={set_popupopner}
+                    profile={profile}
+                />
+            </>
+        }
+
+    </>
     );
 }
 

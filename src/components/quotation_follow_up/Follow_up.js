@@ -11,7 +11,7 @@ import makeAnimated from 'react-select/animated';
 
 const FollowUp = (props) => {
     const db = getFirestore(app);
-    const [lead_data, setLead_data] = useState([])
+    const [lead_data, setLead_data] = useState(props.adminFlg?props.data:[])
     const [open, setopen] = useState(true)
     const [Destination, SetDestination_list] = useState([])
     const [month, setMonths] = useState([])
@@ -52,9 +52,9 @@ const FollowUp = (props) => {
         // console.log(props.target.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target?props.target.uid:props.auth.uid),
-             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true),orderBy("Lead_Status")
-             ,orderBy("Lead_status_change_date"));
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==",props.auth.uid),
+             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true)
+             );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -84,11 +84,16 @@ const FollowUp = (props) => {
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
         console.log(remaining_data,pre_tableData)
         setLead_data(remaining_data)
-
     }
 
     useEffect(() => {
-        getLeadOnBoard()
+        if(props.adminFlg){
+            setopen(false)
+        }
+        else
+        {
+            getLeadOnBoard()
+        }
     }, [props.auth])
 
 

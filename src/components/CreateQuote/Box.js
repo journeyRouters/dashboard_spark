@@ -413,7 +413,7 @@ const Box = ({
                                             <Radio
                                                 checked={SelectedpackageType === 'Per Person'}
                                                 onChange={handleChange}
-                                                value="per Person"
+                                                value="Per Person"
                                                 name="radio-button"
                                                 color='primary'
                                             // inputProps={{ 'aria-label': 'A' }}
@@ -424,7 +424,7 @@ const Box = ({
                                             <Radio
                                                 checked={SelectedpackageType === 'Per Couple'}
                                                 onChange={handleChange}
-                                                value="per Couple"
+                                                value="Per Couple"
                                                 name="radio-button"
                                                 color='primary'
                                             // inputProps={{ 'aria-label': 'A' }}
@@ -442,7 +442,7 @@ const Box = ({
                                             />
                                             <label>total</label>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             <select className='currency_option'>
                                                 <option value={currency[0]}>{currency[0]}</option>
                                                 <option value={currency[1]}>{currency[1]}</option>
@@ -458,7 +458,7 @@ const Box = ({
                                                 <option value={currency[11]}>{currency[11]}</option>
 
                                             </select>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='costOption_estimatiom'>
                                         <div>
@@ -594,6 +594,7 @@ const Box = ({
                                         </textarea> */}
                                                 <div className='flightdetailsDrop'>
                                                     <DropzoneArea
+                                                    filesLimit={10}
                                                         onChange={(files) => flightDetails(files)}
                                                     />
                                                 </div>

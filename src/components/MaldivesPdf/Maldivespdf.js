@@ -40,7 +40,7 @@ const Maldivespdf = ({
     Allquote,
     onClosePdf
 }) => {
-    console.log(E_indicator, data)
+    console.log(inclusion_data)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -400,11 +400,11 @@ const Maldivespdf = ({
                             <div className='pricing'>
                                 <span>{count_days} day, {count_days - 1} Night</span><br />
                                 <span style={{ marginLeft: '2rem', marginBottom: '-1rem' }}>at just</span><br />
-                                <h4 style={{ marginTop: '0rem', marginBottom: '-1.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h4><br />
-                                <span style={SelectedpackageType == 'Total' ? { marginLeft: '2.4rem' } : {}} >{SelectedpackageType}</span>
+                                <h4 style={{ marginTop: '0rem', marginBottom: '-2.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h4><br />
+                                <span style={SelectedpackageType == 'Total' ? { marginLeft: '2.4rem', } : {}} >{SelectedpackageType}</span>
                                 {/* margin-left: 2.4rem; */}
                             </div>
-                            <div style={{ marginTop: '-9rem' }}>
+                            <div style={{ marginTop: '-3.4rem' }}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>
@@ -576,7 +576,8 @@ const Maldivespdf = ({
                                             flightsLocalUrl ? <>
                                                 {
                                                     flightsLocalUrl.map((link, index) => (
-                                                        <img key={index} className='flightsImgcss' src={link.Link} />
+                                                        <img key={index} className='flightsImgcss_
+                                                        ' src={link.Link} />
                                                     ))
                                                 }
                                             </> : <></>
@@ -619,7 +620,7 @@ const Maldivespdf = ({
                                             inclusionImgUrl ? <>
                                                 {
                                                     inclusionImgUrl.map((link, index) => (
-                                                        <img key={index} className='flightsImgcss' src={link.Link} />
+                                                        <img key={index} className='flightsImgcss_' src={link.Link} />
                                                     ))
                                                 }
                                             </> : <></>

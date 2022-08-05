@@ -90,11 +90,11 @@
 .pricing {
     width: 12rem;
     height: 16rem;
-    /* background: white; */
-    margin: 10rem;
-    margin-left: 24rem;
-    font-size: 1.4rem;
+    margin: 7rem;
+    margin-left: 23rem;
+    font-size: 1.7rem;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .inclusionButtoon {
@@ -106,4 +106,8 @@
     font-size: 17px;
     font-weight: 700;
     border-radius: 30px;
+}
+.flightsImgcss_{
+    width: 53rem;
+    margin: 1rem;
 }

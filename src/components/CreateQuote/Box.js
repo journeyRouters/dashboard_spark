@@ -442,7 +442,7 @@ const Box = ({
                                             />
                                             <label>total</label>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             <select className='currency_option'>
                                                 <option value={currency[0]}>{currency[0]}</option>
                                                 <option value={currency[1]}>{currency[1]}</option>
@@ -458,7 +458,7 @@ const Box = ({
                                                 <option value={currency[11]}>{currency[11]}</option>
 
                                             </select>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='costOption_estimatiom'>
                                         <div>

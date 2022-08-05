@@ -40,7 +40,7 @@
     font-family: sans-serif;
     background-color: #ff0000;
     background-image: linear-gradient(315deg, #ff0000 0%, #ffed00 74%);
-    
+
 }
 
 
@@ -89,11 +89,12 @@
 
 .pricing {
     width: 12rem;
-    height: 16rem;
+    height: 9rem;
     /* background: white; */
-    margin: 10rem;
-    margin-left: 24rem;
-    font-size: 1.4rem;
+    text-transform: capitalize;
+    margin: 7rem;
+    margin-left: 23rem;
+    font-size: 1.7rem;
     font-weight: 600;
 }
 

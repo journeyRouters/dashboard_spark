@@ -594,7 +594,7 @@ const Box = ({
                                         </textarea> */}
                                                 <div className='flightdetailsDrop'>
                                                     <DropzoneArea
-                                                    filesLimit={10}
+                                                        filesLimit={10}
                                                         onChange={(files) => flightDetails(files)}
                                                     />
                                                 </div>

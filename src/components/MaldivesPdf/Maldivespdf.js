@@ -294,6 +294,7 @@ const Maldivespdf = ({
                         style={{
                             // backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
                             backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2FHeader.png?alt=media)`,
+                            // backgroundImage:`url(/assets/destination/BALI/testmaldives.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -400,11 +401,11 @@ const Maldivespdf = ({
                             <div className='pricing'>
                                 <span>{count_days} day, {count_days - 1} Night</span><br />
                                 <span style={{ marginLeft: '2rem', marginBottom: '-1rem' }}>at just</span><br />
-                                <h4 style={{ marginTop: '0rem', marginBottom: '-1.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h4><br />
+                                <h4 style={{ marginTop: '0rem', marginBottom: '-2.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h4><br />
                                 <span style={SelectedpackageType == 'Total' ? { marginLeft: '2.4rem' } : {}} >{SelectedpackageType}</span>
                                 {/* margin-left: 2.4rem; */}
                             </div>
-                            <div style={{ marginTop: '-9rem' }}>
+                            <div style={{ marginTop: '11rem' }}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>

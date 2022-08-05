@@ -125,12 +125,12 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                 <div className='mainModalDivSetter'>
                     <div >
                         <div>
-                            <label>CURRENCY</label>
+                            {/* <label>CURRENCY</label>
                             <select className='selectOptions'>
                                 <option value="INR">INR</option>
                                 <option value="CND">CND</option>
 
-                            </select>
+                            </select> */}
 
                             <div>
                                 <label> select qoute to gen invoice</label>

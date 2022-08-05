@@ -9,6 +9,7 @@ const MaldivesInclusion = (props) => {
         props.setinclusion(inclusionFeed)
         props.onClose()
     }
+    console.log(inclusionFeed)
     function BooleanCaseResolver(value) {
         /**a case is not working
          * when it should parse string value to boolean
@@ -32,10 +33,10 @@ const MaldivesInclusion = (props) => {
                 Transfer: firevalue
             }))
         }
-        if (e.target.name === "accommodation") {
+        if (e.target.name === "Accommodation") {
             setFeed(prevState => ({
                 ...prevState,
-                accommodation: firevalue
+                Accommodation: firevalue
             }))
         }
         if (e.target.name === "GST") {
@@ -95,11 +96,11 @@ const MaldivesInclusion = (props) => {
             </div>
             <div className='inclusionContaint1'>
                 <div className='setaline'>
-                    <p className='tag_heading'>accommodation</p>
+                    <p className='tag_heading'>Accommodation</p>
                     <div className='breakfast'>
-                        accommodation
+                    Accommodation
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='accommodation' value={inclusionFeed.accommodation} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Accommodation' value={inclusionFeed.Accommodation} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
 

@@ -864,7 +864,176 @@ const RoomType = {
             value: "TwoBedroomBeachPoolSuite",
         },
     ],
-    
+    ObluSelectLobigili: [
+
+        {
+            label: "Nest Water Villa",
+            value: "NestWaterVilla"
+        },
+        {
+            label: "Sunnest Beach Pool Villa",
+            value: "SunnestBeachPoolVilla"
+        },
+        {
+            label: "Sunnest Water Pool Villa",
+            value: "SunnestWaterPoolVilla"
+        },
+    ],
+    ObluSelectSangeli: [
+        {
+            label: "Beach Villa",
+            value: "BeachVilla",
+        },
+        {
+            label: "Beach Villa With Pool",
+            value: "BeachVillaWithPool",
+        },
+        {
+            label: "Honeymoon Select Ocean",
+            value: "HoneymoonSelectOcean",
+        },
+        {
+            label: "Water Villa",
+            value: "WaterVilla",
+        },
+        {
+            label: "Water Villa With Pool",
+            value: "WaterVillaWithPool",
+        },
+    ],
+    ParadiseIslandResort: [
+        {
+            label: "Beach Villa",
+            value: "BeachVilla",
+        },
+        {
+            label: "Deluxe Beach Pool Villa",
+            value: "DeluxeBeachPoolVilla",
+        },
+        {
+            label: "Ocean Beach Pool Villa",
+            value: "OceanBeachPoolVilla",
+        },
+        {
+            label: "One Bedroom Ocean Suite With Pool",
+            value: "OneBedroomOceanSuiteWithPool",
+        },
+        {
+            label: "Sunset Beach Pool Villa",
+            value: "SunsetBeachPoolVilla",
+        },
+        {
+            label: "Two Bedroom Family Beach Villa",
+            value: "TwoBedroomFamilyBeachVilla",
+        },
+        {
+            label: "Two Bedroom Ocean Suite With Pool",
+            value: "TwoBedroomOceanSuiteWithPool",
+        },
+        {
+            label: "Water Villa",
+            value: "WaterVilla",
+        },
+        {
+            label: "Water Villa With Whirlpool",
+            value: "WaterVillaWithWhirlpool",
+        },
+    ],
+    ReethiFaruResort: [
+        {
+            label: "Deluxe Beach Pool Villas",
+            value: "DeluxeBeachPoolVillas",
+        },
+        {
+            label: "Deluxe Beach Villas",
+            value: "DeluxeBeachVillas",
+        },
+        {
+            label: "Deluxe Two Bedroom Beach Suites",
+            value: "DeluxeTwoBedroomBeachSuites",
+        },
+        {
+            label: "Garden Villas",
+            value: "GardenVillas",
+        },
+        {
+            label: "Two Bedroom Garden Suites",
+            value: "TwoBedroomGardenSuites",
+        },
+        {
+            label: "Two Bedroom Water Villa Suites With Spa Tub",
+            value: "TwoBedroomWaterVillaSuitesWithSpaTub",
+        },
+        {
+            label: "Water Villas",
+            value: "WaterVillas",
+        },
+    ],
+    VaruByAtmosphere: [
+        {
+            label: "Beach Villa",
+            value: "BeachVilla",
+        },
+        {
+            label: "Beach Villa With Pool",
+            value: "BeachVillaWithPool",
+        },
+        {
+            label: "Family Beach Villa",
+            value: "FamilyBeachVilla",
+        },
+        {
+            label: "Family Beach Villa With Pool",
+            value: "FamilyBeachVillaWithPool",
+        },
+        {
+            label: "Majlis Suite",
+            value: "MajlisSuite",
+        },
+        {
+            label: "Water Suite",
+            value: "WaterSuite",
+        },
+        {
+            label: "Water Villa",
+            value: "WaterVilla",
+        },
+        {
+            label: "Water Villa With Pool",
+            value: "WaterVillaWithPool",
+        },
+    ],
+    AmariHavoddaMaldives: [
+        {
+            label: "Deluxe Beach Villa",
+            value: "DeluxeBeachVilla",
+        },
+        {
+            label: "Overwater Pool Suite",
+            value: "OverwaterPoolSuite",
+        },
+        {
+            label: "Overwater Villa",
+            value: "OverwaterVilla",
+        },
+        {
+            label: "Private Pool Villa",
+            value: "PrivatePoolVilla",
+        },
+        {
+            label: "Standard Beach Villa",
+            value: "StandardBeachVilla",
+        },
+        {
+            label: "Sunset Beach Pool Villa",
+            value: "SunsetBeachPoolVilla",
+        },
+        {
+            label: "Sunset Beach Villa",
+            value: "SunsetBeachVilla",
+        },
+    ]
+
 }
 export function RoomTypeReflector(property) {
     // console.log(RoomType[property])

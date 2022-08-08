@@ -1032,7 +1032,303 @@ const RoomType = {
             label: "Sunset Beach Villa",
             value: "SunsetBeachVilla",
         },
-    ]
+    ],
+    SiyamWorldMaldives: [
+        {
+            label: "2 Bedroom Beach Residence",
+            value: "2BedroomBeachResidence",
+        },
+        {
+            label: "2 Bedroom Lagoon Villa With Pool + Slide",
+            value: "2BedroomLagoonVillaWithPool_Slide",
+        },
+        {
+            label: "2 Bedroom Pool Beach Villa",
+            value: "2BedroomPoolBeachVilla",
+        },
+        {
+            label: "3 Bedroom Lagoon Villa With Pool + Slide",
+            value: "3BedroomLagoonVillaWithPool_Slide",
+        },
+        {
+            label: "3 Bedroom Pool Beach Villa",
+            value: "3BedroomPoolBeachVilla",
+        },
+        {
+            label: "4 Bedroom Beach Residence",
+            value: "4BedroomBeachResidence",
+        },
+        {
+            label: "Beach House",
+            value: "BeachHouse",
+        },
+        {
+            label: "Beach Suite With Pool",
+            value: "BeachSuiteWithPool",
+        },
+        {
+            label: "Grand Beach House",
+            value: "GrandBeachHouse",
+        },
+        {
+            label: "Grand Water Pavilion + Slide",
+            value: "GrandWaterPavilion_Slide",
+        },
+        {
+            label: "Lagoon Villa With Pool + Slide",
+            value: "LagoonVillaWithPool_Slide",
+        },
+        {
+            label: "Ocean Villa With Pool + Slide",
+            value: "OceanVillaWithPool_Slide",
+        },
+        {
+            label: "Pool Beach Villa",
+            value: "PoolBeachVilla",
+        },
+        {
+            label: "Reef Villa With Pool + Slide",
+            value: "ReefVillaWithPool_Slide",
+        },
+        {
+            label: "Sunset Pool Beach Villa",
+            value: "SunsetPoolBeachVilla",
+        },
+        {
+            label: "The Palace",
+            value: "ThePalace",
+        },
+        {
+            label: "Water Pavilion + Slide",
+            value: "WaterPavilion_Slide",
+        },
+        {
+            label: "Water Villa With Pool + Slide",
+            value: "WaterVillaWithPool_Slide",
+        },
+    ],
+    SunIslandResort_Spa: [
+        {
+            label: "Beach Pool Villa",
+            value: "BeachPoolVilla",
+        },
+        {
+            label: "Beach Villa",
+            value: "BeachVilla",
+        },
+        {
+            label: "Beach Villa With Whirlpool",
+            value: "BeachVillaWithWhirlpool",
+        },
+        {
+            label: "Deluxe Beach Pool Villa",
+            value: "DeluxeBeachPoolVilla",
+        },
+        {
+            label: "Deluxe Beach Villa",
+            value: "DeluxeBeachVilla",
+        },
+        {
+            label: "Lagoon Beach Villa",
+            value: "LagoonBeachVilla",
+        },
+        {
+            label: "Sunset Beach Villa",
+            value: "SunsetBeachVilla",
+        },
+        {
+            label: "Sunset Water Villa",
+            value: "SunsetWaterVilla",
+        },
+        {
+            label: "Sun Villa",
+            value: "SunVilla",
+        },
+        {
+            label: "Two Bedroom Family Beach Villa",
+            value: "TwoBedroomFamilyBeachVilla",
+        },
+        {
+            label: "Two Bedroom Overwater Suite",
+            value: "TwoBedroomOverwaterSuite",
+        },
+        {
+            label: "Water Villa",
+            value: "WaterVilla",
+        },
+    ],
+    SunSiyamIruFushi: [
+        {
+            label: "Aqua Retreat",
+            value: "AquaRetreat",
+        },
+        {
+            label: "Celebrity Retreat",
+            value: "CelebrityRetreat",
+        },
+        {
+            label: "Deluxe Beach Villa",
+            value: "DeluxeBeachVilla",
+        },
+        {
+            label: "Deluxe Beach Villa With Pool",
+            value: "DeluxeBeachVillaWithPool",
+        },
+        {
+            label: "Family Deluxe Beach Villa With Pool",
+            value: "FamilyDeluxeBeachVillaWithPool",
+        },
+        {
+            label: "Hidden Retreat",
+            value: "HiddenRetreat",
+        },
+        {
+            label: "Horizon Water Villa",
+            value: "HorizonWaterVilla",
+        },
+        {
+            label: "Horizon Water Villa With Pool",
+            value: "HorizonWaterVillaWithPool",
+        },
+        {
+            label: "Infinity Water Villa",
+            value: "InfinityWaterVilla",
+        },
+        {
+            label: "Pool Beach Villa",
+            value: "PoolBeachVilla",
+        },
+        {
+            label: "Sunset Horizon Water Villa",
+            value: "SunsetHorizonWaterVilla",
+        },
+        {
+            label: "Water Villa",
+            value: "WaterVilla",
+        },
+    ],
+    SunSiyamIruVeli: [
+        {
+            label: "Beach Suite With Pool",
+            value: "BeachSuiteWithPool",
+        },
+        {
+            label: "Dolphin Ocean Suite",
+            value: "DolphinOceanSuite",
+        },
+        {
+            label: "Family Beach Suite With Pool",
+            value: "FamilyBeachSuiteWithPool",
+        },
+        {
+            label: "Grand Beach Suite",
+            value: "GrandBeachSuite",
+        },
+        {
+            label: "Grand Ocean Suite",
+            value: "GrandOceanSuite",
+        },
+        {
+            label: "King Beach Suite",
+            value: "KingBeachSuite",
+        },
+        {
+            label: "King Ocean Suite",
+            value: "KingOceanSuite",
+        },
+        {
+            label: "Ocean Suite With Pool",
+            value: "OceanSuiteWithPool",
+        },
+        {
+            label: "Sun Aqua Sultan Suite",
+            value: "SunAquaSultanSuite",
+        },
+    ],
+    SunSiyamOlhuveli: [
+        {
+            label: "Deluxe Room",
+            value: "DeluxeRoom",
+        },
+        {
+            label: "Deluxe Water Villa",
+            value: "DeluxeWaterVilla",
+        },
+        {
+            label: "Grand Beach Suite With Pool",
+            value: "GrandBeachSuiteWithPool",
+        },
+        {
+            label: "Grand Beach Villa",
+            value: "GrandBeachVilla",
+        },
+        {
+            label: "Grand Beach Villa With Pool",
+            value: "GrandBeachVillaWithPool",
+        },
+        {
+            label: "Grand Water Villa",
+            value: "GrandWaterVilla",
+        },
+        {
+            label: "Grand Water Villa With Pool",
+            value: "GrandWaterVillaWithPool",
+        },
+        {
+            label: "Presidential Water Suite",
+            value: "PresidentialWaterSuite",
+        },
+        {
+            label: "Prestige Jacuzzi Water Villa",
+            value: "PrestigeJacuzziWaterVilla",
+        },
+        {
+            label: "Two Bedroom Beach Suite",
+            value: "TwoBedroomBeachSuite",
+        },
+        {
+            label: "WaterVilla",
+            value: "WaterVilla",
+        },
+    ],
+    SunSiyamViluReef: [
+        {
+            label: "Aqua Suite",
+            value: "AquaSuite",
+        },
+        {
+            label: "Aqua Villa",
+            value: "AquaVilla",
+        },
+        {
+            label: "Beach Bungalow",
+            value: "BeachBungalow",
+        },
+        {
+            label: "Deluxe Beach Villa",
+            value: "DeluxeBeachVilla",
+        },
+        {
+            label: "Grand Reef Suite",
+            value: "GrandReefSuite",
+        },
+        {
+            label: "Jacuzzi Deluxe Beach Villa",
+            value: "JacuzziDeluxeBeachVilla",
+        },
+        {
+            label: "Reef Villa",
+            value: "ReefVilla",
+        },
+        {
+            label: "Sun Aqua Pool Villa",
+            value: "SunAquaPoolVilla",
+        },
+        {
+            label: "Sunset Reef Villa",
+            value: "SunsetReefVilla",
+        },
+    ],
 
 }
 export function RoomTypeReflector(property) {

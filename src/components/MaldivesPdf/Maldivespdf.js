@@ -350,19 +350,19 @@ const Maldivespdf = ({
                             }}
                         >
                             <div className='trip_summary'>
-                                <span>TRIP ID:- JR-</span>
+                                <span>TRIP ID:-JR-</span>
                                 <span>{`${data.TripId}`}</span>
                             </div>
                             <div>
                                 <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
                                     <tbody>
                                         <tr >
-                                            <th style={{ border: '1px solid white' }}>Name</th>
+                                            <th style={{ border: '1px solid white' }}>NAME</th> 
                                             <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{`${data.Traveller_name}`}</td>
                                         </tr>
                                         <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
                                             <th style={{ border: '1px solid white' }}>HOTEL</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{Property.value}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{Property.label}</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>STAY</th>

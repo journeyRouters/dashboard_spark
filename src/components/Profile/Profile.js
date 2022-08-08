@@ -225,6 +225,7 @@ const Profile = (
         }
         closeFormAndPdf()
     }
+    var formatter = new Intl.NumberFormat('en-US', {})
 
     return (
         <>
@@ -319,7 +320,7 @@ const Profile = (
                             <div className="yellow_details">
                                 <p className="dayDetails">{count_days} Days {count_days - 1} Nights</p>
                                 <p className="setPara">at just</p>
-                                <h4 className="seth4">INR :{parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost)}/-</h4>
+                                <h4 className="seth4">INR :{formatter.format(parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost))}/-</h4>
                                 <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
                             <div style={{marginTop:'8.3rem'}}>

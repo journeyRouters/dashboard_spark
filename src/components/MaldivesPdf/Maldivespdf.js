@@ -274,6 +274,7 @@ const Maldivespdf = ({
     };
     const pdfExportComponent = useRef(null);
     // console.log(count_days)
+    var formatter = new Intl.NumberFormat('en-US', {})
     let whatsApp = profile.WhatsApp_number
     let Call = profile.contact_number
     return (
@@ -357,44 +358,49 @@ const Maldivespdf = ({
                                     <tbody>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>Name</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{`${data.Traveller_name}`}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{`${data.Traveller_name}`}</td>
                                         </tr>
                                         <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
                                             <th style={{ border: '1px solid white' }}>HOTEL</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Property.value}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{Property.value}</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>STAY</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>
                                                 {
                                                     NightDataFields.map((data, index) => (
-                                                        <> <span>{
-                                                            data.Night.map((data_, index) => (<span>{data_.value},</span>))
-                                                        } at {data.RoomType.value}</span><br /></>
+                                                        <> <span>
+                                                            {/* {
+                                                                data.Night.map((data_, index) => (<span>{data_.value},</span>))
+                                                            } */}
+                                                            {
+                                                                <span>{data.Night.length} Nights </span>
+                                                            }
+                                                            at {data.RoomType.label}</span><br /></>
                                                     ))
                                                 }
 
                                             </td>
                                         </tr>
                                         <tr >
-                                            <th style={{ border: '1px solid white' }}>TRANSFER</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Transfer ? Transfer.value : ''}</td>
+                                            <th style={{ border: '1px solid white' }}>TRANSFERS</th>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{Transfer ? Transfer.value : ''}</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>MEAL PLAN</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{MealPlan ? MealPlan.value : ''}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{MealPlan ? MealPlan.value : ''}</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>DATE</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{selected_Travel_date ? moment(selected_Travel_date).format('DD-MMMM-YYYY') : ''}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{selected_Travel_date ? moment(selected_Travel_date).format('DD-MMMM-YYYY') : ''}</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>NO OF PAX</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{Pax} Adult, {Child}Child</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{Pax} Adult, {Child}Child</td>
                                         </tr>
                                         <tr >
                                             <th style={{ border: '1px solid white' }}>NO OF ROOMS</th>
-                                            <td style={{ border: '1px solid white', paddingLeft: '11rem' }}>{no_rooms ? no_rooms : 0}</td>
+                                            <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{no_rooms ? no_rooms : 0}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -413,7 +419,7 @@ const Maldivespdf = ({
                                             <tr>
                                                 <td>
                                                     <span style={{ fontSize: '2.1rem', fontWeight: '900' }}>
-                                                        INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-
+                                                        INR:-{formatter.format(parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost))}/-
                                                     </span>
                                                 </td>
                                             </tr>

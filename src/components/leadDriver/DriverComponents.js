@@ -9,12 +9,12 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     var today = new Date()
-    const[testdate,setvtestdate]=useState(data.Travel_Date?data.Travel_Date:false)
+    const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
     // const testdate = data.Travel_Date
 
     // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
     var currentdate = moment(today).format('YYYY-MM-DD')
-  
+
     async function deletelead(tripid) {
         try {
             await deleteDoc(doc(db, "Trip", tripid));
@@ -58,6 +58,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />
+                <span style={{color:'yellow',background:'black'}}>Lead Status:- {data.Lead_Status}</span>
             </div>
             <div>
                 {
@@ -78,7 +79,6 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                     </> : <></>
                 } */}
                 <span>Assign to:-</span>
-
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>
                     <option value={0}> assign to</option>
                     {
@@ -92,7 +92,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             </div>
             <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
             <button disabled={data.assign_flg} onClick={() => deletelead(data.TripId)}>delete</button>
-            <button onClick={()=>reassign()}>Reset</button>
+            <button onClick={() => reassign()}>Reset</button>
         </div>
 
     );

@@ -26,6 +26,8 @@
     border: 1px solid;
     margin-bottom: 1rem;
     height: 10rem;
+    background: black;
+    color: white;
     /* color: #FFFFFF;
     background: radial-gradient(#111112, bisque);   */
 }
@@ -38,7 +40,7 @@
     margin-bottom: 1rem;
     height: 10rem;
     color: #FFFFFF;
-    background: radial-gradient(red, bisque);  
+    background: radial-gradient(#00ffef, #3e8c8a);
 }
 .driverButton{
     width: 8rem;

@@ -228,8 +228,8 @@ const Maldives = ({
         setNightDataFields(data);
     }
     const handleFormChangePropety = (event, index) => {
+        console.log(RoomTypeReflector(event.label))
         setRoomTye(RoomTypeReflector(event.value))
-        console.log(RoomTypeReflector(event.value))
         setproperty(event)
     }
     function handleMealPlan(e) {

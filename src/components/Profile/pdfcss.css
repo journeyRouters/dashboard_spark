@@ -331,7 +331,7 @@
 .setInsta{
     width: 25rem;
     margin-left: 15rem;
-    margin-top: -1.5rem;
+    margin-top: 1.5rem;
 }
 .headLineDaywiseItineary{
     font-family: sans-serif;
@@ -410,7 +410,9 @@
     font-size: 1.6rem;
 }
 .trip_summary{
-    width: 29rem;
+    display: flex;
+    justify-content: space-between;
+    width: 20rem;
     margin-top: 25.2rem;
     color: #05e0e9;
     font-size: 2rem;

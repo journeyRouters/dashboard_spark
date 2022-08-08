@@ -349,7 +349,10 @@ const Maldivespdf = ({
                                 // color:"white"
                             }}
                         >
-                            <div className='trip_summary'>TRIP ID:- JR-{`${data.TripId}`}</div>
+                            <div className='trip_summary'>
+                                <span>TRIP ID:- JR-</span>
+                                <span>{`${data.TripId}`}</span>
+                            </div>
                             <div>
                                 <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
                                     <tbody>
@@ -399,10 +402,32 @@ const Maldivespdf = ({
                             </div>
 
                             <div className='pricing'>
-                                <span>{count_days} day, {count_days - 1} Night</span><br />
-                                <span style={{ marginLeft: '2rem', marginBottom: '-1rem' }}>at just</span><br />
-                                <h4 style={{ marginTop: '0rem', marginBottom: '-2.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h4><br />
-                                <span style={SelectedpackageType == 'Total' ? { marginLeft: '2.4rem', } : {}} >{SelectedpackageType}</span>
+                                <center>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>{count_days} day, {count_days - 1} Night</td>
+                                            </tr>
+                                            <tr>
+                                                <td>at just</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span style={{ fontSize: '2.1rem', fontWeight: '900' }}>
+                                                        INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{SelectedpackageType}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </center>
+                                {/* <span>{count_days} day, {count_days - 1} Night</span><br />
+                                <span style={{ marginLeft: '2.5rem', marginBottom: '-1rem' }}>at just</span><br />
+                                <h3 style={{ marginTop: '0rem', marginBottom: '-2.5rem' }}>INR:-{parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost)}/-</h3><br />
+                                <span style={{ marginLeft: '2.4rem', }} >{SelectedpackageType}</span> */}
                                 {/* margin-left: 2.4rem; */}
                             </div>
                             <div style={{ marginTop: '-3.4rem' }}>
@@ -583,7 +608,7 @@ const Maldivespdf = ({
                                                 }
                                             </> : <></>
                                         }
-                                            <sapn style={{textDecoration:'underline', color:'#bbc9ef',marginLeft:'13rem',fontSize:'13px',fontStyle:'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
+                                        <sapn style={{ textDecoration: 'underline', color: '#bbc9ef', marginLeft: '13rem', fontSize: '13px', fontStyle: 'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
                                         <div
                                             style={{
                                                 backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
@@ -679,7 +704,7 @@ const Maldivespdf = ({
                         </div>
                     </div>
                 </div>
-            </PDFExport>
+            </PDFExport >
             {
                 indicator ?
                     <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button> :
@@ -688,7 +713,7 @@ const Maldivespdf = ({
             }
 
 
-        </div>
+        </div >
     );
 }
 

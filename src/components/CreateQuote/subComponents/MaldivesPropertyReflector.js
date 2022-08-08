@@ -4,6 +4,10 @@ export const propertyMaldives = [
         value: 'AdaaranClubRannalhi'
     },
     {
+        label:'AMARI HAVODDA MALDIVES',
+        value:'AmariHavoddaMaldives'
+    },
+    {
         label: 'ADAARAN SELECT HUDHURANFUSHI',
         value: 'AdaaranSelectHudhuranfushi'
     },
@@ -103,10 +107,10 @@ export const propertyMaldives = [
         label: 'HIDEAWAY BEACH RESORT AND SPA',
         value: 'HideawayBeachResort_Spa'
     },
-    {
-        label: 'HOLIDAY INN KANDOOMA',
-        value: 'HolidayInnKandooma'
-    },
+    // {
+    //     label: 'HOLIDAY INN KANDOOMA',
+    //     value: 'HolidayInnKandooma'
+    // },
     {
         label: 'KANDIMA MALDIVES',
         value: 'KandimaMaldives'
@@ -131,18 +135,18 @@ export const propertyMaldives = [
         label: 'OBLU SELECT LOBIGILI',
         value: 'ObluSelectLobigili'
     },
-    // {
-    //     label: 'OBLU SELECT SANGELI',
-    //     value: 'ObluSelectSangeli'
-    // },
-    // {
-    //     label: 'PARADISE ISLAND RESORT',
-    //     value: 'ParadiseIslandResort'
-    // },
-    // {
-    //     label: 'REETHI FARU RESORT',
-    //     value: 'ReethiFaruResort'
-    // },
+    {
+        label: 'OBLU SELECT SANGELI',
+        value: 'ObluSelectSangeli'
+    },
+    {
+        label: 'PARADISE ISLAND RESORT',
+        value: 'ParadiseIslandResort'
+    },
+    {
+        label: 'REETHI FARU RESORT',
+        value: 'ReethiFaruResort'
+    },
     // {
     //     label: 'SAII LAGOON MALDIVES',
     //     value: 'SaiiLagoonMaldives'
@@ -151,30 +155,30 @@ export const propertyMaldives = [
     //     label: 'SHERATON MALDIVES FULL MOON RESORT AND SPA',
     //     value: 'SheratonMaldivesFullMoonResort_Spa'
     // },
-    // {
-    //     label: 'SIYAM WORLD MALDIVES',
-    //     value: 'SiyamWorldMaldives'
-    // },
-    // {
-    //     label: 'SUN ISLAND RESORT AND SPA',
-    //     value: 'SunIslandResort_Spa'
-    // },
-    // {
-    //     label: 'SUN SIYAM IRU FUSHI',
-    //     value: 'SunSiyamIruFushi'
-    // },
-    // {
-    //     label: 'SUN SIYAM IRU VELI',
-    //     value: 'SunSiyamIruVeli'
-    // },
-    // {
-    //     label: 'SUN SIYAM OLHUVELI',
-    //     value: 'SunSiyamOlhuveli'
-    // },
-    // {
-    //     label: 'SUN SIYAM VILU REEF',
-    //     value: 'SunSiyamViluReef'
-    // },
+    {
+        label: 'SIYAM WORLD MALDIVES',
+        value: 'SiyamWorldMaldives'
+    },
+    {
+        label: 'SUN ISLAND RESORT AND SPA',
+        value: 'SunIslandResort_Spa'
+    },
+    {
+        label: 'SUN SIYAM IRU FUSHI',
+        value: 'SunSiyamIruFushi'
+    },
+    {
+        label: 'SUN SIYAM IRU VELI',
+        value: 'SunSiyamIruVeli'
+    },
+    {
+        label: 'SUN SIYAM OLHUVELI',
+        value: 'SunSiyamOlhuveli'
+    },
+    {
+        label: 'SUN SIYAM VILU REEF',
+        value: 'SunSiyamViluReef'
+    },
     // {
     //     label: 'TAJ CORAL REEF RESORT AND SPA',
     //     value: 'TajCoralReefResort_Spa'
@@ -191,14 +195,14 @@ export const propertyMaldives = [
     //     label: 'THULHAGIRI ISLAND RESORT AND SPA',
     //     value: 'ThulhagiriIslandResort_Spa'
     // },
-    // {
-    //     label: 'VARU BY ATMOSPHERE',
-    //     value: 'VaruByAtmosphere'
-    // },
-    // {
-    //     label: 'YOU AND ME BY COCOON',
-    //     value: 'YouAndMeByCocoon'
-    // }
+    {
+        label: 'VARU BY ATMOSPHERE',
+        value: 'VaruByAtmosphere'
+    },
+    {
+        label: 'YOU AND ME BY COCOON',
+        value: 'YouAndMeByCocoon'
+    }
 ]
 
 

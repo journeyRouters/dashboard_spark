@@ -27,6 +27,7 @@
     "material-ui-dropzone": "^3.5.0",
     "moment": "^2.29.3",
     "object-hash": "^3.0.0",
+    "paste-img": "^1.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",

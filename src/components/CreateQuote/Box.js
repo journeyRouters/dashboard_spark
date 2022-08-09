@@ -413,7 +413,7 @@ const Box = ({
                                             <Radio
                                                 checked={SelectedpackageType === 'Per Person'}
                                                 onChange={handleChange}
-                                                value="per Person"
+                                                value="Per Person"
                                                 name="radio-button"
                                                 color='primary'
                                             // inputProps={{ 'aria-label': 'A' }}
@@ -424,7 +424,7 @@ const Box = ({
                                             <Radio
                                                 checked={SelectedpackageType === 'Per Couple'}
                                                 onChange={handleChange}
-                                                value="per Couple"
+                                                value="Per Couple"
                                                 name="radio-button"
                                                 color='primary'
                                             // inputProps={{ 'aria-label': 'A' }}

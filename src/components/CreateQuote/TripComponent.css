@@ -93,9 +93,12 @@
 }
 
 .no_data {
-    background-image: url("https://i.pinimg.com/originals/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.png");
+    /* background-image: url("https://i.pinimg.com/originals/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.png"); */
+    background-image: url("https://media2.giphy.com/media/RMwgs5kZqkRyhF24KK/200.gif");
     height: 35rem;
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .popUp_body {
@@ -204,7 +207,8 @@
     display: flex;
     justify-content: space-between;
 }
-.flightdetailsDrop{
+
+.flightdetailsDrop {
     width: 74% !important;
     margin-left: 2rem
 }
@@ -254,11 +258,10 @@
     border-bottom: 1px dotted rgb(117, 111, 111);
 }
 
-.tableAliner{
+.tableAliner {
     overflow-x: scroll;
 }
-.Autocomplete{
-  border: linear-gradient(to right, red , yellow);
-}
 
- 
+.Autocomplete {
+    border: linear-gradient(to right, red, yellow);
+}

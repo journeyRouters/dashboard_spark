@@ -47,7 +47,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
 
     }
     return (
-        <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components'}>
+        <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>
             <div>
                 <span>TripId:-{data.TripId}</span><br />
                 <span>Name:-{data.Traveller_name}</span><br />

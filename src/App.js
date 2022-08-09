@@ -164,8 +164,12 @@ function App() {
         </p>
         {
           auth ? <>
-            <div>
-              <img className='button' width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
+            <div style={{display:'flex',alignItems:'center',textTransform:'capitalize'}}>
+              {
+                profile?
+                <span>Hello  {profile?profile.name:''}</span>:''
+              }
+              <img width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
               </img>
             </div>
           </> : <>

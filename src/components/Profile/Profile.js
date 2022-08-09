@@ -364,7 +364,7 @@ const Profile = (
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Inclusion ? <>
-                                                {inclusion_data.other_Inclusion.split(".").map((data, index) => (<>
+                                                {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
                                                     <span>
                                                         <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
                                                         {data.trim()}</span><br />
@@ -394,7 +394,7 @@ const Profile = (
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Exclusion ? <>
-                                                {inclusion_data.other_Exclusion.split(".").map((data, index) => (<>
+                                                {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
                                                     <span>
                                                         <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
 
@@ -508,7 +508,7 @@ const Profile = (
                                                             Day {index + 1} - {data.Day}
                                                         </span>
                                                     </div>
-                                                    <p className='dayDetailsitineary'>{data.Description.split('#').map((data, index) => (<><div style={{ marginBottom: '0rem' }}>{data}</div><br /></>))}</p>
+                                                    <p className='dayDetailsitineary'>{data.Description.split('\n').map((data, index) => (<><div style={{ marginBottom: '-1rem' }}>{data}</div><br /></>))}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img

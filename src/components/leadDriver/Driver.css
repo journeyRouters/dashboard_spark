@@ -18,7 +18,7 @@
 .userlist_button{
     margin-right: 1rem;
 }
-.Driver_components{
+.Driver_components1{ 
     align-items: center;
     font-weight: 600;
     display: flex;
@@ -39,7 +39,7 @@
     border: 1px solid;
     margin-bottom: 1rem;
     height: 10rem;
-    color: #FFFFFF;
+    color: black;
     background: radial-gradient(#00ffef, #3e8c8a);
 }
 .driverButton{

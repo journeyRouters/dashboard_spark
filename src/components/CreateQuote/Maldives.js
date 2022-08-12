@@ -590,6 +590,7 @@ const Maldives = ({
                                         </textarea> */}
                                     <div className='flightdetailsDrop'>
                                         <DropzoneArea
+                                        filesLimit={20}
                                             onChange={(files) => flightDetails(files)}
                                         />
                                     </div>
@@ -612,7 +613,8 @@ const Maldives = ({
                                         </textarea> */}
                                     <div className='flightdetailsDrop'>
                                         <DropzoneArea
-                                            onChange={(files) => inclusionDetails(files)}
+                                          filesLimit={20}
+                                          onChange={(files) => inclusionDetails(files)}
                                         />
                                     </div>
                                 </>

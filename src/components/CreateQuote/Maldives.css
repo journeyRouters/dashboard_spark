@@ -111,3 +111,27 @@
     width: 53rem;
     margin: 1rem;
 }
+.copypastArea{
+    margin-top: 5px;
+    padding: 10px;
+    font-style: italic;
+    /* color: red; */
+    border: 3px dashed;
+    /* height: 10rem; */
+    width: 51rem;
+    margin-bottom: 4rem;
+    margin-left: 2rem;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* background-color: #2196F3; */
+    padding: 10px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }

@@ -529,10 +529,11 @@ const Maldivespdf = ({
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Inclusion ? <>
-                                                {inclusion_data.other_Inclusion.split(".").map((data, index) => (<>
-                                                    <span>
-                                                        <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                        {data.trim()}</span><br />
+                                                {inclusion_data.other_Inclusion.split("\n").map((data, index) => (<>
+                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                        <span>-&nbsp; </span>
+                                                        <span>  {data.trim()}</span>
+                                                    </div><br />
                                                 </>))}
                                             </> : <></>
                                         }
@@ -559,11 +560,11 @@ const Maldivespdf = ({
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Exclusion ? <>
-                                                {inclusion_data.other_Exclusion.split(".").map((data, index) => (<>
-                                                    <span>
-                                                        <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-
-                                                        {data.trim()}</span><br />
+                                                {inclusion_data.other_Exclusion.split("\n").map((data, index) => (<>
+                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                        <span>-&nbsp; </span>
+                                                        <span>  {data.trim()}</span>
+                                                    </div><br />
                                                 </>))}
                                             </> : <></>
                                         }

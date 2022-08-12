@@ -364,6 +364,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                     <p>Email:-
                         {data.Email}
                     </p>
+                    <p>converted by:-
+                        {data.assign_to.name}
+                    </p>
                     {
                         details ? <>
                             <button onClick={() => finalPackageOpen()}>Final Package</button>

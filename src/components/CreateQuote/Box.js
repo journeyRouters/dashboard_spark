@@ -11,6 +11,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import moment from 'moment';
 import RoomType from './subComponents/RoomType';
 import Maldives from './Maldives';
+import { Upload } from "@progress/kendo-react-upload";
 
 
 const Box = ({
@@ -32,7 +33,7 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    // console.log(profile)
+    console.log(data)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -52,7 +53,8 @@ const Box = ({
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [opennclusion, setInclusion] = useState(false)
     const [openPDF, setPDF] = useState(false)
-    const [flightsObject, setflightsObject] = useState(null)
+    const [flightsObject, setflightsObject] = useState([])
+    const [flightImgUrl, setflightImgUrl] = useState([])
     const [cabDetailsData, setcabDetails] = useState(null)
     const [nights, setnights] = useState([])
     const [activity, setActivity] = useState([])
@@ -111,6 +113,7 @@ const Box = ({
     }
     function closePDF() {
         setPDF(false)
+
     }
     function showPDF() {
         setPDF(true)
@@ -300,7 +303,36 @@ const Box = ({
         // console.log(files)
         setflightsObject(files)
     }
+    function handlePasteFlight(e) {
+        if (e.clipboardData.files.length) {
+            var localHolder = flightsObject
+            const fileObject = e.clipboardData.files[0];
+            // console.log(fileObject)
+            localHolder.push(fileObject)
+            setflightsObject(localHolder)
+            convertObjectToLink(fileObject)
+        }
+    }
+    function deletefrom(index) {
+        var OperationObjects = [...flightsObject]
+        var oprationLinks = [...flightImgUrl]
+        OperationObjects.splice(index, 1)
+        setflightsObject(OperationObjects)
+        oprationLinks.splice(index, 1)
+        setflightImgUrl(oprationLinks)
 
+    }
+    async function convertObjectToLink(files) {
+        try {
+            const file = files
+            var local_link_list = [...flightImgUrl]
+            const url = URL.createObjectURL(file)
+            local_link_list.push(url)
+            setflightImgUrl(local_link_list)
+        }
+        catch (e) { console.log(e) }
+
+    }
     var formatter = new Intl.NumberFormat('en-US', {})
 
     return (
@@ -323,7 +355,7 @@ const Box = ({
                                 <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                             </div>
                             <div >
-                                <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
+                                <div style={{ display: 'flex', width: '64%', justifyContent: 'space-between' }} >
                                     <div>
                                         <h4>
                                             <span>Trip id:- </span>
@@ -383,9 +415,15 @@ const Box = ({
                                         </h4>
                                     </div>
                                     <div>
-                                        {data.comments.map((data, index) => (<>
-                                            <span key={index}>{data}</span><br />
-                                        </>))}
+                                        {
+                                            data.Comment? <>
+                                                comments:-
+                                                {data.Comment.map((data, index) => (<>
+                                                    <span key={index}>{data}</span><br />
+                                                </>))}
+                                            </> : <></>
+                                        }
+
                                     </div>
                                 </div>
                                 <p className='basicDetailsheading'>Basic Details</p>
@@ -442,30 +480,14 @@ const Box = ({
                                             />
                                             <label>total</label>
                                         </div>
-                                        {/* <div>
-                                            <select className='currency_option'>
-                                                <option value={currency[0]}>{currency[0]}</option>
-                                                <option value={currency[1]}>{currency[1]}</option>
-                                                <option value={currency[2]}>{currency[2]}</option>
-                                                <option value={currency[3]}>{currency[3]}</option>
-                                                <option value={currency[4]}>{currency[4]}</option>
-                                                <option value={currency[5]}>{currency[5]}</option>
-                                                <option value={currency[6]}>{currency[6]}</option>
-                                                <option value={currency[7]}>{currency[7]}</option>
-                                                <option value={currency[8]}>{currency[8]}</option>
-                                                <option value={currency[9]}>{currency[9]}</option>
-                                                <option value={currency[10]}>{currency[10]}</option>
-                                                <option value={currency[11]}>{currency[11]}</option>
 
-                                            </select>
-                                        </div> */}
                                     </div>
                                     <div className='costOption_estimatiom'>
                                         <div>
                                             <label >Flight Cost</label><br />
                                             <input type="number"
                                                 className='input_filed'
-                                                placeholder='0'
+                                                placeholder='Flight'
                                                 value={flightcost}
                                                 onChange={(e) => flightcostChange(e)}
                                             ></input>
@@ -473,12 +495,12 @@ const Box = ({
                                         </div>
                                         <div>
                                             <label>Visa Cost</label><br />
-                                            <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
+                                            <input type="number" className='input_filed' placeholder='visa' value={visacost} onChange={(e) => visacostChange(e)}></input>
                                             <span className='spacer'>+</span>
                                         </div>
                                         <div>
                                             <label>Land Package Cost</label><br />
-                                            <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                            <input type="number" className='input_filed' placeholder='Land' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
                                             <span className='spacer'>=</span>
                                         </div>
 
@@ -553,7 +575,7 @@ const Box = ({
                                                                 <option value="3 Star">3 star</option>
                                                                 <option value="4 star">4 star</option>
                                                                 <option value="5 star">5 star</option>
-                                                                <option value="7 star">Java</option>
+                                                                <option value="7 star">7 Star</option>
 
                                                             </datalist>
                                                         </div>
@@ -590,12 +612,39 @@ const Box = ({
                                     {
                                         flight ?
                                             <>
-                                                {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
-                                        </textarea> */}
-                                                <div className='flightdetailsDrop'>
-                                                    <DropzoneArea
-                                                        onChange={(files) => flightDetails(files)}
+
+                                                <div onPaste={(e) => handlePasteFlight(e)}>
+                                                    <Upload
+                                                        autoUpload={false}
+                                                        batch={false}
+                                                        multiple={true}
                                                     />
+                                                    <div
+                                                        className='copypastArea'
+                                                    >
+                                                        <div >
+                                                            {
+                                                                flightImgUrl ? <>
+                                                                    <div className='grid-container'>
+                                                                        <div className='grid-item'>
+                                                                            {
+                                                                                flightImgUrl.map((link, index) => (<>
+                                                                                    <div>
+                                                                                        <span onClick={() => deletefrom(index, 'flight')}>
+                                                                                            <img alt='delete icon' src='/assets/img/deleteIcon.png' />
+                                                                                        </span>
+                                                                                        <img width='320px' src={link} />
+                                                                                    </div>
+                                                                                </>))
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </> : <></>
+                                                            }
+                                                        </div>
+                                                        Paste Area
+
+                                                    </div>
                                                 </div>
                                             </>
                                             :

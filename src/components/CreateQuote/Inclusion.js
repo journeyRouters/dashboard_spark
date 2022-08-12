@@ -330,7 +330,7 @@ const Inclusion = (props) => {
                             </RadioGroup >
                         </div>
                     </div>
-                    <textarea onChange={(event) => handleData_inclusion(event)} name='Entrance_comments' value={inclusionFeed.Entrance_comments} className='comments_from' placeholder='Please write comments'></textarea>
+                    {/* <textarea onChange={(event) => handleData_inclusion(event)} name='Entrance_comments' value={inclusionFeed.Entrance_comments} className='comments_from' placeholder='Please write comments'></textarea> */}
                 </div>
 
 

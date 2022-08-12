@@ -13,6 +13,7 @@ import { Flight } from '@material-ui/icons';
 import MaldivesInclusion from './MaldivesInclusion';
 import RoomType from './subComponents/RoomType';
 import Box from './Box';
+import { Upload } from "@progress/kendo-react-upload";
 
 const Maldives = ({
     set_popupopner
@@ -42,6 +43,7 @@ const Maldives = ({
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
     const [data, setdata] = useState(PassData)
+
     // console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
@@ -65,12 +67,15 @@ const Maldives = ({
     const [no_rooms, setrooms] = useState(Edit_no_rooms ? Edit_no_rooms : 0)
     const [flightFlg, setflightFlg] = useState(true)
     const [inclusionImgFlg, setinclusionImgFlg] = useState(true)
-    const [flightsObject, setflightsObject] = useState(null)
-    const [inclusionObject, setinclusionObject] = useState(null)
+    const [flightsObject, setflightsObject] = useState([])
+    const [flightImgUrl, setflightImgUrl] = useState([])
     const [Pax, setPax] = useState(data.Pax)
     const [Child, setChild] = useState(data.Child ? data.Child : 0)
     const [inclusionflg, setinclusion] = useState(false)
     const [Destination, setDestination] = useState(data.Destination)
+    const [ScreenShotsurl, setScreenShotsurl] = useState([])
+    const [screenshotsObject, setScreenshotsobject] = useState([])
+
     const inclusion = {
         Accommodation: false,
         MealPlan: false,
@@ -118,6 +123,68 @@ const Maldives = ({
             value: "All Inclusive"
         }
     ]
+    function deletefrom(index, zone) {
+        // console.log(index, 'done', screenshotsObject.ScreenShotsurl)
+        if (zone == 'inclusion') {
+
+            var OperationObjects = [...screenshotsObject]
+            var oprationLinks = [...ScreenShotsurl]
+            OperationObjects.splice(index, 1)
+            setScreenshotsobject(OperationObjects)
+            oprationLinks.splice(index, 1)
+            setScreenShotsurl(oprationLinks)
+        }
+        if (zone == 'flight') {
+            var OperationObjects = [...flightsObject]
+            var oprationLinks = [...flightImgUrl]
+            OperationObjects.splice(index, 1)
+            setflightsObject(OperationObjects)
+            oprationLinks.splice(index, 1)
+            setflightImgUrl(oprationLinks)
+        }
+
+    }
+    function handlePasteFlight(e) {
+        if (e.clipboardData.files.length) {
+            var localHolder = flightsObject
+            const fileObject = e.clipboardData.files[0];
+            // console.log(fileObject)
+            localHolder.push(fileObject)
+            setflightsObject(localHolder)
+            convertObjectToLink(fileObject, 'flight')
+        }
+    }
+    function handlePaste(e) {
+        if (e.clipboardData.files.length) {
+            var localHolder = screenshotsObject
+            const fileObject = e.clipboardData.files[0];
+            // console.log(fileObject)
+            localHolder.push(fileObject)
+            setScreenshotsobject(localHolder)
+            convertObjectToLink(fileObject, 'inclusion')
+        }
+    }
+    async function convertObjectToLink(files, zone) {
+        try {
+            const file = files
+            console.log(file)
+            if (zone == 'inclusion') {
+                var local_link_list = [...ScreenShotsurl]
+                const url = URL.createObjectURL(file)
+                local_link_list.push(url)
+                setScreenShotsurl(local_link_list)
+            }
+            if (zone == 'flight') {
+                var local_link_list = [...flightImgUrl]
+                const url = URL.createObjectURL(file)
+                local_link_list.push(url)
+                setflightImgUrl(local_link_list)
+            }
+        }
+        catch (e) { console.log(e) }
+
+    }
+
     function closeInclusion() {
         setinclusion(false)
     }
@@ -149,9 +216,7 @@ const Maldives = ({
         // console.log(files)
         setflightsObject(files)
     }
-    function inclusionDetails(file) {
-        setinclusionObject(file)
-    }
+
     function handleOptionOfNights() {
         var list = []
         for (let start = 1; start <= days_total.length - 1; start++) {
@@ -281,6 +346,7 @@ const Maldives = ({
         setDestination(Destination.target.value)
         data.Destination = Destination.target.value
     }
+
     return (<>
         <Modal open={pdfFlg} onClose={onClosePdf} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>
             <Maldivespdf
@@ -297,7 +363,7 @@ const Maldives = ({
                 SelectedpackageType={SelectedpackageType}
                 Property={property}
                 flightsObject={flightsObject}
-                inclusionObject={inclusionObject}
+                inclusionObject={screenshotsObject}
                 flightFlg={flightFlg}
                 inclusionImgFlg={inclusionImgFlg}
                 Pax={Pax}
@@ -327,7 +393,7 @@ const Maldives = ({
                             <button className='compo_button' onClick={() => closeHandler()} >close</button>
                             <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                         </div>
-                        <div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }} >
+                        <div style={{ display: 'flex', width: '64%', justifyContent: 'space-between' }} >
                             <div>
                                 <h4>
                                     <span>Trip id:- </span>
@@ -385,15 +451,24 @@ const Maldives = ({
                                 </h4>
                             </div>
                             <div>
-                                {data.comments.map((data, index) => (<>
-                                    <span>{data}</span><br />
-                                </>))}
+                                {
+                                    data.Comment ? <>
+                                        comments:-
+                                        {data.Comment.map((data, index) => (<>
+                                            <span key={index}>{data}</span><br />
+                                        </>))}
+                                    </> : <></>
+                                }
+
                             </div>
                         </div>
                         <div className='basicDetails'>
                             <div>
                                 <label>Days</label>
-                                <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
+                                <input type="number" min="1" max="50"
+                                    placeholder='Days count eg:-0,1,2,3..'
+                                    value={days_total.length} />
+                                onChange={(e) => daysChanges(e)}
                             </div>
                             <div>
                                 <label>Night</label>
@@ -404,25 +479,25 @@ const Maldives = ({
                             <div className='costOption'>
                                 <div>
                                     <Radio
-                                        checked={SelectedpackageType === 'per Person'}
+                                        checked={SelectedpackageType === 'Per Person'}
                                         onChange={handleChange}
-                                        value="per Person"
+                                        value="Per Person"
                                         name="radio-button"
                                         color='primary'
                                     // inputProps={{ 'aria-label': 'A' }}
                                     />
-                                    <label>per Person</label>
+                                    <label>Per Person</label>
                                 </div>
                                 <div>
                                     <Radio
-                                        checked={SelectedpackageType === 'per Couple'}
+                                        checked={SelectedpackageType === 'Per Couple'}
                                         onChange={handleChange}
-                                        value="per Couple"
+                                        value="Per Couple"
                                         name="radio-button"
                                         color='primary'
                                     // inputProps={{ 'aria-label': 'A' }}
                                     />
-                                    <label>per Couple</label>
+                                    <label>Per Couple</label>
                                 </div>
                                 <div>
                                     <Radio
@@ -433,7 +508,7 @@ const Maldives = ({
                                         color='primary'
                                     // inputProps={{ 'aria-label': 'A' }}
                                     />
-                                    <label>total</label>
+                                    <label>Total</label>
                                 </div>
 
                             </div>
@@ -442,7 +517,7 @@ const Maldives = ({
                                     <label >Flight Cost</label><br />
                                     <input type="number"
                                         className='input_filed'
-                                        placeholder='0'
+                                        placeholder='flight'
                                         value={flightcost}
                                         onChange={(e) => flightcostChange(e)}
                                     ></input>
@@ -450,12 +525,12 @@ const Maldives = ({
                                 </div>
                                 <div>
                                     <label>Visa Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' value={visacost} onChange={(e) => visacostChange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='Visa' value={visacost} onChange={(e) => visacostChange(e)}></input>
                                     <sapn className='spacer'>+</sapn>
                                 </div>
                                 <div>
                                     <label>Land Package Cost</label><br />
-                                    <input type="number" className='input_filed' placeholder='0' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                    <input type="number" className='input_filed' placeholder='Land' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
                                     <sapn className='spacer'>=</sapn>
                                 </div>
 
@@ -586,12 +661,38 @@ const Maldives = ({
                         {
                             flightFlg ?
                                 <>
-                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
-                                        </textarea> */}
-                                    <div className='flightdetailsDrop'>
-                                        <DropzoneArea
-                                            onChange={(files) => flightDetails(files)}
+                                    <div onPaste={(e) => handlePasteFlight(e)}>
+                                        <Upload
+                                            autoUpload={false}
+                                            batch={false}
+                                            multiple={true}
                                         />
+                                        <div
+                                            className='copypastArea'
+                                        >
+                                            <div >
+                                                {
+                                                    flightImgUrl ? <>
+                                                        <div className='grid-container'>
+                                                            <div className='grid-item'>
+                                                                {
+                                                                    flightImgUrl.map((link, index) => (<>
+                                                                        <div>
+                                                                            <span onClick={() => deletefrom(index, 'flight')}>
+                                                                                <img alt='delete icon' src='/assets/img/deleteIcon.png' />
+                                                                            </span>
+                                                                            <img width='320px' src={link} />
+                                                                        </div>
+                                                                    </>))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </> : <></>
+                                                }
+                                            </div>
+                                            Paste Area
+
+                                        </div>
                                     </div>
                                 </>
                                 :
@@ -608,13 +709,40 @@ const Maldives = ({
                         {
                             inclusionImgFlg ?
                                 <>
-                                    {/* <textarea onChange={(e) => flightDetails(e)} value={flights} className='flightdetails'>
-                                        </textarea> */}
-                                    <div className='flightdetailsDrop'>
-                                        <DropzoneArea
-                                            onChange={(files) => inclusionDetails(files)}
+                                    <div onPaste={(e) => handlePaste(e)}>
+                                        <Upload
+                                            autoUpload={false}
+                                            batch={false}
+                                            multiple={true}
                                         />
+                                        <div
+                                            className='copypastArea'
+                                        >
+                                            <div >
+                                                {
+                                                    ScreenShotsurl ? <>
+                                                        <div className='grid-container'>
+                                                            <div className='grid-item'>
+                                                                {
+                                                                    ScreenShotsurl.map((link, index) => (<>
+                                                                        <div>
+                                                                            <span onClick={() => deletefrom(index, 'inclusion')}>
+                                                                                <img alt='delete icon' src='/assets/img/deleteIcon.png' />
+                                                                            </span>
+                                                                            <img width='320px' src={link} />
+                                                                        </div>
+                                                                    </>))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </> : <></>
+                                                }
+                                            </div>
+                                            Paste Area
+
+                                        </div>
                                     </div>
+
                                 </>
                                 :
                                 <></>

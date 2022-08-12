@@ -199,8 +199,8 @@
 }
 
 .inclusion {
-    margin-bottom: -0.4rem;
-    text-decoration: underline;
+    margin-bottom: 1rem;
+    /* text-decoration: underline; */
 }
 
 .comments_ {

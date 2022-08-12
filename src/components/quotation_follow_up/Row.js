@@ -330,7 +330,7 @@ const Row = (props) => {
                                                         />
                                                     </> : <>
                                                         <Profile
-                                                            SelectedpackageType={data.SelectedpackageType.SelectedpackageType}
+                                                            SelectedpackageType={data.SelectedpackageType}
                                                             indicator={true}
                                                             inclusion_data={data.inclusion_data}
                                                             travel_data={data.travel_data}

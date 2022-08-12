@@ -20,3 +20,6 @@
   .tooltip-wrap:hover .tooltip-content {
     display: block;
   }
+  .k-widget k-upload{
+    display: none !important;
+  } 

@@ -390,6 +390,7 @@
     text-transform: capitalize;
 }
 .hotelUni{
+    margin-left: 1.5rem;
     color: #FFFFFF;
     display: flex;
     /* justify-content: space-between; */
@@ -400,7 +401,8 @@
     font-family: Glacial Indifference;
 }
 .flightsImgcss{
-    width: 55rem;
+    width: 52rem;
+    margin: 1.5rem;
 }
 .otherInclusion{
     margin-left: 4rem;

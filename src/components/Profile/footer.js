@@ -1,8 +1,8 @@
 import React from 'react';
-import { Aashishsingh, Akriti, Akshat, Amit, Himanshu, imran, Kajal, Manjit, manoj, Naveen, NehaGupta, Sanu, Saumil, Stephen, Tanmay } from './ImgDispathcher';
+import { Akriti, Akshat, Himanshu, Manjit, NehaGupta, Sanu, Saumil, Tanmay } from './ImgDispathcher';
 import './pdfcss.css';
 import './profile.css';
-import { Akriti_Dogra, Akshat_Aggarwal, Himanshu_Gangwar, Manjit_, Neha, Sanu_lawrence, Saumil_, Tanmay_, } from './ReviewLinkDispatcher';
+import { Akriti_Dogra, Akshat_Aggarwal, Himanshu_Gangwar, Manjit_, Neha, Sanu_lawrence, Saumil_, Tanmay_ } from './ReviewLinkDispatcher';
 
 export const Footer = ({whatsApp}) => {
     return (

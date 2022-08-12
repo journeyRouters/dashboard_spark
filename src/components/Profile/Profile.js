@@ -323,7 +323,7 @@ const Profile = (
                                 <h4 className="seth4">INR :{formatter.format(parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost))}/-</h4>
                                 <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
-                            <div style={{marginTop:'8.3rem'}}>
+                            <div style={{ marginTop: '8.3rem' }}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>
@@ -346,7 +346,7 @@ const Profile = (
                                 <span>Exclusion</span>
                             </div>
                             <div className="inclusionExclusionDetails">
-                                <div>
+                                <div style={{ width: '50%' }}>
                                     {
                                         Object.keys(inclusion_data).filter(function (k) {
                                             return inclusion_data[k]
@@ -365,9 +365,10 @@ const Profile = (
                                         {
                                             inclusion_data.other_Inclusion ? <>
                                                 {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
-                                                    <span>
-                                                        <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                        {data.trim()}</span><br />
+                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                        <span>-&nbsp; </span>
+                                                        <span>  {data.trim()}</span>
+                                                    </div><br />
                                                 </>))}
                                             </> : <></>
                                         }
@@ -395,10 +396,10 @@ const Profile = (
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
-                                                    <span>
-                                                        <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-
-                                                        {data.trim()}</span><br />
+                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                        <span>-&nbsp; </span>
+                                                        <span>  {data.trim()}</span>
+                                                    </div><br />
                                                 </>))}
                                             </> : <></>
                                         }
@@ -416,7 +417,7 @@ const Profile = (
                                     backgroundPosition: "top",
                                     backgroundRepeat: "no-repeat",
                                     backgroundSize: "cover",
-                                    height: '5.3rem',
+                                    height: '5.5rem',
                                     display: 'flex',
                                     flexDirection: 'column-reverse'
                                 }}
@@ -462,7 +463,7 @@ const Profile = (
                                         itineary.map((data, index) => (
                                             <div className='mapitineary'>
                                                 <span style={{ width: '5rem' }}><span> Day </span> {index + 1} -</span>
-                                                <p style={{ width: '91%',textTransform:'uppercase' }}>{data.Day}</p>
+                                                <p style={{ width: '91%', textTransform: 'uppercase' }}>{data.Day}</p>
                                             </div>
                                         ))
                                     }
@@ -626,7 +627,7 @@ const Profile = (
                                                 }
                                             </> : <></>
                                         }
-                                            <sapn style={{textDecoration:'underline', color:'#bbc9ef',marginLeft:'13rem',fontSize:'13px',fontStyle:'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
+                                        <sapn style={{ textDecoration: 'underline', color: '#bbc9ef', marginLeft: '13rem', fontSize: '13px', fontStyle: 'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
 
                                         <div
                                             style={{

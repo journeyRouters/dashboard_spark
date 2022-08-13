@@ -136,98 +136,93 @@ const SuggestionQuotes = ({
                 <div className='QuotesDetails'>
 
                     {
-                        selectedData.length != 0 ? <>
-                        {
-                                selectedData.value.travel_data.destination == 'Maldives' ? <>
-                                </> : <>
+                        selectedData.length != 0 ?
+                            <>
                                 <div className='tripIdDetails'>{selectedData.value.travel_data.TripId}</div>
-                            <div className='basicInfo'>
-                                <p>
-                                    <span>Duration</span><br />
-                                    <span>{selectedData.value.count_days} day, {selectedData.value.count_days - 1} Nights</span>
-                                </p>
-                                <p>
-                                    <span>Quotation price</span><br />
-                                    <span>INR:-{parseInt(selectedData.value.flightcost) + parseInt(selectedData.value.visacost) + parseInt(selectedData.value.landPackage)}</span>
-                                </p>
-                                <p>
-                                    <span>Destination</span><br />
-                                    <span>{selectedData.value.travel_data.Destination}</span>
-                                </p>
-                                <p>
-                                    <span>Traveller</span><br />
-                                    <span>{selectedData.value.travel_data.Pax} Adult,{selectedData.value.travel_data.Child ? selectedData.value.travel_data.Child : 0}Child </span>
-                                </p>
-                            </div>
-                            <div className='hotelDetails'>
-                                <p style={{ display: "flex", flexDirection: "row", alineItem: "center" }}>
-                                    <HotelIcon />
-                                    <span>Hotel</span>
-                                </p>
-                                {
-                                    selectedData.value.NightDataFields.map((data, index) => (
-
-                                        <div key={index}>{data.Night.map((Ndata, index) => (<span>{Ndata.value},</span>))} {data.HotelName}, {data.City} , {data.RoomType} Room</div>
-                                    ))
-                                }
-                            </div>
-                            <div className='SuggestionInclusion'>
-                                <p style={{ display: "flex", flexDirection: "row", alineItem: "center" }}>
-                                    <ExtensionSharp />
-                                    <span>inclusion/Exclusion</span>
-                                </p>
-                                <div className="inclusionExclusion__">
-                                    <div>
-                                        {
-                                            Object.keys(selectedData.value.inclusion_data)
-                                                .filter(function (k) {
-                                                    return selectedData.value.inclusion_data[k] == true &&
-                                                        typeof (selectedData.value.inclusion_data[k]) !== "string" && selectedData
-                                                            .value.inclusion_data[k] !== null
-                                                }).map((data, index) => (
-                                                    <div key={index} className="aliner_">
-                                                        <span key={index}>
-                                                            <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                            {data}</span>
-                                                    </div>
-                                                ))
-                                        }
-                                    </div>
-                                    <div className="sepratorLineForInclusionExclusion_"></div>
-                                    <div>
-                                        {
-                                            Object.keys(selectedData.value.inclusion_data)
-                                                .filter(function (k) {
-                                                    return selectedData.value.inclusion_data[k] == false &&
-                                                        typeof (selectedData.value.inclusion_data[k]) !== "string" &&
-                                                        selectedData.value.inclusion_data[k] !== null
-                                                }).map((data, index) => (
-                                                    <div key={index} className="aliner_">
-                                                        <span key={index}>
-                                                            <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-
-                                                            {data}</span>
-                                                    </div>
-                                                ))
-                                        }
-                                    </div>
+                                <div className='basicInfo'>
+                                    <p>
+                                        <span>Duration</span><br />
+                                        <span>{selectedData.value.count_days} day, {selectedData.value.count_days - 1} Nights</span>
+                                    </p>
+                                    <p>
+                                        <span>Quotation price</span><br />
+                                        <span>INR:-{parseInt(selectedData.value.flightcost) + parseInt(selectedData.value.visacost) + parseInt(selectedData.value.landPackage)}</span>
+                                    </p>
+                                    <p>
+                                        <span>Destination</span><br />
+                                        <span>{selectedData.value.travel_data.Destination}</span>
+                                    </p>
+                                    <p>
+                                        <span>Traveller</span><br />
+                                        <span>{selectedData.value.travel_data.Pax} Adult,{selectedData.value.travel_data.Child ? selectedData.value.travel_data.Child : 0}Child </span>
+                                    </p>
                                 </div>
-                                <div className=''>
+                                <div className='hotelDetails'>
+                                    <p style={{ display: "flex", flexDirection: "row", alineItem: "center" }}>
+                                        <HotelIcon />
+                                        <span>Hotel</span>
+                                    </p>
                                     {
-                                        selectedData.value.itineary.map((data, index) => (
-                                            <div key={index} className='suggestionmapItineary'>
-                                                <span>Day:-{index + 1}</span>
-                                                <p>{data.Day}</p>
-                                                <div>{data.Description}</div>
-                                            </div>
+                                        selectedData.value.NightDataFields.map((data, index) => (
+
+                                            <div key={index}>{data.Night.map((Ndata, index) => (<span>{Ndata.value},</span>))} {data.HotelName}, {data.City} , {data.RoomType} Room</div>
                                         ))
                                     }
                                 </div>
-                            </div>
-                                </>
-                            }
-                            
-                        </> : <></>
+                                <div className='SuggestionInclusion'>
+                                    <p style={{ display: "flex", flexDirection: "row", alineItem: "center" }}>
+                                        <ExtensionSharp />
+                                        <span>inclusion/Exclusion</span>
+                                    </p>
+                                    <div className="inclusionExclusion__">
+                                        <div>
+                                            {
+                                                Object.keys(selectedData.value.inclusion_data)
+                                                    .filter(function (k) {
+                                                        return selectedData.value.inclusion_data[k] == true &&
+                                                            typeof (selectedData.value.inclusion_data[k]) !== "string" && selectedData
+                                                                .value.inclusion_data[k] !== null
+                                                    }).map((data, index) => (
+                                                        <div key={index} className="aliner_">
+                                                            <span key={index}>
+                                                                <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+                                                                {data}</span>
+                                                        </div>
+                                                    ))
+                                            }
+                                        </div>
+                                        <div className="sepratorLineForInclusionExclusion_"></div>
+                                        <div>
+                                            {
+                                                Object.keys(selectedData.value.inclusion_data)
+                                                    .filter(function (k) {
+                                                        return selectedData.value.inclusion_data[k] == false &&
+                                                            typeof (selectedData.value.inclusion_data[k]) !== "string" &&
+                                                            selectedData.value.inclusion_data[k] !== null
+                                                    }).map((data, index) => (
+                                                        <div key={index} className="aliner_">
+                                                            <span key={index}>
+                                                                <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
+
+                                                                {data}</span>
+                                                        </div>
+                                                    ))
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className=''>
+                                        {
+                                            selectedData.value.itineary.map((data, index) => (
+                                                <div key={index} className='suggestionmapItineary'>
+                                                    <span>Day:-{index + 1}</span>
+                                                    <p>{data.Day}</p>
+                                                    <div>{data.Description}</div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </> : <></>
                     }
                 </div>
                 <div className='LeadLookUp'>

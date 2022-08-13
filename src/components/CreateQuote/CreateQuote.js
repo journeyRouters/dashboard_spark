@@ -1,15 +1,13 @@
 import { CircularProgress, Modal } from '@material-ui/core';
-import { Flag } from '@material-ui/icons';
-import { collection, doc, getDoc, getDocs, getFirestore, limit, orderBy, Query, query, startAfter, updateDoc, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
+import SortableTbl from 'react-sort-search-table';
 import app from '../required';
 import Box from './Box';
-import './TripComponent.css';
-import SortableTbl from 'react-sort-search-table';
-import Profile from '../Profile/Profile';
-import SendIcon from '@material-ui/icons/Send';
-import SuggestionQuotes from './suggestionQuotes';
 import Maldives from './Maldives';
+import MaldiveSuggestion from './MaldiveSuggestion';
+import SuggestionQuotes from './suggestionQuotes';
+import './TripComponent.css';
 
 
 
@@ -30,6 +28,11 @@ const Createquote = (props) => {
     function handleSuggestion(data) {
         set_uni_data(data)
         settransfermodal(!SuggestionModal)
+
+    }
+    function closeModal() {
+        settransfermodal(!SuggestionModal)
+
     }
     let tHead = [
         "TripId",
@@ -157,15 +160,28 @@ const Createquote = (props) => {
         <div className='tableAliner'>
             {
                 props.auth ? <>
-                    <Modal open={SuggestionModal} onClose={handleSuggestion} >
-                        <SuggestionQuotes
-                            handleSuggestion={handleSuggestion}
-                            Lead_data_to_be_quoted={user_uni_data}
-                            email={props.auth.email}
-                            profile={props.userProfile}
-                            updateTableDataAfterQuote={updateTableDataAfterQuote}
+                    <Modal open={SuggestionModal} onClose={closeModal} >
+                        {
+                            user_uni_data.Destination == 'Maldives' ? <>
+                                <MaldiveSuggestion
+                                    closeModal={closeModal}
+                                    Lead_data_to_be_quoted={user_uni_data}
+                                    email={props.auth.email}
+                                    profile={props.userProfile}
+                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                />
+                            </> : <>
+                                <SuggestionQuotes
+                                    handleSuggestion={closeModal}
+                                    Lead_data_to_be_quoted={user_uni_data}
+                                    email={props.auth.email}
+                                    profile={props.userProfile}
+                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
 
-                        />
+                                />
+                            </>
+                        }
+
 
 
                     </Modal>

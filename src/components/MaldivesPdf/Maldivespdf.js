@@ -357,7 +357,7 @@ const Maldivespdf = ({
                                 <table style={{ border: '1px solid', color: 'white', marginLeft: '4rem', width: '47rem', height: '20rem', fontSize: '1.3rem' }}>
                                     <tbody>
                                         <tr >
-                                            <th style={{ border: '1px solid white' }}>NAME</th> 
+                                            <th style={{ border: '1px solid white' }}>NAME</th>
                                             <td style={{ border: '1px solid white', paddingLeft: '0rem' }}>{`${data.Traveller_name}`}</td>
                                         </tr>
                                         <tr style={{ border: '1px solid white', borderCollapse: 'collapse' }} >
@@ -530,7 +530,7 @@ const Maldivespdf = ({
                                         {
                                             inclusion_data.other_Inclusion ? <>
                                                 {inclusion_data.other_Inclusion.split("\n").map((data, index) => (<>
-                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -561,7 +561,7 @@ const Maldivespdf = ({
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split("\n").map((data, index) => (<>
-                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />

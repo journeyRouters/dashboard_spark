@@ -51,6 +51,16 @@ const Maldives = ({
     const [count_days, setDayscounter] = useState(parseInt(Edit_count_days ? Edit_count_days : data.Travel_Duration))
     const [NightDataFields, setNightDataFields] = useState(Edit_NightDataFields ? Edit_NightDataFields : [
         { Night: [], RoomType: '' }])
+    // const[other]
+    const [OtherOption, setOtherOption] = useState(
+        [
+            {
+                Price: 0,
+                Food: null,
+                stay: [{ Night: [], RoomType: '' }]
+            }
+        ]
+    )
     const [itineary, setItineary] = useState(Edit_itineary ? Edit_itineary : [{ Day: '', Description: '', Activity: {} },])
     const [selected_Travel_date, set_selected_Travel_date] = useState(Edit_selected_Travel_date ? Edit_selected_Travel_date : null)
     const [flightcost, setFlightcost] = useState(Edit_flightcost ? Edit_flightcost : 0)
@@ -193,6 +203,10 @@ const Maldives = ({
     }
     function onClosePdf() {
         setpdfFlg(!pdfFlg)
+        try {
+            set_popupopner(false)
+        }
+        catch (error) { console.log(error) }
     }
     function addFields() {
         let object = { Night: [], RoomType: '' }
@@ -293,7 +307,7 @@ const Maldives = ({
         setNightDataFields(data);
     }
     const handleFormChangePropety = (event, index) => {
-        console.log(RoomTypeReflector(event.label))
+        // console.log(RoomTypeReflector(event.label))
         setRoomTye(RoomTypeReflector(event.value))
         setproperty(event)
     }
@@ -747,6 +761,39 @@ const Maldives = ({
                                 :
                                 <></>
                         }
+                        <div>
+                            {
+                                OtherOption ? <>
+                                    {
+                                        OtherOption.map((data, OtherOptionIndex) => (
+                                            <>
+                                                <div style={{display:'flex',alignItems:'center'}}>
+                                                <div className='unitComponent_'>
+                                                        <h4>MealPlan</h4>
+                                                        <Select
+                                                            components={animatedComponents}
+                                                            options={HotelMeals}
+                                                            defaultValue={MealPlan ? MealPlan : null}
+                                                            // onChange={(e) => handleMealPlan(e)}
+                                                        />
+                                                    </div>
+                                                    <div className='unitComponent_'>
+                                                        <h4>MealPlan</h4>
+                                                        <Select
+                                                            components={animatedComponents}
+                                                            options={HotelMeals}
+                                                            defaultValue={MealPlan ? MealPlan : null}
+                                                            // onChange={(e) => handleMealPlan(e)}
+                                                        />
+                                                    </div>
+
+                                                </div>
+                                            </>
+                                        ))
+                                    }
+                                </> : <></>
+                            }
+                        </div>
                     </div>
 
                 </Modal>

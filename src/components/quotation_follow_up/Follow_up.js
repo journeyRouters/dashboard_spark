@@ -20,7 +20,34 @@ const FollowUp = (props) => {
     const animatedComponents = makeAnimated();
     const [profile, setProfile] = useState(null)
 
-console.log(props.adminFlg,lead_data)
+    async function getOthersStatusLeadOnBoard() {
+        // console.log(props.target.uid)
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target?props.target.uid:props.auth.uid),
+             where('Lead_Status', 'in', ['Dump']),where("quotation_flg","==",true));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                setopen(false)
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+                console.log(list);
+                setopen(false)
+            }
+        }
+        catch (erorr){
+            console.log(erorr)
+            setopen(false)
+        }
+
+    }
     async function getLeadOnBoard() {
         // console.log(props.target.uid)
         try {
@@ -197,6 +224,10 @@ console.log(props.adminFlg,lead_data)
         <div>
             {
                 props.auth ? <>
+                <div>
+                    <button onClick={()=>getLeadOnBoard()}>FollowUp</button>
+                    <button onClick={()=>getOthersStatusLeadOnBoard()}>Dump Leads</button>
+                </div>
                     <div className='filter'>
                         <div>
                             <label>Destination</label>

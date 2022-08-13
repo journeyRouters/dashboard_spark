@@ -295,6 +295,7 @@ const Maldivespdf = ({
                         style={{
                             // backgroundImage: `url(/assets/destination/${Property.value}/Header.png)`,
                             backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${(Property.value).toUpperCase()}%2FHeader.png?alt=media)`,
+                            // backgroundImage:`url(/assets/destination/BALI/testmaldives.png)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",

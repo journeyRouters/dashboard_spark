@@ -95,6 +95,7 @@ const SuggestionQuotes = ({
                         Edit_flightcost={selectedData.value.flightcost}
                         Edit_landPackage={selectedData.value.landPackage}
                         Edit_count_days={selectedData.value.count_days}
+                        handleSuggestion={handleSuggestion}
                     // Allquote={Allquote}
                     /> :
                     <>

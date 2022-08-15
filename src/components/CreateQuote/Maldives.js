@@ -16,6 +16,7 @@ import Box from './Box';
 import { Upload } from "@progress/kendo-react-upload";
 
 const Maldives = ({
+    closeMaldivesSuggestionModal,
     set_popupopner
     , Edit_no_rooms
     , data: PassData
@@ -203,10 +204,6 @@ const Maldives = ({
     }
     function onClosePdf() {
         setpdfFlg(!pdfFlg)
-        try {
-            set_popupopner(false)
-        }
-        catch (error) { console.log(error) }
     }
     function addFields() {
         let object = { Night: [], RoomType: '' }
@@ -252,6 +249,10 @@ const Maldives = ({
         catch (error) { console.log(error) }
         setopen(false)
         set_popupopner(false)
+    }
+    function closeMaldivesForm(){
+        set_popupopner(false)
+
     }
 
     function Save_download() {
@@ -364,7 +365,10 @@ const Maldives = ({
     return (<>
         <Modal open={pdfFlg} onClose={onClosePdf} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }}>
             <Maldivespdf
+                updateTableDataAfterQuote={updateTableDataAfterQuote}
                 data={data}
+                closeMaldivesForm={closeMaldivesForm}
+                closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                 no_rooms={no_rooms}
                 selected_Travel_date={selected_Travel_date}
                 MealPlan={MealPlan}
@@ -761,20 +765,20 @@ const Maldives = ({
                                 :
                                 <></>
                         }
-                        <div>
+                        {/* <div>
                             {
                                 OtherOption ? <>
                                     {
                                         OtherOption.map((data, OtherOptionIndex) => (
                                             <>
-                                                <div style={{display:'flex',alignItems:'center'}}>
-                                                <div className='unitComponent_'>
+                                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                                    <div className='unitComponent_'>
                                                         <h4>MealPlan</h4>
                                                         <Select
                                                             components={animatedComponents}
                                                             options={HotelMeals}
                                                             defaultValue={MealPlan ? MealPlan : null}
-                                                            // onChange={(e) => handleMealPlan(e)}
+                                                        // onChange={(e) => handleMealPlan(e)}
                                                         />
                                                     </div>
                                                     <div className='unitComponent_'>
@@ -783,7 +787,7 @@ const Maldives = ({
                                                             components={animatedComponents}
                                                             options={HotelMeals}
                                                             defaultValue={MealPlan ? MealPlan : null}
-                                                            // onChange={(e) => handleMealPlan(e)}
+                                                        // onChange={(e) => handleMealPlan(e)}
                                                         />
                                                     </div>
 
@@ -793,7 +797,7 @@ const Maldives = ({
                                     }
                                 </> : <></>
                             }
-                        </div>
+                        </div> */}
                     </div>
 
                 </Modal>

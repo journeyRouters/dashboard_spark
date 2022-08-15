@@ -30,7 +30,7 @@ const Createquote = (props) => {
         settransfermodal(!SuggestionModal)
 
     }
-    function closeModal() {
+    function closeMaldivesSuggestionModal() {
         settransfermodal(!SuggestionModal)
 
     }
@@ -160,11 +160,16 @@ const Createquote = (props) => {
         <div className='tableAliner'>
             {
                 props.auth ? <>
-                    <Modal open={SuggestionModal} onClose={closeModal} >
+                    <div className='global_search' >
+
+                        <button onClick={() => getLeadOnBoard()}>Refresh</button>
+                        <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+                    </div>
+                    <Modal open={SuggestionModal} onClose={closeMaldivesSuggestionModal} >
                         {
                             user_uni_data.Destination == 'Maldives' ? <>
                                 <MaldiveSuggestion
-                                    closeModal={closeModal}
+                                    closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
                                     email={props.auth.email}
                                     profile={props.userProfile}
@@ -172,7 +177,7 @@ const Createquote = (props) => {
                                 />
                             </> : <>
                                 <SuggestionQuotes
-                                    handleSuggestion={closeModal}
+                                    handleSuggestion={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
                                     email={props.auth.email}
                                     profile={props.userProfile}

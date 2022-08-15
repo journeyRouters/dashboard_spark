@@ -11,7 +11,7 @@ import makeAnimated from 'react-select/animated';
 
 const FollowUp = (props) => {
     const db = getFirestore(app);
-    const [lead_data, setLead_data] = useState(props.adminFlg?props.data:[])
+    const [lead_data, setLead_data] = useState(props.adminFlg ? props.data : [])
     const [open, setopen] = useState(true)
     const [Destination, SetDestination_list] = useState([])
     const [month, setMonths] = useState([])
@@ -20,17 +20,19 @@ const FollowUp = (props) => {
     const animatedComponents = makeAnimated();
     const [profile, setProfile] = useState(null)
 
-    async function getOthersStatusLeadOnBoard() {
+    async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target?props.target.uid:props.auth.uid),
-             where('Lead_Status', 'in', ['Dump']),where("quotation_flg","==",true));
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target ? props.target.uid : props.auth.uid),
+                where('Lead_Status', 'in', [status]), where("quotation_flg", "==", true));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
                 setopen(false)
+                setLead_data([])
+
             }
             else {
 
@@ -42,7 +44,7 @@ const FollowUp = (props) => {
                 setopen(false)
             }
         }
-        catch (erorr){
+        catch (erorr) {
             console.log(erorr)
             setopen(false)
         }
@@ -52,9 +54,9 @@ const FollowUp = (props) => {
         // console.log(props.target.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==",props.auth.uid),
-             where('Lead_Status', 'not-in', ['Dump','Converted']),where("quotation_flg","==",true)
-             );
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true)
+            );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -71,27 +73,26 @@ const FollowUp = (props) => {
                 setopen(false)
             }
         }
-        catch (erorr){
+        catch (erorr) {
             console.log(erorr)
             setopen(false)
         }
 
     }
 
-   
+
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
-        console.log(remaining_data,pre_tableData)
+        console.log(remaining_data, pre_tableData)
         setLead_data(remaining_data)
     }
 
     useEffect(() => {
-        if(props.adminFlg){
+        if (props.adminFlg) {
             setopen(false)
         }
-        else
-        {
+        else {
             getLeadOnBoard()
         }
     }, [props.auth])
@@ -224,10 +225,21 @@ const FollowUp = (props) => {
         <div>
             {
                 props.auth ? <>
-                <div>
-                    <button onClick={()=>getLeadOnBoard()}>FollowUp</button>
-                    <button onClick={()=>getOthersStatusLeadOnBoard()}>Dump Leads</button>
-                </div>
+                    <div className='global_search' >
+
+                        <button onClick={() => getLeadOnBoard()}>Refresh</button>
+                        <span style={{background:'yellow'}}>Lead= {lead_data.length}</span>
+                        <select onChange={(e) => getOthersStatusLeadOnBoard(e.target.value)}>
+                            <option>select</option>
+                            <option value='Dump'>Dump</option>
+                            <option value='Cold'>cold</option>
+                            <option value='Active'>Active</option>
+                            <option value='Hot'>Hot</option>
+                        </select>
+
+
+                    </div>
+
                     <div className='filter'>
                         <div>
                             <label>Destination</label>
@@ -380,7 +392,7 @@ const FollowUp = (props) => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {lead_data&&
+                                        {lead_data &&
                                             lead_data.map((row, index) => (
                                                 <Row
                                                     auth={props.auth}

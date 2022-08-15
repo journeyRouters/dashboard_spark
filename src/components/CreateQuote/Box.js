@@ -16,6 +16,7 @@ import { Upload } from "@progress/kendo-react-upload";
 
 const Box = ({
     email,
+    handleSuggestion,
     data,
     usingLastQuotes,
     updateTableDataAfterQuote,
@@ -33,7 +34,7 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    console.log(data)
+    // console.log(data)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -104,7 +105,7 @@ const Box = ({
         }
     ]
     function changingDestination(Destination) {
-        console.log(Destination.target.value)
+        // console.log(Destination.target.value)
         setDestination(Destination.target.value)
         data.Destination = Destination.target.value
     }
@@ -717,6 +718,7 @@ const Box = ({
             <Modal open={openPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <Profile
                     SelectedpackageType={SelectedpackageType}
+                    handleSuggestion={handleSuggestion}
                     email={email}
                     indicator={false}
                     count_days={count_days}

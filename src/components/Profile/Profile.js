@@ -18,6 +18,7 @@ const storage = getStorage();
 
 const Profile = (
     {
+        handleSuggestion,
         count_days,
         SelectedpackageType,
         email,
@@ -188,7 +189,9 @@ const Profile = (
     }
     function closeFormAndPdf() {
         setwait(false)
-        // updateTableDataAfterQuote(TripId)
+        updateTableDataAfterQuote(travel_data.TripId)
+        try{handleSuggestion()}
+        catch(error){console.log(error)}
         closeHandler()
         try {
             Allquote()
@@ -236,7 +239,7 @@ const Profile = (
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={`${travel_data.Traveller_name}`}
+                fileName={`${travel_data.Traveller_name}/${travel_data.Destination}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>
@@ -712,10 +715,10 @@ const Profile = (
             </PDFExport>
             {
                 indicator ? <>
-                    <button className='download_button' onClick={() => handleExportWithComponent()}>downloadURL</button>
+                    <button className='download_button' onClick={() => handleExportWithComponent()}>ReDownload</button>
 
                 </> : <>
-                    <button className='download_button' onClick={() => pdfgenrator()}>downloadURL</button>
+                    <button className='download_button' onClick={() => pdfgenrator()}>Download</button>
                 </>
             }
             {/* <button className='download_button' onClick={() => pdfgenrator()}>save Quote</button> */}

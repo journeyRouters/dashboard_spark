@@ -11,7 +11,7 @@ const db = getFirestore(app)
 
 const MaldiveSuggestion = ({
     destination,
-    closeModal,
+    closeMaldivesSuggestionModal,
     Lead_data_to_be_quoted,
     profile,
     updateTableDataAfterQuote,
@@ -81,6 +81,7 @@ const MaldiveSuggestion = ({
                             Edit_SelectedpackageType={selectedData.SelectedpackageType}
                             updateTableDataAfterQuote={updateTableDataAfterQuote}
                             set_popupopner={setusethisKey}
+                            closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                             profile={profile}
                             E_indicator={true}
                             Edit_no_rooms={selectedData.no_rooms}
@@ -109,7 +110,7 @@ const MaldiveSuggestion = ({
                 </RadioGroup >
                 <div>
                     <button onClick={() => usethisquoteHandler()}>USE THIS QUOTE</button>
-                    <button onClick={() => closeModal()}>Cancel</button>
+                    <button onClick={() => closeMaldivesSuggestionModal()}>Cancel</button>
                 </div>
             </div>
             <div className='divContainsThreeDiv'>

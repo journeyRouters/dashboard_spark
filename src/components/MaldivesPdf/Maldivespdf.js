@@ -13,7 +13,9 @@ const storage = getStorage();
 
 
 const Maldivespdf = ({
+    closeMaldivesForm,
     flightsLinkfromstorage,
+    closeMaldivesSuggestionModal,
     inclusionLinkfromstorage,
     data, no_rooms,
     SelectedpackageType,
@@ -38,7 +40,8 @@ const Maldivespdf = ({
     indicator,
     E_indicator,
     Allquote,
-    onClosePdf
+    onClosePdf,
+    updateTableDataAfterQuote
 }) => {
     console.log(inclusion_data)
     const currentdate = new Date();
@@ -269,8 +272,14 @@ const Maldivespdf = ({
         update_quotation_flg()
         setQuotationData()
         setWait(false)
-        Allquote()
-        onClosePdf()
+        try{updateTableDataAfterQuote(data.TripId)}
+        catch(error){console.log(error)}
+        try{closeMaldivesForm()}
+        catch(error){console.log(error)}
+        try{closeMaldivesSuggestionModal()}
+        catch(error){console.log(error)}
+        try{Allquote()}
+        catch(error){console.log(error)}
     };
     const pdfExportComponent = useRef(null);
     // console.log(count_days)
@@ -286,7 +295,7 @@ const Maldivespdf = ({
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={`${data.Traveller_name}`}
+                fileName={`${data.Traveller_name}-${Property.label}`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>

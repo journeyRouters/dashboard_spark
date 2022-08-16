@@ -250,7 +250,7 @@ const Maldives = ({
         setopen(false)
         set_popupopner(false)
     }
-    function closeMaldivesForm(){
+    function closeMaldivesForm() {
         set_popupopner(false)
 
     }
@@ -485,8 +485,9 @@ const Maldives = ({
                                 <label>Days</label>
                                 <input type="number" min="1" max="50"
                                     placeholder='Days count eg:-0,1,2,3..'
-                                    value={days_total.length} />
-                                onChange={(e) => daysChanges(e)}
+                                    value={days_total.length}
+                                    onChange={(e) => daysChanges(e)}
+                                />
                             </div>
                             <div>
                                 <label>Night</label>

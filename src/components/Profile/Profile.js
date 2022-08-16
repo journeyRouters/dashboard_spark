@@ -301,7 +301,10 @@ const Profile = (
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                         }}>
-                            <div className='trip_summary'>TRIP ID:- JR-{travel_data.TripId}</div>
+                            <div className='trip_summary'>
+                                <span>TRIP ID:- JR-&nbsp;</span>
+                                <span>{travel_data.TripId}</span>
+                                </div>
 
                             <div className="package_details">
                                 <div>

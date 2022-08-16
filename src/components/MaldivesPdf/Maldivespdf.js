@@ -360,7 +360,7 @@ const Maldivespdf = ({
                             }}
                         >
                             <div className='trip_summary'>
-                                <span>TRIP ID:-JR-</span>
+                                <span>TRIP ID:-JR-&nbsp;</span>
                                 <span>{`${data.TripId}`}</span>
                             </div>
                             <div>
@@ -428,9 +428,9 @@ const Maldivespdf = ({
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style={{ fontSize: '2.1rem', fontWeight: '900' }}>
+                                                    <h4 style={{ fontSize: '2.1rem', fontWeight: '900',marginTop:'0rem',marginBottom:'0rem' }}>
                                                         INR:-{formatter.format(parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost))}/-
-                                                    </span>
+                                                    </h4>
                                                 </td>
                                             </tr>
                                             <tr>

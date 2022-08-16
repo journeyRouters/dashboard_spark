@@ -415,7 +415,7 @@ const Box = ({
                                             </select>
                                         </h4>
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         {
                                             data.Comment? <>
                                                 comments:-
@@ -425,7 +425,7 @@ const Box = ({
                                             </> : <></>
                                         }
 
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <p className='basicDetailsheading'>Basic Details</p>
                                 <div className='basicDetails'>

@@ -1,7 +1,7 @@
 import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { ExtensionSharp } from '@material-ui/icons';
 import HotelIcon from '@material-ui/icons/Hotel';
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
@@ -51,6 +51,7 @@ const SuggestionQuotes = ({
         var quotesref = collection(db, "Quote")
         const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination)
             // , where("value.selected_Travel_date",">","2022-07-12") 
+            ,limit(20)
         )
         var querySnapshot;
         var list = []

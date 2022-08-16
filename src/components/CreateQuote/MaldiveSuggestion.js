@@ -96,6 +96,7 @@ const MaldiveSuggestion = ({
                             Edit_Transfer={selectedData.Transfer}
                             pre_flightImgLinks={selectedData.flightImgLinks}
                             pre_inclusionLinks={selectedData.inclusionLinks}
+                            inclusion_data_={selectedData.inclusion_data}
                         />
                     </> :
                     <>

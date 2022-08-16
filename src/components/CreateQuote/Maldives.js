@@ -45,7 +45,7 @@ const Maldives = ({
     const [open, setopen] = useState(true)
     const [data, setdata] = useState(PassData)
 
-    // console.log(inclusion_data_)
+    console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);
@@ -468,7 +468,7 @@ const Maldives = ({
                                     <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
                                 </h4>
                             </div>
-                            <div>
+                            {/* <div>
                                 {
                                     data.Comment ? <>
                                         comments:-
@@ -478,7 +478,7 @@ const Maldives = ({
                                     </> : <></>
                                 }
 
-                            </div>
+                            </div> */}
                         </div>
                         <div className='basicDetails'>
                             <div>

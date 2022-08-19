@@ -1,0 +1,6 @@
+.investigation {
+    position: fixed !important;
+    overflow-y: scroll;
+    width: 100%;
+
+}

@@ -7,6 +7,7 @@ import app from '../../required';
 import SuggestionQuotes from '../suggestionQuotes';
 import Box from '../Box';
 import '../TripComponent.css'
+import MaldiveSuggestion from '../MaldiveSuggestion';
 
 
 
@@ -30,6 +31,9 @@ const SuperAdmin = (props) => {
     function handleSuggestion(data) {
         set_uni_data(data)
         settransfermodal(!SuggestionModal)
+    }
+    function closeMaldivesSuggestionModal(){
+        settransfermodal(false)
     }
     useEffect(() => {
         const q = query(collection(db, "Profile"));
@@ -200,14 +204,27 @@ const SuperAdmin = (props) => {
             {
                 props.auth ? <>
                     <Modal open={SuggestionModal} onClose={handleSuggestion} >
-                        <SuggestionQuotes
-                            handleSuggestion={handleSuggestion}
-                            Lead_data_to_be_quoted={user_uni_data}
-                            email={props.auth.email}
-                            profile={props.profile}
-                            updateTableDataAfterQuote={updateTableDataAfterQuote}
+                        
+                        {
+                            user_uni_data.Destination == 'Maldives' ? <>
+                                <MaldiveSuggestion
+                                    closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
+                                    Lead_data_to_be_quoted={user_uni_data}
+                                    email={props.auth.email}
+                                    profile={props.profile}
+                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                />
+                            </> : <>
+                                <SuggestionQuotes
+                                    handleSuggestion={closeMaldivesSuggestionModal}
+                                    Lead_data_to_be_quoted={user_uni_data}
+                                    email={props.auth.email}
+                                    profile={props.profile}
+                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
 
-                        />
+                                />
+                            </>
+                        }
 
 
                     </Modal>

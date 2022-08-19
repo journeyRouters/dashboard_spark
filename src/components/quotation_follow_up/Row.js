@@ -64,14 +64,14 @@ const Row = (props) => {
         setPDF(false)
     }
     function showPDF(args) {
-        console.log("args", args)
+        // console.log("args", args)
         setdata(args)
         setPDF(true)
 
     }
     function invoiceForm() {
         setInvoice(true)
-        console.log(Invoice_flg)
+        // console.log(Invoice_flg)
     }
     function closeinvoice() {
         setInvoice(false)
@@ -89,7 +89,7 @@ const Row = (props) => {
 
     function handlecomment(e) {
         setcomments(e.target.value)
-        console.log(e.target.value)
+        // console.log(e.target.value)
     }
 
     const [open, setOpen] = React.useState(false);
@@ -136,7 +136,7 @@ const Row = (props) => {
             list.push(doc.data())
         });
         setpdf(list)
-        console.log('all quote', list)
+        // console.log('all quote', list)
 
     }
     async function getinvoice() {
@@ -358,7 +358,7 @@ const Row = (props) => {
 
                                             pdfHolder.map((data, index) => (
                                                 <>
-                                                    {console.log(data)}
+                                                    {/* {console.log(data)} */}
                                                     <div key={index} className='pdf_setter'>
                                                         <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
                                                         <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>

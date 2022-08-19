@@ -408,7 +408,7 @@ function App() {
           }
           {
             Page === "Investigation" ?
-              <Test />
+              <Investigation profile={profile}/>
               : <></>
           }
           {

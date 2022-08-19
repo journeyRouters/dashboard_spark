@@ -4,8 +4,8 @@ import { Upload } from "@progress/kendo-react-upload";
 import { PieChart, Pie, Legend, Tooltip } from "recharts";
 import { guid } from "@progress/kendo-react-common";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-
 import './testcss.css'
+import moment from 'moment';
 const Test = () => {
    function imgonChange(e) {
       console.log(typeof (e))
@@ -27,8 +27,9 @@ const Test = () => {
       // console.log(event)
    }
    useEffect(() => {
-      console.log(ScreenShotsurl)
-   }, [ScreenShotsurl]);
+      var date=new Date()
+      console.log(moment(date).format('MMMM'))
+   }, );
    function keydown(event) {
       document.addEventListener('Enter', (event) => {
          var keyValue = event.key;

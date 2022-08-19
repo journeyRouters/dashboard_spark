@@ -40,7 +40,7 @@ const FollowUp = (props) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list);
+                // console.log(list);
                 setopen(false)
             }
         }
@@ -69,7 +69,7 @@ const FollowUp = (props) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list);
+                // console.log(list);
                 setopen(false)
             }
         }
@@ -84,7 +84,7 @@ const FollowUp = (props) => {
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
-        console.log(remaining_data, pre_tableData)
+        // console.log(remaining_data, pre_tableData)
         setLead_data(remaining_data)
     }
 
@@ -174,7 +174,7 @@ const FollowUp = (props) => {
         }
     }
     function monthHandler(e) {
-        console.log(e)
+        // console.log(e)
         const list = []
         if (e.length != 0) {
             for (let len = 0; len <= e.length - 1; len++) {
@@ -182,7 +182,7 @@ const FollowUp = (props) => {
                 // console.log(e[len].value)
             }
             setMonths(list)
-            console.log(e.value)
+            // console.log(e.value)
         }
 
         else if (list.length == 0) {
@@ -190,7 +190,7 @@ const FollowUp = (props) => {
         }
     }
     function leadHandler(e) {
-        console.log(e)
+        // console.log(e)
         const list = []
         if (e.length != 0) {
             for (let len = 0; len <= e.length - 1; len++) {
@@ -198,7 +198,7 @@ const FollowUp = (props) => {
                 // console.log(e[len].value)
             }
             setLead(list)
-            console.log(e.value)
+            // console.log(e.value)
         }
 
         else if (list.length == 0) {
@@ -206,7 +206,7 @@ const FollowUp = (props) => {
         }
     }
     function AgentHandler(e) {
-        console.log(e)
+        // console.log(e)
         const list = []
         if (e.length != 0) {
             for (let len = 0; len <= e.length - 1; len++) {
@@ -214,7 +214,7 @@ const FollowUp = (props) => {
                 // console.log(e[len].value)
             }
             setagent(list)
-            console.log(e.value)
+            // console.log(e.value)
         }
 
         else if (list.length == 0) {

@@ -192,3 +192,6 @@ td {
   display: flex;
   align-items: flex-start;
 }
+.recharts-wrapper{
+  /* position: inherit !important; */
+}

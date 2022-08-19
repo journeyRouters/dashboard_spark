@@ -278,8 +278,8 @@ export const avtivityList = {
     ],
     Singapore: [
         {
-            label:'cityTour',
-            value:'cityTour'
+            label: 'cityTour',
+            value: 'cityTour'
         },
         {
             label: 'Arival',
@@ -443,6 +443,18 @@ export const avtivityList = {
         }
     ],
     Malaysia: [
+        {
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
         {
             label: "BotanicalGardenAndButterflyFarm",
             value: "BotanicalGardenAndButterflyFarm",

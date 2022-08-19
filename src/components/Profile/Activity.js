@@ -456,6 +456,11 @@ export const avtivityList = {
             value: 'Transfer'
         },
         {
+            label: "Leisureday",
+            value: "Leisureday"
+
+        },
+        {
             label: "BotanicalGardenAndButterflyFarm",
             value: "BotanicalGardenAndButterflyFarm",
         },

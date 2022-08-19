@@ -408,7 +408,10 @@ function App() {
           }
           {
             Page === "Investigation" ?
-              <Test />
+              // <Test />
+              <>
+              Investigation
+              </>
               : <></>
           }
           {

@@ -1,5 +1,6 @@
 import { CircularProgress, Modal } from '@material-ui/core';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import SortableTbl from 'react-sort-search-table';
 import app from '../required';
@@ -43,6 +44,7 @@ const Createquote = (props) => {
         "Pax",
         'Child',
         "Email",
+        "assign_date",
         "Lead_Status",
         "Action",
         "Quote",
@@ -56,6 +58,7 @@ const Createquote = (props) => {
         "Pax",
         'Child',
         "Email",
+        "uploaded_date",
         "Lead_Status",
         "Last 10 Quote",
         "Quote",

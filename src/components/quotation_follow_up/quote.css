@@ -16,6 +16,14 @@
     border: 2px solid #56c2c4;
     margin-bottom: 1rem !important;
 }
+.compoLimitCross{
+    width: 99%;
+    height: 9rem;
+    /* background-color: rgb(219, 208, 230); */
+    border: 2px solid red;
+    margin-bottom: 1rem !important;
+    background-color: #ffef7d;
+}
 .client_details_{
     display: flex;
     justify-content: space-between;

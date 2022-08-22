@@ -41,6 +41,7 @@ const Row = (props) => {
     var today = new Date();
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
+    const[limit,setLimit]=useState(false)
     function setEdit_flg() {
         set_edit(true)
     }
@@ -159,6 +160,7 @@ const Row = (props) => {
             }, { merge: true });
 
             // latestTripData()
+            setLimit(false)
             setLatestComment(allComments)
             setcomments(null)
         }
@@ -189,12 +191,21 @@ const Row = (props) => {
         setLead_Status(args.target.value)
     }
     function checkForLastUpdate() {
+        // var currentDay=new Date()
         // row.updated_last
         // var difference =  today-row.updated_last;
         // var daysDifference = Math.floor(difference / 1000 / 60 );
         // console.log({row.updated_last?(row.updated_last).getTime()})
-        if(row.updated_last){
-            console.log(row.updated_last.valueOf()<today)
+        // if(row.updated_last){
+        //     console.log(row.updated_last.valueOf()<today)
+        // }
+        if (row.updated_last) {
+            var commentLimit=new Date(row.updated_last.toDate());
+            commentLimit.setDate(commentLimit.getDate()+3)
+            // console.log(commentLimit)
+            // console.log(commentLimit<today)
+            setLimit(commentLimit<today)
+
         }
     }
 
@@ -244,10 +255,16 @@ const Row = (props) => {
                 </div>
             </Modal>
             <React.Fragment >
-                <TableRow className='compo' onClick={() => setOpen(!open)}>
+                <TableRow className={limit?'compoLimitCross':'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">{row.TripId}</TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
-                    <TableCell align="right">{row.Lead_Status}</TableCell>
+                    {
+                        limit?<>
+                        <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'}/> </TableCell>
+                        </>:<>
+                        <TableCell align="right">{row.Lead_Status}</TableCell>
+                        </>
+                    }
                     <TableCell align="right">{row.Destination}</TableCell>
                     <TableCell align="right">{row.Departure_City}</TableCell>
                 </TableRow>
@@ -375,7 +392,7 @@ const Row = (props) => {
                                                                             data={tripData.travel_data}
                                                                             inclusion_data_={tripData.inclusion_data}
                                                                             Edit_SelectedpackageType={tripData.SelectedpackageType}
-                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            // updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                             set_popupopner={setReqoute_flg}
                                                                             profile={props.profile}
                                                                             E_indicator={true}

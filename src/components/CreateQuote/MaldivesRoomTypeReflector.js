@@ -182,12 +182,12 @@ const RoomType = {
             value: "SunsetBeachVilla",
         },
         {
-            label: "SunsetBeachVillWithPool",
-            value: "SunsetBeachVillWithPool",
+            label: "SunsetBeachVillaWithPool",
+            value: "SunsetBeachVillaWithPool",
         },
         {
-            label: "SunsetWaterVillWithPool",
-            value: "SunsetWaterVillWithPool",
+            label: "SunsetWaterVillaWithPool",
+            value: "SunsetWaterVillaWithPool",
         },
         {
             label: "TwoBedroomSunsetFamilyBeachVilla",

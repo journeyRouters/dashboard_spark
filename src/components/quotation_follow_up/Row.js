@@ -28,11 +28,10 @@ const Row = (props) => {
     const [Invoice_flg, setInvoice] = useState(false)
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
     const [openUpdater, setopenupdater] = useState(false)
-    const [comments, setcomments] = useState([])
+    const [comments, setcomments] = useState(null)
     const [latestComment, setLatestComment] = useState([])
     const [pdfHolder, setpdf] = useState([])
     const [update, setUpdate] = useState('')
-    const [change, setChange] = useState(true)
     const reverse = latestComment.slice(0).reverse();
     const [viewPDF, setPDF] = useState(false)
     const [data, setdata] = useState()
@@ -41,6 +40,8 @@ const Row = (props) => {
     const [tripData, setTripData] = useState(null)
     var today = new Date();
     const [edit_flg, set_edit] = useState(false)
+    const [open, setOpen] = React.useState(false);
+    const[limit,setLimit]=useState(false)
     function setEdit_flg() {
         set_edit(true)
     }
@@ -50,21 +51,15 @@ const Row = (props) => {
     function closeDownload() {
         setdownload(false)
     }
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // var date= today.getDate()+":"+(today.getMonth()+1)+":"+today.getFullYear();
     function Controller_reqoute(data) {
-        // console.log('jhggjkdfhgj', data)
         setTripData(data.value)
         setReqoute_flg(true)
     }
-    function closeReqoute_flg() {
-        setReqoute_flg(false)
-    }
+
     function closePDF() {
         setPDF(false)
     }
     function showPDF(args) {
-        // console.log("args", args)
         setdata(args)
         setPDF(true)
 
@@ -76,40 +71,24 @@ const Row = (props) => {
     function closeinvoice() {
         setInvoice(false)
     }
-    // const useRowStyles = makeStyles({
-    //     root: {
-    //         '& > *': {
-    //             borderBottom: 'unset',
-    //         },
-    //     },
-    // });
-    function dochange() {
-        setChange(!change)
-    }
-
     function handlecomment(e) {
         setcomments(e.target.value)
-        // console.log(e.target.value)
     }
 
-    const [open, setOpen] = React.useState(false);
     useEffect(() => {
         Allquote()
     }, [open]);
     useEffect(() => {
-        if(Reqoute_flg==false){
+        if (Reqoute_flg == false) {
             Allquote()
         }
     }, [Reqoute_flg]);
-    // function changeStatus(Status) {
-    //     setLead_Status(Status)
-    // }
+
     function closeUpdater() {
         setopenupdater(false)
     }
 
     function closeOnstatusComments() {
-
         updateStatus()
         props.getLeadOnBoard()
         setopenupdater(false)
@@ -177,23 +156,29 @@ const Row = (props) => {
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
                 Lead_Status: Lead_Status,
-                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                updated_last: today
 
             }, { merge: true });
 
-            latestTripData()
-            dochange()
-            setcomments('')
-            // props.getProfile(props.auth)
+            // latestTripData()
+            setLimit(false)
+            setLatestComment(allComments)
+            setcomments(null)
+        }
+        else {
+            alert('please comment something to save')
         }
 
 
     }
 
+
     useEffect(() => {
         latestTripData()
         Allquote()
         getinvoice()
+        checkForLastUpdate()
 
     }, []);
     // function OpenUpdater() {
@@ -206,6 +191,24 @@ const Row = (props) => {
     }
     function changeLead_Status(args) {
         setLead_Status(args.target.value)
+    }
+    function checkForLastUpdate() {
+        // var currentDay=new Date()
+        // row.updated_last
+        // var difference =  today-row.updated_last;
+        // var daysDifference = Math.floor(difference / 1000 / 60 );
+        // console.log({row.updated_last?(row.updated_last).getTime()})
+        // if(row.updated_last){
+        //     console.log(row.updated_last.valueOf()<today)
+        // }
+        if (row.updated_last) {
+            var commentLimit=new Date(row.updated_last.toDate());
+            commentLimit.setDate(commentLimit.getDate()+3)
+            // console.log(commentLimit)
+            // console.log(commentLimit<today)
+            setLimit(commentLimit<today)
+
+        }
     }
 
     return (
@@ -254,10 +257,16 @@ const Row = (props) => {
                 </div>
             </Modal>
             <React.Fragment >
-                <TableRow className='compo' onClick={() => setOpen(!open)}>
+                <TableRow className={limit?'compoLimitCross':'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">{row.TripId}</TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
-                    <TableCell align="right">{row.Lead_Status}</TableCell>
+                    {
+                        limit?<>
+                        <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'}/> </TableCell>
+                        </>:<>
+                        <TableCell align="right">{row.Lead_Status}</TableCell>
+                        </>
+                    }
                     <TableCell align="right">{row.Destination}</TableCell>
                     <TableCell align="right">{row.Departure_City}</TableCell>
                 </TableRow>
@@ -278,7 +287,7 @@ const Row = (props) => {
                                 <div className='follow_up'>
                                     <div className='remark' >
                                         {
-                                            reverse.map((sapn, index) => (
+                                            (latestComment.slice(0).reverse()).map((sapn, index) => (
                                                 <div key={index} className='comments_maping'>
                                                     {/* {console.log("comments data",sapn)} */}
                                                     <p style={{ fontSize: '10px', borderRight: '1px solid' }}>
@@ -385,7 +394,7 @@ const Row = (props) => {
                                                                             data={tripData.travel_data}
                                                                             inclusion_data_={tripData.inclusion_data}
                                                                             Edit_SelectedpackageType={tripData.SelectedpackageType}
-                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                            // updateTableDataAfterQuote={props.updateTableDataAfterConversion}
                                                                             set_popupopner={setReqoute_flg}
                                                                             profile={props.profile}
                                                                             E_indicator={true}
@@ -441,7 +450,7 @@ const Row = (props) => {
                                     <div className='comments_box'>
                                         <input className='Autocomplete'
                                             list='Comments'
-                                            value={comments}
+                                            value={comments == null ? '' : comments}
                                             onChange={(e) => handlecomment(e)}
                                         ></input>
                                         <datalist id="Comments">

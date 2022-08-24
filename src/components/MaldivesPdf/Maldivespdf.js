@@ -272,14 +272,22 @@ const Maldivespdf = ({
         update_quotation_flg()
         setQuotationData()
         setWait(false)
-        try{updateTableDataAfterQuote(data.TripId)}
-        catch(error){console.log(error)}
-        try{closeMaldivesForm()}
-        catch(error){console.log(error)}
-        try{closeMaldivesSuggestionModal()}
-        catch(error){console.log(error)}
-        try{Allquote()}
-        catch(error){console.log(error)}
+        try { updateTableDataAfterQuote(data.TripId) }
+        catch (error) { console.log(error) }
+        try {
+            if (inclusionLinkfromstorage) {
+
+            }
+            else {
+
+                closeMaldivesForm()
+            }
+        }
+        catch (error) { console.log(error) }
+        try { closeMaldivesSuggestionModal() }
+        catch (error) { console.log(error) }
+        try { Allquote() }
+        catch (error) { console.log(error) }
     };
     const pdfExportComponent = useRef(null);
     // console.log(count_days)
@@ -428,7 +436,7 @@ const Maldivespdf = ({
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h4 style={{ fontSize: '2.1rem', fontWeight: '900',marginTop:'0rem',marginBottom:'0rem' }}>
+                                                    <h4 style={{ fontSize: '2.1rem', fontWeight: '900', marginTop: '0rem', marginBottom: '0rem' }}>
                                                         INR:-{formatter.format(parseInt(flightcost) + parseInt(landPackage) + parseInt(visacost))}/-
                                                     </h4>
                                                 </td>

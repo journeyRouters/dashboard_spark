@@ -190,8 +190,8 @@ const Profile = (
     function closeFormAndPdf() {
         setwait(false)
         updateTableDataAfterQuote(travel_data.TripId)
-        try{handleSuggestion()}
-        catch(error){console.log(error)}
+        try { handleSuggestion() }
+        catch (error) { console.log(error) }
         closeHandler()
         try {
             Allquote()
@@ -304,7 +304,7 @@ const Profile = (
                             <div className='trip_summary'>
                                 <span>TRIP ID:- JR-&nbsp;</span>
                                 <span>{travel_data.TripId}</span>
-                                </div>
+                            </div>
 
                             <div className="package_details">
                                 <div>
@@ -371,7 +371,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Inclusion ? <>
                                                 {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
-                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -402,7 +402,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
-                                                    <div style={{ display:'flex',alignItems:'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -562,7 +562,9 @@ const Profile = (
                                     NightDataFields.map((data, index) => (
                                         <div key={index} className='hotelUni'>
                                             <div>
-                                                <img src={`/assets/pdfDefaultImage/hotel${index + 1}.png`} width="320px" />
+                                                {/* 'https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' */}
+                                                <img src={`https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2Fhotel${index + 1}.png?alt=media`} width="320px" />
+                                                {/* <img src={`/assets/pdfDefaultImage/hotel${index + 1}.png`} width="320px" /> */}
                                             </div>
                                             <div className='hotelUniRight'>
                                                 <h4 style={{ color: 'yellow' }}>{

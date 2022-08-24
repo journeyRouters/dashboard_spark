@@ -158,67 +158,85 @@ const FollowUp = (props) => {
         { value: 'jacove', label: 'jacove', color: '#FFC400' },
 
     ];
+   
 
     function DestinationHandler(e) {
+        // console.log(e)
+
         const list = []
-        for (let len = 0; len <= e.length - 1; len++) {
-            list.push(e[len].value)
-            // console.log(e[len].value)
+        if (e.length > 0) {
+            for (let len = 0; len <= e.length - 1; len++) {
+                list.push(e[len].value)
+            }
+            SetDestination_list(list)
         }
-        SetDestination_list(list)
-
-
+        else if (e != 0) {
+            list.push(e.value)
+            SetDestination_list(list)
+        }
         // queryDesigner(list)
         if (list.length == 0) {
             // datahandle()
+            SetDestination_list(list)
         }
     }
     function monthHandler(e) {
         // console.log(e)
         const list = []
-        if (e.length != 0) {
+        if (e.length > 0) {
             for (let len = 0; len <= e.length - 1; len++) {
                 list.push(e[len].value)
-                // console.log(e[len].value)
             }
             setMonths(list)
-            // console.log(e.value)
+            // console.log(list)
+        }
+        else if (e != 0) {
+            list.push(e.value)
+            setMonths(list)
         }
 
         else if (list.length == 0) {
+            setMonths(list)
             // datahandle()
         }
     }
     function leadHandler(e) {
         // console.log(e)
         const list = []
-        if (e.length != 0) {
+        if (e.length > 0) {
             for (let len = 0; len <= e.length - 1; len++) {
                 list.push(e[len].value)
-                // console.log(e[len].value)
             }
             setLead(list)
-            // console.log(e.value)
+        }
+        else if(e !=0){
+            list.push(e.value)
+            setLead(list)
         }
 
         else if (list.length == 0) {
             // datahandle()
+            setLead(list)
         }
     }
     function AgentHandler(e) {
         // console.log(e)
         const list = []
-        if (e.length != 0) {
+        if (e.length > 0) {
             for (let len = 0; len <= e.length - 1; len++) {
                 list.push(e[len].value)
-                // console.log(e[len].value)
             }
             setagent(list)
-            // console.log(e.value)
+        }
+        else if(e !=0){
+            list.push(e.value)
+            setagent(list)
         }
 
         else if (list.length == 0) {
             // datahandle()
+            setagent(list)
+
         }
     }
     return (
@@ -228,7 +246,7 @@ const FollowUp = (props) => {
                     <div className='global_search' >
 
                         <button onClick={() => getLeadOnBoard()}>Refresh</button>
-                        <span style={{background:'yellow'}}>Lead= {lead_data.length}</span>
+                        <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
                         <select onChange={(e) => getOthersStatusLeadOnBoard(e.target.value)}>
                             <option>select</option>
                             <option value='Dump'>Dump</option>
@@ -250,9 +268,8 @@ const FollowUp = (props) => {
                                         className='select_opt'
                                         closeMenuOnSelect={false}
                                         components={animatedComponents}
-                                        // isMulti
                                         options={Destinations}
-                                    // onChange={(e) => DestinationHandler(e)}
+                                        onChange={(e) => DestinationHandler(e)}
                                     />
                                 </> : <>
 
@@ -263,7 +280,7 @@ const FollowUp = (props) => {
                                         components={animatedComponents}
                                         isMulti
                                         options={Destinations}
-                                    // onChange={(e) => DestinationHandler(e)}
+                                        onChange={(e) => DestinationHandler(e)}
                                     />
 
 
@@ -280,9 +297,8 @@ const FollowUp = (props) => {
                                         placeholder='Month'
                                         closeMenuOnSelect={false}
                                         components={animatedComponents}
-                                        // isMulti
                                         options={months}
-                                    // onChange={(e) => monthHandler(e)}
+                                        onChange={(e) => monthHandler(e)}
                                     />
                                 </> : <>
 
@@ -292,7 +308,7 @@ const FollowUp = (props) => {
                                         components={animatedComponents}
                                         isMulti
                                         options={months}
-                                    // onChange={(e) => monthHandler(e)}
+                                        onChange={(e) => monthHandler(e)}
                                     />
 
 
@@ -310,9 +326,8 @@ const FollowUp = (props) => {
                                         placeholder='Lead'
                                         closeMenuOnSelect={false}
                                         components={animatedComponents}
-                                        // isMulti
                                         options={Lead_type}
-                                    // onChange={(e) => leadHandler(e)}
+                                        onChange={(e) => leadHandler(e)}
                                     />
                                 </> : <>
 
@@ -322,7 +337,7 @@ const FollowUp = (props) => {
                                         components={animatedComponents}
                                         isMulti
                                         options={Lead_type}
-                                    // onChange={(e) => leadHandler(e)}
+                                        onChange={(e) => leadHandler(e)}
                                     />
                                 </>
 

@@ -132,7 +132,7 @@ const Profile = (
         await updateDoc(doc(db, "Trip", `${travel_data.TripId}`), {
             quotation: quotation_new,
             quotation_flg: true,
-            month: month,
+            month: moment(selected_Travel_date).format('MMMM'),
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: email,

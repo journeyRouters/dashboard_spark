@@ -19,7 +19,7 @@ const SuggestionQuotes = ({
     email
 
 }) => {
-    console.log(Lead_data_to_be_quoted.Destination)
+    // console.log(Lead_data_to_be_quoted.Destination)
     const [sampleQuotes, setsampleQuotes] = useState([])
     const [searchKey, setSearchKey] = useState(0)
     const [selectedData, setselectedData] = useState([])
@@ -30,7 +30,7 @@ const SuggestionQuotes = ({
 
     function syncDataToMapper(data) {
         let list = []
-        console.log(data.value.NightDataFields)
+        // console.log(data.value.NightDataFields)
         list.push(data)
         setselectedData(data)
     }
@@ -48,10 +48,15 @@ const SuggestionQuotes = ({
     }
     async function getSampleQuotes(Destination) {
         // console.log(Destination)
+        var date=new Date()
+        var formateDate=moment(date).format("YYYY-MM-DD")
+        date.setDate(date.getDate()-4)
+        console.log(formateDate)
         var quotesref = collection(db, "Quote")
-        const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination)
-            // , where("value.selected_Travel_date",">","2022-07-12") 
-            ,limit(20)
+        const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination),
+            where("value.count_days","==",Lead_data_to_be_quoted.Travel_Duration),
+            where("value.selected_Travel_date",">",formateDate),
+            limit(50)
         )
         var querySnapshot;
         var list = []
@@ -64,7 +69,7 @@ const SuggestionQuotes = ({
                 });
                 setsampleQuotes(list)
                 // setselectedData(list[0])
-                // console.log(list[0].value.itineary)
+                console.log(list)
                 // setLead_data(list[0].value.travel_data)
             }
         }

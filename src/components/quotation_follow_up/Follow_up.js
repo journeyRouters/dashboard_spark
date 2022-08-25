@@ -393,13 +393,7 @@ async  function handlefilter(){
 
                         <button onClick={() => getLeadOnBoard()}>Refresh</button>
                         <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
-                        <select value={leadStatus} onChange={(e) => getOthersStatusLeadOnBoard(e.target.value)}>
-                            <option value={0}>select</option>
-                            <option value='Dump'>Dump</option>
-                            <option value='Cold'>cold</option>
-                            <option value='Active'>Active</option>
-                            <option value='Hot'>Hot</option>
-                        </select>
+                        
 
 
                     </div>

@@ -6,6 +6,7 @@ import Row from './Row';
 import './quote.css'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import moment from 'moment';
 
 
 
@@ -19,34 +20,39 @@ const FollowUp = (props) => {
     const [agent, setagent] = useState([])
     const animatedComponents = makeAnimated();
     const [profile, setProfile] = useState(null)
+    const [leadStatus, setStatus] = useState(0)
 
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
-        try {
-            let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target ? props.target.uid : props.auth.uid),
-                where('Lead_Status', 'in', [status]), where("quotation_flg", "==", true));
-            var querySnapshot;
+        setStatus(status)
+        if (status == 0) { }
+        else {
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target ? props.target.uid : props.auth.uid),
+                    where('Lead_Status', 'in', [status]), where("quotation_flg", "==", true));
+                var querySnapshot;
 
-            querySnapshot = await getDocs(q);
-            if (querySnapshot.docs.length == 0) {
-                setopen(false)
-                setLead_data([])
+                querySnapshot = await getDocs(q);
+                if (querySnapshot.docs.length == 0) {
+                    setopen(false)
+                    setLead_data([])
 
+                }
+                else {
+
+                    querySnapshot.forEach((doc) => {
+                        list.push(doc.data())
+                    });
+                    setLead_data(list)
+                    // console.log(list);
+                    setopen(false)
+                }
             }
-            else {
-
-                querySnapshot.forEach((doc) => {
-                    list.push(doc.data())
-                });
-                setLead_data(list)
-                // console.log(list);
+            catch (erorr) {
+                console.log(erorr)
                 setopen(false)
             }
-        }
-        catch (erorr) {
-            console.log(erorr)
-            setopen(false)
         }
 
     }
@@ -62,6 +68,8 @@ const FollowUp = (props) => {
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
                 setopen(false)
+                setStatus(0)
+
             }
             else {
 
@@ -70,7 +78,9 @@ const FollowUp = (props) => {
                 });
                 setLead_data(list)
                 // console.log(list);
+                setStatus(0)
                 setopen(false)
+
             }
         }
         catch (erorr) {
@@ -139,15 +149,12 @@ const FollowUp = (props) => {
 
     ];
     const Lead_type = [
-        { value: 'ACTIVE', label: 'ACTIVE', color: '#00B8D9' },
-        { value: 'HOT', label: 'HOT', color: '#0052CC' },
-        { value: 'In Progress', label: 'In Progress', color: '#5243AA' },
-        { value: 'Book Now', label: 'Book Now', color: '#FF5630', },
-        { value: 'Invoiced', label: 'Invoiced', color: '#FF8B00' },
-        { value: 'My Hot', label: 'My Hot', color: '#FFC400' },
-        { value: 'No Response', label: 'No Response', color: '#36B37E' },
-        { value: 'Booker', label: 'Booker', color: '#00875A' },
-        { value: 'Hidden Lead', label: 'Hidden Lead', color: '#253858' },
+        { value: 'Active', label: 'Active', color: '#00B8D9' },
+        { value: 'Hot', label: 'Hot', color: '#0052CC' },
+        { value: 'Cold', label: 'Cold', color: '#5243AA' },
+        { value: 'Dump', label: 'Dump', color: '#FF5630', },
+        { value: 'Converted', label: 'Converted', color: '#FF5630', },
+
     ];
     const Agent = [
         { value: 'Nand', label: 'Nand', color: '#00B8D9' },
@@ -158,8 +165,166 @@ const FollowUp = (props) => {
         { value: 'jacove', label: 'jacove', color: '#FFC400' },
 
     ];
-   
 
+async  function handlefilter(){
+    var q;
+    var today=new Date()
+    var currentMonth=moment(today).format('MMMM')
+    if(Destination.length>1){
+        if(lead.length!=0&&month.length!=0){
+            q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+            where('Destination', 'in', Destination), where("Lead_Status", "==", lead[0]),where("month","==",month[0])
+        );
+        }
+        else if(lead.length!=0){
+            q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+            where('Destination', 'in', Destination), where("Lead_Status", "==", lead[0])
+        );
+        }
+        else if(month.length!=0){
+            q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+            where('Destination', 'in', Destination), where("month","==",month[0])
+        );
+        }
+        else if(Destination.length!=0){
+            q = query(collection(db, "Trip"),
+             where("assign_to.uid", "==", props.auth.uid),
+            where('Destination', 'in', Destination),where("month","==",currentMonth)
+        ); 
+        }
+    }
+    else if(month.length>1){
+        if(Destination.length!=0&&lead.length!=0){
+            q=query(collection(db,"Trip"),
+            where("month","in",month),
+            where("Destination","==",Destination[0]),
+            where("Lead_Status","==",lead[0]))
+        }
+        else if(Destination.length!=0){
+            q=query(collection(db,'Trip'),
+            where("month","in",month),
+            where("Destination","==",Destination[0])
+            )
+        }
+        else if(lead.length!=0){
+            q=query(collection(db,'Trip'),
+            where("month","in",month),
+            where("Lead_Status","==",lead[0])
+            )
+        }
+        else if(month.length!=0){
+            q=query(collection(db,'Trip'),
+            where("month","in",month),
+            )
+        }
+
+    }
+    else if(lead.length>1){
+        if(month.length!=0&&Destination.length!=0){
+            q=query(collection(db,'Trip'),
+            where("Lead_Status","in",lead),
+            where("month","==",month[0]),
+            where("Destination","==",Destination[0])
+            );
+        }
+        else if(month.length!=0){
+            q=query(collection(db,'Trip'),
+            where("Lead_Status","in",lead),
+            where("month","==",month[0]),
+            );
+        }
+        else if(Destination.length!=0){
+            q=query(collection(db,'Trip'),
+            where("Lead_Status","in",lead),
+            where("Destination","==",Destination[0])
+            );
+        }
+        else if(lead.length!=0){
+            q=query(collection(db,'Trip'),
+            where("Lead_Status","in",lead),
+            where("month","==",currentMonth),
+            );
+        }        
+    }
+    else if(Destination.length==1&&lead.length==1&&month.length==1){
+        q=query(collection(db,'Trip'),
+        where("Destination","==",Destination[0]),
+        where("month","==",month[0]),
+        where("Lead_Status","==",lead[0])
+        )
+    }
+    else if(Destination.length==1&&lead.length==1){
+        q=query(collection(db,'Trip'),
+        where("Destination","==",Destination[0]),
+        where("month","==",currentMonth),
+        where("Lead_Status","==",lead[0])
+        )
+    }
+    else if(Destination.length==1&&month.length==1){
+        q=query(collection(db,'Trip'),
+        where("Destination","==",Destination[0]),
+        where("month","==",month[0])
+        )
+    }
+    else if(lead.length==1&&month.length==1){
+        q=query(collection(db,'Trip'),
+        where("Lead_Status","==",Destination[0]),
+        where("month","==",month[0])
+        )
+    }
+    else if(Destination.length==1){
+        q=query(collection(db,'Trip'),
+        where("Destination","==",Destination[0]),
+        where("month","==",currentMonth),
+        )
+    }
+    else if(lead.length==1){
+        console.log('get',lead[0])
+        q=query(collection(db,'Trip'),
+        where("month","==",currentMonth),
+        where("Lead_Status","==",lead[0])
+        )
+    }
+    else if(month.length==1){
+        q=query(collection(db,'Trip'),
+        where("month","==",month[0])
+        )
+    }
+    else if(Destination.length==0&&lead.length==0&&month.length==0){
+        getLeadOnBoard()
+    }
+    else{
+        alert("Select some filter")
+    }
+
+    try {
+        let list = []
+        var querySnapshot;
+        querySnapshot = await getDocs(q);
+        if (querySnapshot.docs.length == 0) {
+            setopen(false)
+            console.log('no data')
+            setLead_data(list)
+            setStatus(0)
+
+        }
+        else {
+
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            setLead_data(list)
+            console.log(list);
+            setStatus(0)
+            setopen(false)
+
+        }
+    }
+    catch (erorr) {
+        console.log(erorr)
+        setopen(false)
+    }
+ }
     function DestinationHandler(e) {
         // console.log(e)
 
@@ -209,7 +374,7 @@ const FollowUp = (props) => {
             }
             setLead(list)
         }
-        else if(e !=0){
+        else if (e != 0) {
             list.push(e.value)
             setLead(list)
         }
@@ -219,26 +384,7 @@ const FollowUp = (props) => {
             setLead(list)
         }
     }
-    function AgentHandler(e) {
-        // console.log(e)
-        const list = []
-        if (e.length > 0) {
-            for (let len = 0; len <= e.length - 1; len++) {
-                list.push(e[len].value)
-            }
-            setagent(list)
-        }
-        else if(e !=0){
-            list.push(e.value)
-            setagent(list)
-        }
-
-        else if (list.length == 0) {
-            // datahandle()
-            setagent(list)
-
-        }
-    }
+   
     return (
         <div>
             {
@@ -247,8 +393,8 @@ const FollowUp = (props) => {
 
                         <button onClick={() => getLeadOnBoard()}>Refresh</button>
                         <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
-                        <select onChange={(e) => getOthersStatusLeadOnBoard(e.target.value)}>
-                            <option>select</option>
+                        <select value={leadStatus} onChange={(e) => getOthersStatusLeadOnBoard(e.target.value)}>
+                            <option value={0}>select</option>
                             <option value='Dump'>Dump</option>
                             <option value='Cold'>cold</option>
                             <option value='Active'>Active</option>
@@ -345,32 +491,8 @@ const FollowUp = (props) => {
 
 
                         </div>
-                        <div>
-                            <label>Agent</label>
-                            {
-                                Destination.length > 1 || month.length > 1 || lead.length > 1 ? <>
-                                    <Select
-                                        placeholder='Agent'
-                                        closeMenuOnSelect={false}
-                                        components={animatedComponents}
-                                        // isMulti
-                                        options={Agent}
-                                        onChange={(e) => AgentHandler(e)}
-                                    />
-                                </> : <>
-
-                                    <Select
-                                        placeholder='Agent'
-                                        closeMenuOnSelect={false}
-                                        components={animatedComponents}
-                                        isMulti
-                                        options={Agent}
-                                        onChange={(e) => AgentHandler(e)}
-                                    />
-
-                                </>
-                            }
-
+                        <div className='Searchbutton' onClick={()=>handlefilter()}>
+                            <img src='/assets/img/search.png' height={'48px'} />
 
                         </div>
                     </div>

@@ -1,22 +1,24 @@
-.filter{
+.filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:  rgba(103, 107, 106, 0.238);
+    background-color: rgba(103, 107, 106, 0.238);
     background-image: linear-gradient(rgb(134, 130, 215), rgb(156, 213, 148));
     margin-bottom: 1rem;
     position: sticky;
     top: 0;
     /* text-transform: capitalize; */
 }
-.compo{
+
+.compo {
     width: 99%;
     height: 9rem;
     /* background-color: rgb(219, 208, 230); */
     border: 2px solid #56c2c4;
     margin-bottom: 1rem !important;
 }
-.compoLimitCross{
+
+.compoLimitCross {
     width: 99%;
     height: 9rem;
     /* background-color: rgb(219, 208, 230); */
@@ -24,30 +26,37 @@
     margin-bottom: 1rem !important;
     background-color: #ffef7d;
 }
-.client_details_{
+
+.client_details_ {
     display: flex;
     justify-content: space-between;
 }
-.follow_up{
+
+.follow_up {
     display: flex;
     justify-content: space-between;
 }
-.p{
+
+.p {
     font-weight: 600;
 }
-.p:hover{
+
+.p:hover {
     cursor: pointer;
     color: rgb(127, 120, 228);
 }
-.p1{
+
+.p1 {
     font-weight: 600;
 }
-.p1:hover{
+
+.p1:hover {
     color: rgb(120, 228, 136);
     cursor: pointer;
 
 }
-.status{
+
+.status {
     width: 25rem;
     height: 21rem;
     background-color: aliceblue;
@@ -56,7 +65,8 @@
     align-items: center;
     border-radius: 5rem;
 }
-.button_save{
+
+.button_save {
     width: 5rem;
     margin-top: 4rem;
     display: flex;
@@ -65,33 +75,38 @@
     font-weight: 600;
     color: green;
 }
-.destination{
+
+.destination {
     width: 25rem;
     /* height: 25rem; */
     background-color: rgb(235, 239, 242);
     border-radius: 2rem;
 }
 
-.select_opt{
+.select_opt {
     text-transform: capitalize;
     font-size: small;
 }
-.contains_destination{
+
+.contains_destination {
     margin-left: 1rem;
 }
-.input_{
+
+.input_ {
     margin-top: 2rem;
     width: 20rem;
     height: 6rem;
-    
+
 }
-.collaps{
+
+.collaps {
     /* width: 100%;
     height: 25rem;
     overflow-y: scroll; */
     /* background-color: #b4e7e8; */
 }
-.remark{
+
+.remark {
     /* margin-top: 2.1rem; */
     border: 2px solid;
     width: 34rem;
@@ -103,17 +118,19 @@
     font-weight: 600;
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     overflow-y: scroll;
-   
+
     /* align-items: center; */
 }
-.remark_set{
+
+.remark_set {
     /* margin-top: 2.1rem; */
     display: flex;
     justify-content: space-between;
     /* height: 10rem; */
- 
+
 }
-.comments_box{
+
+.comments_box {
     display: flex;
     align-items: flex-start;
     /* position: sticky;
@@ -122,40 +139,47 @@
     display: flex;
     height: 2rem;
     background: #FFFFFF; */
-    
+
 }
+
 .comments_box::-webkit-scrollbar {
-    display:none;
+    display: none;
 }
-.input_comments{
+
+.input_comments {
     width: 16.5rem;
     height: 2rem;
 }
-.Autocomplete{
+
+.Autocomplete {
     width: 23rem;
     height: 2rem;
     margin-top: 0.3rem;
-    text-transform: capitalize;  
+    text-transform: capitalize;
 }
-.button_save_comments{
+
+.button_save_comments {
     margin: 1rem;
     width: 4rem;
     border-radius: 0.3rem;
 }
-.comments_maping{
+
+.comments_maping {
     /* height: 3rem; */
     background-color: #eaec9c;
-    margin-top: 0.2rem    ;
+    margin-top: 0.2rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.pdf_setter{
+
+.pdf_setter {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
-.download_requote{  
+
+.download_requote {
     width: 7rem;
     height: 2rem;
     color: #FFFFFF;
@@ -164,22 +188,26 @@
     background-color: #1939cb;
     border-radius: 1rem;
 }
-.time_date{
+
+.time_date {
     font-size: 10px;
     width: 46%;
     display: flex;
     justify-content: space-between;
 }
-.Comments{
-    width:100%;
+
+.Comments {
+    width: 100%;
     font-family: 'Courier New', Courier, monospace;
     font-size: x-small;
 }
-.option_text{
+
+.option_text {
     font-size: small;
 
 }
-.invoicing{
+
+.invoicing {
     margin-top: 1rem;
     border: 1px solid;
     display: flex;
@@ -188,8 +216,16 @@
     height: 2rem;
     align-items: center;
 }
-.invoice_id{
+
+.invoice_id {
     height: 1rem;
     width: 5rem;
     /* background-color: #1939cb; */
 }
+.Searchbutton{
+
+}
+
+.Searchbutton:active {
+    transform: translateY(4px);
+}  

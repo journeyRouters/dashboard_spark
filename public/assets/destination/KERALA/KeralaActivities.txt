@@ -1,0 +1,74 @@
+Kerala Activites
+
+{
+label:"Anamudi Hills",
+value:"AnamudiHills",
+},
+{
+label:"Backwater Alleppey",
+value:"BackwaterAlleppey",
+},
+{
+label:"Cheeyappara Waterfalls",
+value:"CheeyapparaWaterfalls",
+},
+{
+label:"Eravikulam National Park",
+value:"EravikulamNationalPark",
+},
+{
+label:"Jeep Safari Thekkady",
+value:"JeepSafariThekkady",
+},
+{
+label:"Jewish Synagogue",
+value:"JewishSynagogue",
+},
+{
+label:"Kuthiramalika Palace Trivandrum",
+value:"KuthiramalikaPalaceTrivandrum",
+},
+{
+label:"Mattancherry Palace",
+value:"MattancherryPalace",
+},
+{
+label:"Mattupetty Dam",
+value:"MattupettyDam",
+},
+{
+label:"Periyar Wildlife Sanctuary",
+value:"PeriyarWildlifeSanctuary",
+},
+{
+label:"Sucheendran Temple",
+value:"SucheendranTemple",
+},
+{
+label:"Tea Plantation",
+value:"TeaPlantation",
+},
+{
+label:"The Zoological Park",
+value:"TheZoologicalPark",
+},
+{
+label:"Vattakottai",
+value:"Vattakottai",
+},
+{
+label:"Vembanad Lake",
+value:"VembanadLake",
+},
+{
+label:"Vivekananda Rock",
+value:"VivekanandaRock",
+},
+{
+label:"Arrival",
+value:"Arrival",
+},
+{
+label:"Departure",
+value:"Departure",
+},

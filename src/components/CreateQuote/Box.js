@@ -105,7 +105,7 @@ const Box = ({
         }
     ]
     function changingDestination(Destination) {
-        // console.log(Destination.target.value)
+        console.log(itineary)
         setDestination(Destination.target.value)
         data.Destination = Destination.target.value
     }
@@ -193,12 +193,15 @@ const Box = ({
         setItineary(data)
     }
     function setVar() {
-        // console.log('hey')
-        for (let s = 0; s < Travel_Duration - 1; s++) {
-            let data = { Day: '', Description: '', Activity: {} }
-            let temp = itineary
-            temp.push(data)
-            setItineary(temp)
+        console.log('hey')
+        if(itineary.length<=1){
+
+            for (let s = 0; s < Travel_Duration - 1; s++) {
+                let data = { Day: '', Description: '', Activity: {} }
+                let temp = itineary
+                temp.push(data)
+                setItineary(temp)
+            }
         }
     }
     function advance_controller_Activity(e, index) {
@@ -269,7 +272,6 @@ const Box = ({
         setlandpackage(e.target.value)
     }
 
-    const currency = ["INR", "ILS", "CNY", "KWD", "AFN", "MYR", "NPR", "PHP", "AMD", "EUR", "ISK", "USD", "CLP"]
     function openHandler() {
         setOpen(true)
 
@@ -412,6 +414,7 @@ const Box = ({
                                                 <option value={'Bali'}>Bali</option>
                                                 <option value={'Himachal'}>Himachal</option>
                                                 <option value={'Ladakh'}>Ladakh</option>
+                                                <option value={'Kerala'}>Kerala</option>
                                             </select>
                                         </h4>
                                     </div>

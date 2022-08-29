@@ -42,7 +42,7 @@ const Profile = (
         flight
     }
 ) => {
-    // console.log(profile)
+    console.log(itineary)
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"

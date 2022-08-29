@@ -1,17 +1,71 @@
 import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { DynamicBarChart } from 'react-dynamic-charts';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, Pie, PieChart, Tooltip, XAxis, YAxis } from "recharts";
 import app from '../required';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import { PieChart, Pie, Legend, Tooltip } from "recharts";
+import "react-dynamic-charts/dist/index.css";
+import { Modal } from '@material-ui/core';
 const db = getFirestore(app);
 
 const Investigation = ({ profile }) => {
     var date = new Date()
+    const [data_Analysed, setdata_Analysed] = useState([])
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
+    const [AllUserprofile, setAllUserprofile] = useState([])
+
+    function getAllUserProfie() {
+        const q = query(collection(db, "Profile"), where("access_type", "==", "User"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const Profile = [];
+            querySnapshot.forEach((doc) => {
+                Profile.push(doc.data());
+                // console.log(doc.data().name)
+            });
+            setAllUserprofile(Profile)
+            console.log(Profile,);
+            getConvertedByAllSpokes(Profile)
+
+
+        });
+    }
+    async function getConvertedByAllSpokes(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Converted'), where("month", "==", currentMonth), where("quotation_flg", "==", true));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        setdata_Analysed([
+            {
+                name: "Conversion",
+                values: holdAlluserAnalytics
+            }
+        ])
+        console.log(holdAlluserAnalytics)
+        setdataAvailablityFlg(true)
+
+    }
     async function currentLead() {
         var local = { name: 'Create quote', value: 0, fill: 'yellow' }
         var prev_instance = dataLoaded
@@ -25,7 +79,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
+            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -49,7 +103,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
+            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -66,7 +120,7 @@ const Investigation = ({ profile }) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", profile.uid),
-                where('Lead_Status', 'in', ['Dump']), where("quotation_flg", "==", true),where("month","==",currentMonth));
+                where('Lead_Status', 'in', ['Dump']), where("quotation_flg", "==", true), where("month", "==", currentMonth));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -74,7 +128,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
+            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -99,10 +153,9 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
+            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
-            setdataAvailablityFlg(true)
 
         }
         catch (erorr) {
@@ -112,6 +165,7 @@ const Investigation = ({ profile }) => {
     }
 
     function dataMiner() {
+        getAllUserProfie()
         currentLead()
         followUp()
         Dump()
@@ -119,58 +173,125 @@ const Investigation = ({ profile }) => {
 
     }
     useEffect(() => {
+
         dataMiner()
-        // console.log(dataLoaded)
 
     }, []);
+    // const demodata = [
+    //     {
+    //         name: 'kishor',
+    //         value: 10
+    //     },
+    //     {
+    //         name: 'ram',
+    //         value: 125
+    //     },
+    //     {
+    //         name: 'rohit',
+    //         value: 22
+    //     },
+    //     {
+    //         name: 'tezal',
+    //         value: 133
+    //     },
+    //     {
+    //         name: 'rana',
+    //         value: 17
+    //     },
+    //     {
+    //         name: 'akash',
+    //         value: 170
+    //     },
+    //     {
+    //         name: 'singh',
+    //         value: 101
+    //     },
+    //     {
+    //         name: 'tezal',
+    //         value: 177
+    //     }
+    // ]
 
     return (
-        
-            <div className='investigation'>
 
-                {
-                    dataAvailablityFlg ? <>
-                        <BarChart
-                            width={500}
-                            height={300}
+        <div className='investigation'>
+            <Modal open={!dataAvailablityFlg} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                <>
+                    <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
+                </>
+            </Modal>
+
+            {
+                dataAvailablityFlg ? <>
+                    <BarChart
+                        width={500}
+                        height={300}
+                        data={dataLoaded}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5
+                        }}
+                        barSize={30}
+                    >
+                        <XAxis
+                            dataKey="name"
+                            scale="point"
+                            padding={{ left: 10, right: 10 }}
+                        />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend legendType='circle' />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                    </BarChart>
+                    {/* <PieChart width={400} height={400}>
+                        <Pie
+                            dataKey="value"
+                            isAnimationActive={false}
                             data={dataLoaded}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5
+                            cx={200}
+                            cy={200}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            label
+                        />
+
+                        <Tooltip />
+                    </PieChart> */}
+                    {/* <LineChart width={730} height={250} data={dataLoaded}
+                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }}/>
+                        <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+                    </LineChart> */}
+                    {/* <LineChart width={600} height={300} data={demodata} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                    </LineChart> */}
+                    <div>
+                        <DynamicBarChart
+                            data={data_Analysed}
+                            // Timeout in ms between each iteration
+                            iterationTimeout={1200}
+                            startRunningTimeout={2500}
+                            barHeight={20}
+                            iterationTitleStyles={{
+                                fontSize: 18
                             }}
-                            barSize={30}
-                        >
-                            <XAxis
-                                dataKey="name"
-                                scale="point"
-                                padding={{ left: 10, right: 10 }}
-                            />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-                        </BarChart>
-                        <PieChart width={400} height={400}>
-                            <Pie
-                                dataKey="value"
-                                isAnimationActive={false}
-                                data={dataLoaded}
-                                cx={200}
-                                cy={200}
-                                outerRadius={80}
-                                fill="#8884d8"
-                                label
-                            />
-
-                            <Tooltip />
-                        </PieChart>
-
-                    </> : <></>
-                }
-            </div>
+                        />
+                    </div>
+                </> : <></>
+            }
+        </div>
     );
 }
 

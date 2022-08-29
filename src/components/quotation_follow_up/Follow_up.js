@@ -196,24 +196,28 @@ async  function handlefilter(){
     else if(month.length>1){
         if(Destination.length!=0&&lead.length!=0){
             q=query(collection(db,"Trip"),
+            where("assign_to.uid", "==", props.auth.uid),
             where("month","in",month),
             where("Destination","==",Destination[0]),
             where("Lead_Status","==",lead[0]))
         }
         else if(Destination.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("month","in",month),
             where("Destination","==",Destination[0])
             )
         }
         else if(lead.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("month","in",month),
             where("Lead_Status","==",lead[0])
             )
         }
         else if(month.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("month","in",month),
             )
         }
@@ -222,6 +226,7 @@ async  function handlefilter(){
     else if(lead.length>1){
         if(month.length!=0&&Destination.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("Lead_Status","in",lead),
             where("month","==",month[0]),
             where("Destination","==",Destination[0])
@@ -229,18 +234,21 @@ async  function handlefilter(){
         }
         else if(month.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("Lead_Status","in",lead),
             where("month","==",month[0]),
             );
         }
         else if(Destination.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("Lead_Status","in",lead),
             where("Destination","==",Destination[0])
             );
         }
         else if(lead.length!=0){
             q=query(collection(db,'Trip'),
+            where("assign_to.uid", "==", props.auth.uid),
             where("Lead_Status","in",lead),
             where("month","==",currentMonth),
             );
@@ -248,6 +256,7 @@ async  function handlefilter(){
     }
     else if(Destination.length==1&&lead.length==1&&month.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("Destination","==",Destination[0]),
         where("month","==",month[0]),
         where("Lead_Status","==",lead[0])
@@ -255,6 +264,7 @@ async  function handlefilter(){
     }
     else if(Destination.length==1&&lead.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("Destination","==",Destination[0]),
         where("month","==",currentMonth),
         where("Lead_Status","==",lead[0])
@@ -262,18 +272,21 @@ async  function handlefilter(){
     }
     else if(Destination.length==1&&month.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("Destination","==",Destination[0]),
         where("month","==",month[0])
         )
     }
     else if(lead.length==1&&month.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("Lead_Status","==",Destination[0]),
         where("month","==",month[0])
         )
     }
     else if(Destination.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("Destination","==",Destination[0]),
         where("month","==",currentMonth),
         )
@@ -281,12 +294,14 @@ async  function handlefilter(){
     else if(lead.length==1){
         console.log('get',lead[0])
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("month","==",currentMonth),
         where("Lead_Status","==",lead[0])
         )
     }
     else if(month.length==1){
         q=query(collection(db,'Trip'),
+        where("assign_to.uid", "==", props.auth.uid),
         where("month","==",month[0])
         )
     }

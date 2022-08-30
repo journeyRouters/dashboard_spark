@@ -460,9 +460,11 @@ const Row = (props) => {
                                             <option value="Traveler will Finalize and it's my hot">Traveler will Finalize and it's my hot</option>
                                             <option value="Call not connecting">Call not connecting</option>
                                             <option value="Travler change their mind">Travler change their mind</option>
-                                            <option value="Quote shared on what's app">Quote shared on what's app</option>
-                                            <option value="Travel not responding">Travel not responding</option>
+                                            <option value="Quote shared on whatsapp">Quote shared on what's app</option>
+                                            <option value="Traveler not responding">Travel not responding</option>
                                             <option value="Booking form somewhere else">Booking form somewhere else</option>
+                                            <option value="will let know after few days/time">will let know after few days/time</option>
+                                            <option value="Converting/ Booking amount received">Converting /Booking amount received</option>
                                         </datalist>
 
                                         <button className='button_save_comments' onClick={() => update_comments()}>save</button>

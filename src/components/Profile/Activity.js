@@ -94,10 +94,18 @@ export const avtivityList = {
             label: "Leisureday",
             value: "Leisureday"
 
+        },
+        {
+            label: 'Candle Light Dinner Bali',
+            value: 'CandleLightDinnerBali'
+        },
+        {
+            label: 'UlunDanuBeratan',
+            value: 'UlunDanuBeratan'
         }
 
     ],
-    Himachal: [
+    Andaman: [
         {
             label: 'Arival',
             value: 'Arival'
@@ -107,63 +115,164 @@ export const avtivityList = {
             value: 'Departure'
         },
         {
-            label: 'HipHipHurrayAmusementPark ',
-            value: 'HipHipHurrayAmusementPark'
+            label: "Leisure",
+            value: "Leisure",
         },
         {
-            label: 'Transfer',
-            value: 'Transfer'
+            label: "Transfer",
+            value: "Transfer",
         },
         {
-            label: 'Solang Valley ',
-            value: 'SolangValley'
+            label: 'Bharatpur Beach',
+            value: 'BharatpurBeach'
         },
         {
-            label: 'Old Manali',
-            value: 'OldManali'
+            label: 'Cellular Jail',
+            value: 'CellularJail'
         },
         {
-            label: 'Naggar castle',
-            value: 'Naggarcastle'
+            label: 'CorbynCover Beach',
+            value: 'CorbynCoverBeach'
         },
         {
-            label: 'kasol',
-            value: 'kasol'
+            label: 'Elephant Beach',
+            value: 'ElephantBeach'
         },
         {
-            label: 'Rohtang Pass',
-            value: 'RohtangPass'
+            label: 'Kalapathar Beach',
+            value: 'KalapatharBeach'
         },
         {
-            label: 'Attal Tunnel',
-            value: 'AttalTunnel'
+            label: 'Laxmanpur Beach',
+            value: 'LaxmanpurBeach'
         },
         {
-            label: 'Hadima',
-            value: 'Hadima'
+            label: 'Radhanagar Beach',
+            value: 'RadhanagarBeach'
         },
         {
-            label: 'Vashisht Temple',
-            value: 'VashishtTemple'
+            label: 'Ross Island',
+            value: 'RossIsland'
+        }
+
+    ],
+    Himachal: [
+        {
+            label: "Atal Tunnel",
+            value: "AtalTunnel",
         },
         {
-            label: 'Van Vihar',
-            value: 'VanVihar'
+            label: "Bhagsu Waterfall",
+            value: "BhagsuWaterfall",
         },
         {
-            label: 'Tibetan monastery',
-            value: 'Tibetanmonastery'
+            label: "Bir Billing",
+            value: "BirBilling",
         },
         {
-            label: 'Manu Temple',
-            value: 'ManuTemple'
+            label: "Christ Church Shimla",
+            value: "ChristChurchShimla",
+        },
+        {
+            label: "Dalai Lama Temple",
+            value: "DalaiLamaTemple",
+        },
+        {
+            label: "Dalhousie Arrival",
+            value: "DalhousieArrival",
+        },
+        {
+            label: "Dharamshala Arrival",
+            value: "DharamshalaArrival",
+        },
+        {
+            label: "Dharamshala Stadium",
+            value: "DharamshalaStadium",
+        },
+        {
+            label: "Hadimba Temple",
+            value: "HadimbaTemple",
+        },
+        {
+            label: "Hatu Temple",
+            value: "HatuTemple",
+        },
+        {
+            label: "Jakhoo Temple",
+            value: "JakhooTemple",
+        },
+        {
+            label: "Jogini Waterfall",
+            value: "JoginiWaterfall",
+        },
+        {
+            label: "Kasol",
+            value: "Kasol",
+        },
+        {
+            label: "Khajjiar",
+            value: "Khajjiar",
+        },
+        {
+            label: "Kheerganga Trek",
+            value: "KheergangaTrek",
+        },
+        {
+            label: "Kufri",
+            value: "Kufri",
+        },
+        {
+            label: "Kullu",
+            value: "Kullu",
+        },
+        {
+            label: 'Arival',
+            value: 'Arival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
         },
         {
             label: "Leisureday",
-            value: "Leisureday"
-
-        }
-
+            value: "Leisureday",
+        },
+        {
+            label: "Manali Arrival",
+            value: "ManaliArrival",
+        },
+        {
+            label: "Manikaran",
+            value: "Manikaran",
+        },
+        {
+            label: "Mcleodganj Market",
+            value: "McleodganjMarket",
+        },
+        {
+            label: "Pandoh Dam",
+            value: "PandohDam",
+        },
+        {
+            label: "Rohtang Pass",
+            value: "RohtangPass",
+        },
+        {
+            label: "Shimla Arrival",
+            value: "ShimlaArrival",
+        },
+        {
+            label: "Solang Valley",
+            value: "SolangValley",
+        },
+        {
+            label: "Transfer",
+            value: "Transfer",
+        },
+        {
+            label: "Van Vihar",
+            value: "VanVihar",
+        },
     ],
     Thailand: [
         {
@@ -359,6 +468,18 @@ export const avtivityList = {
         {
             label: "MotionGate",
             value: "MotionGate",
+        },
+        {
+            label: 'Palm 52Floor View',
+            value: 'Palm52FloorView'
+        },
+        {
+            label: 'FlyingCup',
+            value: 'FlyingCup'
+        },
+        {
+            label: 'Dinner In The Sky Dubai',
+            value: 'DinnerInTheSkyDubai'
         },
         {
             label: 'Transfer',
@@ -582,17 +703,26 @@ export const avtivityList = {
         },
     ],
     Ladakh: [
+       
+        {
+            label: "Departure",
+            value: "Arival_Departure",
+        },
         {
             label: "ChanglaPass",
             value: "ChanglaPass",
+        },
+        {
+            label: "Leisureday",
+            value: "Leisureday"
         },
         {
             label: "HemisMonastery",
             value: "HemisMonastery",
         },
         {
-            label: "Arival/Departure",
-            value: "Arival/Departure",
+            label: "Arival",
+            value: "Arival_Departure",
         },
         {
             label: "Kargil",
@@ -699,6 +829,56 @@ export const avtivityList = {
         {
             label: "Departure",
             value: "Departure",
+        },
+        {
+            label: "Leisureday",
+            value: "Leisureday"
+        },
+    ],
+    Kashmir: [
+        {
+            label: "Arrival",
+            value: "Arrival",
+        },
+        {
+            label: "Departure",
+            value: "Departure",
+        },
+        {
+            label: "Doodhpathri",
+            value: "Doodhpathri",
+        },
+        {
+            label: "Gulmarg",
+            value: "Gulmarg",
+        },
+        {
+            label: "Houseboat",
+            value: "Houseboat",
+        },
+        {
+            label: "Leisure",
+            value: "Leisure",
+        },
+        {
+            label: "Pahalgam",
+            value: "Pahalgam",
+        },
+        {
+            label: "ShikaraRide",
+            value: "ShikaraRide",
+        },
+        {
+            label: "Sonmarg",
+            value: "Sonmarg",
+        },
+        {
+            label: "Taxi",
+            value: "Taxi",
+        },
+        {
+            label: "Tulip Garden",
+            value: "TulipGarden",
         },
     ]
 }

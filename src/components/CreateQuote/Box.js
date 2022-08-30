@@ -193,7 +193,6 @@ const Box = ({
         setItineary(data)
     }
     function setVar() {
-        console.log('hey')
         if(itineary.length<=1){
 
             for (let s = 0; s < Travel_Duration - 1; s++) {
@@ -415,6 +414,8 @@ const Box = ({
                                                 <option value={'Himachal'}>Himachal</option>
                                                 <option value={'Ladakh'}>Ladakh</option>
                                                 <option value={'Kerala'}>Kerala</option>
+                                                <option value={'Kashmir'}>Kashmir</option>
+                                                <option value={'Andaman'}>Andaman</option>
                                             </select>
                                         </h4>
                                     </div>

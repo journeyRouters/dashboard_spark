@@ -156,12 +156,24 @@ const Investigation = ({ profile }) => {
             console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
+            count_total_lead_provided()
 
         }
         catch (erorr) {
             console.log(erorr)
         }
 
+    }
+    function count_total_lead_provided(){
+        var prev_instance = dataLoaded
+        var local = { name: 'Total', value: 0, fill: '#6AA121' }
+        var total=0
+        prev_instance.forEach((item,index)=>{
+            total=total+item.value
+        })
+        local.value=total
+        prev_instance.push(local)
+        loadData(prev_instance)
     }
 
     function dataMiner() {
@@ -244,7 +256,8 @@ const Investigation = ({ profile }) => {
                         <Tooltip />
                         <Legend legendType='circle' />
                         <CartesianGrid strokeDasharray="3 3" />
-                        <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                        <Bar
+                         dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
                     </BarChart>
                     {/* <PieChart width={400} height={400}>
                         <Pie

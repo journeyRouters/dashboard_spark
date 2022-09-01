@@ -110,7 +110,7 @@ function App() {
 
   }
   function page(args) {
-    console.log(args)
+    // console.log(args)
     setPage(args)
   }
 

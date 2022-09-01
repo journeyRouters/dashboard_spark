@@ -8,7 +8,7 @@ const db = getFirestore(app);
 
 
 const Account_converted = () => {
-    console.log('ACCOUNTS')
+    // console.log('ACCOUNTS')
     const currentDate = new Date();
     var times = 0
     const[lead_data,set_lead_data]=useState([])
@@ -23,7 +23,7 @@ const Account_converted = () => {
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            console.log(converted)
+            // console.log(converted)
             set_lead_data(converted)
         });
     }, []);

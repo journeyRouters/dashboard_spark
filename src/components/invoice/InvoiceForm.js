@@ -53,7 +53,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
         else {
             tempList = tempList.filter(element => element !== e.target.name);
         }
-        console.log(tempList)
+        // console.log(tempList)
 
         setdeliverableItem(tempList)
     }
@@ -80,7 +80,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     }
     function handleInstallments(event, index) {
         let data = [...installment];
-        console.log(data)
+        // console.log(data)
         data[index][event.target.name] = event.target.value;
         setinstallment(data);
 
@@ -88,7 +88,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     function addMOreInstallments() {
         let newInstallment = { Date: '', amount: 0,Status:'Pending',TransactionId:'',amountRecived:'',yourname:'' }
         setinstallment([...installment, newInstallment])
-        console.log(documents)
+        // console.log(documents)
     }
     function removeInstallments(index) {
         let data = [...installment];

@@ -75,8 +75,8 @@ const Userunitcomponent = (props) => {
     }
     async function updateUserDetails() {
         try{
-            console.log({name ,access_type,WhatsApp_number,contact})
-            console.log(props.data)
+            // console.log({name ,access_type,WhatsApp_number,contact})
+            // console.log(props.data)
             const user = doc(db, "Profile", props.data.uid);
             await updateDoc(user,{
                 name: name,
@@ -88,7 +88,6 @@ const Userunitcomponent = (props) => {
                 email: props.data.email,
                 following_lead: lead_list
             });
-            console.log("pp")
             props.datahandle()
             handelClose()
         }

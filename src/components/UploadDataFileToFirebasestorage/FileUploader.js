@@ -10,7 +10,7 @@ const FileUploader = ({Filepath  ,folderName}) => {
     const uploadTask = uploadBytesResumable(storageRef, Filepath[0]);
     uploadTask.on('state_changed',
       (snapshot) => {
-        console.log(snapshot)
+        // console.log(snapshot)
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -32,7 +32,7 @@ const FileUploader = ({Filepath  ,folderName}) => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
+          // console.log('File available at', downloadURL);
         });
       }
     );

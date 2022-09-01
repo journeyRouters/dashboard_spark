@@ -26,7 +26,7 @@ const MaldiveSuggestion = ({
     const [usethisKey, setusethisKey] = useState(false)
     function syncDataToMapper(data) {
         let list = []
-        console.log(data.value)
+        // console.log(data.value)
         list.push(data)
         setselectedData(data.value)
     }
@@ -39,7 +39,7 @@ const MaldiveSuggestion = ({
         setusethisKey(!usethisKey)
     }
     function handleSearchOption(e) {
-        console.log(typeof (e.target.value))
+        // console.log(typeof (e.target.value))
         setSearchKey(parseInt(e.target.value))
     }
     async function getSampleQuotes(Destination) {
@@ -67,7 +67,7 @@ const MaldiveSuggestion = ({
             console.log(e)
         }
 
-        console.log(list)
+        // console.log(list)
     }
 
     return (

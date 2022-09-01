@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const InstallmentsMapper = ({ index, handleInstallments, data }) => {
-    console.log(data)
+    // console.log(data)
     const[satatus,setstatus]=useState(data.Status)
      function statusHandler(response){
         setstatus(response.target.value)

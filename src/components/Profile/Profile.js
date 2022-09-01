@@ -42,7 +42,7 @@ const Profile = (
         flight
     }
 ) => {
-    console.log(itineary)
+    // console.log(itineary)
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"
@@ -92,7 +92,7 @@ const Profile = (
         if (!indicator) {
             uploadFlightsScreenShots()
         }
-        console.log(destinationName)
+        // console.log(destinationName)
 
     }, []);
 

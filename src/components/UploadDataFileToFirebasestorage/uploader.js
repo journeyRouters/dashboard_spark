@@ -6,7 +6,7 @@ const storage = getStorage();
 export default async function handleSubmit() {
     const handles = await window.showOpenFilePicker({ multiple: false });
     const file = await fromEvent(handles);
-    console.log(file)
+    // console.log(file)
     // e.preventDefault()
     // const file = e.target[0]?.files[0]
 
@@ -17,7 +17,7 @@ export default async function handleSubmit() {
 
     uploadTask.on('state_changed',
         (snapshot) => {
-            console.log(snapshot)
+            // console.log(snapshot)
             switch (snapshot.state) {
                 case 'paused':
                     console.log('Upload is paused');

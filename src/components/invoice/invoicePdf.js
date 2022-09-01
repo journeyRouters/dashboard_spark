@@ -39,7 +39,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
 
             if (docSnap.exists()) {
                 setInvoiceData(docSnap.data())
-                console.log((docSnap.data()))
+                // console.log((docSnap.data()))
                 setEditinvoicedDate(docSnap.data().date)
                 setEditaddress(docSnap.data().BillingAddress)
             } else {

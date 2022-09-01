@@ -28,7 +28,7 @@ const TestTable = () => {
             });
             setlastVisible(querySnapshot.docs[querySnapshot.docs.length - 1])
             setLead_data(list)
-            console.log(list)
+            // console.log(list)
             setopen(false)
         }
         else {
@@ -180,7 +180,7 @@ const TestTable = () => {
         }
         editItem() {
             alert("edit " + this.props.rowData.Traveller_name);
-            console.log(this.props.rowData, this.props.tdData);
+            // console.log(this.props.rowData, this.props.tdData);
         }
         render() {
             return (
@@ -223,7 +223,7 @@ const TestTable = () => {
         }
         deleteItem() {
             alert("delete " + this.props.rowData.name);
-            console.log(this.props.rowData, this.props.tdData);
+            // console.log(this.props.rowData, this.props.tdData);
         }
         render() {
             return (

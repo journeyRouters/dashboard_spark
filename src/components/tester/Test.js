@@ -8,7 +8,7 @@ import './testcss.css'
 import moment from 'moment';
 const Test = () => {
    function imgonChange(e) {
-      console.log(typeof (e))
+      // console.log(typeof (e))
    }
    const data = [
       { name: "Create quote", value: 80, fill: 'yellow' },
@@ -28,13 +28,13 @@ const Test = () => {
    }
    useEffect(() => {
       var date=new Date()
-      console.log(moment(date).format('MMMM'))
+      // console.log(moment(date).format('MMMM'))
    }, );
    function keydown(event) {
       document.addEventListener('Enter', (event) => {
          var keyValue = event.key;
          // var codeValue = event.code;
-         console.log("Enter event, keyValue: " + keyValue);
+         // console.log("Enter event, keyValue: " + keyValue);
       }, false);
    }
    function handlePaste(e) {
@@ -62,12 +62,12 @@ const Test = () => {
    async function convertObjectToLink(files) {
       try {
          const file = files
-         console.log(file)
+         // console.log(file)
          // debugger
          var local_link_list = [...ScreenShotsurl]
          const url = URL.createObjectURL(file)
          local_link_list.push(url)
-         console.log(url)
+         // console.log(url)
 
          setScreenShotsurl(local_link_list)
       }
@@ -76,7 +76,7 @@ const Test = () => {
    }
    function onAdd(event) {
       // const fileObject = event.affectedFiles[0];
-      console.log(event);
+      // console.log(event);
       // setfiles(event.newState)
       // convertObjectToLink(fileObject)
 
@@ -94,7 +94,7 @@ const Test = () => {
    };
 
    function deletefrom(index) {
-      console.log(index, 'done', screenshotsObject.ScreenShotsurl)
+      // console.log(index, 'done', screenshotsObject.ScreenShotsurl)
       var OperationObjects = [...screenshotsObject]
       var oprationLinks = [...ScreenShotsurl]
       OperationObjects.splice(index, 1)

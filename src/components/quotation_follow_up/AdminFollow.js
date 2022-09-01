@@ -28,7 +28,7 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
         /**this function is to filter the current user from the all user data */
         setflg(false)
         var profile_of_user = profile.filter((data) => data.uid === uid)
-        console.log(profile_of_user[0].uid)
+        // console.log(profile_of_user[0].uid)
         setCurrentuser(profile_of_user[0])
 
     }
@@ -54,7 +54,7 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list);
+                // console.log(list);
                 // setopen(false)
                 setflg(true)
             }

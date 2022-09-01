@@ -121,10 +121,10 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     }
     async function updateLinkAndPathOfUploadedVouchers(path, link, name) {
         const docref = doc(db, "Trip", data.TripId);
-        console.log(target)
+        // console.log(target)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
-            console.log(data.Vouchers_flight)
+            // console.log(data.Vouchers_flight)
             let content =
             {
                 path: path,
@@ -141,7 +141,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
         }
         if (target === 'hotels') {
             let previousData = latestData.Vouchers_hotels
-            console.log(data.Vouchers_hotels)
+            // console.log(data.Vouchers_hotels)
             let content =
             {
                 path: path,
@@ -150,7 +150,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 name: name
             }
             previousData.push(content)
-            console.log("list to set", content, previousData)
+            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_hotels": previousData
             });
@@ -158,7 +158,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
         }
         if (target === 'others') {
             let previousData = latestData.Vouchers_others
-            console.log(data.Vouchers_others)
+            // console.log(data.Vouchers_others)
             let content =
             {
                 path: path,
@@ -167,7 +167,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 name: name
             }
             previousData.push(content)
-            console.log("list to set", content, previousData)
+            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_others": previousData
             });
@@ -229,7 +229,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
+                    // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
@@ -243,7 +243,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
         getdatalatest_for_voucher()
     }, [details]);
     function ondelete(target, path, index) {
-        console.log(target, path, index)
+        // console.log(target, path, index)
 
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)
@@ -286,7 +286,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
+                    // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
@@ -297,11 +297,11 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     }
     async function delete_vouchers_from_firebase_firestore(target, del_index) {
         const docref = doc(db, "Trip", data.TripId);
-        console.log(target, del_index)
+        // console.log(target, del_index)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
             previousData.splice(del_index, 1);
-            console.log(previousData)
+            // console.log(previousData)
             // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_flight": previousData
@@ -328,7 +328,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             let previousData = data.vouchers_idproof
 
             previousData.splice(del_index, 1)
-            console.log(previousData)
+            // console.log(previousData)
 
             await updateDoc(docref, {
                 "vouchers_idproof": previousData

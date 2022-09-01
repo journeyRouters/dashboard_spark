@@ -72,7 +72,7 @@ const Createquote = (props) => {
 
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
-        console.log(lead_data)
+        // console.log(lead_data)
         var new_tableData = pre_tableData.filter((data) => data.TripId !== tripid)
         setLead_data(new_tableData)
 

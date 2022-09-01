@@ -26,7 +26,7 @@ const Investigation = ({ profile }) => {
                 // console.log(doc.data().name)
             });
             setAllUserprofile(Profile)
-            console.log(Profile,);
+            // console.log(Profile,);
             getConvertedByAllSpokes(Profile)
 
 
@@ -34,7 +34,7 @@ const Investigation = ({ profile }) => {
     }
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
-        console.log(AllUserprofile)
+        // console.log(AllUserprofile)
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
@@ -49,7 +49,7 @@ const Investigation = ({ profile }) => {
                 });
                 user_analytics.value = list.length
                 holdAlluserAnalytics.push(user_analytics)
-                console.log(list)
+                // console.log(list)
 
 
             }
@@ -64,7 +64,7 @@ const Investigation = ({ profile }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        console.log(holdAlluserAnalytics)
+        // console.log(holdAlluserAnalytics)
         setdataAvailablityFlg(true)
 
     }
@@ -156,7 +156,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
+            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
             count_total_lead_provided()

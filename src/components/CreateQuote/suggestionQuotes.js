@@ -51,7 +51,7 @@ const SuggestionQuotes = ({
         var date=new Date()
         var formateDate=moment(date).format("YYYY-MM-DD")
         date.setDate(date.getDate()-4)
-        console.log(formateDate)
+        // console.log(formateDate)
         var quotesref = collection(db, "Quote")
         const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination),
             where("value.count_days","==",Lead_data_to_be_quoted.Travel_Duration),
@@ -69,7 +69,7 @@ const SuggestionQuotes = ({
                 });
                 setsampleQuotes(list)
                 // setselectedData(list[0])
-                console.log(list)
+                // console.log(list)
                 // setLead_data(list[0].value.travel_data)
             }
         }
@@ -77,7 +77,7 @@ const SuggestionQuotes = ({
             console.log(e)
         }
 
-        console.log(list)
+        // console.log(list)
     }
 
     return (

@@ -4,7 +4,7 @@ import app from '../required';
 import Userunitcomponent from './UserUnitComponent';
 
 const Usercontrol = (props) => {
-    console.log(props)
+    // console.log(props)
     const [user, setUser] = useState([])
     const db = getFirestore(app);
     async function datahandle() {

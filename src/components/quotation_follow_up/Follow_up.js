@@ -292,7 +292,7 @@ async  function handlefilter(){
         )
     }
     else if(lead.length==1){
-        console.log('get',lead[0])
+        // console.log('get',lead[0])
         q=query(collection(db,'Trip'),
         where("assign_to.uid", "==", props.auth.uid),
         where("month","==",currentMonth),
@@ -329,7 +329,7 @@ async  function handlefilter(){
                 list.push(doc.data())
             });
             setLead_data(list)
-            console.log(list);
+            // console.log(list);
             setStatus(0)
             setopen(false)
 

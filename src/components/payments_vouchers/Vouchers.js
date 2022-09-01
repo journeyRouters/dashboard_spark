@@ -31,7 +31,7 @@ const Vouchers = (props) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list);
+                // console.log(list);
                 setopen(false)
             }
         }

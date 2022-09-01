@@ -9,7 +9,7 @@ const MaldivesInclusion = (props) => {
         props.setinclusion(inclusionFeed)
         props.onClose()
     }
-    console.log(inclusionFeed)
+    // console.log(inclusionFeed)
     function BooleanCaseResolver(value) {
         /**a case is not working
          * when it should parse string value to boolean

@@ -41,7 +41,7 @@ const SuperAdmin = (props) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
                 Profile.push(doc.data());
-                console.log(doc.data())
+                // console.log(doc.data())
             });
             setprofile(Profile)
             // console.log(Profile,);
@@ -79,7 +79,7 @@ const SuperAdmin = (props) => {
 
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
-        console.log(lead_data)
+        // console.log(lead_data)
         var new_tableData = pre_tableData.filter((data) => data.TripId !== tripid)
         setLead_data(new_tableData)
 
@@ -173,7 +173,7 @@ const SuperAdmin = (props) => {
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
-        console.log(profile_of_user)
+        // console.log(profile_of_user)
         setCurrentuser(profile_of_user)
 
     }

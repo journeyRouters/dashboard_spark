@@ -43,7 +43,7 @@ const Maldivespdf = ({
     onClosePdf,
     updateTableDataAfterQuote
 }) => {
-    console.log(profile)
+    // console.log(profile)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -472,7 +472,6 @@ const Maldivespdf = ({
                                     {
                                         NightDataFields.map((data, index) => (
                                             <>
-                                                {console.log(data)},
                                                 <span style={{ color: 'yellow', fontSize: '1.5rem', marginLeft: '1rem' }} >{data.Night.map((data_, index_) => (<>{data_.value},</>))}</span><br />
                                                 <img className="inclusionPage_img"
                                                     // src={`assets/destination/${Property.value}/${data.RoomType.value}.png`}

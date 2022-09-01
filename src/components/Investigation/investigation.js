@@ -1,11 +1,11 @@
+import { Modal } from '@material-ui/core';
 import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { DynamicBarChart } from 'react-dynamic-charts';
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, Pie, PieChart, Tooltip, XAxis, YAxis } from "recharts";
-import app from '../required';
 import "react-dynamic-charts/dist/index.css";
-import { Modal } from '@material-ui/core';
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import app from '../required';
 const db = getFirestore(app);
 
 const Investigation = ({ profile }) => {
@@ -41,13 +41,15 @@ const Investigation = ({ profile }) => {
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Converted'), where("month", "==", currentMonth), where("quotation_flg", "==", true));
+                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true),where("month", "==", currentMonth));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
+                    // console.log(doc.data())
                 });
                 user_analytics.value = list.length
                 holdAlluserAnalytics.push(user_analytics)
+                console.log(list)
 
 
             }
@@ -145,7 +147,8 @@ const Investigation = ({ profile }) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", profile.uid),
-                where('Lead_Status', 'in', ['Converted']), where("quotation_flg", "==", true));
+                where('Lead_Status', 'in', ['Converted']), where("quotation_flg", "==", true),
+                where("month", "==", currentMonth));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

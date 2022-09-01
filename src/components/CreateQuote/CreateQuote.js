@@ -7,6 +7,7 @@ import app from '../required';
 import Box from './Box';
 import Maldives from './Maldives';
 import MaldiveSuggestion from './MaldiveSuggestion';
+import SelfLeadgenrator from './SelfLeadgenrator';
 import SuggestionQuotes from './suggestionQuotes';
 import './TripComponent.css';
 
@@ -25,6 +26,10 @@ const Createquote = (props) => {
     const [SuggestionModal, settransfermodal] = useState(false)
     const [lastVisible, setlastVisible] = useState(null)
     const [sampleQuotes, setsampleQuotes] = useState([])
+    const[AddLead, setAddLead]=useState(false)
+    function AddLeadButtonController(){
+        setAddLead(true)
+    }
 
     function handleSuggestion(data) {
         set_uni_data(data)
@@ -167,6 +172,8 @@ const Createquote = (props) => {
 
                         <button onClick={() => getLeadOnBoard()}>Refresh</button>
                         <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+                        <button onClick={()=>AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
+                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard}/>
                     </div>
                     <Modal open={SuggestionModal} onClose={closeMaldivesSuggestionModal} >
                         {
@@ -204,7 +211,16 @@ const Createquote = (props) => {
                                     </Modal> :
                                     <>
 
-                                        <div className='no_data'></div>
+                                        <div className='no_data'>
+                                        {/* <iframe 
+                                        width="560" height="315"
+                                         src="https://www.youtube.com/embed/yXWw0_UfSFg" 
+                                         title="YouTube video player" frameborder="0" 
+                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                          allowfullscreen>
+
+                                          </iframe> */}
+                                        </div>
                                     </>
                             }
 

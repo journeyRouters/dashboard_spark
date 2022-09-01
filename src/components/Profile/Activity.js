@@ -15,6 +15,10 @@ export const avtivityList = {
             value: 'Arival'
         },
         {
+            label:'BaliSafari',
+            value:'BaliSafari'
+        },
+        {
             label: 'Departure',
             value: 'Departure'
         },
@@ -160,6 +164,10 @@ export const avtivityList = {
         {
             label: "Atal Tunnel",
             value: "AtalTunnel",
+        },
+        {
+            label:'Bus',
+            value:'Bus'
         },
         {
             label: "Bhagsu Waterfall",

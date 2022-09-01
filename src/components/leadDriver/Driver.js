@@ -93,7 +93,7 @@ const Driver = (props) => {
                     });
                 }
                 updateTripCounter(countUpdater)
-                updateHash(HashTable    )
+                updateHash(HashTable)
                 getLeadByDate()
                 // console.log(rows[1][0])
                 // uploadFileOnStorage(path,'dingdong')

@@ -95,7 +95,7 @@
 .no_data {
     /* background-image: url("https://i.pinimg.com/originals/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.png"); */
     background-image: url("https://media2.giphy.com/media/RMwgs5kZqkRyhF24KK/200.gif");
-    /* background-image: url('https://cdn.dribbble.com/users/2059463/screenshots/4828452/polizas_gif.gif'); */
+    /* background-image: url('https://c.tenor.com/_eA5w8vUqCUAAAAC/drugdo-jugdo.gif'); */
     height: 35rem;
     background-position: center;
     background-repeat: no-repeat;
@@ -265,4 +265,43 @@
 
 .Autocomplete {
     border: linear-gradient(to right, red, yellow);
+}
+
+.addNewLeadButton {
+    height: 2rem;
+    width: 7em;
+    border: 3px solid yellow;
+    border-radius: 6px;
+    background: aquamarine;
+}
+
+.SelfLeadDiv {
+    background-color: #FFFFFF;
+    width: 28rem;
+    border-radius: 10px;
+   
+}
+
+.SelfLeadGenParentDiv {
+    display: flex;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.SelfLeadGenleftDiv {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.SelfLeadGenRightDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40rem;
+    margin-left: 2rem;
+}
+.SelfLeadButtonDiv{
+    display: flex;
+    justify-content: space-around;
 }

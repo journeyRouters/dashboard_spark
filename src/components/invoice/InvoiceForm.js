@@ -27,8 +27,12 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [invoice, setInvoice] = useState(false)
     const [selected_pdf_data, setpdf] = useState([])
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
+    const[TCS,setTCS]=useState(0)
     const db = getFirestore(app);
     // console.log(selected_pdf_data)
+    function TCShandler(e){
+        setTCS(e.target.value)
+    }
     function controllDate(e){
         setcurrentday(e.target.value)
     }
@@ -173,7 +177,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </input>
                         </div>
                         <div className='BillingAddress'>
-                            <label>Flight Cost</label>
+                            <label>Flight Cost </label>
                             <input className='txtArea' name='Flight_cost' defaultValue={0} value={flight_cost}
                             // onChange={(event) => handleFlightCost(event)} 
                             >
@@ -194,8 +198,12 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </input>
                         </div>
                         <div className='BillingAddress'>
+                            <label>TCS (5%) = {parseInt((5/100)*(parseInt(flight_cost) + parseInt(visa_cost) + parseInt(land_package)))}</label>
+                            <input className='textArea' value={TCS}  onChange={(e)=>TCShandler(e)}></input>
+                        </div>
+                        <div className='BillingAddress'>
                             <label>Total Cost</label>
-                            <input className='txtArea' value={parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package)}  >
+                            <input className='textArea' value={parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package)+parseFloat(TCS)}  >
                             </input>
                         </div>
                     </div>
@@ -309,6 +317,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                         <div>
                             <InvoicePdf
                                 installment={installment}
+                                TCS={TCS}
                                 deliverable_item={deliverable_item}
                                 selected_pdf_data={selected_pdf_data}
                                 documents={documents}

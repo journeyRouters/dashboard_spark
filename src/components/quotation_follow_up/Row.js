@@ -503,6 +503,7 @@ const Row = (props) => {
                                                             installment={invoice.installment}
                                                             deliverable_item={invoice.deliverable_item}
                                                             selected_pdf_data={invoice.selected_pdf_data}
+                                                            TCS={invoice.TCS?invoice.TCS:0}
                                                             documents={invoice.documents}
                                                             auth={props.auth}
                                                             profile={props.profile}

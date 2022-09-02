@@ -197,14 +197,10 @@
 }
 
 .invoiceDownload_jr_invoice {
-    width: 13%;
+    /* width: 13%; */
     font-weight: 600;
     background: #e4fe1e;
-    border: none;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 2rem;
 }
 
 .customer_care_details_jr_invoice {
@@ -266,7 +262,7 @@
 
 
 
-.paymentsSchedual{
+.paymentsSchedual {
     height: 5rem;
     width: 44.5rem;
     margin-left: 4rem;
@@ -275,7 +271,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.Date{
+
+.Date {
     border: 2px solid black;
     margin-left: 4rem;
     height: 2rem;
@@ -286,7 +283,8 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
-.DateValue{
+
+.DateValue {
     border: 2px solid black;
     margin-left: 4rem;
     height: 3rem;
@@ -297,19 +295,23 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
-.PaymentsSchedualLine{
+
+.PaymentsSchedualLine {
     width: 1px;
     background: black;
 }
-.mappingArea{
+
+.mappingArea {
     display: flex;
 }
-.reducer{
+
+.reducer {
     margin-right: -4rem;
 }
-.grandtotal{
-    height: 10rem;
-    width: 40rem;
+
+.grandtotal {
+    height: 11rem;
+    width: 42rem;
     margin-left: 11rem;
     margin-top: 2rem;
     background-image: url("/public/assets/InvoiceAssets/grandtotal.png");
@@ -318,19 +320,52 @@
     background-size: cover;
 
 }
-.total{
-    margin-left: 2rem;
+
+.total {
+    margin-left: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding-top: 1.5rem;
+    padding-top: 0.3rem;
+    width: 33rem;
+    margin-bottom: 1.3rem;
 
 }
-.secondpage{
+.total2{
+    margin-left: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 1.3rem;
+    width: 33rem;
+    margin-bottom: 1.3rem;
+
+}
+
+.tcsNotice {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    margin-left: 9rem;
+    font-weight: 600;
+    text-decoration: overline;
+    font-style: italic;
+}
+
+.secondpage {
     width: 55rem;
     height: 78rem;
     background-image: url("/public/assets/InvoiceAssets/JRINVOICEPAGE2.png");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.grandTotal_Tcs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 5rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-top: 1rem;
 }

@@ -66,13 +66,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             if (this.name == null ||
                 this.Destination == null ||
                 this.Travel_Duration == null ||
-                this.Departure_City == null ||
                 this.Contact_Number == null ||
                 this.pax == null ||
-                this.Child == null ||
-                this.Budget == null ||
-                this.Travel_date == null ||
-                this.Email == null
+                this.Travel_date == null
             ) { return true }
             return false
         }
@@ -249,7 +245,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         <Modal open={open} onClose={onclose} style={{ display: "grid", justifyContent: "center", marginTop: "2rem", overflowY: 'scroll' }}>
 
             <div className='SelfLeadDiv'>
-                <h3>SELF LEAD</h3>
+                <h3 style={{marginLeft:'10rem'}}>SELF LEAD</h3>
                 <div className='SelfLeadGenParentDiv'>
                     <div className='SelfLeadGenleftDiv'>
                         <p>Name </p>
@@ -276,21 +272,21 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                         <p>:-</p>
                     </div>
                     <div className='SelfLeadGenRightDiv'>
-                        <input onChange={(e) => leadData.Assigner('name', e.target.value)}></input>
-                        <input onChange={(e) => leadData.Assigner('Contact_Number', e.target.value)} ></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('name', e.target.value)}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Contact_Number', e.target.value)} ></input>
                         <input onChange={(e) => leadData.Assigner('Email', e.target.value)}></input>
                         <Select
                             placeholder='Destination'
-                            className='select_opt'
+                            className='required'
                             closeMenuOnSelect={true}
                             components={animatedComponents}
                             options={Destinations}
                             onChange={(e) => leadData.Assigner('Destination', e.value)}
                         />
                         <input onChange={(e) => leadData.Assigner('Departure_City', e.target.value)}></input>
-                        <input onChange={(e) => leadData.Assigner('Travel_Duration', e.target.value)} type={'number'}></input>
-                        <input onChange={(e) => leadData.Assigner('Travel_date', e.target.value)} type={'date'}></input>
-                        <input onChange={(e) => leadData.Assigner('Pax', e.target.value)} type={'number'}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Travel_Duration', e.target.value)} type={'number'}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Travel_date', e.target.value)} type={'date'}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Pax', e.target.value)} type={'number'}></input>
                         <input onChange={(e) => leadData.Assigner('Child', e.target.value)} type={'number'}></input>
                         <input onChange={(e) => leadData.Assigner('Budget', e.target.value)} type={'number'}></input>
                     </div>

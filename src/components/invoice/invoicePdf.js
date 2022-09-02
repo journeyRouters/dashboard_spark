@@ -2,10 +2,11 @@ import { PDFExport } from "@progress/kendo-react-pdf";
 import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
+import { Modal } from '@material-ui/core';
 const db = getFirestore(app);
 
 
-const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_item,BillingAddress,documents, profile, hint, getinvoice:invoiceOnPrepage }) => {
+const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverable_item, BillingAddress, documents, profile, hint, getinvoice: invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
@@ -15,20 +16,23 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     var today = new Date();
     const [comment_inclusion, set_comment_inclusion] = useState([])
     const [Comment_Exclusion, set_Comment_Exclusion] = useState([])
-    const[invoicedDate,setInvoiceDate]=useState(date?date:selected_pdf_data.date)
-    const[EditinvoicedDate,setEditinvoicedDate]=useState()
-    const[editaddress,setEditaddress]=useState()
-    const[address,setaddress]=useState(BillingAddress?BillingAddress:selected_pdf_data.BillingAddress)
+    const [invoicedDate, setInvoiceDate] = useState(date ? date : selected_pdf_data.date)
+    const [EditinvoicedDate, setEditinvoicedDate] = useState()
+    const [editaddress, setEditaddress] = useState()
+    const[wait,setWait]=useState(false)
+    const [address, setaddress] = useState(BillingAddress ? BillingAddress : selected_pdf_data.BillingAddress)
     function handleExportWithComponent() {
+        setWait(true)
         pdfExportComponent.current.save();
         if (hint) {
             setInvoice()
             invoiceOnPrepage()
 
         }
-        else{
-            
+        else {
+
         }
+        setWait(false)
         // pdfgenrator
     };
     const inclusion_data = selected_pdf_data.inclusion_data
@@ -64,8 +68,9 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
             updated_by: profile.email,
             selected_pdf_data: selected_pdf_data,
             finalPackageId: selected_pdf_data.pdf_name,
-            BillingAddress:BillingAddress,
-            date:date
+            BillingAddress: BillingAddress,
+            date: date,
+            TCS: parseInt(TCS)
         });
     }
     // async function updateTrip() {
@@ -97,10 +102,10 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
     }, []);
     // let val = (2500000).toLocaleString('en');
     var formatter = new Intl.NumberFormat('en-US', {})
-    let flight_cost=parseInt(selected_pdf_data.flightcost)
-    let land_package=parseInt(selected_pdf_data.landPackage)
-    let visa_cost=parseInt(selected_pdf_data.visacost)
-    var total=flight_cost+land_package+visa_cost
+    let flight_cost = parseInt(selected_pdf_data.flightcost)
+    let land_package = parseInt(selected_pdf_data.landPackage)
+    let visa_cost = parseInt(selected_pdf_data.visacost)
+    var total = flight_cost + land_package + visa_cost + parseInt(TCS)
     return (
         <>
             <PDFExport
@@ -126,9 +131,9 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                                     </div>
                                     <div className="TitleValue">
                                         <p>:- {selected_pdf_data.travel_data.Traveller_name}</p>
-                                        <p>:- {hint?invoicedDate:EditinvoicedDate}</p>
+                                        <p>:- {hint ? invoicedDate : EditinvoicedDate}</p>
                                         <p>:- {selected_pdf_data.travel_data.TripId}</p>
-                                        <p>:- {hint?address:editaddress}</p>
+                                        <p>:- {hint ? address : editaddress}</p>
 
                                     </div>
                                 </div>
@@ -197,7 +202,7 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                                                         {/* <span>
                                                             <img src="/assets/InvoiceAssets/TestingLogo.png" width='35px'/>
                                                             PENDING</span> */}
-                                                            <p>{data.Status}</p>
+                                                        <p>{data.Status}</p>
                                                     </div>
                                                 </>))
                                             }
@@ -210,10 +215,35 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
 
                             </div>
                             <div className="grandtotal">
-                                <div className="total">
-                                    <h1>Grand Total  :- INR  {formatter.format(total)}/-</h1>
-                                    {/* <h1>-</h1> */}
+                                <div className={TCS>0?"total":"total2"}>
+                                    {
+                                        TCS > 0 ? <>
+                                            <div className="grandTotal_Tcs">
+                                                <span> Grand Total</span>
+                                                <span>+</span>
+                                                <span>TCS (5%)</span>
+                                            </div>
+                                            <h1>
+                                                :- INR  &nbsp;
+                                                {formatter.format(total)}/-
+                                            </h1>
+
+                                        </> : <>
+                                            <h1>
+                                                Grand Total
+                                                :- INR  &nbsp;
+                                                {formatter.format(total)}/-</h1>
+                                        </>
+                                    }
                                 </div>
+                                {
+                                    TCS > 0 ? <>
+                                        <div className="tcsNotice">
+                                            <span>TCS 5% on invoiced value. you can Claim the same while filling ITR</span>
+                                        </div>
+                                    </> : <></>
+                                }
+
 
                             </div>
                             <img src="/assets/InvoiceAssets/footer.png" width='880px' />
@@ -226,6 +256,11 @@ const InvoicePdf = ({date, selected_pdf_data, installment, auth, deliverable_ite
                 </div>
 
             </PDFExport>
+            <Modal open={wait} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                <>
+                    <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
+                </>
+            </Modal>
             <button className="invoiceDownload_jr_invoice" onClick={handleExportWithComponent}>downloadURL</button>
         </>
     );

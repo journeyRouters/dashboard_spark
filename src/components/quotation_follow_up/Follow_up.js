@@ -539,7 +539,7 @@ async  function handlefilter(){
                                     </TableHead>
                                     <TableBody>
                                         {lead_data &&
-                                            lead_data.map((row, index) => (
+                                            (lead_data.slice(0).reverse()).map((row, index) => (
                                                 <Row
                                                     auth={props.auth}
                                                     profile={props.profile}

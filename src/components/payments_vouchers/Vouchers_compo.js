@@ -409,6 +409,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                         deliverable_item={invoice.deliverable_item}
                                         selected_pdf_data={invoice.selected_pdf_data}
                                         documents={invoice.documents}
+                                        TCS={invoice.TCS}
                                         hint={false}
                                     />
                                 </div>

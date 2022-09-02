@@ -125,6 +125,7 @@ const Row = (props) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
+                // console.log(docSnap.data())
                 // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
             } else {
                 console.log("No such document!");

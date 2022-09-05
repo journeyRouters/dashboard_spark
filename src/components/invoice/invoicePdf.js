@@ -105,8 +105,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverab
     let flight_cost = parseInt(selected_pdf_data.flightcost)
     let land_package = parseInt(selected_pdf_data.landPackage)
     let visa_cost = parseInt(selected_pdf_data.visacost)
-    var total = flight_cost + land_package + visa_cost 
-    console.log(TCS)
+    var total = flight_cost + land_package + visa_cost+TCS
     return (
         <>
             <PDFExport

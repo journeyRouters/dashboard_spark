@@ -49,7 +49,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                // console.log(docSnap.data().finalPackageId)
+                console.log(docSnap.data())
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");

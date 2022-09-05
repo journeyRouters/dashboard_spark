@@ -303,7 +303,7 @@ const Maldivespdf = ({
             </Modal>
             <PDFExport
                 ref={pdfExportComponent}
-                fileName={`${data.Traveller_name}-${Property.label}`}
+                fileName={`${data.Traveller_name}-${Property.label}.pdf`}
                 forcePageBreak=".page-break"
             >
                 <div className={`pre ${layoutSelection.value}`}>

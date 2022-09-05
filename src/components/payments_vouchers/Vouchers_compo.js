@@ -26,7 +26,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)
     function finalPackageOpen() {
-        console.log(finalPackage)
+        // console.log(finalPackage)
         setpackageOpener(true)
     }
     function closePackage() {
@@ -49,7 +49,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                console.log(docSnap.data())
+                // console.log(docSnap.data())
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
@@ -83,7 +83,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 collect.push(doc.data())
             });
             setFinalPackage(collect[0].value)
-            console.log(collect[0].value)
+            // console.log(collect[0].value)
         }
         catch (e) {
             console.log(e)
@@ -114,7 +114,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
         if (docSnap.exists()) {
             setlatestData(docSnap.data())
-            console.log("Document data:", docSnap.data());
+            // console.log("Document data:", docSnap.data());
         } else {
             console.log("No such document!");
         }

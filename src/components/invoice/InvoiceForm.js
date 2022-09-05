@@ -31,7 +31,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const db = getFirestore(app);
     // console.log(selected_pdf_data)
     function TCShandler(e){
-        setTCS(e.target.value)
+        setTCS(parseInt(e.target.value))
     }
     function controllDate(e){
         setcurrentday(e.target.value)

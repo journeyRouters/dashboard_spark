@@ -23,7 +23,7 @@ const db = getFirestore(app);
 
 const Row = (props) => {
     const { row } = props;
-    // console.log(row)
+    // console.log(row.assigned_date_time.toDate())
     const [invoice, setinvocice] = useState()
     const [Invoice_flg, setInvoice] = useState(false)
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
@@ -156,10 +156,7 @@ const Row = (props) => {
             // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
-                Lead_Status: Lead_Status,
-                Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
                 updated_last: today
-
             }, { merge: true });
 
             // latestTripData()
@@ -182,9 +179,7 @@ const Row = (props) => {
         checkForLastUpdate()
 
     }, []);
-    // function OpenUpdater() {
-    //     setopenupdater(true)
-    // }
+   
     function sethint(hint) {
         setUpdate(hint)
         setopenupdater(true)
@@ -194,19 +189,9 @@ const Row = (props) => {
         setLead_Status(args.target.value)
     }
     function checkForLastUpdate() {
-        // var currentDay=new Date()
-        // row.updated_last
-        // var difference =  today-row.updated_last;
-        // var daysDifference = Math.floor(difference / 1000 / 60 );
-        // console.log({row.updated_last?(row.updated_last).getTime()})
-        // if(row.updated_last){
-        //     console.log(row.updated_last.valueOf()<today)
-        // }
         if (row.updated_last) {
             var commentLimit=new Date(row.updated_last.toDate());
             commentLimit.setDate(commentLimit.getDate()+3)
-            // console.log(commentLimit)
-            // console.log(commentLimit<today)
             setLimit(commentLimit<today)
 
         }

@@ -229,3 +229,10 @@
 .Searchbutton:active {
     transform: translateY(4px);
 }  
+.assignDatePicker{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3.1rem;
+    font-size: 1.1em;
+}

@@ -103,7 +103,7 @@ const RoomType = {
             value: "BeachSuite",
         },
         {
-            label: "BeachVilla",
+            label: "BeachVillaWithPool",
             value: "BeachVilla",
         },
         {
@@ -111,7 +111,7 @@ const RoomType = {
             value: "FamilyDuplexBeachVilla",
         },
         {
-            label: "WaterVilla",
+            label: "WaterVillaWithPool",
             value: "WaterVilla",
         },
         {

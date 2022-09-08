@@ -14,7 +14,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     const [TripCounter, setTripCount] = useState()
     const [Hash, setHash] = useState()
     const [currentUser, setCurrentuser] = useState(undefined)
-    var leadData = {
+    const leadData = {
         name: null,
         Contact_Number: null,
         Destination: null,
@@ -26,6 +26,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         Child: null,
         Email: null,
         Assigner: function (key, value) {
+            console.log(this.Budget,this.Child,this.Contact_Number,this.Departure_City,this.Destination,this.name,this.Travel_date)
             switch (key) {
                 case 'name':
                     this.name = value
@@ -98,7 +99,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Maldives', label: 'Maldives', color: '666666' }
     ];
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "==", "User"));
+        const q = query(collection(db, "Profile"), 
+        // where("access_type", "==", "User")
+        );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
@@ -128,8 +131,10 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
         else{
         var profile_of_user = AllUserprofile.filter((data) => data.uid === uid)
-        setCurrentuser(profile_of_user[0])
-        // console.log(profile_of_user[0])
+        // console.log(leadData)
+        // setCurrentuser(profile_of_user[0])
+        saveToOthers(profile_of_user[0])
+        // console.log(leadData)
         }
     }
     async function getHashTable() {
@@ -231,7 +236,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             onclose()
         }
     }
-    function saveToOthers(){
+    function saveToOthers(currentUser){
         if (typeof currentUser === 'undefined'||leadData.Checker()){
             alert('select spokes/ insufficient data')
         }
@@ -260,16 +265,10 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                         <p>Budget </p>
                     </div>
                     <div className='SelfLeadGenleftDiv'>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
-                        <p>:-</p>
+                        {
+                            [0,1,2,3,4,5,7,8,9,10].map((data,index)=><p>:-</p>)
+                        }
+                        
                     </div>
                     <div className='SelfLeadGenRightDiv'>
                         <input className='required' onChange={(e) => leadData.Assigner('name', e.target.value)}></input>
@@ -303,7 +302,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                                 ))
                             }
                         </select>
-                        <button onClick={()=>saveToOthers()}>save</button>
+                        {/* <button onClick={()=>saveToOthers()}>save</button> */}
                     </div>
                     <div>
                         <button onClick={()=>saveForSelf()}>save for Self</button>

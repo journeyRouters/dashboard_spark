@@ -17,7 +17,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [currentdate, setcurrentday] = useState(moment(today).format('YYYY-MM-DD'))
     const animatedComponents = makeAnimated();
     const [installment, setinstallment] = useState([
-        { Date: '', amount: 0 ,Status:'Pending',TransactionId:'',amountRecived:'',yourname:''},])
+        { Date: '', amount: 0, Status: 'Pending', TransactionId: '', amountRecived: '', yourname: '' },])
     const [BillingAddress, setBillingAddress] = useState('')
     const [flight_cost, setFlight_cost] = useState(0)
     const [visa_cost, set_visa_cost] = useState(0)
@@ -27,13 +27,18 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [invoice, setInvoice] = useState(false)
     const [selected_pdf_data, setpdf] = useState([])
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
-    const[TCS,setTCS]=useState(0)
+    const [TCS, setTCS] = useState(0)
     const db = getFirestore(app);
     // console.log(selected_pdf_data)
-    function TCShandler(e){
-        setTCS(parseInt(e.target.value))
+    function TCShandler(e) {
+        if (e.target.value <= 0) {
+            setTCS(parseInt(0))
+        }
+        else {
+            setTCS(parseInt(e.target.value))
+        }
     }
-    function controllDate(e){
+    function controllDate(e) {
         setcurrentday(e.target.value)
     }
     function showinvoice() {
@@ -90,7 +95,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
 
     }
     function addMOreInstallments() {
-        let newInstallment = { Date: '', amount: 0,Status:'Pending',TransactionId:'',amountRecived:'',yourname:'' }
+        let newInstallment = { Date: '', amount: 0, Status: 'Pending', TransactionId: '', amountRecived: '', yourname: '' }
         setinstallment([...installment, newInstallment])
         // console.log(documents)
     }
@@ -198,12 +203,12 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </input>
                         </div>
                         <div className='BillingAddress'>
-                            <label>TCS (5%) = {parseInt((5/100)*(parseInt(flight_cost) + parseInt(visa_cost) + parseInt(land_package)))}</label>
-                            <input className='textArea' value={TCS}  onChange={(e)=>TCShandler(e)}></input>
+                            <label>TCS (5%) = {parseInt((5 / 100) * (parseInt(flight_cost) + parseInt(visa_cost) + parseInt(land_package)))}</label>
+                            <input className='textArea' value={TCS} onChange={(e) => TCShandler(e)}></input>
                         </div>
                         <div className='BillingAddress'>
                             <label>Total Cost</label>
-                            <input className='textArea' value={parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package)+parseFloat(TCS)}  >
+                            <input className='textArea' value={parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package) + parseFloat(TCS)}  >
                             </input>
                         </div>
                     </div>
@@ -309,7 +314,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                     </div> */}
                     <div>
                         <label>Pick a invoicing Date (default today)</label>
-                        <input type={'date'} value={currentdate} onChange={(e)=>controllDate(e)}></input>
+                        <input type={'date'} value={currentdate} onChange={(e) => controllDate(e)}></input>
                         <button onClick={() => showinvoice()} disabled={pdfseletcted_flg}>Invoice</button>
                         <button style={{ marginLeft: '16px' }} onClick={closeinvoice}>Cancel</button>
                     </div>

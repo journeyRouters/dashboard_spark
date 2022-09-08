@@ -99,7 +99,7 @@ const Maldives = ({
         Other_Exclusion: ''
     }
     const [InclusionExclusion, setInclusionExclusion] = useState(inclusion_data_ ? inclusion_data_ : inclusion)
-    const [EditController, setEditController] = useState(E_indicator ? E_indicator : false)
+    const [EditController, setEditController] = useState(false)
 
     const TransferOption = [
         {
@@ -354,7 +354,7 @@ const Maldives = ({
         localStorage.setItem('Journeydate', date);
     }
     function newImageObjectWilAppear(e) {
-        setEditController(false)
+        setEditController(!EditController)
     }
     function changingDestination(Destination) {
         console.log(Destination.target.value)
@@ -666,12 +666,10 @@ const Maldives = ({
                             <button className='addMore' onClick={() => addFields()}>Add More..</button>
                         </div>
                         <div>
-                            {
-                                EditController ? <>
-                                    <label>Do not use previous image( default using previous images)</label>
-                                    <input checked={E_indicator} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
-                                </> : <></>
-                            }
+
+                            <label>To use previous image mark here</label>
+                            <input checked={EditController} type={'checkbox'} onChange={(e) => newImageObjectWilAppear(e)}></input>
+
 
                         </div>
                         <div className='FlightDetails'>

@@ -13,11 +13,13 @@ const Vouchers = (props) => {
 
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
+        var CurrentDate=new Date()
         try {
             let list = []
             var q = query(collection(db, "Trip"), 
             where("assign_to.uid", "==", props.auth.uid),
              where('Lead_Status', '==', 'Converted'),
+             where('Travel_Date','>',CurrentDate),
              where("quotation_flg","==",true));
             var querySnapshot;
 

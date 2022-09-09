@@ -19,6 +19,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [installment, setinstallment] = useState([
         { Date: '', amount: 0, Status: 'Pending', TransactionId: '', amountRecived: '', yourname: '' },])
     const [BillingAddress, setBillingAddress] = useState('')
+    const [BillingName, setBillingName] = useState('')
     const [flight_cost, setFlight_cost] = useState(0)
     const [visa_cost, set_visa_cost] = useState(0)
     const [land_package, setlandpackage] = useState(0)
@@ -80,6 +81,10 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     function handleBillingaddress(addressEvent) {
         setBillingAddress(addressEvent.target.value)
     }
+    function handleBillingName(addressEvent) {
+        setBillingName(addressEvent.target.value)
+        selected_pdf_data.travel_data.Traveller_name=addressEvent.target.value
+    }
     function handleFlightCost(FlightEvent) {
         setFlight_cost(FlightEvent.target.value)
     } function handlevisaCost(VisaEvent) {
@@ -108,6 +113,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     function handleselectedPdf(data) {
         setpdf_flg(false)
         setpdf(data)
+        setBillingName(data.travel_data.Traveller_name)
         setFlight_cost(data.flightcost)
         set_visa_cost(data.visacost)
         setlandpackage(data.landPackage)
@@ -179,6 +185,11 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                         <div className='BillingAddress'>
                             <label>Billing Address</label>
                             <input className='txtArea' type='sapn' name='Billing_Address' value={BillingAddress} onChange={(event) => handleBillingaddress(event)} >
+                            </input>
+                        </div>
+                        <div className='BillingAddress'>
+                            <label>Billing Name</label>
+                            <input className='txtArea' type='sapn' name='Billing_Name' value={BillingName} onChange={(event) => handleBillingName(event)} >
                             </input>
                         </div>
                         <div className='BillingAddress'>

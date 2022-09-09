@@ -25,6 +25,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     const [invoice, setinvocice] = useState()
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)
+    const [idproof, idproofcontrller] = useState(false)
+    const db = getFirestore(app);
+    const today = new Date()
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -65,9 +68,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     function stoploading() {
         setloading(false)
     }
-    const [idproof, idproofcontrller] = useState(false)
-    const db = getFirestore(app);
-    const today = new Date()
+   
     function closeidproof() {
         idproofcontrller(!idproof)
         settarget(0)
@@ -82,7 +83,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 collect.push(doc.data())
-                console.log(doc.id)
+                // console.log(doc.id)
             });
             setFinalPackage(collect[0].value)
             // console.log(collect[0].value)

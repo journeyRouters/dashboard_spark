@@ -471,6 +471,14 @@ const Maldives = ({
                                     <span>Traveler:- </span>
                                     <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
                                 </h4>
+                                <h4>
+                                    comments:-
+                                    <span>
+                                        {
+                                            data.Comment
+                                        }
+                                    </span>
+                                </h4>
                             </div>
                             {/* <div>
                                 {

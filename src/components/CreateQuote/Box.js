@@ -34,7 +34,7 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    // console.log(data)
+    console.log(data)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -193,7 +193,7 @@ const Box = ({
         setItineary(data)
     }
     function setVar() {
-        if(itineary.length<=1){
+        if (itineary.length <= 1) {
 
             for (let s = 0; s < Travel_Duration - 1; s++) {
                 let data = { Day: '', Description: '', Activity: {} }
@@ -357,7 +357,7 @@ const Box = ({
                                 <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                             </div>
                             <div >
-                                <div style={{ display: 'flex', width: '64%', justifyContent: 'space-between' }} >
+                                <div style={{ display: 'flex', width:'70%', justifyContent: 'space-between' }} >
                                     <div>
                                         <h4>
                                             <span>Trip id:- </span>
@@ -388,6 +388,14 @@ const Box = ({
                                         <h4>
                                             <span>Contact:- </span>
                                             <span>{data.Contact_Number}</span>
+                                        </h4>
+                                        <h4>
+                                            comments:-
+                                            <span>
+                                                {
+                                                    data.Comment
+                                                }
+                                            </span>
                                         </h4>
 
                                     </div>

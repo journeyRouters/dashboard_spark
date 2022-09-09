@@ -218,6 +218,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                 uid: assigned_uid,
                 name: assigned_name
             },
+            assigned_date_time:today,
             updated_last: null,
             assign_flg: true,
             final_package: null

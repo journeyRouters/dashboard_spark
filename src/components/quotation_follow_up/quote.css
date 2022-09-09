@@ -236,3 +236,8 @@
     height: 3.1rem;
     font-size: 1.1em;
 }
+.TravelersComments{
+    display: flex;
+    justify-content: space-between;
+    background-color: cornflowerblue;
+}

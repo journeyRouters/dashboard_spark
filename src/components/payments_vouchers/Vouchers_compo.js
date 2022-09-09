@@ -49,7 +49,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                // console.log(docSnap.data())
+                // console.log(docSnap.data(),docSnap.id)
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
@@ -76,11 +76,13 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     async function getFinalPackage(finalPackageId) {
         try {
             // console.log(finalPackageId)
+            // Sep 7, 2022 3:56 PM"
             const q = query(collection(db, "Quote"), where("label", "==", finalPackageId));
             var collect = []
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 collect.push(doc.data())
+                console.log(doc.id)
             });
             setFinalPackage(collect[0].value)
             // console.log(collect[0].value)

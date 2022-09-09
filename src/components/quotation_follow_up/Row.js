@@ -41,7 +41,7 @@ const Row = (props) => {
     var today = new Date();
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
-    const[limit,setLimit]=useState(false)
+    const [limit, setLimit] = useState(false)
     function setEdit_flg() {
         set_edit(true)
     }
@@ -179,7 +179,7 @@ const Row = (props) => {
         checkForLastUpdate()
 
     }, []);
-   
+
     function sethint(hint) {
         setUpdate(hint)
         setopenupdater(true)
@@ -190,9 +190,9 @@ const Row = (props) => {
     }
     function checkForLastUpdate() {
         if (row.updated_last) {
-            var commentLimit=new Date(row.updated_last.toDate());
-            commentLimit.setDate(commentLimit.getDate()+3)
-            setLimit(commentLimit<today)
+            var commentLimit = new Date(row.updated_last.toDate());
+            commentLimit.setDate(commentLimit.getDate() + 3)
+            setLimit(commentLimit < today)
 
         }
     }
@@ -243,14 +243,14 @@ const Row = (props) => {
                 </div>
             </Modal>
             <React.Fragment >
-                <TableRow className={limit?'compoLimitCross':'compo'} onClick={() => setOpen(!open)}>
+                <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">{row.TripId}</TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
-                        limit?<>
-                        <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'}/> </TableCell>
-                        </>:<>
-                        <TableCell align="right">{row.Lead_Status}</TableCell>
+                        limit ? <>
+                            <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'} /> </TableCell>
+                        </> : <>
+                            <TableCell align="right">{row.Lead_Status}</TableCell>
                         </>
                     }
                     <TableCell align="right">{row.Destination}</TableCell>
@@ -287,7 +287,14 @@ const Row = (props) => {
                                                 </div>
                                             ))
                                         }
-                                        {row.Remark}
+                                        <h4 className='TravelersComments'>
+                                            <span>
+                                                {row.Comment}
+                                            </span>
+                                            <span>
+                                                Traveler's comments
+                                            </span>
+                                        </h4>
 
                                     </div>
 
@@ -489,7 +496,7 @@ const Row = (props) => {
                                                             installment={invoice.installment}
                                                             deliverable_item={invoice.deliverable_item}
                                                             selected_pdf_data={invoice.selected_pdf_data}
-                                                            TCS={invoice.TCS?invoice.TCS:0}
+                                                            TCS={invoice.TCS ? invoice.TCS : 0}
                                                             documents={invoice.documents}
                                                             auth={props.auth}
                                                             profile={props.profile}

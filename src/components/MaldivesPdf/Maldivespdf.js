@@ -43,7 +43,7 @@ const Maldivespdf = ({
     onClosePdf,
     updateTableDataAfterQuote
 }) => {
-    // console.log(profile)
+    console.log(data)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -56,6 +56,14 @@ const Maldivespdf = ({
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const [flightImgLinks, setflightImgLinks] = useState([])
     const [inclusionLinks, setinclusionLinks] = useState([])
+    const[travelEndDate,setTravelEndDate]=useState()
+    function getTravelEndDate(){
+        var tempDate=new Date(selected_Travel_date)
+        var nights=count_days-1
+        tempDate.setDate(tempDate.getDate()+nights)
+        setTravelEndDate(tempDate)
+        // console.log(tempDate)
+    }
     function controllLinks(args) {
         setflightImgLinks(args)
     }
@@ -109,6 +117,7 @@ const Maldivespdf = ({
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: profile.email,
+            travelEndDate:travelEndDate,
             Travel_Duration: count_days,
             Pax: data.Pax,
             Child: data.Child,
@@ -123,7 +132,7 @@ const Maldivespdf = ({
         if (indicator) {
             // console.log(flightImgLinks, inclusionLinks)
             await addDoc(collection(db, "Quote"), {
-                label: moment(currentdate).format('lll'),
+                label: `${moment(currentdate).format('lll')}/${data.TripId}`,
                 value: {
                     travel_data: data,
                     count_days: count_days,
@@ -137,6 +146,7 @@ const Maldivespdf = ({
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                     Quoted_by: profile.name,
+                    travelEndDate:travelEndDate,
                     no_rooms: no_rooms,
                     MealPlan: MealPlan,
                     Transfer: Transfer,
@@ -246,11 +256,12 @@ const Maldivespdf = ({
 
             }
             else {
-                console.log(E_indicator)
+                // console.log(E_indicator)
                 convertObjectToLink()
                 inclusionImgconvertObjectToLink()
                 uploadFlightsScreenShots()
                 uploadInclusionScreenShots()
+                getTravelEndDate()
             }
         }
 

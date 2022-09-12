@@ -59,6 +59,14 @@ const Profile = (
     const [whatsApp, setwhatsApp] = useState(profile.WhatsApp_number)
     const [Call, setCalling] = useState(profile.contact_number)
     const [ImgLinks, setImgLinks] = useState([])
+    const[travelEndDate,setTravelEndDate]=useState()
+    function getTravelEndDate(){
+        var tempDate=new Date(selected_Travel_date)
+        var nights=count_days-1
+        tempDate.setDate(tempDate.getDate()+nights)
+        setTravelEndDate(tempDate)
+        console.log(tempDate)
+    }
     function controllLinks(args) {
         setImgLinks(args)
     }
@@ -92,6 +100,7 @@ const Profile = (
         if (!indicator) {
             uploadFlightsScreenShots()
         }
+        getTravelEndDate()
         // console.log(destinationName)
 
     }, []);
@@ -116,6 +125,7 @@ const Profile = (
                     pdf_name: moment(currentdate).format('lll'),
                     cabDetailsData: cabDetailsData,
                     // flights: flights,
+                    travelEndDate:travelEndDate,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                     flightsImagesLinks: ImgLinks,
@@ -136,6 +146,7 @@ const Profile = (
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: email,
+            travelEndDate:travelEndDate,
             Travel_Duration: count_days
         });
     }

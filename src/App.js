@@ -13,6 +13,8 @@ import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Investigation from './components/Investigation/investigation';
 import Driver from './components/leadDriver/Driver';
+import OprationConverted from './components/payments_vouchers/operation/oprationConverted';
+import Poststay from './components/payments_vouchers/operation/Poststay';
 import Vouchers from './components/payments_vouchers/Vouchers';
 import AdminFollow from './components/quotation_follow_up/AdminFollow';
 import FollowUp from './components/quotation_follow_up/Follow_up';
@@ -274,7 +276,7 @@ function App() {
                         <p>During Stay</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("Post_Stay"))}>
+                    <div className='sidebarCard' onClick={(() => page("Poststay"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>Post Stay</p>
@@ -470,6 +472,16 @@ function App() {
             Page === "Investigate Current Lead" ? <>
               <SuperAdmin auth={auth} profile={profile} />
             </> : <></>
+          }
+          {
+            Page ==='Operation_converted'?<>
+            <OprationConverted profile={profile}/>
+            </>:<></>
+          }
+          {
+            Page ==='Poststay'?<>
+            <Poststay profile={profile}/>
+            </>:<></>
           }
         </div>
       </div>

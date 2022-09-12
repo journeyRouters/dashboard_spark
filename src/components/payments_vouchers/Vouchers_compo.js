@@ -433,7 +433,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                     finalPackage.travel_data.Destination == 'Maldives' ? <>
                                         {/* <h1 className='glow'>wait dev in progress</h1> */}
                                         <Maldivespdf
-                                            data={finalPackage}
+                                            data={finalPackage.travel_data}
                                             no_rooms={finalPackage.no_rooms}
                                             selected_Travel_date={finalPackage.selected_Travel_date}
                                             MealPlan={finalPackage.MealPlan}

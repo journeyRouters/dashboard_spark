@@ -4,38 +4,43 @@ import app from '../../required';
 import VouchersCompo from '../Vouchers_compo';
 const db = getFirestore(app);
 
-const Poststay = ({profile}) => {
+const Duringstay = ({profile}) => {
     const [lead_data, setLead_data] = useState([])
-    // const [open, setopen] = useState(true)
+    const [open, setopen] = useState(true)
+
+    function filterDuringStay(list){
+        var CurrentDate=new Date()
+        console.log((list[0].Travel_Date.toDate ()),(CurrentDate))
+       let value= list.filter((lead)=>(lead.Travel_Date.toDate ()<=CurrentDate))
+       setLead_data(value)
+    }
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
         var CurrentDate=new Date()
         try {
             let list = []
             var q = query(collection(db, "Trip"), 
-            // where("assign_to.uid", "==", props.auth.uid),
              where('Lead_Status', '==', 'Converted'),
-             where('travelEndDate','<',CurrentDate),
-             where("quotation_flg","==",true));
+             where('travelEndDate','>',CurrentDate),
+             where("quotation_flg","==",true),
+             );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length === 0) {
-                // setopen(false)
+                setopen(false)
             }
             else {
 
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                setLead_data(list)
-                // console.log(list);
-                // setopen(false)
+                filterDuringStay(list)
+                setopen(false)
             }
         }
         catch (erorr){ 
             console.log(erorr)
-            // setopen(false)
+            setopen(false)
         }
 
     }
@@ -56,5 +61,4 @@ const Poststay = ({profile}) => {
     );
 }
 
-
-export default Poststay;
+export default Duringstay;

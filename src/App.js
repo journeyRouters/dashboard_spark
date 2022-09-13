@@ -13,6 +13,7 @@ import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Investigation from './components/Investigation/investigation';
 import Driver from './components/leadDriver/Driver';
+import Duringstay from './components/payments_vouchers/operation/Duringstay';
 import OprationConverted from './components/payments_vouchers/operation/oprationConverted';
 import Poststay from './components/payments_vouchers/operation/Poststay';
 import Vouchers from './components/payments_vouchers/Vouchers';
@@ -162,14 +163,14 @@ function App() {
 
       <div className='header'>
         <p className='headLine'>
-          <img width={'276px'} style={{marginLeft:'-4rem'}} src='/assets/pdfDefaultImage/JrLOGO_.png'/>
+          <img width={'276px'} style={{ marginLeft: '-4rem' }} src='/assets/pdfDefaultImage/JrLOGO_.png' />
         </p>
         {
           auth ? <>
-            <div style={{display:'flex',alignItems:'center',textTransform:'capitalize'}}>
+            <div style={{ display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
               {
-                profile?
-                <span>Hello  {profile?profile.name:''}</span>:''
+                profile ?
+                  <span>Hello  {profile ? profile.name : ''}</span> : ''
               }
               <img width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
               </img>
@@ -270,7 +271,7 @@ function App() {
                         <p>converted</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("During_Stay"))}>
+                    <div className='sidebarCard' onClick={(() => page("Duringstay"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>During Stay</p>
@@ -297,7 +298,7 @@ function App() {
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>User Controller</p>
                       </div>
-                    </div>                    
+                    </div>
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -350,7 +351,7 @@ function App() {
                         <p>Followed Lead</p>
                       </div>
                     </div>
-                    
+
                     <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -410,7 +411,7 @@ function App() {
           }
           {
             Page === "Investigation" ?
-              <Investigation profile={profile}/>
+              <Investigation profile={profile} />
               : <></>
           }
           {
@@ -428,7 +429,7 @@ function App() {
               </>
               : <></>
           }
-           {
+          {
             Page === "Admin_Follow_up" ?
               <>
                 {
@@ -438,7 +439,7 @@ function App() {
               </>
               : <></>
           }
-          
+
           {Page === "voucher" ?
             <>
               {
@@ -474,15 +475,22 @@ function App() {
             </> : <></>
           }
           {
-            Page ==='Operation_converted'?<>
-            <OprationConverted profile={profile}/>
-            </>:<></>
+            Page === 'Operation_converted' ? <>
+              <OprationConverted profile={profile} />
+            </> : <></>
           }
           {
-            Page ==='Poststay'?<>
-            <Poststay profile={profile}/>
-            </>:<></>
+            Page === 'Poststay' ? <>
+              <Poststay profile={profile} />
+            </> : <></>
           }
+          {
+            // Duringstay
+            Page === 'Duringstay' ? <>
+              <Duringstay profile={profile} />
+            </> : <></>
+          }
+
         </div>
       </div>
       {/* <button className='top'>Top</button> */}

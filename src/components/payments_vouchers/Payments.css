@@ -184,11 +184,7 @@
 .paymentsConfirmer{
 
 }
-.uni_installments{
-    display: flex;
-    width: 47rem;
-    justify-content: space-between;
-}
+
 
 .glow {
     font-size: 80px;

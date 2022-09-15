@@ -1,0 +1,14 @@
+.uni_installments{
+    display: flex;
+    /* width: 47rem; */
+    justify-content: space-between;
+    height: 4rem;
+    font-size: 1.4rem;
+    border: 1px solid pink;
+    align-items: center;
+}
+.showInput{
+    width: 10rem;
+    height: 1.5rem;
+    border: 2px solid yellow;
+}

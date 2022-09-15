@@ -466,7 +466,7 @@ function App() {
           {/* Investigate Current Lead */}
           {
             Page === "Account_Converted" ? <>
-              <Account_converted auth={auth} />
+              <Account_converted auth={auth}  profile={profile}/>
             </> : <></>
           }
           {

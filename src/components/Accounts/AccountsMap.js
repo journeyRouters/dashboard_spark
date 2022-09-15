@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import app from '../required';
 import '../payments_vouchers/Payments.css';
 import InstallmentsMapper from './installmentsMapper';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 const AccountsMap = ({ data, profile, datahandle }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
@@ -22,7 +23,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
     const [invoice, setinvocice] = useState()
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)
-    const[installment,setinstallment]=useState()
+    const [installment, setinstallment] = useState()
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -48,7 +49,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
                 setinstallment(docSnap.data().installment)
-                // console.log(docSnap.data().installment)
+                console.log(docSnap.data().installment)
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
@@ -408,6 +409,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                                 <div>
                                     <InvoicePdf
                                         installment={invoice.installment}
+                                        TCS={invoice.TCS}
                                         deliverable_item={invoice.deliverable_item}
                                         selected_pdf_data={invoice.selected_pdf_data}
                                         documents={invoice.documents}
@@ -427,24 +429,55 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                     <Modal open={packageOpner} onClose={closePackage} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", overflowY: 'scroll' }} >
                         {
                             finalPackage ? <>
-                                <Profile
-                                    indicator={true}
-                                    inclusion_data={finalPackage.inclusion_data}
-                                    travel_data={finalPackage.travel_data}
-                                    count_days={finalPackage.count_days}
-                                    cabDetailsData={finalPackage.cabDetailsData}
-                                    flights={finalPackage.flights}
-                                    SelectedpackageType={finalPackage.SelectedpackageType}
-                                    itineary={finalPackage.itineary}
-                                    NightDataFields={finalPackage.NightDataFields}
-                                    selected_Travel_date={finalPackage.selected_Travel_date}
-                                    flightcost={finalPackage.flightcost}
-                                    visacost={finalPackage.visacost}
-                                    profile={profile}
-                                    flight={true}
-                                    flightsLinkfromstorage={finalPackage.flightsImagesLinks}
-                                    landPackage={finalPackage.landPackage}
-                                />
+                                {
+                                    finalPackage.travel_data.Destination == 'Maldives' ? <>
+                                        {/* <h1 className='glow'>wait dev in progress</h1> */}
+                                        <Maldivespdf
+                                            data={finalPackage.travel_data}
+                                            no_rooms={finalPackage.no_rooms}
+                                            selected_Travel_date={finalPackage.selected_Travel_date}
+                                            MealPlan={finalPackage.MealPlan}
+                                            Transfer={finalPackage.Transfer}
+                                            NightDataFields={finalPackage.NightDataFields}
+                                            count_days={finalPackage.count_days}
+                                            flightcost={finalPackage.flightcost}
+                                            visacost={finalPackage.visacost}
+                                            landPackage={finalPackage.landPackage}
+                                            SelectedpackageType={finalPackage.SelectedpackageType}
+                                            Property={finalPackage.Property}
+                                            flightsLinkfromstorage={finalPackage.flightImgLinks}
+                                            inclusionLinkfromstorage={finalPackage.inclusionLinks}
+                                            flightFlg={finalPackage.flightImgLinks ? true : false}
+                                            inclusionImgFlg={finalPackage.inclusionLinks ? true : false}
+                                            Pax={finalPackage.travel_data.Pax}
+                                            Child={finalPackage.travel_data.Child}
+                                            inclusion_data={finalPackage.inclusion_data}
+                                            profile={profile}
+                                            indicator={false}
+
+                                        />
+                                    </> : <>
+                                        <Profile
+                                            indicator={true}
+                                            inclusion_data={finalPackage.inclusion_data}
+                                            travel_data={finalPackage.travel_data}
+                                            count_days={finalPackage.count_days}
+                                            cabDetailsData={finalPackage.cabDetailsData}
+                                            flights={finalPackage.flights}
+                                            SelectedpackageType={finalPackage.SelectedpackageType}
+                                            itineary={finalPackage.itineary}
+                                            NightDataFields={finalPackage.NightDataFields}
+                                            selected_Travel_date={finalPackage.selected_Travel_date}
+                                            flightcost={finalPackage.flightcost}
+                                            visacost={finalPackage.visacost}
+                                            profile={profile}
+                                            flight={true}
+                                            flightsLinkfromstorage={finalPackage.flightsImagesLinks}
+                                            landPackage={finalPackage.landPackage}
+                                        />
+                                    </>
+                                }
+
                             </> : <>
                                 <div style={{ background: 'white', borderRadius: '32px', height: '141px' }}>
                                     <h1> there is no any Invoiced Pdf</h1>
@@ -590,11 +623,9 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                     <div>
                         {
                             installment ? <div className='paymentsConfirmer'>
-                                {
-                                    invoice.installment.map((data, index) => (
-                                        <InstallmentsMapper data={data} index={index} handleInstallments={handleInstallments} />
-                                    ))
-                                }
+                                <InstallmentsMapper data={invoice.installment}
+                                setDetails={setDetails}
+                                handleInstallments={handleInstallments} TripId={data.TripId} />
                             </div> : <></>
                         }
                     </div>

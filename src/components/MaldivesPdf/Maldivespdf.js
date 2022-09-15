@@ -43,7 +43,7 @@ const Maldivespdf = ({
     onClosePdf,
     updateTableDataAfterQuote
 }) => {
-    console.log(data)
+    console.log(profile)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",

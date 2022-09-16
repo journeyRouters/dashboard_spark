@@ -83,7 +83,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         catch (e) { console.log(e) }
         if (SupportSnap.exists()) {
             setTripCount(SupportSnap.data().tripCount)
-            // console.log(SupportSnap.data().tripCount)
+            console.log(SupportSnap.data().tripCount)
 
         }
     }
@@ -152,6 +152,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
     }
     async function updateTripCounter(counted) {
+        console.log(counted)
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
             tripCount: counted

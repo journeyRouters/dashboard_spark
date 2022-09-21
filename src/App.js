@@ -406,7 +406,7 @@ function App() {
           }
           {
             Page === "rapid_fire" ?
-              <Rapid />
+              <Test />
               : <></>
           }
           {

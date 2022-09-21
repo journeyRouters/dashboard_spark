@@ -49,7 +49,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
                 setinstallment(docSnap.data().installment)
-                console.log(docSnap.data().installment)
+                console.log(docSnap.data())
                 getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
@@ -83,7 +83,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                 collect.push(doc.data())
             });
             setFinalPackage(collect[0].value)
-            // console.log(collect[0].value)
+            console.log(collect[0].value)
         }
         catch (e) {
             console.log(e)

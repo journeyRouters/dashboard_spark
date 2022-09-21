@@ -67,7 +67,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverab
             updated_at: today,
             updated_by: profile.email,
             selected_pdf_data: selected_pdf_data,
-            finalPackageId: selected_pdf_data.pdf_name,
+            finalPackageId: selected_pdf_data.pdf_name+'/'+selected_pdf_data.travel_data.TripId,
             BillingAddress: BillingAddress,
             date: date,
             TCS: parseInt(TCS)

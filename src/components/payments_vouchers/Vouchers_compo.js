@@ -52,8 +52,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                // console.log(docSnap.data(),docSnap.id)
-                getFinalPackage(docSnap.data().finalPackageId)
+                console.log(docSnap.data())
+                setFinalPackage(docSnap.data().selected_pdf_data)
+                // getFinalPackage(`${docSnap.data().finalPackageId}/${data.TripId}`)
             } else {
                 console.log("No such document!");
                 // setinvocice({})
@@ -86,7 +87,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 // console.log(doc.id)
             });
             setFinalPackage(collect[0].value)
-            // console.log(collect[0].value)
+            console.log(collect[0].value)
         }
         catch (e) {
             console.log(e)
@@ -380,7 +381,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
                 </div>
                 <div className='trip_details'>
-                    <button onClick={() => detailsFlgactive()}>
+                    <button style={{marginTop:'0.5rem'}} onClick={() => detailsFlgactive()}>
                         <img className={details ? 'expand_details_' : 'expand_details'} src='/assets/img/expand.png' />
                     </button>
                     <p> Package:-

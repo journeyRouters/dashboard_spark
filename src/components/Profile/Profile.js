@@ -112,7 +112,7 @@ const Profile = (
         }
         else {
             await addDoc(collection(db, "Quote"), {
-                label: moment(currentdate).format('lll'),
+                label: moment(currentdate).format('lll')+'/'+Data.TripId,
                 value: {
                     travel_data: Data,
                     count_days: count_days,
@@ -142,6 +142,7 @@ const Profile = (
         await updateDoc(doc(db, "Trip", `${travel_data.TripId}`), {
             quotation: quotation_new,
             quotation_flg: true,
+            Travel_Date:new Date(selected_Travel_date),
             month: moment(currentdate).format('MMMM'),
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
@@ -200,7 +201,7 @@ const Profile = (
     }
     function closeFormAndPdf() {
         setwait(false)
-        updateTableDataAfterQuote(travel_data.TripId)
+        // updateTableDataAfterQuote(travel_data.TripId)
         try { handleSuggestion() }
         catch (error) { console.log(error) }
         closeHandler()

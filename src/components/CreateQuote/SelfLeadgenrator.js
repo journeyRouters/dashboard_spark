@@ -26,7 +26,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         Child: null,
         Email: null,
         Assigner: function (key, value) {
-            console.log(this.Budget,this.Child,this.Contact_Number,this.Departure_City,this.Destination,this.name,this.Travel_date)
+            // console.log(this.Budget,this.Child,this.Contact_Number,this.Departure_City,this.Destination,this.name,this.Travel_date)
             switch (key) {
                 case 'name':
                     this.name = value
@@ -83,7 +83,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         catch (e) { console.log(e) }
         if (SupportSnap.exists()) {
             setTripCount(SupportSnap.data().tripCount)
-            console.log(SupportSnap.data().tripCount)
+            // console.log(SupportSnap.data().tripCount)
 
         }
     }
@@ -152,7 +152,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
     }
     async function updateTripCounter(counted) {
-        console.log(counted)
+        // console.log(counted)
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
             tripCount: counted

@@ -13,7 +13,10 @@ const Account_converted = ({ profile }) => {
     var times = 0
     const [lead_data, set_lead_data] = useState([])
     const [selectedDate, setDate] = useState(moment(currentDate).format('YYYY-MM-DD'))
+    // function filterOldLeads(leads) {
+    //     const travelinFuture = leads.filter(lead => lead.travelEndDate < currentDate)
 
+    // }
     useEffect(() => {
         var CurrentDate = new Date()
         const q = query(collection(db, "Trip"),
@@ -37,7 +40,7 @@ const Account_converted = ({ profile }) => {
         var audio = new Audio('/assets/Notification/Notification.mp3');
         audio.play();
     }
-   
+
     return (
         <div>
             {

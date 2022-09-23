@@ -179,6 +179,10 @@ export const propertyMaldives = [
         label: 'SUN SIYAM VILU REEF',
         value: 'SunSiyamViluReef'
     },
+    {
+        label:'Diamonds Athuruga Maldives',
+        value:'DIAMONDSATHURUGAMALDIVES'
+    },
     // {
     //     label: 'TAJ CORAL REEF RESORT AND SPA',
     //     value: 'TajCoralReefResort_Spa'

@@ -115,7 +115,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
 
         if (docSnap.exists()) {
             setlatestData(docSnap.data())
-            console.log("Document data:", docSnap.data());
+            // console.log("Document data:", docSnap.data());
         } else {
             console.log("No such document!");
         }

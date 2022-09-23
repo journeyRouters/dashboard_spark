@@ -404,6 +404,24 @@ const RoomType = {
             value: "WaterVillaPoolJacuzzi",
         },
     ],
+    DIAMONDSATHURUGAMALDIVES: [
+        {
+            label: "Beach Bungalows",
+            value: "BeachBungalows",
+        },
+        {
+            label: "Junior Suite",
+            value: "JuniorSuite",
+        },
+        {
+            label: "Two Bedroom Water Villas",
+            value: "TwoBedroomWaterVillas",
+        },
+        {
+            label: "Water Villas",
+            value: "WaterVillas",
+        },
+    ],
     CoraCoraMaldives: [
         {
             label: "BeachPoolSuites",

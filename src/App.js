@@ -1,4 +1,4 @@
-import { AccountBalanceWalletTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
+import { AccountBalanceWalletTwoTone, PublicTwoTone, GroupAddTwoTone,AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
 import { fromEvent } from "file-selector";
 import { getAuth, signOut } from 'firebase/auth';
 import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
@@ -11,8 +11,10 @@ import Account_converted from './components/AdminController/Account_converted';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
+import Freelance_Investigation from './components/Investigation/Freelance_Investigation';
 import Investigation from './components/Investigation/investigation';
 import Driver from './components/leadDriver/Driver';
+import Leaves from './components/Leaves/Leaves';
 import Duringstay from './components/payments_vouchers/operation/Duringstay';
 import OprationConverted from './components/payments_vouchers/operation/oprationConverted';
 import Poststay from './components/payments_vouchers/operation/Poststay';
@@ -191,6 +193,41 @@ function App() {
             profile ?
               <>
                 {
+                  profile.access_type === "freelance" ? <>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Create Quote</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Quotation Followup</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Vouchers & payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Freelance_Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+
+                  </> : <></>
+                }
+                {
                   profile.access_type === "User" ? <>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
@@ -198,12 +235,6 @@ function App() {
                         <p>Rapid Fire</p>
                       </div>
                     </div>
-                    {/* <div className='sidebarCard' onClick={(() => page("Driver"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Driver</p>
-                      </div>
-                    </div> */}
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -226,6 +257,19 @@ function App() {
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Team")}>
+                      <div className='sidebarCardContaint'>
+                        <GroupAddTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Team</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("leave policy")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        <p>leave policy
+                        </p>
                       </div>
                     </div>
 
@@ -415,8 +459,18 @@ function App() {
               : <></>
           }
           {
+            Page === "Freelance_Investigation" ?
+              <Freelance_Investigation profile={profile} />
+              : <></>
+          }
+          {
             Page === "User_Controller" ?
               <Usercontrol auth={auth} data={profile} />
+              : <></>
+          }
+          {
+            Page === "leave policy" ?
+              <Leaves auth={auth} data={profile} />
               : <></>
           }
           {
@@ -466,7 +520,7 @@ function App() {
           {/* Investigate Current Lead */}
           {
             Page === "Account_Converted" ? <>
-              <Account_converted auth={auth}  profile={profile}/>
+              <Account_converted auth={auth} profile={profile} />
             </> : <></>
           }
           {

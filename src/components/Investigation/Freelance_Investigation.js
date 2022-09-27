@@ -8,66 +8,15 @@ import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "rec
 import app from '../required';
 const db = getFirestore(app);
 
-const Investigation = ({ profile }) => {
+const Freelance_Investigation = ({ profile }) => {
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
-    const [AllUserprofile, setAllUserprofile] = useState([])
 
-    function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "==", "User"), where('user_type','==','show'));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const Profile = [];
-            querySnapshot.forEach((doc) => {
-                Profile.push(doc.data());
-                // console.log(doc.data().name)
-            });
-            setAllUserprofile(Profile)
-            // console.log(Profile,);
-            getConvertedByAllSpokes(Profile)
-
-
-        });
-    }
-    async function getConvertedByAllSpokes(AllUserprofile) {
-        var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
-        for (var i = 0; i < AllUserprofile.length; i++) {
-            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
-            try {
-                let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true),where("month", "==", currentMonth),);
-                var querySnapshot = await getDocs(q);
-                querySnapshot.forEach((doc) => {
-                    list.push(doc.data())
-                    // console.log(doc.data())
-                });
-                user_analytics.value = list.length
-                holdAlluserAnalytics.push(user_analytics)
-                // console.log(list)
-
-
-            }
-            catch (erorr) {
-                console.log(erorr)
-                // setopen(false)
-            }
-        }
-        setdata_Analysed([
-            {
-                name: "Conversion",
-                values: holdAlluserAnalytics
-            }
-        ])
-        // console.log(holdAlluserAnalytics)
-        setdataAvailablityFlg(true)
-
-    }
+   
     async function currentLead() {
         var local = { name: 'Create quote', value: 0, fill: 'yellow' }
         var prev_instance = dataLoaded
@@ -81,7 +30,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
+            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -105,7 +54,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
+            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -130,7 +79,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
+            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -156,7 +105,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
+            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
             count_total_lead_provided()
@@ -177,10 +126,11 @@ const Investigation = ({ profile }) => {
         local.value=total
         prev_instance.push(local)
         loadData(prev_instance)
+        setdataAvailablityFlg(!dataAvailablityFlg)
+
     }
 
     function dataMiner() {
-        getAllUserProfie()
         currentLead()
         followUp()
         Dump()
@@ -192,40 +142,7 @@ const Investigation = ({ profile }) => {
         dataMiner()
 
     }, []);
-    // const demodata = [
-    //     {
-    //         name: 'kishor',
-    //         value: 10
-    //     },
-    //     {
-    //         name: 'ram',
-    //         value: 125
-    //     },
-    //     {
-    //         name: 'rohit',
-    //         value: 22
-    //     },
-    //     {
-    //         name: 'tezal',
-    //         value: 133
-    //     },
-    //     {
-    //         name: 'rana',
-    //         value: 17
-    //     },
-    //     {
-    //         name: 'akash',
-    //         value: 170
-    //     },
-    //     {
-    //         name: 'singh',
-    //         value: 101
-    //     },
-    //     {
-    //         name: 'tezal',
-    //         value: 177
-    //     }
-    // ]
+    
 
     return (
 
@@ -262,53 +179,10 @@ const Investigation = ({ profile }) => {
                         <Bar
                          dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
                     </BarChart>
-                    {/* <PieChart width={400} height={400}>
-                        <Pie
-                            dataKey="value"
-                            isAnimationActive={false}
-                            data={dataLoaded}
-                            cx={200}
-                            cy={200}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            label
-                        />
-
-                        <Tooltip />
-                    </PieChart> */}
-                    {/* <LineChart width={730} height={250} data={dataLoaded}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }}/>
-                        <Line type="monotone" dataKey="value" stroke="#82ca9d" />
-                    </LineChart> */}
-                    {/* <LineChart width={600} height={300} data={demodata} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                    </LineChart> */}
-                    <div>
-                        <DynamicBarChart
-                            data={data_Analysed}
-                            // Timeout in ms between each iteration
-                            iterationTimeout={1200}
-                            startRunningTimeout={2500}
-                            barHeight={20}
-                            iterationTitleStyles={{
-                                fontSize: 18
-                            }}
-                        />
-                    </div>
                 </> : <></>
             }
         </div>
     );
 }
 
-export default Investigation;
+export default Freelance_Investigation;

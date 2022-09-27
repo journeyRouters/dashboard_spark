@@ -22,7 +22,7 @@ const Userunitcomponent = (props) => {
     // console.log(userType)
     const Access=[
         {value:'Hide', label:'Hide' },
-        {value:'Show', label:'show' },
+        {value:'show', label:'show' },
         {vlaue:'other' , label:'other'}
     ]
     const Destinations = [

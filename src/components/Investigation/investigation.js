@@ -11,14 +11,16 @@ const db = getFirestore(app);
 const Investigation = ({ profile }) => {
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
+    const[prevMonth,setPrevMonth]=useState([])
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
     const [AllUserprofile, setAllUserprofile] = useState([])
-
+    // console.log(moment(date).subtract(1, 'month').calendar())
+  
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "==", "User"), where('user_type','==','show'));
+        const q = query(collection(db, "Profile"), where("access_type", "==", "User"), where('user_type', '==', 'show'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
@@ -27,10 +29,50 @@ const Investigation = ({ profile }) => {
             });
             setAllUserprofile(Profile)
             // console.log(Profile,);
+            getPrevMonthConvertedByAllSpokes(Profile)
             getConvertedByAllSpokes(Profile)
 
 
         });
+    }
+    async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
+        var datePrev=moment(date).subtract(1, 'month').calendar()
+        var month=moment(datePrev).format('MMMM')
+        console.log(month,AllUserprofile)
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true), where("month", "==", month),);
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                    // console.log(doc.data())
+                });
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+                // console.log(holdAlluserAnalytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        setPrevMonth([
+            {
+                name: "Previous-Conversion",
+                values: holdAlluserAnalytics
+            }
+        ])
+        // console.log(holdAlluserAnalytics)
+        // setdataAvailablityFlg(true)
+
     }
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
@@ -41,7 +83,7 @@ const Investigation = ({ profile }) => {
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true),where("month", "==", currentMonth),);
+                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true), where("month", "==", currentMonth),);
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
@@ -60,7 +102,7 @@ const Investigation = ({ profile }) => {
         }
         setdata_Analysed([
             {
-                name: "Conversion",
+                name: "Current-Conversion",
                 values: holdAlluserAnalytics
             }
         ])
@@ -167,14 +209,14 @@ const Investigation = ({ profile }) => {
         }
 
     }
-    function count_total_lead_provided(){
+    function count_total_lead_provided() {
         var prev_instance = dataLoaded
         var local = { name: 'Total', value: 0, fill: '#6AA121' }
-        var total=0
-        prev_instance.forEach((item,index)=>{
-            total=total+item.value
+        var total = 0
+        prev_instance.forEach((item, index) => {
+            total = total + item.value
         })
-        local.value=total
+        local.value = total
         prev_instance.push(local)
         loadData(prev_instance)
     }
@@ -260,7 +302,7 @@ const Investigation = ({ profile }) => {
                         <Legend legendType='circle' />
                         <CartesianGrid strokeDasharray="3 3" />
                         <Bar
-                         dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                            dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
                     </BarChart>
                     {/* <PieChart width={400} height={400}>
                         <Pie
@@ -293,9 +335,19 @@ const Investigation = ({ profile }) => {
                         <YAxis />
                         <Tooltip />
                     </LineChart> */}
-                    <div>
+                    <div style={{display:'flex'}}>
                         <DynamicBarChart
                             data={data_Analysed}
+                            // Timeout in ms between each iteration
+                            iterationTimeout={1200}
+                            startRunningTimeout={2500}
+                            barHeight={20}
+                            iterationTitleStyles={{
+                                fontSize: 18
+                            }}
+                        />
+                         <DynamicBarChart
+                            data={prevMonth}
                             // Timeout in ms between each iteration
                             iterationTimeout={1200}
                             startRunningTimeout={2500}

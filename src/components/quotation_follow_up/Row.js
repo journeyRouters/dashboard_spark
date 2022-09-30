@@ -100,7 +100,7 @@ const Row = (props) => {
         if (docSnap.exists()) {
             setLatestComment(docSnap.data().comments)
             setTripData(docSnap.data())
-            // console.log(docSnap.id)
+            // console.log(docSnap.data())
         } else {
             console.log("No such document!");
         }

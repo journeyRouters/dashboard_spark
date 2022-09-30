@@ -66,7 +66,7 @@ const Investigation = ({ profile }) => {
         }
         setPrevMonth([
             {
-                name: "Previous-Conversion",
+                name: `${month}-Conversion`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -102,7 +102,7 @@ const Investigation = ({ profile }) => {
         }
         setdata_Analysed([
             {
-                name: "Current-Conversion",
+                name: `${currentMonth}-Conversion`,
                 values: holdAlluserAnalytics
             }
         ])

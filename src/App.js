@@ -1,4 +1,4 @@
-import { AccountBalanceWalletTwoTone, PublicTwoTone, GroupAddTwoTone,AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
+import { AccountBalanceWalletTwoTone, PublicTwoTone, GroupAddTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
 import { fromEvent } from "file-selector";
 import { getAuth, signOut } from 'firebase/auth';
 import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
@@ -23,6 +23,8 @@ import AdminFollow from './components/quotation_follow_up/AdminFollow';
 import FollowUp from './components/quotation_follow_up/Follow_up';
 import Rapid from './components/Rapid/Rapid';
 import app from './components/required';
+import Main from './components/Teams/main';
+import Main_Admin from './components/Teams/support/Main_Admin.js'
 import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
 
@@ -272,6 +274,13 @@ function App() {
                         </p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("Team_")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Team_
+                        </p>
+                      </div>
+                    </div>
 
                   </> : <></>
                 }
@@ -451,6 +460,16 @@ function App() {
           {
             Page === "rapid_fire" ?
               <Rapid />
+              : <></>
+          }
+          {
+            Page === "Team" ?
+              <Main profile={profile} />
+              : <></>
+          }
+          {
+            Page === "Team_" ?
+              <Main_Admin profile={profile} />
               : <></>
           }
           {

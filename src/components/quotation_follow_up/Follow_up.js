@@ -138,7 +138,6 @@ const FollowUp = (props) => {
         { value: 'Hot', label: 'Hot', color: '#0052CC' },
         { value: 'Cold', label: 'Cold', color: '#5243AA' },
         { value: 'Dump', label: 'Dump', color: '#FF5630', },
-        { value: 'Converted', label: 'Converted', color: '#FF5630', },
 
     ];
 

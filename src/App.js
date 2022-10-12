@@ -464,12 +464,14 @@ function App() {
           }
           {
             Page === "Team" ?
-              <Main profile={profile} />
+              // <Main profile={profile} />
+              <div></div>
               : <></>
           }
           {
             Page === "Team_" ?
-              <Main_Admin profile={profile} />
+              // <Main_Admin profile={profile} />
+              <div></div>
               : <></>
           }
           {

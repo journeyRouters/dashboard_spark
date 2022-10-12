@@ -23,6 +23,66 @@ const RoomType = {
             value: "HoneymoonVilla",
         },
     ],
+    CinnamoDhonveli: [
+        {
+            label: "Beach Bungalows",
+            value: "BeachBungalows",
+        },
+        {
+            label: "Beach Suite With Pool",
+            value: "BeachSuiteWithPool",
+        },
+        {
+            label: "Duplex Garden Bungalow",
+            value: "DuplexGardenBungalow",
+        },
+        {
+            label: "Junior Beach Suite",
+            value: "JuniorBeachSuite",
+        },
+        {
+            label: "Overwater Suite",
+            value: "OverwaterSuite",
+        },
+        {
+            label: "Superior Room Ocean View",
+            value: "SuperiorRoomOceanView",
+        },
+        {
+            label: "Water Bungalows",
+            value: "WaterBungalows",
+        },
+    ],
+    TheResidenceDhigurah: [
+        {
+            label: "Beach Pool Villa",
+            value: "BeachPoolVilla",
+        },
+        {
+            label: "Deluxe Beach Pool Villa",
+            value: "DeluxeBeachPoolVilla",
+        },
+        {
+            label: "Deluxe Lagoon Pool Villa",
+            value: "DeluxeLagoonPoolVilla",
+        },
+        {
+            label: "Lagoon Pool Villa",
+            value: "LagoonPoolVilla",
+        },
+        {
+            label: "Two Bedroom Beach Pool Villa",
+            value: "TwoBedroomBeachPoolVilla",
+        },
+        {
+            label: "Two Bedroom Water Pool Villa",
+            value: "TwoBedroomWaterPoolVilla",
+        },
+        {
+            label: "Water Pool Villa",
+            value: "WaterPoolVilla",
+        },
+    ],
     AdaaranSelectHudhuranfushi: [
         {
             label: "BeachVilla",

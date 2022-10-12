@@ -72,6 +72,14 @@ export const propertyMaldives = [
         value: 'DhigufaruIslandResort'
     },
     {
+        label:'THE RESIDENCE DHIGURAH',
+        value:'TheResidenceDhigurah'
+    },
+    {
+        label:'Cinnamon Dhonveli',
+        value:'CinnamoDhonveli'
+    },
+    {
         label: 'DREAMLAND MALDIVES',
         value: 'DreamlandMaldives'
     },

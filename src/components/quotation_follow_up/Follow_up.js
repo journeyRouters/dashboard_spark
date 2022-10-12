@@ -138,6 +138,8 @@ const FollowUp = (props) => {
         { value: 'Hot', label: 'Hot', color: '#0052CC' },
         { value: 'Cold', label: 'Cold', color: '#5243AA' },
         { value: 'Dump', label: 'Dump', color: '#FF5630', },
+        { value: 'Converted', label: 'Converted', color: '#FF5630', },
+
 
     ];
 
@@ -391,7 +393,7 @@ const FollowUp = (props) => {
             )
         }
         else if (Destination.length == 1 && assign_date.length == 1) {
-            console.log('yes', assign_date, dateBelow,Destination[0])
+            console.log('yes', assign_date, dateBelow, Destination[0])
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", props.auth.uid),
                 where("Destination", "==", Destination[0]),
@@ -442,7 +444,7 @@ const FollowUp = (props) => {
             // console.log('get',lead[0])
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", props.auth.uid),
-                // where("month","==",currentMonth),
+                where("month","==",currentMonth),
                 where("Lead_Status", "==", lead[0])
             )
         }

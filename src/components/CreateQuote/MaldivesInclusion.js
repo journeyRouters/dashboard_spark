@@ -71,12 +71,14 @@ const MaldivesInclusion = (props) => {
         }
 
         if (e.target.name === "other_inclusion") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 other_Inclusion: e.target.value
             }))
         }
         if (e.target.name === "other_Exclusion") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 other_Exclusion: e.target.value

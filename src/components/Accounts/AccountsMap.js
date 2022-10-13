@@ -49,8 +49,9 @@ const AccountsMap = ({ data, profile, datahandle }) => {
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
                 setinstallment(docSnap.data().installment)
-                console.log(docSnap.data())
-                getFinalPackage(docSnap.data().finalPackageId)
+                setFinalPackage(docSnap.data().selected_pdf_data)
+                // console.log(docSnap.data().installment)
+                // getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
                 // setinvocice({})
@@ -114,7 +115,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
 
         if (docSnap.exists()) {
             setlatestData(docSnap.data())
-            console.log("Document data:", docSnap.data());
+            // console.log("Document data:", docSnap.data());
         } else {
             console.log("No such document!");
         }

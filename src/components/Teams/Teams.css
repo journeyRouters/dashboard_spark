@@ -1,0 +1,53 @@
+.createLeadButton{
+    display: flex;
+    flex-direction: row-reverse;
+    height: 3rem;
+    margin-top: 2rem;
+}
+.form-feild{
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 12px;
+}
+.label{
+    font-size: 1.5rem;
+    font-family: emoji;
+    font-weight: 600;
+}
+.setInput{
+    width: 26rem;
+    height: 2rem;
+    border: 2px dashed grey;
+}
+.setInput1{
+    width: 26rem;
+    height: 2rem;
+    border: 2px dashed red;
+}
+.Button_save{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.SaveTeam{
+    height: 2rem;
+}
+.teamdiv{
+    background: mediumpurple;
+    height: 12rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    /* border: 3px dashed red; */
+    background-image: linear-gradient(to right,#dee04a,#e76e6e);
+}
+.headerTeam{
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid ;
+    height: 2rem;
+    background-color:black;
+    color: yellow;
+
+}

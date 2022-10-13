@@ -1,11 +1,11 @@
-import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup } from'@material-ui/core';
-import { PersonOutlined } from'@material-ui/icons';
-import { doc, getFirestore, updateDoc } from'firebase/firestore';
-import React, { useState } from'react';
-import Select from'react-select';
-import makeAnimated from'react-select/animated';
-import app from'../required';
-import'./usercontrol.css';
+import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup } from '@material-ui/core';
+import { PersonOutlined } from '@material-ui/icons';
+import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import app from '../required';
+import './usercontrol.css';
 
 const Userunitcomponent = (props) => {
     const db = getFirestore(app);
@@ -16,42 +16,53 @@ const Userunitcomponent = (props) => {
     const [contact, setContact] = useState(props.data.contact_number)
     const [access_type, setAccessType] = useState(props.data.access_type)
     const [WhatsApp_number, setWhatsApp_number] = useState(props.data.WhatsApp_number)
+    const [userType, setUserType] = useState({value:props.data.user_type,label:props.data.user_type})
     const animatedComponents = makeAnimated();
-    const [lead_list,setLead_list]=useState([])
+    const [lead_list, setLead_list] = useState([])
+    // console.log(userType)
+    const Access=[
+        {value:'Hide', label:'Hide' },
+        {value:'show', label:'show' },
+        {vlaue:'other' , label:'other'}
+    ]
     const Destinations = [
-        { value:'Thailand', label:'Thailand', color:'#00B8D9' },
-        { value:'Bali', label:'Bali', color:'#0052CC' },
-        { value:'Dubai', label:'Dubai', color:'#5243AA'},
-        { value:'Europe', label:'Europe', color:'#FF5630', },
-        { value:'Sri Lanka', label:'Sri Lanka', color:'#FF8B00'},
-        { value:'Mauritius', label:'Mauritius', color:'#FFC400'},
-        { value:'Seychelles', label:'Seychelles', color:'#36B37E'},
-        { value:'Vietnmam', label:'Vietnmam', color:'#00875A' },
-        { value:'Malaysia', label:'Malaysia', color:'#253858' },
-        { value:'Singapore', label:'Singapore', color:'#666666' },
-        { value:'Australia', label:'Australia', color:'#666666' },
-        { value:'New Zealand', label:'New Zealand', color:'#666666' },
-        { value:'Kashmir', label:'Kashmir', color:'#666666' },
-        { value:'Himachal', label:'Himachal', color:'#666666' },
-        { value:'Rajasthan', label:'Rajasthan', color:'#666666' },
-        { value:'Uttrakhand', label:'Uttrakhand', color:'#666666' },
-        { value:'Goa', label:'Goa', color:'#666666' },
-        { value:'Kerala', label:'Kerala', color:'#666666' },
-        { value:'Andaman', label:'Andaman', color:'#666666' },
-        { value:'Sikkim', label:'Sikkim', color:'#666666' },
-        { value:'Karnataka', label:'Karnataka', color:'#666666' },
+        { value: 'Thailand', label: 'Thailand', color: '#00B8D9' },
+        { value: 'Bali', label: 'Bali', color: '#0052CC' },
+        { value: 'Dubai', label: 'Dubai', color: '#5243AA' },
+        { value: 'Europe', label: 'Europe', color: '#FF5630', },
+        { value: 'Sri Lanka', label: 'Sri Lanka', color: '#FF8B00' },
+        { value: 'Mauritius', label: 'Mauritius', color: '#FFC400' },
+        { value: 'Seychelles', label: 'Seychelles', color: '#36B37E' },
+        { value: 'Vietnmam', label: 'Vietnmam', color: '#00875A' },
+        { value: 'Malaysia', label: 'Malaysia', color: '#253858' },
+        { value: 'Singapore', label: 'Singapore', color: '#666666' },
+        { value: 'Australia', label: 'Australia', color: '#666666' },
+        { value: 'New Zealand', label: 'New Zealand', color: '#666666' },
+        { value: 'Kashmir', label: 'Kashmir', color: '#666666' },
+        { value: 'Himachal', label: 'Himachal', color: '#666666' },
+        { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
+        { value: 'Uttrakhand', label: 'Uttrakhand', color: '#666666' },
+        { value: 'Goa', label: 'Goa', color: '#666666' },
+        { value: 'Kerala', label: 'Kerala', color: '#666666' },
+        { value: 'Andaman', label: 'Andaman', color: '#666666' },
+        { value: 'Sikkim', label: 'Sikkim', color: '#666666' },
+        { value: 'Karnataka', label: 'Karnataka', color: '#666666' },
     ];
     var currentdate = new Date();
-    function leadHandler(e){
-        const list=[]
-        for(let len=0;len<=e.length-1; len++){
+    function handleUserType(args){
+        setUserType({value:args.value, label:args.value})
+        // console.log(args)
+    }
+    function leadHandler(e) {
+        const list = []
+        for (let len = 0; len <= e.length - 1; len++) {
             list.push(e[len].value)
             // console.log(e[len].value)
         }
         // console.log(list)
         setLead_list(list)
     }
-    function changeAcessType(args){
+    function changeAcessType(args) {
         setAccessType(args.target.value)
     }
     function onChangeName(e) {
@@ -74,11 +85,11 @@ const Userunitcomponent = (props) => {
         setEdit(true)
     }
     async function updateUserDetails() {
-        try{
+        try {
             // console.log({name ,access_type,WhatsApp_number,contact})
             // console.log(props.data)
             const user = doc(db, "Profile", props.data.uid);
-            await updateDoc(user,{
+            await updateDoc(user, {
                 name: name,
                 account_updated_date: `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`,
                 account_updated_time: `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}:${currentdate.getMilliseconds()}`,
@@ -86,15 +97,16 @@ const Userunitcomponent = (props) => {
                 contact_number: contact,
                 access_type: access_type,
                 email: props.data.email,
+                user_type:userType.value,
                 following_lead: lead_list
             });
             props.datahandle()
             handelClose()
         }
-        catch (error){
+        catch (error) {
             console.log(error)
         }
-        
+
     }
     return (
         <>
@@ -118,7 +130,7 @@ const Userunitcomponent = (props) => {
             </div>
             {
                 edit ?
-                    <Modal style={{ display: "flex", justifyContent: "center"}} open={edit} onClose={handelClose} >
+                    <Modal style={{ display: "flex", justifyContent: "center" }} open={edit} onClose={handelClose} >
                         <div className='edit_main'>
                             <PersonOutlined
                                 color='primary'
@@ -152,21 +164,33 @@ const Userunitcomponent = (props) => {
                                             <FormControlLabel value="Operation" control={<Radio />} label="Operation" />
                                             <FormControlLabel value="Super Admin" control={<Radio />} label="Super Admin" />
                                             <FormControlLabel value="Accounts" control={<Radio />} label="Accounts" />
+                                            <FormControlLabel value="freelance" control={<Radio />} label="freelance" />
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
-                                <div>
-                                    <Select
-                                        
+                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '9rem' }}>
+                                    {/* <Select
+
                                         closeMenuOnSelect={false}
                                         components={animatedComponents}
                                         isMulti
                                         options={Destinations}
-                                        onChange={(e)=>leadHandler(e)}
-                                    />
+                                        onChange={(e) => leadHandler(e)}
+                                    /> */}
+                                    <div>
+                                        <FormLabel >user Type</FormLabel>
+                                        <Select
+                                            closeMenuOnSelect={true}
+                                            components={animatedComponents}
+                                            defaultValue={userType}
+                                            options={Access}
+                                            onChange={(e) => handleUserType(e)}
+                                        />
+
+                                    </div>
                                 </div>
                             </div>
-                            <button className='userupdateButton' onClick={()=>updateUserDetails()}>update</button>
+                            <button className='userupdateButton' onClick={() => updateUserDetails()}>update</button>
                         </div>
                     </Modal>
                     : <></>

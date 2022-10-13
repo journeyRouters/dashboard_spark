@@ -72,6 +72,14 @@ export const propertyMaldives = [
         value: 'DhigufaruIslandResort'
     },
     {
+        label:'THE RESIDENCE DHIGURAH',
+        value:'TheResidenceDhigurah'
+    },
+    {
+        label:'Cinnamon Dhonveli',
+        value:'CinnamoDhonveli'
+    },
+    {
         label: 'DREAMLAND MALDIVES',
         value: 'DreamlandMaldives'
     },
@@ -178,6 +186,10 @@ export const propertyMaldives = [
     {
         label: 'SUN SIYAM VILU REEF',
         value: 'SunSiyamViluReef'
+    },
+    {
+        label:'Diamonds Athuruga Maldives',
+        value:'DIAMONDSATHURUGAMALDIVES'
     },
     // {
     //     label: 'TAJ CORAL REEF RESORT AND SPA',

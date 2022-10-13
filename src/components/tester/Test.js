@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
@@ -15,20 +15,24 @@ const Test = () => {
          console.log(doc.id)
       });
    }
-   async function trip() {
-      const docRef = doc(db, "Trip", "12913510");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-         console.log("Document data:", docSnap.data());
-      } else {
-         // doc.data() will be undefined in this case
-         console.log("No such document!");
-      }
+   async function allDoc() {
+      const q = query(collection(db, "Profile"))
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+         // doc.data() is never undefined for query doc snapshots
+         console.log(doc.id, " => ", doc.data());
+         // add_a_feild(doc.id)
+      });
+   }
+   function add_a_feild(id) {
+      setDoc(doc(db, "Profile",id), {
+         user_type: 'show'
+      }, { merge: true })
    }
    useEffect(() => {
       //   tester()
-      trip()
+      // add_a_feild()
+      // allDoc()
    }, []);
    return (
       <div>

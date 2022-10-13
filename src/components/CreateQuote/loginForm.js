@@ -70,7 +70,8 @@ const Loginform = (props) => {
                 Lead_followUp:[],
                 Lead_Vouchers:[],
                 Lead_Dump:[],
-                Lead_converted:[]
+                Lead_converted:[],
+                user_type:{label:"show",value:"show"}
 
 
             });

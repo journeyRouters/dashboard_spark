@@ -135,24 +135,28 @@ const Inclusion = (props) => {
             }))
         }
         if (e.target.name === "Entrance_comments") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 Entrance_comments: e.target.value
             }))
         }
         if (e.target.name === "other_inclusion") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 other_Inclusion: e.target.value
             }))
         }
         if (e.target.name === "other_Exclusion") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 other_Exclusion: e.target.value
             }))
         }
         if (e.target.name === "Private_cab") {
+            e.persist();
             setFeed(prevState => ({
                 ...prevState,
                 cab_Private_comments: (e.target.value)

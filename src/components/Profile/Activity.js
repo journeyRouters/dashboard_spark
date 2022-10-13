@@ -454,6 +454,10 @@ export const avtivityList = {
     ],
     Dubai: [
         {
+            label:'GlobalVillage',
+            value:'GlobalVillage'
+        },
+        {
             label: 'Arival',
             value: 'Arival'
         },

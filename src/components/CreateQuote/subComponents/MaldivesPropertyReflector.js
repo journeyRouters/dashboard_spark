@@ -136,6 +136,10 @@ export const propertyMaldives = [
         value: 'ObluXperienceAilafushi'
     },
     {
+        label:'Movenpick Resort Kuredhivaru',
+        value:'MovenpickResortKuredhivaru'
+    },
+    {
         label: 'OBLU NATURE HELENGELI',
         value: 'ObluNatureHelengeli'
     },

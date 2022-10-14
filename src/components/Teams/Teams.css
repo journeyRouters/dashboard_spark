@@ -51,3 +51,11 @@
     color: yellow;
 
 }
+.ButtonEffect{
+    box-shadow: 5px 1px 12px yellow;
+}
+.ButtonEffect:hover{
+    cursor: pointer;
+    color: white;
+    transform: scale(1.2);
+}

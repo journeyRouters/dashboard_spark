@@ -1,10 +1,12 @@
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Box from '../../CreateQuote/Box';
+import DriverComponents from '../../leadDriver/DriverComponents';
 import app from '../../required';
+import Createleadcomponent from '../support/Createleadcomponent';
 const db = getFirestore(app);
 
-const CreateQuote = ({ uid }) => {
+const CreateQuote = ({ uid, profile,TeamProfile }) => {
     // console.log(uid)
     const [lead_data, setLead_data] = useState([])
 
@@ -32,22 +34,22 @@ const CreateQuote = ({ uid }) => {
         }
 
     }
-    useEffect(() => {       
-            getLeadOnBoard()
-        
+    useEffect(() => {
+        getLeadOnBoard()
+        console.log(lead_data.length)
+
     }, []);
     return (
         <>
             {
-                lead_data.length!=0 ? <>
-                    yes
-                    {/* <Box
-                        email={props.auth.email}
-                        data={user_uni_data}
-                        updateTableDataAfterQuote={updateTableDataAfterQuote}
-                        set_popupopner={set_popupopner}
-                        profile={props.userProfile}
-                    /> */}
+                lead_data ? <>
+                    {
+                        lead_data.map((data, index) => (
+                            <>
+                           <Createleadcomponent data={data} getLeadOnBoard={getLeadOnBoard} TeamProfile={TeamProfile} index={index}/>
+                            </>
+                        ))
+                    }
                 </> : <>Na</>
             }
         </>

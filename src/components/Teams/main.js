@@ -7,7 +7,8 @@ import Createteamform from './support/Createteamform';
 import Team from './support/Team';
 import './Teams.css'
 
-const Main = ({ profile }) => {
+const Main = ({ profile ,auth}) => {
+    console.log(profile)
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -78,7 +79,7 @@ const Main = ({ profile }) => {
                 }
                 {
                     TeamUnit ? <>
-                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData} />
+                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData} profile={profile} auth={auth}/>
                     </> : <></>
                 }
             </div>

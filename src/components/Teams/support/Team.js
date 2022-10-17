@@ -9,7 +9,8 @@ import Investigation from '../Pages/Investigation';
 import TeamEdit from '../Pages/TeamEdit';
 import TeamGraph from '../Pages/TeamGraph';
 
-const Team = ({ open, onclose, data }) => {
+const Team = ({ open, onclose, data,profile,auth }) => {
+    console.log(profile)
     const [page, setpage] = useState('Team Graph')
     const [seleteduser, setUser] = useState('')
     function screenController(args) {
@@ -52,9 +53,9 @@ const Team = ({ open, onclose, data }) => {
                         }{
                             page === 'Investigation' ? <><Investigation /></> : <></>
                         }{
-                            page === 'Create quote' ? <><CreateQuote uid={seleteduser} /></> : <></>
+                            page === 'Create quote' ? <><CreateQuote uid={seleteduser} profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
                         }{
-                            page === 'Follow up' ? <><FollowUp /></> : <></>
+                            page === 'Follow up' ? <><FollowUp  uid={seleteduser} auth={auth} profile={profile} /></> : <></>
                         }{
                             page === 'Converted' ? <><Converted /></> : <></>
                         }{

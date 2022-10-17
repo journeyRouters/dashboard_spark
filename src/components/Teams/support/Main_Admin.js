@@ -8,7 +8,8 @@ import Team from '../support/Team';
 import '../Teams.css'
 import PieRechartComponent from './PieRechartComponent';
 
-const Main_Admin = ({ profile }) => {
+const Main_Admin = ({ profile ,auth }) => {
+    console.log(profile)
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -96,7 +97,7 @@ const Main_Admin = ({ profile }) => {
                 }
                 {
                     TeamUnit ? <>
-                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData} />
+                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData}  profile={profile} auth={auth} />
                     </> : <></>
                 }
             </div>

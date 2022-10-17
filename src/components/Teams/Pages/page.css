@@ -1,0 +1,4 @@
+.setAliners{
+    display: flex;
+    flex-direction: column;
+}

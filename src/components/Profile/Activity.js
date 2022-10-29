@@ -15,8 +15,8 @@ export const avtivityList = {
             value: 'Arival'
         },
         {
-            label:'BaliSafari',
-            value:'BaliSafari'
+            label: 'BaliSafari',
+            value: 'BaliSafari'
         },
         {
             label: 'Departure',
@@ -166,8 +166,8 @@ export const avtivityList = {
             value: "AtalTunnel",
         },
         {
-            label:'Bus',
-            value:'Bus'
+            label: 'Bus',
+            value: 'Bus'
         },
         {
             label: "Bhagsu Waterfall",
@@ -454,8 +454,8 @@ export const avtivityList = {
     ],
     Dubai: [
         {
-            label:'GlobalVillage',
-            value:'GlobalVillage'
+            label: 'GlobalVillage',
+            value: 'GlobalVillage'
         },
         {
             label: 'Arival',
@@ -715,7 +715,7 @@ export const avtivityList = {
         },
     ],
     Ladakh: [
-       
+
         {
             label: "Departure",
             value: "Arival_Departure",
@@ -891,6 +891,78 @@ export const avtivityList = {
         {
             label: "Tulip Garden",
             value: "TulipGarden",
+        },
+    ],
+    Goa: [
+        {
+            label: "Arrival",
+            value: "Arrival",
+        },
+        {
+            label: "Departure",
+            value: "Departure",
+        },
+        {
+            label: 'Anjuna Beach',
+            value: 'AnjunaBeach'
+        },
+        {
+            label: 'Basilica Of BomJesus',
+            value: 'BasilicaOfBomJesus'
+        },
+        {
+            label: 'Calangute Beach',
+            value: 'CalanguteBeach'
+        },
+        {
+            label: 'Candolim Beach',
+            value: 'CandolimBeach'
+        },
+        {
+            label: 'Chopra Fort',
+            value: 'ChopraFort'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: 'Coco Beach Goa',
+            value: 'CocoBeachGoa'
+        },
+        {
+            label: 'DonaOaula',
+            value: 'DonaOaula'
+        },
+        {
+            label: 'Dudh sagar Waterfall',
+            value: 'DudhsagarWaterfall'
+        },
+        {
+            label: 'Fort Aguada',
+            value: 'FortAguada'
+        },
+        {
+            label: 'Mandovi River',
+            value: 'MandoviRiver'
+        },
+        {
+            label: 'Mangeshi Temple',
+            value: 'MangeshiTemple'
+        },
+        {
+            label: 'Old Goa Church',
+            value: 'OldGoaChurch'
+        },
+        {
+            label: 'Santa durga  Temple',
+            value: 'SantadurgaTemple'
+        }, {
+            label: 'Spice Farm',
+            value: 'SpiceFarm'
+        }, {
+            label: 'Vagator Beach',
+            value: 'VagatorBeach'
         },
     ]
 }

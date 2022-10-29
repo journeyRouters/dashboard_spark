@@ -401,6 +401,32 @@ const RoomType = {
             value: "TwoBedroomBeachVillaWithPrivatePool",
         },
     ],
+    MovenpickResortKuredhivaru:[
+        {
+            label: "Beach Pool Suite",
+            value: "BeachPoolSuite",
+        },
+        {
+            label: "Beach Pool Suite Sunset",
+            value: "BeachPoolSuiteSunset",
+        },
+        {
+            label: "Beach Spa Residence",
+            value: "BeachSpaResidence",
+        },
+        {
+            label: "Overwater Pool Villa Lagoon",
+            value: "OverwaterPoolVillaLagoon",
+        },
+        {
+            label: "Overwater Pool Villa Ocean",
+            value: "OverwaterPoolVillaOcean",
+        },
+        {
+            label: "Overwater Pool Villa Ocean Sunrise View",
+            value: "OverwaterPoolVillaOceanSunriseView",
+        },
+    ],
     CentaraRasFushiResort_Spa: [
         {
             label: "BeachVilla",

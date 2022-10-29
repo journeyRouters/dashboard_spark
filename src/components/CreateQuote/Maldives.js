@@ -357,7 +357,7 @@ const Maldives = ({
         setEditController(!EditController)
     }
     function changingDestination(Destination) {
-        console.log(Destination.target.value)
+        // console.log(Destination.target.value)
         setDestination(Destination.target.value)
         data.Destination = Destination.target.value
     }
@@ -459,6 +459,7 @@ const Maldives = ({
                                         <option value={'Ladakh'}>Ladakh</option>
                                         <option value={'Kerala'}>Kerala</option>
                                         <option value={'Kashmir'}>Kashmir</option>
+                                        <option value={'Goa'}>Goa</option>
                                     </select>
                                 </h4>
                             </div>

@@ -5,7 +5,8 @@ class PieRechartComponent extends React.Component {
    pieData = [
       {
          name: "kishor",
-         value: 54.85
+         value: 54.85,
+         fill:'red'
       },
       {
          name: "tezal",

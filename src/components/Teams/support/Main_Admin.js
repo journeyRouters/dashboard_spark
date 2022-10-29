@@ -1,12 +1,10 @@
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, orderBy, query, where } from 'firebase/firestore';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { collection, getFirestore, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import app from '../../required';
-import Createteamform from './Createteamform';
 import Team from '../support/Team';
-import '../Teams.css'
-import PieRechartComponent from './PieRechartComponent';
+import '../Teams.css';
+import Createteamform from './Createteamform';
+import GraphHandler from './graphHandler';
 
 const Main_Admin = ({ profile ,auth }) => {
     const db = getFirestore(app)
@@ -74,22 +72,7 @@ const Main_Admin = ({ profile ,auth }) => {
                                     }
                                 </div>
                             </div>
-                            <div style={{ width: '12rem' }} >
-                                <span style={{marginLeft:'3rem',fontSize:'1.1rem',fontWeight:'700'}}>Lead Seeded</span><br />
-                                <PieRechartComponent />
-                            </div>
-                            <div style={{ width: '12rem' }}>
-                            <span style={{marginLeft:'3rem',fontSize:'1.1rem',fontWeight:'700'}}>Lead Converted</span><br />
-
-                                <PieRechartComponent />
-
-                            </div>
-                            <div style={{ width: '12rem' }}>
-                            <span style={{marginLeft:'3rem',fontSize:'1.1rem',fontWeight:'700'}}>Lead Dump</span><br />
-
-                                <PieRechartComponent />
-
-                            </div>
+                            <GraphHandler TeamData={data}/>
                             <button style={{ height: '2rem' }}>Allowed</button>
                         </div>
                     </>))

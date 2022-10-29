@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import { Modal } from '@material-ui/core';
 import { DynamicBarChart } from 'react-dynamic-charts';
@@ -15,6 +15,8 @@ const Investigation = ({ uid, TeamProfile }) => {
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     const [member, setmember] = useState()
+    const [lastTarget, setLastTarget] = useState([])
+    const [Target, setTarget] = useState(0)
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
     async function fetch_profile() {
@@ -23,8 +25,9 @@ const Investigation = ({ uid, TeamProfile }) => {
             const docRef = doc(db, "Profile", uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                console.log(docSnap.data())
                 setmember(docSnap.data())
+                lastTargets(docSnap.data())
+
             }
         }
         catch (error) {
@@ -208,6 +211,32 @@ const Investigation = ({ uid, TeamProfile }) => {
         }
 
     }
+    function OnsubmitTarget() {
+        if (Target != 0 && Target>0) {
+            var month = moment(new Date()).format('MMMM-YYYY')
+            // console.log(month)
+            setDoc(doc(db, "Profile", uid), {
+                Target: { [month]: Target }
+            }, { merge: true })
+            fetch_profile()
+            setTarget(0)
+        }
+        else{
+            alert('Target should be greater than "0"')
+        }
+
+    }
+    function lastTargets(member) {
+        var localList = []
+        Object.entries(member.Target).forEach(([key, value]) => {
+            console.log(key, typeof (key))
+            var localObject = { Key: '', value: '' }
+            localObject.Key = key
+            localObject.value = value
+            localList.push(localObject)
+        });
+        setLastTarget(localList)
+    }
     function dataMiner() {
         getConvertedByAllSpokes(TeamProfile)
         getPrevMonthConvertedByAllSpokes(TeamProfile)
@@ -217,7 +246,7 @@ const Investigation = ({ uid, TeamProfile }) => {
         Converted()
     }
     useEffect(() => {
-        if(uid!==0){
+        if (uid !== 0) {
             fetch_profile()
             dataMiner()
         }
@@ -256,7 +285,6 @@ const Investigation = ({ uid, TeamProfile }) => {
                                     />
                                     <YAxis />
                                     <Tooltip />
-                                    <Legend legendType='circle' />
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <Bar
                                         dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
@@ -268,8 +296,13 @@ const Investigation = ({ uid, TeamProfile }) => {
                                                 <h2>Target for {moment(new Date()).format('MMMM')}</h2>
                                                 <span>{member.name}</span>
                                                 <div>
-                                                    <input type={'number'}></input>
-                                                    <button>Update</button>
+                                                    <input  value={Target} onChange={(e) => setTarget(e.target.value)} type={'number'}></input>
+                                                    <button onClick={()=>OnsubmitTarget()}>Update</button>
+                                                </div>
+                                                <div style={{ height: '4rem', overflowY: 'scroll' }}>
+                                                    {
+                                                        lastTarget.map((data, index) => <><span>{(data.Key)}- {data.value}</span><br /></>)
+                                                    }
                                                 </div>
                                             </div>
                                         </> : <></>

@@ -84,7 +84,6 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                 collect.push(doc.data())
             });
             setFinalPackage(collect[0].value)
-            console.log(collect[0].value)
         }
         catch (e) {
             console.log(e)
@@ -125,7 +124,6 @@ const AccountsMap = ({ data, profile, datahandle }) => {
         // console.log(target)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
-            console.log(data.Vouchers_flight)
             let content =
             {
                 path: path,

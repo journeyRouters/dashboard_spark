@@ -36,15 +36,12 @@ const Createteamform = ({ open, onclose, profile }) => {
                 // console.log(doc.data().name)
             });
             setAllUserprofile(Profile)
-            console.log(Profile);
 
 
         });
     }
 
-    async function CheckAvailablityForName(TeamName) {
-        console.log(TeamName)
-        var ref = doc(db, 'Team', TeamName)
+    async function CheckAvailablityForName(TeamName) {        var ref = doc(db, 'Team', TeamName)
         // var q=query(ref,where("Member.Name","==","kishor"))
         var firequery = await getDoc(ref)
         if (firequery.exists()) {
@@ -82,7 +79,6 @@ const Createteamform = ({ open, onclose, profile }) => {
         CheckAvailablityForName(TeamName).then((value) => {
             if (value) {
                 setSimilarname(true)
-                console.log(TeamMembers, TeamTarget)
             }
             else {
                 setSimilarname(false)   

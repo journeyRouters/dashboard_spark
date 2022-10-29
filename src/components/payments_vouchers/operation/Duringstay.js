@@ -10,7 +10,6 @@ const Duringstay = ({profile}) => {
 
     function filterDuringStay(list){
         var CurrentDate=new Date()
-        console.log((list[0].Travel_Date.toDate ()),(CurrentDate))
        let value= list.filter((lead)=>(lead.Travel_Date.toDate ()<=CurrentDate))
        setLead_data(value)
     }

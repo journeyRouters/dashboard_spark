@@ -459,8 +459,8 @@ function App() {
           }
           {
             Page === "rapid_fire" ?
-              // <Test />
-              <div></div>
+              <Test />
+              // <div></div>
               : <></>
           }
           {

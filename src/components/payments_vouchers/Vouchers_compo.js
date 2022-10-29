@@ -52,7 +52,6 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                console.log(docSnap.data())
                 setFinalPackage(docSnap.data().selected_pdf_data)
                 // getFinalPackage(`${docSnap.data().finalPackageId}/${data.TripId}`)
             } else {
@@ -87,7 +86,6 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 // console.log(doc.id)
             });
             setFinalPackage(collect[0].value)
-            console.log(collect[0].value)
         }
         catch (e) {
             console.log(e)

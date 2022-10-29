@@ -31,7 +31,6 @@ const Createleadcomponent = ({ data, TeamProfile ,getLeadOnBoard ,index}) => {
         getLeadOnBoard()
     }
     async function update_lead_field(uid, name) {
-        console.log(uid,name)
         /**this function is to update the assigned user in lead data for ref and to be identify */
         const Databaseref = doc(db, "Trip", data.TripId);
         await updateDoc(Databaseref, {

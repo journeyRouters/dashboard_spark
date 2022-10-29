@@ -4,20 +4,25 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Converted from '../Pages/Converted';
 import CreateQuote from '../Pages/CreateQuote';
+import Empty from '../Pages/empty';
 import FollowUp from '../Pages/FollowUp';
 import Investigation from '../Pages/Investigation';
 import TeamEdit from '../Pages/TeamEdit';
-import TeamGraph from '../Pages/TeamGraph';
 
 const Team = ({ open, onclose, data,profile,auth }) => {
-    console.log(profile)
-    const [page, setpage] = useState('Team Graph')
+    const [page, setpage] = useState('Investigation')
     const [seleteduser, setUser] = useState('')
+    const[count,setcount]=useState(0)
+    const[countConverted,setcountConverted]=useState(0)
     function screenController(args) {
+        setcount(0)
+        setcountConverted(0)
         setpage(args)
+
     }
     function updateUser(user){
         setUser(user)
+        setpage('Empty')
     }
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
@@ -29,7 +34,7 @@ const Team = ({ open, onclose, data,profile,auth }) => {
     return (
         <div>
             <Modal open={open} style={{ marginTop: '2rem', overflowY: 'scroll' }} >
-                <div style={{ background: 'white', height: '44rem', }}>
+                <div style={{ background: 'white' }}>
                     <div className='headerTeam'>
                         <button onClick={() => onclose()}>close</button>
                         <select onChange={(e) => updateUser(e.target.value)} >
@@ -40,26 +45,26 @@ const Team = ({ open, onclose, data,profile,auth }) => {
                                 )
                             }
                         </select>
-                        <span className='ButtonEffect' onClick={() => screenController('Team Graph')}>Team Graph</span>
                         <span className='ButtonEffect' onClick={() => screenController('Investigation')}>Investigation</span>
                         <span className='ButtonEffect' onClick={() => screenController('Create quote')}>Create quote</span>
-                        <span className='ButtonEffect' onClick={() => screenController('Follow up')}>Follow up</span>
-                        <span className='ButtonEffect' onClick={() => screenController('Converted')}>Converted</span>
-                        <span className='ButtonEffect' onClick={() => screenController('Edit Team')}>Edit Team</span>
+                        <span className='ButtonEffect' onClick={() => screenController('Follow up')}>Follow up({count})</span>
+                        <span className='ButtonEffect' onClick={() => screenController('Converted')}>Converted ({countConverted})</span>
+                        <span className='ButtonEffect' onClick={() => screenController('Edit Team')}>Team</span>
                     </div>
                     <div>
                         {
-                            page === 'Team Graph' ? <><TeamGraph /></> : <></>
+                            page === 'Investigation' ? <><Investigation uid={seleteduser} TeamProfile={data.TeamMembers} /></> : <></>
                         }{
-                            page === 'Investigation' ? <><Investigation /></> : <></>
+                            page === 'Create quote' ? <><CreateQuote  setcount={setcount} uid={seleteduser} profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
                         }{
-                            page === 'Create quote' ? <><CreateQuote uid={seleteduser} profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
+                            page === 'Follow up' ? <><FollowUp setcount={setcount} uid={seleteduser} auth={auth} profile={profile} /></> : <></>
                         }{
-                            page === 'Follow up' ? <><FollowUp  uid={seleteduser} auth={auth} profile={profile} /></> : <></>
+                            page === 'Converted' ? <><Converted   setcount={setcountConverted} uid={seleteduser} auth={auth} profile={profile} /></> : <></>
                         }{
-                            page === 'Converted' ? <><Converted /></> : <></>
-                        }{
-                            page === 'Edit Team' ? <><TeamEdit /></> : <></>
+                            page === 'Edit Team' ? <><TeamEdit  profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
+                        }
+                        {
+                            page === 'Empty' ? <><Empty/></> : <></>
                         }
                     </div>
                 </div>

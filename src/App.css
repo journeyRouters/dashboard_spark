@@ -195,3 +195,6 @@ td {
 .recharts-wrapper{
   /* position: inherit !important; */
 }
+.recharts-wrapper{
+  position: inherit !important;
+}

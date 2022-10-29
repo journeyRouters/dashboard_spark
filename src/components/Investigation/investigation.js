@@ -1,9 +1,9 @@
 import { Modal } from '@material-ui/core';
+import { DynamicBarChart } from 'react-dynamic-charts';
+import "react-dynamic-charts/dist/index.css";
 import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { DynamicBarChart } from 'react-dynamic-charts';
-import "react-dynamic-charts/dist/index.css";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import app from '../required';
 const db = getFirestore(app);
@@ -38,7 +38,6 @@ const Investigation = ({ profile }) => {
     async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
         var datePrev=moment(date).subtract(1, 'month').calendar()
         var month=moment(datePrev).format('MMMM')
-        console.log(month,AllUserprofile)
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
         for (var i = 0; i < AllUserprofile.length; i++) {

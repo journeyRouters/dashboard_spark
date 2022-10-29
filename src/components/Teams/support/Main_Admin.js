@@ -9,7 +9,6 @@ import '../Teams.css'
 import PieRechartComponent from './PieRechartComponent';
 
 const Main_Admin = ({ profile ,auth }) => {
-    console.log(profile)
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -56,7 +55,7 @@ const Main_Admin = ({ profile ,auth }) => {
             <div>
                 {
                     (Teams.slice(0).reverse()).map((data, index) => (<>
-                        <div onClick={() => handleTeam(data)} className='teamdiv'>
+                        <div onClick={() => handleTeam(data)} className='teamdiv' key={index}>
                             <div>
                                 <img alt='sales team img' src='/assets/img/sales-icon-12.png' width='170px' height='120px' />
                                 <h1 style={{ marginLeft: '1rem', marginTop: '-0.5rem' }}>
@@ -68,7 +67,7 @@ const Main_Admin = ({ profile ,auth }) => {
                                 <div style={{ marginTop: '2rem', marginLeft: '0.5rem' }}>
                                     {
                                         data.TeamMembers.map((data, index) => <>
-                                            <ul style={{ fontSize: '10px', fontWeight: '600' }}>
+                                            <ul key={index} style={{ fontSize: '10px', fontWeight: '600' }}>
                                                 <li>{data.label}</li>
                                             </ul>
                                         </>)

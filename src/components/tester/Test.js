@@ -1,4 +1,5 @@
 import { collection, doc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import moment from 'moment/moment';
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
@@ -12,21 +13,20 @@ const Test = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          collect.push(doc.data())
-         console.log(doc.id)
       });
    }
    async function allDoc() {
       const q = query(collection(db, "Profile"))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         // doc.data() is never undefined for query doc snapshots
-         console.log(doc.id, " => ", doc.data());
-         // add_a_feild(doc.id)
+         add_a_feild(doc.id)
       });
    }
    function add_a_feild(id) {
+      var month=moment(new Date()).format('MMMM-YYYY')
+      // console.log(month)
       setDoc(doc(db, "Profile",id), {
-         user_type: 'show'
+         Target:{[month]:10}
       }, { merge: true })
    }
    useEffect(() => {

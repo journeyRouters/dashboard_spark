@@ -30,7 +30,6 @@ const Freelance_Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -54,7 +53,6 @@ const Freelance_Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -79,7 +77,6 @@ const Freelance_Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -105,7 +102,6 @@ const Freelance_Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
             count_total_lead_provided()

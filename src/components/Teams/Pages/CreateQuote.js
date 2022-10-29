@@ -6,7 +6,7 @@ import app from '../../required';
 import Createleadcomponent from '../support/Createleadcomponent';
 const db = getFirestore(app);
 
-const CreateQuote = ({ uid, profile,TeamProfile }) => {
+const CreateQuote = ({ uid, profile, TeamProfile }) => {
     // console.log(uid)
     const [lead_data, setLead_data] = useState([])
 
@@ -26,7 +26,6 @@ const CreateQuote = ({ uid, profile,TeamProfile }) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list)
             }
         }
         catch (erorr) {
@@ -36,23 +35,24 @@ const CreateQuote = ({ uid, profile,TeamProfile }) => {
     }
     useEffect(() => {
         getLeadOnBoard()
-        console.log(lead_data.length)
 
     }, []);
     return (
-        <>
+
+        <div style={{ overflowY: 'scroll', height: '44rem' }}>
             {
                 lead_data ? <>
                     {
                         lead_data.map((data, index) => (
-                            <>
-                           <Createleadcomponent data={data} getLeadOnBoard={getLeadOnBoard} TeamProfile={TeamProfile} index={index}/>
-                            </>
+
+                            <Createleadcomponent key={index} data={data} getLeadOnBoard={getLeadOnBoard} TeamProfile={TeamProfile} index={index} />
+
                         ))
                     }
                 </> : <>Na</>
             }
-        </>
+        </div>
+
     );
 }
 

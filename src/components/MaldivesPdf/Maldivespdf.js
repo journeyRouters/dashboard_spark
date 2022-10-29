@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import moment from 'moment';
 import Footer, { GoogleReviews } from '../Profile/footer';
 import { Modal } from '@material-ui/core';
-import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import app from '../required';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 const db = getFirestore(app);
@@ -43,7 +43,6 @@ const Maldivespdf = ({
     onClosePdf,
     updateTableDataAfterQuote
 }) => {
-    console.log(profile)
     const currentdate = new Date();
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -69,6 +68,28 @@ const Maldivespdf = ({
     }
     function controllinclusionLinks(args) {
         setinclusionLinks(args)
+    }
+    async function UpdateTheTimeStamp() {
+        var TripData = [currentdate];
+        const docRef = doc(db, "Trip", data.TripId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            TripData = docSnap.data()
+        } else {
+            console.log("document not found!");
+        }
+        // updating the same data with current date time stamp
+        try {
+            TripData.dateTimeStampList.push(currentdate)
+            setDoc(docRef, { dateTimeStampList: TripData.dateTimeStampList }, { merge: true });
+        }
+        catch (error) {
+            console.log(error)
+            setDoc(docRef, { dateTimeStampList: [currentdate] }, { merge: true });
+
+        }
+
     }
     async function convertObjectToLink() {
         try {
@@ -282,6 +303,7 @@ const Maldivespdf = ({
         await delay(20000);
         update_quotation_flg()
         setQuotationData()
+        UpdateTheTimeStamp()
         setWait(false)
         try { updateTableDataAfterQuote(data.TripId) }
         catch (error) { console.log(error) }

@@ -178,7 +178,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverab
                                         installment.length != 0 ? <>
                                             {
                                                 installment.map((data, index) => (<>
-                                                    <div className="DateValue">
+                                                    <div className="DateValue" key={index}>
                                                         <p>{formatter.format(data.amount)}</p>
 
                                                     </div>
@@ -198,7 +198,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverab
                                         installment.length != 0 ? <>
                                             {
                                                 installment.map((data, index) => (<>
-                                                    <div className="DateValue   ">
+                                                    <div className="DateValue" key={index}>
                                                         {/* <span>
                                                             <img src="/assets/InvoiceAssets/TestingLogo.png" width='35px'/>
                                                             PENDING</span> */}

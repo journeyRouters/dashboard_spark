@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import jsPDF from 'jspdf';
 import React, { useRef, useState, useEffect } from 'react';
 import app from '../required';
@@ -59,13 +59,12 @@ const Profile = (
     const [whatsApp, setwhatsApp] = useState(profile.WhatsApp_number)
     const [Call, setCalling] = useState(profile.contact_number)
     const [ImgLinks, setImgLinks] = useState([])
-    const[travelEndDate,setTravelEndDate]=useState()
-    function getTravelEndDate(){
-        var tempDate=new Date(selected_Travel_date)
-        var nights=count_days-1
-        tempDate.setDate(tempDate.getDate()+nights)
+    const [travelEndDate, setTravelEndDate] = useState()
+    function getTravelEndDate() {
+        var tempDate = new Date(selected_Travel_date)
+        var nights = count_days - 1
+        tempDate.setDate(tempDate.getDate() + nights)
         setTravelEndDate(tempDate)
-        console.log(tempDate)
     }
     function controllLinks(args) {
         setImgLinks(args)
@@ -112,7 +111,7 @@ const Profile = (
         }
         else {
             await addDoc(collection(db, "Quote"), {
-                label: moment(currentdate).format('lll')+'/'+Data.TripId,
+                label: moment(currentdate).format('lll') + '/' + Data.TripId,
                 value: {
                     travel_data: Data,
                     count_days: count_days,
@@ -125,7 +124,7 @@ const Profile = (
                     pdf_name: moment(currentdate).format('lll'),
                     cabDetailsData: cabDetailsData,
                     // flights: flights,
-                    travelEndDate:travelEndDate,
+                    travelEndDate: travelEndDate,
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                     flightsImagesLinks: ImgLinks,
@@ -142,12 +141,12 @@ const Profile = (
         await updateDoc(doc(db, "Trip", `${travel_data.TripId}`), {
             quotation: quotation_new,
             quotation_flg: true,
-            Travel_Date:new Date(selected_Travel_date),
+            Travel_Date: new Date(selected_Travel_date),
             month: moment(currentdate).format('MMMM'),
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: email,
-            travelEndDate:travelEndDate,
+            travelEndDate: travelEndDate,
             Travel_Duration: count_days
         });
     }
@@ -199,6 +198,28 @@ const Profile = (
         // console.log(localList)
         controllLinks(localList)
     }
+    async function UpdateTheTimeStamp() {
+        var TripData = [currentdate];
+        const docRef = doc(db, "Trip", travel_data.TripId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            TripData = docSnap.data()
+        } else {
+            console.log("document not found!");
+        }
+        // updating the same data with current date time stamp
+        try {
+            TripData.dateTimeStampList.push(currentdate)
+            setDoc(docRef, { dateTimeStampList: TripData.dateTimeStampList }, { merge: true });
+        }
+        catch (error) {
+            console.log(error)
+            setDoc(docRef, { dateTimeStampList: [currentdate] }, { merge: true });
+
+        }
+
+    }
     function closeFormAndPdf() {
         setwait(false)
         // updateTableDataAfterQuote(travel_data.TripId)
@@ -234,6 +255,7 @@ const Profile = (
         }
         try {
             setQuotationData()
+            UpdateTheTimeStamp()
         }
         catch (e) {
             console.log(e)
@@ -372,7 +394,7 @@ const Profile = (
                                                 "string" && inclusion_data[k] !== null
                                         }
                                         ).map((data, index) => (
-                                            <div className="aliner_">
+                                            <div className="aliner_" key={index}>
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
                                                     {data}</span>
@@ -383,7 +405,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Inclusion ? <>
                                                 {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
-                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div  key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -402,7 +424,7 @@ const Profile = (
                                                 false && typeof (inclusion_data[k]) !==
                                                 "string" && inclusion_data[k] !== null
                                         }).map((data, index) => (
-                                            <div className="aliner_">
+                                            <div className="aliner_" key={index}>
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
 
@@ -414,7 +436,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
-                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div  key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -479,7 +501,7 @@ const Profile = (
                                 <div className='itinearyDiv'>
                                     {itineary &&
                                         itineary.map((data, index) => (
-                                            <div className='mapitineary'>
+                                            <div className='mapitineary' key={index}>
                                                 <span style={{ width: '5rem' }}><span> Day </span> {index + 1} -</span>
                                                 <p style={{ width: '91%', textTransform: 'uppercase' }}>{data.Day}</p>
                                             </div>
@@ -520,14 +542,14 @@ const Profile = (
                                 <div className='itinearyDiv'>
                                     {
                                         itineary.map((data, index) => (
-                                            <div className={(index + 1) % 2 == 0 ? 'DaywiseItinearyDiv' : 'DaywiseItinearyDivReverse'}>
+                                            <div key={index} className={(index + 1) % 2 == 0 ? 'DaywiseItinearyDiv' : 'DaywiseItinearyDivReverse'}>
                                                 <div className='DaywiseItinearyDivleft'>
                                                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                         <span className='dayheader'>
                                                             Day {index + 1} - {data.Day}
                                                         </span>
                                                     </div>
-                                                    <p className='dayDetailsitineary'>{data.Description.split('\n').map((data, index) => (<><div style={{ marginBottom: '-1rem' }}>{data}</div><br /></>))}</p>
+                                                    <p className='dayDetailsitineary'>{data.Description.split('\n').map((data, index) => (<><div key={index} style={{ marginBottom: '-1rem' }}>{data}</div><br /></>))}</p>
                                                 </div>
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img
@@ -584,7 +606,7 @@ const Profile = (
                                                 } Stay at {data.City} </h4>
 
                                                 <span>Hotel-{data.HotelName}</span><br />
-                                                <span>Meal-{data.HotelMeal.map((data__, index) => (<span>{data__.value},</span>))}</span>  <br />
+                                                <span>Meal-{data.HotelMeal.map((data__, index) => (<span key={index}>{data__.value},</span>))}</span>  <br />
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <span>Hotel Category-{data.Category}</span><br />
                                                 <h4></h4>

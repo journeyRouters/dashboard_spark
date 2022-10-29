@@ -1,4 +1,31 @@
 .setAliners{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+   justify-content: space-between;
+   width: 100%;
 }
+.theBar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    width: 74%;
+    font-size: 1.3rem;
+    position: sticky;
+    top: 2rem;
+    background-color: black;
+    color: yellow;
+    font-family: sans-serif;
+}
+.theBar_{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+.myBar{
+    width: 10%;
+    height: 30px;
+    background-color: #04AA6D;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }

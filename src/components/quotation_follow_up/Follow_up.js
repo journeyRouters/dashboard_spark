@@ -444,7 +444,7 @@ const FollowUp = (props) => {
             // console.log('get',lead[0])
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", props.auth.uid),
-                where("month","==",currentMonth),
+                // where("month","==",currentMonth),
                 where("Lead_Status", "==", lead[0])
             )
         }

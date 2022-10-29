@@ -82,6 +82,7 @@ const Row = (props) => {
         if (Reqoute_flg == false) {
             Allquote()
         }
+        // console.log(row.assigned_date_time.toDate())
     }, [Reqoute_flg]);
 
     function closeUpdater() {
@@ -114,7 +115,7 @@ const Row = (props) => {
         querySnapshot.forEach((doc) => {
             list.push(doc.data())
         });
-        setpdf(list)
+        setpdf(list)        
         // console.log('all quote', list)
 
     }
@@ -177,7 +178,6 @@ const Row = (props) => {
         Allquote()
         getinvoice()
         checkForLastUpdate()
-
     }, []);
 
     function sethint(hint) {

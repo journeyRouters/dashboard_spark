@@ -20,7 +20,6 @@ const Investigation = ({ uid, TeamProfile }) => {
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
     async function fetch_profile() {
-        // console.log(args)
         try {
             const docRef = doc(db, "Profile", uid);
             const docSnap = await getDoc(docRef);
@@ -38,7 +37,6 @@ const Investigation = ({ uid, TeamProfile }) => {
     }
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].label, value: 0, color: randomColor }
@@ -49,11 +47,9 @@ const Investigation = ({ uid, TeamProfile }) => {
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    // console.log(doc.data())
                 });
                 user_analytics.value = list.length
                 holdAlluserAnalytics.push(user_analytics)
-                // console.log(list)
 
 
             }
@@ -68,15 +64,12 @@ const Investigation = ({ uid, TeamProfile }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        // console.log(holdAlluserAnalytics)
-        // setdataAvailablityFlg(true)
 
     }
     async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
         var datePrev = moment(date).subtract(1, 'month').calendar()
         var month = moment(datePrev).format('MMMM')
         var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].label, value: 0, color: randomColor }
@@ -87,11 +80,9 @@ const Investigation = ({ uid, TeamProfile }) => {
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    // console.log(doc.data())
                 });
                 user_analytics.value = list.length
                 holdAlluserAnalytics.push(user_analytics)
-                // console.log(holdAlluserAnalytics)
 
 
             }
@@ -106,8 +97,7 @@ const Investigation = ({ uid, TeamProfile }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        // console.log(holdAlluserAnalytics)
-        // setdataAvailablityFlg(true)
+        setdataAvailablityFlg(true)
 
     }
     async function currentLead() {
@@ -125,7 +115,6 @@ const Investigation = ({ uid, TeamProfile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -149,7 +138,6 @@ const Investigation = ({ uid, TeamProfile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -175,7 +163,6 @@ const Investigation = ({ uid, TeamProfile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
-            // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)
 
@@ -203,7 +190,6 @@ const Investigation = ({ uid, TeamProfile }) => {
             local.value = list.length
             prev_instance.push(local)
             loadData(prev_instance)
-            setdataAvailablityFlg(true)
 
         }
         catch (erorr) {
@@ -212,16 +198,15 @@ const Investigation = ({ uid, TeamProfile }) => {
 
     }
     function OnsubmitTarget() {
-        if (Target != 0 && Target>0) {
+        if (Target != 0 && Target > 0) {
             var month = moment(new Date()).format('MMMM-YYYY')
-            // console.log(month)
             setDoc(doc(db, "Profile", uid), {
                 Target: { [month]: Target }
             }, { merge: true })
             fetch_profile()
             setTarget(0)
         }
-        else{
+        else {
             alert('Target should be greater than "0"')
         }
 
@@ -229,7 +214,6 @@ const Investigation = ({ uid, TeamProfile }) => {
     function lastTargets(member) {
         var localList = []
         Object.entries(member.Target).forEach(([key, value]) => {
-            console.log(key, typeof (key))
             var localObject = { Key: '', value: '' }
             localObject.Key = key
             localObject.value = value
@@ -238,8 +222,6 @@ const Investigation = ({ uid, TeamProfile }) => {
         setLastTarget(localList)
     }
     function dataMiner() {
-        getConvertedByAllSpokes(TeamProfile)
-        getPrevMonthConvertedByAllSpokes(TeamProfile)
         currentLead()
         followUp()
         Dump()
@@ -250,7 +232,8 @@ const Investigation = ({ uid, TeamProfile }) => {
             fetch_profile()
             dataMiner()
         }
-
+        getConvertedByAllSpokes(TeamProfile)
+        getPrevMonthConvertedByAllSpokes(TeamProfile)
 
     }, []);
     return (
@@ -296,8 +279,8 @@ const Investigation = ({ uid, TeamProfile }) => {
                                                 <h2>Target for {moment(new Date()).format('MMMM')}</h2>
                                                 <span>{member.name}</span>
                                                 <div>
-                                                    <input  value={Target} onChange={(e) => setTarget(e.target.value)} type={'number'}></input>
-                                                    <button onClick={()=>OnsubmitTarget()}>Update</button>
+                                                    <input value={Target} onChange={(e) => setTarget(e.target.value)} type={'number'}></input>
+                                                    <button onClick={() => OnsubmitTarget()}>Update</button>
                                                 </div>
                                                 <div style={{ height: '4rem', overflowY: 'scroll' }}>
                                                     {

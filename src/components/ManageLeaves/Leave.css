@@ -1,0 +1,15 @@
+.Leave_header{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid green;
+}
+.logoCL{
+    width: 5.5rem;
+    border-radius: 2rem;
+    height: 4.4rem;
+}
+.unitDivCL{
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+}

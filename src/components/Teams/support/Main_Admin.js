@@ -31,11 +31,9 @@ const Main_Admin = ({ profile ,auth }) => {
         );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Team = [];
-            // console.log(times)
             querySnapshot.forEach((doc) => {
                 Team.push(doc.data());
             });
-            // console.log(Team)
             setTeams(Team)
         });
         // arrange()

@@ -165,6 +165,8 @@ const Userunitcomponent = (props) => {
                                             <FormControlLabel value="Super Admin" control={<Radio />} label="Super Admin" />
                                             <FormControlLabel value="Accounts" control={<Radio />} label="Accounts" />
                                             <FormControlLabel value="freelance" control={<Radio />} label="freelance" />
+                                            <FormControlLabel value="Team Leader" control={<Radio />} label="Team Leader" />
+
                                         </RadioGroup>
                                     </FormControl>
                                 </div>

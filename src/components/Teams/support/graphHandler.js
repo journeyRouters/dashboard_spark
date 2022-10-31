@@ -28,7 +28,6 @@ const GraphHandler = ({ TeamData }) => {
                 querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    console.log(doc.data())
                 });
                 local.value = list.length
                 local.name = TeamData.TeamMembers[member].label
@@ -61,7 +60,6 @@ const GraphHandler = ({ TeamData }) => {
                 querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    console.log(doc.data())
                 });
                 local.value = list.length
                 local.name = TeamData.TeamMembers[member].label
@@ -94,7 +92,6 @@ const GraphHandler = ({ TeamData }) => {
                 querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    console.log(doc.data())
                 });
                 local.value = list.length
                 local.name = TeamData.TeamMembers[member].label

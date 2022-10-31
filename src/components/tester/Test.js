@@ -26,7 +26,9 @@ const Test = () => {
       var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
       setDoc(doc(db, "Profile",id), {
-         Target:{[month]:10}
+         Target:{}
+         // testFeild:{'October-2023':10}
+
       }, { merge: true })
    }
    useEffect(() => {

@@ -1,13 +1,11 @@
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, orderBy, query, where } from 'firebase/firestore';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { collection, getFirestore, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Createteamform from './support/Createteamform';
+import GraphHandler from './support/graphHandler';
 import Team from './support/Team';
-import './Teams.css'
 
-const Main = ({ profile ,auth}) => {
+const MainPage = ({ profile ,auth }) => {
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -28,15 +26,13 @@ const Main = ({ profile ,auth}) => {
     }
     useEffect(() => {
         const q = query(collection(db, "Team"),
-            where("PermissionStatus", "==", 'Hold'), orderBy('createdDate')
+            where("PermissionStatus", "==", 'Hold'),where("createdBy.uid","==",profile.uid), orderBy('createdDate')
         );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Team = [];
-            // console.log(times)
             querySnapshot.forEach((doc) => {
                 Team.push(doc.data());
             });
-            // console.log(Team)
             setTeams(Team)
         });
         // arrange()
@@ -53,7 +49,7 @@ const Main = ({ profile ,auth}) => {
             }
             <div>
                 {
-                    (Teams.slice(0).reverse()).map((data, index) => (
+                    (Teams.slice(0).reverse()).map((data, index) => (<>
                         <div onClick={() => handleTeam(data)} className='teamdiv' key={index}>
                             <div>
                                 <img alt='sales team img' src='/assets/img/sales-icon-12.png' width='170px' height='120px' />
@@ -65,26 +61,30 @@ const Main = ({ profile ,auth}) => {
                                 <span style={{ fontSize: '15px', fontWeight: '600' }}> Leaded BY:-{data.createdBy.name}</span>
                                 <div style={{ marginTop: '2rem', marginLeft: '0.5rem' }}>
                                     {
-                                        data.TeamMembers.map((data, index) =>
-                                            <ul  key={index} style={{ fontSize: '10px', fontWeight: '600' }}>
+                                        data.TeamMembers.map((data, index) => <>
+                                            <ul key={index} style={{ fontSize: '10px', fontWeight: '600' }}>
                                                 <li>{data.label}</li>
                                             </ul>
-                                        )
+                                        </>)
                                     }
                                 </div>
                             </div>
+                            <GraphHandler TeamData={data}/>
+                            {/* <button style={{ height: '2rem' }}>Allowed</button> */}
                         </div>
-                    ))
+                    </>))
                 }
                 {
                     TeamUnit ? <>
-                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData} profile={profile} auth={auth}/>
+                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData}  profile={profile} auth={auth} />
                     </> : <></>
                 }
             </div>
+
+
 
         </div>
     );
 }
 
-export default Main;
+export default MainPage;

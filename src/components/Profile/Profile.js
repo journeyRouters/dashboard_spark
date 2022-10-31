@@ -42,7 +42,7 @@ const Profile = (
         flight
     }
 ) => {
-    // console.log(itineary)
+    // console.log(selected_Travel_date)
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"
@@ -60,6 +60,7 @@ const Profile = (
     const [Call, setCalling] = useState(profile.contact_number)
     const [ImgLinks, setImgLinks] = useState([])
     const [travelEndDate, setTravelEndDate] = useState()
+    const [flgForlocalMemoryAccess, setLocalMemoryFlg] = useState(false)
     function getTravelEndDate() {
         var tempDate = new Date(selected_Travel_date)
         var nights = count_days - 1
@@ -93,6 +94,8 @@ const Profile = (
 
     }
     useEffect(() => {
+        localStorage.setItem('Journeydate', selected_Travel_date);
+        setLocalMemoryFlg(true)
         if (!flightsLinkfromstorage) {
             convertObjectToLink()
         }
@@ -280,7 +283,8 @@ const Profile = (
                     {/* this is the first page for introduction to the destination */}
                     <div className={'page1'}
                         style={{
-                            backgroundImage: `url(/assets/destination/${destinationName}/Header.png)`,
+                            // backgroundImage: `url(/assets/destination/${destinationName}/Header.png)`,
+                            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FHeader.png?alt=media)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -330,7 +334,8 @@ const Profile = (
                     {/* page2 start (Package Details)*/}
                     <div className="page-break">
                         <div className="page2" style={{
-                            backgroundImage: `url(/assets/destination/${destinationName}/PackageDetails.png)`,
+                            // backgroundImage: `url(/assets/destination/${destinationName}/PackageDetails.png)`,
+                            backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FPackageDetails.png?alt=media)`,
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
@@ -379,7 +384,10 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/InclusionExclusion.png`} />
+                                <img className="inclusionPage_img"
+                                    // src={`/assets/destination/${destinationName}/InclusionExclusion.png`} 
+                                    src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FInclusionExclusion.png?alt=media`}
+                                />
                             </div>
                             <div className="inclusionPage_blocks" >
                                 <span> Inclusion</span>
@@ -405,7 +413,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Inclusion ? <>
                                                 {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
-                                                    <div  key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -436,7 +444,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
-                                                    <div  key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -495,7 +503,11 @@ const Profile = (
                             }}
                         >
                             <div>
-                                <img className="inclusionPage_img" src={`/assets/destination/${destinationName}/DayWiseItineary.png`} />
+                                <img className="inclusionPage_img"
+                                    // src={`/assets/destination/${destinationName}/DayWiseItineary.png`} 
+                                    src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FDayWiseItineary.png?alt=media`}
+
+                                />
 
                                 <span className='headLineDaywiseItineary'> Day wise Itinerary</span>
                                 <div className='itinearyDiv'>
@@ -535,7 +547,8 @@ const Profile = (
                         >
                             <div>
                                 <img className="inclusionPage_img"
-                                    src={`/assets/destination/${destinationName}/DetailItineary.png`}
+                                    // src={`/assets/destination/${destinationName}/DetailItineary.png`}
+                                    src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FDetailItineary.png?alt=media`}
                                 />
 
                                 <span className='headLineDaywiseItineary'>Detail  Itineary</span>
@@ -554,7 +567,8 @@ const Profile = (
                                                 <div className='DaywiseItinearyDivRight'>
                                                     <img
                                                         // src='/assets/pdfDefaultImage/BALI ACTIVITIES IMAGES-20220704T120432Z-001/SolangValleym (1).png'
-                                                        src={`/assets/destination/${destinationName}/${data.Activity.value}.png`}
+                                                        // src={`/assets/destination/${destinationName}/${data.Activity.value}.png`}
+                                                        src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2F${data.Activity.value}.png?alt=media`}
                                                         style={{ width: "14rem", height: "14rem" }} />
                                                 </div>
                                             </div>
@@ -610,11 +624,14 @@ const Profile = (
                                                 <span>Room-{data.RoomType}</span><br />
                                                 <span>Hotel Category-{data.Category}</span><br />
                                                 <h4></h4>
-                                                <NightsController
-                                                    nights={data.Night.length}
-                                                    checkIn={checkIn}
-                                                    controlsetCheckIn={controlsetCheckIn}
-                                                />
+                                                {
+                                                    flgForlocalMemoryAccess ?
+                                                        <NightsController
+                                                            nights={data.Night.length}
+                                                            checkIn={checkIn}
+                                                            controlsetCheckIn={controlsetCheckIn}
+                                                        /> : <></>
+                                                }
 
 
                                             </div>

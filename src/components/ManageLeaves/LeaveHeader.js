@@ -12,7 +12,7 @@ const LeaveHeader = () => {
             </div>
             <div className='unitDivCL'>
             <span>Leave Without Pay</span>
-                <img alt='Leave Without Pay'src='/assets/leaveAssets/LWP.jpeg' className='logoCL'/>
+                <img alt='Leave Without Pay'src='/assets/leaveAssets/lwp.jpg' className='logoCL'/>
                 <span>10 Days</span>
             </div>
             <div className='unitDivCL'>
@@ -22,7 +22,7 @@ const LeaveHeader = () => {
             </div>
             <div className='unitDivCL'>
             <span>Sick Leave</span>
-                <img alt='Sick Leave'src='/assets/leaveAssets/sick.jpeg' className='logoCL'/>
+                <img alt='Sick Leave'src='/assets/leaveAssets/sick.jpg' className='logoCL'/>
                 <span>12 Days</span>
             </div>
             <div className='unitDivCL'>

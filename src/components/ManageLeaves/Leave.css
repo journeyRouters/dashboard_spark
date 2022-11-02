@@ -13,3 +13,24 @@
     flex-direction: column;
     font-weight: 700;
 }
+.ApplicationMainDiv{
+    
+    background: rgb(242, 241, 176);
+    width: 38rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: 700;
+    padding-left: 1rem;
+
+}
+.ApplicationReasonTextArea{
+    width: 31rem;
+    height: 8rem;
+    margin-left: 1rem;
+}
+.ApplicationSubmitButton{
+    width: 4rem;
+    height: 2rem;
+    border-radius: 8px;
+}

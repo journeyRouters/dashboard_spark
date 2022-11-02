@@ -20,7 +20,7 @@ const Investigation = ({ profile }) => {
     // console.log(moment(date).subtract(1, 'month').calendar())
   
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "==", "User"), where('user_type', '==', 'show'));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User","Team Leader"]), where('user_type', '==', 'show'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

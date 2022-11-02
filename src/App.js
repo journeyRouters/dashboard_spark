@@ -275,6 +275,13 @@ function App() {
                         </p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        <p>Manage Leave
+                        </p>
+                      </div>
+                    </div>
                   </> : <></>
                 }
                 {
@@ -512,7 +519,7 @@ function App() {
           }
           {
             Page === "Manage Leave" ?
-              <LeaveMainPage profile={profile} auth={auth}/>
+              <LeaveMainPage profile={profile} auth={auth} />
               : <></>
           }
           {

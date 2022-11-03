@@ -8,12 +8,13 @@ const db = getFirestore(app);
 const Test = () => {
    async function tester() {
       // Sep 7, 2022 3:56 PM"
-      const q = query(collection(db, "Quote"), where("label", "==", 'Sep 7, 2022 3:56 PM'));
+      const q = query(collection(db, "Trip"), where("leave_avail.2021.cl", "==", 12));
       var collect = []
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          collect.push(doc.data())
       });
+      console.log(collect)
    }
    async function allDoc() {
       const q = query(collection(db, "Profile"))
@@ -26,14 +27,18 @@ const Test = () => {
       var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
       setDoc(doc(db, "Profile",id), {
-         Target:{}
-         // testFeild:{'October-2023':10}
+         Leave:{
+            CasualLeave:12,
+            SickLeave:12,
+            LeaveWithoutPay:10,
+            PrivilegedLeave:12,
+            MaternityLeave:182
+         }
 
       }, { merge: true })
    }
    useEffect(() => {
       //   tester()
-      // add_a_feild()
       // allDoc()
    }, []);
    return (

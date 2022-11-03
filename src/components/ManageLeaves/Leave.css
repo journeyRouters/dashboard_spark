@@ -1,20 +1,23 @@
-.Leave_header{
+.Leave_header {
     display: flex;
     justify-content: space-evenly;
     border: 2px solid green;
 }
-.logoCL{
+
+.logoCL {
     width: 5.5rem;
     border-radius: 2rem;
     height: 4.4rem;
 }
-.unitDivCL{
+
+.unitDivCL {
     display: flex;
     flex-direction: column;
     font-weight: 700;
 }
-.ApplicationMainDiv{
-    
+
+.ApplicationMainDiv {
+
     background: rgb(242, 241, 176);
     width: 38rem;
     display: flex;
@@ -24,13 +27,35 @@
     padding-left: 1rem;
 
 }
-.ApplicationReasonTextArea{
+
+.ApplicationReasonTextArea {
     width: 31rem;
     height: 8rem;
     margin-left: 1rem;
 }
-.ApplicationSubmitButton{
+
+.ApplicationSubmitButton {
     width: 4rem;
     height: 2rem;
     border-radius: 8px;
+}
+
+.ticket {
+    /* background-image: url('/assets/leaveAssets/ticket1.png'); */
+    background-image: url("/public/assets/leaveAssets/ticket1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 11rem;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.DateApplication{
+    display: flex;
+    flex-direction: column;
 }

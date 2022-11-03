@@ -551,7 +551,7 @@ const Profile = (
                                     src={`https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FDetailItineary.png?alt=media`}
                                 />
 
-                                <span className='headLineDaywiseItineary'>Detail  Itineary</span>
+                                <span className='headLineDaywiseItineary'>Detail  Itinerary</span>
                                 <div className='itinearyDiv'>
                                     {
                                         itineary.map((data, index) => (

@@ -34,7 +34,6 @@ const Test = () => {
             PrivilegedLeave:12,
             MaternityLeave:182
          }
-
       }, { merge: true })
    }
    useEffect(() => {

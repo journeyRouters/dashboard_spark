@@ -62,6 +62,9 @@ const Component = ({ data, docid, getLeaveApplication }) => {
         var Leaves = userProfile.Leave
         var difference = data.From.toDate() - data.To.toDate();
         var Day = Math.floor(difference / 1000 / 60 / 60 / 24);
+        if (Day == 0) {
+            Day = -1
+        }
         switch (data.LeaveType) {
             case 'CasualLeave': {
                 Leaves.CasualLeave = Math.abs(Leaves['CasualLeave'] + Day)
@@ -154,7 +157,7 @@ const Component = ({ data, docid, getLeaveApplication }) => {
                         <></>
                 }
             </div>
-            <div className='grant'>
+            <div className={data.LeaveStatus === 'Approved' ?'blur':'grant'}>
                 <textarea style={{ backgroundColor: '#fed638', width: '19rem' }} defaultValue={data.Reason}></textarea>
                 <textarea onChange={(e) => HandleRemarks(e.target.value)} value={remarks} style={{ width: '19rem', height: '4rem' }} placeholder='your comments'></textarea>
                 <div style={{ display: 'flex', justifyContent: 'space-around', width: '12rem' }}>

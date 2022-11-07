@@ -1,11 +1,8 @@
-import { AccountBalanceWalletTwoTone, PublicTwoTone, GroupAddTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, PersonOutlineOutlined, SearchTwoTone, Speed, TrendingUp, PublicOutlined } from '@material-ui/icons';
-import { fromEvent } from "file-selector";
+import { AccountBalanceWalletTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, GroupAddTwoTone, PersonOutlineOutlined, PublicOutlined, PublicTwoTone, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
 import { getAuth, signOut } from 'firebase/auth';
-import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import readXlsxFile from 'read-excel-file';
 import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
 import Createquote from './components/CreateQuote/CreateQuote';
@@ -22,10 +19,10 @@ import Poststay from './components/payments_vouchers/operation/Poststay';
 import Vouchers from './components/payments_vouchers/Vouchers';
 import AdminFollow from './components/quotation_follow_up/AdminFollow';
 import FollowUp from './components/quotation_follow_up/Follow_up';
-import Rapid from './components/Rapid/Rapid';
 import app from './components/required';
 import Main from './components/Teams/main';
-import Main_Admin from './components/Teams/support/Main_Admin.js'
+import Adminleavefunnel from './components/Teams/Pages/AdminLeaveFunnel';
+import Main_Admin from './components/Teams/support/Main_Admin.js';
 import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
 
@@ -434,10 +431,10 @@ function App() {
                         <p>Driver</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Payments")}>
+                    <div className='sidebarCard' onClick={() => page("AdminLeaveFunnel")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Payments</p>
+                        <p>Leaves</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
@@ -489,12 +486,12 @@ function App() {
                         <p>Post Stay</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
+                    {/* <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>Switch user</p>
                       </div>
-                    </div>
+                    </div> */}
 
                   </> : <></>
                 }
@@ -510,6 +507,12 @@ function App() {
                 <Createquote auth={auth} userProfile={profile} />
               }
               </> : <></>
+          }
+
+          {
+            Page === "AdminLeaveFunnel" ?
+              <Adminleavefunnel auth={auth} />
+              : <></>
           }
           {
             Page === "rapid_fire" ?

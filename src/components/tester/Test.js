@@ -28,17 +28,17 @@ const Test = () => {
       // console.log(month)
       setDoc(doc(db, "Profile",id), {
          Leave:{
-            CasualLeave:12,
-            SickLeave:12,
-            LeaveWithoutPay:10,
-            PrivilegedLeave:12,
+            CasualLeave:5,
+            SickLeave:5,
+            LeaveWithoutPay:4,
+            PrivilegedLeave:5,
             MaternityLeave:182
          }
       }, { merge: true })
    }
    useEffect(() => {
       //   tester()
-      // allDoc()
+      allDoc()
    }, []);
    return (
       <div>

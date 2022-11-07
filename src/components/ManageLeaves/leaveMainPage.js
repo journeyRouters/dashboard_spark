@@ -10,7 +10,7 @@ import './Leave.css'
 const db = getFirestore(app);
 
 const LeaveMainPage = ({ profile, auth }) => {
-    const[AllLeaves,setAllLeaves]=useState([])
+    const [AllLeaves, setAllLeaves] = useState([])
     async function getLeaveApplication() {
         var localList = []
         const q = query(collection(db, "Leaves"), where("appliedBY.uid", "==", auth.uid))
@@ -18,7 +18,6 @@ const LeaveMainPage = ({ profile, auth }) => {
         querySnapshot.forEach((doc) => {
             localList.push(doc.data())
         });
-        console.log(localList)
         setAllLeaves(localList)
     }
     useEffect(() => {
@@ -30,22 +29,32 @@ const LeaveMainPage = ({ profile, auth }) => {
             <Application profile={profile} auth={auth} getLeaveApplication={getLeaveApplication} />
             <div>
                 {
-                    AllLeaves.map((data,index)=><div key={index} className='ticket'>
-                        <div className='DateApplication'>
-                             <span>{moment(data.From.toDate()).format('DD-MMMM-YYYY')}</span>
-                             <span>......................................</span>
-                             <span>
-                             {moment(data.To.toDate()).format('DD-MMMM-YYYY')}
-                             </span>
+                    AllLeaves.map((data, index) => <>
+                        <div key={index} style={{ display: 'flex' }} >
+                            <div className='ticket'>
+                                <div className='DateApplication'>
+                                    <span>{moment(data.From.toDate()).format('DD-MMMM-YYYY')}</span>
+                                    <span>......................................</span>
+                                    <span>
+                                        {moment(data.To.toDate()).format('DD-MMMM-YYYY')}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>{data.LeaveType}</span><br />
+                                </div>
+                                <div>
+                                    <span style={{ color: '#641d6b' }}>{data.approvedBy.label}</span>
+                                    {/* Applied by {data.} */}
+                                </div>
+                            </div>
+                            {
+                                data.LeaveStatus === 'Approved' ?
+                                    <img className='approverlogo' alt='Approved' src={'/assets/leaveAssets/Approved.png'} /> :
+                                    <></>
+                            }
                         </div>
-                        <div>
-                            <span>{data.LeaveType}</span><br/>
-                        </div>
-                        <div>
-                            <span style={{color:'#641d6b'}}>{data.approvedBy.label}</span>
-                            {/* Applied by {data.} */}
-                        </div>
-                    </div>)
+
+                    </>)
                 }
             </div>
         </div>

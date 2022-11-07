@@ -59,3 +59,17 @@
     display: flex;
     flex-direction: column;
 }
+.grant{
+    width: 21rem;
+    height: 9.4rem;
+    background-color: #fed638;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.approverlogo{
+    width: 9rem;
+    margin-left: -9.5rem;
+}

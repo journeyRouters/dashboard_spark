@@ -7,20 +7,21 @@ import CreateQuote from '../Pages/CreateQuote';
 import Empty from '../Pages/empty';
 import FollowUp from '../Pages/FollowUp';
 import Investigation from '../Pages/Investigation';
+import Leaves from '../Pages/Leaves';
 import TeamEdit from '../Pages/TeamEdit';
 
-const Team = ({ open, onclose, data,profile,auth }) => {
+const Team = ({ open, onclose, data, profile, auth }) => {
     const [page, setpage] = useState('Investigation')
     const [seleteduser, setUser] = useState('')
-    const[count,setcount]=useState(0)
-    const[countConverted,setcountConverted]=useState(0)
+    const [count, setcount] = useState(0)
+    const [countConverted, setcountConverted] = useState(0)
     function screenController(args) {
         setcount(0)
         setcountConverted(0)
         setpage(args)
 
     }
-    function updateUser(user){
+    function updateUser(user) {
         setUser(user)
         setpage('Empty')
     }
@@ -50,21 +51,26 @@ const Team = ({ open, onclose, data,profile,auth }) => {
                         <span className='ButtonEffect' onClick={() => screenController('Follow up')}>Follow up({count})</span>
                         <span className='ButtonEffect' onClick={() => screenController('Converted')}>Converted ({countConverted})</span>
                         <span className='ButtonEffect' onClick={() => screenController('Edit Team')}>Team</span>
+                        <span className='ButtonEffect' onClick={() => screenController('Leaves')}>Leaves</span>
+
                     </div>
                     <div>
                         {
                             page === 'Investigation' ? <><Investigation uid={seleteduser} TeamProfile={data.TeamMembers} /></> : <></>
                         }{
-                            page === 'Create quote' ? <><CreateQuote  setcount={setcount} uid={seleteduser} profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
+                            page === 'Create quote' ? <><CreateQuote setcount={setcount} uid={seleteduser} profile={profile} TeamProfile={data.TeamMembers} /></> : <></>
                         }{
                             page === 'Follow up' ? <><FollowUp setcount={setcount} uid={seleteduser} auth={auth} profile={profile} /></> : <></>
                         }{
-                            page === 'Converted' ? <><Converted   setcount={setcountConverted} uid={seleteduser} auth={auth} profile={profile} /></> : <></>
+                            page === 'Converted' ? <><Converted setcount={setcountConverted} uid={seleteduser} auth={auth} profile={profile} /></> : <></>
                         }{
-                            page === 'Edit Team' ? <><TeamEdit  profile={profile} TeamProfile={data.TeamMembers}/></> : <></>
+                            page === 'Edit Team' ? <><TeamEdit profile={profile} TeamProfile={data.TeamMembers} /></> : <></>
                         }
                         {
-                            page === 'Empty' ? <><Empty/></> : <></>
+                            page === 'Leaves' ? <><Leaves profile={profile} TeamProfile={data.TeamMembers} auth={auth} /></> : <></>
+                        }
+                        {
+                            page === 'Empty' ? <><Empty /></> : <></>
                         }
                     </div>
                 </div>

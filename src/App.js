@@ -437,6 +437,13 @@ function App() {
                         <p>Leaves</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("Team_")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Teams
+                        </p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -449,13 +456,7 @@ function App() {
                         <p>Followed Lead</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Team_")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Teams
-                        </p>
-                      </div>
-                    </div>
+
                     <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />

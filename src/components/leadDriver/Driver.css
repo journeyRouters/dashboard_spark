@@ -2,7 +2,8 @@
     background: antiquewhite;
     height: 4rem;
     /* width: 80%; */
-    /* position: fixed; */
+    position: sticky;
+    top: 0rem;
     align-items: center;
     display: flex;
     justify-content: space-between;

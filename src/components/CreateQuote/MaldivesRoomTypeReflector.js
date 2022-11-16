@@ -401,7 +401,7 @@ const RoomType = {
             value: "TwoBedroomBeachVillaWithPrivatePool",
         },
     ],
-    MovenpickResortKuredhivaru:[
+    MovenpickResortKuredhivaru: [
         {
             label: "Beach Pool Suite",
             value: "BeachPoolSuite",
@@ -548,8 +548,12 @@ const RoomType = {
     ],
     DhigufaruIslandResort: [
         {
-            label: "BeachVillaVeliAndBoaku",
-            value: "BeachVillaVeliAndBoaku",
+            label: "VeliBeachVilla",
+            value: "VeliBeachVilla",
+        },
+        {
+            label: "BoakuBeachVilla",
+            value: "BoakuBeachVilla",
         },
         {
             label: "BodhanfulhuWaterPoolVilla",
@@ -759,14 +763,34 @@ const RoomType = {
         },
 
     ],
+
+    Thulagiri: [
+        {
+            label: 'Water Bungalow',
+            value: 'WaterBungalow'
+        },
+        {
+            label: 'Beach Bungalow',
+            value: 'BeachBungalow'
+        },
+        {
+            label: 'Superior Water Bungalow',
+            value: 'SuperiorWaterBungalow'
+        }
+
+    ],
     HardRockMaldives: [
         {
-            label: "GoldBeachPoolVilla",
+            label: "Gold Beach Pool Villa",
             value: "GoldBeachPoolVilla",
         },
         {
             label: "GoldBeachVilla",
             value: "GoldBeachVilla",
+        },
+        {
+            label: 'Silver Sky Studio',
+            value: 'SilverSkyStudio'
         },
         {
             label: "PlatinumOverwaterPoolVilla",

@@ -207,10 +207,10 @@ export const propertyMaldives = [
     //     label: 'THE STANDARD MALDIVES',
     //     value: 'TheStandardMaldives'
     // },
-    // {
-    //     label: 'THULHAGIRI ISLAND RESORT AND SPA',
-    //     value: 'ThulhagiriIslandResort_Spa'
-    // },
+    {
+        label: 'Thulagiri',
+        value: 'Thulagiri'
+    },
     {
         label: 'VARU BY ATMOSPHERE',
         value: 'VaruByAtmosphere'

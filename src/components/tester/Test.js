@@ -38,7 +38,7 @@ const Test = () => {
    }
    useEffect(() => {
       //   tester()
-      allDoc()
+      // allDoc()
    }, []);
    return (
       <div>

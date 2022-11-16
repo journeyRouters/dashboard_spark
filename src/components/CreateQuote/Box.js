@@ -425,6 +425,8 @@ const Box = ({
                                                 <option value={'Kashmir'}>Kashmir</option>
                                                 <option value={'Andaman'}>Andaman</option>
                                                 <option value={'Goa'}>Goa</option>
+                                                <option value={'Singapore'}>Singapore</option>
+                                                <option value={'Rajasthan'}>Rajasthan</option>
                                             </select>
                                         </h4>
                                     </div>

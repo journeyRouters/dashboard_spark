@@ -448,7 +448,6 @@ const Maldives = ({
                                     <span style={{ border: "2px solid green" }}>{data.Destination}</span>
                                     <select onChange={(destination) => changingDestination(destination)}>
                                         <option value={'change Destination'}>change Destination</option>
-                                        <option value={'Maldives'}>Maldives</option>
                                         <option value={'Dubai'}>Dubai</option>
                                         <option value={'Maldives'}>Maldives</option>
                                         <option value={'Thailand'}>Thailand</option>
@@ -459,7 +458,10 @@ const Maldives = ({
                                         <option value={'Ladakh'}>Ladakh</option>
                                         <option value={'Kerala'}>Kerala</option>
                                         <option value={'Kashmir'}>Kashmir</option>
+                                        <option value={'Andaman'}>Andaman</option>
                                         <option value={'Goa'}>Goa</option>
+                                        <option value={'Singapore'}>Singapore</option>
+                                        <option value={'Rajasthan'}>Rajasthan</option>
                                     </select>
                                 </h4>
                             </div>

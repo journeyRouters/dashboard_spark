@@ -11,6 +11,18 @@ export const avtivityList = {
             value: 'Transfer'
         },
         {
+            label: 'Anvaya Dinner',
+            value: 'AnvayaDinner'
+        },
+        {
+            label: 'Sadara Dinner',
+            value: 'SadaraDinner'
+        },
+        {
+            label: 'GiliIsland Transfers',
+            value: 'GiliIslandTransfers'
+        },
+        {
             label: 'Arival',
             value: 'Arival'
         },
@@ -106,6 +118,65 @@ export const avtivityList = {
         {
             label: 'UlunDanuBeratan',
             value: 'UlunDanuBeratan'
+        }
+
+    ],
+    Rajasthan: [
+        {
+            label: 'Amer Fort',
+            value: 'AmerFort'
+        },
+        {
+            label: 'Hawa Mahal',
+            value: 'HawaMahal'
+        },
+        {
+            label: 'Jagdish Temple',
+            value: 'JagdishTemple'
+        },
+        {
+            label: 'Jain Temple',
+            value: 'JainTemple'
+        },
+        {
+            label: 'Jaisalmer Fort',
+            value: 'JaisalmerFort'
+        },
+        {
+            label: 'Karni Mata Ropeway',
+            value: 'KarniMataRopeway'
+        },
+        {
+            label: 'Mehrangarh Fort',
+            value: 'MehrangarhFort'
+        },
+        {
+            label: 'Patwon Ki Haveli',
+            value: 'PatwonKiHaveli'
+        },
+        {
+            label: 'Pichola Lake',
+            value: 'PicholaLake'
+        },
+        {
+            label: 'Arrival',
+            value: 'Arrival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: "Leisure",
+            value: "Leisure",
+        },
+        {
+            label: "Transfer",
+            value: "Transfer",
+        },
+        {
+            label: 'Sand Dunes',
+            value: 'SandDunes'
         }
 
     ],
@@ -450,6 +521,14 @@ export const avtivityList = {
             label: "Leisureday",
             value: "Leisureday"
 
+        },
+        {
+            label: 'Genting Dream Cruise',
+            value: 'GentingDreamCruise'
+        },
+        {
+            label:'Art Science Museum',
+            value:'ArtScienceMuseum'
         }
     ],
     Dubai: [

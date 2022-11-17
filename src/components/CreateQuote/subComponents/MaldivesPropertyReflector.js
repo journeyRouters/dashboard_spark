@@ -195,18 +195,18 @@ export const propertyMaldives = [
         label:'Diamonds Athuruga Maldives',
         value:'DIAMONDSATHURUGAMALDIVES'
     },
-    // {
-    //     label: 'TAJ CORAL REEF RESORT AND SPA',
-    //     value: 'TajCoralReefResort_Spa'
-    // },
-    // {
-    //     label: 'TAJ EXOTICA RESORT AND SPA',
-    //     value: 'TajExoticaResort_Spa'
-    // },
-    // {
-    //     label: 'THE STANDARD MALDIVES',
-    //     value: 'TheStandardMaldives'
-    // },
+    {
+        label: 'TAJ CORAL REEF RESORT AND SPA',
+        value: 'TajCoraReef'
+    },
+    {
+        label: 'TAJ EXOTICA RESORT AND SPA',
+        value: 'TajExoticaResort_Spa'
+    },
+    {
+        label: 'THE STANDARD MALDIVES',
+        value: 'TheStandardMaldives'
+    },
     {
         label: 'Thulagiri',
         value: 'Thulagiri'

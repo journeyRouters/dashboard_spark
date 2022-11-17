@@ -395,6 +395,34 @@ export const avtivityList = {
             value: 'Transfer'
         },
         {
+            label: 'Tiger kingdom',
+            value: 'Tigerkingdom'
+        },
+        {
+            label: 'Angthong marine park koh samui',
+            value: 'Angthongmarineparkkohsamui'
+        },
+        {
+            label: 'Trickey museum',
+            value: 'Trickeymuseum'
+        },
+        {
+            label: 'Sunset Cruise',
+            value: 'SunsetCruise'
+        },
+        {
+            label: 'Simon Cabret Show',
+            value: 'SimonCabretShow'
+        },
+        {
+            label: 'KohSamui City Tour',
+            value: 'KohSamuiCityTour'
+        },
+        {
+            label: 'Aquaria Phuket',
+            value: 'AquariaPhuket'
+        },
+        {
             label: "CoralIsland",
             value: "CoralIsland",
         },
@@ -527,8 +555,8 @@ export const avtivityList = {
             value: 'GentingDreamCruise'
         },
         {
-            label:'Art Science Museum',
-            value:'ArtScienceMuseum'
+            label: 'Art Science Museum',
+            value: 'ArtScienceMuseum'
         }
     ],
     Dubai: [

@@ -763,7 +763,92 @@ const RoomType = {
         },
 
     ],
-
+    TajCoraReef:[
+        {
+            label:'Deluxe Beach villa',
+            value:'DeluxeBeachvilla'
+        },
+        {
+            label:'Nirvana Presidential Suit',
+            value:'NirvanaPresidentialSuit'
+        },
+        {
+            label:'Premium Water Villa',
+            value:'PremiumWaterVilla'
+        },
+        {
+            label:'Superior Beach Villa',
+            value:'SuperiorBeachVilla'
+        }
+    ],
+    TajExoticaResort_Spa:[
+        {
+            label:'Premium Villa With Pool',
+            value:'PremiumVillaWithPool'
+        },
+        {
+            label:'Delux Beach Villa With Pool',
+            value:'DeluxBeachVillaWithPool'
+        },
+        {
+            label:'Two Bedroom Beach Suite With Pool',
+            value:'TwoBedroomBeachSuiteWithPool'
+        },
+        {
+            label:'One Bedroom Beach Suite With Pool',
+            value:'OneBedroomBeachSuiteWithPool'
+        },
+        {
+            label:'Delux Lagoon Villa With Pool',
+            value:'DeluxLagoonVillaWithPool'
+        },
+        {
+            label:'Lagoon Villa Ocean View',
+            value:'LagoonVillaOceanView'
+        },
+        {
+            label:'Two Bedroom Rehendi Presidental Suite',
+            value:'TwoBedroomRehendiPresidentalSuite'
+        },
+        {
+            label:'One Bedroom Ocean Suite With Pool',
+            value:'OneBedroomOceanSuiteWithPool'
+        },
+    ],
+    TheStandardMaldives:[
+        {
+            label:'Lagoon Beach Pool Villa',
+            value:'LagoonBeachPoolVilla'
+        },
+        {
+            label:'Lagoon Overwater Pool Villa',
+            value:'LagoonOverwaterPoolVilla'
+        },
+        {
+            label:'Ocean Beach Pool Villa',
+            value:'OceanBeachPoolVilla'
+        },
+        {
+            label:'Ocean Overwater Pool Villa',
+            value:'OceanOverwaterPoolVilla'
+        },
+        {
+            label:'The Standard Residence',
+            value:'TheStandardResidence'
+        },
+        {
+            label:'Two Bedroom Lagoon Beach Pool Villa',
+            value:'TwoBedroomLagoonBeachPoolVilla'
+        },
+        {
+            label:'Two Bedroom Lagoon Overwater Pool Villa',
+            value:'TwoBedroomLagoonOverwaterPoolVilla'
+        },
+        {
+            label:'Two Bedroom Ocean Beach Pool Villa',
+            value:'TwoBedroomOceanBeachPoolVilla'
+        },
+    ],
     Thulagiri: [
         {
             label: 'Water Bungalow',

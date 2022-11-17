@@ -225,7 +225,7 @@ const Profile = (
     }
     function closeFormAndPdf() {
         setwait(false)
-        // updateTableDataAfterQuote(travel_data.TripId)
+        updateTableDataAfterQuote(travel_data.TripId)
         try { handleSuggestion() }
         catch (error) { console.log(error) }
         closeHandler()

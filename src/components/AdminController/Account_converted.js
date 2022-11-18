@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import AccountsMap from '../Accounts/AccountsMap';
 import VouchersCompo from '../payments_vouchers/Vouchers_compo';
 import app from '../required';
+import '../Accounts/Accounts.css'
 const db = getFirestore(app);
 
 
@@ -42,7 +43,24 @@ const Account_converted = ({ profile }) => {
     }
 
     return (
-        <div>
+        <div >
+            <div className='searchFilter'>
+                <div>
+                    <label>Travel Month</label><br/>
+                    <input type={'date'}></input>
+                </div>
+                <div>
+                    <label>Conversion Month</label><br/>
+                    <input type={'date'}></input>
+                </div>
+                <div>
+                    <label>TripId</label><br/>
+                    <input type={"number"}></input>
+                </div>
+                <div>
+                    <button>SEARCH</button>
+                </div>
+            </div>
             {
                 lead_data.map((data, index) => (
                     <>

@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where } from 'firebase/firestore';
 import moment from 'moment/moment';
 import { default as React, useEffect } from 'react';
 import app from '../required';
@@ -8,7 +8,13 @@ const db = getFirestore(app);
 const Test = () => {
    async function tester() {
       // Sep 7, 2022 3:56 PM"
-      const q = query(collection(db, "Trip"), where("leave_avail.2021.cl", "==", 12));
+      // const q = query(collection(db, "Trip"), where("leave_avail.2021.cl", "==", 12));
+     const q = query(collection(db, "Trip"),
+      where("Lead_Status", "==", "Converted"),
+      where("quotation_flg", "==", true),
+      where("Contact_Number", "==", 9886871492),
+      orderBy("Travel_Date")
+  )
       var collect = []
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {

@@ -56,7 +56,7 @@ const Driver = (props) => {
                         Date_of_lead: Row[2],
                         Traveller_name: Row[3],
                         InstaId: Row[4],
-                        Contact_Number: Row[5],
+                        Contact_Number: parseInt(Row[5]),
                         Destination: Row[6],
                         Comment: Row[7],
                         Departure_City: Row[8],

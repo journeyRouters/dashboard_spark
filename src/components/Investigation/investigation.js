@@ -11,16 +11,16 @@ const db = getFirestore(app);
 const Investigation = ({ profile }) => {
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
-    const[prevMonth,setPrevMonth]=useState([])
+    const [prevMonth, setPrevMonth] = useState([])
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     // var graphData = []
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
     const [AllUserprofile, setAllUserprofile] = useState([])
     // console.log(moment(date).subtract(1, 'month').calendar())
-  
+
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "in", ["User","Team Leader"]), where('user_type', '==', 'show'));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader"]), where('user_type', '==', 'show'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
@@ -36,8 +36,8 @@ const Investigation = ({ profile }) => {
         });
     }
     async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
-        var datePrev=moment(date).subtract(1, 'month').calendar()
-        var month=moment(datePrev).format('MMMM')
+        var datePrev = moment(date).subtract(1, 'month').calendar()
+        var month = moment(datePrev).format('MMMM')
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
         for (var i = 0; i < AllUserprofile.length; i++) {
@@ -303,38 +303,8 @@ const Investigation = ({ profile }) => {
                         <Bar
                             dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
                     </BarChart>
-                    {/* <PieChart width={400} height={400}>
-                        <Pie
-                            dataKey="value"
-                            isAnimationActive={false}
-                            data={dataLoaded}
-                            cx={200}
-                            cy={200}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            label
-                        />
 
-                        <Tooltip />
-                    </PieChart> */}
-                    {/* <LineChart width={730} height={250} data={dataLoaded}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }}/>
-                        <Line type="monotone" dataKey="value" stroke="#82ca9d" />
-                    </LineChart> */}
-                    {/* <LineChart width={600} height={300} data={demodata} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                    </LineChart> */}
-                    <div style={{display:'flex'}}>
+                    <div style={{ display: 'flex' }}>
                         <DynamicBarChart
                             data={data_Analysed}
                             // Timeout in ms between each iteration
@@ -345,7 +315,7 @@ const Investigation = ({ profile }) => {
                                 fontSize: 18
                             }}
                         />
-                         <DynamicBarChart
+                        <DynamicBarChart
                             data={prevMonth}
                             // Timeout in ms between each iteration
                             iterationTimeout={1200}

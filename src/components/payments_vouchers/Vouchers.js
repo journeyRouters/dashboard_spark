@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import app from '../required';
 import './Payments.css';
@@ -21,6 +21,7 @@ const Vouchers = (props) => {
              where('Lead_Status', '==', 'Converted'),
              where('Travel_Date','>',CurrentDate),
              where("quotation_flg","==",true));
+             orderBy('Travel_Date')
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

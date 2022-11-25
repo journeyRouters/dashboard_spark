@@ -8,6 +8,7 @@ import Account_converted from './components/AdminController/Account_converted';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
+import AdminInvestigation from './components/Investigation/AdminInvestigation';
 import Freelance_Investigation from './components/Investigation/Freelance_Investigation';
 import Investigation from './components/Investigation/investigation';
 import Driver from './components/leadDriver/Driver';
@@ -463,7 +464,7 @@ function App() {
                         <p>Converted</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>
@@ -514,6 +515,10 @@ function App() {
             Page === "AdminLeaveFunnel" ?
               <Adminleavefunnel auth={auth} />
               : <></>
+          }
+          {
+            Page=="AdminInvestigation"?
+            <AdminInvestigation profile={profile}/>:<></>
           }
           {
             Page === "rapid_fire" ?

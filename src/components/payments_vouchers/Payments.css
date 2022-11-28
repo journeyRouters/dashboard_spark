@@ -44,6 +44,12 @@
     justify-content: space-between;
 }
 
+.client_detailMarked {
+    display: flex;
+    justify-content: space-between;
+    background-image: linear-gradient(90deg, #728FCE, #00ffc2);
+}
+
 .trip_details {
     padding-right: o.3rem;
 }
@@ -159,7 +165,8 @@
     margin-left: 1rem;
 
 }
-.delete_button{
+
+.delete_button {
     width: 3rem;
     height: 1rem;
     display: flex;
@@ -169,26 +176,27 @@
     cursor: pointer;
     border: none;
 }
-.expand_details{
+
+.expand_details {
     width: 1rem;
 }
-.expand_details_{
+
+.expand_details_ {
     width: 1rem;
     transform: rotate(180deg);
 }
-.packageAndInvoice{
+
+.packageAndInvoice {
     display: flex;
     flex-direction: column;
 }
-/* Payments Block for Accounts */
-.paymentsConfirmer{
 
-}
+/* Payments Block for Accounts */
+.paymentsConfirmer {}
 
 
 .glow {
     font-size: 80px;
     color: rgb(217, 243, 28);
 
-  }
-  
+}

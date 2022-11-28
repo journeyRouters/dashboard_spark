@@ -24,6 +24,8 @@ const AccountsMap = ({ data, profile, datahandle }) => {
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)
     const [installment, setinstallment] = useState()
+    const [AccountClearanceFlg, setAccountClearanceFlg] = useState(data.AccountClearance ? data.AccountClearance : false)
+    const [OperationsClearanceFlg, setOperationsClearanceFlg] = useState(data.OperationsClearance ? data.OperationsClearance : false)
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -62,6 +64,32 @@ const AccountsMap = ({ data, profile, datahandle }) => {
 
         }
 
+    }
+    function handleCheckBoxChange(name) {
+        switch (name) {
+            case "AccountClearance": {
+                setAccountClearanceFlg(!AccountClearanceFlg)
+                markComplete("AccountClearance", !AccountClearanceFlg)
+                break
+            }
+            case "OperationClearnace": {
+                console.log(name)
+                setOperationsClearanceFlg(!OperationsClearanceFlg)
+                markComplete("OperationsClearance", !OperationsClearanceFlg)
+                break
+            }
+            default: {
+
+            }
+        }
+
+    }
+    async function markComplete(name, value) {
+        const docref = doc(db, "Trip", data.TripId);
+        console.log(name)
+        await updateDoc(docref, {
+            [name]: value
+        });
     }
     function stoploading() {
         setloading(false)
@@ -355,7 +383,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
     }
     return (
         <div className='details_of_specific_trip' >
-            <div className='client_detail'>
+            <div className={AccountClearanceFlg ? 'client_detailMarked' : 'client_detail'}>
                 <div className='personal-details'>
                     <div className='TripId'>
                         {data.TripId}
@@ -492,24 +520,40 @@ const AccountsMap = ({ data, profile, datahandle }) => {
 
                     </Modal>
                     <div className='AllDetailsOfTripQuoteComments'>
-
-                        <div className='allComments' >
-                            {
-                                data.comments.slice(0).reverse().map((U_data, index) => (<>
-                                    <p key={index} className='comment_'>
-                                        <p>
-                                            {U_data.comments}
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div className='allComments' >
+                                {
+                                    data.comments.slice(0).reverse().map((U_data, index) => (<>
+                                        <p key={index} className='comment_'>
+                                            <p>
+                                                {U_data.comments}
+                                            </p>
+                                            <p>
+                                                {U_data.date}
+                                            </p>
+                                            <p>
+                                                {U_data.time}
+                                            </p>
                                         </p>
-                                        <p>
-                                            {U_data.date}
-                                        </p>
-                                        <p>
-                                            {U_data.time}
-                                        </p>
-                                    </p>
-                                </>))
-                            }
+                                    </>))
+                                }
+                            </div>
+                            <div>
+                                <label>
+                                    <span>
+                                        Accounts
+                                    </span>
+                                    <input type="checkbox" checked={AccountClearanceFlg} name='AccountClearance' onChange={(e) => handleCheckBoxChange("AccountClearance")}></input>
+                                </label>
+                                <label><br />
+                                    <span>
+                                        Operation
+                                    </span>
+                                    <input type="checkbox" checked={OperationsClearanceFlg} name="OperationClearance" onChange={() => handleCheckBoxChange("OperationClearnace")}></input>
+                                </label>
+                            </div>
                         </div>
+
                         <div className='voucher_and_payments'>
                             <div className='vouchers_upload'>
                                 <p>ID proof/<span className='upload_proof' onClick={() => closeidproof()}>upload</span></p>
@@ -626,8 +670,8 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                         {
                             installment ? <div className='paymentsConfirmer'>
                                 <InstallmentsMapper data={invoice.installment}
-                                setDetails={setDetails}
-                                handleInstallments={handleInstallments} TripId={data.TripId} />
+                                    setDetails={setDetails}
+                                    handleInstallments={handleInstallments} TripId={data.TripId} />
                             </div> : <></>
                         }
                     </div>

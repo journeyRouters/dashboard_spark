@@ -197,6 +197,7 @@ const Investigation = ({ profile }) => {
                 list.push(doc.data())
             });
             local.value = list.length
+            // console.log(list)
             // console.log(prev_instance)
             prev_instance.push(local)
             loadData(prev_instance)

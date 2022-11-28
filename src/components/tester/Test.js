@@ -23,23 +23,18 @@ const Test = () => {
       console.log(collect)
    }
    async function allDoc() {
-      const q = query(collection(db, "Profile"))
+      const q = query(collection(db, "Trip"))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          add_a_feild(doc.id)
       });
    }
    function add_a_feild(id) {
-      var month=moment(new Date()).format('MMMM-YYYY')
+      // var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
-      setDoc(doc(db, "Profile",id), {
-         Leave:{
-            CasualLeave:5,
-            SickLeave:5,
-            LeaveWithoutPay:4,
-            PrivilegedLeave:5,
-            MaternityLeave:182
-         }
+      setDoc(doc(db, "Trip",id), {
+         AccountClearanceFlg:false,
+         OperationsClearanceFlg:false
       }, { merge: true })
    }
    useEffect(() => {

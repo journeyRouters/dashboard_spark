@@ -559,6 +559,49 @@ export const avtivityList = {
             value: 'ArtScienceMuseum'
         }
     ],
+    Veitnam: [
+        {
+            label: 'Danang Bana hill golden Bridge',
+            value: 'DanangBanahillgoldenBridge'
+        },
+        {
+            label: 'Danang Marble Mountain',
+            value: 'DanangMarbleMountain'
+        },
+        {
+            label: 'Hanoi Half day city tour',
+            value: 'HanoiHalfdaycitytour'
+        },
+        {
+            label: 'Hanoi Halong Bay Cruise',
+            value: 'HanoiHalongBayCruise'
+        },
+        {
+            label: 'Hanoi Halong Bay Day Trip',
+            value: 'HanoiHalongBayDayTrip'
+        },
+        {
+            label: 'Hanoi NinhBinh',
+            valalue: 'HanoiNinhBinh'
+        },
+        {
+            label: 'Ho Chin Mekong Delta Tour',
+            value: 'HoChinMekongDeltaTour'
+        },
+        {
+            label: 'Hoi Ain Coconut village',
+            value: 'HoiAinCoconutvillage'
+        },
+        {
+            label: 'Phu Quoc Island Tour',
+            value: 'PhuQuocIslandTour'
+        },
+        {
+            label: 'Hoi An Leisure and Tour',
+            value: 'HoiAnLeisureandTour'
+        }
+
+    ],
     Dubai: [
         {
             label: 'GlobalVillage',
@@ -567,6 +610,66 @@ export const avtivityList = {
         {
             label: 'Arival',
             value: 'Arival'
+        },
+        {
+            label: 'Abu Dhabi City Tour',
+            value: 'AbuDhabiCityTour'
+        },
+        {
+            label: 'Abu Dhabi Ferrari World',
+            balue: 'AbuDhabiFerrariWorld'
+        },
+        {
+            label: 'Aura Skypool Dubai',
+            value: 'AuraSkypoolDubai'
+        },
+        {
+            label: 'BurjAlArabInsideTour',
+            value: 'BurjAlArabInsideTour'
+        },
+        {
+            label: 'Butterfly Garden',
+            value: 'ButterflyGarden'
+        },
+        {
+            label: 'Dubai Aquarium Underwater Zoo',
+            value: 'DubaiAquariumUnderwaterZoo'
+        },
+        {
+            label: 'Dubai Safari Park',
+            value: 'DubaiSafariPark'
+        },
+        {
+            label: 'Glow Garden',
+            value: 'GlowGarden'
+        },
+        {
+            label: 'GreenPlanet',
+            value: 'GreenPlanet'
+        },
+        {
+            label: 'LegoLand',
+            value: 'LegoLand'
+        },
+        {
+            label: 'Lotus 220 Cruise',
+            value: 'Lotus220Cruise'
+        }
+        , {
+            label: 'MuseumOfillusion',
+            value: 'MuseumOfillusion'
+        },
+        {
+            label: 'SkyViewObservatoryWithGlassWalk',
+            value: 'SkyViewObservatoryWithGlassWalk'
+        },
+        {
+            label: 'WarnerBrother',
+            value: 'WarnerBrother'
+        },
+        {
+            label: 'YatchTour(Pvt)',
+            value: 'YatchTourPvt'
         },
         {
             label: "DubaiFrame",
@@ -644,10 +747,7 @@ export const avtivityList = {
             label: "FerrariWorld",
             value: "FerrariWorld",
         },
-        {
-            label: "GlobalVillage",
-            value: "GlobalVillage",
-        },
+
         {
             label: "ImgWorld",
             value: "ImgWorld",

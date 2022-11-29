@@ -19,6 +19,8 @@ const AdminInvestigation = ({ profile }) => {
     const [Hot_Lead_Analysed, set_Hot_Lead_Analysed] = useState([])
     const [Active_Lead_Analysed, set_Active_Lead_Analysed] = useState([])
     const [Converted_Lead_Analysed, set_Converted_Lead_Analysed] = useState([])
+    const [Dump_Lead_Analysed, set_Dump_Lead_Analysed] = useState([])
+    const [Total_Lead_Analysed, set_Total_Lead_Analysed] = useState([])
     const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     const [dataLoaded, loadData] = useState([])
@@ -238,7 +240,7 @@ const AdminInvestigation = ({ profile }) => {
     async function getConvertedLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
-        var local = { name: 'converted', value: 0, fill: '#814fdc'}
+        var local = { name: 'converted', value: 0, fill: '#814fdc' }
         var prev_instance = dataLoaded
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -269,6 +271,75 @@ const AdminInvestigation = ({ profile }) => {
         set_Converted_Lead_Analysed([
             {
                 name: 'Lead Converted',
+                values: holdAlluserAnalytics
+            }
+        ])
+        getDumpLeadData(AllUserprofile)
+    }
+    async function getDumpLeadData(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Dump'), where("quotation_flg", "==", true), where("month", "==", currentMonth));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                // console.log(list)
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+                // console.log(list)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+
+        set_Dump_Lead_Analysed([
+            {
+                name: 'Lead Dumped',
+                values: holdAlluserAnalytics
+            }
+        ])
+        getTotalLeadData(AllUserprofile)
+    }
+    async function getTotalLeadData(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid), where("month", "==", currentMonth));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                // console.log(list)
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+                // console.log(list)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+
+        set_Total_Lead_Analysed([
+            {
+                name: 'Total lead Assigned',
                 values: holdAlluserAnalytics
             }
         ])
@@ -345,6 +416,30 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
+                            <div style={{ display: 'flex' }}>
+
+                                <DynamicBarChart
+                                    data={Dump_Lead_Analysed}
+                                    // Timeout in ms between each iteration
+                                    iterationTimeout={1200}
+                                    startRunningTimeout={2500}
+                                    barHeight={20}
+                                    iterationTitleStyles={{
+                                        fontSize: 18
+                                    }}
+                                />
+                                <DynamicBarChart
+                                    data={Total_Lead_Analysed}
+                                    // Timeout in ms between each iteration
+                                    iterationTimeout={1200}
+                                    startRunningTimeout={2500}
+                                    barHeight={20}
+                                    iterationTitleStyles={{
+                                        fontSize: 18
+                                    }}
+                                />
+                            </div>
+
                         </> : <></>
                     }
                     <div style={{ display: 'flex' }}>

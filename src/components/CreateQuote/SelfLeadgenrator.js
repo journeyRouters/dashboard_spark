@@ -97,13 +97,14 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Kerala', label: 'Kerala', color: '#666666' },
         { value: "Andaman", label: "Andaman", color: '#666666' },
         { value: 'Maldives', label: 'Maldives', color: '#666666' },
-        { value: 'Goa', label: 'Goa', color: '#666666'},
-        { value: 'Rajasthan', label: 'Rajasthan', color: '#666666'},
-        { value: 'Singapore', label: 'Singapore', color: '#666666'}
+        { value: 'Goa', label: 'Goa', color: '#666666' },
+        { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
+        { value: 'Singapore', label: 'Singapore', color: '#666666' },
+        { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' }
     ];
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), 
-        // where("access_type", "==", "User")
+        const q = query(collection(db, "Profile"),
+            // where("access_type", "==", "User")
         );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
@@ -129,15 +130,15 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     }, []);
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
-        if(uid==0){
+        if (uid == 0) {
             alert('Select any user/assign to self')
         }
-        else{
-        var profile_of_user = AllUserprofile.filter((data) => data.uid === uid)
-        // console.log(leadData)
-        // setCurrentuser(profile_of_user[0])
-        saveToOthers(profile_of_user[0])
-        // console.log(leadData)
+        else {
+            var profile_of_user = AllUserprofile.filter((data) => data.uid === uid)
+            // console.log(leadData)
+            // setCurrentuser(profile_of_user[0])
+            saveToOthers(profile_of_user[0])
+            // console.log(leadData)
         }
     }
     async function getHashTable() {
@@ -222,7 +223,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                 uid: assigned_uid,
                 name: assigned_name
             },
-            assigned_date_time:today,
+            assigned_date_time: today,
             updated_last: null,
             assign_flg: true,
             final_package: null
@@ -241,11 +242,11 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             onclose()
         }
     }
-    function saveToOthers(currentUser){
-        if (typeof currentUser === 'undefined'||leadData.Checker()){
+    function saveToOthers(currentUser) {
+        if (typeof currentUser === 'undefined' || leadData.Checker()) {
             alert('select spokes/ insufficient data')
         }
-        else{
+        else {
             uploadLeadBySpokes(currentUser.uid, currentUser.name)
             getLeadOnBoard()
             onclose()
@@ -255,7 +256,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         <Modal open={open} onClose={onclose} style={{ display: "grid", justifyContent: "center", marginTop: "2rem", overflowY: 'scroll' }}>
 
             <div className='SelfLeadDiv'>
-                <h3 style={{marginLeft:'10rem'}}>SELF LEAD</h3>
+                <h3 style={{ marginLeft: '10rem' }}>SELF LEAD</h3>
                 <div className='SelfLeadGenParentDiv'>
                     <div className='SelfLeadGenleftDiv'>
                         <p>Name </p>
@@ -271,9 +272,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                     </div>
                     <div className='SelfLeadGenleftDiv'>
                         {
-                            [0,1,2,3,4,5,7,8,9,10].map((data,index)=><p>:-</p>)
+                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10].map((data, index) => <p>:-</p>)
                         }
-                        
+
                     </div>
                     <div className='SelfLeadGenRightDiv'>
                         <input className='required' onChange={(e) => leadData.Assigner('name', e.target.value)}></input>
@@ -299,7 +300,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem' }}>
                         <span>Assign to
                         </span>
-                        <select onChange={(e)=>filterDataFromProfile(e.target.value)}>
+                        <select onChange={(e) => filterDataFromProfile(e.target.value)}>
                             <option value={0}>Select Spokes</option>
                             {
                                 AllUserprofile.map((data, index) => (
@@ -310,7 +311,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                         {/* <button onClick={()=>saveToOthers()}>save</button> */}
                     </div>
                     <div>
-                        <button onClick={()=>saveForSelf()}>save for Self</button>
+                        <button onClick={() => saveForSelf()}>save for Self</button>
                     </div>
                 </div>
             </div>

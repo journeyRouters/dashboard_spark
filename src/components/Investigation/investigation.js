@@ -12,6 +12,7 @@ const Investigation = ({ profile }) => {
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
     const [prevMonth, setPrevMonth] = useState([])
+    const [Pre_prevMonth, setPre_PrevMonth] = useState([])
     const [dataLoaded, loadData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     // var graphData = []
@@ -30,6 +31,7 @@ const Investigation = ({ profile }) => {
             setAllUserprofile(Profile)
             // console.log(Profile,);
             getPrevMonthConvertedByAllSpokes(Profile)
+            getPre_PrevMonthConvertedByAllSpokes(Profile)
             getConvertedByAllSpokes(Profile)
 
 
@@ -64,6 +66,44 @@ const Investigation = ({ profile }) => {
             }
         }
         setPrevMonth([
+            {
+                name: `${month}-Conversion`,
+                values: holdAlluserAnalytics
+            }
+        ])
+        // console.log(holdAlluserAnalytics)
+        // setdataAvailablityFlg(true)
+
+    }
+    async function getPre_PrevMonthConvertedByAllSpokes(AllUserprofile) {
+        var datePrev = moment(date).subtract(2, 'month').calendar()
+        var month = moment(datePrev).format('MMMM')
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Converted'), where("quotation_flg", "==", true), where("month", "==", month),);
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                    // console.log(doc.data())
+                });
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+                // console.log(holdAlluserAnalytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        setPre_PrevMonth([
             {
                 name: `${month}-Conversion`,
                 values: holdAlluserAnalytics
@@ -318,6 +358,16 @@ const Investigation = ({ profile }) => {
                         />
                         <DynamicBarChart
                             data={prevMonth}
+                            // Timeout in ms between each iteration
+                            iterationTimeout={1200}
+                            startRunningTimeout={2500}
+                            barHeight={20}
+                            iterationTitleStyles={{
+                                fontSize: 18
+                            }}
+                        />
+                        <DynamicBarChart
+                            data={Pre_prevMonth}
                             // Timeout in ms between each iteration
                             iterationTimeout={1200}
                             startRunningTimeout={2500}

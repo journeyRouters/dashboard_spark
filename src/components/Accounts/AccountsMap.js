@@ -11,7 +11,7 @@ import app from '../required';
 import '../payments_vouchers/Payments.css';
 import InstallmentsMapper from './installmentsMapper';
 import Maldivespdf from '../MaldivesPdf/Maldivespdf';
-const AccountsMap = ({ data, profile, datahandle }) => {
+const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
@@ -64,6 +64,12 @@ const AccountsMap = ({ data, profile, datahandle }) => {
 
         }
 
+    }
+    async function resetToEdit(){
+        await updateDoc(doc(db, "Trip", `${data.TripId}`), {
+            Lead_Status: "Cold",
+        });
+        getUpdatedlead()
     }
     function handleCheckBoxChange(name) {
         switch (name) {
@@ -404,6 +410,7 @@ const AccountsMap = ({ data, profile, datahandle }) => {
                         details ? <>
                             <button onClick={() => finalPackageOpen()}>Final Package</button>
                             <button onClick={() => invoiceOpen()}>Invoice</button>
+                            <button onClick={() => resetToEdit()}>Reset to Edit</button>
                         </> : <></>
                     }
 

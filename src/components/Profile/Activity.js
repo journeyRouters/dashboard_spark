@@ -569,6 +569,22 @@ export const avtivityList = {
             value: 'DanangMarbleMountain'
         },
         {
+            label:'Ninh Binh Mua Cave',
+            value:'NinhBinhMuaCave'
+        },
+        {
+            label:'Sapa Trek',
+            value:'SapaTrek'
+        },
+        {
+            label:'Arrival',
+            vallue:'Arrival'
+        },
+        {
+            label:"Departure",
+            value:"Departute"
+        },
+        {
             label: 'Hanoi Half day city tour',
             value: 'HanoiHalfdaycitytour'
         },

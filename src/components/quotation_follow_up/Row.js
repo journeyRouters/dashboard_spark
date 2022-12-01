@@ -115,7 +115,7 @@ const Row = (props) => {
         querySnapshot.forEach((doc) => {
             list.push(doc.data())
         });
-        setpdf(list)        
+        setpdf(list)
         // console.log('all quote', list)
 
     }
@@ -140,10 +140,19 @@ const Row = (props) => {
 
     }
     async function updateStatus() {
-        setDoc(doc(db, "Trip", row.TripId), {
-            Lead_Status: Lead_Status,
-            Lead_status_change_date: moment(today).format('YYYY-MM-DD')
-        }, { merge: true });
+        if (row.month == null || row.month == "") {
+            setDoc(doc(db, "Trip", row.TripId), {
+                Lead_Status: Lead_Status,
+                month: moment(new Date()).format('MMMM'),
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+            }, { merge: true });
+        }
+        else {
+            setDoc(doc(db, "Trip", row.TripId), {
+                Lead_Status: Lead_Status,
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+            }, { merge: true });
+        }
     }
     async function update_comments() {
         if (comments) {

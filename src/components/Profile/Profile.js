@@ -145,7 +145,6 @@ const Profile = (
             quotation: quotation_new,
             quotation_flg: true,
             Travel_Date: new Date(selected_Travel_date),
-            month: moment(currentdate).format('MMMM'),
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: email,

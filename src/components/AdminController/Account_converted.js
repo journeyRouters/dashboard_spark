@@ -160,7 +160,7 @@ const Account_converted = ({ profile }) => {
             {
                 lead_data.map((data, index) => (
                     <>
-                        <AccountsMap key={index} data={data} profile={profile} />
+                        <AccountsMap key={index} data={data} profile={profile} getUpdatedlead={getlead} />
                         {/* <VouchersCompo key={index} data={data}  /> */}
                     </>
                 ))

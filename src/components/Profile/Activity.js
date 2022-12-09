@@ -604,6 +604,14 @@ export const avtivityList = {
             label:'Ho Chi Minh City Tour',
             value:'HoChiMinhCityTour'
         },
+        {
+            label:'Bus Transfer',
+            value:'BusTransfer'
+        },
+        {
+            label:'Flight Transfer',
+            value:'FlightTransfer'
+        },
 
         {
             label: 'Halong Bay Cruise 2DAYS La Casta Regal Cruise',

@@ -23,7 +23,7 @@ const db = getFirestore(app);
 
 const Row = (props) => {
     const { row } = props;
-    // console.log(row.assigned_date_time.toDate())
+    // console.log(row)
     const [invoice, setinvocice] = useState()
     const [Invoice_flg, setInvoice] = useState(false)
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
@@ -126,7 +126,7 @@ const Row = (props) => {
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                // console.log(docSnap.data())
+                console.log(row.TripId)
                 // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
             } else {
                 console.log("No such document!");
@@ -135,7 +135,9 @@ const Row = (props) => {
             }
         }
         catch (error) {
+            console.log(row.TripId)
 
+            console.log(error)
         }
 
     }

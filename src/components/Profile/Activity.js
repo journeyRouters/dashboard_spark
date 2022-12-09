@@ -578,11 +578,11 @@ export const avtivityList = {
         },
         {
             label:'Arrival',
-            vallue:'Arrival'
+            value:'Arrival'
         },
         {
             label:"Departure",
-            value:"Departute"
+            value:"Departure"
         },
         {
             label: 'Hanoi Half day city tour',
@@ -598,7 +598,7 @@ export const avtivityList = {
         },
         {
             label: 'Hanoi NinhBinh',
-            valalue: 'HanoiNinhBinh'
+            value: 'HanoiNinhBinh'
         },
         {
             label: 'Ho Chin Mekong Delta Tour',

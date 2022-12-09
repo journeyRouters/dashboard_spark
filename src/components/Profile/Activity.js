@@ -569,20 +569,20 @@ export const avtivityList = {
             value: 'DanangMarbleMountain'
         },
         {
-            label:'Ninh Binh Mua Cave',
-            value:'NinhBinhMuaCave'
+            label: 'Ninh Binh Mua Cave',
+            value: 'NinhBinhMuaCave'
         },
         {
-            label:'Sapa Trek',
-            value:'SapaTrek'
+            label: 'Sapa Trek',
+            value: 'SapaTrek'
         },
         {
-            label:'Arrival',
-            value:'Arrival'
+            label: 'Arrival',
+            value: 'Arrival'
         },
         {
-            label:"Departure",
-            value:"Departure"
+            label: "Departure",
+            value: "Departure"
         },
         {
             label: 'Hanoi Half day city tour',
@@ -595,6 +595,19 @@ export const avtivityList = {
         {
             label: 'Hanoi Halong Bay Day Trip',
             value: 'HanoiHalongBayDayTrip'
+        },
+        {
+            label: 'Cu Chi Tunnel',
+            value: 'CuChiTunnel'
+        },
+        {
+            label:'Ho Chi Minh City Tour',
+            value:'HoChiMinhCityTour'
+        },
+
+        {
+            label: 'Halong Bay Cruise 2DAYS La Casta Regal Cruise',
+            value: 'HalongBayCruise2DAYSLaCastaRegalCruise'
         },
         {
             label: 'Hanoi NinhBinh',

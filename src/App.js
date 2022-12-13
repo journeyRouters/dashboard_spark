@@ -5,6 +5,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
+import AttendanceMain from './components/Attendance/AttendanceMain';
+import UploadAttendance from './components/Attendance/uploadAttendance';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
@@ -236,6 +238,12 @@ function App() {
                         <p>Rapid Fire</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -290,6 +298,12 @@ function App() {
                         <p>Rapid Fire</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -338,7 +352,12 @@ function App() {
                         <p>Rapid Fire </p>
                       </div>
                     </div>
-
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("Account_Converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -370,6 +389,12 @@ function App() {
                         <p>converted</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Duringstay"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -398,6 +423,19 @@ function App() {
                         <p>User Controller</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("UploadAttendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>UploadAttendance</p>
+                      </div>
+                    </div>
+                    
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
@@ -510,15 +548,19 @@ function App() {
               }
               </> : <></>
           }
-
+          {
+            Page === 'Attendance' ? <>
+              <AttendanceMain profile={profile} />
+            </> : <></>
+          }
           {
             Page === "AdminLeaveFunnel" ?
               <Adminleavefunnel auth={auth} />
               : <></>
           }
           {
-            Page=="AdminInvestigation"?
-            <AdminInvestigation profile={profile}/>:<></>
+            Page == "AdminInvestigation" ?
+              <AdminInvestigation profile={profile} /> : <></>
           }
           {
             Page === "rapid_fire" ?
@@ -526,6 +568,12 @@ function App() {
               <div></div>
               : <></>
           }
+          {
+            Page === "UploadAttendance" ?
+              <UploadAttendance />
+              : <></>
+          }
+          {/* UploadAttendance */}
           {
             Page === "Manage Leave" ?
               <LeaveMainPage profile={profile} auth={auth} />

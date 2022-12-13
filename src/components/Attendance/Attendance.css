@@ -1,0 +1,22 @@
+.tableLine{
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+    border: 1px solid;
+}
+.tableLineHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 97%;
+    border: 1px solid;
+    font-size: 1.6rem;
+    font-family: cursive;
+}
+.DateCol{
+    font-family: cursive;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    width: 14.6rem;
+
+}

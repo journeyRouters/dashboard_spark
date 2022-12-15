@@ -319,14 +319,15 @@ const AdminInvestigation = ({ profile }) => {
     }
     async function getDumpLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Dump'), where("quotation_flg", "==", true), where("month", "==", currentMonth));
+                    where('Lead_Status', '==', 'Dump'), where("quotation_flg", "==", true), where("assigned_date_time", ">=", firstDay));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
@@ -354,13 +355,14 @@ const AdminInvestigation = ({ profile }) => {
     }
     async function getTotalLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
             try {
                 let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid), where("month", "==", currentMonth));
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid), where("assigned_date_time", ">=", firstDay));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
@@ -504,7 +506,7 @@ const AdminInvestigation = ({ profile }) => {
                                 fontSize: 18
                             }}
                         />
-                         <DynamicBarChart
+                        <DynamicBarChart
                             data={Pre_prevMonth}
                             // Timeout in ms between each iteration
                             iterationTimeout={1200}

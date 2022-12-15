@@ -7,9 +7,10 @@ import './Driver.css';
 
 const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
     const [currentUser, setCurrentuser] = useState(null)
+    const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
     const db = getFirestore(app);
     var today = new Date()
-    const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
+    // const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
     // const testdate = data.Travel_Date
 
     // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
@@ -30,6 +31,14 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assign_to.name": name,
             "assign_flg": true,
             "assigned_date_time": today
+        });
+        getLeadByDate(currentdate)
+    }
+    async function updateNumberOfDays(value) {
+        setNumberOfDays(value)
+        const Databaseref = doc(db, "Trip", data.TripId);
+        await updateDoc(Databaseref, {
+            "Travel_Duration": parseInt(value)
         });
         getLeadByDate(currentdate)
     }
@@ -58,7 +67,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />
-                <span style={{color:'yellow',background:'black'}}>Lead Status:- {data.Lead_Status}</span>
+                <span style={{ color: 'yellow', background: 'black' }}>Lead Status:- {data.Lead_Status}</span>
             </div>
             <div>
                 {
@@ -90,6 +99,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                     }
                 </select>
             </div>
+            <input type={"number"} value={numberOfDays} onChange={(e) => updateNumberOfDays(e.target.value)}></input>
             <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
             <button disabled={data.assign_flg} onClick={() => deletelead(data.TripId)}>delete</button>
             <button onClick={() => reassign()}>Reset</button>

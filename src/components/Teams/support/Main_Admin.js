@@ -54,9 +54,9 @@ const Main_Admin = ({ profile ,auth }) => {
                         <div onClick={() => handleTeam(data)} className='teamdiv' key={index}>
                             <div>
                                 <img alt='sales team img' src='/assets/img/sales-icon-12.png' width='170px' height='120px' />
-                                <h1 style={{ marginLeft: '1rem', marginTop: '-0.5rem' }}>
+                                <h2 style={{ marginLeft: '1rem', marginTop: '-0.5rem' }}>
                                     {data.TeamName}
-                                </h1>
+                                </h2>
                             </div>
                             <div>
                                 <span style={{ fontSize: '15px', fontWeight: '600' }}> Leaded BY:-{data.createdBy.name}</span>

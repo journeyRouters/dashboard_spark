@@ -254,14 +254,18 @@ const Row = (props) => {
                 </div>
             </Modal>
             <React.Fragment >
-                <TableRow className={limit ? 'compoLimitCross' : row.Lead_Status=='Hot'?'compoCaps':row.Lead_Status=='Active'?'compoCaps':'compo'} onClick={() => setOpen(!open)}>
+                <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">{row.TripId}</TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
                         limit ? <>
                             <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'} /> </TableCell>
                         </> : <>
-                            <TableCell align="right">{row.Lead_Status}</TableCell>
+                            <TableCell align="right">
+                                <span className='caps'>
+                                    {row.Lead_Status}
+                                </span>
+                            </TableCell>
                         </>
                     }
                     <TableCell align="right">{row.Destination}</TableCell>

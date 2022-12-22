@@ -18,6 +18,18 @@
     margin-bottom: 1rem !important;
 }
 
+.compoCaps {
+    width: 99%;
+    height: 9rem;
+    /* background-color: rgb(219, 208, 230); */
+    border: 2px solid rgb(237, 234, 60);
+    margin-bottom: 1rem !important;
+    /* background-color: #1071b8b0; */
+    background-image: linear-gradient(to left,#1071b8b0, white, #1071b8b0);
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
 .compoLimitCross {
     width: 99%;
     height: 9rem;
@@ -222,21 +234,22 @@
     width: 5rem;
     /* background-color: #1939cb; */
 }
-.Searchbutton{
 
-}
+.Searchbutton {}
 
 .Searchbutton:active {
     transform: translateY(4px);
-}  
-.assignDatePicker{
+}
+
+.assignDatePicker {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 3.1rem;
     font-size: 1.1em;
 }
-.TravelersComments{
+
+.TravelersComments {
     display: flex;
     justify-content: space-between;
     background-color: cornflowerblue;

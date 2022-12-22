@@ -196,3 +196,13 @@ td {
 .recharts-wrapper{
   /* position: inherit !important; */
 }
+.MuiTableCell-root {
+  display: table-cell;
+  padding: 16px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: bold !important;
+  line-height: 1.43;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  letter-spacing: 0.01071em;
+  vertical-align: inherit;
+}

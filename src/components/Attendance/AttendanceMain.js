@@ -19,7 +19,7 @@ const AttendanceMain = ({ profile }) => {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setData(docSnap.data())
-                sortObject(docSnap.data())
+                // sortObject(docSnap.data())
                 // console.log("Document data:", docSnap.data(), typeof (docSnap.data()));
             }
         }
@@ -33,7 +33,7 @@ const AttendanceMain = ({ profile }) => {
         var obj={a:'a',b:'b'}
         return Object.keys(obj).sort().reduce(function (result, key) {
             result[key] = obj[key];
-            console.log(result,obj)
+            // console.log(result,obj)
             // return result;
         }, {});
     }

@@ -27,12 +27,42 @@ const SuggestionQuotes = ({
     const [exclusionlist, setexclusion] = useState([''])
     const [lead_data, setLead_data] = useState()
     const [usethisKey, setusethisKey] = useState(false)
+    const[TripId,setTripid]=useState()
 
     function syncDataToMapper(data) {
         let list = []
         // console.log(data.value.NightDataFields)
         list.push(data)
         setselectedData(data)
+    }
+    async function getSampleQuotesonSpecificTrip() {
+        // console.log(Destination)
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        var date=new Date()
+        var formateDate=moment(date).format("YYYY-MM-DD")
+        date.setDate(date.getDate()-4)
+        // console.log(formateDate)
+        var quotesref = collection(db, "Quote")
+        const queryQuotes = query(quotesref, where("value.travel_data.TripId", "==", TripId),
+            limit(50)
+        )
+        var querySnapshot;
+        var list = []
+        try {
+
+            querySnapshot = await getDocs(queryQuotes);
+            if (querySnapshot.docs.length != 0) {
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setsampleQuotes(list)
+            }
+        }
+        catch (e) {
+            console.log(e)
+        }
+
     }
     useEffect(() => {
         getSampleQuotes(Lead_data_to_be_quoted.Destination)
@@ -43,11 +73,13 @@ const SuggestionQuotes = ({
         setusethisKey(!usethisKey)
     }
     function handleSearchOption(e) {
-        console.log(typeof (e.target.value))
+        // console.log(typeof (e.target.value))
         setSearchKey(parseInt(e.target.value))
     }
     async function getSampleQuotes(Destination) {
         // console.log(Destination)
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var date=new Date()
         var formateDate=moment(date).format("YYYY-MM-DD")
         date.setDate(date.getDate()-4)
@@ -114,6 +146,8 @@ const SuggestionQuotes = ({
                     <FormControlLabel control={<Radio />} value={1} label="most Matched Quote" />
                     <FormControlLabel control={<Radio />} value={2} label="Search by TripId" />
                 </RadioGroup >
+                <input type={"number"} placeholder="TripId" onChange={(e)=>setTripid(e.target.value)}></input>
+                <button onClick={()=>getSampleQuotesonSpecificTrip()}>Search</button>
                 <div>
                     <button onClick={() => usethisquoteHandler()}>USE THIS QUOTE</button>
                     <button onClick={() => handleSuggestion()}>Cancel</button>

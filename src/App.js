@@ -435,7 +435,13 @@ function App() {
                         <p>UploadAttendance</p>
                       </div>
                     </div>
-                    
+                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />

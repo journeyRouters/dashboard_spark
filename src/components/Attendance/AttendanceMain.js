@@ -19,7 +19,8 @@ const AttendanceMain = ({ profile }) => {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 setData(docSnap.data())
-                console.log("Document data:", docSnap.data(), typeof (docSnap.data()));
+                // sortObject(docSnap.data())
+                // console.log("Document data:", docSnap.data(), typeof (docSnap.data()));
             }
         }
         catch (error) {
@@ -28,8 +29,17 @@ const AttendanceMain = ({ profile }) => {
 
 
     }
+    function sortObject(obj) {
+        var obj={a:'a',b:'b'}
+        return Object.keys(obj).sort().reduce(function (result, key) {
+            result[key] = obj[key];
+            // console.log(result,obj)
+            // return result;
+        }, {});
+    }
     useEffect(() => {
         fetch_Attendance(profile.AttendanceId)
+        // console.log(typeof(Attendance))
     }, []);
     return (
         <div>

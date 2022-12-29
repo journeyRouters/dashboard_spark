@@ -37,6 +37,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverab
     };
     const inclusion_data = selected_pdf_data.inclusion_data
     async function getinvoice() {
+        // console.log(selected_pdf_data)
         try {
             const docRef = doc(db, "invoice", selected_pdf_data.travel_data.TripId);
             const docSnap = await getDoc(docRef);

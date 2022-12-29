@@ -120,13 +120,14 @@ const Row = (props) => {
 
     }
     async function getinvoice() {
+        // console.log(row.TripId)
         try {
             const docRef = doc(db, "invoice", row.TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                console.log(row.TripId)
+                // console.log(row.TripId)
                 // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
             } else {
                 console.log("No such document!");
@@ -135,7 +136,7 @@ const Row = (props) => {
             }
         }
         catch (error) {
-            console.log(row.TripId)
+            // console.log(row.TripId)
 
             console.log(error)
         }
@@ -261,7 +262,11 @@ const Row = (props) => {
                         limit ? <>
                             <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'} /> </TableCell>
                         </> : <>
-                            <TableCell align="right">{row.Lead_Status}</TableCell>
+                            <TableCell align="right">
+                                <span className='caps'>
+                                    {row.Lead_Status}
+                                </span>
+                            </TableCell>
                         </>
                     }
                     <TableCell align="right">{row.Destination}</TableCell>

@@ -44,19 +44,20 @@ const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
         settarget(0)
     }
     async function getinvoice() {
+        // console.log(data.TripId)
+
         try {
-            const docRef = doc(db, "invoice", data.TripId);
+            const docRef = doc(db, "invoice",data.TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
                 setinstallment(docSnap.data().installment)
                 setFinalPackage(docSnap.data().selected_pdf_data)
-                // console.log(docSnap.data().installment)
-                // getFinalPackage(docSnap.data().finalPackageId)
             } else {
                 console.log("No such document!");
-                // setinvocice({})
+                setinstallment()
+                // setinvocice([])
 
             }
         }

@@ -21,7 +21,6 @@ const FollowUp = (props) => {
     const animatedComponents = makeAnimated();
     const [profile, setProfile] = useState(null)
     const [leadStatus, setStatus] = useState(0)
-
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
         setStatus(status)
@@ -40,7 +39,6 @@ const FollowUp = (props) => {
 
                 }
                 else {
-
                     querySnapshot.forEach((doc) => {
                         list.push(doc.data())
                     });
@@ -441,10 +439,10 @@ const FollowUp = (props) => {
             )
         }
         else if (lead.length == 1) {
-            // console.log('get',lead[0],currentMonth)
+             // console.log('get',lead[0],currentMonth)
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", props.auth.uid),
-                where("month","==",currentMonth),
+                where("month", "==", currentMonth),
                 where("Lead_Status", "==", lead[0])
             )
         }

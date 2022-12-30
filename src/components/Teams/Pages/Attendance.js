@@ -8,13 +8,11 @@ const Attendance = ({ profile,uid }) => {
     const db = getFirestore(app);
     const [Attendance, setData] = useState([])
     const [AttendanceFlg, setAttendanceflg] = useState(false)
-    const[userProfile,setUserProfile]=useState()
 
     async function getProfileOfSelectedUser(){
         var docref= doc(db,'Profile',uid)
         const dataref=await getDoc(docref)
         if(dataref.exists()){
-            setUserProfile(dataref.data())
             fetch_Attendance(dataref.data().AttendanceId)
         }
     }
@@ -44,8 +42,6 @@ const Attendance = ({ profile,uid }) => {
     }
     useEffect(() => {
         getProfileOfSelectedUser()
-        // fetch_Attendance(profile.AttendanceId)
-        // console.log(typeof(Attendance))
 
     }, []);
     return (

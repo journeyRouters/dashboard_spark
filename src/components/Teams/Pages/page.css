@@ -29,3 +29,8 @@
     line-height: 30px;
     color: white;
   }
+.attendancepage{
+    display: flex;
+    height: 30rem;
+    overflow-y: scroll;
+}

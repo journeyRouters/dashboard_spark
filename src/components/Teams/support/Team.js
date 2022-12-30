@@ -2,6 +2,7 @@ import { Modal } from '@material-ui/core';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Attendance from '../Pages/Attendance';
 import Converted from '../Pages/Converted';
 import CreateQuote from '../Pages/CreateQuote';
 import Empty from '../Pages/empty';
@@ -52,6 +53,8 @@ const Team = ({ open, onclose, data, profile, auth }) => {
                         <span className='ButtonEffect' onClick={() => screenController('Converted')}>Converted ({countConverted})</span>
                         <span className='ButtonEffect' onClick={() => screenController('Edit Team')}>Team</span>
                         <span className='ButtonEffect' onClick={() => screenController('Leaves')}>Leaves</span>
+                        <span className='ButtonEffect' onClick={() => screenController('Attendance')}>Attendance</span>
+
 
                     </div>
                     <div>
@@ -68,6 +71,9 @@ const Team = ({ open, onclose, data, profile, auth }) => {
                         }
                         {
                             page === 'Leaves' ? <><Leaves profile={profile} TeamProfile={data.TeamMembers} auth={auth} /></> : <></>
+                        }
+                        {
+                            page === 'Attendance' ? <><Attendance uid={seleteduser} profile={profile} auth={auth} /></> : <></>
                         }
                         {
                             page === 'Empty' ? <><Empty /></> : <></>

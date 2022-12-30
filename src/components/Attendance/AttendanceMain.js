@@ -7,10 +7,13 @@ import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './Attendance.css'
+import Row from './Row';
+import Adminrow from './Adminrow';
 
 const AttendanceMain = ({ profile }) => {
     const db = getFirestore(app);
-    const [Attendance, setData] = useState()
+    const [Attendance, setData] = useState([])
+    const [AttendanceFlg, setAttendanceflg] = useState(false)
 
 
     async function fetch_Attendance(userId) {
@@ -18,9 +21,10 @@ const AttendanceMain = ({ profile }) => {
             const docRef = doc(db, "Attendance", userId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setData(docSnap.data())
-                // sortObject(docSnap.data())
-                // console.log("Document data:", docSnap.data(), typeof (docSnap.data()));
+                // console.log("Document data:", docSnap.data().attendance);
+                sortAttendanceByDate(docSnap.data().attendance)
+                // setData(docSnap.data().attendance)
+                setAttendanceflg(true)
             }
         }
         catch (error) {
@@ -29,74 +33,44 @@ const AttendanceMain = ({ profile }) => {
 
 
     }
-    function sortObject(obj) {
-        var obj={a:'a',b:'b'}
-        return Object.keys(obj).sort().reduce(function (result, key) {
-            result[key] = obj[key];
-            // console.log(result,obj)
-            // return result;
-        }, {});
+    function sortAttendanceByDate(Attendance) {
+        let sortedAttendance = Attendance.sort(
+            (p1, p2) => (p1.dateObject < p2.dateObject) ? 1 : (p1.dateObject > p2.dateObject) ? -1 : 0);
+        // console.log(sortedAttendance)
+        setData(sortedAttendance)
+        
     }
+
     useEffect(() => {
         fetch_Attendance(profile.AttendanceId)
         // console.log(typeof(Attendance))
+
     }, []);
     return (
         <div>
             {
-                Attendance ? <>
+                AttendanceFlg ? <>
                     <div style={{ display: 'flex' }}>
-                        <div className='DateCol'>
-                            <span style={{ fontSize: '1.3rem' }}>Date</span>
-                            {
-                                Object.keys(Attendance)
-                                    .map((Key, index) => (
-                                        <span style={{ borderTop: '1px solid' }} key={index}>{Key}</span>
+                        <table className='Table'>
+                            <thead>
+                                <tr className='row'>
+                                    <th className='r'>Date</th>
+                                    <th className='r'>Check In</th>
+                                    <th className='r'>Check Out</th>
+                                    <th className='r'>total Hr.</th>
+                                    <th className='r'>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    Attendance.map((data, index) => <>
+                                        <Row data={data} key={index} totalAttendance={Attendance} />
+                                    </>)
+                                }
 
-                                    ))
-                            }
-                        </div>
-                        <div className='DateCol'>
-                            <span style={{ fontSize: '1.3rem' }}>Check In</span>
-                            {
-                                Object.keys(Attendance)
-                                    .map((Key, index) => (
-                                        <span style={{ borderTop: '1px solid' }} key={index}>{Attendance[Key].CheckIn}</span>
+                            </tbody>
 
-                                    ))
-                            }
-                        </div>
-                        <div className='DateCol'>
-                            <span style={{ fontSize: '1.3rem' }}>check Out</span>
-                            {
-                                Object.keys(Attendance)
-                                    .map((Key, index) => (
-                                        <span style={{ borderTop: '1px solid' }} key={index}>{Attendance[Key].checkOut}</span>
-
-                                    ))
-                            }
-                        </div>
-                        <div className='DateCol'>
-                            <span style={{ fontSize: '1.3rem' }}>Total Hr.</span>
-                            {
-                                Object.keys(Attendance)
-                                    .map((Key, index) => (
-                                        <span style={{ borderTop: '1px solid' }} key={index}>{Attendance[Key].TotalWorkingHours}</span>
-
-                                    ))
-                            }
-                        </div>
-                        <div className='DateCol'>
-                            <span style={{ fontSize: '1.3rem' }}>Status</span>
-                            {
-                                Object.keys(Attendance)
-                                    .map((Key, index) => (
-                                        <span style={{ borderTop: '1px solid' }} key={index}>{Attendance[Key].Status}</span>
-
-                                    ))
-                            }
-                        </div>
-
+                        </table>
 
                     </div>
                 </> : <></>

@@ -222,6 +222,9 @@ const Maldives = ({
         handleOptionOfNights()
 
     }, []);
+    function ChangeNameOnPackage(name) {
+        data.Traveller_name = name
+    }
 
     function flightDetails(files) {
         // console.log(files)
@@ -302,6 +305,7 @@ const Maldives = ({
         }
 
     }
+    
     const handleFormChange = (event, index) => {
         let data = [...NightDataFields];
         data[index]['RoomType'] = event;
@@ -473,7 +477,7 @@ const Maldives = ({
                                 </h4>
                                 <h4>
                                     <span>Traveler:- </span>
-                                    <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
+                                    <input style={{ border: "2px solid Blue" }} onChange={(e)=>ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
                                 </h4>
                                 <h4>
                                     comments:-

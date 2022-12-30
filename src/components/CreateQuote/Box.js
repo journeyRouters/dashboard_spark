@@ -324,6 +324,9 @@ const Box = ({
         setflightImgUrl(oprationLinks)
 
     }
+    function ChangeNameOnPackage(name) {
+        data.Traveller_name = name
+    }
     async function convertObjectToLink(files) {
         try {
             const file = files
@@ -357,7 +360,7 @@ const Box = ({
                                 <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
                             </div>
                             <div >
-                                <div style={{ display: 'flex', width:'70%', justifyContent: 'space-between' }} >
+                                <div style={{ display: 'flex', width: '70%', justifyContent: 'space-between' }} >
                                     <div>
                                         <h4>
                                             <span>Trip id:- </span>
@@ -406,7 +409,7 @@ const Box = ({
                                         </h4>
                                         <h4>
                                             <span>Traveler:- </span>
-                                            <span style={{ border: "2px solid Blue" }}>{data.Traveller_name}</span>
+                                            <input style={{ border: "2px solid Blue" }} onChange={(e)=>ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
                                         </h4>
                                         <h4>
                                             <span>Destination:- </span>

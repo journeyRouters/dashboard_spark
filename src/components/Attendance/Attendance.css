@@ -1,10 +1,11 @@
-.tableLine{
+.tableLine {
     display: flex;
     justify-content: space-between;
     width: 97%;
     border: 1px solid;
 }
-.tableLineHeader{
+
+.tableLineHeader {
     display: flex;
     justify-content: space-between;
     width: 97%;
@@ -12,11 +13,32 @@
     font-size: 1.6rem;
     font-family: cursive;
 }
-.DateCol{
+
+.DateCol {
     font-family: cursive;
     border: 1px solid;
     display: flex;
     flex-direction: column;
     width: 14.6rem;
 
+}
+
+.r {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.row:nth-child(even) {
+    background-color: #dddddd;
+}
+.row2{
+    background-color: rgb(117, 212, 117);
+    color: red;
+}
+
+.Table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }

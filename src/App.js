@@ -10,6 +10,7 @@ import UploadAttendance from './components/Attendance/uploadAttendance';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
+import Dump from './components/DumpLead/Dump';
 import AdminInvestigation from './components/Investigation/AdminInvestigation';
 import Freelance_Investigation from './components/Investigation/Freelance_Investigation';
 import Investigation from './components/Investigation/investigation';
@@ -345,6 +346,67 @@ function App() {
                   </> : <></>
                 }
                 {
+                  profile.access_type === "CallUser" ? <>
+                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Rapid Fire</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Create Quote</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
+                      <div className='sidebarCardContaint'>
+                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        <p>Quotation Followup</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Vouchers & payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                      <div className='sidebarCardContaint'>
+                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Investigation</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("leave policy")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        <p>leave policy
+                        </p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        <p>Manage Leave
+                        </p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Dump")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        <p>Dump
+                        </p>
+                      </div>
+                    </div>
+                  </> : <></>
+                }
+                {
                   profile.access_type === "Accounts" ? <>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
@@ -572,6 +634,12 @@ function App() {
             Page === "rapid_fire" ?
               // <Test />
               <div></div>
+              : <></>
+          }
+          {
+            Page === "Dump" ?
+              <Dump profile={profile} auth={auth} />
+
               : <></>
           }
           {

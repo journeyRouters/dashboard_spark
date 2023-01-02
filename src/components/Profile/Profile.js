@@ -149,7 +149,8 @@ const Profile = (
             time: currentdate,
             Quoted_by: email,
             travelEndDate: travelEndDate,
-            Travel_Duration: count_days
+            Travel_Duration: count_days,
+            updated_last:new Date()
         });
     }
 

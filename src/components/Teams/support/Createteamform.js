@@ -25,7 +25,7 @@ const Createteamform = ({ open, onclose, profile }) => {
         setTeamMembers(e)
     }
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "in", ["User","Team Leader"]), where('user_type', '==', 'show'));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User","Team Leader","CallUser"]), where('user_type', '==', 'show'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

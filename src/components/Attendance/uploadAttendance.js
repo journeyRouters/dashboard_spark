@@ -2,15 +2,16 @@ import { async } from "@firebase/util";
 import { fromEvent } from "file-selector";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import readXlsxFile from 'read-excel-file';
 import app from "../required";
 const UploadAttendance = () => {
     const db = getFirestore(app);
+    const[date,setDate]=useState(new Date())
     async function UploadFile() {
-        var today = new Date()
-        today.setDate(today.getDate() - 1);
-        var key = moment(today).format('DD-MM-YYYY')
+        var today = new Date(date)
+        // today.setDate(today.getDate() - 1);
+        var key = moment(date).format('DD-MM-YYYY')
         //   console.log(auth)
         const handles = await window.showOpenFilePicker({ multiple: false });
         const files = await fromEvent(handles);
@@ -63,6 +64,10 @@ const UploadAttendance = () => {
         })
 
     }
+     function HandaleDate(e){
+        setDate(e.target.value)
+        // console.log(e.target.value)
+     }
     async function updateAttendance(data, user){
         const AttendanceRef = doc(db, "Attendance", user);
         await updateDoc(AttendanceRef, {
@@ -80,7 +85,9 @@ const UploadAttendance = () => {
     }
     return (
         <div>
+            <input type={'date'} value={date} onChange={(e)=>HandaleDate(e)}></input>
             <button onClick={() => UploadFile()}>upload</button>
+            
 
         </div>
     );

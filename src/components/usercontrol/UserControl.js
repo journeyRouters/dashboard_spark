@@ -33,7 +33,7 @@ const Usercontrol = (props) => {
     return (
         <div>
             {props.data?
-                props.data.access_type === "admin" ? <>
+                props.data.access_type === "admin"||"Super Admin"? <>
                     {
                         user.map((d, index) => (
                             <Userunitcomponent key={index} data={d} datahandle={datahandle} />

@@ -594,6 +594,19 @@ function App() {
                         <p>Post Stay</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={() => page("leave policy")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        <p>leave policy
+                        </p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>User Controller</p>
+                      </div>
+                    </div>
                     {/* <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />

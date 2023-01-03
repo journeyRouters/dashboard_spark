@@ -20,3 +20,14 @@
     display: flex;
     justify-content: space-around;
 }
+.editInvoiceDiv{
+    background: #FFFF;
+    width: 40rem;
+    overflow-y: scroll;
+}
+.installment{
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    margin: 1rem;
+}

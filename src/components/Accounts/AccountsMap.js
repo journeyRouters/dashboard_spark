@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
 import { Modal } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { fromEvent } from 'file-selector';
 import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import InvoicePdf from '../invoice/invoicePdf';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
+import '../payments_vouchers/Payments.css';
 import Profile from '../Profile/Profile';
 import app from '../required';
-import '../payments_vouchers/Payments.css';
 import InstallmentsMapper from './installmentsMapper';
-import Maldivespdf from '../MaldivesPdf/Maldivespdf';
-const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
+import EditInvoice from './EditInvoice'
+const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
     const [details, setDetails] = useState(false)
     const [target, settarget] = useState(0)
     const storage = getStorage();
+    const [EditInvoiceflg, setEditInvoice] = useState(false)
     const [openuploader, setuploader] = useState(false)
     const [finalPackage, setFinalPackage] = useState(null)
     const [invoice, setinvocice] = useState()
@@ -26,6 +27,12 @@ const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
     const [installment, setinstallment] = useState()
     const [AccountClearanceFlg, setAccountClearanceFlg] = useState(data.AccountClearance ? data.AccountClearance : false)
     const [OperationsClearanceFlg, setOperationsClearanceFlg] = useState(data.OperationsClearance ? data.OperationsClearance : false)
+    function handleInvoiceEditing() {
+        setEditInvoice(true)
+    }
+    function closeInvoiceModal() {
+        setEditInvoice(false)
+    }
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -47,7 +54,7 @@ const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
         // console.log(data.TripId)
 
         try {
-            const docRef = doc(db, "invoice",data.TripId);
+            const docRef = doc(db, "invoice", data.TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
@@ -66,7 +73,7 @@ const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
         }
 
     }
-    async function resetToEdit(){
+    async function resetToEdit() {
         await updateDoc(doc(db, "Trip", `${data.TripId}`), {
             Lead_Status: "Cold",
         });
@@ -674,13 +681,28 @@ const AccountsMap = ({ data, profile, datahandle,getUpdatedlead }) => {
                             </div>
                         </div>
                     </div>
+
                     <div>
                         {
-                            installment ? <div className='paymentsConfirmer'>
-                                <InstallmentsMapper data={invoice.installment}
-                                    setDetails={setDetails}
-                                    handleInstallments={handleInstallments} TripId={data.TripId} />
-                            </div> : <></>
+                            installment ? <>
+                                <div>
+                                    <button onClick={() => handleInvoiceEditing()}>Edit Invoice</button>
+                                    {
+                                        EditInvoiceflg ? <>
+                                            <Modal open={EditInvoice} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
+                                                <>
+                                                    <EditInvoice installments={invoice.installment} TripId={data.TripId} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal}/>
+                                                </>
+                                            </Modal>
+
+                                        </> : <></>
+                                    }
+                                </div>
+                                <div className='paymentsConfirmer'>
+                                    <InstallmentsMapper data={invoice.installment}
+                                        setDetails={setDetails}
+                                        handleInstallments={handleInstallments} TripId={data.TripId} />
+                                </div></> : <></>
                         }
                     </div>
 

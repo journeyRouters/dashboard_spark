@@ -40,7 +40,7 @@ const TeameditComponent = ({ data }) => {
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
             });
-            performencePercentage(list.length,profile)
+            performencePercentage(list.length, profile)
 
         }
         catch (erorr) {
@@ -48,19 +48,19 @@ const TeameditComponent = ({ data }) => {
         }
 
     }
-    function performencePercentage(convertedCount,profile) {
+    function performencePercentage(convertedCount, profile) {
         var month = moment(new Date()).format('MMMM-YYYY')
         var target = profile.Target[`${month}`]
         var percent = (convertedCount / target) * 100;
         setpercentage(parseInt(percent))
     }
     return (
-        <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '30%' }}>
+        <div >
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '30%', border: '1px solid' }}>
                 <li>
-                    {data.label}
+                    {data.label} 
                 </li>
-                <div style={{ width: '30%' }}>
+                <div style={{ width: '30%', display: 'flex', justifyContent: 'space-between' }}>
                     <div className='myBar' style={{ width: percentage }}></div>{percentage}%
                 </div>
             </div>

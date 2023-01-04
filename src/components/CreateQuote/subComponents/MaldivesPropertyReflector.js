@@ -163,10 +163,10 @@ export const propertyMaldives = [
     //     label: 'SAII LAGOON MALDIVES',
     //     value: 'SaiiLagoonMaldives'
     // },
-    // {
-    //     label: 'SHERATON MALDIVES FULL MOON RESORT AND SPA',
-    //     value: 'SheratonMaldivesFullMoonResort_Spa'
-    // },
+    {
+        label: 'SHERATON MALDIVES',
+        value: 'SheratonMaldives'
+    },
     {
         label: 'SIYAM WORLD MALDIVES',
         value: 'SiyamWorldMaldives'

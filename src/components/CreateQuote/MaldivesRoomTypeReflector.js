@@ -763,90 +763,90 @@ const RoomType = {
         },
 
     ],
-    TajCoraReef:[
+    TajCoraReef: [
         {
-            label:'Deluxe Beach villa',
-            value:'DeluxeBeachvilla'
+            label: 'Deluxe Beach villa',
+            value: 'DeluxeBeachvilla'
         },
         {
-            label:'Nirvana Presidential Suit',
-            value:'NirvanaPresidentialSuit'
+            label: 'Nirvana Presidential Suit',
+            value: 'NirvanaPresidentialSuit'
         },
         {
-            label:'Premium Water Villa',
-            value:'PremiumWaterVilla'
+            label: 'Premium Water Villa',
+            value: 'PremiumWaterVilla'
         },
         {
-            label:'Superior Beach Villa',
-            value:'SuperiorBeachVilla'
+            label: 'Superior Beach Villa',
+            value: 'SuperiorBeachVilla'
         }
     ],
-    TajExoticaResort_Spa:[
+    TajExoticaResort_Spa: [
         {
-            label:'Premium Villa With Pool',
-            value:'PremiumVillaWithPool'
+            label: 'Premium Villa With Pool',
+            value: 'PremiumVillaWithPool'
         },
         {
-            label:'Delux Beach Villa With Pool',
-            value:'DeluxBeachVillaWithPool'
+            label: 'Delux Beach Villa With Pool',
+            value: 'DeluxBeachVillaWithPool'
         },
         {
-            label:'Two Bedroom Beach Suite With Pool',
-            value:'TwoBedroomBeachSuiteWithPool'
+            label: 'Two Bedroom Beach Suite With Pool',
+            value: 'TwoBedroomBeachSuiteWithPool'
         },
         {
-            label:'One Bedroom Beach Suite With Pool',
-            value:'OneBedroomBeachSuiteWithPool'
+            label: 'One Bedroom Beach Suite With Pool',
+            value: 'OneBedroomBeachSuiteWithPool'
         },
         {
-            label:'Delux Lagoon Villa With Pool',
-            value:'DeluxLagoonVillaWithPool'
+            label: 'Delux Lagoon Villa With Pool',
+            value: 'DeluxLagoonVillaWithPool'
         },
         {
-            label:'Lagoon Villa Ocean View',
-            value:'LagoonVillaOceanView'
+            label: 'Lagoon Villa Ocean View',
+            value: 'LagoonVillaOceanView'
         },
         {
-            label:'Two Bedroom Rehendi Presidental Suite',
-            value:'TwoBedroomRehendiPresidentalSuite'
+            label: 'Two Bedroom Rehendi Presidental Suite',
+            value: 'TwoBedroomRehendiPresidentalSuite'
         },
         {
-            label:'One Bedroom Ocean Suite With Pool',
-            value:'OneBedroomOceanSuiteWithPool'
+            label: 'One Bedroom Ocean Suite With Pool',
+            value: 'OneBedroomOceanSuiteWithPool'
         },
     ],
-    TheStandardMaldives:[
+    TheStandardMaldives: [
         {
-            label:'Lagoon Beach Pool Villa',
-            value:'LagoonBeachPoolVilla'
+            label: 'Lagoon Beach Pool Villa',
+            value: 'LagoonBeachPoolVilla'
         },
         {
-            label:'Lagoon Overwater Pool Villa',
-            value:'LagoonOverwaterPoolVilla'
+            label: 'Lagoon Overwater Pool Villa',
+            value: 'LagoonOverwaterPoolVilla'
         },
         {
-            label:'Ocean Beach Pool Villa',
-            value:'OceanBeachPoolVilla'
+            label: 'Ocean Beach Pool Villa',
+            value: 'OceanBeachPoolVilla'
         },
         {
-            label:'Ocean Overwater Pool Villa',
-            value:'OceanOverwaterPoolVilla'
+            label: 'Ocean Overwater Pool Villa',
+            value: 'OceanOverwaterPoolVilla'
         },
         {
-            label:'The Standard Residence',
-            value:'TheStandardResidence'
+            label: 'The Standard Residence',
+            value: 'TheStandardResidence'
         },
         {
-            label:'Two Bedroom Lagoon Beach Pool Villa',
-            value:'TwoBedroomLagoonBeachPoolVilla'
+            label: 'Two Bedroom Lagoon Beach Pool Villa',
+            value: 'TwoBedroomLagoonBeachPoolVilla'
         },
         {
-            label:'Two Bedroom Lagoon Overwater Pool Villa',
-            value:'TwoBedroomLagoonOverwaterPoolVilla'
+            label: 'Two Bedroom Lagoon Overwater Pool Villa',
+            value: 'TwoBedroomLagoonOverwaterPoolVilla'
         },
         {
-            label:'Two Bedroom Ocean Beach Pool Villa',
-            value:'TwoBedroomOceanBeachPoolVilla'
+            label: 'Two Bedroom Ocean Beach Pool Villa',
+            value: 'TwoBedroomOceanBeachPoolVilla'
         },
     ],
     Thulagiri: [
@@ -1017,6 +1017,48 @@ const RoomType = {
         {
             label: 'under development',
             value: ''
+        }
+    ],
+    SheratonMaldives: [
+        {
+            label: 'Beach Front Cottage',
+            value: 'BeachFrontCottage'
+        },
+        {
+            label:'Beach Front Deluxe',
+            value:'BeachFrontDeluxe'
+        },
+        {
+            label:'Cottage With Pool',
+            value:'CottageWithPool'
+        },
+        {
+            label:'Deluxe Room',
+            value:'DeluxeRoom'
+        },
+        {
+            label:'Island Cottage',
+            value:'IslandCottage'
+        },
+        {
+            label:'Ocean Pool Villa',
+            value:'OceanPoolVilla'
+        },
+        {
+            label:'Water Bungalow With Pool',
+            value:'WaterBungalowWithPool'
+        },
+        {
+            label:'Water Villa With Pool',
+            value:'WaterVillaWithPool'
+        },
+        {
+            label:'Water Suite With Plunge Pool',
+            value:'WaterSuiteWithPlungePool'
+        },
+        {
+            label:'Water Bungalow',
+            value:'WaterBungalow'
         }
     ],
     MedhufushiIslandResort: [

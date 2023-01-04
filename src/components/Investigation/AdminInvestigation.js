@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { DynamicBarChart } from 'react-dynamic-charts';
 import moment from 'moment';
 import { Modal } from '@material-ui/core';
+import { Layout } from '@progress/kendo-drawing';
 const db = getFirestore(app);
 
 
@@ -321,6 +322,8 @@ const AdminInvestigation = ({ profile }) => {
     async function getDumpLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
+        var local = { name: 'Dump', value: 0, fill: '#FF0000' }
+        var prev_instance = dataLoaded
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -335,6 +338,7 @@ const AdminInvestigation = ({ profile }) => {
                 });
                 // console.log(list)
                 user_analytics.value = list.length
+                local.value = local.value + list.length
                 holdAlluserAnalytics.push(user_analytics)
                 // console.log(list)
 
@@ -345,7 +349,8 @@ const AdminInvestigation = ({ profile }) => {
                 // setopen(false)
             }
         }
-
+        prev_instance.push(local)
+        loadData(prev_instance)
         set_Dump_Lead_Analysed([
             {
                 name: 'Lead Dumped',
@@ -393,7 +398,8 @@ const AdminInvestigation = ({ profile }) => {
     async function getcoldLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
-        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        var local = { name: 'Cold', value: 0, fill: '#814fdc' }
+        var prev_instance = dataLoaded
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
@@ -407,6 +413,7 @@ const AdminInvestigation = ({ profile }) => {
                 });
                 // console.log(list)
                 user_analytics.value = list.length
+                local.value = local.value + list.length
                 holdAlluserAnalytics.push(user_analytics)
                 // console.log(list)
 
@@ -417,7 +424,8 @@ const AdminInvestigation = ({ profile }) => {
                 // setopen(false)
             }
         }
-
+        prev_instance.push(local)
+        loadData(prev_instance)
         set_Cold_Lead_Analysed([
             {
                 name: 'Total Cold Leads',
@@ -490,7 +498,7 @@ const AdminInvestigation = ({ profile }) => {
                             scale="point"
                             padding={{ left: 10, right: 10 }}
                         />
-                        <YAxis />
+                        <YAxis type="number" domain={[0, 'dataMax+100']} />
                         <Tooltip />
                         <Legend legendType='circle' />
                         <CartesianGrid strokeDasharray="3 3" />

@@ -2,18 +2,19 @@ import React from 'react';
 import { Modal } from '@material-ui/core';
 import { useState } from 'react';
 import moment from 'moment';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import app from '../required';
 
 
 
-const EditInvoice = ({ installments, TripId ,profile,getUpdatedlead,closeInvoiceModal}) => {
+const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoiceModal }) => {
     // console.log(installments)
     const db = getFirestore(app);
     async function setInvoice() {
         var today = new Date()
         var date = moment(today).format('YYYY-MM-DD')
-        await setDoc(doc(db, "invoice", TripId), {
+        var docref = doc(db, "invoice", TripId)
+        await updateDoc(docref, {
             installment: installment,
             created_at: today,
             updated_at: today,
@@ -21,11 +22,11 @@ const EditInvoice = ({ installments, TripId ,profile,getUpdatedlead,closeInvoice
             date: date,
         });
     }
-    function onClickUpdater(){
-        if(installment.length==0){
+    function onClickUpdater() {
+        if (installment.length == 0) {
             alert('NO Installment Found')
         }
-        else{
+        else {
             setInvoice()
         }
         getUpdatedlead()
@@ -71,7 +72,7 @@ const EditInvoice = ({ installments, TripId ,profile,getUpdatedlead,closeInvoice
                 ))
             }
             <button className='addmoreInstallments' onClick={addMOreInstallments}>+</button>
-            <button onClick={()=>onClickUpdater()}>Update Invoice</button>
+            <button onClick={() => onClickUpdater()}>Update Invoice</button>
 
 
         </div>

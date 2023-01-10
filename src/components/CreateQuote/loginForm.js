@@ -59,21 +59,28 @@ const Loginform = (props) => {
                 account_created_date: moment(currentdate).format('YYYY-MM-DD'),
                 account_create_time: moment(currentdate).format('h:mm:ss'),
                 account_updated_date: moment(currentdate).format('YYYY-MM-DD'),
-                account_updated_time:  moment(currentdate).format('h:mm:ss'),
+                account_updated_time: moment(currentdate).format('h:mm:ss'),
                 WhatsApp_number: userWhatsApp_number,
                 contact_number: contact,
                 access_type: "Block",
                 email: args.email,
                 following_lead: [],
-                uid:args.uid,
-                Lead_Current:[],
-                Lead_followUp:[],
-                Lead_Vouchers:[],
-                Lead_Dump:[],
-                Lead_converted:[],
-                user_type:"show",
-                Target:{}
-
+                uid: args.uid,
+                Lead_Current: [],
+                Lead_followUp: [],
+                Lead_Vouchers: [],
+                Lead_Dump: [],
+                Lead_converted: [],
+                user_type: "show",
+                Target: {},
+                Leave: {
+                    CasualLeave: 10,
+                    LeaveWithoutPay: 10,
+                    MaternityLeave: 182,
+                    PrivilegedLeave: 12,
+                    SickLeave: 4
+                },
+                AttendanceId: ''
             });
         }
         catch (error) {
@@ -98,7 +105,7 @@ const Loginform = (props) => {
             login()
 
         }
-       
+
 
     }
     function signUp() {
@@ -120,11 +127,11 @@ const Loginform = (props) => {
         else if (contact.length === 0) {
             setContact_flg(true)
         }
-        else  {
+        else {
             create_id()
 
         }
-       
+
 
     }
 
@@ -139,9 +146,9 @@ const Loginform = (props) => {
         props.setopen(false)
     }
     const auth = getAuth();
-//   function SetCustomUserClaims(uid){
-//     admin.auth.setCustomUserClaims(uid, { admin: true }).then(()=>{})
-//   }
+    //   function SetCustomUserClaims(uid){
+    //     admin.auth.setCustomUserClaims(uid, { admin: true }).then(()=>{})
+    //   }
     async function create_id() {
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

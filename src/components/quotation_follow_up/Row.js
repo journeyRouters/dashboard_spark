@@ -147,13 +147,15 @@ const Row = (props) => {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
                 month: moment(new Date()).format('MMMM'),
-                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                updated_last:new Date()
             }, { merge: true });
         }
         else {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
-                Lead_status_change_date: moment(today).format('YYYY-MM-DD')
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                updated_last:new Date()
             }, { merge: true });
         }
     }

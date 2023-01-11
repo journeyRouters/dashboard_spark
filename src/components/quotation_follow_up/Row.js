@@ -146,16 +146,16 @@ const Row = (props) => {
         if (row.month == null || row.month == "") {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
-                month: moment(new Date()).format('MMMM'),
+                month: moment(today).format('MMMM'),
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
-                updated_last:new Date()
+                updated_last:today
             }, { merge: true });
         }
         else {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
-                updated_last:new Date()
+                updated_last:today
             }, { merge: true });
         }
     }

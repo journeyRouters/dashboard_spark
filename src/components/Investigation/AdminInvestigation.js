@@ -1,14 +1,12 @@
-import React from 'react';
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import app from '../required';
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
-import { useState } from 'react';
-import Investigation from './investigation';
-import { useEffect } from 'react';
-import { DynamicBarChart } from 'react-dynamic-charts';
-import moment from 'moment';
 import { Modal } from '@material-ui/core';
-import { Layout } from '@progress/kendo-drawing';
+import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { DynamicBarChart } from 'react-dynamic-charts';
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import app from '../required';
+import CurrentMonthcharts from './CurrentMonthcharts';
+import OverallChart from './OverallChart';
 const db = getFirestore(app);
 
 
@@ -29,13 +27,24 @@ const AdminInvestigation = ({ profile }) => {
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     const [dataLoaded, loadData] = useState([])
     const [DetailGraphFlg, setDetailGraphFlg] = useState(false)
+    const [currentUser, setCurrentuser] = useState(null)
+    const [detailsFlg, setdetailsFlg] = useState(false)
+
+    function handleSearch(e) {
+        if (e == 'hide') {
+            setdetailsFlg(false)
+        }
+        else if (e == 'show') {
+            setdetailsFlg(true)
+        }
+    }
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"]), where('user_type', '==', 'show'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
                 Profile.push(doc.data());
-                // console.log(doc.data().name)
+                // console.log(doc.data())
             });
             setAllUserprofile(Profile)
             getPendingLead(Profile)
@@ -278,6 +287,13 @@ const AdminInvestigation = ({ profile }) => {
         getConvertedLeadData(AllUserprofile)
         // console.log(holdAlluserAnalytics)
         // setdataAvailablityFlg(true)
+
+    }
+    function filterDataFromProfile(uid) {
+        /**this function is to filter the current user from the all user data */
+        var profile_of_user = AllUserprofile.filter((data) => data.uid === uid)
+        // console.log(profile_of_user)
+        setCurrentuser(profile_of_user)
 
     }
     async function getConvertedLeadData(AllUserprofile) {
@@ -619,6 +635,32 @@ const AdminInvestigation = ({ profile }) => {
                                 fontSize: 18
                             }}
                         />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                        <select onChange={(e) => filterDataFromProfile(e.target.value)} >
+                            <option value={0}> assign to</option>
+                            {
+                                AllUserprofile.map((data, index) => (<>
+                                    <option key={index} value={data.uid}>{data.name}</option>
+
+                                </>))
+                            }
+                        </select>
+                        {
+                            detailsFlg ?
+                                <button onClick={() => handleSearch('hide')}>Hide</button> :
+                                <button onClick={() => handleSearch('show')}>Show</button>
+                        }
+                    </div>
+                    <div>
+                        {
+                            detailsFlg ? <>
+
+                                <CurrentMonthcharts currentUser={currentUser} />
+                                {/* <OverallChart currentUser={currentUser}/> */}
+
+                            </> : <></>
+                        }
                     </div>
                 </> : <></>
             }

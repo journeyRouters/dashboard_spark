@@ -655,9 +655,10 @@ const AdminInvestigation = ({ profile }) => {
                     <div>
                         {
                             detailsFlg ? <>
-
+                                <h2>CurrentMonthcharts</h2>
                                 <CurrentMonthcharts currentUser={currentUser} />
-                                {/* <OverallChart currentUser={currentUser}/> */}
+                                <h2>OverallChart</h2>
+                                <OverallChart currentUser={currentUser} />
 
                             </> : <></>
                         }

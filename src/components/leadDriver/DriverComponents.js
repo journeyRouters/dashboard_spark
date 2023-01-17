@@ -8,6 +8,7 @@ import './Driver.css';
 const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
     const [currentUser, setCurrentuser] = useState(null)
     const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
+    const [Status, setStatus] = useState(data.Lead_Status)
     const db = getFirestore(app);
     var today = new Date()
     // const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
@@ -30,9 +31,13 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assign_to.uid": uid,
             "assign_to.name": name,
             "assign_flg": true,
-            "assigned_date_time": today
+            "assigned_date_time": today,
+            "Lead_Status":Status
         });
         getLeadByDate(currentdate)
+    }
+    function OnStatusChange(value) {
+        setStatus(value)
     }
     async function updateNumberOfDays(value) {
         setNumberOfDays(value)
@@ -67,16 +72,16 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />
-                <span style={{ color: 'yellow', background: 'black' }}>Lead Status:- {data.Lead_Status}</span>
+                <span style={{ color: 'yellow', background: 'black' }}>Lead Status:- {Status}</span>
             </div>
             <div>
                 {
                     data.assign_flg ? <span>assign To:-{data.assign_to.name}</span> : <></>
                 }<br />
                 <span>
-                    <select disabled={data.assign_flg}>
-                        <option value='cold'>change Lead Status</option>
-                        <option value='cold'>cold</option>
+                    <select disabled={data.assign_flg} onChange={(e)=>OnStatusChange(e.target.value)}>
+                        <option value='Cold'>change Lead Status</option>
+                        <option value='Cold'>cold</option>
                         <option value='Active'>Active</option>
                         <option value='Hot'>Hot</option>
 

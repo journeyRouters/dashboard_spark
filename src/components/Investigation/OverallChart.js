@@ -28,23 +28,43 @@ const OverallChart = ({ currentUser }) => {
     async function totalLeadOfCurrentMonth() {
         var date = new Date()
         var list = []
-        var local = { name: 'Assign', value: 0, fill: 'blue' }
-        var prev_instance = dataLoaded
-        // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var firequery = query(collection(db, "Trip"),
-            where("quotation_flg", '==', false),
-            where("Lead_Status", "in", ["Active"]),
-            where("assign_to.uid", "==", currentUser[0].uid)
+        where("assigned_date_time", '>=', firstDay),
+        where("assign_to.uid", "==", currentUser[0].uid)
         );
         var querySnapshot = await getDocs(firequery);
         querySnapshot.forEach((doc) => {
             list.push(doc.data())
         });
         setTotaldata(list)
+        // TotalDumpOfCurrentMonth(list.length)
+        totalPassOverLead(list.length,list)
+
+    }
+    async function totalPassOverLead(length,list) {
+        var date = new Date()
+        var local = { name: 'Assign', value: 0, fill: 'blue' }
+        var prev_instance = dataLoaded
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        var firequery = query(collection(db, "Trip"),
+        where("assigned_date_time", '<', firstDay),
+        where("Lead_Status","==","Cold",),
+        where("Lead_Status","==","Active",),
+        where("Lead_Status","==","Hot",),
+        where("assign_to.uid", "==", currentUser[0].uid)
+        );
+        var querySnapshot = await getDocs(firequery);
+        querySnapshot.forEach((doc) => {
+            list.push(doc.data())
+            console.log(moment(doc.data().assigned_date_time.toDate()).format('DD-MM-YYYY'))
+        });
+        setTotaldata(list)
+        console.log(list)
         local.value = local.value + list.length
         prev_instance.push(local)
         loadData(prev_instance)
-        TotalDumpOfCurrentMonth(list.length)
+        TotalDumpOfCurrentMonth(length)
 
     }
     async function TotalDumpOfCurrentMonth(total) {

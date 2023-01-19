@@ -565,6 +565,10 @@ export const avtivityList = {
             value: 'DanangBanahillgoldenBridge'
         },
         {
+            lavel:'Da Lat',
+            value:'DaLat'
+        },
+        {
             label: 'Danang Marble Mountain',
             value: 'DanangMarbleMountain'
         },

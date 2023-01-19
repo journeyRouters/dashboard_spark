@@ -565,7 +565,7 @@ export const avtivityList = {
             value: 'DanangBanahillgoldenBridge'
         },
         {
-            lavel:'Da Lat',
+            label:'Da Lat',
             value:'DaLat'
         },
         {

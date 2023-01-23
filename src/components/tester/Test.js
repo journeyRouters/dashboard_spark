@@ -22,26 +22,27 @@ const Test = () => {
       });
       console.log(collect)
    }
-   // async function allDoc() {
-   //    const q = query(collection(db, "Profile"))
-   //    const querySnapshot = await getDocs(q);
-   //    querySnapshot.forEach((doc) => {
-   //       add_a_feild(doc.id)
-   //    });
-   // }
-   // function add_a_feild(id) {
-   //    // var month=moment(new Date()).format('MMMM-YYYY')
-   //    // console.log(month)
-   //    setDoc(doc(db, "Profile",id), {
-   //     Leave:{
-   //       CasualLeave:10,
-   //       LeaveWithoutPay:10,
-   //       MaternityLeave:182,
-   //       PrivilegedLeave:12,
-   //       SickLeave:4
-   //     }
-   //    }, { merge: true })
-   // }
+   async function allDoc() {
+      var date = new Date("01/12/2022");
+      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      const q = query(collection(db, "Trip"),where("assigned_date_time",">=",firstDay))
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+         add_a_feild(doc.id)
+      });
+   }
+   function add_a_feild(id) {
+      // var month=moment(new Date()).format('MMMM-YYYY')
+      // console.log(month)
+      setDoc(doc(db, "Trip",id), {
+       callingStatus:'',
+       callingLastUpdate:new Date(),
+       caller:{
+         name:'',
+         uid:''
+       }
+      }, { merge: true })
+   }
    useEffect(() => {
       //   tester()
       // allDoc()

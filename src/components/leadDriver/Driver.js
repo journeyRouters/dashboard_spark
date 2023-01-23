@@ -21,8 +21,8 @@ const Driver = (props) => {
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     const [openlistOfUsers, setopenlistOfUsers] = useState(false)
-    const[TripCounter,setTripCount]=useState()
-    const[Hash,setHash]=useState()
+    const [TripCounter, setTripCount] = useState()
+    const [Hash, setHash] = useState()
     function handleListChange() {
         setopenlistOfUsers(!openlistOfUsers)
     }
@@ -34,21 +34,21 @@ const Driver = (props) => {
             const path = files[0].path
             // setInProgress(true)
             readXlsxFile(files[0]).then((rows) => {
-                let countUpdater=TripCounter
-                let HashTable=Hash
+                let countUpdater = TripCounter
+                let HashTable = Hash
                 for (let i = 1; i <= rows.length - 1; i++) {
                     let Row = rows[i]
                     // console.log(Row)
-                    let TripHash=objectHash({foo: Row[3]+Row[5]+today})
-                    let contactString=Row[5]+''
-                    let last4=contactString.slice(contactString.length-4)
-                    let tripid = countUpdater+''+last4
-                    countUpdater=countUpdater+1
+                    let TripHash = objectHash({ foo: Row[3] + Row[5] + today })
+                    let contactString = Row[5] + ''
+                    let last4 = contactString.slice(contactString.length - 4)
+                    let tripid = countUpdater + '' + last4
+                    countUpdater = countUpdater + 1
                     // console.log(TripHash)
-                    try{
-                        HashTable[`${tripid}`]=TripHash
+                    try {
+                        HashTable[`${tripid}`] = TripHash
                     }
-                    catch(e){console.log(e)}
+                    catch (e) { console.log(e) }
                     setDoc(doc(db, "Trip", tripid), {
                         TripId: tripid,
                         Lead_Status: Row[0],
@@ -89,7 +89,13 @@ const Driver = (props) => {
                         },
                         updated_last: null,
                         assign_flg: false,
-                        final_package: null
+                        final_package: null,
+                        callingStatus: '',
+                        callingLastUpdate: new Date(),
+                        caller: {
+                            name: '',
+                            uid: ''
+                        }
                     });
                 }
                 updateTripCounter(countUpdater)
@@ -114,11 +120,11 @@ const Driver = (props) => {
                 list.push(doc.data())
                 // console.log(doc.data())
             });
-            try{
+            try {
                 // console.log(list)
                 setLead_data(list)
             }
-            catch(e){console.log(e)}
+            catch (e) { console.log(e) }
             // console.log(list);
         }
         catch (error) {
@@ -154,46 +160,46 @@ const Driver = (props) => {
         // console.log(selectedDate)
         getLeadByDate(currentdate)
     }, []);
-    async function getTripCounter(){
+    async function getTripCounter() {
         const TripRef = doc(db, "Support", "tripCount");
         let SupportSnap;
-        try{
-             SupportSnap = await getDoc(TripRef);
+        try {
+            SupportSnap = await getDoc(TripRef);
         }
-        catch(e){console.log(e)}
-        if(SupportSnap.exists()){
+        catch (e) { console.log(e) }
+        if (SupportSnap.exists()) {
             setTripCount(SupportSnap.data().tripCount)
             // console.log(SupportSnap.data().tripCount)
 
         }
     }
-    async function getHashTable(){
+    async function getHashTable() {
         const TripRef = doc(db, "Support", "Hash");
         let SupportSnap;
-        try{
-             SupportSnap = await getDoc(TripRef);
+        try {
+            SupportSnap = await getDoc(TripRef);
         }
-        catch(e){console.log(e)}
-        if(SupportSnap.exists()){
+        catch (e) { console.log(e) }
+        if (SupportSnap.exists()) {
             setHash(SupportSnap.data().hash)
             // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
 
 
         }
     }
-    async function updateTripCounter(counted){
+    async function updateTripCounter(counted) {
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
             tripCount: counted
-          });
+        });
 
     }
-    async function updateHash(json){
+    async function updateHash(json) {
         const TripRef = doc(db, "Support", "Hash");
         // console.log(Object.keys(json).length)
         await updateDoc(TripRef, {
             hash: json
-          },{ merge: true });
+        }, { merge: true });
 
     }
     return (
@@ -238,7 +244,7 @@ const Driver = (props) => {
                 <button className='userlist_button' onClick={handleListChange}>All listed User</button>
                 <button onClick={() => UploadFile()}>upload the Leads</button>
             </div>
-            <div style={{background:'cyan'}}>
+            <div style={{ background: 'cyan' }}>
                 {lead_data.map((data, index) => (
                     <DriverComponents key={index} profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} selectedDate={selectedDate} />
                 ))}

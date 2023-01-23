@@ -7,6 +7,8 @@ import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
 import AttendanceMain from './components/Attendance/AttendanceMain';
 import UploadAttendance from './components/Attendance/uploadAttendance';
+import Assignerhandler from './components/Calling/Pages/Assignerhandler';
+import CreateQuote from './components/Calling/Pages/CreateQuote';
 import Createquote from './components/CreateQuote/CreateQuote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
@@ -346,7 +348,7 @@ function App() {
                   </> : <></>
                 }
                 {
-                  profile.access_type === "CallUser" ? <>
+                  profile.access_type === "Caller" ? <>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -359,10 +361,10 @@ function App() {
                         <p>Attendance</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                    <div className='sidebarCard' onClick={() => page("CallerLeads")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Create Quote</p>
+                        <p>LEADS</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
@@ -371,12 +373,7 @@ function App() {
                         <p>Quotation Followup</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Vouchers & payments</p>
-                      </div>
-                    </div>
+                    
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -397,15 +394,9 @@ function App() {
                         </p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Dump")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>Dump
-                        </p>
-                      </div>
-                    </div>
                   </> : <></>
                 }
+                
                 {
                   profile.access_type === "Accounts" ? <>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
@@ -485,6 +476,12 @@ function App() {
                         <p>User Controller</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Caller_Lead_Assigning"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Caller's lead</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -532,6 +529,7 @@ function App() {
                 }
                 {
                   profile.access_type === "Super Admin" ? <>
+
                     <div className='sidebarCard' onClick={(() => page("Driver"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -628,6 +626,17 @@ function App() {
                 <Createquote auth={auth} userProfile={profile} />
               }
               </> : <></>
+          }
+
+{
+            Page === 'Caller_Lead_Assigning' ? <>
+              <Assignerhandler Auth={auth} profile={profile} />
+            </> : <></>
+          }
+          {
+            Page === 'CallerLeads' ? <>
+              <CreateQuote Auth={auth} profile={profile} />
+            </> : <></>
           }
           {
             Page === 'Attendance' ? <>

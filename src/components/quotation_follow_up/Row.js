@@ -143,19 +143,25 @@ const Row = (props) => {
 
     }
     async function updateStatus() {
-        if (row.month == null || row.month == "") {
+        if (props.Caller == 1) {
+            setDoc(doc(db, "Trip", row.TripId), {
+                callingStatus: Lead_Status,
+                updated_last: today
+            }, { merge: true });
+        }
+        else if (row.month == null || row.month == "") {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
                 month: moment(today).format('MMMM'),
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
-                updated_last:today
+                updated_last: today
             }, { merge: true });
         }
         else {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
-                updated_last:today
+                updated_last: today
             }, { merge: true });
         }
     }
@@ -266,7 +272,13 @@ const Row = (props) => {
                         </> : <>
                             <TableCell align="right">
                                 <span className='caps'>
-                                    {row.Lead_Status}
+                                    {
+                                        props.Caller == 1 ? <>
+                                            {row.callingStatus}
+                                        </> : <>
+                                            {row.Lead_Status}
+                                        </>
+                                    }
                                 </span>
                             </TableCell>
                         </>

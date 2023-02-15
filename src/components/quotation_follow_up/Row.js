@@ -179,7 +179,7 @@ const Row = (props) => {
                 comments: allComments,
                 updated_last: today
             }, { merge: true });
-
+           
             // latestTripData()
             setLimit(false)
             setLatestComment(allComments)

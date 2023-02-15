@@ -1,32 +1,29 @@
-import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import app from '../required';
 import './Payments.css';
 import VouchersCompo from './Vouchers_compo';
 const Vouchers = (props) => {
     const [lead_data, setLead_data] = useState([])
-    const [open, setopen] = useState(true)
-    const [profile, setProfile] = useState(null)
     const db = getFirestore(app);
 
 
 
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
-        var CurrentDate=new Date()
+        var CurrentDate = new Date()
         try {
             let list = []
-            var q = query(collection(db, "Trip"), 
-            where("assign_to.uid", "==", props.auth.uid),
-             where('Lead_Status', '==', 'Converted'),
-             where('Travel_Date','>',CurrentDate),
-             where("quotation_flg","==",true));
-             orderBy('Travel_Date')
+            var q = query(collection(db, "Trip"),
+                where("assign_to.uid", "==", props.auth.uid),
+                where('Lead_Status', '==', 'Converted'),
+                where('Travel_Date', '>', CurrentDate),
+                where("quotation_flg", "==", true));
+            orderBy('Travel_Date')
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
-                setopen(false)
             }
             else {
 
@@ -34,13 +31,11 @@ const Vouchers = (props) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                // console.log(list);
-                setopen(false)
+                console.log(list)
             }
         }
-        catch (erorr){ 
+        catch (erorr) {
             console.log(erorr)
-            setopen(false)
         }
 
     }
@@ -67,9 +62,9 @@ const Vouchers = (props) => {
             <div className='details_of_specific_trip_main_container'>
                 {
                     lead_data.map((data, index) => (
-                        <>
-                            <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={props.profile}/>
-                        </>
+
+                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={props.profile} />
+
                     ))
                 }
 

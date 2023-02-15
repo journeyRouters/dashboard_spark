@@ -1,11 +1,11 @@
 import { Modal } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { fromEvent } from 'file-selector';
-import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import Maldives from '../CreateQuote/Maldives';
+import { NotifyByEmail, SendNotification } from '../emailer/NotifyByEmail';
 import InvoicePdf from '../invoice/invoicePdf';
 import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import Profile from '../Profile/Profile';
@@ -14,9 +14,10 @@ import './Payments.css';
 
 
 const VouchersCompo = ({ data, profile, datahandle }) => {
-    const [latestData, setlatestData] = useState(null)
+    const [latestData, setlatestData] = useState(data)
     const [loading, setloading] = useState(false)
     // console.log("from vouchers", data)
+    const [openPaymentsScreenShotsloader, setopenPaymentsScreenShotsloader] = useState(false)
     const [details, setDetails] = useState(false)
     const [target, settarget] = useState(0)
     const storage = getStorage();
@@ -28,6 +29,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     const [idproof, idproofcontrller] = useState(false)
     const db = getFirestore(app);
     const today = new Date()
+    var nothingList = []
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -44,6 +46,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     function uploaderpopup() {
         setuploader(!openuploader)
         settarget(0)
+    }
+    function PaymentsScreenShotsloader(value) {
+        setopenPaymentsScreenShotsloader(value)
     }
     async function getinvoice() {
         try {
@@ -68,7 +73,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     function stoploading() {
         setloading(false)
     }
-   
+
     function closeidproof() {
         idproofcontrller(!idproof)
         settarget(0)
@@ -191,14 +196,78 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
     }
 
+    async function updateLinkAndPathOfUploadedPaymentsScreenShots(path, link, name) {
+        var param = {
+            "email": "991221nandkishor@gmail.com", "message": "Auto triggered mail", "emailTitle": "Payment ScreenShots Uplaoded",
+            "ClientData": {
+                "tripId": data.TripId, "ClientName": data.Traveller_name,
+                 "Contact": data.Contact_Number, "Destination": data.Destination,
+                  "DepartureCity": data.Departure_City, "Pax": data.Pax,
+                "Nights": data.Travel_Duration-1, "TravelDate": moment(data.Travel_Date).format('DD-MMMM-YYYY')
+            }
+        }
+        const docref = doc(db, "Trip", data.TripId);
+        // console.log(target)
+        if (target === 'flights') {
+            let previousData = latestData.PaymentScreenshots_flight
+            // console.log(data.Vouchers_flight)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            // console.log("list to set", content, previousData)
+            await setDoc(docref, {
+                "PaymentScreenshots_flight": previousData
+            }, { merge: true });
+            SendNotification(param)
 
+        }
+        if (target === 'hotels') {
+            let previousData = latestData.PaymentScreenshots_hotels
+            // console.log(data.Vouchers_hotels)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            // console.log("list to set", content, previousData)
+            await setDoc(docref, {
+                "PaymentScreenshots_hotels": previousData
+            }, { merge: true });
+
+        }
+        if (target === 'others') {
+            let previousData = latestData.PaymentScreenshots_others
+            // console.log(data.Vouchers_others)
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            // console.log("list to set", content, previousData)
+            await setDoc(docref, {
+                "PaymentScreenshots_others": previousData
+            }, { merge: true });
+
+        }
+
+    }
     async function handleSubmit() {
         /**this function will upload the file in firebase storage
            vouchers/tripid/flight,hotel,others/filename 
          */
         const handles = await window.showOpenFilePicker({ multiple: false });
         const file = await fromEvent(handles);
-        // console.log('sufficient',file[0].name,file[0])
         uploaderpopup()
         setloading(true)
         if (!file) return;
@@ -233,6 +302,53 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
+                    getdatalatest_for_voucher()
+                    stoploading()
+
+                });
+            }
+        );
+    }
+    async function PaymentsScreenShotshandleSubmit() {
+        /**this function will upload the file in firebase storage
+           vouchers/tripid/flight,hotel,others/filename 
+         */
+        const handles = await window.showOpenFilePicker({ multiple: false });
+        const file = await fromEvent(handles);
+        uploaderpopup()
+        setloading(true)
+        if (!file) return;
+        const storageRef = ref(storage, `vouchers/${data.TripId}/Payments/${target}/${file[0].name}`);
+        const path = `vouchers/${data.TripId}/Payments/${target}/${file[0].name}`
+        const name = file[0].name
+        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // console.log(snapshot)
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        // console.log('Upload is running');
+                        break;
+                }
+            },
+            (error) => {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        break;
+                    case 'storage/canceled':
+                        break;
+                    case 'storage/unknown':
+                        break;
+                }
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    // console.log('File available at', downloadURL);
+                    updateLinkAndPathOfUploadedPaymentsScreenShots(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
 
@@ -336,7 +452,6 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 "vouchers_idproof": previousData
             });
         }
-        datahandle()
     }
     function deleteuploadedvoucher_from_firebase_storage(path) {
         const deleteItem = ref(storage, path)
@@ -379,7 +494,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
                 </div>
                 <div className='trip_details'>
-                    <button style={{marginTop:'0.5rem'}} onClick={() => detailsFlgactive()}>
+                    <button style={{ marginTop: '0.5rem' }} onClick={() => detailsFlgactive()}>
                         <img className={details ? 'expand_details_' : 'expand_details'} src='/assets/img/expand.png' />
                     </button>
                     <p> Package:-
@@ -597,21 +712,57 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
 
                             </div>
                             <div className='vouchers_upload'>
-                                <p>Payment's/<span className='upload_proof' >upload</span ></p>
+                                <p>Payment's/<span className='upload_proof' onClick={() => PaymentsScreenShotsloader(true)} >upload</span ></p>
                                 <div className='upload_radio_button'>
                                     <div className='parent'>
-                                        <input type='radio'></input>
-                                        <div className='childpopup'></div>
+                                        <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0}></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_flight.map((flight, index) => (
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {flight.name}
+                                                        </p>
+                                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                        {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                    </div>
 
-                                    </div>
-                                    <div className='parent'>
-                                        <input type='radio'></input>
-                                        <div className='childpopup'></div>
+                                                ))}
+                                        </div>
+
                                     </div>
                                     <div className='parent'>
                                         <input type='radio'></input>
                                         <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_hotels.map((flight, index) => (
 
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {flight.name}
+                                                        </p>
+                                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                        {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                    </div>
+
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio'></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_others.map((flight, index) => (
+
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {flight.name}
+                                                        </p>
+                                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                        {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                    </div>
+
+                                                ))}
                                         </div>
                                     </div>
                                 </div>
@@ -628,6 +779,17 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                 </> : <>
                 </>
             }
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openPaymentsScreenShotsloader} onClose={() => PaymentsScreenShotsloader(false)} >
+                <div className='uploaderPopUp'>
+                    <select className='optionChoose' onChange={(e) => optionHandler(e)}>
+                        <option value={0}>choose here</option>
+                        <option value='flights'>flights</option>
+                        <option value='hotels'>hotel</option>
+                        <option value='others' >others</option>
+                    </select>
+                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => PaymentsScreenShotshandleSubmit()}>upload</button>
+                </div>
+            </Modal>
             <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openuploader} onClose={uploaderpopup} >
                 <div className='uploaderPopUp'>
                     <select className='optionChoose' onChange={(e) => optionHandler(e)}>

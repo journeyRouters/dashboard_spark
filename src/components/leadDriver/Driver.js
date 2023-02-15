@@ -81,6 +81,9 @@ const Driver = (props) => {
                         Vouchers_hotels: [],
                         Vouchers_others: [],
                         vouchers_idproof: [],
+                        PaymentScreenshots_flight:[],
+                        PaymentScreenshots_hotels:[],
+                        PaymentScreenshots_others:[],
                         transfer_request: false,
                         transfer_request_reason: [],
                         assign_to: {

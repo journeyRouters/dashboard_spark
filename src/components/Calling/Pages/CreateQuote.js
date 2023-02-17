@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Row from '../../quotation_follow_up/Row';
 import app from '../../required';
 
-const CreateQuote = ({Auth,profile}) => {
+const CreateQuote = ({ Auth, profile }) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
     const [open, setopen] = useState(true)
@@ -15,7 +15,9 @@ const CreateQuote = ({Auth,profile}) => {
             let list = []
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
-                where('Lead_Status', '==', 'Dump'));
+                where('Lead_Status', '==', 'Dump'),
+                where('callingStatus', '==', '')
+            );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

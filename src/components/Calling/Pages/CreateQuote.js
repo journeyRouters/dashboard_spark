@@ -15,7 +15,9 @@ const CreateQuote = ({Auth,profile}) => {
             let list = []
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
-                where('Lead_Status', '==', 'Dump'));
+                where('Lead_Status', '==', 'Dump'),
+                where('callingStatus','==','')
+                );
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

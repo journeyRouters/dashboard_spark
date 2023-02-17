@@ -223,7 +223,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             await setDoc(docref, {
                 "PaymentScreenshots_flight": previousData
             }, { merge: true });
-            SendNotification(param)
+            // SendNotification(param)
 
         }
         if (target === 'hotels') {

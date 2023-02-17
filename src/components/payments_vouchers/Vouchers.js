@@ -1,5 +1,6 @@
 import { collection, getDocs, getFirestore, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { SendNotification } from '../emailer/NotifyByEmail';
 import app from '../required';
 import './Payments.css';
 import VouchersCompo from './Vouchers_compo';
@@ -41,6 +42,22 @@ const Vouchers = (props) => {
     }
     useEffect(() => {
         getLeadOnBoard()
+        SendNotification()
+
+        // fetch('https://notification-services-g-buoig14.an.gateway.dev/hello?message=hi', {
+        //     method: 'POST',
+        //     mode: 'no-cors',
+        //     body: {
+        //       json: {'message':'bolo'}
+        //     }
+        //   })
+        //     .then(response => {
+        //       console.log(response)
+        //     })
+        //     .catch(err => {
+        //       console.log(err)
+        //     })
+        // https://notification-services-g-buoig14.an.gateway.dev/hello?message=hi
     }, []);
     return (
         <div>

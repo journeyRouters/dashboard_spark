@@ -16,7 +16,7 @@ const CreateQuote = ({ Auth, profile }) => {
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
                 where('Lead_Status', '==', 'Dump'),
-                where('callingStatus', '==', '')
+                where('callingStatus', 'not-in', ['Cold','Dump','Active','Hot'])
             );
             var querySnapshot;
 
@@ -29,6 +29,7 @@ const CreateQuote = ({ Auth, profile }) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
+                console.log(list)
                 setLead_data(list)
                 setopen(false)
             }

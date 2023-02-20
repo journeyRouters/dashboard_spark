@@ -1,5 +1,5 @@
 import { CircularProgress, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Row from '../../quotation_follow_up/Row';
 import app from '../../required';
@@ -7,8 +7,7 @@ import app from '../../required';
 const CreateQuote = ({ Auth, profile }) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
-    const [open, setopen] = useState(true)
-
+    const [open, setopen] = useState(true)   
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
         try {
@@ -16,7 +15,7 @@ const CreateQuote = ({ Auth, profile }) => {
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
                 where('Lead_Status', '==', 'Dump'),
-                where('callingStatus', 'not-in', ['Cold','Dump','Active','Hot'])
+                where('callingStatus', 'not-in', ['Cold', 'Dump', 'Active', 'Hot'])
             );
             var querySnapshot;
 
@@ -29,7 +28,7 @@ const CreateQuote = ({ Auth, profile }) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                console.log(list)
+                // console.log(list)
                 setLead_data(list)
                 setopen(false)
             }
@@ -39,6 +38,13 @@ const CreateQuote = ({ Auth, profile }) => {
             setopen(false)
         }
 
+    }
+
+    function updateTableDataAfterUpdate(tripid) {
+        var pre_tableData = lead_data
+        var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
+        // console.log(remaining_data, pre_tableData)
+        setLead_data(remaining_data)
     }
     useEffect(() => {
         getLeadOnBoard()
@@ -89,7 +95,7 @@ const CreateQuote = ({ Auth, profile }) => {
                                                     key={index}
                                                     row={row}
                                                     getLeadOnBoard={getLeadOnBoard}
-                                                    updateTableDataAfterConversion={getLeadOnBoard}
+                                                    updateTableDataAfterUpdate={updateTableDataAfterUpdate}
                                                     Caller={1}
                                                 // datahandle={datahandle}
                                                 />

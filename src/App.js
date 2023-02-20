@@ -31,6 +31,7 @@ import Adminleavefunnel from './components/Teams/Pages/AdminLeaveFunnel';
 import Main_Admin from './components/Teams/support/Main_Admin.js';
 import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
+import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 
 
 function App() {
@@ -367,13 +368,13 @@ function App() {
                         <p>LEADS</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
+                    <div className='sidebarCard' onClick={() => page("Calling_Followup")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
                         <p>Quotation Followup</p>
                       </div>
                     </div>
-                    
+
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -396,7 +397,7 @@ function App() {
                     </div>
                   </> : <></>
                 }
-                
+
                 {
                   profile.access_type === "Accounts" ? <>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
@@ -628,7 +629,7 @@ function App() {
               </> : <></>
           }
 
-{
+          {
             Page === 'Caller_Lead_Assigning' ? <>
               <Assignerhandler Auth={auth} profile={profile} />
             </> : <></>
@@ -716,6 +717,17 @@ function App() {
                 }
               </>
               : <></>
+          }
+          {
+            Page === "Calling_Followup" ?
+              <>
+                {
+                  auth &&
+                  <CallerFollowUp auth={auth} profile={profile} />
+                }
+              </>
+              : <></>
+
           }
           {
             Page === "Admin_Follow_up" ?

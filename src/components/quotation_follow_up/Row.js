@@ -148,6 +148,7 @@ const Row = (props) => {
                 callingStatus: Lead_Status,
                 updated_last: today
             }, { merge: true });
+            props.updateTableDataAfterUpdate(row.TripId)
         }
         else if (row.month == null || row.month == "") {
             setDoc(doc(db, "Trip", row.TripId), {
@@ -179,7 +180,7 @@ const Row = (props) => {
                 comments: allComments,
                 updated_last: today
             }, { merge: true });
-           
+
             // latestTripData()
             setLimit(false)
             setLatestComment(allComments)

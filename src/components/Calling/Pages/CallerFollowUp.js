@@ -4,10 +4,16 @@ import { useState } from 'react';
 import app from '../../required';
 import TableRow from './TableRow';
 
-const FollowUp = ({profile}) => {
+const FollowUp = ({ profile }) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
     const [open, setopen] = useState(true)
+    function updateTableDataAfterConversion(tripid) {
+        var pre_tableData = lead_data
+        var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
+        // console.log(remaining_data, pre_tableData)
+        setLead_data(remaining_data)
+    }
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
         try {
@@ -40,15 +46,15 @@ const FollowUp = ({profile}) => {
 
     }
     useEffect(() => {
-       getLeadOnBoard()
-    }, []);
+        getLeadOnBoard()
+    }, [updateTableDataAfterConversion]);
     return (
         <div>
             <div style={{ display: 'flex' }}>
                 <table className='Table'>
                     <thead>
                         <tr className='row'>
-                        <th className='r'>TripId</th>
+                            <th className='r'>TripId</th>
                             <th className='r'>Name</th>
                             <th className='r'>Destination</th>
                             <th className='r'>Departure City</th>
@@ -62,7 +68,7 @@ const FollowUp = ({profile}) => {
                     <tbody>
                         {
                             lead_data.map((data, index) => <>
-                                <TableRow data={data} key={index} />
+                                <TableRow data={data} key={index} updateTableDataAfterConversion={updateTableDataAfterConversion} />
                             </>)
                         }
 

@@ -565,8 +565,8 @@ export const avtivityList = {
             value: 'DanangBanahillgoldenBridge'
         },
         {
-            label:'Da Lat',
-            value:'DaLat'
+            label: 'Da Lat',
+            value: 'DaLat'
         },
         {
             label: 'Danang Marble Mountain',
@@ -605,16 +605,16 @@ export const avtivityList = {
             value: 'CuChiTunnel'
         },
         {
-            label:'Ho Chi Minh City Tour',
-            value:'HoChiMinhCityTour'
+            label: 'Ho Chi Minh City Tour',
+            value: 'HoChiMinhCityTour'
         },
         {
-            label:'Bus Transfer',
-            value:'BusTransfer'
+            label: 'Bus Transfer',
+            value: 'BusTransfer'
         },
         {
-            label:'Flight Transfer',
-            value:'FlightTransfer'
+            label: 'Flight Transfer',
+            value: 'FlightTransfer'
         },
 
         {
@@ -1212,7 +1212,57 @@ export const avtivityList = {
             label: 'Vagator Beach',
             value: 'VagatorBeach'
         },
-    ]
+    ],
+    Europe: [
+        {
+            label: 'Amalfi Coast',
+            value: 'AmalfiCoast'
+        }, {
+            label: 'Arrival',
+            value: 'Arrivals'
+        },
+        {
+            label: 'Colosseum',
+            value: 'Colosseum'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: 'Eiffel Tower',
+            value: 'EiffelTower'
+        },
+        {
+            label: 'Jungfraujoch',
+            value: 'Jungfraujoch'
+
+        },
+        {
+            label: 'Mt Titlis',
+            value: 'MtTitlis'
+        },
+        {
+            label: 'Pisa',
+            value: 'Pisa'
+        },
+        {
+            label: 'SwarovskiCrystal Museum',
+            value: 'SwarovskiCrystalMuseum'
+        },
+        {
+            label: 'Vatican City',
+            value: 'VaticanCity'
+        },
+        {
+            label: 'Venice Arrival',
+            value: 'VeniceArrival'
+        },
+        {
+            label: 'Zurich Arrival',
+            value: 'ZurichArrival'
+        }
+    ],
 }
 export function ActivityResolver(destination) {
     // console.log(avtivityList[destination])

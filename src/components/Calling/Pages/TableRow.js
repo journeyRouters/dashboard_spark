@@ -198,7 +198,16 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
                                 </label>
                             </h4>
                             <h4>Prev. spokes :-{data.assign_to.name}</h4>
-                            <h4>Contact_Number :-{data.Contact_Number}</h4>
+                            <h4>
+                                <label>Contact_Number:-
+                                    <input onChange={(e) => HandleName(e)} type='number' placeholder={data.Contact_Number}></input>
+                                </label>
+                            </h4>
+                            <h4>
+                                <label>Travel Date:-
+                                    <input onChange={(e) => HandleName(e)} type='date' placeholder={data.Travel_Date}></input>
+                                </label>
+                            </h4>
                         </div>
                     </div>
                     <div>

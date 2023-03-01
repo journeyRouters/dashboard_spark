@@ -1255,6 +1255,10 @@ export const avtivityList = {
             value: 'VaticanCity'
         },
         {
+            label: 'Dijone City',
+            value: 'Dijone'
+        },
+        {
             label: 'Venice Arrival',
             value: 'VeniceArrival'
         },

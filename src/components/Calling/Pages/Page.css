@@ -5,14 +5,22 @@
     height: 20rem;
 }
 
-.r1 {
+.r-{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-.r:hover {
-    cursor: pointer;
+.row-:nth-child(even) {
+    background-color: #dddddd;
+}
+.row2-{
+    background-color: rgb(117, 153, 211);
+    color: #ffff00;
+}
+.row3-{
+    background-color: rgb(225, 23, 23);
+    color: rgb(227, 237, 88);
 }
 
 .remark1 {

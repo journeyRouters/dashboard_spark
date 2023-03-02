@@ -50,10 +50,12 @@ const FollowUp = ({ profile }) => {
     }, [updateTableDataAfterConversion]);
     return (
         <div>
+            <h2> Total called {lead_data.length}</h2>
             <div style={{ display: 'flex' }}>
                 <table className='Table'>
                     <thead>
                         <tr className='row'>
+                            <th className='r'>Sr.no</th>
                             <th className='r'>TripId</th>
                             <th className='r'>Name</th>
                             <th className='r'>Destination</th>
@@ -61,14 +63,14 @@ const FollowUp = ({ profile }) => {
                             <th className='r'>Pax</th>
                             <th className='r'>Follower</th>
                             <th className='r'>Contact_Number</th>
-                            <th className='r'>Action</th>
+                            {/* <th className='r'>Action</th> */}
                             <th className='r'>Change Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             lead_data.map((data, index) => <>
-                                <TableRow data={data} key={index} updateTableDataAfterConversion={updateTableDataAfterConversion} />
+                                <TableRow data={data} key={index} index={index} updateTableDataAfterConversion={updateTableDataAfterConversion} />
                             </>)
                         }
 

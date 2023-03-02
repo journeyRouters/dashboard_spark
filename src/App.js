@@ -32,6 +32,7 @@ import Main_Admin from './components/Teams/support/Main_Admin.js';
 import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
 import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
+import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 
 
 function App() {
@@ -477,6 +478,12 @@ function App() {
                         <p>User Controller</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("LeadFromCallers"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Lead From Callers</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Caller_Lead_Assigning"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -659,6 +666,13 @@ function App() {
               <div></div>
               : <></>
           }
+          {
+            Page === "LeadFromCallers" ?
+              <LeadFromCallers />
+              : <></>
+          }
+          {/* LeadFromCallers */}
+
           {
             Page === "Dump" ?
               <Dump profile={profile} auth={auth} />

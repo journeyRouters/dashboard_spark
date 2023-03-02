@@ -4,41 +4,57 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import app from '../../required';
 
-const TableRow = ({ data, updateTableDataAfterUpdate }) => {
-    // console.log((data))
+const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
+    // console.log(data.Travel_Date.toDate())
     const db = getFirestore(app);
     const [comments, setcomments] = useState(null)
     const [detailsPopUp, setdetailsPopUp] = useState(false);
     const [Destination, setDestination] = useState(data.Destination)
     const [Name, setName] = useState(data.Traveller_name)
+    const [TravelDate, setTravelDate] = useState(null)
+    const [Contact, setContact] = useState(data.Contact_Number)
     const [Departure_City, setDeparture_City] = useState(data.Departure_City)
+
+
     async function updateStatus(status) {
         setDoc(doc(db, "Trip", data.TripId), {
             callingStatus: status,
             updated_last: new Date()
         }, { merge: true });
         updateTableDataAfterUpdate(data.TripId)
-
-
     }
+
     async function ReadyToTalk() {
-        setDoc(doc(db, "Trip", data.TripId), {
-            Lead_Status: 'Hot',
-            callingStatus: 'Converted',
-            callingStatusChangeDate: new Date(),
-            Follow_Up_date: '',
-            Lead_status_change_date: '',
-            Travel_Date: '',
-            assign_to: {
-                name: '',
-                uid: ''
-            },
-            quotation_flg: false,
-            travelEndDate: "",
-            assign_flg:false,
-            updated_last: new Date()
-        }, { merge: true });
-        updateTableDataAfterUpdate(data.TripId)
+        if (TravelDate == null) {
+            alert('Please select The Travel date')
+        }
+        else {
+            var today = new Date()
+            var date_Travel = new Date(TravelDate)
+            var currentdate = moment(today).format('YYYY-MM-DD')
+            setDoc(doc(db, "Trip", data.TripId), {
+                Traveller_name: Name,
+                Lead_Status: 'Hot',
+                callingStatus: 'Converted',
+                Contact_Number: Contact,
+                callingStatusChangeDate: currentdate,
+                Follow_Up_date: '',
+                Departure_City: Departure_City,
+                Lead_status_change_date: '',
+                Travel_Date: date_Travel,
+                assign_to: {
+                    name: '',
+                    uid: ''
+                },
+                Pax: data.Pax,
+                Destination: Destination,
+                quotation_flg: false,
+                travelEndDate: "",
+                assign_flg: false,
+                updated_last: new Date()
+            }, { merge: true });
+            updateTableDataAfterUpdate(data.TripId)
+        }
     }
     function HandleName(e) {
         setName(e.target.value)
@@ -66,10 +82,6 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
                 comments: allComments,
                 updated_last: new Date()
             }, { merge: true });
-
-            // latestTripData()
-            // setLimit(false)
-            // setLatestComment(allComments)
             setcomments(null)
         }
         else {
@@ -77,22 +89,20 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
         }
     }
     function changingDestination(Destination) {
-        // console.log(itineary)
         setDestination(Destination.target.value)
-        // data.Destination = Destination.target.value
     }
     return (
         <>
-            <tr className='row' >
-                {/* <td className='r'>{moment(data.dateObject.toDate()).format('DD-MMMM-YYYY')}</td> */}
-                <td className='r' onClick={() => setdetailsPopUp(true)}>{data.TripId}</td>
-                <td className='r'>{data.Traveller_name}</td>
-                <td className='r'>{data.Destination}</td>
-                <td className='r'>{data.Departure_City}</td>
-                <td className='r'>{data.Pax}</td>
-                <td className='r'>{data.assign_to.name}</td>
-                <td className='r'>{data.Contact_Number}</td>
-                <td><button onClick={() => ReadyToTalk()}>Ready to talk</button></td>
+            <tr className={data.callingStatus == 'Active' ? 'row2-' : data.callingStatus == 'Hot' ? 'row3-' : 'row-'} >
+                <td className='r-'>{index}</td>
+                <td className='r-' onClick={() => setdetailsPopUp(true)}>{data.TripId}</td>
+                <td className='r-'>{data.Traveller_name}</td>
+                <td className='r-'>{data.Destination}</td>
+                <td className='r-'>{data.Departure_City}</td>
+                <td className='r-'>{data.Pax}</td>
+                <td className='r-'>{data.assign_to.name}</td>
+                <td className='r-'>{data.Contact_Number}</td>
+                {/* <td><button onClick={() => ReadyToTalk()}>Ready to talk</button></td> */}
                 <td><button onClick={() => updateStatus('Dump')}>Dump</button></td>
             </tr>
             <Modal open={detailsPopUp} onClose={onClose} style={{ width: '50%', margin: "5%", marginLeft: '15%', overflowY: 'scroll' }} >
@@ -139,7 +149,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
                     <h4>
                         <span>STATUS:- </span>
                         <span style={{ border: "2px solid green" }}>{data.callingStatus}</span>
-                        <select onChange={(destination) => changingDestination(destination)}>
+                        <select onChange={(event) => updateStatus(event.target.value)}>
                             <option value={0}>STATUS</option>
                             <option value={'Active'}>Active</option>
                             <option value={'Hot'}>Hot</option>
@@ -155,6 +165,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
                             <h4>Pax :-{data.Pax}</h4>
                             <h4>Prev. spokes :-{data.assign_to.name}</h4>
                             <h4>Contact_Number :-{data.Contact_Number}</h4>
+                            <h4> Pre Travel date :-{moment(data.Travel_Date.toDate()).format('DD-MMM-YYYY')}</h4>
                         </div>
                         <div className='line'></div>
                         <div className='TravellerDetails1'>
@@ -200,18 +211,18 @@ const TableRow = ({ data, updateTableDataAfterUpdate }) => {
                             <h4>Prev. spokes :-{data.assign_to.name}</h4>
                             <h4>
                                 <label>Contact_Number:-
-                                    <input onChange={(e) => HandleName(e)} type='number' placeholder={data.Contact_Number}></input>
+                                    <input onChange={(e) => setContact(e.target.value)} type='number' placeholder={data.Contact_Number}></input>
                                 </label>
                             </h4>
                             <h4>
                                 <label>Travel Date:-
-                                    <input onChange={(e) => HandleName(e)} type='date' placeholder={data.Travel_Date}></input>
+                                    <input onChange={(e) => setTravelDate(e.target.value)} type='date' ></input>
                                 </label>
                             </h4>
                         </div>
                     </div>
                     <div>
-                        <button className='updatemodalButton'>UPDATE</button>
+                        <button onClick={() => ReadyToTalk()} className='updatemodalButton'>UPDATE</button>
                     </div>
                 </div>
             </Modal>

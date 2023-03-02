@@ -1,15 +1,12 @@
-import { Modal } from '@material-ui/core';
-import { useEffect, useState } from 'react';
-import './Driver.css';
-import React from 'react';
-import moment from 'moment';
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
-import app from '../required';
-import DriverComponents from './DriverComponents';
-import readXlsxFile from 'read-excel-file';
 import { fromEvent } from "file-selector";
-import { async } from '@firebase/util';
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import moment from 'moment';
 import objectHash from 'object-hash';
+import React, { useEffect, useState } from 'react';
+import readXlsxFile from 'read-excel-file';
+import app from '../required';
+import './Driver.css';
+import DriverComponents from './DriverComponents';
 const db = getFirestore(app);
 
 

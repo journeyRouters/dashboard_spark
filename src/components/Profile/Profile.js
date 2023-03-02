@@ -150,7 +150,7 @@ const Profile = (
             Quoted_by: email,
             travelEndDate: travelEndDate,
             Travel_Duration: count_days,
-            updated_last:new Date()
+            updated_last: new Date()
         });
     }
 
@@ -749,21 +749,40 @@ const Profile = (
                     {/* end of jr info page */}
 
                     {/* start of jr FAQ page */}
-                    <div className="page-break">
-                        <div className="page2"
-                            style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
-                                backgroundPosition: "top",
-                                backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover"
-                            }}
-                        >
-                            <div className='paymentsPage'>
-                                <Footer whatsApp={whatsApp} />
-                            </div>
+                    {
+                        travel_data.Destination == 'Europe' ?
+                            <div className="page-break">
+                                <div className="page2"
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/FAQEurope.png)",
+                                        backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover"
+                                    }}
+                                >
+                                    <div className='paymentsPage'>
+                                        <Footer whatsApp={whatsApp} />
+                                    </div>
 
-                        </div>
-                    </div>
+                                </div>
+                            </div> :
+                            <div className="page-break">
+                                <div className="page2"
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
+                                        backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover"
+                                    }}
+                                >
+                                    <div className='paymentsPage'>
+                                        <Footer whatsApp={whatsApp} />
+                                    </div>
+
+                                </div>
+                            </div>
+                    }
+
                     {/* end of jr FAQ page */}
 
 

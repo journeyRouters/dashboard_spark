@@ -100,7 +100,8 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Goa', label: 'Goa', color: '#666666' },
         { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
         { value: 'Singapore', label: 'Singapore', color: '#666666' },
-        { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' }
+        { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' },
+        { value: 'Europe', label: 'Europe', color: '#5243AA' }
     ];
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"),

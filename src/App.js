@@ -37,13 +37,11 @@ import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 
 function App() {
   const storage = getStorage();
-  const currentdate = new Date();
   const [profile, setData] = React.useState()
   const [open, setopen] = React.useState(false)
   const db = getFirestore(app);
   const [auth, setauth] = useState()
   const [Page, setPage] = React.useState("")
-  const [live, setlive] = useState([])
   const oauth = getAuth();
 
   function setAuthFirebase(args) {

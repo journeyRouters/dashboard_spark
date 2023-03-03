@@ -60,7 +60,7 @@ const OverallChart = ({ currentUser }) => {
             console.log(moment(doc.data().assigned_date_time.toDate()).format('DD-MM-YYYY'))
         });
         setTotaldata(list)
-        console.log(list)
+        // console.log(list)
         local.value = local.value + list.length
         prev_instance.push(local)
         loadData(prev_instance)

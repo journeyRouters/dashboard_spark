@@ -1,62 +1,74 @@
-.createLeadButton{
+.createLeadButton {
     display: flex;
     flex-direction: row-reverse;
     height: 3rem;
     margin-top: 2rem;
 }
-.form-feild{
+
+.form-feild {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     border-radius: 12px;
 }
-.label{
+
+.label {
     font-size: 1.5rem;
     font-family: emoji;
     font-weight: 600;
 }
-.setInput{
+
+.setInput {
     width: 26rem;
     height: 2rem;
     border: 2px dashed grey;
 }
-.setInput1{
+
+.setInput1 {
     width: 26rem;
     height: 2rem;
     border: 2px dashed red;
 }
-.Button_save{
+
+.Button_save {
     display: flex;
     flex-direction: row-reverse;
 }
-.SaveTeam{
+
+.SaveTeam {
     height: 2rem;
 }
-.teamdiv{
+
+.teamdiv {
     background: mediumpurple;
     height: 12rem;
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    /* border: 3px dashed red; */
-    background-image: linear-gradient(to right,#dee04a,#e76e6e);
+    background-image: linear-gradient(to right, #dee04a, #e76e6e);
 }
-.headerTeam{
+.teamdiv::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.headerTeam {
     display: flex;
     justify-content: space-between;
-    border: 2px solid ;
+    border: 2px solid;
     height: 2rem;
-    background-color:black;
+    background-color: black;
     color: yellow;
     position: sticky;
     top: 0;
 
 }
-.ButtonEffect{
+
+.ButtonEffect {
     box-shadow: 5px 1px 12px yellow;
 }
-.ButtonEffect:hover{
+
+.ButtonEffect:hover {
     cursor: pointer;
     color: white;
     transform: scale(1.2);

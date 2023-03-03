@@ -34,7 +34,7 @@ const Test = () => {
    function add_a_feild() {
       // var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
-      setDoc(doc(db, "Trip", '62619728'), {
+      setDoc(doc(db, "Trip", '59145130'), {
          PaymentScreenshots_flight:[],
          PaymentScreenshots_hotels:[],
          PaymentScreenshots_others:[]
@@ -43,7 +43,7 @@ const Test = () => {
    useEffect(() => {
       //   tester()
       // allDoc()
-      add_a_feild()
+      // add_a_feild()
    }, []);
    return (
       <div>

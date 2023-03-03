@@ -6,7 +6,7 @@ import '../Teams.css';
 import Createteamform from './Createteamform';
 import GraphHandler from './graphHandler';
 
-const Main_Admin = ({ profile ,auth }) => {
+const Main_Admin = ({ profile, auth }) => {
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -60,24 +60,24 @@ const Main_Admin = ({ profile ,auth }) => {
                             </div>
                             <div>
                                 <span style={{ fontSize: '15px', fontWeight: '600' }}> Leaded BY:-{data.createdBy.name}</span>
-                                <div style={{ marginTop: '2rem', marginLeft: '0.5rem' }}>
+                                <div style={{ marginTop: '2rem', marginLeft: '0.5rem', overflowY: 'hidden', height: '6rem' }}>
                                     {
                                         data.TeamMembers.map((data, index) => <>
-                                            <ul key={index} style={{ fontSize: '10px', fontWeight: '600' }}>
+                                            <ul key={index} style={{ fontSize: '10px', fontWeight: '600', }}>
                                                 <li>{data.label}</li>
                                             </ul>
                                         </>)
                                     }
                                 </div>
                             </div>
-                            <GraphHandler TeamData={data}/>
+                            <GraphHandler TeamData={data} />
                             <button style={{ height: '2rem' }}>Allowed</button>
                         </div>
                     </>))
                 }
                 {
                     TeamUnit ? <>
-                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData}  profile={profile} auth={auth} />
+                        <Team open={TeamUnit} onclose={TeamUnitClose} data={TeamData} profile={profile} auth={auth} />
                     </> : <></>
                 }
             </div>

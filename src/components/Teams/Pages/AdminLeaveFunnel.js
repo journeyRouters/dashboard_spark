@@ -1,15 +1,43 @@
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import app from '../../required';
-import '../../ManageLeaves/Leave.css'
+import LeaveHeader from '../../ManageLeaves/LeaveHeader';
 const db = getFirestore(app);
 
 
 const Adminleavefunnel = ({ auth }) => {
     const [AllLeaves, setAllLeaves] = useState([])
+    const [Profile, SetProfile] = useState([])
+    const [ActiveFlg, setActiveFlg] = useState(0)
+    const[Currentuser,setCurrentuser]=useState()
+    async function fetch_profile() {
+        const q = query(collection(db, "Profile"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const Profile = [];
+            querySnapshot.forEach((doc) => {
+                Profile.push(doc.data());
+                // console.log(doc.data())
+            });
+            SetProfile(Profile)
+            // console.log(Profile,);
+        });
+    }
+    function filterDataFromProfile(uid) {
+        /**this function is to filter the current user from the all user data */
+        var profile_of_user = Profile.filter((data) => data.uid === uid)
+        // console.log(profile_of_user[0].uid)
+        setCurrentuser(profile_of_user[0])
+        
+
+    }
+    function updateUser(user) {
+        getLeaveApplicationByUser(user)
+        filterDataFromProfile(user)
+        setActiveFlg(1)
+    }
     async function getLeaveApplication() {
         var localList = []
         const q = query(collection(db, "Leaves"),
@@ -18,14 +46,41 @@ const Adminleavefunnel = ({ auth }) => {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             localList.push(doc)
+            // console.log(doc.data())
+        });
+        setAllLeaves(localList)
+    }
+    async function getLeaveApplicationByUser(uid) {
+        var localList = []
+        const q = query(collection(db, "Leaves"),
+            where("appliedBY.uid", "==", uid)
+        )
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            localList.push(doc)
         });
         setAllLeaves(localList)
     }
     useEffect(() => {
+        fetch_profile()
         getLeaveApplication()
     }, [])
     return (
         <div>
+            <div>
+                <select onChange={(e) => updateUser(e.target.value)} >
+                    <option value={0}>Select User</option>
+                    {
+                        Profile.map((member, index) =>
+                            <option key={index} value={member.uid}>{member.name}</option>
+                        )
+                    }
+                </select>
+            </div>
+            {
+                ActiveFlg == 0 ? <></> :
+                    <LeaveHeader profile={Currentuser} />
+            }
             {
                 AllLeaves.map((data, index) =>
                     <Component data={data.data()} docid={data.id} key={index} getLeaveApplication={getLeaveApplication} />
@@ -194,7 +249,7 @@ const Component = ({ data, docid, getLeaveApplication }) => {
                         <></>
                 }
             </div>
-            <div className={data.LeaveStatus === 'Approved' ?'blur':'grant'}>
+            <div className={data.LeaveStatus === 'Approved' ? 'blur' : 'grant'}>
                 <textarea style={{ backgroundColor: '#fed638', width: '19rem' }} defaultValue={data.Reason}></textarea>
                 <textarea onChange={(e) => HandleRemarks(e.target.value)} value={remarks} style={{ width: '19rem', height: '4rem' }} placeholder='your comments'></textarea>
                 <div style={{ display: 'flex', justifyContent: 'space-around', width: '12rem' }}>

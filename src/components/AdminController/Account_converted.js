@@ -42,7 +42,7 @@ const Account_converted = ({ profile }) => {
                 break;
             }
             case "Contact_Number": {
-                console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
+                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -54,7 +54,7 @@ const Account_converted = ({ profile }) => {
             case "Travel_date": {
                 var before = new Date(input);
                 before.setDate(before.getDate() - 1);
-                console.log(before)
+                // console.log(before)
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -80,7 +80,7 @@ const Account_converted = ({ profile }) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                console.log(list)
+                // console.log(list)
                 set_lead_data(list)
                 setInput('')
             }

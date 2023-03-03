@@ -26,7 +26,7 @@ const Assignerhandler = () => {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
         setCurrentuser(profile_of_user)
-        console.log(profile_of_user)
+        // console.log(profile_of_user)
 
     }
     function handleSelectedDate(date) {
@@ -54,7 +54,7 @@ const Assignerhandler = () => {
     }
 
     async function AssignLeadToCaller(id) {
-        console.log(id)
+        // console.log(id)
         setDoc(doc(db, "Trip", id), {
             callingLastUpdate: new Date(),
             caller: {

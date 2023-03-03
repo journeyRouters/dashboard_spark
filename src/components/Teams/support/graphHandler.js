@@ -30,7 +30,7 @@ const GraphHandler = ({ TeamData }) => {
                     list.push(doc.data())
                 });
                 local.value = list.length
-                local.name = TeamData.TeamMembers[member].label
+                local.name = (TeamData.TeamMembers[member].label)
                 // prev_instance.push(local)
                 // loadData(prev_instance)
 

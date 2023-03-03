@@ -114,7 +114,9 @@ const FollowUp = (props) => {
         { value: 'Himachal', label: 'Himachal', color: '#666666' },
         { value: 'Kerala', label: 'Kerala', color: '#666666' },
         { value: "Andaman", label: "Andaman", color: '666666' },
-        { value: 'Maldives', label: 'Maldives', color: '666666' }
+        { value: 'Maldives', label: 'Maldives', color: '666666' },
+        { value: 'Veitnam', label: 'Veitnam', color: '666666' }
+
     ];
     const months = [
         { value: 'January', label: 'JAN', color: '#00B8D9' },

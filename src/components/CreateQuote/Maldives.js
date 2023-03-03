@@ -178,7 +178,7 @@ const Maldives = ({
     async function convertObjectToLink(files, zone) {
         try {
             const file = files
-            console.log(file)
+            // console.log(file)
             if (zone == 'inclusion') {
                 var local_link_list = [...ScreenShotsurl]
                 const url = URL.createObjectURL(file)

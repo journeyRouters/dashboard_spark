@@ -7,8 +7,8 @@ const db = getFirestore(app);
 
 const LeaveHeader = ({profile:userProfile,}) => {
     const[profile,setProfile]=useState(null)
+    // console.log(userProfile)
     async function fetch_profile(uid) {
-        // console.log(args)
         try {
           const docRef = doc(db, "Profile", uid);
           const docSnap = await getDoc(docRef);
@@ -22,7 +22,7 @@ const LeaveHeader = ({profile:userProfile,}) => {
       }
       useEffect(() => {
        fetch_profile(userProfile.uid)
-      }, []);
+      }, [userProfile]);
     return (
         <div className='Leave_header' >
             <div className='unitDivCL'>

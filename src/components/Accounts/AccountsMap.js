@@ -87,7 +87,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 break
             }
             case "OperationClearnace": {
-                console.log(name)
+                // console.log(name)
                 setOperationsClearanceFlg(!OperationsClearanceFlg)
                 markComplete("OperationsClearance", !OperationsClearanceFlg)
                 break
@@ -100,7 +100,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     }
     async function markComplete(name, value) {
         const docref = doc(db, "Trip", data.TripId);
-        console.log(name)
+        // console.log(name)
         await updateDoc(docref, {
             [name]: value
         });

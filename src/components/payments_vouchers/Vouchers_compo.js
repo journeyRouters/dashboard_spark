@@ -16,7 +16,6 @@ import './Payments.css';
 const VouchersCompo = ({ data, profile, datahandle }) => {
     const [latestData, setlatestData] = useState(data)
     const [loading, setloading] = useState(false)
-    // console.log("from vouchers", data)
     const [openPaymentsScreenShotsloader, setopenPaymentsScreenShotsloader] = useState(false)
     const [details, setDetails] = useState(false)
     const [target, settarget] = useState(0)

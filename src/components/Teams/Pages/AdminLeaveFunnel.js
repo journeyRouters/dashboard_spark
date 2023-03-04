@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import app from '../../required';
 import LeaveHeader from '../../ManageLeaves/LeaveHeader';
+import AttendanceMain from '../../Attendance/AttendanceMain';
 const db = getFirestore(app);
 
 
@@ -85,6 +86,10 @@ const Adminleavefunnel = ({ auth }) => {
                 AllLeaves.map((data, index) =>
                     <Component data={data.data()} docid={data.id} key={index} getLeaveApplication={getLeaveApplication} />
                 )
+            }
+              {
+                ActiveFlg == 0 ? <></> :
+            <AttendanceMain profile={Currentuser}/>
             }
         </div>
 

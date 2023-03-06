@@ -42,3 +42,9 @@
     border-collapse: collapse;
     width: 100%;
 }
+.filterBarAttendance{
+    width: 50%;
+    /* height:5rem; */
+    background-color: yellow;
+    border: 2px solid red;
+}

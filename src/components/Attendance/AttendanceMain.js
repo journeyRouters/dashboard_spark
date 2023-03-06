@@ -14,6 +14,54 @@ const AttendanceMain = ({ profile }) => {
     const db = getFirestore(app);
     const [Attendance, setData] = useState([])
     const [AttendanceFlg, setAttendanceflg] = useState(false)
+    const [selectedDate, setselectedDate] = useState(null)
+    const [AttendanceReport, setAttendanceReport] = useState(null)
+
+    function updateAttendanceTableData() {
+        if (selectedDate != null) {
+            var key = new Date(selectedDate)
+            var new_tableData = Attendance.filter((data) => data.dateObject.toDate() >= key)
+            // console.log(new_tableData)
+            contAbsent(new_tableData)
+            sortAttendanceByDate(new_tableData)
+        }
+        else {
+            alert('Please Select a Date')
+        }
+
+    }
+    function contAbsent(data) {
+        var obj = {
+            Absent: null,
+            HalfPresent: null,
+            Present: null,
+            Allowed: null,
+            HalfPresentDueTo:null
+        }
+        var new_tableData = data.filter((data) => data.Status == 'Absent')
+        obj.Absent = new_tableData.length
+        CountPresent(data, obj)
+    }
+    function CountPresent(data, obj) {
+        var new_tableData = data.filter((data) => data.Status == 'Present')
+        obj.Present = new_tableData.length
+        CountHalfPresent(data, obj)
+    }
+    function CountHalfPresent(data, obj) {
+        var new_tableData = data.filter((data) => data.Status == '½Present')
+        obj.HalfPresent = new_tableData.length
+        CountHalfPresentDueToContinousLate(data, obj)
+    }
+    function CountHalfPresentDueToContinousLate(data, obj) {
+        var new_tableData = data.filter((data) => data.Status == '½Present(Due to Continous Late)')
+        obj.HalfPresentDueTo = new_tableData.length
+        CountAllowed(data, obj)
+    }
+    function CountAllowed(data, obj) {
+        var new_tableData = data.filter((data) => data.LatePermisson == 'true')
+        obj.Allowed = new_tableData.length
+        setAttendanceReport(obj)
+    }
 
 
     async function fetch_Attendance(userId) {
@@ -23,7 +71,8 @@ const AttendanceMain = ({ profile }) => {
             if (docSnap.exists()) {
                 // console.log("Document data:", docSnap.data().attendance);
                 sortAttendanceByDate(docSnap.data().attendance)
-                // setData(docSnap.data().attendance)
+                // console.log(docSnap.data().attendance)
+                contAbsent(docSnap.data().attendance)
                 setAttendanceflg(true)
             }
         }
@@ -38,7 +87,7 @@ const AttendanceMain = ({ profile }) => {
             (p1, p2) => (p1.dateObject < p2.dateObject) ? 1 : (p1.dateObject > p2.dateObject) ? -1 : 0);
         // console.log(sortedAttendance)
         setData(sortedAttendance)
-        
+
     }
 
     useEffect(() => {
@@ -48,6 +97,24 @@ const AttendanceMain = ({ profile }) => {
     }, []);
     return (
         <div>
+            <div className='filterBarAttendance'>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '50%', justifyContent: 'space-between' }}>
+                    <input type={'date'} placeholder='select a date' onChange={(e) => setselectedDate(e.target.value)}></input>
+                    <button onClick={() => updateAttendanceTableData()}>Find</button>
+                    <button onClick={() => fetch_Attendance(profile.AttendanceId)}>Reset</button>
+                </div>
+                <div>
+                    {
+                        AttendanceReport != null ? <div>
+                            <h3>Present:- {AttendanceReport.Present}</h3>
+                            <h3>Absent:- {AttendanceReport.Absent}</h3>
+                            <h3>½Present:- {AttendanceReport.HalfPresent+AttendanceReport.HalfPresentDueTo}</h3>
+                            <h3>Allowed:- {AttendanceReport.Allowed}</h3>
+
+                        </div> : <></>
+                    }
+                </div>
+            </div>
             {
                 AttendanceFlg ? <>
                     <div style={{ display: 'flex' }}>

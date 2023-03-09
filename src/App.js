@@ -265,7 +265,7 @@ function App() {
                         <p>Vouchers & payments</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>

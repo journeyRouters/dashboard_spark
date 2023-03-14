@@ -409,7 +409,7 @@ const Box = ({
                                         </h4>
                                         <h4>
                                             <span>Traveler:- </span>
-                                            <input style={{ border: "2px solid Blue" }} onChange={(e)=>ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
+                                            <input style={{ border: "2px solid Blue" }} onChange={(e) => ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
                                         </h4>
                                         <h4>
                                             <span>Destination:- </span>
@@ -431,6 +431,8 @@ const Box = ({
                                                 <option value={'Singapore'}>Singapore</option>
                                                 <option value={'Rajasthan'}>Rajasthan</option>
                                                 <option value={'Veitnam'}>Veitnam</option>
+                                                <option value={'Northeast'}>Northeast</option>
+                                                <option value={'Europe'}>Europe</option>
                                             </select>
                                         </h4>
                                     </div>

@@ -823,6 +823,64 @@ export const avtivityList = {
 
         }
     ],
+    Northeast: [
+        {
+            label: 'Arrival',
+            value: 'Arrival'
+        },
+        {
+            label: 'Day At Leisure',
+            value: 'DayAtLeisure'
+        },
+        {
+            label: 'Departue',
+            value: 'Departue'
+        },
+        {
+            label: 'Gangtok City Tour',
+            value: 'GangtokCityTour'
+        },
+        {
+            label: 'Gurudongmar Lake',
+            value: 'GurudongmarLake'
+        },
+        {
+            label: 'Khecheopalri Lake',
+            value: 'KhecheopalriLake'
+        },
+        {
+            label: 'Nathula Pass',
+            value: 'NathulaPass'
+        },
+        {
+            label: 'Peace Pagoda Japaneess Temple',
+            value: 'PeacePagodaJapaneessTemple'
+        },
+        {
+            label: 'Pelling Buddha Park',
+            value: 'PellingBuddhaPark'
+        },
+        {
+            label: 'Pemayangte Monastery',
+            value: 'PemayangteMonastery'
+        },
+        {
+            label: 'Seven Sisters Waterfall',
+            value: 'SevenSistersWaterfall'
+        },
+        {
+            label: 'Tiger Hill',
+            value: 'TigerHill'
+        },
+        {
+            labe: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: 'TsomgoLake',
+            value: 'TsomgoLake'
+        }
+    ],
     Malaysia: [
         {
             label: 'Arival',

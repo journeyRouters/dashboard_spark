@@ -101,7 +101,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
         { value: 'Singapore', label: 'Singapore', color: '#666666' },
         { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' },
-        { value: 'Europe', label: 'Europe', color: '#5243AA' }
+        { value: 'Europe', label: 'Europe', color: '#5243AA' },
+        { value: 'Northeast', label: 'Northeast', color: '#5243AA' },
+
     ];
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"),
@@ -218,6 +220,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             Vouchers_hotels: [],
             Vouchers_others: [],
             vouchers_idproof: [],
+            PaymentScreenshots_flight:[],
+            PaymentScreenshots_hotels:[],
+            PaymentScreenshots_others:[],
             transfer_request: false,
             transfer_request_reason: [],
             assign_to: {

@@ -34,7 +34,7 @@ const Test = () => {
    function add_a_feild() {
       // var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
-      setDoc(doc(db, "Trip", '64247182'), {
+      setDoc(doc(db, "Trip", '60499109'), {
          PaymentScreenshots_flight:[],
          PaymentScreenshots_hotels:[],
          PaymentScreenshots_others:[]

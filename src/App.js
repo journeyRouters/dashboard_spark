@@ -33,6 +33,7 @@ import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
 import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 import LeadFromCallers from './components/leadDriver/LeadFromCallers';
+import CallerInvestigation from './components/Investigation/CallerInvestigation';
 
 
 function App() {
@@ -374,7 +375,7 @@ function App() {
                       </div>
                     </div>
 
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
+                    <div className='sidebarCard' onClick={() => page("Investigation caller")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>
@@ -654,6 +655,12 @@ function App() {
               <Adminleavefunnel auth={auth} />
               : <></>
           }
+          {
+            Page === "Investigation caller" ?
+              <CallerInvestigation auth={auth} profile={profile} />
+              : <></>
+          }
+          
           {
             Page == "AdminInvestigation" ?
               <AdminInvestigation profile={profile} /> : <></>

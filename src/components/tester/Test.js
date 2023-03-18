@@ -25,10 +25,11 @@ const Test = () => {
    async function allDoc() {
       // var date = new Date("01/12/2022");
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      const q = query(collection(db, "Trip"))
+      const q = query(collection(db, "Trip"),where('TripId','==','66981929'))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         add_a_feild(doc.id)
+         console.log(doc.data())
+         // add_a_feild(doc.id)
       });
    }
    function add_a_feild() {

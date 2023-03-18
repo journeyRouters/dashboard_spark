@@ -51,7 +51,8 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
                 quotation_flg: false,
                 travelEndDate: "",
                 assign_flg: false,
-                updated_last: new Date()
+                updated_last: new Date(),
+                CallingConversionMonth:moment(new Date()).format('MMMM-YYYY')
             }, { merge: true });
             updateTableDataAfterUpdate(data.TripId)
         }

@@ -52,7 +52,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
                 travelEndDate: "",
                 assign_flg: false,
                 updated_last: new Date(),
-                CallingConversionMonth:moment(new Date()).format('MMMM-YYYY')
+                CallingConversionMonth: moment(new Date()).format('MMMM-YYYY')
             }, { merge: true });
             updateTableDataAfterUpdate(data.TripId)
         }
@@ -155,6 +155,8 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
                             <option value={'Active'}>Active</option>
                             <option value={'Hot'}>Hot</option>
                             <option value={'Cold'}>Cold</option>
+                            <option value={'Converted'}>Converted</option>
+
                         </select>
                     </h4>
                     <div className='DetailsEditor'>

@@ -10,7 +10,8 @@ const CallerInvestigation = ({ profile }) => {
     const db = getFirestore(app);
     const [ConvertedByCaller, setConvertedByCaller] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
-    const month = moment(new Date()).format('MMMM')
+    const month = moment(new Date()).format('MMMM-YYYY')
+    // console.log(month)
     const date = new Date()
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     async function ConvertedLead() {
@@ -28,6 +29,7 @@ const CallerInvestigation = ({ profile }) => {
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
             });
+            // console.log(list)
             local.value = list.length
             prev_instance.push(local)
             setConvertedByCaller(prev_instance)

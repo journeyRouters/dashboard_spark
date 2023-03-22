@@ -10,10 +10,10 @@ const Test = () => {
       // Sep 7, 2022 3:56 PM"
       // const q = query(collection(db, "Trip"), where("leave_avail.2021.cl", "==", 12));
       const q = query(collection(db, "Trip"),
-         where("Lead_Status", "==", "Converted"),
-         where("quotation_flg", "==", true),
-         where("Contact_Number", "==", 9886871492),
-         orderBy("Travel_Date")
+         // where("Lead_Status", "==", "Converted"),
+         // where("quotation_flg", "==", true),
+         where("Contact_Number", "==", 8867325760),
+         // orderBy("Travel_Date")
       )
       var collect = []
       const querySnapshot = await getDocs(q);

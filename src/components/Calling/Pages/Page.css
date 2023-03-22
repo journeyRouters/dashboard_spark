@@ -1,8 +1,18 @@
 .container {
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: space-between; */
+    /* height: 10rem; */
+}
+.assignerBox{
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    height: 20rem;
+    height: 6rem;
+    /* flex-direction: column; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+   border: 1px solid goldenrod;
+   align-items: center;
 }
 
 .r-{

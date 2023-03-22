@@ -1,13 +1,18 @@
-import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { Modal } from '@material-ui/core';
+import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import app from '../../required';
-import './Page.css'
+import './Page.css';
 const Assignerhandler = () => {
     const [profile, setprofile] = useState([])
-    const [currentUser, setCurrentuser] = useState(null)
+    const [currentcaller, setCurrentcaller] = useState(null)
     const [SelectedDate, setSelectedDate] = useState(null)
+    const [AllSalePerson, setAllSalePerson] = useState([])
+    const [salesPerson, setsalesPerson] = useState(null)
+    const [startDate, setstartDate] = useState(null)
+    const [endDate, setendDate] = useState(null)
+    const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
+
     const db = getFirestore(app);
     useEffect(() => {
         GetCallerProfile()
@@ -25,32 +30,140 @@ const Assignerhandler = () => {
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
-        setCurrentuser(profile_of_user)
-        // console.log(profile_of_user)
+        setCurrentcaller(profile_of_user)
+        console.log(profile_of_user)
+
+    }
+    function salesWhichLeadIsTOBeAssign(uid) {
+        /**this function is to filter the current user from the all user data */
+        var profile_of_user = AllSalePerson.filter((data) => data.uid === uid)
+        setsalesPerson(profile_of_user)
+        console.log(profile_of_user)
+
+    }
+    function handleRangeDate(args, flg) {
+        if (flg == 'start') {
+            setstartDate(args)
+        }
+        if (flg == 'end') {
+            setendDate(args)
+        }
 
     }
     function handleSelectedDate(date) {
         setSelectedDate(date)
     }
     async function allTripUnderDateSelection() {
-        try {
-            var DayBefore = new Date(SelectedDate);
-            DayBefore.setDate(DayBefore.getDate() - 1);
-            var DayAfter = new Date(SelectedDate)
-            DayAfter.setDate(DayAfter.getDate() + 1);
-            // console.log(DayAfter, DayBefore)
-            // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            const q = query(collection(db, "Trip"),
-                where("Lead_Status", "==", "Dump"),
-                where("updated_last", ">", DayBefore),
-                where("updated_last", "<", DayAfter),
-            )
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                AssignLeadToCaller(doc.id)
-            });
+        if (SelectedDate == null) {
+            alert('No Date is Selected')
         }
-        catch (error) { console.log(error) }
+        else {
+            try {
+                var DayBefore = new Date(SelectedDate);
+                DayBefore.setDate(DayBefore.getDate() - 1);
+                var DayAfter = new Date(SelectedDate)
+                DayAfter.setDate(DayAfter.getDate() + 1);
+                // console.log(DayAfter, DayBefore)
+                // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                const q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Dump"),
+                    where("updated_last", ">", DayBefore),
+                    where("updated_last", "<", DayAfter),
+                )
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.docs.length == 0) {
+                    alert('no data found')
+                    setdataAvailablityFlg(false)
+
+                }
+                else {
+                    querySnapshot.forEach((doc) => {
+                        // console.log(doc.data())
+                        AssignLeadToCaller(doc.id)
+                        setdataAvailablityFlg(false)
+                    });
+                }
+            }
+            catch (error) {
+                setdataAvailablityFlg(false)
+                console.log(error)
+                alert('no lead is found/assign  on this selection')
+            }
+        }
+    }
+    async function allTripWithinDateRange() {
+        if (startDate == null || endDate == null) {
+            alert('Selecte Date Range')
+        }
+        else {
+            try {
+                // console.log(DayAfter, DayBefore)
+                // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                const q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Dump"),
+                    where("updated_last", ">", new Date(startDate)),
+                    where("updated_last", "<", new Date(endDate)),
+                )
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.docs.length == 0) {
+                    alert('no data found')
+                    setdataAvailablityFlg(false)
+
+                }
+                else {
+                    querySnapshot.forEach((doc) => {
+                        // console.log(doc.data())
+                        AssignLeadToCaller(doc.id)
+                        setdataAvailablityFlg(false)
+
+                    });
+                }
+            }
+            catch (error) {
+                setdataAvailablityFlg(false)
+                console.log(error)
+                alert('no lead is found/assign  on this selection')
+
+
+            }
+        }
+    }
+    async function allTripWithinDateRangeWithSpecificSalesPerson() {
+        if (startDate == null || endDate == null || salesPerson == null) {
+            alert('Selecte Date Range/ sales Person')
+        }
+        else {
+            try {
+                // console.log(DayAfter, DayBefore)
+                // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                const q = query(collection(db, "Trip"),
+                    where('assign_to.uid', '==', salesPerson[0].uid),
+                    where("Lead_Status", "==", "Dump"),
+                    where("updated_last", ">", new Date(startDate)),
+                    where("updated_last", "<", new Date(endDate)),
+                )
+                const querySnapshot = await getDocs(q);
+                if (querySnapshot.docs.length == 0) {
+                    alert('no data found')
+                    setdataAvailablityFlg(false)
+
+                }
+                else {
+                    querySnapshot.forEach((doc) => {
+                        // console.log(doc.data())
+                        AssignLeadToCaller(doc.id)
+                        setdataAvailablityFlg(false)
+
+                    });
+                }
+            }
+            catch (error) {
+                setdataAvailablityFlg(false)
+                console.log(error)
+                alert('no lead is found/assign  on this selection')
+            }
+
+        }
     }
 
     async function AssignLeadToCaller(id) {
@@ -58,13 +171,43 @@ const Assignerhandler = () => {
         setDoc(doc(db, "Trip", id), {
             callingLastUpdate: new Date(),
             caller: {
-                name: currentUser[0].name,
-                uid: currentUser[0].uid
+                name: currentcaller[0].name,
+                uid: currentcaller[0].uid
             }
         }, { merge: true })
     }
+    function ControllApplyer(clickControl) {
+        setdataAvailablityFlg(true)
 
-    return (
+        if (currentcaller == null) {
+            alert('No Caller Is selected')
+        }
+        else if (clickControl == 1) {
+            allTripUnderDateSelection()
+        }
+        else if (clickControl == 2) {
+            allTripWithinDateRange()
+        }
+        else if (clickControl == 3) {
+            allTripWithinDateRangeWithSpecificSalesPerson()
+        }
+    }
+
+    useEffect(() => {
+        const q = query(collection(db, "Profile"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const Profile = [];
+            querySnapshot.forEach((doc) => {
+                Profile.push(doc.data());
+            });
+            setAllSalePerson(Profile)
+            // console.log(Profile,);
+        });
+        return () => unsubscribe()
+
+    }, []);
+
+    return (<>
         <div className='container'>
             <div>
                 <span>Assign to:-</span>
@@ -77,11 +220,52 @@ const Assignerhandler = () => {
                     }
                 </select>
             </div>
-            <div>
+            <div className='assignerBox'>
+                <span>Assign By Date</span>
                 <input type={"date"} onChange={(event) => handleSelectedDate(event.target.value)}></input>
-                <button onClick={() => allTripUnderDateSelection()}>Apply</button>
+                <button onClick={() => ControllApplyer(1)}>Apply</button>
+            </div>
+            <div className='assignerBox'>
+                <span>Assign By Date range</span>
+                <label>
+                    FROM
+                    <input type={"date"} onChange={(event) => handleRangeDate(event.target.value, 'start')}></input>
+                </label>
+                <label>
+                    TO
+                    <input type={"date"} onChange={(event) => handleRangeDate(event.target.value, 'end')}></input>
+                </label>
+                <button onClick={() => ControllApplyer(2)}>Apply</button>
+            </div>
+            <div className='assignerBox'>
+                <span>Assign By Date range and sales  </span>
+                <select onChange={(e) => salesWhichLeadIsTOBeAssign(e.target.value)}>
+                    <option value={0}> Dumped By</option>
+                    {
+                        AllSalePerson.map((data, index) => (<>
+                            {/* {console.log(data.Lead_Current)} */}
+                            <option key={index} value={data.uid}>{data.name}</option>
+
+                        </>))
+                    }
+                </select>
+                <label>
+                    FROM
+                    <input type={"date"} onChange={(event) => handleRangeDate(event.target.value, 'start')}></input>
+                </label>
+                <label>
+                    TO
+                    <input type={"date"} onChange={(event) => handleRangeDate(event.target.value, 'end')}></input>
+                </label>
+                <button onClick={() => ControllApplyer(3)}>Apply</button>
             </div>
         </div>
+        <Modal open={dataAvailablityFlg} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+            <>
+                <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
+            </>
+        </Modal>
+    </>
     );
 }
 

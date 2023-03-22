@@ -612,6 +612,12 @@ function App() {
                         <p>User Controller</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("Caller_Lead_Assigning"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Caller's lead</p>
+                      </div>
+                    </div>
                     {/* <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -660,7 +666,7 @@ function App() {
               <CallerInvestigation auth={auth} profile={profile} />
               : <></>
           }
-          
+
           {
             Page == "AdminInvestigation" ?
               <AdminInvestigation profile={profile} /> : <></>

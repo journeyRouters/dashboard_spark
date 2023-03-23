@@ -25,20 +25,18 @@ const Test = () => {
    async function allDoc() {
       // var date = new Date("01/12/2022");
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      const q = query(collection(db, "Trip"),where('TripId','==','66981929'))
+      const q = query(collection(db, "Trip"),where('Contact_Number','==','9767177629'))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          console.log(doc.data())
          // add_a_feild(doc.id)
       });
    }
-   function add_a_feild() {
+   function add_a_feild(tripid) {
       // var month=moment(new Date()).format('MMMM-YYYY')
       // console.log(month)
-      setDoc(doc(db, "Trip", '60499109'), {
-         PaymentScreenshots_flight:[],
-         PaymentScreenshots_hotels:[],
-         PaymentScreenshots_others:[]
+      setDoc(doc(db, "Trip", tripid), {
+         Travel_Date:new Date('18-04-2023')
       }, { merge: true })
    }
    useEffect(() => {

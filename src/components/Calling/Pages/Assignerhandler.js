@@ -181,6 +181,7 @@ const Assignerhandler = () => {
 
         if (currentcaller == null) {
             alert('No Caller Is selected')
+            setdataAvailablityFlg(false)
         }
         else if (clickControl == 1) {
             allTripUnderDateSelection()

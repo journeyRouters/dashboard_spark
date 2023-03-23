@@ -21,7 +21,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
             callingStatus: status,
             updated_last: new Date()
         }, { merge: true });
-        updateTableDataAfterUpdate(data.TripId)
+        // updateTableDataAfterUpdate(data.TripId)
     }
 
     async function ReadyToTalk() {

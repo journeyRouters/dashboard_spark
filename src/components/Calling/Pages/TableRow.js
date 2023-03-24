@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import app from '../../required';
 
-const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
+const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
     // console.log(data.Travel_Date.toDate())
     const db = getFirestore(app);
     const [comments, setcomments] = useState(null)
@@ -21,7 +21,6 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
             callingStatus: status,
             updated_last: new Date()
         }, { merge: true });
-        // updateTableDataAfterUpdate(data.TripId)
     }
 
     async function ReadyToTalk() {
@@ -32,6 +31,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
             var today = new Date()
             var date_Travel = new Date(TravelDate)
             var currentdate = moment(today).format('YYYY-MM-DD')
+            updateTableDataAfterConversion(data.TripId)
             setDoc(doc(db, "Trip", data.TripId), {
                 Traveller_name: Name,
                 Lead_Status: 'Hot',
@@ -54,7 +54,7 @@ const TableRow = ({ data, updateTableDataAfterUpdate, index }) => {
                 updated_last: new Date(),
                 CallingConversionMonth: moment(new Date()).format('MMMM-YYYY')
             }, { merge: true });
-            updateTableDataAfterUpdate(data.TripId)
+            onClose()
         }
     }
     function HandleName(e) {

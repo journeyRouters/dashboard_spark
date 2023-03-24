@@ -21,6 +21,9 @@ const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
             callingStatus: status,
             updated_last: new Date()
         }, { merge: true });
+        if (status == 'Dump') {
+            updateTableDataAfterConversion(data.TripId)
+        }
     }
 
     async function ReadyToTalk() {

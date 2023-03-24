@@ -17,7 +17,7 @@ const LeadFromCallers = () => {
         let list = []
         // console.log(selectedDate)
         var q = query(collection(db, "Trip"), 
-        where('callingStatusChangeDate', '==', selectedDate),
+        // where('callingStatusChangeDate', '==', selectedDate),
         where('callingStatus','==','Converted')
         );
         // console.log(date)

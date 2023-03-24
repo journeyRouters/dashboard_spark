@@ -25,7 +25,7 @@ const Test = () => {
    async function allDoc() {
       // var date = new Date("01/12/2022");
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      const q = query(collection(db, "Trip"),where('Contact_Number','==','9767177629'))
+      const q = query(collection(db, "Trip"),where('Contact_Number','==','9827952504'))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          console.log(doc.data())

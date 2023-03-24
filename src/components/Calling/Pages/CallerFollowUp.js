@@ -47,7 +47,7 @@ const FollowUp = ({ profile }) => {
     }
     useEffect(() => {
         getLeadOnBoard()
-    }, [updateTableDataAfterConversion]);
+    }, []);
     return (
         <div>
             <h2> Total called {lead_data.length}</h2>

@@ -31,14 +31,14 @@ const Assignerhandler = () => {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
         setCurrentcaller(profile_of_user)
-        console.log(profile_of_user)
+        // console.log(profile_of_user)
 
     }
     function salesWhichLeadIsTOBeAssign(uid) {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = AllSalePerson.filter((data) => data.uid === uid)
         setsalesPerson(profile_of_user)
-        console.log(profile_of_user)
+        // console.log(profile_of_user)
 
     }
     function handleRangeDate(args, flg) {

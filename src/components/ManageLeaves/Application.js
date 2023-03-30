@@ -25,7 +25,7 @@ const Application = ({profile,auth,getLeaveApplication}) => {
         setapprovedBy(e)
     }
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "in", ["admin", "Super Admin", "Team Leader"]), where('user_type', '==', 'show'));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["admin", "Super Admin", "Team Leader"]));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

@@ -593,7 +593,7 @@ function App() {
                         <p>During Stay</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("Post_Stay"))}>
+                    <div className='sidebarCard' onClick={(() => page("Poststay"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                         <p>Post Stay</p>
@@ -673,8 +673,8 @@ function App() {
           }
           {
             Page === "rapid_fire" ?
-              <Test />
-              // <div></div>
+              // <Test />
+              <div></div>
               : <></>
           }
           {

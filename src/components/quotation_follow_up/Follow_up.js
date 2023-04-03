@@ -268,7 +268,7 @@ const FollowUp = (props) => {
             }
 
         }
-        else if (lead.length > 1) {
+        else if (lead.length >= 1) {
             if (month.length != 0 && Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", props.auth.uid),
@@ -335,7 +335,7 @@ const FollowUp = (props) => {
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", props.auth.uid),
                     where("Lead_Status", "in", lead),
-                    where("month", "==", currentMonth),
+                    // where("month", "==", currentMonth),
                 );
             }
         }
@@ -444,7 +444,7 @@ const FollowUp = (props) => {
              // console.log('get',lead[0],currentMonth)
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", props.auth.uid),
-                where("month", "==", currentMonth),
+                // where("month", "==", currentMonth),
                 where("Lead_Status", "==", lead[0])
             )
         }

@@ -274,40 +274,6 @@ const Investigation = ({ profile }) => {
         dataMiner()
 
     }, []);
-    // const demodata = [
-    //     {
-    //         name: 'kishor',
-    //         value: 10
-    //     },
-    //     {
-    //         name: 'ram',
-    //         value: 125
-    //     },
-    //     {
-    //         name: 'rohit',
-    //         value: 22
-    //     },
-    //     {
-    //         name: 'tezal',
-    //         value: 133
-    //     },
-    //     {
-    //         name: 'rana',
-    //         value: 17
-    //     },
-    //     {
-    //         name: 'akash',
-    //         value: 170
-    //     },
-    //     {
-    //         name: 'singh',
-    //         value: 101
-    //     },
-    //     {
-    //         name: 'tezal',
-    //         value: 177
-    //     }
-    // ]
 
     return (
 

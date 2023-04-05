@@ -351,9 +351,9 @@ const AdminInvestigation = ({ profile }) => {
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    console.log(moment(doc.data().updated_last.toDate()).format('DD-MMM-YYYY'))
+                    // console.log(moment(doc.data().updated_last.toDate()).format('DD-MMM-YYYY'))
                 });
-                console.log(list, firstDay)
+                // console.log(list, firstDay)
                 user_analytics.value = list.length
                 local.value = local.value + list.length
                 holdAlluserAnalytics.push(user_analytics)

@@ -34,6 +34,7 @@ import Usercontrol from './components/usercontrol/UserControl';
 import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 import CallerInvestigation from './components/Investigation/CallerInvestigation';
+import Rapid from './components/Rapid/Rapid';
 
 
 function App() {
@@ -674,7 +675,7 @@ function App() {
           {
             Page === "rapid_fire" ?
               // <Test />
-              <div></div>
+              <Rapid auth={auth} profile={profile} />
               : <></>
           }
           {

@@ -387,148 +387,148 @@ const Row = (props) => {
                                             </Modal>
                                         </> : <></>
                                     }
-                                    <div style={{display:'flex',flexDirection:'column'}}>
-                                    <div className='remark'>
-                                        {
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <div className='remark'>
+                                            {
 
-                                            pdfHolder.map((data, index) => (
-                                                <>
-                                                    {/* {console.log(data)} */}
-                                                    <div key={index} className='pdf_setter'>
-                                                        <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
-                                                        <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>
-                                                        <p key={index}>
-                                                            {
-                                                                typeof (data.value.pdf_name) === 'string' ? <>
-                                                                    {data.value.pdf_name}
-                                                                </> : <>
-                                                                    {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
-                                                                    {moment(data.value.pdf_name.toDate()).format('lll')}
-                                                                </>
-                                                            }
-                                                        </p>
-                                                        <button onClick={() => showPDF(data.value)} className='download_requote'>
-                                                            downloadURL</button>
-                                                        <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>
-                                                        {
-                                                            Reqoute_flg ? <>
+                                                pdfHolder.map((data, index) => (
+                                                    <div key={index}>
+                                                        {/* {console.log(data)} */}
+                                                        <div className='pdf_setter'>
+                                                            <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
+                                                            <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>
+                                                            <p key={index}>
                                                                 {
-                                                                    tripData.travel_data.Destination == 'Maldives' ? <>
-                                                                        <Maldives
-                                                                            Allquote={Allquote}
-                                                                            email={props.auth.email}
-                                                                            data={tripData.travel_data}
-                                                                            inclusion_data_={tripData.inclusion_data}
-                                                                            Edit_SelectedpackageType={tripData.SelectedpackageType}
-                                                                            // updateTableDataAfterQuote={props.updateTableDataAfterConversion}
-                                                                            set_popupopner={setReqoute_flg}
-                                                                            profile={props.profile}
-                                                                            E_indicator={true}
-                                                                            Edit_no_rooms={tripData.no_rooms}
-                                                                            Edit_NightDataFields={tripData.NightDataFields}
-                                                                            Edit_itineary={tripData.itineary}
-                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
-                                                                            Edit_visacost={tripData.visacost}
-                                                                            Edit_flightcost={tripData.flightcost}
-                                                                            Edit_landPackage={tripData.landPackage}
-                                                                            Edit_count_days={tripData.count_days}
-                                                                            Edit_Property={tripData.Property}
-                                                                            Edit_MealPlan={tripData.MealPlan}
-                                                                            Edit_Transfer={tripData.Transfer}
-                                                                            pre_flightImgLinks={tripData.flightImgLinks}
-                                                                            pre_inclusionLinks={tripData.inclusionLinks}
-                                                                        />
+                                                                    typeof (data.value.pdf_name) === 'string' ? <>
+                                                                        {data.value.pdf_name}
                                                                     </> : <>
-                                                                        <Box
-                                                                            email={props.auth.email}
-                                                                            data={tripData.travel_data}
-                                                                            inclusion_data_={tripData.inclusion_data}
-                                                                            SelectedpackageTyp={tripData.SelectedpackageType}
-                                                                            updateTableDataAfterQuote={props.updateTableDataAfterConversion}
-                                                                            set_popupopner={setReqoute_flg}
-                                                                            profile={props.profile}
-                                                                            indicator={true}
-                                                                            Edit_NightDataFields={tripData.NightDataFields}
-                                                                            Edit_itineary={tripData.itineary}
-                                                                            Edit_selected_Travel_date={tripData.selected_Travel_date}
-                                                                            Edit_visacost={tripData.visacost}
-                                                                            Edit_flightcost={tripData.flightcost}
-                                                                            Edit_landPackage={tripData.landPackage}
-                                                                            Edit_count_days={tripData.count_days}
-                                                                            Allquote={Allquote}
-
-                                                                        />
+                                                                        {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
+                                                                        {moment(data.value.pdf_name.toDate()).format('lll')}
                                                                     </>
                                                                 }
+                                                            </p>
+                                                            <button onClick={() => showPDF(data.value)} className='download_requote'>
+                                                                downloadURL</button>
+                                                            <button className='download_requote' onClick={() => Controller_reqoute(data)}>Edit</button>
+                                                            {
+                                                                Reqoute_flg ? <>
+                                                                    {
+                                                                        tripData.travel_data.Destination == 'Maldives' ? <>
+                                                                            <Maldives
+                                                                                Allquote={Allquote}
+                                                                                email={props.auth.email}
+                                                                                data={tripData.travel_data}
+                                                                                inclusion_data_={tripData.inclusion_data}
+                                                                                Edit_SelectedpackageType={tripData.SelectedpackageType}
+                                                                                // updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                                set_popupopner={setReqoute_flg}
+                                                                                profile={props.profile}
+                                                                                E_indicator={true}
+                                                                                Edit_no_rooms={tripData.no_rooms}
+                                                                                Edit_NightDataFields={tripData.NightDataFields}
+                                                                                Edit_itineary={tripData.itineary}
+                                                                                Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                                Edit_visacost={tripData.visacost}
+                                                                                Edit_flightcost={tripData.flightcost}
+                                                                                Edit_landPackage={tripData.landPackage}
+                                                                                Edit_count_days={tripData.count_days}
+                                                                                Edit_Property={tripData.Property}
+                                                                                Edit_MealPlan={tripData.MealPlan}
+                                                                                Edit_Transfer={tripData.Transfer}
+                                                                                pre_flightImgLinks={tripData.flightImgLinks}
+                                                                                pre_inclusionLinks={tripData.inclusionLinks}
+                                                                            />
+                                                                        </> : <>
+                                                                            <Box
+                                                                                email={props.auth.email}
+                                                                                data={tripData.travel_data}
+                                                                                inclusion_data_={tripData.inclusion_data}
+                                                                                SelectedpackageTyp={tripData.SelectedpackageType}
+                                                                                updateTableDataAfterQuote={props.updateTableDataAfterConversion}
+                                                                                set_popupopner={setReqoute_flg}
+                                                                                profile={props.profile}
+                                                                                indicator={true}
+                                                                                Edit_NightDataFields={tripData.NightDataFields}
+                                                                                Edit_itineary={tripData.itineary}
+                                                                                Edit_selected_Travel_date={tripData.selected_Travel_date}
+                                                                                Edit_visacost={tripData.visacost}
+                                                                                Edit_flightcost={tripData.flightcost}
+                                                                                Edit_landPackage={tripData.landPackage}
+                                                                                Edit_count_days={tripData.count_days}
+                                                                                Allquote={Allquote}
+
+                                                                            />
+                                                                        </>
+                                                                    }
 
 
-                                                            </> : <></>
-                                                        }
+                                                                </> : <></>
+                                                            }
+                                                        </div>
+
                                                     </div>
+                                                ))
+                                            }
 
-                                                </>
-                                            ))
-                                        }
+                                        </div>
+                                        <div className='invoicing' >
+                                            {
+                                                invoice ?
+                                                    <>
+                                                        <p className='invoice_id'>{moment(invoice.created_at.toDate()).format('YYYY-MM-DD')}</p>
+                                                        <GetAppIcon onClick={() => setdownload(!download)} />
+                                                        <EditIcon onClick={() => setEdit_flg()} />
+                                                    </> :
+                                                    <>
+                                                    </>
+                                            }
+                                            {
+                                                edit_flg ? <>
+                                                    <Invoice
+                                                        auth={props.auth}
+                                                        Invoice_flg={edit_flg}
+                                                        profile={props.profile}
+                                                        closeinvoice={closeEdit}
+                                                        pdfHolder={pdfHolder}
+                                                        installment={invoice.installment}
+                                                        deliverable_item={invoice.deliverable_item}
+                                                        selected_pdf_data={invoice.selected_pdf_data}
 
-                                    </div>
-                                    <div className='invoicing' >
-                                        {
-                                            invoice ?
-                                                <>
-                                                    <p className='invoice_id'>{moment(invoice.created_at.toDate()).format('YYYY-MM-DD')}</p>
-                                                    <GetAppIcon onClick={() => setdownload(!download)} />
-                                                    <EditIcon onClick={() => setEdit_flg()} />
-                                                </> :
-                                                <>
-                                                </>
-                                        }
-                                        {
-                                            edit_flg ? <>
-                                                <Invoice
-                                                    auth={props.auth}
-                                                    Invoice_flg={edit_flg}
-                                                    profile={props.profile}
-                                                    closeinvoice={closeEdit}
-                                                    pdfHolder={pdfHolder}
-                                                    installment={invoice.installment}
-                                                    deliverable_item={invoice.deliverable_item}
-                                                    selected_pdf_data={invoice.selected_pdf_data}
+                                                    />
+                                                </> : <></>
+                                            }
+                                            {
+                                                download ? <>
+                                                    <Modal open={download} onClose={closeDownload} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                                                        <div>
+                                                            <InvoicePdf
+                                                                installment={invoice.installment}
+                                                                deliverable_item={invoice.deliverable_item}
+                                                                selected_pdf_data={invoice.selected_pdf_data}
+                                                                TCS={invoice.TCS ? invoice.TCS : 0}
+                                                                documents={invoice.documents}
+                                                                auth={props.auth}
+                                                                profile={props.profile}
+                                                                hint={false}
+                                                            />
+                                                        </div>
+                                                    </Modal>
+                                                </> : <></>
+                                            }
 
-                                                />
-                                            </> : <></>
-                                        }
-                                        {
-                                            download ? <>
-                                                <Modal open={download} onClose={closeDownload} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
-                                                    <div>
-                                                        <InvoicePdf
-                                                            installment={invoice.installment}
-                                                            deliverable_item={invoice.deliverable_item}
-                                                            selected_pdf_data={invoice.selected_pdf_data}
-                                                            TCS={invoice.TCS ? invoice.TCS : 0}
-                                                            documents={invoice.documents}
-                                                            auth={props.auth}
-                                                            profile={props.profile}
-                                                            hint={false}
-                                                        />
-                                                    </div>
-                                                </Modal>
-                                            </> : <></>
-                                        }
-
-                                        <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button>
-                                        {
-                                            Invoice_flg ?
-                                                <Invoice
-                                                    auth={props.auth}
-                                                    Invoice_flg={Invoice_flg}
-                                                    profile={props.profile}
-                                                    closeinvoice={closeinvoice}
-                                                    pdfHolder={pdfHolder}
-                                                    getinvoice={getinvoice}
-                                                /> : <></>
-                                        }
-                                    </div>
+                                            <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button>
+                                            {
+                                                Invoice_flg ?
+                                                    <Invoice
+                                                        auth={props.auth}
+                                                        Invoice_flg={Invoice_flg}
+                                                        profile={props.profile}
+                                                        closeinvoice={closeinvoice}
+                                                        pdfHolder={pdfHolder}
+                                                        getinvoice={getinvoice}
+                                                    /> : <></>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='remark_set'>

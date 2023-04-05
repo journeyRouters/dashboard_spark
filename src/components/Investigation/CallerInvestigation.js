@@ -49,7 +49,7 @@ const CallerInvestigation = ({ profile }) => {
                 where("caller.uid", "==", profile.uid),
                 where('callingStatus', '==', 'Converted'),
                 where('Lead_Status', '==', 'Dump'),
-                where("updated_last", ">", firstDay));
+                where("updated_last_By_Caller", ">", firstDay));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

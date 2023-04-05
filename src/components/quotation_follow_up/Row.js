@@ -147,7 +147,7 @@ const Row = (props) => {
         if (props.Caller == 1) {
             setDoc(doc(db, "Trip", row.TripId), {
                 callingStatus: Lead_Status,
-                updated_last: today
+                updated_last_By_Caller: today
             }, { merge: true });
             props.updateTableDataAfterUpdate(row.TripId)
         }

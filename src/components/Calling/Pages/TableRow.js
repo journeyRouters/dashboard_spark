@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import app from '../../required';
 
-const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
+const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
     // console.log(data.Travel_Date.toDate())
     const db = getFirestore(app);
     const [comments, setcomments] = useState(null)
@@ -19,7 +19,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
     async function updateStatus(status) {
         setDoc(doc(db, "Trip", data.TripId), {
             callingStatus: status,
-            updated_last: new Date()
+            updated_last_By_Caller: new Date()
         }, { merge: true });
         if (status == 'Dump') {
             updateTableDataAfterConversion(data.TripId)
@@ -54,7 +54,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
                 quotation_flg: false,
                 travelEndDate: "",
                 assign_flg: false,
-                updated_last: new Date(),
+                updated_last_By_Caller: new Date(),
                 CallingConversionMonth: moment(new Date()).format('MMMM-YYYY')
             }, { merge: true });
             onClose()
@@ -84,7 +84,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index }) => {
             // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", data.TripId), {
                 comments: allComments,
-                updated_last: new Date()
+                updated_last_By_Caller: new Date()
             }, { merge: true });
             setcomments(null)
         }

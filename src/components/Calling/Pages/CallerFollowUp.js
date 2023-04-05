@@ -70,7 +70,7 @@ const FollowUp = ({ profile }) => {
                     <tbody>
                         {
                             lead_data.map((data, index) => <>
-                                <TableRow data={data} key={index} index={index} updateTableDataAfterConversion={updateTableDataAfterConversion} />
+                                <TableRow data={data} key={index} index={index} updateTableDataAfterConversion={updateTableDataAfterConversion}  />
                             </>)
                         }
 

@@ -351,12 +351,6 @@ function App() {
                 }
                 {
                   profile.access_type === "Caller" ? <>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire</p>
-                      </div>
-                    </div>
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -401,12 +395,7 @@ function App() {
 
                 {
                   profile.access_type === "Accounts" ? <>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire </p>
-                      </div>
-                    </div>
+                    
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -580,12 +569,6 @@ function App() {
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
                         <p>Investigation</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={(() => page("During_Stay"))}>

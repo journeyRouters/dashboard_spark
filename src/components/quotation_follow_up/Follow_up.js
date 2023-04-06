@@ -11,6 +11,7 @@ import moment from 'moment';
 
 
 const FollowUp = (props) => {
+    const [SearchKey, setSearchKey] = useState(0)
     const db = getFirestore(app);
     const [lead_data, setLead_data] = useState(props.adminFlg ? props.data : [])
     const [open, setopen] = useState(true)
@@ -19,7 +20,7 @@ const FollowUp = (props) => {
     const [lead, setLead] = useState([])
     const [assign_date, setassign_month] = useState([])
     const animatedComponents = makeAnimated();
-    const [profile, setProfile] = useState(null)
+    const [user, setuser] = useState(props.adminFlg?props.user:props.auth.uid)
     const [leadStatus, setStatus] = useState(0)
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
@@ -58,8 +59,10 @@ const FollowUp = (props) => {
         // console.log(props.target.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
-                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true)
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
+                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true),
+                
+
             );
             var querySnapshot;
 
@@ -115,7 +118,9 @@ const FollowUp = (props) => {
         { value: 'Kerala', label: 'Kerala', color: '#666666' },
         { value: "Andaman", label: "Andaman", color: '666666' },
         { value: 'Maldives', label: 'Maldives', color: '666666' },
-        { value: 'Veitnam', label: 'Veitnam', color: '666666' }
+        { value: 'Veitnam', label: 'Veitnam', color: '666666' },
+        { value: 'NorthEast', label: 'NorthEast', color: '666666' }
+
 
     ];
     const months = [
@@ -156,114 +161,143 @@ const FollowUp = (props) => {
         var currentMonth = moment(today).format('MMMM')
         if (Destination.length > 1) {
             if (lead.length != 0 && month.length != 0 && assign_date != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination),
                     where("Lead_Status", "==", lead[0]),
                     where("month", "==", month[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
                 );
             }
             else if (lead.length != 0 && month.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination),
                     where("month", "==", month[0]),
-                    where("Lead_Status", "==", lead[0])
+                    where("Lead_Status", "==", lead[0]),
+                    
+
                 );
             }
             else if (lead.length != 0 && assign_date.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    where("Lead_Status", "==", lead[0])
+                    where("Lead_Status", "==", lead[0]),
+                    
+
                 );
             }
             else if (month.length != 0 && assign_date.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
                     where("month", "==", month[0]),
+                    
+
                 );
             }
             else if (month.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
-                    where('Destination', 'in', Destination), where("month", "==", month[0])
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
+                    where('Destination', 'in', Destination), where("month", "==", month[0]),
+                    
+
                 );
             }
             else if (lead.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
-                    where('Destination', 'in', Destination), where("Lead_Status", "==", lead[0])
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
+                    where('Destination', 'in', Destination), where("Lead_Status", "==", lead[0]),
+                    
+
                 );
             }
             else if (assign_date.length != 0) {
-                q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+                q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 );
             }
             else if (Destination.length != 0) {
                 q = query(collection(db, "Trip"),
-                    where("assign_to.uid", "==", props.auth.uid),
-                    where('Destination', 'in', Destination), where("month", "==", currentMonth)
+                    where("assign_to.uid", "==", user),
+                    where('Destination', 'in', Destination), where("month", "==", currentMonth),
+                    
+
                 );
             }
         }
         else if (month.length > 1) {
             if (Destination.length != 0 && lead.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, "Trip"),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    where("Lead_Status", "==", lead[0]))
+                    where("Lead_Status", "==", lead[0]),
+                    
+                    )
             }
             else if (Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, "Trip"),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 )
             }
             else if (Destination.length != 0 && lead.length != 0) {
                 q = query(collection(db, "Trip"),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where("Destination", "==", Destination[0]),
-                    where("Lead_Status", "==", lead[0])
+                    where("Lead_Status", "==", lead[0]),
+                    
+
                 )
             }
             else if (Destination.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
-                    where("Destination", "==", Destination[0])
+                    where("Destination", "==", Destination[0]),
+                    
+
                 )
             }
             else if (lead.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
-                    where("Lead_Status", "==", lead[0])
+                    where("Lead_Status", "==", lead[0]),
+                    
+
                 )
             }
             else if (month.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
+                    
+
                 )
             }
             else if (assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 )
             }
 
@@ -271,194 +305,238 @@ const FollowUp = (props) => {
         else if (lead.length >= 1) {
             if (month.length != 0 && Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 );
             }
             else if (month.length != 0 && Destination.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
                     where("Destination", "==", Destination[0]),
+                    
+
                 );
             }
             else if (month.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 );
             }
             else if (Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", currentMonth),
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
                 );
             }
             else if (month.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
+                    
+
                 );
             }
             else if (Destination.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("Destination", "==", Destination[0]),
                     where("month", "==", currentMonth),
+                    
+
 
                 );
             }
             else if (assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
+                    
+
 
                 );
             }
             else if (lead.length != 0) {
                 q = query(collection(db, 'Trip'),
-                    where("assign_to.uid", "==", props.auth.uid),
+                    where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
+                    
+
                     // where("month", "==", currentMonth),
                 );
             }
         }
         else if (Destination.length == 1 && lead.length == 1 && month.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", month[0]),
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (Destination.length == 1 && lead.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (month.length == 1 && lead.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("month", "==", month[0]),
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (Destination.length == 1 && month.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", month[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (Destination.length == 1 && lead.length == 1 && month.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", month[0]),
-                where("Lead_Status", "==", lead[0])
+                where("Lead_Status", "==", lead[0]),
+                
+
             )
         }
         else if (Destination.length == 1 && lead.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", currentMonth),
-                where("Lead_Status", "==", lead[0])
+                where("Lead_Status", "==", lead[0]),
+                
+
             )
         }
         else if (Destination.length == 1 && assign_date.length == 1) {
             console.log('yes', assign_date, dateBelow, Destination[0])
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (Destination.length == 1 && month.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
-                where("month", "==", month[0])
+                where("month", "==", month[0]),
+                
+
             )
         }
         else if (lead.length == 1 && month.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Lead_Status", "==", lead[0]),
-                where("month", "==", month[0])
+                where("month", "==", month[0]),
+                
+
             )
         }
         else if (lead.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
 
             )
         }
         else if (month.length == 1 && assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("month", "==", month[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-
+                
             )
         }
         else if (Destination.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", currentMonth),
+                
+
             )
         }
         else if (lead.length == 1) {
-             // console.log('get',lead[0],currentMonth)
+            // console.log('get',lead[0],currentMonth)
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 // where("month", "==", currentMonth),
-                where("Lead_Status", "==", lead[0])
+                where("Lead_Status", "==", lead[0]),
+                
+
             )
         }
         else if (month.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
-                where("month", "==", month[0])
+                where("assign_to.uid", "==", user),
+                where("month", "==", month[0]),
+                
+
             )
         }
         else if (assign_date.length == 1) {
             q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", user),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
+                
+
             )
         }
         else if (Destination.length == 0 && lead.length == 0 && month.length == 0) {
@@ -572,14 +650,15 @@ const FollowUp = (props) => {
         <div>
             {
                 props.auth ? <>
-                    <div className='global_search' >
-
-                        <button onClick={() => getLeadOnBoard()}>Refresh</button>
-                        <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
-
-
-
-                    </div>
+                    {
+                        props.adminFlg ? <></>
+                            : <>
+                                <div className='global_search' >
+                                    <button onClick={() => getLeadOnBoard()}>Refresh</button>
+                                    <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+                                </div>
+                            </>
+                    }
 
                     <div className='filter'>
                         <div>

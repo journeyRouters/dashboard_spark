@@ -5,6 +5,8 @@ import FollowUp from './Follow_up';
 
 const AdminFollow = ({ auth, profile: profile_ }) => {
     const [profile, setprofile] = useState(null)
+    const [SearchKey, setSearchKey] = useState(0)
+    const [input, setInput] = useState('')
     const [currentUser, setCurrentuser] = useState(null)
     const db = getFirestore(app);
     const [flg, setflg] = useState(false)
@@ -34,6 +36,77 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
     }
     function updateCurrentUser() {
         getLeadOnBoard()
+    }
+    async function fetchTheSearch() {
+        var q;
+        switch (SearchKey) {
+            case "Name": {
+                q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Converted"),
+                    where("quotation_flg", "==", true),
+                    where('Traveller_name', '>=', input),
+                    where("Traveller_name", '<=', input + '\uf8ff'),
+                )
+                break;
+            }
+            case "Trip_id": {
+                q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Converted"),
+                    where("quotation_flg", "==", true),
+                    where("TripId", "==", input),
+                    orderBy("Travel_Date")
+                )
+                break;
+            }
+            case "Contact_Number": {
+                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
+                q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Converted"),
+                    where("quotation_flg", "==", true),
+                    where("Contact_Number", "==", parseInt(input)),
+                    orderBy("Travel_Date")
+                )
+                break;
+            }
+            case "Travel_date": {
+                var before = new Date(input);
+                before.setDate(before.getDate() - 1);
+                // console.log(before)
+                q = query(collection(db, "Trip"),
+                    where("Lead_Status", "==", "Converted"),
+                    where("quotation_flg", "==", true),
+                    where("Travel_Date", ">", before),
+                    where("Travel_Date", "<=", new Date(input)),
+                    orderBy("Travel_Date")
+                )
+                break;
+            }
+            default:
+                q = null;
+
+        }
+        getQueryDatafromDatbase(q)
+
+
+    }
+    async function getQueryDatafromDatbase(q) {
+        try {
+            var querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length != 0) {
+                let list = []
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                // console.log(list)
+                setLead_data(list)
+                setInput('')
+                setflg(true)
+
+            }
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
     async function getLeadOnBoard() {
         // console.log(props.target.uid)
@@ -65,9 +138,35 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
         }
 
     }
+    function reset() {
+        setLead_data([])
+        setflg(false)
+
+    }
 
     return (
         <div>
+            <div className='global_search'>
+                <button onClick={() => reset()}>Refresh</button>
+                <select name='search_type' id='firestore' className='option_selector' onChange={(e) => setSearchKey(e.target.value)}>
+                    <option value={0}>select</option>
+                    <option value="Name">Name</option>
+                    <option value="Trip_id">TripId</option>
+                    <option value="Contact_Number">Contact Number</option>
+                    <option value="Travel_date">Travel Month</option>
+                </select>
+                <input placeholder='search your selection' type={SearchKey == 'Travel_date' ? "date" : String}
+                    onChange={(e) => setInput(e.target.value)}
+                ></input>
+                <input
+                    className='global_search_button'
+                    type="button"
+                    value="Search "
+                    onClick={() => fetchTheSearch()}
+                ></input>
+
+
+            </div>
             <div>
                 {
                     profile ? <>
@@ -87,10 +186,10 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
             </div>
             {
                 flg ? <>
-                    <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} />
+                    <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} user={currentUser.uid}/>
 
                 </> : <>
-                <div className='no_data'></div>
+                    <div className='no_data'></div>
                     {/* <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} /> */}
                 </>
             }

@@ -164,8 +164,6 @@ const AdminFollow = ({ auth, profile: profile_ }) => {
                     value="Search "
                     onClick={() => fetchTheSearch()}
                 ></input>
-
-
             </div>
             <div>
                 {

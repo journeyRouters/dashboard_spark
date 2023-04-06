@@ -494,10 +494,6 @@ export const avtivityList = {
     ],
     Singapore: [
         {
-            label: 'cityTour',
-            value: 'cityTour'
-        },
-        {
             label: 'Arival',
             value: 'Arival'
         },
@@ -505,6 +501,140 @@ export const avtivityList = {
             label: 'Departure',
             value: 'Departure'
         },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: "Leisureday",
+            value: "Leisureday"
+
+        },
+        {
+            label: "BotanicalGardenAndButterflyFarm",
+            value: "BotanicalGardenAndButterflyFarm",
+        },
+        {
+            label: "BukitTinggiTour",
+            value: "BukitTinggiTour",
+        },
+        {
+            label: "CameronHighlandsTour",
+            value: "CameronHighlandsTour",
+        },
+        {
+            label: "CityExplorer",
+            value: "CityExplorer",
+        },
+        {
+            label: "CraftAndCultureTour",
+            value: "CraftAndCultureTour",
+        },
+        {
+            label: "DayCruise",
+            value: "DayCruise",
+        },
+        {
+            label: "DiscoverLangkawi",
+            value: "DiscoverLangkawi",
+        },
+        {
+            label: "ElephantSanctuaryTour",
+            value: "ElephantSanctuaryTour",
+        },
+        {
+            label: "EveningWalkingTourOfChinaTown",
+            value: "EveningWalkingTourOfChinaTown",
+        },
+        {
+            label: "FireFliesTour",
+            value: "FireFliesTour",
+        },
+        {
+            label: "GardenAndParkTour",
+            value: "GardenAndParkTour",
+        },
+        {
+            label: "GentingHighlandsTour",
+            value: "GentingHighlandsTour",
+        },
+        {
+            label: "HalfDayCityTour",
+            value: "HalfDayCityTour",
+        },
+        {
+            label: "HillAndTempleSightseeing",
+            value: "HillAndTempleSightseeing",
+        },
+        {
+            label: "IslandExperience",
+            value: "IslandExperience",
+        },
+        {
+            label: "IslandHopping",
+            value: "IslandHopping",
+        },
+        {
+            label: "LangkawiGrandTour",
+            value: "LangkawiGrandTour",
+        },
+        {
+            label: "LostWorldOfTambun",
+            value: "LostWorldOfTambun",
+        },
+        {
+            label: "MangroveIsland",
+            value: "MangroveIsland",
+        },
+        {
+            label: "MelakaTour",
+            value: "MelakaTour",
+        },
+        {
+            label: "NatureCruise",
+            value: "NatureCruise",
+        },
+        {
+            label: "PulauPayarSnorklingBeach",
+            value: "PulauPayarSnorklingBeach",
+        },
+        {
+            label: "PutrajayaTour",
+            value: "PutrajayaTour",
+        },
+        {
+            label: "RoundIslandDiscovery",
+            value: "RoundIslandDiscovery",
+        },
+        {
+            label: "StreetArtTour",
+            value: "StreetArtTour",
+        },
+        {
+            label: "SunsetCruise",
+            value: "SunsetCruise",
+        },
+        {
+            label: "SunwayLagoon",
+            value: "SunwayLagoon",
+        },
+        {
+            label: "TemplersParkTour",
+            value: "TemplersParkTour",
+        },
+        {
+            label: "WarMuseumAdventure",
+            value: "WarMuseumAdventure",
+        },
+        {
+            label: "ZooNegara",
+            value: "ZooNegara",
+        },
+        {
+            label: 'cityTour',
+            value: 'cityTour'
+        },
+      
         {
             label: 'Transfer',
             value: 'Transfer'
@@ -544,11 +674,6 @@ export const avtivityList = {
         {
             label: "UniversalStudio",
             value: "UniversalStudio",
-        },
-        {
-            label: "Leisureday",
-            value: "Leisureday"
-
         },
         {
             label: 'Genting Dream Cruise',
@@ -1019,6 +1144,59 @@ export const avtivityList = {
             label: "ZooNegara",
             value: "ZooNegara",
         },
+        {
+            label: 'cityTour',
+            value: 'cityTour'
+        },
+      
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: "GardenByTheBay",
+            value: "GardenByTheBay",
+        },
+        {
+            label: "JurongBirdPark",
+            value: "JurongBirdPark",
+        },
+        {
+            label: "MerlionPark",
+            value: "MerlionPark",
+        },
+        {
+            label: "NightSafari",
+            value: "NightSafari",
+        },
+        {
+            label: "RiverSafari",
+            value: "RiverSafari",
+        },
+        {
+            label: "RoyalCaribbeanCruise",
+            value: "RoyalCaribbeanCruise",
+        },
+        {
+            label: "SentosaIsland",
+            value: "SentosaIsland",
+        },
+        {
+            label: "SingaporeZoo",
+            value: "SingaporeZoo",
+        },
+        {
+            label: "UniversalStudio",
+            value: "UniversalStudio",
+        },
+        {
+            label: 'Genting Dream Cruise',
+            value: 'GentingDreamCruise'
+        },
+        {
+            label: 'Art Science Museum',
+            value: 'ArtScienceMuseum'
+        }
     ],
     Ladakh: [
 

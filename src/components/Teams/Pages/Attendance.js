@@ -45,7 +45,7 @@ const Attendance = ({ profile,uid }) => {
 
     }, []);
     return (
-        <div style={{height:'44rem' }}>
+        <div >
 
             <div>
                 {

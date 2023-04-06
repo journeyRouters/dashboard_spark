@@ -1022,7 +1022,6 @@ export const avtivityList = {
         {
             label: "Leisureday",
             value: "Leisureday"
-
         },
         {
             label: "BotanicalGardenAndButterflyFarm",

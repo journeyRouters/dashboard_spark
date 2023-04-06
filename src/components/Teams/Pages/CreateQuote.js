@@ -57,7 +57,6 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                 break;
             }
             case "Contact_Number": {
-                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
                 q = query(collection(db, "Trip"),
                     where("Contact_Number", "==", parseInt(input)),
                     orderBy("Travel_Date")

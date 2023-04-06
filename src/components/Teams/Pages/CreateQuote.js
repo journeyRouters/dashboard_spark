@@ -103,7 +103,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
     return (
 
         <div style={{ overflowY: 'scroll', height: '44rem', }}>
-            <div className='global_searchin'>
+            {/* <div className='global_searchin'>
                 <button onClick={() => reset()}>Refresh</button>
                 <select name='search_type' id='firestore' className='option_selector' onChange={(e) => setSearchKey(e.target.value)}>
                     <option value={0}>select</option>
@@ -121,7 +121,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                     value="Search "
                     onClick={() => fetchTheSearch()}
                 ></input>
-            </div>
+            </div> */}
             {
                 lead_data ? <>
                     {

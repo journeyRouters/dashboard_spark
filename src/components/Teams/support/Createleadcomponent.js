@@ -3,12 +3,13 @@ import '../../leadDriver/Driver.css'
 import { deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import app from '../../required';
 import { useState } from 'react';
+import { useEffect } from 'react';
 const db = getFirestore(app);
 
 
-const Createleadcomponent = ({ data, TeamProfile ,getLeadOnBoard ,index}) => {
+const Createleadcomponent = ({ data, TeamProfile, getLeadOnBoard, index, overide, getLeadAfterEffect }) => {
     const [currentUser, setCurrentuser] = useState(null)
-    var today=new Date()
+    var today = new Date()
 
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
@@ -24,23 +25,47 @@ const Createleadcomponent = ({ data, TeamProfile ,getLeadOnBoard ,index}) => {
         catch (e) { console.log(e) }
     }
     async function reassign() {
-        const Databaseref = doc(db, "Trip", data.TripId);
-        await updateDoc(Databaseref, {
-            "assign_flg": false,
-        });
-        getLeadOnBoard()
+        if (overide) {
+            const Databaseref = doc(db, "Trip", data.TripId);
+            await updateDoc(Databaseref, {
+                "assign_flg": false,
+            });
+            getLeadAfterEffect(data.TripId)
+        }
+        else {
+
+            const Databaseref = doc(db, "Trip", data.TripId);
+            await updateDoc(Databaseref, {
+                "assign_flg": false,
+            });
+            getLeadOnBoard()
+        }
     }
     async function update_lead_field(uid, name) {
         /**this function is to update the assigned user in lead data for ref and to be identify */
-        const Databaseref = doc(db, "Trip", data.TripId);
-        await updateDoc(Databaseref, {
-            "assign_to.uid": uid,
-            "assign_to.name": name,
-            "assign_flg": true,
-            "assigned_date_time": today
-        });
-        getLeadOnBoard()
+        if (overide) {
+
+            const Databaseref = doc(db, "Trip", data.TripId);
+            await updateDoc(Databaseref, {
+                "assign_to.uid": uid,
+                "assign_to.name": name,
+                "assign_flg": true,
+                "assigned_date_time": today
+            });
+            getLeadAfterEffect(data.TripId)
+        }
+        else {
+            const Databaseref = doc(db, "Trip", data.TripId);
+            await updateDoc(Databaseref, {
+                "assign_to.uid": uid,
+                "assign_to.name": name,
+                "assign_flg": true,
+                "assigned_date_time": today
+            });
+            getLeadOnBoard()
+        }
     }
+
     return (
         <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>
             <div>
@@ -58,7 +83,8 @@ const Createleadcomponent = ({ data, TeamProfile ,getLeadOnBoard ,index}) => {
             <div>
                 {
                     data.assign_flg ? <span>assign To:-{data.assign_to.name}</span> : <></>
-                }<br />
+                }
+                <br />
                 <span>
                     <select disabled={data.assign_flg}>
                         <option value='cold'>change Lead Status</option>

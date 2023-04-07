@@ -78,7 +78,6 @@ const FollowUp = (props) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                // console.log(list);
                 setStatus(0)
                 setopen(false)
 
@@ -558,6 +557,7 @@ const FollowUp = (props) => {
 
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
+                    console.log(doc.data().TripId);
                 });
                 setLead_data(list)
                 // console.log(list);

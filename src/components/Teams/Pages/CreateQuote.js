@@ -31,6 +31,29 @@ const CreateQuote = ({ uid, TeamProfile }) => {
         }
 
     }
+    async function getLeadAfterEffect(TripId) {
+        // console.log(props.auth.uid)
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("TripId", "==", TripId),);
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+            }
+        }
+        catch (erorr) {
+            console.log(erorr)
+        }
+
+    }
     useEffect(() => {
         getLeadOnBoard()
 
@@ -127,7 +150,11 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                     {
                         lead_data.map((data, index) => (
 
-                            <Createleadcomponent key={index} data={data} getLeadOnBoard={getLeadOnBoard} TeamProfile={TeamProfile} index={index} />
+                            <Createleadcomponent key={index} data={data}
+                                getLeadOnBoard={getLeadOnBoard} TeamProfile={TeamProfile}
+                                index={index} overide={true}
+                                getLeadAfterEffect={getLeadAfterEffect}
+                            />
 
                         ))
                     }

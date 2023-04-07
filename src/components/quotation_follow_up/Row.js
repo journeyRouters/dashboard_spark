@@ -138,7 +138,6 @@ const Row = (props) => {
         }
         catch (error) {
             // console.log(row.TripId)
-
             console.log(error)
         }
 

@@ -634,7 +634,7 @@ export const avtivityList = {
             label: 'cityTour',
             value: 'cityTour'
         },
-      
+
         {
             label: 'Transfer',
             value: 'Transfer'
@@ -1147,7 +1147,7 @@ export const avtivityList = {
             label: 'cityTour',
             value: 'cityTour'
         },
-      
+
         {
             label: 'Transfer',
             value: 'Transfer'
@@ -1452,7 +1452,8 @@ export const avtivityList = {
         {
             label: 'Amalfi Coast',
             value: 'AmalfiCoast'
-        }, {
+        },
+        {
             label: 'Arrival',
             value: 'Arrivals'
         },
@@ -1500,6 +1501,414 @@ export const avtivityList = {
         {
             label: 'Zurich Arrival',
             value: 'ZurichArrival'
+        },
+        {
+            label: 'Baden Town',
+            value: 'BadenTown'
+        },
+        {
+            label: 'Berlin Television Tower',
+            value: 'BerlinTelevisionTower'
+        },
+        {
+            label: 'BMW Headquarter',
+            value: 'BMWHeadquarter'
+        },
+        {
+            label: 'Brandenburg Gate',
+            value: 'BrandenburgGate'
+        },
+        {
+            label: 'Heidelberg Castle ruin',
+            value: 'HeidelbergCastlruin'
+        },
+        {
+            label: 'Humboldt Forum',
+            value: 'HumboldtForum'
+        },
+        {
+            label: 'MercedesBenzFactory',
+            value: 'MercedesBenzFactory'
+        },
+        {
+            label: 'Museum Ludwig',
+            value: 'MuseumLudwig'
+        },
+        {
+            label: 'Neuschwanstein Castle & Lindehof',
+            value: 'NeuschwansteinCastleLindehof'
+        },
+        {
+            label: 'Reichstag',
+            value: 'Reichstag'
+        },
+        {
+            label: 'River Cruise Frankfurt',
+            value: 'RiverCruiseFrankfurt'
+        },
+        {
+            label: 'Rothenberg & Harburg',
+            value: 'RothenbergHarburg'
+        },
+        {
+            label: 'Twin Church',
+            value: 'TwinChurch'
+        },
+        {
+            label: 'Wonderwheel',
+            value: 'Wonderwheel'
+        },
+        {
+            label: 'Christchurch',
+            value: 'Christchurch'
+        },
+        {
+            label: 'Gandola Rotorua',
+            value: 'GandolaRotorua'
+        },
+        {
+            label: "Hell's Gate",
+            value: 'HellGate'
+        },
+        {
+            label: 'Hour walking tour Venice',
+            value: 'HourwalkingtourVenice'
+        },
+        {
+            label: 'Lake Tekapo',
+            value: 'LakeTekapo'
+        },
+        {
+            label: 'milford sound cruise',
+            value: 'milfordsoundcruise'
+        },
+        {
+            label: 'Queenstown',
+            value: 'Queenstown'
+        },
+        {
+            label: 'Shotover Jetboat Ride',
+            value: 'ShotoverJetboatRide'
+        },
+        {
+            label: 'Shweeb',
+            value: 'Shweeb'
+        },
+        {
+            label: 'Sky tower',
+            value: 'Skytower'
+        },
+        {
+            label: 'Tandem SKydive',
+            value: 'TandemSKydive'
+        },
+        {
+            label: 'Te Puia',
+            value: 'TePuia'
+        },
+        {
+            label: 'TQueenstown Quad Biking',
+            value: 'TQueenstownQuadBiking.png'
+        },
+        {
+            label: 'Vatican Museum',
+            value: 'VaticanMuseum'
+        },
+        {
+            label: 'Waiheke Wharf',
+            value: 'WaihekeWharf'
+        },
+        {
+            label: 'Waitomo Caves',
+            value: 'WaitomoCaves'
+        },
+        {
+            label: 'Whale Watch Kaikoura',
+            value: 'WhaleWatchKaikoura'
+        },
+        {
+            label: 'Whitewater Raft',
+            value: 'WhitewaterRaft'
+        },
+        {
+            label: 'Arc de Triomphe',
+            value: 'ArcdeTriomphe'
+        },
+        {
+            label: 'Cannes Day Trip',
+            value: 'CannesDayTrip'
+        },
+        {
+            label: 'Champs Elysées',
+            value: 'ChampsElysées'
+        },
+        {
+            label: 'Disney Studio',
+            value: 'DisneyStudio'
+        },
+        {
+            label: 'Eiffel Tower Summit level entrance',
+            value: 'EiffelTowerSummitlevelentrance'
+        },
+        {
+            label: 'Hour walking tour Venice',
+            value: 'HourwalkingtourVenice'
+        },
+        {
+            label: 'Opéra Garnier',
+            value: 'OpéraGarnier'
+        },
+        {
+            label: 'Louvre museum guided tour',
+            value: 'Louvremuseumguidedtour'
+        },
+        {
+            label: 'Monaco & Monte Carlo',
+            value: 'MonacoMonteCarlo'
+        },
+        {
+            label: 'Musée d-Orsay',
+            value: 'MuséeOrsay'
+        },
+        {
+            label: 'Notre Dame Cathedral',
+            value: 'NotreDameCathedral'
+        },
+        {
+            label: 'Walt Studio Amusement Parks',
+            value: 'WaltStudioAmusementParks'
+        },
+        {
+            label: 'Acropolis Museum',
+            value: 'AcropolisMuseum'
+        },
+        {
+            label: 'Acropolis Structure',
+            value: 'AcropolisStructure'
+        },
+        {
+            label: 'delos',
+            value: 'delos'
+        },
+        {
+            label: 'Hot Spring Tour Santorini',
+            value: 'HotSpringTourSantorini'
+        },
+        {
+            label: 'Little Venice',
+            value: 'LittleVenice'
+        },
+        {
+            label: 'Metrora Day Trip',
+            value: 'MetroraDayTrip'
+        },
+        {
+            label: 'Naxos Island Trip',
+            value: 'NaxosIslandTrip'
+        },
+        {
+            label: 'Notre Dame Cathedral',
+            value: 'NotreDameCathedral'
+        },
+        {
+            label: 'Santori volcano',
+            value: 'Santorivolcano'
+        },
+        {
+            label: 'Sunset Santorini',
+            value: 'SunsetSantorini'
+        },
+        {
+            label: 'Fortress Hohensalzburg',
+            value: 'FortressHohensalzburg'
+        },
+        {
+            label: 'kunsthistorisches museum',
+            value: 'kunsthistorischesmuseum'
+        },
+        {
+            label: 'Cesky KrumlovPlace',
+            value: 'CeskyKrumlovPlace'
+        },
+        {
+            label: 'Charles Bridge',
+            value: 'CharlesBridge'
+        },
+        {
+            label: 'Karlovy Vary',
+            value: 'KarlovyVary'
+        },
+        {
+            label: 'Prague Astronomical ClockBridge',
+            value: 'PragueAstronomicalClockBridge'
+        },
+        {
+            label: 'The Old Town of Kutná Hora',
+            value: 'TheOldTownofKutnáHora'
+        },
+        {
+            label: 'Prague Old Town Square',
+            value: 'PragueOldTownSquare'
+        },
+        {
+            label: 'Prague Dancing House',
+            value: 'PragueDancingHouse'
+        },
+        {
+            label: 'Prague Chuches',
+            value: 'PragueChuches'
+        },
+        {
+            label: 'Prague Castel',
+            value: 'PragueCastel'
+        },
+        {
+            label: 'Ateneum Art Museum',
+            value: 'AteneumArtMuseum'
+        },
+        {
+            label: 'Helsinki Cathedral',
+            value: 'HelsinkiCathedral'
+        },
+        {
+            label: 'Helsinki City Hall',
+            value: 'HelsinkiCityHall'
+        },
+        {
+            label: 'Helsinki Zoo',
+            value: 'HelsinkiZoo'
+        },
+        {
+            label: 'National Museum of Finland',
+            value: 'NationalMuseumofFinland'
+        },
+        {
+            label: 'Porvoo Old Town',
+            value: 'PorvooOldTown'
+        },
+        {
+            label: 'Rock Church',
+            value: 'RockChurch'
+        },
+        {
+            label: 'Suomenlinna Fortress',
+            value: 'SuomenlinnaFortress'
+        },
+		{
+            label: 'City Tour',
+            value: 'CityTour'
+        },
+        {
+            label: 'Copenhagen Canal Tour',
+            value: 'CopenhagenCanalTour'
+        },
+        {
+            label: 'Hamlet and Sweden Tour',
+            value: 'HamletandSwedenTour'
+        },
+        {
+            label: 'The Grand Tour',
+            value: 'TheGrandTour'
+        },
+        {
+            label: 'Tivoli Gardens',
+            value: 'TivoliGardens'
+        },
+        {
+            label: 'Atomium',
+            value: 'Atomium'
+        },
+        {
+            label: 'Grand Place',
+            value: 'GrandPlace'
+        },
+        {
+            label: 'Manneken Pis',
+            value: 'MannekenPis'
+        },
+        {
+            label: 'Royal Museum belgium',
+            value: 'RoyalMuseumbelgium'
+        },
+        {
+            label: 'Royal Palace',
+            value: 'RoyalPalace'
+        },
+        {
+            label: 'Big Bus Rome',
+            value: 'BigBusRome'
+        },
+        {
+            label: 'Capri',
+            value: 'Capri'
+        },
+        {
+            label: 'Cathedral Square',
+            value: 'CathedralSquare'
+        },
+        {
+            label: 'City Sightseeing Milan Hop-On Hop-Off Bus Tour',
+            value: 'CitySightseeingMilanHopOnHopOffBusTour'
+        },
+        {
+            label: 'City tour Florence',
+            value: 'CitytourFlorence'
+        },
+        {
+            label: 'city tour turin',
+            value: 'citytourturin'
+        },
+        {
+            label: 'Colloseum',
+            value: 'Colloseum'
+        },
+        {
+            label: 'como and bellagio',
+            value: 'comoandbellagio'
+        },
+        {
+            label: 'Doge Palace',
+            value: 'DogePalace'
+        },
+        {
+            label: 'Duomo Cathedral',
+            value: 'DuomoCathedral'
+        },
+        {
+            label: 'Gondola Ride on the Grand Canal',
+            value: 'GondolaRideontheGrandCanal'
+        },
+        {
+            label: 'Hour walking tour Venice',
+            value: 'HourwalkingtourVenice'
+        },
+        {
+            label: 'Leaning Tower of Pisa',
+            value: 'LeaningTowerofPisa'
+        },
+        {
+            label: 'Milan Dome',
+            value: 'MilanDome'
+        },
+        {
+            label: 'Murano and Torcello',
+            value: 'BuranoandTorcello'
+        },
+        {
+            label: 'Museo Delle Langhe',
+            value: 'MuseoDelleLanghe'
+        },
+        {
+            label: 'Sorrento',
+            value: 'Sorrento'
+        },
+        {
+            label: 'Trevi Fountain',
+            value: 'TreviFountain'
+        },
+        {
+            label: 'Vatican Museum',
+            value: 'VaticanMuseum'
         }
     ],
 }

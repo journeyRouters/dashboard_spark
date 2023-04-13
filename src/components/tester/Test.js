@@ -3,6 +3,7 @@ import moment from 'moment/moment';
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
+import { SendNotification } from '../emailer/NotifyByEmail';
 const db = getFirestore(app);
 
 const Test = () => {
@@ -25,7 +26,7 @@ const Test = () => {
    async function allDoc() {
       // var date = new Date("01/12/2022");
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      const q = query(collection(db, "Trip"), where('Contact_Number', '==', '9827952504'))
+      const q = query(collection(db, "Trip"), where('Contact_Number', '==', '8240264929'))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          console.log(doc.data())
@@ -42,6 +43,7 @@ const Test = () => {
       }, { merge: true })
    }
    useEffect(() => {
+      // SendNotification()
       //   tester()
       // allDoc()
       // add_a_feild()

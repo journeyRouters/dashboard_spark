@@ -298,7 +298,7 @@ const Row = (props) => {
                                     <p>{row.Budget}</p>
                                     <p className='p'> {row.Destination}</p>
                                     <p className='p'>
-                                        <a href={'tel:91' + row.Contact_Number}>{row.Contact_Number}</a>
+                                        <a href={'tel:' + row.Contact_Number}>{row.Contact_Number}</a>
                                     </p>
                                 </div>
                                 <div className='follow_up'>

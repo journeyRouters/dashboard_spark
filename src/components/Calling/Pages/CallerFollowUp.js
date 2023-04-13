@@ -8,11 +8,13 @@ const FollowUp = ({ profile }) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
     const [open, setopen] = useState(true)
+    
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
         // console.log(remaining_data, pre_tableData)
         setLead_data(remaining_data)
+        getLeadOnBoard()
     }
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)

@@ -311,7 +311,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                         {/* <button onClick={()=>saveToOthers()}>save</button> */}
                     </div>
                     <div>
-                        <button onClick={() => alert('under dev.')}>save for Self</button>
+                        <button onClick={() => saveForSelf()}>save for Self</button>
                     </div>
                 </div>
             </div>

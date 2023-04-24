@@ -31,6 +31,17 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [TCS, setTCS] = useState(0)
     const db = getFirestore(app);
     // console.log(selected_pdf_data)
+    function checkbalanceEquality() {
+        var total = 0
+        for (var install; install >= 0; install++) {
+            total = total + installment[install].amount
+        }
+        var packageCost = parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package) + parseFloat(TCS)
+        if (total == packageCost) {
+            return true
+        }
+        return false
+    }
     function TCShandler(e) {
         if (e.target.value <= 0) {
             setTCS(parseInt(0))
@@ -43,13 +54,18 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
         setcurrentday(e.target.value)
     }
     function showinvoice() {
-        if (selected_pdf_data.length != 0) {
-            setpdf_flg(false)
-            setInvoice(true)
+        if (checkbalanceEquality()) {
+            if (selected_pdf_data.length != 0) {
+                setpdf_flg(false)
+                setInvoice(true)
+            }
+            else {
+                setpdf_flg(true)
+                setInvoice(false)
+            }
         }
-        else {
-            setpdf_flg(true)
-            setInvoice(false)
+        else{
+            alert('amount mismatch')
         }
     }
     function closeinvoice_() {
@@ -83,7 +99,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     }
     function handleBillingName(addressEvent) {
         setBillingName(addressEvent.target.value)
-        selected_pdf_data.travel_data.Traveller_name=addressEvent.target.value
+        selected_pdf_data.travel_data.Traveller_name = addressEvent.target.value
     }
     function handleFlightCost(FlightEvent) {
         setFlight_cost(FlightEvent.target.value)
@@ -223,106 +239,6 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                             </input>
                         </div>
                     </div>
-                    {/* <div>
-                        <div className='deliverable' onChange={(event) => handleDeliverable(event)}>
-                            <h5>Select Deliverables (if any)</h5>
-                            <label>
-                                <input type='checkbox' name='flight/Train Ticket' value=' flight/Train Ticket'></input>
-                                <span>
-                                    flight/Train Ticket
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Hotel Voucher' value=' Hotel Voucher'></input>
-                                <span>
-                                    Hotel Voucher
-
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Processed Visa' value='Processed Visa'></input>
-                                <span>
-                                    Processed Visa
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Sight Seeing/Activities Tickets' value='Sight Seeing/Activities Tickets'></input>
-                                <span>
-                                    Sight Seeing/Activities Tickets
-                                </span>
-                            </label>
-                            <label>
-                                <input type='checkbox' name='Others' ></input>
-                                <span>Others</span><br />
-                                <input className='txtArea'></input>
-                            </label>
-
-                        </div>
-                        <div className='deliverable' onChange={(event) => handleDocuments(event)}>
-                            <h5>Travel Document(if any)</h5>
-                            <label>
-                                <input type='checkbox' name='Scanned Copy Of Passport' ></input>
-                                <span>
-                                    Scanned Copy Of Passport
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Scanned Copy Of Flights And Tickets' ></input>
-                                <span>
-                                    Scanned Copy Of Flights And Tickets
-
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Screen Shot Of Payment( When Done- Specially For NEFT Payment)' ></input>
-                                <span>
-                                    Screen Shot Of Payment( When Done- Specially For NEFT Payment)
-                                </span>
-                            </label>
-
-                            <label>
-                                <input type='checkbox' name='Scanned Copy Of PAN Card' ></input>
-                                <span>
-                                    Scanned Copy Of PAN Card
-                                </span>
-                            </label>
-                            <label>
-                                <input type='checkbox' name='Others' ></input>
-                                <span>Others</span><br />
-                                <input className='txtArea'></input>
-                            </label>
-
-                        </div>
-                        <div>
-                            <label>Pick a invoicing Date (default today)</label>
-                            <input type={'date'} value={currentdate}></input>
-                        </div>
-                        <button onClick={() => showinvoice()} disabled={pdfseletcted_flg}>Invoice</button>
-                        <button style={{ marginLeft: '16px' }} onClick={closeinvoice}>Cancel</button>
-                        <Modal open={invoice} onClose={closeinvoice_} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
-                            <div>
-                                <InvoicePdf
-                                    installment={installment}
-                                    deliverable_item={deliverable_item}
-                                    selected_pdf_data={selected_pdf_data}
-                                    documents={documents}
-                                    auth={auth}
-                                    date={currentdate}
-                                    profile={profile}
-                                    hint={true}
-                                    getinvoice={getinvoice}
-                                    BillingAddress={BillingAddress}
-                                />
-                            </div>
-                        </Modal>
-
-
-                    </div> */}
                     <div>
                         <label>Pick a invoicing Date (default today)</label>
                         <input type={'date'} value={currentdate} onChange={(e) => controllDate(e)}></input>

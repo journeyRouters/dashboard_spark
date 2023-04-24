@@ -33,10 +33,12 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     // console.log(selected_pdf_data)
     function checkbalanceEquality() {
         var total = 0
-        for (var install; install >= 0; install++) {
-            total = total + installment[install].amount
-        }
+        installment.forEach((item, index) => {
+            total = total + parseInt(item.amount)
+            console.log(item.amount)
+        })
         var packageCost = parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package) + parseFloat(TCS)
+        console.log(total, packageCost)
         if (total == packageCost) {
             return true
         }
@@ -64,7 +66,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                 setInvoice(false)
             }
         }
-        else{
+        else {
             alert('amount mismatch')
         }
     }

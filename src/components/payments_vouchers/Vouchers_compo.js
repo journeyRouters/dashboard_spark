@@ -200,9 +200,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             "email": "991221nandkishor@gmail.com", "message": "Auto triggered mail", "emailTitle": "Payment ScreenShots Uplaoded",
             "ClientData": {
                 "tripId": data.TripId, "ClientName": data.Traveller_name,
-                 "Contact": data.Contact_Number, "Destination": data.Destination,
-                  "DepartureCity": data.Departure_City, "Pax": data.Pax,
-                "Nights": data.Travel_Duration-1, "TravelDate": moment(data.Travel_Date).format('DD-MMMM-YYYY')
+                "Contact": data.Contact_Number, "Destination": data.Destination,
+                "DepartureCity": data.Departure_City, "Pax": data.Pax,
+                "Nights": data.Travel_Duration - 1, "TravelDate": moment(data.Travel_Date).format('DD-MMMM-YYYY')
             }
         }
         const docref = doc(db, "Trip", data.TripId);
@@ -469,7 +469,16 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             <div className='client_detail'>
                 <div className='personal-details'>
                     <div className='TripId'>
-                        {data.TripId}
+                        {data.Campaign_code == 'Direct' ?
+                            <span>
+                                D-{data.TripId}
+                            </span>
+                            :
+                            <span>
+
+                                {data.TripId}
+                            </span>
+                        }
                     </div>
                     <p>Name :-
                         {data.Traveller_name}

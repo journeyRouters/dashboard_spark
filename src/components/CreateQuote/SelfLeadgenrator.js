@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { CircularProgress, Modal } from '@material-ui/core';
-import './TripComponent.css';
-import makeAnimated from 'react-select/animated';
-import Select from 'react-select';
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
-import app from '../required';
-import objectHash from 'object-hash';
+import { Modal } from '@material-ui/core';
+import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import app from '../required';
+import './TripComponent.css';
 const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => {
     const db = getFirestore(app);
     var today = new Date()
     const [AllUserprofile, setAllUserprofile] = useState([])
     const [TripCounter, setTripCount] = useState()
-    const [Hash, setHash] = useState()
+    // const [Hash, setHash] = useState()
     const [currentUser, setCurrentuser] = useState(undefined)
     const leadData = {
         name: null,
@@ -129,7 +128,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     useEffect(() => {
         getAllUserProfie()
         getTripCounter()
-        getHashTable()
     }, []);
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
@@ -144,20 +142,20 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             // console.log(leadData)
         }
     }
-    async function getHashTable() {
-        const TripRef = doc(db, "Support", "Hash");
-        let SupportSnap;
-        try {
-            SupportSnap = await getDoc(TripRef);
-        }
-        catch (e) { console.log(e) }
-        if (SupportSnap.exists()) {
-            setHash(SupportSnap.data().hash)
-            // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
+    // async function getHashTable() {
+    //     const TripRef = doc(db, "Support", "Hash");
+    //     let SupportSnap;
+    //     try {
+    //         SupportSnap = await getDoc(TripRef);
+    //     }
+    //     catch (e) { console.log(e) }
+    //     if (SupportSnap.exists()) {
+    //         setHash(SupportSnap.data().hash)
+    //         // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
 
 
-        }
-    }
+    //     }
+    // }
     async function updateTripCounter(counted) {
         // console.log(counted)
         const TripRef = doc(db, "Support", "tripCount");
@@ -166,28 +164,25 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         });
 
     }
-    async function updateHash(json) {
-        // console.log(json)
-        const TripRef = doc(db, "Support", "Hash");
-        // console.log(Object.keys(json).length)
-        await updateDoc(TripRef, {
-            hash: json
-        }, { merge: true });
+    // async function updateHash(json) {
+    //     // console.log(json)
+    //     const TripRef = doc(db, "Support", "Hash");
+    //     // console.log(Object.keys(json).length)
+    //     await updateDoc(TripRef, {
+    //         hash: json
+    //     }, { merge: true });
 
-    }
+
     function uploadLeadBySpokes(assigned_uid, assigned_name) {
         let countUpdater = TripCounter
-        let TripHash = objectHash({ foo: leadData.name + leadData.Contact_Number + today })
         let contactString = leadData.Contact_Number + ''
         let last4 = contactString.slice(contactString.length - 4)
         let tripid = countUpdater + '' + last4
-        countUpdater = countUpdater + 1
-        let HashTable = Hash
-        // console.log(TripHash)
-        try {
-            HashTable[`${tripid}`] = TripHash
+        if (tripid.includes('Nan')) {
+            alert('server Busy :(')
+            return
         }
-        catch (e) { console.log(e) }
+        countUpdater = countUpdater + 1
         setDoc(doc(db, "Trip", tripid), {
             TripId: tripid,
             Lead_Status: 'Hot',
@@ -220,9 +215,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             Vouchers_hotels: [],
             Vouchers_others: [],
             vouchers_idproof: [],
-            PaymentScreenshots_flight:[],
-            PaymentScreenshots_hotels:[],
-            PaymentScreenshots_others:[],
+            PaymentScreenshots_flight: [],
+            PaymentScreenshots_hotels: [],
+            PaymentScreenshots_others: [],
             transfer_request: false,
             transfer_request_reason: [],
             assign_to: {
@@ -235,12 +230,11 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             final_package: null
         });
         updateTripCounter(countUpdater)
-        updateHash(HashTable)
+
     }
     function saveForSelf() {
         if (leadData.Checker()) {
             alert('please add sufficient data')
-            // console.log(leadData)
         }
         else {
             uploadLeadBySpokes(userProfile.uid, userProfile.name)
@@ -324,5 +318,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         </Modal>
     );
 }
+
 
 export default SelfLeadgenrator;

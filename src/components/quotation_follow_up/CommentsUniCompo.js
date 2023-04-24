@@ -46,6 +46,8 @@ const CommentsUniCompo = ({ row }) => {
 
         if (docSnap.exists()) {
             setLatestComment(docSnap.data().comments)
+            // console.log(docSnap.data().comments)
+
         } else {
             console.log("No such document!");
         }

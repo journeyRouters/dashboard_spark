@@ -122,10 +122,7 @@ function App() {
     }
 
   }
-  function page(args) {
-    // console.log(args)
-    setPage(args)
-  }
+  function page(args) {setPage(args)}
 
   async function authListener() {
     oauth.onAuthStateChanged(user => {
@@ -153,12 +150,6 @@ function App() {
     }
 
   }, [auth])
-
-  useEffect(() => {
-
-
-  }, [auth]);
-
 
   function refreshPage() {
     window.location.reload(false);

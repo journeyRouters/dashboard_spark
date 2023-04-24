@@ -1,5 +1,5 @@
 import { CircularProgress, makeStyles, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, limit, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import Row from './Row';
@@ -20,7 +20,7 @@ const FollowUp = (props) => {
     const [lead, setLead] = useState([])
     const [assign_date, setassign_month] = useState([])
     const animatedComponents = makeAnimated();
-    const [user, setuser] = useState(props.adminFlg?props.user:props.auth.uid)
+    const [user, setuser] = useState(props.adminFlg ? props.user : props.auth.uid)
     const [leadStatus, setStatus] = useState(0)
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
@@ -61,7 +61,7 @@ const FollowUp = (props) => {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                 where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true),
-                
+
 
             );
             var querySnapshot;
@@ -166,7 +166,7 @@ const FollowUp = (props) => {
                     where("month", "==", month[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
                 );
             }
             else if (lead.length != 0 && month.length != 0) {
@@ -174,7 +174,7 @@ const FollowUp = (props) => {
                     where('Destination', 'in', Destination),
                     where("month", "==", month[0]),
                     where("Lead_Status", "==", lead[0]),
-                    
+
 
                 );
             }
@@ -184,7 +184,7 @@ const FollowUp = (props) => {
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
                     where("Lead_Status", "==", lead[0]),
-                    
+
 
                 );
             }
@@ -194,21 +194,21 @@ const FollowUp = (props) => {
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
                     where("month", "==", month[0]),
-                    
+
 
                 );
             }
             else if (month.length != 0) {
                 q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination), where("month", "==", month[0]),
-                    
+
 
                 );
             }
             else if (lead.length != 0) {
                 q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination), where("Lead_Status", "==", lead[0]),
-                    
+
 
                 );
             }
@@ -217,7 +217,7 @@ const FollowUp = (props) => {
                     where('Destination', 'in', Destination),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 );
             }
@@ -225,7 +225,7 @@ const FollowUp = (props) => {
                 q = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", user),
                     where('Destination', 'in', Destination), where("month", "==", currentMonth),
-                    
+
 
                 );
             }
@@ -239,8 +239,8 @@ const FollowUp = (props) => {
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
                     where("Lead_Status", "==", lead[0]),
-                    
-                    )
+
+                )
             }
             else if (Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, "Trip"),
@@ -249,7 +249,7 @@ const FollowUp = (props) => {
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 )
             }
@@ -259,7 +259,7 @@ const FollowUp = (props) => {
                     where("month", "in", month),
                     where("Destination", "==", Destination[0]),
                     where("Lead_Status", "==", lead[0]),
-                    
+
 
                 )
             }
@@ -268,7 +268,7 @@ const FollowUp = (props) => {
                     where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where("Destination", "==", Destination[0]),
-                    
+
 
                 )
             }
@@ -277,7 +277,7 @@ const FollowUp = (props) => {
                     where("assign_to.uid", "==", user),
                     where("month", "in", month),
                     where("Lead_Status", "==", lead[0]),
-                    
+
 
                 )
             }
@@ -285,7 +285,7 @@ const FollowUp = (props) => {
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", user),
                     where("month", "in", month),
-                    
+
 
                 )
             }
@@ -295,7 +295,7 @@ const FollowUp = (props) => {
                     where("month", "in", month),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 )
             }
@@ -310,7 +310,7 @@ const FollowUp = (props) => {
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 );
             }
@@ -320,7 +320,7 @@ const FollowUp = (props) => {
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
                     where("Destination", "==", Destination[0]),
-                    
+
 
                 );
             }
@@ -331,7 +331,7 @@ const FollowUp = (props) => {
                     where("month", "==", month[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 );
             }
@@ -343,7 +343,7 @@ const FollowUp = (props) => {
                     where("Destination", "==", Destination[0]),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
                 );
             }
@@ -352,7 +352,7 @@ const FollowUp = (props) => {
                     where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
                     where("month", "==", month[0]),
-                    
+
 
                 );
             }
@@ -362,7 +362,7 @@ const FollowUp = (props) => {
                     where("Lead_Status", "in", lead),
                     where("Destination", "==", Destination[0]),
                     where("month", "==", currentMonth),
-                    
+
 
 
                 );
@@ -373,7 +373,7 @@ const FollowUp = (props) => {
                     where("Lead_Status", "in", lead),
                     where('assigned_date_time', '>=', assign_date[0]),
                     where('assigned_date_time', '<', dateBelow),
-                    
+
 
 
                 );
@@ -382,8 +382,8 @@ const FollowUp = (props) => {
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", user),
                     where("Lead_Status", "in", lead),
-                    
-
+                    limit(200),
+                    orderBy("updated_last")
                     // where("month", "==", currentMonth),
                 );
             }
@@ -396,7 +396,7 @@ const FollowUp = (props) => {
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -407,7 +407,7 @@ const FollowUp = (props) => {
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -418,7 +418,7 @@ const FollowUp = (props) => {
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -429,7 +429,7 @@ const FollowUp = (props) => {
                 where("month", "==", month[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -439,7 +439,7 @@ const FollowUp = (props) => {
                 where("Destination", "==", Destination[0]),
                 where("month", "==", month[0]),
                 where("Lead_Status", "==", lead[0]),
-                
+
 
             )
         }
@@ -449,7 +449,7 @@ const FollowUp = (props) => {
                 where("Destination", "==", Destination[0]),
                 where("month", "==", currentMonth),
                 where("Lead_Status", "==", lead[0]),
-                
+
 
             )
         }
@@ -460,7 +460,7 @@ const FollowUp = (props) => {
                 where("Destination", "==", Destination[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -469,16 +469,23 @@ const FollowUp = (props) => {
                 where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", month[0]),
-                
+
 
             )
         }
         else if (lead.length == 1 && month.length == 1) {
+            const firstdate = new Date(`${month[0]} 1, ${new Date().getFullYear()}`);
+            const lastdate = new Date(`${month[0]} 1, ${new Date().getFullYear()}`);
+            const month = lastdate.getMonth();
+            lastdate.setMonth(month + 1);
+            lastdate.setDate(0);
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", user),
                 where("Lead_Status", "==", lead[0]),
                 where("month", "==", month[0]),
-                
+                where("updated_last", ">=", firstdate),
+                where("updated_last", "<=", lastdate)
+
 
             )
         }
@@ -488,7 +495,7 @@ const FollowUp = (props) => {
                 where("Lead_Status", "==", lead[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
 
             )
@@ -499,7 +506,7 @@ const FollowUp = (props) => {
                 where("month", "==", month[0]),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
             )
         }
         else if (Destination.length == 1) {
@@ -507,7 +514,7 @@ const FollowUp = (props) => {
                 where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
                 where("month", "==", currentMonth),
-                
+
 
             )
         }
@@ -517,7 +524,7 @@ const FollowUp = (props) => {
                 where("assign_to.uid", "==", user),
                 // where("month", "==", currentMonth),
                 where("Lead_Status", "==", lead[0]),
-                
+
 
             )
         }
@@ -525,7 +532,7 @@ const FollowUp = (props) => {
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", user),
                 where("month", "==", month[0]),
-                
+
 
             )
         }
@@ -534,7 +541,7 @@ const FollowUp = (props) => {
                 where("assign_to.uid", "==", user),
                 where('assigned_date_time', '>=', assign_date[0]),
                 where('assigned_date_time', '<', dateBelow),
-                
+
 
             )
         }
@@ -557,10 +564,10 @@ const FollowUp = (props) => {
 
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                    console.log(doc.data().TripId);
+                    // console.log(doc.data().TripId);
                 });
                 setLead_data(list)
-                // console.log(list);
+                console.log(list);
                 setStatus(0)
                 setopen(false)
 
@@ -692,7 +699,7 @@ const FollowUp = (props) => {
 
                         </div>
                         <div>
-                            <label>Month of travel</label>
+                            <label>Month</label>
                             {
                                 Destination.length > 1 || lead.length > 1 || assign_date.length > 1 ? <>
                                     <Select

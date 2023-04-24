@@ -24,7 +24,6 @@ const Test = () => {
       console.log(collect)
    }
    async function allDoc() {
-      // var date = new Date("01/12/2022");
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
       const q = query(collection(db, "Quote"), where('value.travel_data.TripId', '==', 'NaN4224'))
       const querySnapshot = await getDocs(q);

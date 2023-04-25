@@ -301,7 +301,7 @@ const FollowUp = (props) => {
             }
 
         }
-        else if (lead.length >= 1) {
+        else if (lead.length > 1) {
             if (month.length != 0 && Destination.length != 0 && assign_date.length != 0) {
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", user),
@@ -519,14 +519,25 @@ const FollowUp = (props) => {
             )
         }
         else if (lead.length == 1) {
-            // console.log('get',lead[0],currentMonth)
-            q = query(collection(db, 'Trip'),
-                where("assign_to.uid", "==", user),
-                // where("month", "==", currentMonth),
-                where("Lead_Status", "==", lead[0]),
+            // console.log('trigger')
+            if (lead[0].includes('Converted')) {
+                q = query(collection(db, 'Trip'),
+                    where("assign_to.uid", "==", user),
+                    where("month", "==", currentMonth),
+                    where("Lead_Status", "==", lead[0]),
+                )
+            }
+            else {
+            // console.log('trigger')
+                // console.log('get',lead[0],currentMonth)
+                q = query(collection(db, 'Trip'),
+                    where("assign_to.uid", "==", user),
+                    // where("month", "==", currentMonth),
+                    where("Lead_Status", "==", lead[0]),
 
 
-            )
+                )
+            }
         }
         else if (month.length == 1) {
             q = query(collection(db, 'Trip'),
@@ -567,7 +578,7 @@ const FollowUp = (props) => {
                     // console.log(doc.data().TripId);
                 });
                 setLead_data(list)
-                console.log(list);
+                // console.log(list);
                 setStatus(0)
                 setopen(false)
 

@@ -125,7 +125,7 @@ const Account_converted = ({ profile }) => {
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            // console.log(converted)
+            console.log(converted)
             set_lead_data(converted)
             // Beep()
         });

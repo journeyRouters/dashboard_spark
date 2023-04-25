@@ -5,6 +5,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
+import PaymentMarking from './components/AdminController/Paymentmarking';
 import AttendanceMain from './components/Attendance/AttendanceMain';
 import UploadAttendance from './components/Attendance/uploadAttendance';
 import Assignerhandler from './components/Calling/Pages/Assignerhandler';
@@ -122,7 +123,7 @@ function App() {
     }
 
   }
-  function page(args) {setPage(args)}
+  function page(args) { setPage(args) }
 
   async function authListener() {
     oauth.onAuthStateChanged(user => {
@@ -386,7 +387,7 @@ function App() {
 
                 {
                   profile.access_type === "Accounts" ? <>
-                    
+
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -614,6 +615,9 @@ function App() {
                 <Createquote auth={auth} userProfile={profile} />
               }
               </> : <></>
+          }
+          {
+            Page == 'Payments' ? <PaymentMarking Auth={auth} profile={profile} /> : <></>
           }
 
           {

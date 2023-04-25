@@ -51,8 +51,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
         settarget(0)
     }
     async function getinvoice() {
-        // console.log(data.TripId)
-
         try {
             const docRef = doc(db, "invoice", data.TripId);
             const docSnap = await getDoc(docRef);

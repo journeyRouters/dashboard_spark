@@ -82,6 +82,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         catch (e) { console.log(e) }
         if (SupportSnap.exists()) {
             setTripCount(SupportSnap.data().tripCount)
+
             // console.log(SupportSnap.data().tripCount)
 
         }
@@ -129,6 +130,16 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         getAllUserProfie()
         getTripCounter()
     }, []);
+    function saveToOthers(currentUser) {
+        if (typeof currentUser === 'undefined' || leadData.Checker()) {
+            alert('select spokes/ insufficient data')
+        }
+        else {
+            uploadLeadBySpokes(currentUser.uid, currentUser.name)
+            getLeadOnBoard()
+            onclose()
+        }
+    }
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
         if (uid == 0) {
@@ -157,81 +168,86 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     //     }
     // }
     async function updateTripCounter(counted) {
-        // console.log(counted)
+        console.log(counted)
+
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
             tripCount: counted
         });
 
     }
-    // async function updateHash(json) {
-    //     // console.log(json)
-    //     const TripRef = doc(db, "Support", "Hash");
-    //     // console.log(Object.keys(json).length)
-    //     await updateDoc(TripRef, {
-    //         hash: json
-    //     }, { merge: true });
+    async function updateHash(json) {
+        const TripRef = doc(db, "Support", "Hash");
+        // console.log(Object.keys(json).length)
+        await updateDoc(TripRef, {
+            hash: json
+        }, { merge: true });
 
-
+    }
     function uploadLeadBySpokes(assigned_uid, assigned_name) {
         let countUpdater = TripCounter
         let contactString = leadData.Contact_Number + ''
         let last4 = contactString.slice(contactString.length - 4)
         let tripid = countUpdater + '' + last4
-        if (tripid.includes('Nan')) {
+        // console.log(countUpdater + tripid)        
+        if (countUpdater == 'Nan') {
             alert('server Busy :(')
             return
         }
-        countUpdater = countUpdater + 1
-        setDoc(doc(db, "Trip", tripid), {
-            TripId: tripid,
-            Lead_Status: 'Hot',
-            Campaign_code: 'Direct',
-            Date_of_lead: today,
-            Traveller_name: leadData.name,
-            InstaId: 'Direct lead',
-            Contact_Number: leadData.Contact_Number,
-            Destination: leadData.Destination,
-            Comment: 'none',
-            Departure_City: leadData.Departure_City,
-            Travel_Date: new Date(leadData.Travel_date),
-            Travel_Duration: parseInt(leadData.Travel_Duration),
-            Budget: parseInt(leadData.Budget),
-            Pax: parseInt(leadData.pax),
-            Child: parseInt(leadData.Child),
-            Email: leadData.Email,
-            Remark: 'none',
-            Lead_genrate_date: today,
-            uploaded_by: userProfile.email,
-            Quoted_by: null,
-            uploaded_date: moment(today).format('YYYY-MM-DD'),
-            uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,
-            quotation: 0,
-            quotation_flg: false,
-            month: '',
-            Lead_status_change_date: null,
-            comments: [],
-            Vouchers_flight: [],
-            Vouchers_hotels: [],
-            Vouchers_others: [],
-            vouchers_idproof: [],
-            PaymentScreenshots_flight: [],
-            PaymentScreenshots_hotels: [],
-            PaymentScreenshots_others: [],
-            transfer_request: false,
-            transfer_request_reason: [],
-            assign_to: {
-                uid: assigned_uid,
-                name: assigned_name
-            },
-            assigned_date_time: today,
-            updated_last: null,
-            assign_flg: true,
-            final_package: null
-        });
-        updateTripCounter(countUpdater)
+        else {
+
+            countUpdater = countUpdater + 1
+            setDoc(doc(db, "Trip", tripid), {
+                TripId: tripid,
+                Lead_Status: 'Hot',
+                Campaign_code: 'Direct',
+                Date_of_lead: today,
+                Traveller_name: leadData.name,
+                InstaId: 'Direct lead',
+                Contact_Number: leadData.Contact_Number,
+                Destination: leadData.Destination,
+                Comment: 'none',
+                Departure_City: leadData.Departure_City,
+                Travel_Date: new Date(leadData.Travel_date),
+                Travel_Duration: parseInt(leadData.Travel_Duration),
+                Budget: parseInt(leadData.Budget),
+                Pax: parseInt(leadData.pax),
+                Child: parseInt(leadData.Child),
+                Email: leadData.Email,
+                Remark: 'none',
+                Lead_genrate_date: today,
+                uploaded_by: userProfile.email,
+                Quoted_by: null,
+                uploaded_date: moment(today).format('YYYY-MM-DD'),
+                uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,
+                quotation: 0,
+                quotation_flg: false,
+                month: '',
+                Lead_status_change_date: null,
+                comments: [],
+                Vouchers_flight: [],
+                Vouchers_hotels: [],
+                Vouchers_others: [],
+                vouchers_idproof: [],
+                PaymentScreenshots_flight: [],
+                PaymentScreenshots_hotels: [],
+                PaymentScreenshots_others: [],
+                transfer_request: false,
+                transfer_request_reason: [],
+                assign_to: {
+                    uid: assigned_uid,
+                    name: assigned_name
+                },
+                assigned_date_time: today,
+                updated_last: null,
+                assign_flg: true,
+                final_package: null
+            });
+            updateTripCounter(countUpdater)
+        }
 
     }
+
     function saveForSelf() {
         if (leadData.Checker()) {
             alert('please add sufficient data')
@@ -242,16 +258,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             onclose()
         }
     }
-    function saveToOthers(currentUser) {
-        if (typeof currentUser === 'undefined' || leadData.Checker()) {
-            alert('select spokes/ insufficient data')
-        }
-        else {
-            uploadLeadBySpokes(currentUser.uid, currentUser.name)
-            getLeadOnBoard()
-            onclose()
-        }
-    }
+
     return (
         <Modal open={open} onClose={onclose} style={{ display: "grid", justifyContent: "center", marginTop: "2rem", overflowY: 'scroll' }}>
 
@@ -317,6 +324,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             </div>
         </Modal>
     );
+
 }
 
 

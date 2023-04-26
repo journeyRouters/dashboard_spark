@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import { Modal } from '@material-ui/core';
 import InvoicePdf from '../invoice/invoicePdf';
+import InstallmentsMapper from '../Accounts/installmentsMapper';
 const db = getFirestore(app);
 
 const PaymentMarking = ({ profile }) => {
@@ -132,6 +133,13 @@ const PaymentMarking = ({ profile }) => {
     }
     function closeInvoice() {
         setinvociceOpener(false)
+    }
+    function handleInstallments(event, index) {
+        let data = [...installment];
+        // console.log(data)
+        data[index][event.target.name] = event.target.value;
+        setinstallment(data);
+
     }
     return (
         <div>
@@ -281,10 +289,15 @@ const PaymentMarking = ({ profile }) => {
                         </div>
                     </div>
                     {/* final Package and Invoice */}
-                    <div>
-                        <button onClick={() => finalPackageOpen()}>Final Package</button>
-                        <button onClick={() => invoiceOpen()}>Invoice</button>
-                        <button onClick={() => resetToEdit()}>Reset to Edit</button>
+                    <div className='PaymentButtonDiv'>
+                        <button className='PaymentsButton' onClick={() => finalPackageOpen()}>Final Package</button>
+                        <button className='PaymentsButton' onClick={() => invoiceOpen()}>Invoice</button>
+                        <button className='PaymentsButton' onClick={() => resetToEdit()}>Reset to Edit</button>
+                    </div>
+                    <div className='paymentsConfirmer'>
+                        <InstallmentsMapper data={invoice.installment}
+                            // setDetails={setDetails}
+                            handleInstallments={handleInstallments} TripId={lead_data.TripId} />
                     </div>
 
                 </> : <></>

@@ -13,3 +13,14 @@
     text-decoration: underline;
     color: #1b5786;
 }
+
+.PaymentsButton{
+    width: 7rem;
+    height: 3rem;
+    align-items: center;
+}
+.PaymentButtonDiv{
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+}

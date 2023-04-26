@@ -112,7 +112,7 @@ const Assignerhandler = () => {
                 }
                 else {
                     querySnapshot.forEach((doc) => {
-                        // console.log(doc.data())
+                        // console.log(doc.data())                        
                         AssignLeadToCaller(doc.id)
                         setdataAvailablityFlg(false)
 
@@ -173,7 +173,8 @@ const Assignerhandler = () => {
             caller: {
                 name: currentcaller[0].name,
                 uid: currentcaller[0].uid
-            }
+            },
+            callingStatus:''
         }, { merge: true })
     }
     function ControllApplyer(clickControl) {

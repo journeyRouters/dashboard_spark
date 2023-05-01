@@ -341,8 +341,17 @@ const Profile = (
                             backgroundSize: "cover",
                         }}>
                             <div className='trip_summary'>
-                                <span>TRIP ID:- JR-&nbsp;</span>
-                                <span>{travel_data.TripId}</span>
+                                <span>TRIP ID:-&nbsp;</span>
+                                <span>
+                                    {travel_data.Campaign_code == 'Direct' ?
+                                        <span>
+                                            D-{travel_data.TripId}
+                                        </span>
+                                        :
+                                        <span>
+                                           JR-{travel_data.TripId}
+                                        </span>
+                                    }</span>
                             </div>
 
                             <div className="package_details">

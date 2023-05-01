@@ -265,7 +265,8 @@ const Row = (props) => {
             </Modal>
             <React.Fragment >
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
-                    <TableCell component="th" scope="row">{row.Campaign_code == 'Direct' ?
+                    <TableCell component="th" scope="row">
+                        {row.Campaign_code == 'Direct' ?
                         <span>
                             D-{row.TripId}
                         </span>
@@ -273,7 +274,8 @@ const Row = (props) => {
                         <span>
                             {row.TripId}
                         </span>
-                    }</TableCell>
+                    }
+                    </TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
                         limit ? <>

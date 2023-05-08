@@ -203,6 +203,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                 Campaign_code: 'Direct',
                 Date_of_lead: today,
                 Traveller_name: leadData.name,
+                FlightBookedFlg:false,
                 InstaId: 'Direct lead',
                 Contact_Number: leadData.Contact_Number,
                 Destination: leadData.Destination,

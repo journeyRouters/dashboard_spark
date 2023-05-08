@@ -83,6 +83,7 @@ const Driver = (props) => {
                         PaymentScreenshots_others:[],
                         transfer_request: false,
                         transfer_request_reason: [],
+                        FlightBookedFlg:false,
                         assign_to: {
                             uid: null,
                             name: null

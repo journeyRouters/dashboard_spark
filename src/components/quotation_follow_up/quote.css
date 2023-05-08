@@ -42,6 +42,11 @@
     display: flex;
     justify-content: space-between;
 }
+.flightnotbook {
+    width: 4rem;
+    height: 3rem;
+    /* margin-top: 3rem; */
+}
 
 .p {
     font-weight: 600;

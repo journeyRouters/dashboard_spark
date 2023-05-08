@@ -267,14 +267,21 @@ const Row = (props) => {
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">
                         {row.Campaign_code == 'Direct' ?
-                        <span>
-                            D-{row.TripId}
-                        </span>
-                        :
-                        <span>
-                            {row.TripId}
-                        </span>
-                    }
+                            <span>
+                                D-{row.TripId}
+                            </span>
+                            :
+                            <span>
+                                {row.TripId}
+                            </span>
+                        }
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                        {
+                            row.FlightBookedFlg ?
+                                <img src='../assets/Notification/plane1.gif' className='flightbook' />
+                                : <img src='../assets/Notification/noflight.png' className='flightnotbook' />
+                        }
                     </TableCell>
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
@@ -311,7 +318,7 @@ const Row = (props) => {
                                         <a href={'tel:' + row.Contact_Number}>{row.Contact_Number}</a>
                                     </p>
                                 </div>
-                                <div className='follow_up'>                                    
+                                <div className='follow_up'>
                                     <CommentsUniCompo row={row} />
                                     {
                                         viewPDF ? <>

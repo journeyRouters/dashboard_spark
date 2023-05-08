@@ -801,6 +801,7 @@ const FollowUp = (props) => {
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>Trip</TableCell>
+                                            <TableCell>Flight</TableCell>
                                             <TableCell align="right">Name</TableCell>
                                             <TableCell align="right">Lead Status</TableCell>
                                             <TableCell align="right">Destination</TableCell>

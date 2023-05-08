@@ -261,6 +261,9 @@
 
 .tableAliner {
     overflow-x: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .Autocomplete {
@@ -279,7 +282,7 @@
     background-color: #FFFFFF;
     width: 28rem;
     border-radius: 10px;
-   
+
 }
 
 .SelfLeadGenParentDiv {
@@ -301,10 +304,40 @@
     height: 40rem;
     margin-left: 2rem;
 }
-.SelfLeadButtonDiv{
+
+.SelfLeadButtonDiv {
     display: flex;
     justify-content: space-around;
 }
-.required{
+
+.required {
     border: 2px solid green;
+}
+
+/* TableheaderCreatequote */
+.Createquoteunicompo {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: aliceblue;
+    width: 98%;
+    /* color: rgb(83, 5, 5); */
+    /* background-image: url('../../../public/assets/Notification/flight.gif');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: 'no-repeat';
+    align-items: center;
+    height: 9rem; */
+
+
+}
+
+.flightbook {
+    width: 5rem;
+    height: 4rem;
+    margin-top: 3rem;
+
 }

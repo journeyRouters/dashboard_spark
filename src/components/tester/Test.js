@@ -13,15 +13,15 @@ const Test = () => {
       const q = query(collection(db, "Trip"),
          // where("Lead_Status", "==", "Converted"),
          // where("quotation_flg", "==", true),
-         where("Contact_Number", "==", 8867325760),
+         // where("Contact_Number", "==", 8867325760),
          // orderBy("Travel_Date")
       )
       var collect = []
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         collect.push(doc.data())
+         add_a_feild(doc.id)
+         console.log(doc.id)
       });
-      console.log(collect)
    }
    async function allDoc() {
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -32,13 +32,9 @@ const Test = () => {
          // add_a_feild(doc.id)
       });
    }
-   function add_a_feild() {
-      // var month=moment(new Date()).format('MMMM-YYYY')
-      // console.log(month)
-      setDoc(doc(db, "Trip", "57385440"), {
-         PaymentScreenshots_flight: [],
-         PaymentScreenshots_hotels: [],
-         PaymentScreenshots_others: [],
+   function add_a_feild(tripid) {
+      setDoc(doc(db, "Trip", tripid), {
+         FlightBookedFlg: false
       }, { merge: true })
    }
    useEffect(() => {

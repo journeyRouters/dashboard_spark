@@ -311,36 +311,8 @@ const Row = (props) => {
                                         <a href={'tel:' + row.Contact_Number}>{row.Contact_Number}</a>
                                     </p>
                                 </div>
-                                <div className='follow_up'>
-                                    {/* <div className='remark' >
-                                        {
-                                            (latestComment.slice(0).reverse()).map((sapn, index) => (
-                                                <div key={index} className='comments_maping'>
-                                                    <p style={{ fontSize: '10px', borderRight: '1px solid' }}>
-                                                        {sapn.comments}
-                                                    </p>
-                                                    <div className='time_date'>
-                                                        <p>{moment(sapn.date).format('DD-MMM-YYYY')}</p>
-                                                        <p>{sapn.time}</p>
-
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
-                                        <h4 className='TravelersComments'>
-                                            <span>
-                                                {row.Comment}
-                                            </span>
-                                            <span>
-                                                Traveler's comments
-                                            </span>
-                                        </h4>
-
-                                    </div> */}
+                                <div className='follow_up'>                                    
                                     <CommentsUniCompo row={row} />
-
-
-
                                     {
                                         viewPDF ? <>
                                             <Modal open={viewPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >

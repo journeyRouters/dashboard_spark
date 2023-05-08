@@ -10,6 +10,7 @@ import MaldiveSuggestion from './MaldiveSuggestion';
 import SelfLeadgenrator from './SelfLeadgenrator';
 import SuggestionQuotes from './suggestionQuotes';
 import './TripComponent.css';
+import CreateQuoteTableRow from './CreateQuoteTableRow';
 
 
 
@@ -26,8 +27,8 @@ const Createquote = (props) => {
     const [SuggestionModal, settransfermodal] = useState(false)
     const [lastVisible, setlastVisible] = useState(null)
     const [sampleQuotes, setsampleQuotes] = useState([])
-    const[AddLead, setAddLead]=useState(false)
-    function AddLeadButtonController(){
+    const [AddLead, setAddLead] = useState(false)
+    function AddLeadButtonController() {
         setAddLead(true)
     }
 
@@ -172,8 +173,8 @@ const Createquote = (props) => {
 
                         <button onClick={() => getLeadOnBoard()}>Refresh</button>
                         <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
-                        <button onClick={()=>AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
-                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard}/>
+                        <button onClick={() => AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
+                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard} />
                     </div>
                     <Modal open={SuggestionModal} onClose={closeMaldivesSuggestionModal} >
                         {
@@ -212,7 +213,7 @@ const Createquote = (props) => {
                                     <>
 
                                         <div className='no_data'>
-                                        {/* <iframe 
+                                            {/* <iframe 
                                         width="560" height="315"
                                          src="https://www.youtube.com/embed/yXWw0_UfSFg" 
                                          title="YouTube video player" frameborder="0" 
@@ -231,10 +232,10 @@ const Createquote = (props) => {
                                         user_uni_data.Destination === "Maldives" ? <>
                                             <Maldives
                                                 email={props.auth.email}
+                                                profile={props.userProfile}
                                                 data={user_uni_data}
                                                 updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                 set_popupopner={set_popupopner}
-                                                profile={props.userProfile}
                                             />
                                         </> : <>
                                             <Box
@@ -247,18 +248,30 @@ const Createquote = (props) => {
                                         </>
                                     }
                                 </> :
-                                    <SortableTbl
-                                        tblData={lead_data}
-                                        tHead={tHead}
-                                        defaultCSS={true}
-                                        paging={false}
-                                        customTd={[
-                                            // { custd: BaseProductTblImageComponent, keyItem: "imageUrl" },
-                                            { custd: BaseProductEditComponent, keyItem: "Quote" },
-                                            { custd: BaseProductDeleteComponent, keyItem: "Last 10 Quote" },
-                                        ]}
-                                        dKey={col}
-                                    />
+                                    // <SortableTbl
+                                    //     tblData={lead_data}
+                                    //     tHead={tHead}
+                                    //     defaultCSS={true}
+                                    //     paging={false}
+                                    //     customTd={[
+                                    //         // { custd: BaseProductTblImageComponent, keyItem: "imageUrl" },
+                                    //         { custd: BaseProductEditComponent, keyItem: "Quote" },
+                                    //         { custd: BaseProductDeleteComponent, keyItem: "Last 10 Quote" },
+                                    //     ]}
+                                    //     dKey={col}
+                                    // />
+
+                                    lead_data.map((data, index) =>
+                                        <CreateQuoteTableRow
+                                            updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                            handleSuggestion={closeMaldivesSuggestionModal}
+                                            closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
+                                            set_popupopner={set_popupopner}
+                                            email={props.auth.email}
+                                            userProfile={props.userProfile}
+                                            data={data} key={index} 
+                                            />
+                                    )
                             }
                             {/* <button className='loadMOreBUtton' onClick={() => getnextdatacontroller()}>Load more</button> */}
                         </>

@@ -9,6 +9,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [currentUser, setCurrentuser] = useState(null)
     const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
     const [Status, setStatus] = useState(data.Lead_Status)
+    const [flightBooked, setflightBooked] = useState(false)
     const db = getFirestore(app);
     var today = new Date()
     // const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
@@ -67,6 +68,14 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         setCurrentuser(profile_of_user)
 
     }
+    async function FlightController(e) {
+        setflightBooked(!flightBooked)
+        const Databaseref = doc(db, "Trip", data.TripId);
+        await updateDoc(Databaseref, {
+            "FlightBookedFlg": !flightBooked
+        });
+        getLeadByDate(currentdate)
+    }
     return (
         <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>
             <div>
@@ -74,6 +83,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Name:-{data.Traveller_name}</span><br />
                 <span>Pax:-{data.Pax}</span><br />
                 <span>Child:-{data.Child}</span><br />
+                <input type='checkbox' checked={flightBooked} onChange={(e) => FlightController(e)} /><span>Flight Is Booked</span>
             </div>
             <div>
                 <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />

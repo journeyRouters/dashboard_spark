@@ -800,8 +800,7 @@ const FollowUp = (props) => {
                                 <Table aria-label="collapsible table" style={{ width: "99%" }}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Trip</TableCell>
-                                            <TableCell>Flight</TableCell>
+                                            <TableCell>Trip Id</TableCell>
                                             <TableCell align="right">Name</TableCell>
                                             <TableCell align="right">Lead Status</TableCell>
                                             <TableCell align="right">Destination</TableCell>

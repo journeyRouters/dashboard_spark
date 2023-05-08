@@ -267,22 +267,36 @@ const Row = (props) => {
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">
                         {row.Campaign_code == 'Direct' ?
-                            <span>
-                                D-{row.TripId}
-                            </span>
+                            <div style={{ display: 'flex', justifyContent: 'space-around' ,alignItems:'center'}}>
+                                <span>
+                                    D-{row.TripId}
+                                </span>
+                                {
+                                    row.FlightBookedFlg ?
+                                        <img src='../assets/Notification/plane1.gif' className='flightbook_' />
+                                        : <></>
+                                }
+                            </div>
                             :
-                            <span>
-                                {row.TripId}
-                            </span>
+                            <div style={{ display: 'flex', justifyContent: 'space-around',alignItems:'center' }}>
+                                <span>
+                                    {row.TripId}
+                                </span>
+                                {
+                                    row.FlightBookedFlg ?
+                                        <img src='../assets/Notification/plane1.gif' className='flightbook_' />
+                                        : <></>
+                                }
+                            </div>
                         }
                     </TableCell>
-                    <TableCell component="th" scope="row">
+                    {/* <TableCell component="th" scope="row">
                         {
                             row.FlightBookedFlg ?
                                 <img src='../assets/Notification/plane1.gif' className='flightbook' />
-                                : <img src='../assets/Notification/noflight.png' className='flightnotbook' />
+                                : <></>
                         }
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
                         limit ? <>

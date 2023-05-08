@@ -42,9 +42,9 @@
     display: flex;
     justify-content: space-between;
 }
-.flightnotbook {
-    width: 4rem;
-    height: 3rem;
+.flightbook_ {
+    width: 5rem;
+    height: 4rem;
     /* margin-top: 3rem; */
 }
 

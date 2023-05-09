@@ -267,24 +267,28 @@ const Row = (props) => {
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">
                         {row.Campaign_code == 'Direct' ?
-                            <div style={{ display: 'flex', justifyContent: 'space-around' ,alignItems:'center'}}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <span>
                                     D-{row.TripId}
                                 </span>
                                 {
                                     row.FlightBookedFlg ?
-                                        <img src='../assets/Notification/plane1.gif' className='flightbook_' />
+                                        <img
+                                            src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FPlane1.gif?alt=media'
+                                            className='flightbook_' />
                                         : <></>
                                 }
                             </div>
                             :
-                            <div style={{ display: 'flex', justifyContent: 'space-around',alignItems:'center' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <span>
                                     {row.TripId}
                                 </span>
                                 {
                                     row.FlightBookedFlg ?
-                                        <img src='../assets/Notification/plane1.gif' className='flightbook_' />
+                                        <img
+                                            src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FPlane1.gif?alt=media'
+                                            className='flightbook_' />
                                         : <></>
                                 }
                             </div>

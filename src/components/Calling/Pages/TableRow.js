@@ -12,10 +12,13 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
     const [Destination, setDestination] = useState(data.Destination)
     const [Name, setName] = useState(data.Traveller_name)
     const [TravelDate, setTravelDate] = useState(null)
+    const [newBudget, setnewBudget] = useState(data.Budget)
     const [Contact, setContact] = useState(data.Contact_Number)
     const [Departure_City, setDeparture_City] = useState(data.Departure_City)
 
-
+    function ChangeBudget(e) {
+        setnewBudget(e.target.value)
+    }
     async function updateStatus(status) {
         setDoc(doc(db, "Trip", data.TripId), {
             callingStatus: status,
@@ -36,6 +39,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
             var currentdate = moment(today).format('YYYY-MM-DD')
             updateTableDataAfterConversion(data.TripId)
             setDoc(doc(db, "Trip", data.TripId), {
+                BUdget: newBudget,
                 Traveller_name: Name,
                 Lead_Status: 'Hot',
                 callingStatus: 'Converted',
@@ -171,6 +175,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                             <h4>Pax :-{data.Pax}</h4>
                             <h4>Prev. spokes :-{data.assign_to.name}</h4>
                             <h4>Contact_Number :-{data.Contact_Number}</h4>
+                            <h4>Budget :-{data.Budget}</h4>
                             <h4> Pre Travel date :-{moment(data.Travel_Date.toDate()).format('DD-MMM-YYYY')}</h4>
                         </div>
                         <div className='line'></div>
@@ -223,6 +228,11 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                             <h4>
                                 <label>Travel Date:-
                                     <input onChange={(e) => setTravelDate(e.target.value)} type='date' ></input>
+                                </label>
+                            </h4>
+                            <h4>
+                                <label>New Budget:-
+                                    <input onChange={(e) => ChangeBudget(e)} type='number' ></input>
                                 </label>
                             </h4>
                         </div>

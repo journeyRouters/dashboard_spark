@@ -657,22 +657,60 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
 
                             </div>
                             <div className='vouchers_upload'>
-                                <p>Payment's/<span className='upload_proof' >upload</span ></p>
+                                <p>Payments's/<span className='upload_proof' onClick={() => setuploader(true)}>upload</span></p>
                                 <div className='upload_radio_button'>
                                     <div className='parent'>
-                                        <input type='radio'></input>
-                                        <div className='childpopup'></div>
-
-                                    </div>
-                                    <div className='parent'>
-                                        <input type='radio'></input>
-                                        <div className='childpopup'></div>
-                                    </div>
-                                    <div className='parent'>
-                                        <input type='radio'></input>
+                                        <input type='radio' checked={latestData.PaymentScreenshots_hotels.length != 0} readOnly></input>
                                         <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_hotels.map((hotel, index) => (
+                                                    <>
+                                                        <div key={index} className='hover_popup_main_div'>
+                                                            <p>
+                                                                {hotel.name}
+                                                            </p>
+                                                            <a href={hotel.link} download={hotel.name} target="_blank">download</a>
 
+                                                            <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
                                         </div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0} readOnly></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_flight.map((flight, index) => (
+                                                    <>
+                                                        <div key={index} className='hover_popup_main_div'>
+                                                            <p>
+                                                                {flight.name}
+                                                            </p>
+                                                            <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                            <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <div className='parent'>
+                                        <input type='radio' checked={latestData.PaymentScreenshots_others.length != 0} readOnly></input>
+                                        <div className='childpopup'>
+                                            {
+                                                latestData.PaymentScreenshots_others.map((others, index) => (
+                                                    <>
+                                                        <div key={index} className='hover_popup_main_div'>
+                                                            <p>
+                                                                {others.name}
+                                                            </p>
+                                                            <a href={others.link} download={others.name} target="_blank">download</a>
+                                                            <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
+                                                        </div>
+                                                    </>
+                                                ))}
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -689,7 +727,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                         EditInvoiceflg ? <>
                                             <Modal open={EditInvoice} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
                                                 <>
-                                                    <EditInvoice installments={invoice.installment} TripId={data.TripId} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal}/>
+                                                    <EditInvoice installments={invoice.installment} TripId={data.TripId} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal} />
                                                 </>
                                             </Modal>
 

@@ -125,7 +125,7 @@ const Account_converted = ({ profile }) => {
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            console.log(converted)
+            // console.log(converted)
             set_lead_data(converted)
             // Beep()
         });
@@ -146,7 +146,7 @@ const Account_converted = ({ profile }) => {
                     <option value="Contact_Number">Contact Number</option>
                     <option value="Travel_date">Travel Month</option>
                 </select>
-                <input placeholder='search your selection' type={SearchKey == 'Travel_date'?"date":String}
+                <input placeholder='search your selection' className={SearchKey == 'Travel_date'?"date":null}
                     onChange={(e) => setInput(e.target.value)}
                 ></input>
                 <input

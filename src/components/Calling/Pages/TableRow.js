@@ -203,6 +203,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                                     <option value={'Kashmir'}>Kashmir</option>
                                     <option value={'Andaman'}>Andaman</option>
                                     <option value={'Goa'}>Goa</option>
+                                    <option value={'Europe'}>Europe</option>
                                     <option value={'Singapore'}>Singapore</option>
                                     <option value={'Rajasthan'}>Rajasthan</option>
                                     <option value={'Veitnam'}>Veitnam</option>

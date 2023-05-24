@@ -43,6 +43,8 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                 Traveller_name: Name,
                 Lead_Status: 'Hot',
                 callingStatus: 'Converted',
+                x_callerFlg:true,
+                x_Caller:data.assign_to.name,
                 Contact_Number: Contact,
                 callingStatusChangeDate: currentdate,
                 Follow_Up_date: '',

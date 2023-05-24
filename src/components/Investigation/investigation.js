@@ -6,6 +6,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import app from '../required';
+// import IndividuaInvestigation from './IndividuaInvestigation';
 const db = getFirestore(app);
 
 const Investigation = ({ profile }) => {
@@ -283,6 +284,7 @@ const Investigation = ({ profile }) => {
                     <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
                 </>
             </Modal>
+            {/* <IndividuaInvestigation/> */}
 
             {
                 dataAvailablityFlg ? <>

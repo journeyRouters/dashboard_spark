@@ -28,7 +28,6 @@ const CreateQuote = ({ Auth, profile }) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                // console.log(list)
                 setLead_data(list)
                 setopen(false)
             }
@@ -39,6 +38,11 @@ const CreateQuote = ({ Auth, profile }) => {
         }
 
     }
+    // function update(tripid) {
+    //     setDoc(doc(db, "Trip", tripid), {
+    //         callingStatus: 'Dump'
+    //     }, { merge: true })
+    //  }
 
     function updateTableDataAfterUpdate(tripid) {
         var pre_tableData = lead_data

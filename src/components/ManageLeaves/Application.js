@@ -72,7 +72,7 @@ const Application = ({profile,auth,getLeaveApplication}) => {
                 setTo(dateObject)
             }
         }
-        console.log(new Date(date))
+        // console.log(new Date(date))
     }
     function handleLeaveType(args){
         setLeaveType(args)

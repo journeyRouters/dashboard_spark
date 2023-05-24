@@ -40,7 +40,6 @@ const Adminrow = ({ data, totalAttendance, fetch_Attendance }) => {
         totalAttendance[index].TotalWorkingHours = totalHr
         totalAttendance[index].Status = status
         updateAttendance(totalAttendance, data.userId)
-
     }
     function findTheIndex(indicator) {
         var date = moment(data.dateObject.toDate()).format('DD-MM-YYYY')

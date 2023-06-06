@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import moment from 'moment/moment';
 import { default as React, useEffect } from 'react';
 import app from '../required';
@@ -24,17 +24,17 @@ const Test = () => {
          console.log(doc.id)
       });
    }
-   async function CreditLeaves(id){
+   async function CreditLeaves(id) {
       setDoc(doc(db, "Profile", id), {
-        Leave:{
-         CasualLeave:10,
-         LeaveWithoutPay:10,
-         MaternityLeave:182,
-         PrivilegedLeave:12,
-         SickLeave:12
-        }
+         Leave: {
+            CasualLeave: 10,
+            LeaveWithoutPay: 10,
+            MaternityLeave: 182,
+            PrivilegedLeave: 12,
+            SickLeave: 12
+         }
       }, { merge: true })
-      console.log(id,'done')
+      console.log(id, 'done')
    }
    async function allDoc() {
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -49,65 +49,80 @@ const Test = () => {
       setDoc(doc(db, "Trip", tripid), {
          x_callerFlg: false
       }, { merge: true })
-      console.log(tripid,'done')
+      console.log(tripid, 'done')
    }
    async function FetchLeaves() {
       const q = query(collection(db, "Leaves"))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         FetchProfile(doc.data())
-         console.log(doc.id)
+         FetchProfile(doc.data(), doc.data().appliedBY.uid)
+         console.log(doc.id, 'fetch Leave')
       });
    }
-   async function FetchProfile(leavedata) {
-      const q = query(collection(db, "Profile",leavedata.appliedBY.uid))
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-         calculateLeaves(doc.data(),leavedata)
-         console.log(doc.id)
-      });
+   async function FetchProfile(leavedata, uid) {
+      const docRef = doc(db, "Profile", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+         calculateLeaves(docSnap.data(), leavedata, docSnap.id)
+         console.log(docSnap.id, 'fetching profile')
+      }
    }
 
-  
-  
-   function calculateLeaves(userProfile,data) {
+
+
+   function calculateLeaves(userProfile, data, docid) {
+      console.log('calculating....')
       var BalanceLeaves = userProfile.Leave
       var difference = data.From.toDate() - data.To.toDate();
       var Day = Math.floor(difference / 1000 / 60 / 60 / 24);
       if (Day == 0) {
-          Day = -1
+         Day = -1
       }
       switch (data.LeaveType) {
-          case 'CasualLeave': {
-              BalanceLeaves.CasualLeave = Math.abs(BalanceLeaves['CasualLeave'] + Day)
-              break
-          }
-          case 'LeaveWithoutPay': {
-              BalanceLeaves.LeaveWithoutPay = Math.abs(BalanceLeaves['LeaveWithoutPay'] + Day)
-              break
-          }
-          case 'MaternityLeave': {
-              BalanceLeaves.MaternityLeave = Math.abs(BalanceLeaves['MaternityLeave'] + Day)
-              break
-          }
-          case 'PrivilegedLeave': {
-              BalanceLeaves.PrivilegedLeave = Math.abs(BalanceLeaves['PrivilegedLeave'] + Day)
-              break
-          }
-          case 'SickLeave': {
-              BalanceLeaves.SickLeave = Math.abs(BalanceLeaves['SickLeave'] + Day)
-              break
-          }
-          default: {
-              console.log('some error')
-          }
+         case 'CasualLeave': {
+            BalanceLeaves.CasualLeave = Math.abs(BalanceLeaves['CasualLeave'] + Day)
+            updateLeave(docid, BalanceLeaves,userProfile)
+            break
+         }
+         case 'LeaveWithoutPay': {
+            BalanceLeaves.LeaveWithoutPay = Math.abs(BalanceLeaves['LeaveWithoutPay'] + Day)
+            updateLeave(docid, BalanceLeaves,userProfile)
+            break
+         }
+         case 'MaternityLeave': {
+            BalanceLeaves.MaternityLeave = Math.abs(BalanceLeaves['MaternityLeave'] + Day)
+            updateLeave(docid, BalanceLeaves,userProfile)
+            break
+         }
+         case 'PrivilegedLeave': {
+            BalanceLeaves.PrivilegedLeave = Math.abs(BalanceLeaves['PrivilegedLeave'] + Day)
+            updateLeave(docid, BalanceLeaves,userProfile)
+            break
+         }
+         case 'SickLeave': {
+            BalanceLeaves.SickLeave = Math.abs(BalanceLeaves['SickLeave'] + Day)
+            updateLeave(docid, BalanceLeaves,userProfile)
+            break
+         }
+         default: {
+            console.log('some error')
+         }
       }
 
-  }
-   
+   }
+   async function updateLeave(id, BalanceLeaves,userProfile) {
+      const ref = doc(db, "Profile", id);
+      await updateDoc(ref, {
+         Leave: BalanceLeaves
+      });
+      console.log(id, 'done', BalanceLeaves,userProfile.name)
+   }
+
    useEffect(() => {
       // FetchProfile()
       // add_a_feild_()
+      // FetchLeaves()
       // SendNotification()
       //   tester()
       // allDoc()

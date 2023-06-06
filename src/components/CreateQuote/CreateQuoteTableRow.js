@@ -11,6 +11,7 @@ const CreateQuoteTableRow = ({
     data, updateTableDataAfterQuote,
     email, userProfile
 }) => {
+    // console.log(userProfile)
     const [SuggestionModal, settransfermodal] = useState(false)
     const [popupopener, set_popupopner] = useState(false)
     const [user_uni_data, set_uni_data] = useState([])
@@ -79,10 +80,14 @@ const CreateQuoteTableRow = ({
                     }
                 </> : <></>
             }
-            <div>
+            <div className={userProfile.user_type == 'Team Leader' && data.x_callerFlg == true ? 'called' : <></>}>
                 <h4>TripId:-{data.TripId} </h4>
                 <h4>Name:-{data.Traveller_name}</h4>
                 <h4>Contact:- {data.Contact_Number}</h4>
+                {
+                    data.x_callerFlg == true ?
+                        <h4>x-Caller:-{data.x_Caller}</h4> : <></>
+                }
             </div>
             <div>
                 <h4>Budget:-{data.Budget}</h4>

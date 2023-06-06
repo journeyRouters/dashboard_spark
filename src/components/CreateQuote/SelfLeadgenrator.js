@@ -129,7 +129,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     useEffect(() => {
         getAllUserProfie()
         getTripCounter()
-    }, []);
+    }, [open]);
     function saveToOthers(currentUser) {
         if (typeof currentUser === 'undefined' || leadData.Checker()) {
             alert('select spokes/ insufficient data')
@@ -168,7 +168,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     //     }
     // }
     async function updateTripCounter(counted) {
-        console.log(counted)
+        // console.log(counted)
 
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
@@ -196,7 +196,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
         else {
 
-            countUpdater = countUpdater + 1
+            countUpdater = parseInt(countUpdater) + 1
             setDoc(doc(db, "Trip", tripid), {
                 TripId: tripid,
                 Lead_Status: 'Hot',

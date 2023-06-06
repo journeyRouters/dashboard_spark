@@ -346,3 +346,7 @@
     height: 3rem;
     /* margin-top: 3rem; */
 }
+.called{
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2Fcalled.png?alt=media');
+    background-size: 100% 100%;
+}

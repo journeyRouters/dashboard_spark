@@ -1,17 +1,14 @@
+import { Modal } from '@material-ui/core';
+import { PDFExport } from "@progress/kendo-react-pdf";
 import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
-import jsPDF from 'jspdf';
-import React, { useRef, useState, useEffect } from 'react';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import moment from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
 import app from '../required';
+import Footer, { GoogleReviews } from './footer';
 import './pdfcss.css';
 import './profile.css';
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import moment from 'moment';
-import { Call, CallMissedOutgoing, ContactlessOutlined, Image } from '@material-ui/icons';
-import Footer, { GoogleReviews } from './footer';
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import NightsController from './subcomponents/NightsController';
-import { Modal } from '@material-ui/core';
-import { wait } from '@testing-library/user-event/dist/utils';
 const db = getFirestore(app);
 const storage = getStorage();
 
@@ -42,7 +39,7 @@ const Profile = (
         flight
     }
 ) => {
-    // console.log(selected_Travel_date)
+    console.log(travel_data)
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"
@@ -50,8 +47,6 @@ const Profile = (
     const pdfExportComponent = useRef(null);
     const Data = travel_data
     const currentdate = new Date();
-    const TripId = Data.TripId
-    const month = currentdate.toLocaleString('default', { month: 'long' })
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
     const [wait, setwait] = useState(false)
@@ -349,7 +344,7 @@ const Profile = (
                                         </span>
                                         :
                                         <span>
-                                           JR-{travel_data.TripId}
+                                            JR-{travel_data.TripId}
                                         </span>
                                     }</span>
                             </div>
@@ -377,7 +372,16 @@ const Profile = (
                                 <h4 className="seth4">INR :{formatter.format(parseInt(landPackage) + parseInt(flightcost) + parseInt(visacost))}/-</h4>
                                 <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
-                            <div style={{ marginTop: '8.3rem' }}>
+                            {
+                                travel_data.dateTimeStampList ? <p style={{ color: 'white', marginTop: '4rem',fontSize:'13px' }}>
+                                    Created on :-{moment(travel_data.dateTimeStampList[0].toDate()).format('MMMM Do YYYY, h:mm:ss a')}
+
+                                </p> :
+                                    <p style={{ color: 'white', marginTop: '4rem',fontSize:'13px' }}>
+                                        Created on :-{moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')}
+                                    </p>
+                            }
+                            <div style={{ marginTop: '2.2rem' }}>
                                 <Footer whatsApp={whatsApp} />
                             </div>
                         </div>

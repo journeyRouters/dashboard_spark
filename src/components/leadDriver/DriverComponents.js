@@ -1,9 +1,8 @@
 import { deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import app from '../required';
 import './Driver.css';
-
 
 const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
     const [currentUser, setCurrentuser] = useState(null)
@@ -12,11 +11,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [flightBooked, setflightBooked] = useState(false)
     const db = getFirestore(app);
     var today = new Date()
-    // const [testdate, setvtestdate] = useState(data.Travel_Date ? data.Travel_Date : false)
-    // const testdate = data.Travel_Date
-
-    // console.log(moment(testdate.toDate()).format('DD-MM-YYYY'))
-    var currentdate = moment(today).format('YYYY-MM-DD')
+        var currentdate = moment(today).format('YYYY-MM-DD')
 
     async function deletelead(tripid) {
         try {
@@ -114,11 +109,8 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <select disabled={data.assign_flg} onChange={(e) => filterDataFromProfile(e.target.value)}>
                     <option value={0}> assign to</option>
                     {
-                        profile.map((data, index) => (<>
-                            {/* {console.log(data.Lead_Current)} */}
-                            <option key={index} value={data.uid}>{data.name}</option>
-
-                        </>))
+                        profile.map((data, index) => (
+                            <option key={index} value={data.uid}>{data.name}</option>))
                     }
                 </select>
             </div>

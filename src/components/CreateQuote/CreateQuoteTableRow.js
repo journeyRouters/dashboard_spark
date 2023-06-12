@@ -101,7 +101,7 @@ const CreateQuoteTableRow = ({
             <div>
                 <h4>Assign Date:-{data.uploaded_date}</h4>
                 <h4>Destination:-{data.Destination}</h4>
-                <h4>Satus:-{data.Lead_Status}</h4>
+                <h4>Status:-{data.Lead_Status}</h4>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                 <button onClick={() => editItem()}>Fresh Quote</button>

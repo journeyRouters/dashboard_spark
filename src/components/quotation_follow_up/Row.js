@@ -373,7 +373,7 @@ const Row = (props) => {
                                                             SelectedpackageType={data.SelectedpackageType}
                                                             indicator={true}
                                                             inclusion_data={data.inclusion_data}
-                                                            travel_data={data.travel_data}
+                                                            travel_data={tripData}
                                                             count_days={data.count_days}
                                                             cabDetailsData={data.cabDetailsData}
                                                             flights={data.flights}

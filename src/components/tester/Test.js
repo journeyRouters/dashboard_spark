@@ -1,10 +1,7 @@
-import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
-import moment from 'moment/moment';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
-import { SendNotification } from '../emailer/NotifyByEmail';
-import { act } from '@testing-library/react';
 const db = getFirestore(app);
 
 const Test = () => {
@@ -38,12 +35,20 @@ const Test = () => {
    }
    async function allDoc() {
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      const q = query(collection(db, "Quote"), where('value.travel_data.TripId', '==', 'NaN4224'))
+      console.log('trigger')
+      const q = query(collection(db, "Trip"), where("month", "==", "April"))
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         console.log(doc.data())
-         // add_a_feild(doc.id)
+         console.log(doc.id)
+         updateMonthFeild(doc.id)
       });
+   }
+   async function updateMonthFeild(id) {
+      const ref = doc(db, "Trip", id);
+      await updateDoc(ref, {
+         month: "April-2023"
+      });
+      console.log('updated', id)
    }
    function add_a_feild(tripid) {
       setDoc(doc(db, "Trip", tripid), {
@@ -82,27 +87,27 @@ const Test = () => {
       switch (data.LeaveType) {
          case 'CasualLeave': {
             BalanceLeaves.CasualLeave = Math.abs(BalanceLeaves['CasualLeave'] + Day)
-            updateLeave(docid, BalanceLeaves,userProfile)
+            updateLeave(docid, BalanceLeaves, userProfile)
             break
          }
          case 'LeaveWithoutPay': {
             BalanceLeaves.LeaveWithoutPay = Math.abs(BalanceLeaves['LeaveWithoutPay'] + Day)
-            updateLeave(docid, BalanceLeaves,userProfile)
+            updateLeave(docid, BalanceLeaves, userProfile)
             break
          }
          case 'MaternityLeave': {
             BalanceLeaves.MaternityLeave = Math.abs(BalanceLeaves['MaternityLeave'] + Day)
-            updateLeave(docid, BalanceLeaves,userProfile)
+            updateLeave(docid, BalanceLeaves, userProfile)
             break
          }
          case 'PrivilegedLeave': {
             BalanceLeaves.PrivilegedLeave = Math.abs(BalanceLeaves['PrivilegedLeave'] + Day)
-            updateLeave(docid, BalanceLeaves,userProfile)
+            updateLeave(docid, BalanceLeaves, userProfile)
             break
          }
          case 'SickLeave': {
             BalanceLeaves.SickLeave = Math.abs(BalanceLeaves['SickLeave'] + Day)
-            updateLeave(docid, BalanceLeaves,userProfile)
+            updateLeave(docid, BalanceLeaves, userProfile)
             break
          }
          default: {
@@ -111,21 +116,20 @@ const Test = () => {
       }
 
    }
-   async function updateLeave(id, BalanceLeaves,userProfile) {
+   async function updateLeave(id, BalanceLeaves, userProfile) {
       const ref = doc(db, "Profile", id);
       await updateDoc(ref, {
          Leave: BalanceLeaves
       });
-      console.log(id, 'done', BalanceLeaves,userProfile.name)
    }
 
    useEffect(() => {
+      // allDoc()
       // FetchProfile()
       // add_a_feild_()
       // FetchLeaves()
       // SendNotification()
       //   tester()
-      // allDoc()
       // add_a_feild()
    }, []);
    return (

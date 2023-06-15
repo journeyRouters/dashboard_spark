@@ -493,6 +493,7 @@ export const avtivityList = {
         }
     ],
     Singapore: [
+
         {
             label: 'Arival',
             value: 'Arival'
@@ -682,7 +683,42 @@ export const avtivityList = {
         {
             label: 'Art Science Museum',
             value: 'ArtScienceMuseum'
-        }
+        },
+        {
+            label:'Adventure Cove Water Park',
+            value:'AdventureCoveWaterPark'
+        },
+        {
+            label:'Botanical and Orchid Garden',
+            value:'BotanicalandOrchidGardenSingapore'
+        },{
+            label:'Coach Transfers',
+            value:'CoachTransfers'
+        },{
+            label:'Dolphin Encounter',
+            value:'DolphinEncounter'
+        },{
+            label:'Museum of Ice Cream',
+            value:'MuseumofIceCream'
+        },{
+            label:'Sea Aquarium Sentosa',
+            value:'SeaAquariumSentosa'
+        },{
+            label:'Singapore Big Bus Tour',
+            value:'SingaporeBigBusTour'
+        },{
+            label:'Singapore Flyer',
+            value:'SingaporeFlyer'
+        },{
+            label:'Singapore I fly',
+            value:'SingaporeIfly'
+        },{
+            label:'Singapore Vintage Vespa Side car Heritage Tour',
+            value:'SingaporeVintageVespaSidecarHeritageTour'
+        },{
+            label:'Singapore River Cruise',
+            value:'SingaporeRiverCruise'
+        },
     ],
     Veitnam: [
         {

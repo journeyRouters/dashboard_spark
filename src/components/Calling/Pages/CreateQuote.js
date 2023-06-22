@@ -7,7 +7,7 @@ import app from '../../required';
 const CreateQuote = ({ Auth, profile }) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
-    const [open, setopen] = useState(true)   
+    const [open, setopen] = useState(true)
     async function getLeadOnBoard() {
         // console.log(props.auth.uid)
         try {
@@ -15,7 +15,7 @@ const CreateQuote = ({ Auth, profile }) => {
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
                 where('Lead_Status', '==', 'Dump'),
-                where('callingStatus', 'not-in', ['Cold', 'Dump', 'Active', 'Hot'])
+                where('callingStatus', 'not-in', ['Cold', 'Dump', 'Active', 'Hot', 'Converted'])
             );
             var querySnapshot;
 
@@ -58,6 +58,10 @@ const CreateQuote = ({ Auth, profile }) => {
         <>
             {
                 Auth ? <>
+                    <div className='global_search' >
+                        <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+
+                    </div>
                     {
                         lead_data.length == 0 ? <>
                             {

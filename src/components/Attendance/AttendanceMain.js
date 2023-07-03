@@ -36,7 +36,7 @@ const AttendanceMain = ({ profile }) => {
             HalfPresent: null,
             Present: null,
             Allowed: null,
-            HalfPresentDueTo:null
+            HalfPresentDueTo: null
         }
         var new_tableData = data.filter((data) => data.Status == 'Absent')
         obj.Absent = new_tableData.length
@@ -108,7 +108,7 @@ const AttendanceMain = ({ profile }) => {
                         AttendanceReport != null ? <div>
                             <h3>Present:- {AttendanceReport.Present}</h3>
                             <h3>Absent:- {AttendanceReport.Absent}</h3>
-                            <h3>½Present:- {AttendanceReport.HalfPresent+AttendanceReport.HalfPresentDueTo}</h3>
+                            <h3>½Present:- {AttendanceReport.HalfPresent + AttendanceReport.HalfPresentDueTo}</h3>
                             <h3>Allowed:- {AttendanceReport.Allowed}</h3>
 
                         </div> : <></>
@@ -126,12 +126,18 @@ const AttendanceMain = ({ profile }) => {
                                     <th className='r'>Check Out</th>
                                     <th className='r'>total Hr.</th>
                                     <th className='r'>Status</th>
+                                    <th className='r' >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     Attendance.map((data, index) => <>
-                                        <Row data={data} key={index} totalAttendance={Attendance} />
+                                        <Row
+                                            user={profile.AttendanceId}
+                                            data={data}
+                                            key={index}
+                                            totalAttendance={Attendance}
+                                            fetch_Attendance={fetch_Attendance} />
                                     </>)
                                 }
 

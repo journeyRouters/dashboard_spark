@@ -27,6 +27,7 @@ const CreateQuote = ({ Auth, profile }) => {
 
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
+                    
                 });
                 setLead_data(list)
                 setopen(false)

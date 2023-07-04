@@ -31,11 +31,11 @@ const Row = ({ data, totalAttendance,fetch_Attendance,user }) => {
             <td className='r'>{data.checkOut}</td>
             <td className='r'>{data.TotalWorkingHours} Hr</td>
             <td className='r'>{data.Status}</td>
-            {/* <td>
+            <td>
                 <button
                  onClick={() => DeleteEntry()}
                  >Delete</button>
-            </td> */}
+            </td>
         </tr>
     );
 }

@@ -126,7 +126,7 @@ const AttendanceMain = ({ profile }) => {
                                     <th className='r'>Check Out</th>
                                     <th className='r'>total Hr.</th>
                                     <th className='r'>Status</th>
-                                    {/* <th className='r' >Action</th> */}
+                                    <th className='r' >Action</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,16 +1,13 @@
-import React from 'react';
-import readXlsxFile from 'read-excel-file';
-import { fromEvent } from "file-selector";
-import moment from 'moment';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import app from '../required';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import './Attendance.css'
+import './Attendance.css';
 import Row from './Row';
-import Adminrow from './Adminrow';
+import exportFromJSON from 'export-from-json'
 
 const AttendanceMain = ({ profile }) => {
+    const fileName = `${profile.name}`
+    const exportType = 'xls'
     const db = getFirestore(app);
     const [Attendance, setData] = useState([])
     const [AttendanceFlg, setAttendanceflg] = useState(false)
@@ -30,6 +27,10 @@ const AttendanceMain = ({ profile }) => {
         }
 
     }
+   function  ExportToExcel () { 
+    console.log(Attendance) 
+        exportFromJSON({  data: Attendance, fileName: 'download', exportType: exportFromJSON.types.xls})  
+      }  
     function contAbsent(data) {
         var obj = {
             Absent: null,
@@ -102,6 +103,7 @@ const AttendanceMain = ({ profile }) => {
                     <input type={'date'} placeholder='select a date' onChange={(e) => setselectedDate(e.target.value)}></input>
                     <button onClick={() => updateAttendanceTableData()}>Find</button>
                     <button onClick={() => fetch_Attendance(profile.AttendanceId)}>Reset</button>
+                    {/* <button onClick={()=>ExportToExcel()}>export data</button> */}
                 </div>
                 <div>
                     {

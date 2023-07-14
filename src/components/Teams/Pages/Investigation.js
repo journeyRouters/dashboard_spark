@@ -105,8 +105,10 @@ const Investigation = ({ uid, TeamProfile }) => {
         var prev_instance = dataLoaded
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
-                where('Lead_Status', '!=', 'Dump'), where("month", "==", currentMonth)
+            var q = query(collection(db, "Trip"),
+                where("assign_to.uid", "==", uid),
+                where("quotation_flg", "==", false),
+                where('Lead_Status', '!=', 'Dump')
             );
             var querySnapshot;
 
@@ -152,10 +154,15 @@ const Investigation = ({ uid, TeamProfile }) => {
     async function Dump() {
         var local = { name: 'dump', value: 0, fill: 'red' }
         var prev_instance = dataLoaded
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
-                where('Lead_Status', 'in', ['Dump']), where("quotation_flg", "==", true), where("month", "==", currentMonth));
+            var q = query(collection(db, "Trip"),
+                where("assign_to.uid", "==", uid),
+                where('Lead_Status', '==', 'Dump'),
+                where("quotation_flg", "==", true),
+                where("updated_last", ">=", firstDay));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

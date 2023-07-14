@@ -338,9 +338,9 @@ const AdminInvestigation = ({ profile }) => {
     async function getDumpLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var local = { name: 'Dump', value: 0, fill: '#FF0000' }
         var prev_instance = dataLoaded
-        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }

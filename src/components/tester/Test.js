@@ -34,14 +34,21 @@ const Test = () => {
       console.log(id, 'done')
    }
    async function allDoc() {
+      var list = []
       // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      console.log('trigger')
-      const q = query(collection(db, "Trip"), where("month", "==", "April"))
+      // console.log('trigger')
+      const q = query(collection(db, "Attendance"),
+         // where("month", "==", "May"),
+         where('Lead_Status', '==', 'Converted'),
+         // where('caller.name', '==', 'KULJEET SINGH'),
+         // where('callingStatus', '==', 'Converted')
+         )
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         console.log(doc.id)
-         updateMonthFeild(doc.id)
+         console.log(doc.data())
+         list.push(doc.id)
       });
+      console.log(list.length)
    }
    async function updateMonthFeild(id) {
       const ref = doc(db, "Trip", id);

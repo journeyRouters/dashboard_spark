@@ -50,6 +50,7 @@ const FollowUp = ({ uid, profile, auth, setcount }) => {
     useEffect(() => {
         getLeadOnBoard()
     }, []);
+    
     return (
         <div>
             <div className='theBar'>

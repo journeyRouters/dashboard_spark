@@ -214,7 +214,6 @@ const Row = (props) => {
             var commentLimit = new Date(row.updated_last.toDate());
             commentLimit.setDate(commentLimit.getDate() + 3)
             setLimit(commentLimit < today)
-
         }
     }
 

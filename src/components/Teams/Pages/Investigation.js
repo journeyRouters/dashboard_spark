@@ -18,8 +18,57 @@ const Investigation = ({ uid, TeamProfile }) => {
     const [member, setmember] = useState()
     const [lastTarget, setLastTarget] = useState([])
     const [Target, setTarget] = useState(0)
-    // var graphData = []
+    var today = new Date();
+    var counted = 0
+    // const[noResponseCounter,setnoResponseCounter]=useState(localStorage.getItem('Counter'))
     const [currentMonth, setmonth] = useState(moment(date).format('MMMM'))
+
+    async function getLeadOnBoard() {
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
+                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true)
+            );
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                return
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                    checkForLastUpdate(doc.data())
+                });
+                // console.log(counted)
+                var prev_instance = StatusData
+                var local = { name: '72 HR', value: counted, fill: '#ffef7d' }
+                prev_instance.push(local)
+                setStatusData(prev_instance)
+
+
+            }
+        }
+        catch (erorr) {
+            console.log(erorr)
+        }
+
+    }
+    function checkForLastUpdate(row) {
+        if (row.updated_last) {
+            var commentLimit = new Date(row.updated_last.toDate());
+            commentLimit.setDate(commentLimit.getDate() + 3)
+            // setLimit(commentLimit < today)
+            if (commentLimit < today) {
+                // var count = localStorage.getItem('Counter')
+                // localStorage.setItem('Counter', count+1);
+                counted++
+            }
+
+        }
+    }
+
     async function fetch_profile() {
         try {
             const docRef = doc(db, "Profile", uid);
@@ -310,6 +359,7 @@ const Investigation = ({ uid, TeamProfile }) => {
         Dump()
         Converted()
         HotLead()
+        getLeadOnBoard()
     }
     useEffect(() => {
         if (uid !== 0) {
@@ -332,7 +382,7 @@ const Investigation = ({ uid, TeamProfile }) => {
                 {
                     dataAvailablityFlg ?
                         <>
-                            <div style={{ display: 'flex', justifyContent: 'space-around',marginTop:'2rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '2rem' }}>
                                 <BarChart
                                     width={500}
                                     height={300}

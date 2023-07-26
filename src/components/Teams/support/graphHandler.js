@@ -10,7 +10,10 @@ const GraphHandler = ({ TeamData }) => {
     const [leadAssign, setLeadAssignedNumber] = useState([])
     const [convertedFile, setcountConverted] = useState([])
     const [DumpedByTeam, setDumped] = useState([])
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     async function getLeadSeededInTeam() {
+        
         var len = TeamData.TeamMembers.length
         var totalLeadSeeded = []
         for (var member = 0; member < len; member++) {
@@ -20,8 +23,8 @@ const GraphHandler = ({ TeamData }) => {
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", TeamData.TeamMembers[member].value),
-                    // where('Lead_Status', '!=', 'Dump'), 
-                    where("month", "==", currentMonth)
+                    where("assigned_date_time", ">=", firstDay)
+                    
                 );
                 var querySnapshot;
 
@@ -85,7 +88,7 @@ const GraphHandler = ({ TeamData }) => {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", TeamData.TeamMembers[member].value),
                     where('Lead_Status', '==', 'Dump'),
-                    where("month", "==", currentMonth)
+                    where("updated_last", ">=", firstDay)
                 );
                 var querySnapshot;
 

@@ -58,7 +58,7 @@ const MainPage = ({ profile ,auth }) => {
                                 </h3>
                             </div>
                             <div>
-                                <span style={{ fontSize: '15px', fontWeight: '600' }}> Leaded BY:-{data.createdBy.name}</span>
+                                <span style={{ fontSize: '15px', fontWeight: '600' }}> Leader:-{data.createdBy.name}</span>
                                 <div style={{ marginTop: '2rem', marginLeft: '0.5rem' }}>
                                     {
                                         data.TeamMembers.map((data, index) => <>

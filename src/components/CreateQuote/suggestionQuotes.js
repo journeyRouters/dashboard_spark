@@ -146,7 +146,7 @@ const SuggestionQuotes = ({
                     <FormControlLabel control={<Radio />} value={1} label="most Matched Quote" />
                     <FormControlLabel control={<Radio />} value={2} label="Search by TripId" />
                 </RadioGroup >
-                <input type={"number"} placeholder="TripId" onChange={(e)=>setTripid(e.target.value)}></input>
+                <input type={"string"} placeholder="TripId" onChange={(e)=>setTripid(e.target.value)}></input>
                 <button onClick={()=>getSampleQuotesonSpecificTrip()}>Search</button>
                 <div>
                     <button onClick={() => usethisquoteHandler()}>USE THIS QUOTE</button>

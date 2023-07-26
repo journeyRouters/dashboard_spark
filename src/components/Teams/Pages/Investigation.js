@@ -13,6 +13,7 @@ const Investigation = ({ uid, TeamProfile }) => {
     const [data_Analysed, setdata_Analysed] = useState([])
     const [prevMonth, setPrevMonth] = useState([])
     const [dataLoaded, loadData] = useState([])
+    const [StatusData, setStatusData] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
     const [member, setmember] = useState()
     const [lastTarget, setLastTarget] = useState([])
@@ -151,6 +152,81 @@ const Investigation = ({ uid, TeamProfile }) => {
         }
 
     }
+    async function HotLead() {
+        var local = { name: 'Hot', value: 0, fill: 'red' }
+        var prev_instance = StatusData
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
+                where('Lead_Status', '==', 'Hot'), where("quotation_flg", "==", true));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            local.value = list.length
+            prev_instance.push(local)
+            setStatusData(prev_instance)
+            ColdLead()
+
+        }
+        catch (erorr) {
+            console.log(erorr)
+            // setopen(false)
+        }
+
+    }
+    async function ColdLead() {
+        var local = { name: 'Cold', value: 0, fill: 'blue' }
+        var prev_instance = StatusData
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
+                where('Lead_Status', '==', 'Cold'), where("quotation_flg", "==", true));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            local.value = list.length
+            prev_instance.push(local)
+            setStatusData(prev_instance)
+            ActiveLead()
+
+        }
+        catch (erorr) {
+            console.log(erorr)
+            // setopen(false)
+        }
+
+    }
+    async function ActiveLead() {
+        var local = { name: 'Active', value: 0, fill: 'yellow' }
+        var prev_instance = StatusData
+        try {
+            let list = []
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
+                where('Lead_Status', '==', 'Active'), where("quotation_flg", "==", true));
+            var querySnapshot;
+
+            querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            local.value = list.length
+            prev_instance.push(local)
+            setStatusData(prev_instance)
+
+
+        }
+        catch (erorr) {
+            console.log(erorr)
+            // setopen(false)
+        }
+
+    }
     async function Dump() {
         var local = { name: 'dump', value: 0, fill: 'red' }
         var prev_instance = dataLoaded
@@ -233,6 +309,7 @@ const Investigation = ({ uid, TeamProfile }) => {
         followUp()
         Dump()
         Converted()
+        HotLead()
     }
     useEffect(() => {
         if (uid !== 0) {
@@ -255,7 +332,7 @@ const Investigation = ({ uid, TeamProfile }) => {
                 {
                     dataAvailablityFlg ?
                         <>
-                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-around',marginTop:'2rem' }}>
                                 <BarChart
                                     width={500}
                                     height={300}
@@ -279,6 +356,31 @@ const Investigation = ({ uid, TeamProfile }) => {
                                     <Bar
                                         dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
                                 </BarChart>
+                                <div>
+                                    <BarChart
+                                        width={500}
+                                        height={300}
+                                        data={StatusData}
+                                        margin={{
+                                            top: 5,
+                                            right: 30,
+                                            left: 20,
+                                            bottom: 5
+                                        }}
+                                        barSize={30}
+                                    >
+                                        <XAxis
+                                            dataKey="name"
+                                            scale="point"
+                                            padding={{ left: 10, right: 10 }}
+                                        />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <Bar
+                                            dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                                    </BarChart>
+                                </div>
                                 <div>{
                                     uid != 0 ?
                                         <>

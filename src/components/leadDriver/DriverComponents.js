@@ -10,6 +10,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
     const db = getFirestore(app);
+    console.log(data.TripId)
     var today = new Date()
         var currentdate = moment(today).format('YYYY-MM-DD')
 
@@ -81,7 +82,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <input type='checkbox' checked={flightBooked} onChange={(e) => FlightController(e)} /><span>Flight Is Booked</span>
             </div>
             <div>
-                <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />
+                {/* <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br /> */}
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />

@@ -91,7 +91,7 @@ const PaymentMarking = ({ profile }) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                console.log(list)
+                // console.log(list)
                 set_lead_data(list[0])
                 setInput('')
                 // getinvoice(list[0])

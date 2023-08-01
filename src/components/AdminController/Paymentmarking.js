@@ -11,6 +11,8 @@ import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import { Modal } from '@material-ui/core';
 import InvoicePdf from '../invoice/invoicePdf';
 import InstallmentsMapper from '../Accounts/installmentsMapper';
+import EditInvoice from '../Accounts/EditInvoice';
+import PaymentsScreenShotUploader from './PaymentsScreenShotUploader';
 const db = getFirestore(app);
 
 const PaymentMarking = ({ profile }) => {
@@ -25,7 +27,12 @@ const PaymentMarking = ({ profile }) => {
     const [packageOpner, setpackageOpener] = useState(false)
     const [invoiceOpener, setinvociceOpener] = useState(false)
     const [EditInvoiceflg, setEditInvoice] = useState(false)
-
+    function handleInvoiceEditing() {
+        setEditInvoice(true)
+    }
+    function closeInvoiceModal() {
+        setEditInvoice(false)
+    }
     async function fetchTheSearch() {
         var q;
         switch (SearchKey) {
@@ -72,8 +79,8 @@ const PaymentMarking = ({ profile }) => {
             }
             default:
                 q = null;
-
         }
+        getinvoice(input)
         getQueryDatafromDatbase(q)
     }
     async function getQueryDatafromDatbase(q) {
@@ -87,7 +94,7 @@ const PaymentMarking = ({ profile }) => {
                 // console.log(list)
                 set_lead_data(list[0])
                 setInput('')
-                getinvoice(list[0])
+                // getinvoice(list[0])
                 setdataAvailityFlg(true)
             }
         }
@@ -95,9 +102,9 @@ const PaymentMarking = ({ profile }) => {
             console.log(e)
         }
     }
-    async function getinvoice(data) {
+    async function getinvoice(TripId) {
         try {
-            const docRef = doc(db, "invoice", data.TripId);
+            const docRef = doc(db, "invoice", TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
@@ -289,10 +296,25 @@ const PaymentMarking = ({ profile }) => {
                         </div>
                     </div>
                     {/* final Package and Invoice */}
+                    <PaymentsScreenShotUploader data={lead_data} />
+
                     <div className='PaymentButtonDiv'>
                         <button className='PaymentsButton' onClick={() => finalPackageOpen()}>Final Package</button>
                         <button className='PaymentsButton' onClick={() => invoiceOpen()}>Invoice</button>
                         <button className='PaymentsButton' onClick={() => resetToEdit()}>Reset to Edit</button>
+                        <button className='PaymentsButton' onClick={() => handleInvoiceEditing()} >invoice Editor</button>
+                    </div>
+                    <div>
+                        {
+                            EditInvoiceflg ? <>
+                                <Modal open={EditInvoiceflg} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
+                                    <>
+                                        <EditInvoice installments={invoice.installment} TripId={lead_data.TripId} profile={profile} closeInvoiceModal={closeInvoiceModal} />
+                                    </>
+                                </Modal>
+
+                            </> : <></>
+                        }
                     </div>
                     <div className='paymentsConfirmer'>
                         <InstallmentsMapper data={invoice.installment}

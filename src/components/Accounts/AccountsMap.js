@@ -725,7 +725,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                     <button onClick={() => handleInvoiceEditing()}>Edit Invoice</button>
                                     {
                                         EditInvoiceflg ? <>
-                                            <Modal open={EditInvoice} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
+                                            <Modal open={EditInvoiceflg} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
                                                 <>
                                                     <EditInvoice installments={invoice.installment} TripId={data.TripId} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal} />
                                                 </>

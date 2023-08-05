@@ -7,6 +7,10 @@ import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "rec
 import app from '../required';
 import CurrentMonthcharts from './CurrentMonthcharts';
 import OverallChart from './OverallChart';
+import ConversionPrecentage from './ConversionPrecentage';
+import ConversionPercentageAgaintLeadSeeded from './ConversionPercentageAgaintLeadSeeded';
+import TotalLeadeSeeded from './TotalLeadSeeded';
+import AvgLeadSeeded from './AvgLeadSeeded';
 const db = getFirestore(app);
 
 
@@ -50,6 +54,7 @@ const AdminInvestigation = ({ profile }) => {
             getPendingLead(Profile)
         });
     }
+
     async function getPendingLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -637,6 +642,14 @@ const AdminInvestigation = ({ profile }) => {
                             }}
                         />
                     </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                        <ConversionPrecentage />
+                        <ConversionPercentageAgaintLeadSeeded />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '-3rem',justifyContent: 'space-around' }}>
+                        <TotalLeadeSeeded />
+                        <AvgLeadSeeded />
+                    </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
                         <select onChange={(e) => filterDataFromProfile(e.target.value)} >
                             <option value={0}> assign to</option>
@@ -653,6 +666,7 @@ const AdminInvestigation = ({ profile }) => {
                                 <button onClick={() => handleSearch('show')}>Show</button>
                         }
                     </div>
+
                     <div>
                         {
                             detailsFlg ? <>

@@ -80,33 +80,45 @@ const CreateQuoteTableRow = ({
                     }
                 </> : <></>
             }
-            <div className={userProfile.user_type == 'Team Leader' && data.x_callerFlg == true ? 'called' : <></>}>
-                <h4>TripId:-{data.TripId} </h4>
-                <h4>Name:-{data.Traveller_name}</h4>
-                <h4>Contact:- {data.Contact_Number}</h4>
-                {
-                    data.x_callerFlg == true ?
-                        <h4>x-Caller:-{data.x_Caller}</h4> : <></>
-                }
-            </div>
-            <div>
-                <h4>Budget:-{data.Budget}</h4>
-                <h4>Pax:-{data.Pax}</h4>
-                <h4>Child:-{data.Child}</h4>
-            </div>
-            {
-                data.FlightBookedFlg ?
-                    <img src='../assets/Notification/plane1.gif' className='flightbook' /> : <></>
-            }
-            <div>
-                <h4>Assign Date:-{data.uploaded_date}</h4>
-                <h4>Destination:-{data.Destination}</h4>
-                <h4>Status:-{data.Lead_Status}</h4>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-                <button onClick={() => editItem()}>Fresh Quote</button>
-                <button onClick={() => handleSuggestion(data)}>Last 10 quotes</button>
-            </div>
+            <div className='createQouteBox'>
+                <div className='createQouteBoxFirstHalf'>
+                    <div className={userProfile.user_type == 'Team Leader' && data.x_callerFlg == true ? 'called' : 'called1'}>
+                        <h4>TripId:-{data.TripId} </h4>
+                        <h4>Name:-{data.Traveller_name}</h4>
+                        <h4>Contact:- {data.Contact_Number}</h4>
+                        <h4>E-mail:-</h4>
+                        {
+                            data.x_callerFlg == true ?
+                                <h4>x-Caller:-{data.x_Caller}</h4> : <></>
+                        }
+                    </div>
+                </div>
+                <div className='createQouteBox2'>
+                    <div style={{ marginLeft: '2rem' }}>
+
+                        <div>
+                            <h4>Destination:-{data.Destination}</h4>
+                            <h4>Pax:-{data.Pax}</h4>
+                            <h4>Child:-{data.Child}</h4>
+                            <h4>Departure City:-{data.Departure_City}</h4>
+                        </div>
+                        {
+                            data.FlightBookedFlg ?
+                                <img src='../assets/Notification/plane1.gif' className='flightbook' /> : <></>
+                        }
+                    </div>
+                    <div>
+                        <h4>Budget:-{data.Budget}</h4>
+                        <h4>Assign Date:-{data.uploaded_date}</h4>
+                        <h4>Assign Time:-{data.uploaded_time}</h4>
+                        <h4>Status:-{data.Lead_Status}</h4>
+                    </div>
+                    <div style={{ height:'5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-around',marginTop:'2.5rem' }}>
+                        <button className='last10quoteButton' onClick={() => editItem()}>Fresh Quote</button>
+                        <button className='last10quoteButton' onClick={() => handleSuggestion(data)}>Last 10 quotes</button>
+                    </div>
+                </div>
+            </div >
         </div>
     );
 }

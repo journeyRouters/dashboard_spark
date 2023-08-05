@@ -80,7 +80,7 @@ const Box = ({
         siteseeing_comments: '',
         Visa: false,
         Visa_comments: '',
-        Entrance_fee: false,
+        // Entrance_fee: false,
         Entrance_comments: '',
         other_Inclusion: '',
         other_Exclusion: ''

@@ -271,11 +271,10 @@
 }
 
 .addNewLeadButton {
-    height: 2rem;
+    height: 28px;
     width: 7em;
-    border: 3px solid yellow;
-    border-radius: 6px;
-    background: aquamarine;
+    border-radius: 9px;
+    background: #f5fbf9;
 }
 
 .SelfLeadDiv {
@@ -318,11 +317,11 @@
 .Createquoteunicompo {
     margin-top: 1rem;
     margin-bottom: 2rem;
-    border: 1px solid gray;
-    display: flex;
+    /* border: 1px solid gray; */
+    /* display: flex; */
     flex-direction: row;
-    justify-content: space-between;
-    background-image: linear-gradient(354deg,#93a4a4,#00ffc2);
+    /* justify-content: space-between; */
+    /* background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC); */
     width: 98%;
     /* color: rgb(83, 5, 5); */
     /* background-image: url('../../../public/assets/Notification/flight.gif');
@@ -331,8 +330,35 @@
     background-repeat: 'no-repeat';
     align-items: center;
     height: 9rem; */
+}
+.createQouteBoxFirstHalf{
+    width: 30%;
+    background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
+    border-radius: 1rem;
 
-
+}
+.createQouteBox{
+    color: #f5fbf9;
+    font-family: monospace;
+    font-size: large;
+    /* width: 40%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC); */
+}
+.createQouteBox2{
+    border-radius: 1rem;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
+}
+.last10quoteButton{
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-right: 1rem;
 }
 
 .flightbook {
@@ -349,4 +375,7 @@
 .called{
     background-image: url('https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2Fcalled.png?alt=media');
     background-size: 100% 100%;
+}
+.called1{
+    margin-left: 2rem;
 }

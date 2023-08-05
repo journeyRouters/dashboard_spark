@@ -6,6 +6,10 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import app from '../required';
+import ConversionPrecentage from './ConversionPrecentage';
+import ConversionPercentageAgaintLeadSeeded from './ConversionPercentageAgaintLeadSeeded';
+import AvgLeadSeeded from './AvgLeadSeeded';
+import TotalLeadeSeeded from './TotalLeadSeeded';
 // import IndividuaInvestigation from './IndividuaInvestigation';
 const db = getFirestore(app);
 
@@ -345,8 +349,18 @@ const Investigation = ({ profile }) => {
                             }}
                         />
                     </div>
+                    <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'space-around' }}>
+                        <ConversionPrecentage />
+                        <ConversionPercentageAgaintLeadSeeded />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row',marginLeft:'-3rem' }}>
+                        <TotalLeadeSeeded />
+                        <AvgLeadSeeded />
+                    </div>
                 </> : <></>
+
             }
+
         </div>
     );
 }

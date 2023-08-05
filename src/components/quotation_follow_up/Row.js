@@ -267,7 +267,9 @@ const Row = (props) => {
                     <TableCell component="th" scope="row">
                         {row.Campaign_code == 'Direct' ?
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                                
                                 <span>
+                                <span style={{marginLeft:'-5rem',marginRight:'1rem'}}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
                                     D-{row.TripId}
                                 </span>
                                 {
@@ -281,6 +283,7 @@ const Row = (props) => {
                             :
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <span>
+                                    <span style={{marginLeft:'-5rem',marginRight:'1rem'}}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
                                     {row.TripId}
                                 </span>
                                 {

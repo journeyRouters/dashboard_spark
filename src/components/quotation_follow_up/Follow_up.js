@@ -454,7 +454,7 @@ const FollowUp = (props) => {
             )
         }
         else if (Destination.length == 1 && assign_date.length == 1) {
-            console.log('yes', assign_date, dateBelow, Destination[0])
+            // console.log('yes', assign_date, dateBelow, Destination[0])
             q = query(collection(db, 'Trip'),
                 where("assign_to.uid", "==", user),
                 where("Destination", "==", Destination[0]),
@@ -566,7 +566,7 @@ const FollowUp = (props) => {
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
                 setopen(false)
-                console.log('no data')
+                // console.log('no data')
                 setLead_data(list)
                 setStatus(0)
 
@@ -673,7 +673,7 @@ const FollowUp = (props) => {
                             : <>
                                 <div className='global_search' >
                                     <button onClick={() => getLeadOnBoard()}>Refresh</button>
-                                    <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+                                    <span style={{ color: 'white' }}>Lead - {lead_data.length}</span>
                                 </div>
                             </>
                     }
@@ -800,7 +800,7 @@ const FollowUp = (props) => {
                                 <Table aria-label="collapsible table" style={{ width: "99%" }}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Trip Id</TableCell>
+                                            <TableCell align="center">Trip Id</TableCell>
                                             <TableCell align="right">Name</TableCell>
                                             <TableCell align="right">Lead Status</TableCell>
                                             <TableCell align="right">Destination</TableCell>

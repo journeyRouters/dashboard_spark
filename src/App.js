@@ -163,30 +163,7 @@ function App() {
         open ? <Loginform open={open} setopen={setopen} setauth={setAuthFirebase} setData={setData} refreshPage={refreshPage} /> : <></>
       }
 
-      <div className='header'>
-        <p className='headLine'>
-          <img width={'276px'} style={{ marginLeft: '-4rem' }} src='/assets/pdfDefaultImage/JrLOGO_.png' />
-        </p>
-        {
-          auth ? <>
-            <div style={{ display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
-              {
-                profile ?
-                  <span>Hello  {profile ? profile.name : ''}</span> : ''
-              }
-              <img width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
-              </img>
-            </div>
-          </> : <>
-            <div className='button' onClick={() => openPopUp()}>
-              <Fingerprint
-                style={{ height: "5rem", width: "2rem" }}
-              />
-            </div>
-          </>
-        }
 
-      </div>
       <div className='assembler'>
         <div className='sidebars'>
           {
@@ -194,6 +171,11 @@ function App() {
               <>
                 {
                   profile.access_type === "freelance" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -229,6 +211,11 @@ function App() {
                 }
                 {
                   profile.access_type === "Team Leader" ? <>
+                   <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -289,6 +276,11 @@ function App() {
                 }
                 {
                   profile.access_type === "User" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -343,6 +335,11 @@ function App() {
                 }
                 {
                   profile.access_type === "Caller" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
                         <Speed style={{ marginRight: "1rem" }} />
@@ -387,6 +384,11 @@ function App() {
 
                 {
                   profile.access_type === "Accounts" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
 
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
@@ -419,6 +421,11 @@ function App() {
                 }
                 {
                   profile.access_type === "Operation" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={() => page("Operation_converted")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -453,6 +460,11 @@ function App() {
                 }
                 {
                   profile.access_type === "admin" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
                       <div className='sidebarCardContaint'>
                         <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
@@ -518,6 +530,11 @@ function App() {
                 }
                 {
                   profile.access_type === "Super Admin" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
 
                     <div className='sidebarCard' onClick={(() => page("Driver"))}>
                       <div className='sidebarCardContaint'>
@@ -608,6 +625,38 @@ function App() {
           }
         </div>
         <div className='mainContaint'>
+          <div className='header'>
+            <div className='headerfirstpart'>
+              {
+                auth ? <>{
+
+                  profile ? <>
+                    <img width={'30px'} src='./assets/img/user.png' />
+                    <span style={{ fontFamily: 'Poppins', fontSize: '13px' }}>Hello, {profile ? profile.name : ''}</span> </> : ''
+                }
+                </> : <></>
+              }
+            </div>
+            {/* <p className='headLine'>
+              <img width={'276px'} style={{ marginLeft: '-4rem' }} src='/assets/pdfDefaultImage/JrLOGO_.png' />
+            </p> */}
+            {
+              auth ? <>
+                <div style={{ display: 'flex', alignItems: 'center', textTransform: 'capitalize' }}>
+
+                  <img width={'85px'} onClick={() => logOut()} src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FLogout3.png?alt=media' >
+                  </img>
+                </div>
+              </> : <>
+                <div className='button' onClick={() => openPopUp()}>
+                  <Fingerprint
+                    style={{ height: "5rem", width: "2rem" }}
+                  />
+                </div>
+              </>
+            }
+
+          </div>
           {
             Page === "create_quote" ?
               <>{

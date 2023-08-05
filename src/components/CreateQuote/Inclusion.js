@@ -325,7 +325,7 @@ const Inclusion = (props) => {
                         </div>
                     </div>
                     {/* <textarea onChange={(event) => handleData_inclusion(event)} name='visa_comments' value={inclusionFeed.Visa_comments} className='comments_from' placeholder='Please write comments'></textarea> */}
-                    <div className='breakfast'>
+                    {/* <div className='breakfast'>
                         Entrance Fee/Extra activity
                         <div className='settingToSide'>
                             <RadioGroup className='radiogroup' name='Entrance' value={inclusionFeed.Entrance_fee} onChange={(event) => handleData_inclusion(event)}>
@@ -333,7 +333,7 @@ const Inclusion = (props) => {
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >
                         </div>
-                    </div>
+                    </div> */}
                     {/* <textarea onChange={(event) => handleData_inclusion(event)} name='Entrance_comments' value={inclusionFeed.Entrance_comments} className='comments_from' placeholder='Please write comments'></textarea> */}
                 </div>
 

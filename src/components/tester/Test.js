@@ -2,6 +2,10 @@ import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDo
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
+import ConversionPrecentage from '../Investigation/ConversionPrecentage';
+import ConversionPercentageAgaintLeadSeeded from '../Investigation/ConversionPercentageAgaintLeadSeeded';
+import TotalLeadSeeded from '../Investigation/TotalLeadSeeded';
+import AvgLeadSeeded from '../Investigation/AvgLeadSeeded';
 const db = getFirestore(app);
 
 const Test = () => {
@@ -42,7 +46,7 @@ const Test = () => {
          where('Lead_Status', '==', 'Converted'),
          // where('caller.name', '==', 'KULJEET SINGH'),
          // where('callingStatus', '==', 'Converted')
-         )
+      )
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
          console.log(doc.data())
@@ -129,6 +133,26 @@ const Test = () => {
          Leave: BalanceLeaves
       });
    }
+   function notification() {
+      const url = "https://northamerica-northeast1-jrspark-adb98.cloudfunctions.net/journeyRoutersNotification?message=hiiii";
+
+      // Making a GET request
+      fetch(url)
+         .then(response => {
+            if (!response.ok) {
+               throw new Error('Network response was not ok');
+            }
+
+            return response
+
+         })
+         .then(data => {
+            console.log("GET Request Response:", data);
+         })
+         .catch(error => {
+            console.error('Error:', error);
+         });
+   }
 
    useEffect(() => {
       // allDoc()
@@ -138,10 +162,18 @@ const Test = () => {
       // SendNotification()
       //   tester()
       // add_a_feild()
+      // notification()
    }, []);
    return (
       <div>
-         setting.........
+         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <ConversionPrecentage />
+            <ConversionPercentageAgaintLeadSeeded />
+         </div>
+         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <AvgLeadSeeded />
+            <TotalLeadSeeded />
+         </div>
       </div>
    );
 }

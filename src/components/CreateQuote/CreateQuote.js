@@ -171,8 +171,8 @@ const Createquote = (props) => {
                 props.auth ? <>
                     <div className='global_search' >
 
-                        <button onClick={() => getLeadOnBoard()}>Refresh</button>
-                        <span style={{ background: 'yellow' }}>Lead= {lead_data.length}</span>
+                        {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
+                        <span style={{ color: 'white' }}>Lead - {lead_data.length}</span>
                         <button onClick={() => AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
                         <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard} />
                     </div>

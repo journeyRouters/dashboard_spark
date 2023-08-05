@@ -6,8 +6,8 @@
     background-image: linear-gradient(rgb(134, 130, 215), rgb(156, 213, 148));
     margin-bottom: 1rem;
     position: sticky;
-    top: 0;
-    /* text-transform: capitalize; */
+    top: 2px;
+    margin-top: 1rem;
 }
 
 .compo {

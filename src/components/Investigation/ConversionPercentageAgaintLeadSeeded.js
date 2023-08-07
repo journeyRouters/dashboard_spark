@@ -84,7 +84,7 @@ const ConversionPercentageAgaintLeadSeeded = () => {
         loadData(prev_instance)
         loadData([
             {
-                name: 'Conversion % Against Lead Seeded',
+                name: ' Leads vs Conversion %',
                 values: prev_instance
             }
         ])
@@ -98,7 +98,7 @@ const ConversionPercentageAgaintLeadSeeded = () => {
         getAllUserProfie()
     }, []);
     return (
-        <div>
+        <div style={{width:'30rem'}}>
             {
                 dataAvailablityFlg ?
                     <DynamicBarChart

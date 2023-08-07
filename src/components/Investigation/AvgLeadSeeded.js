@@ -49,7 +49,7 @@ const AvgLeadSeeded = () => {
                 loadData(prev_instance)
                 loadData([
                     {
-                        name: 'Avg Lead Seeded',
+                        name: 'Daily Avg Lead',
                         values: prev_instance
                     }
                 ])

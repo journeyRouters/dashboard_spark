@@ -44,7 +44,7 @@ const Vouchers = (props) => {
     }, []);
     return (
         <div>
-            <div className='global_search'>
+            {/* <div className='global_search'>
                 <select name='search_type' id='firestore' className='option_selector'>
                     <option value="Name">Name</option>
                     <option value="Trip_id">TripId</option>
@@ -58,7 +58,7 @@ const Vouchers = (props) => {
                     value="Search "
                 ></input>
 
-            </div>
+            </div> */}
             <div className='details_of_specific_trip_main_container'>
                 {
                     lead_data.map((data, index) => (

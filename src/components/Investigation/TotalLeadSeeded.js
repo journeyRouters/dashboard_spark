@@ -47,7 +47,7 @@ const TotalLeadeSeeded = () => {
                 loadData(prev_instance)
                 loadData([
                     {
-                        name: 'Lead Seeded',
+                        name: 'Leads Assigned',
                         values: prev_instance
                     }
                 ])

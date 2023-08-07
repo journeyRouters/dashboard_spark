@@ -9,11 +9,16 @@
   text-transform: uppercase;
   background-color: #c7e8f5;
   position: sticky;
-  top: 0;
+  top: 1rem;
   background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
   margin-left: 1rem;
   margin-top: 1rem;
   border-radius: 13px;
+  border: 1px solid white;
+}
+.tripId{
+  border: 1px solid white;
+    width: 10rem;
 }
 .headerfirstpart{
   display: flex;
@@ -31,7 +36,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
+  background-image: linear-gradient(136deg,#689CFC,#FF4F4ACC);
   /* border: 1px solid green; */
   margin-top: 1rem;
 
@@ -74,12 +79,12 @@
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
   /* background-image: linear-gradient(90deg,#554c4c,#00ffc2); */
   color: white;
-  /* border-bottom: 1px solid aquamarine; */
+  border-bottom: 1px solid white;
 }
 
 .sidebarCard:hover {
-  color: #56c2c4;
-  background: #f8f8f8;
+  color: yellow;
+  background: #131111;
   cursor: pointer;
 }
 

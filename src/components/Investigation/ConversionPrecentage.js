@@ -64,7 +64,7 @@ const ConversionPrecentage = () => {
         loadData(prev_instance)
         loadData([
             {
-                name: 'Conversion % Against Target',
+                name: 'Target vs Conversion %',
                 values: prev_instance
             }
         ])
@@ -73,7 +73,7 @@ const ConversionPrecentage = () => {
         getAllUserProfie()
     }, []);
     return (
-        <div>
+        <div style={{width:'30rem'}}>
             {
                 dataAvailablityFlg ?
                     <DynamicBarChart

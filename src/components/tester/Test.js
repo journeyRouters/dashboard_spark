@@ -162,18 +162,18 @@ const Test = () => {
       // SendNotification()
       //   tester()
       // add_a_feild()
-      // notification()
+      notification()
    }, []);
    return (
       <div>
-         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+         {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
             <ConversionPrecentage />
             <ConversionPercentageAgaintLeadSeeded />
          </div>
          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
             <AvgLeadSeeded />
             <TotalLeadSeeded />
-         </div>
+         </div> */}
       </div>
    );
 }

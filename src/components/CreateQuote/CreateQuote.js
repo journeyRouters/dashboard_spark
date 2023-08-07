@@ -172,7 +172,12 @@ const Createquote = (props) => {
                     <div className='global_search' >
 
                         {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
-                        <span style={{ color: 'white' }}>Lead - {lead_data.length}</span>
+                        <span style={{
+                            color: 'yellow',
+                            fontSize: '20px',
+                            fontWeight: '700',
+                            color: 'yellow',
+                        }}>Total Lead - {lead_data.length}</span>
                         <button onClick={() => AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
                         <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard} />
                     </div>
@@ -269,8 +274,8 @@ const Createquote = (props) => {
                                             set_popupopner={set_popupopner}
                                             email={props.auth.email}
                                             userProfile={props.userProfile}
-                                            data={data} key={index} 
-                                            />
+                                            data={data} key={index}
+                                        />
                                     )
                             }
                             {/* <button className='loadMOreBUtton' onClick={() => getnextdatacontroller()}>Load more</button> */}

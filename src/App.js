@@ -283,50 +283,50 @@ function App() {
                     </div>
                     <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
                       <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
+                        {/* <Speed style={{ marginRight: "1rem" }} /> */}
                         <p>Rapid Fire</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={(() => page("Attendance"))}>
                       <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
+                        {/* <Speed style={{ marginRight: "1rem" }} /> */}
                         <p>Attendance</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("create_quote")}>
                       <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        {/* <FileCopyOutlined style={{ marginRight: "1rem" }} /> */}
                         <p>Create Quote</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
                       <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
+                        {/* <FileCopyOutlined style={{ marginRight: "1rem" }} /> */}
                         <p>Quotation Followup</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={(() => page("voucher"))}>
                       <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        {/* <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} /> */}
                         <p>Vouchers & payments</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
+                        {/* <SearchTwoTone style={{ marginRight: "1rem" }} /> */}
                         <p>Investigation</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("leave policy")}>
                       <div className='sidebarCardContaint'>
-                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        {/* <PublicTwoTone style={{ marginRight: "1rem" }} /> */}
                         <p>leave policy
                         </p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Manage Leave")}>
                       <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        {/* <PublicOutlined style={{ marginRight: "1rem" }} /> */}
                         <p>Manage Leave
                         </p>
                       </div>

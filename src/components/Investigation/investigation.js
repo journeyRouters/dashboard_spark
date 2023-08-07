@@ -10,6 +10,7 @@ import ConversionPrecentage from './ConversionPrecentage';
 import ConversionPercentageAgaintLeadSeeded from './ConversionPercentageAgaintLeadSeeded';
 import AvgLeadSeeded from './AvgLeadSeeded';
 import TotalLeadeSeeded from './TotalLeadSeeded';
+import FollowupBreak from './FollowupBreak';
 // import IndividuaInvestigation from './IndividuaInvestigation';
 const db = getFirestore(app);
 
@@ -292,30 +293,33 @@ const Investigation = ({ profile }) => {
 
             {
                 dataAvailablityFlg ? <>
-                    <BarChart
-                        width={500}
-                        height={300}
-                        data={dataLoaded}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5
-                        }}
-                        barSize={30}
-                    >
-                        <XAxis
-                            dataKey="name"
-                            scale="point"
-                            padding={{ left: 10, right: 10 }}
-                        />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend legendType='circle' />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Bar
-                            dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-                    </BarChart>
+                    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={dataLoaded}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5
+                            }}
+                            barSize={30}
+                        >
+                            <XAxis
+                                dataKey="name"
+                                scale="point"
+                                padding={{ left: 10, right: 10 }}
+                            />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend legendType='circle' />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Bar
+                                dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                        </BarChart>
+                        <FollowupBreak uid={profile.uid} />
+                    </div>
 
                     <div style={{ display: 'flex' }}>
                         <DynamicBarChart
@@ -349,11 +353,11 @@ const Investigation = ({ profile }) => {
                             }}
                         />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'space-around' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                         <ConversionPrecentage />
                         <ConversionPercentageAgaintLeadSeeded />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row',marginLeft:'-3rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                         <TotalLeadeSeeded />
                         <AvgLeadSeeded />
                     </div>

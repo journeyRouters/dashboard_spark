@@ -428,7 +428,7 @@ const AdminInvestigation = ({ profile }) => {
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Cold'),);
+                    where('Lead_Status', '==', 'Cold'),where("quotation_flg", "==", true));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())

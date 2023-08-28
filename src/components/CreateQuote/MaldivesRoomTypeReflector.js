@@ -1101,23 +1101,50 @@ const RoomType = {
             value: "WaterVilla",
         },
     ],
-    ObluNatureHelengeli: [
+    // ObluNatureHelengeli: [
+    //     {
+    //         label: "BeachVilla",
+    //         value: "BeachVilla",
+    //     },
+    //     {
+    //         label: "WatervillaWithPool",
+    //         value: "WatervillaWithPool",
+    //     },
+    //     {
+    //         label: "DeluxeBeachVilla",
+    //         value: "DeluxeBeachVilla",
+    //     },
+    //     {
+    //         label: "TwoBedroomBeachPoolSuite",
+    //         value: "TwoBedroomBeachPoolSuite",
+    //     },
+    // ],
+    ObluNatureHelengelibysentido : [
         {
-            label: "BeachVilla",
-            value: "BeachVilla",
+            label: "Deluxebeachvilla",
+            value: "Deluxebeachvilla",
         },
         {
-            label: "WatervillaWithPool",
-            value: "WatervillaWithPool",
+            label:'deluxebeachvillawithpool',
+            value:'deluxebeachvillawithpool'
         },
         {
-            label: "DeluxeBeachVilla",
-            value: "DeluxeBeachVilla",
+            label: "twobedroomfamilywithpool",
+            value: "twobedroomfamilywithpool",
         },
         {
-            label: "TwoBedroomBeachPoolSuite",
-            value: "TwoBedroomBeachPoolSuite",
+            label:'sunrisewatervillawithpool',
+            value:'sunrisewatervillawithpool'
         },
+        {
+            label:'sunsetwatervillawithpool',
+            value:'sunsetwatervillawithpool'
+        },
+        {
+            label:'lagoonvillawithpool',
+            value:'lagoonvillawithpool'
+        }
+
     ],
     ObluSelectLobigili: [
 

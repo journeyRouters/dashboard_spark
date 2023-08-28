@@ -373,11 +373,11 @@ const Profile = (
                                 <p style={SelectedpackageType == 'Total' ? { marginLeft: '5.4rem' } : {}} className="setPara_">{SelectedpackageType}</p>
                             </div>
                             {
-                                travel_data.dateTimeStampList ? <p style={{ color: 'white', marginTop: '4rem',fontSize:'13px' }}>
+                                travel_data.dateTimeStampList ? <p style={{ color: 'white', marginTop: '4rem', fontSize: '13px' }}>
                                     Created on :-{moment(travel_data.dateTimeStampList[0].toDate()).format('MMMM Do YYYY, h:mm:ss a')}
 
                                 </p> :
-                                    <p style={{ color: 'white', marginTop: '4rem',fontSize:'13px' }}>
+                                    <p style={{ color: 'white', marginTop: '4rem', fontSize: '13px' }}>
                                         Created on :-{moment(new Date()).format('MMMM Do YYYY, h:mm:ss a')}
                                     </p>
                             }
@@ -725,10 +725,50 @@ const Profile = (
                     {/* end of 8th page(Flights page) */}
 
                     {/* start of 9th page(payments details) */}
+                    {
+                        travel_data.Destination == 'Maldives' ?
+                            <div className="page-break">
+                                <div className="page2"
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/PaymentPageMaldives.jpg)",
+                                        backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover"
+                                    }}
+                                >
+                                    <div className='paymentsPage'>
+                                        <Footer whatsApp={whatsApp} />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            :
+                            <div className="page-break">
+                                <div className="page2"
+                                    style={{
+                                        backgroundImage: "url(/assets/pdfDefaultImage/GENERAL.png)",
+                                        backgroundPosition: "top",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover"
+                                    }}
+                                >
+                                    <div className='paymentsPage'>
+                                        <Footer whatsApp={whatsApp} />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                    }
+
+                    {/* end of 9th page(payments details) */}
+
+                    {/* start of jr cancellation page */}
                     <div className="page-break">
                         <div className="page2"
                             style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/PaymentPage.png)",
+                                backgroundImage: "url(/assets/pdfDefaultImage/cancellation.jpg)",
                                 backgroundPosition: "top",
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover"
@@ -738,11 +778,9 @@ const Profile = (
                                 <Footer whatsApp={whatsApp} />
                             </div>
 
-
                         </div>
                     </div>
-                    {/* end of 9th page(payments details) */}
-
+                    {/* end of jr cancellation page */}
                     {/* start of jr info page */}
                     <div className="page-break">
                         <div className="page2"

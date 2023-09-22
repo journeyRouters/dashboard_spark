@@ -28,7 +28,6 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     const [idproof, idproofcontrller] = useState(false)
     const db = getFirestore(app);
     const today = new Date()
-    var nothingList = []
     function finalPackageOpen() {
         // console.log(finalPackage)
         setpackageOpener(true)
@@ -460,6 +459,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
         var date = new Date()
         // console.log(moment(date).format('DDMMYYYY'))
         setDetails(!details)
+        // console.log(details)
     }
     function optionHandler(e) {
         settarget(e.target.value)
@@ -640,15 +640,13 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.vouchers_idproof.map((id, index) => (
-                                                    <>
-                                                        <div key={index} className='hover_popup_main_div'>
-                                                            <p>
-                                                                {id.name}
-                                                            </p>
-                                                            <a href={id.link} download={id.name} target="_blank">download</a>
-                                                            <button disabled onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
-                                                        </div>
-                                                    </>
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {id.name}
+                                                        </p>
+                                                        <a href={id.link} download={id.name} target="_blank">download</a>
+                                                        <button disabled onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
+                                                    </div>
                                                 ))}
                                         </div>
                                     </div>
@@ -668,16 +666,16 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.Vouchers_hotels.map((hotel, index) => (
-                                                    <>
-                                                        <div key={index} className='hover_popup_main_div'>
-                                                            <p>
-                                                                {hotel.name}
-                                                            </p>
-                                                            <a href={hotel.link} download={hotel.name} target="_blank">download</a>
 
-                                                            <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
-                                                        </div>
-                                                    </>
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {hotel.name}
+                                                        </p>
+                                                        <a href={hotel.link} download={hotel.name} target="_blank">download</a>
+
+                                                        <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
+                                                    </div>
+
                                                 ))}
                                         </div>
                                     </div>
@@ -686,15 +684,15 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.Vouchers_flight.map((flight, index) => (
-                                                    <>
-                                                        <div key={index} className='hover_popup_main_div'>
-                                                            <p>
-                                                                {flight.name}
-                                                            </p>
-                                                            <a href={flight.link} download={flight.name} target="_blank">download</a>
-                                                            <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
-                                                        </div>
-                                                    </>
+
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {flight.name}
+                                                        </p>
+                                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                        <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                                    </div>
+
                                                 ))}
                                         </div>
                                     </div>
@@ -703,7 +701,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.Vouchers_others.map((others, index) => (
-                                                    <>
+                                                    
                                                         <div key={index} className='hover_popup_main_div'>
                                                             <p>
                                                                 {others.name}
@@ -711,7 +709,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                                             <a href={others.link} download={others.name} target="_blank">download</a>
                                                             <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
                                                         </div>
-                                                    </>
+                                                   
                                                 ))}
                                         </div>
 

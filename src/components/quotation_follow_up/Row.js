@@ -83,7 +83,8 @@ const Row = (props) => {
         if (Reqoute_flg == false) {
             Allquote()
         }
-        // console.log(row.assigned_date_time.toDate())
+        // console.log(row.TripId)
+        // console.log(row.Travel_Date)
     }, [Reqoute_flg]);
 
     function closeUpdater() {

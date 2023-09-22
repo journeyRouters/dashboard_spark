@@ -36,6 +36,7 @@ import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 import CallerInvestigation from './components/Investigation/CallerInvestigation';
 import Rapid from './components/Rapid/Rapid';
+import AllConvertedFile from './components/quotation_follow_up/AllConvertedFile';
 
 
 function App() {
@@ -211,7 +212,7 @@ function App() {
                 }
                 {
                   profile.access_type === "Team Leader" ? <>
-                   <div className='sidebarCard' >
+                    <div className='sidebarCard' >
                       <div className='sidebarCardContaint'>
                         <img width={'128px'} src='./assets/img/jrlogo.png' />
                       </div>
@@ -244,6 +245,12 @@ function App() {
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                         <p>Vouchers & payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Converted Files</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
@@ -309,6 +316,12 @@ function App() {
                       <div className='sidebarCardContaint'>
                         {/* <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} /> */}
                         <p>Vouchers & payments</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Converted Files</p>
                       </div>
                     </div>
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
@@ -657,6 +670,7 @@ function App() {
             }
 
           </div>
+         
           {
             Page === "create_quote" ?
               <>{
@@ -798,6 +812,15 @@ function App() {
               {
                 auth &&
                 <Vouchers auth={auth} profile={profile} />
+              }
+            </>
+            : <></>
+          }
+          {Page === "ConvertedFiles" ?
+            <>
+              {
+                auth &&
+                <AllConvertedFile auth={auth} profile={profile} />
               }
             </>
             : <></>

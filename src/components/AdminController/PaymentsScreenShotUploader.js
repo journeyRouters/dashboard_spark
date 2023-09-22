@@ -1,6 +1,6 @@
 import { fromEvent } from 'file-selector';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { React, useEffect, useState } from 'react';
 import app from '../required';
 import '../payments_vouchers/Payments.css';
@@ -140,77 +140,190 @@ const PaymentsScreenShotUploader = ({ data }) => {
             console.log("No such document!");
         }
     }
+    function deleteuploadedvoucher_from_firebase_storage(path) {
+        const deleteItem = ref(storage, path)
+        deleteObject(deleteItem).then(() => { }).catch((error) => { console.log(error) })
+    }
+    async function delete_vouchers_from_firebase_firestore(target, del_index) {
+        const docref = doc(db, "Trip", data.TripId);
+        // console.log(target, del_index)
+        if (target === 'flights') {
+            let previousData = latestData.Vouchers_flight
+            previousData.splice(del_index, 1);
+            // console.log(previousData)
+            // console.log("list to set", content, previousData)
+            await updateDoc(docref, {
+                "Vouchers_flight": previousData
+            });
+
+        }
+        if (target === 'hotels') {
+            let previousData = data.Vouchers_hotels
+            previousData.splice(del_index, 1)
+            await updateDoc(docref, {
+                "Vouchers_hotels": previousData
+            });
+
+        }
+        if (target === 'others') {
+            let previousData = data.Vouchers_others
+            previousData.splice(del_index, 1)
+            await updateDoc(docref, {
+                "Vouchers_others": previousData
+            });
+
+        }
+        if (target == 'id') {
+            let previousData = data.vouchers_idproof
+
+            previousData.splice(del_index, 1)
+            // console.log(previousData)
+
+            await updateDoc(docref, {
+                "vouchers_idproof": previousData
+            });
+        }
+    }
+
+    function ondelete(target, path, index) {
+        // console.log(target, path, index)
+
+        deleteuploadedvoucher_from_firebase_storage(path)
+        delete_vouchers_from_firebase_firestore(target, index)
+        getdatalatest_for_voucher()
+    }
     useEffect(() => {
         getdatalatest_for_voucher()
     }, []);
     return (
-        <div className='vouchers_upload'>
-            <p>Payment's/<span className='upload_proof' onClick={() => PaymentsScreenShotsloader(true)} >upload</span ></p>
-            <div className='upload_radio_button'>
-                <div className='parent'>
-                    <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0}></input>
-                    <div className='childpopup'>
-                        {
-                            latestData.PaymentScreenshots_flight.map((flight, index) => (
-                                <div key={index} className='hover_popup_main_div'>
-                                    <p>
-                                        {flight.name}
-                                    </p>
-                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
-                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
-                                </div>
+        <div>
+            <div className='vouchers_upload'>
+                <p>Payment's/<span className='upload_proof' onClick={() => PaymentsScreenShotsloader(true)} >upload</span ></p>
+                <div className='upload_radio_button'>
+                    <div className='parent'>
+                        <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0}></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.PaymentScreenshots_flight.map((flight, index) => (
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {flight.name}
+                                        </p>
+                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                        <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                    </div>
 
-                            ))}
+                                ))}
+                        </div>
+
                     </div>
+                    <div className='parent'>
+                        <input type='radio'></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.PaymentScreenshots_hotels.map((flight, index) => (
 
-                </div>
-                <div className='parent'>
-                    <input type='radio'></input>
-                    <div className='childpopup'>
-                        {
-                            latestData.PaymentScreenshots_hotels.map((flight, index) => (
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {flight.name}
+                                        </p>
+                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                        <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                    </div>
 
-                                <div key={index} className='hover_popup_main_div'>
-                                    <p>
-                                        {flight.name}
-                                    </p>
-                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
-                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
-                                </div>
+                                ))}
+                        </div>
+                    </div>
+                    <div className='parent'>
+                        <input type='radio'></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.PaymentScreenshots_others.map((flight, index) => (
 
-                            ))}
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {flight.name}
+                                        </p>
+                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                        <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                    </div>
+
+                                ))}
+                        </div>
                     </div>
                 </div>
-                <div className='parent'>
-                    <input type='radio'></input>
-                    <div className='childpopup'>
-                        {
-                            latestData.PaymentScreenshots_others.map((flight, index) => (
-
-                                <div key={index} className='hover_popup_main_div'>
-                                    <p>
-                                        {flight.name}
-                                    </p>
-                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
-                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
-                                </div>
-
-                            ))}
+                <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openPaymentsScreenShotsloader} onClose={() => PaymentsScreenShotsloader(false)} >
+                    <div className='uploaderPopUp'>
+                        <select className='optionChoose' onChange={(e) => optionHandler(e)}>
+                            <option value={0}>choose here</option>
+                            <option value='flights'>flights</option>
+                            <option value='hotels'>hotel</option>
+                            <option value='others' >others</option>
+                        </select>
+                        <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => PaymentsScreenShotshandleSubmit()}>upload</button>
                     </div>
-                </div>
+                </Modal>
+
             </div>
-            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openPaymentsScreenShotsloader} onClose={() => PaymentsScreenShotsloader(false)} >
-                <div className='uploaderPopUp'>
-                    <select className='optionChoose' onChange={(e) => optionHandler(e)}>
-                        <option value={0}>choose here</option>
-                        <option value='flights'>flights</option>
-                        <option value='hotels'>hotel</option>
-                        <option value='others' >others</option>
-                    </select>
-                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => PaymentsScreenShotshandleSubmit()}>upload</button>
-                </div>
-            </Modal>
+            <div className='vouchers_upload'>
+                <p>Voucher's/<span className='upload_proof' onClick={() => setuploader(true)}>upload</span></p>
+                <div className='upload_radio_button'>
+                    <div className='parent'>
+                        <input type='radio' checked={latestData.Vouchers_hotels.length != 0} readOnly></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.Vouchers_hotels.map((hotel, index) => (
 
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {hotel.name}
+                                        </p>
+                                        <a href={hotel.link} download={hotel.name} target="_blank">download</a>
+
+                                        <button onClick={() => ondelete('hotels', hotel.path, index)} className='delete_button'>Delete</button>
+                                    </div>
+
+                                ))}
+                        </div>
+                    </div>
+                    <div className='parent'>
+                        <input type='radio' checked={latestData.Vouchers_flight.length != 0} readOnly></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.Vouchers_flight.map((flight, index) => (
+
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {flight.name}
+                                        </p>
+                                        <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                        <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button>
+                                    </div>
+
+                                ))}
+                        </div>
+                    </div>
+                    <div className='parent'>
+                        <input type='radio' checked={latestData.Vouchers_others.length != 0} readOnly></input>
+                        <div className='childpopup'>
+                            {
+                                latestData.Vouchers_others.map((others, index) => (
+
+                                    <div key={index} className='hover_popup_main_div'>
+                                        <p>
+                                            {others.name}
+                                        </p>
+                                        <a href={others.link} download={others.name} target="_blank">download</a>
+                                        <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
+                                    </div>
+
+                                ))}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     );

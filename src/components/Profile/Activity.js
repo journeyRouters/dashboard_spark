@@ -39,6 +39,14 @@ export const avtivityList = {
             value: 'BaliSwing'
         },
         {
+            label:'Atv Ride',
+            value:'Atvride'
+        },
+        {
+            label:'Dinner Discovery Kartika',
+            value:'DinnerDiscoveryKartika'
+        },
+        {
             label: 'Water Sports Activities',
             value: 'WaterSportsActivities'
         },

@@ -1,7 +1,7 @@
 import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import { ExtensionSharp } from '@material-ui/icons';
 import HotelIcon from '@material-ui/icons/Hotel';
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import app from '../required';
@@ -44,8 +44,11 @@ const MaldiveSuggestion = ({
     }
     async function getSampleQuotes(Destination) {
         // console.log(Destination)
+        var formateDate=moment(new Date()).format("YYYY-MM-DD")
         var quotesref = collection(db, "Quote")
-        const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination)
+        const queryQuotes = query(quotesref, where("value.travel_data.Destination", "==", Destination),
+        where("value.selected_Travel_date",">",formateDate),
+        limit(50)
             // , where("value.selected_Travel_date",">","2022-07-12") 
         )
         var querySnapshot;

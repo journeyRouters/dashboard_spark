@@ -68,12 +68,14 @@ const CreateQuote = ({ uid, TeamProfile }) => {
             case "Name": {
                 q = query(collection(db, "Trip"),
                     where('Traveller_name', '>=', input),
+                    where("Lead_Status", "!=", "Converted"),
                     where("Traveller_name", '<=', input + '\uf8ff'),
                 )
                 break;
             }
             case "Trip_id": {
                 q = query(collection(db, "Trip"),
+                    where("Lead_Status", "!=", "Converted"),
                     where("TripId", "==", input),
                     orderBy("Travel_Date")
                 )
@@ -82,6 +84,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
             case "Contact_Number": {
                 q = query(collection(db, "Trip"),
                     where("Contact_Number", "==", parseInt(input)),
+                    where("Lead_Status", "!=", "Converted"),
                     orderBy("Travel_Date")
                 )
                 break;
@@ -91,7 +94,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                 before.setDate(before.getDate() - 1);
                 // console.log(before)
                 q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
+                    where("Lead_Status", "!=", "Converted"),
                     where("quotation_flg", "==", true),
                     where("Travel_Date", ">", before),
                     where("Travel_Date", "<=", new Date(input)),

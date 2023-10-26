@@ -37,6 +37,7 @@ import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 import CallerInvestigation from './components/Investigation/CallerInvestigation';
 import Rapid from './components/Rapid/Rapid';
 import AllConvertedFile from './components/quotation_follow_up/AllConvertedFile';
+import Flight from './components/quotation_follow_up/Flight';
 
 
 function App() {
@@ -394,6 +395,41 @@ function App() {
                     </div>
                   </> : <></>
                 }
+                {
+                  profile.access_type === "Flight" ? <>
+                    <div className='sidebarCard' >
+                      <div className='sidebarCardContaint'>
+                        <img width={'128px'} src='./assets/img/jrlogo.png' />
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Flight"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Converted Files</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
+                      <div className='sidebarCardContaint'>
+                        <Speed style={{ marginRight: "1rem" }} />
+                        <p>Attendance</p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("leave policy")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicTwoTone style={{ marginRight: "1rem" }} />
+                        <p>leave policy
+                        </p>
+                      </div>
+                    </div>
+                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
+                      <div className='sidebarCardContaint'>
+                        <PublicOutlined style={{ marginRight: "1rem" }} />
+                        <p>Manage Leave
+                        </p>
+                      </div>
+                    </div>
+                  </> : <></>
+                }
 
                 {
                   profile.access_type === "Accounts" ? <>
@@ -670,7 +706,7 @@ function App() {
             }
 
           </div>
-         
+
           {
             Page === "create_quote" ?
               <>{
@@ -812,6 +848,15 @@ function App() {
               {
                 auth &&
                 <Vouchers auth={auth} profile={profile} />
+              }
+            </>
+            : <></>
+          }
+             {Page === "Flight" ?
+            <>
+              {
+                auth &&
+                <Flight auth={auth} profile={profile} />
               }
             </>
             : <></>

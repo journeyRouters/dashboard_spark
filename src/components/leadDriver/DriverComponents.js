@@ -10,7 +10,6 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
     const db = getFirestore(app);
-    console.log(data.TripId)
     var today = new Date()
         var currentdate = moment(today).format('YYYY-MM-DD')
 

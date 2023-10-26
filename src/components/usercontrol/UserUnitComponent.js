@@ -159,6 +159,7 @@ const Userunitcomponent = (props) => {
                                         <RadioGroup value={access_type} >
                                             <FormControlLabel value="admin" control={<Radio />} label="Admin" />
                                             <FormControlLabel value="User" control={<Radio />} label="User" />
+                                            <FormControlLabel value="Flight" control={<Radio />} label="Flight" />
                                             <FormControlLabel value="Unauthorise" control={<Radio />} label="Unauthorise" />
                                             <FormControlLabel value="Block" control={<Radio />} label="Block" />
                                             <FormControlLabel value="Operation" control={<Radio />} label="Operation" />

@@ -33,6 +33,7 @@ const AdminInvestigation = ({ profile }) => {
     const [DetailGraphFlg, setDetailGraphFlg] = useState(false)
     const [currentUser, setCurrentuser] = useState(null)
     const [detailsFlg, setdetailsFlg] = useState(false)
+    const [DirectLead, setDirectLead] = useState([])
 
     function handleSearch(e) {
         if (e == 'hide') {
@@ -179,6 +180,7 @@ const AdminInvestigation = ({ profile }) => {
         // setdataAvailablityFlg(true)
 
     }
+
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -212,8 +214,40 @@ const AdminInvestigation = ({ profile }) => {
             }
         ])
         // console.log(holdAlluserAnalytics)
+        getdirectleadConvertedByAllSpokes(AllUserprofile)
+
+    }
+    async function getdirectleadConvertedByAllSpokes(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"),
+                    where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Converted'),
+                    where("quotation_flg", "==", true),
+                    where("Campaign_code","==","Direct"),
+                    where("month", "==", currentMonth),);
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+            }
+            catch (erorr) {
+                console.log(erorr)
+            }
+        }
+        setDirectLead([
+            {
+                name: `${currentMonth}-Direct-Lead-Conversion`,
+                values: holdAlluserAnalytics
+            }
+        ])
         getPrevMonthConvertedByAllSpokes(AllUserprofile)
-        // setdataAvailablityFlg(true)
 
     }
     async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
@@ -428,7 +462,7 @@ const AdminInvestigation = ({ profile }) => {
             try {
                 let list = []
                 var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Cold'),where("quotation_flg", "==", true));
+                    where('Lead_Status', '==', 'Cold'), where("quotation_flg", "==", true));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
@@ -530,7 +564,7 @@ const AdminInvestigation = ({ profile }) => {
                     <button onClick={() => setDetailGraphFlg(!DetailGraphFlg)}>Detail</button>
                     {
                         DetailGraphFlg ? <>
-                            <div style={{ display: 'flex' }}>
+                            <div style={{ display: 'flex',borderTop:'20px solid blue' }}>
                                 <DynamicBarChart
                                     data={Create_quote_data_Analysed}
                                     // Timeout in ms between each iteration
@@ -562,7 +596,7 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-                            <div style={{ display: 'flex' }}>
+                            <div style={{ display: 'flex',borderTop:'20px solid pink'  }}>
 
                                 <DynamicBarChart
                                     data={Dump_Lead_Analysed}
@@ -595,7 +629,7 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-                            <div>
+                            <div style={{borderTop:'20px solid green',borderBottom:'20px solid yellow'  }}>
                                 <DynamicBarChart
                                     data={Cold_Lead_Analysed}
                                     // Timeout in ms between each iteration
@@ -607,10 +641,21 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-
+                            <div style={{ width: "60%", }}>
+                                <DynamicBarChart
+                               
+                                    data={DirectLead}
+                                    iterationTimeout={1200}
+                                    startRunningTimeout={2500}
+                                    barHeight={20}
+                                    iterationTitleStyles={{
+                                        fontSize: 18
+                                    }}
+                                />
+                            </div>
                         </> : <></>
                     }
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex',borderTop:'20px solid green'  }}>
                         <DynamicBarChart
                             data={data_Analysed}
                             // Timeout in ms between each iteration
@@ -642,15 +687,15 @@ const AdminInvestigation = ({ profile }) => {
                             }}
                         />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around',borderTop:'20px solid black'  }}>
                         <ConversionPrecentage />
                         <ConversionPercentageAgaintLeadSeeded />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '-3rem',justifyContent: 'space-around' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '-3rem', justifyContent: 'space-around',borderTop:'20px solid red',borderBottom:'10px solid cyan'   }}>
                         <TotalLeadeSeeded />
                         <AvgLeadSeeded />
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '20%', }}>
                         <select onChange={(e) => filterDataFromProfile(e.target.value)} >
                             <option value={0}> assign to</option>
                             {

@@ -3,6 +3,7 @@ import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, wher
 import React, { useEffect, useState } from 'react';
 import app from '../../required';
 import './Page.css';
+import StreamData from '../StreamCount/StreamData';
 const Assignerhandler = () => {
     const [profile, setprofile] = useState([])
     const [currentcaller, setCurrentcaller] = useState(null)
@@ -174,7 +175,7 @@ const Assignerhandler = () => {
                 name: currentcaller[0].name,
                 uid: currentcaller[0].uid
             },
-            callingStatus:''
+            callingStatus: ''
         }, { merge: true })
     }
     function ControllApplyer(clickControl) {
@@ -211,6 +212,7 @@ const Assignerhandler = () => {
 
     return (<>
         <div className='container'>
+            <StreamData />
             <div>
                 <span>Assign to:-</span>
                 <select onChange={(e) => filterDataFromProfile(e.target.value)}>

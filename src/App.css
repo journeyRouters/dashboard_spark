@@ -8,8 +8,7 @@
   font-family: cursive;
   text-transform: uppercase;
   background-color: #c7e8f5;
-  position: sticky;
-  top: 1rem;
+  position: absolute;
   background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
   margin-left: 1rem;
   margin-top: 1rem;
@@ -98,6 +97,7 @@
   width: 80%;
   height: 41.4rem;
   overflow-y: scroll;
+  position: relative;
   /* margin-left: 19.3rem; */
 }
 

@@ -706,215 +706,217 @@ function App() {
             }
 
           </div>
+          <div style={{marginTop:"7rem"}}>
 
-          {
-            Page === "create_quote" ?
-              <>{
-                auth &&
-                <Createquote auth={auth} userProfile={profile} />
-              }
+            {
+              Page === "create_quote" ?
+                <>{
+                  auth &&
+                  <Createquote auth={auth} userProfile={profile} />
+                }
+                </> : <></>
+            }
+            {
+              Page == 'Payments' ? <PaymentMarking Auth={auth} profile={profile} /> : <></>
+            }
+
+            {
+              Page === 'Caller_Lead_Assigning' ? <>
+                <Assignerhandler Auth={auth} profile={profile} />
               </> : <></>
-          }
-          {
-            Page == 'Payments' ? <PaymentMarking Auth={auth} profile={profile} /> : <></>
-          }
+            }
+            {
+              Page === 'CallerLeads' ? <>
+                <CreateQuote Auth={auth} profile={profile} />
+              </> : <></>
+            }
+            {
+              Page === 'Attendance' ? <>
+                <AttendanceMain profile={profile} />
+              </> : <></>
+            }
+            {
+              Page === "AdminLeaveFunnel" ?
+                <Adminleavefunnel auth={auth} />
+                : <></>
+            }
+            {
+              Page === "Investigation caller" ?
+                <CallerInvestigation auth={auth} profile={profile} />
+                : <></>
+            }
 
-          {
-            Page === 'Caller_Lead_Assigning' ? <>
-              <Assignerhandler Auth={auth} profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === 'CallerLeads' ? <>
-              <CreateQuote Auth={auth} profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === 'Attendance' ? <>
-              <AttendanceMain profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === "AdminLeaveFunnel" ?
-              <Adminleavefunnel auth={auth} />
-              : <></>
-          }
-          {
-            Page === "Investigation caller" ?
-              <CallerInvestigation auth={auth} profile={profile} />
-              : <></>
-          }
+            {
+              Page == "AdminInvestigation" ?
+                <AdminInvestigation profile={profile} /> : <></>
+            }
+            {
+              Page === "rapid_fire" ?
+                // <Test />
+                <Rapid auth={auth} profile={profile} />
+                : <></>
+            }
+            {
+              Page === "LeadFromCallers" ?
+                <LeadFromCallers />
+                : <></>
+            }
+            {/* LeadFromCallers */}
 
-          {
-            Page == "AdminInvestigation" ?
-              <AdminInvestigation profile={profile} /> : <></>
-          }
-          {
-            Page === "rapid_fire" ?
-              // <Test />
-              <Rapid auth={auth} profile={profile} />
-              : <></>
-          }
-          {
-            Page === "LeadFromCallers" ?
-              <LeadFromCallers />
-              : <></>
-          }
-          {/* LeadFromCallers */}
+            {
+              Page === "Dump" ?
+                <Dump profile={profile} auth={auth} />
 
-          {
-            Page === "Dump" ?
-              <Dump profile={profile} auth={auth} />
+                : <></>
+            }
+            {
+              Page === "UploadAttendance" ?
+                <UploadAttendance />
+                : <></>
+            }
+            {/* UploadAttendance */}
+            {
+              Page === "Manage Leave" ?
+                <LeaveMainPage profile={profile} auth={auth} />
+                : <></>
+            }
+            {
+              Page === "Team" ?
+                <Main profile={profile} auth={auth} />
+                // <div></div>
+                : <></>
+            }
+            {
+              Page === "Team_" ?
+                <Main_Admin profile={profile} auth={auth} />
+                // <div></div>
+                : <></>
+            }
+            {
+              Page === "Investigation" ?
+                <Investigation profile={profile} />
+                : <></>
+            }
+            {
+              Page === "Freelance_Investigation" ?
+                <Freelance_Investigation profile={profile} />
+                : <></>
+            }
+            {
+              Page === "User_Controller" ?
+                <Usercontrol auth={auth} data={profile} />
+                : <></>
+            }
+            {
+              Page === "leave policy" ?
+                <Leaves auth={auth} data={profile} />
+                : <></>
+            }
+            {
+              Page === "Quotation_Followup" ?
+                <>
+                  {
+                    auth &&
+                    <FollowUp auth={auth} profile={profile} />
+                  }
+                </>
+                : <></>
+            }
+            {
+              Page === "Calling_Followup" ?
+                <>
+                  {
+                    auth &&
+                    <CallerFollowUp auth={auth} profile={profile} />
+                  }
+                </>
+                : <></>
 
-              : <></>
-          }
-          {
-            Page === "UploadAttendance" ?
-              <UploadAttendance />
-              : <></>
-          }
-          {/* UploadAttendance */}
-          {
-            Page === "Manage Leave" ?
-              <LeaveMainPage profile={profile} auth={auth} />
-              : <></>
-          }
-          {
-            Page === "Team" ?
-              <Main profile={profile} auth={auth} />
-              // <div></div>
-              : <></>
-          }
-          {
-            Page === "Team_" ?
-              <Main_Admin profile={profile} auth={auth} />
-              // <div></div>
-              : <></>
-          }
-          {
-            Page === "Investigation" ?
-              <Investigation profile={profile} />
-              : <></>
-          }
-          {
-            Page === "Freelance_Investigation" ?
-              <Freelance_Investigation profile={profile} />
-              : <></>
-          }
-          {
-            Page === "User_Controller" ?
-              <Usercontrol auth={auth} data={profile} />
-              : <></>
-          }
-          {
-            Page === "leave policy" ?
-              <Leaves auth={auth} data={profile} />
-              : <></>
-          }
-          {
-            Page === "Quotation_Followup" ?
+            }
+            {
+              Page === "Admin_Follow_up" ?
+                <>
+                  {
+                    auth &&
+                    <AdminFollow auth={auth} profile={profile} />
+                  }
+                </>
+                : <></>
+            }
+
+            {Page === "voucher" ?
               <>
                 {
                   auth &&
-                  <FollowUp auth={auth} profile={profile} />
+                  <Vouchers auth={auth} profile={profile} />
                 }
               </>
               : <></>
-          }
-          {
-            Page === "Calling_Followup" ?
+            }
+            {Page === "Flight" ?
               <>
                 {
                   auth &&
-                  <CallerFollowUp auth={auth} profile={profile} />
+                  <Flight auth={auth} profile={profile} />
                 }
               </>
               : <></>
-
-          }
-          {
-            Page === "Admin_Follow_up" ?
+            }
+            {Page === "ConvertedFiles" ?
               <>
                 {
                   auth &&
-                  <AdminFollow auth={auth} profile={profile} />
+                  <AllConvertedFile auth={auth} profile={profile} />
                 }
               </>
               : <></>
-          }
+            }
+            {
+              Page === "profile" ?
+                <>
+                  <Test />
+                </>
+                : <></>
+            }
+            {
+              Page === "Driver" ?
+                <>
+                  <Driver auth={auth} />
+                </>
+                : <></>
+            }
+            {/* Investigate Current Lead */}
+            {
+              Page === "Account_Converted" ? <>
+                <Account_converted auth={auth} profile={profile} />
+              </> : <></>
+            }
+            {
+              Page === "Investigate Current Lead" ? <>
+                <SuperAdmin auth={auth} profile={profile} />
+              </> : <></>
+            }
+            {
+              Page === 'Operation_converted' ? <>
+                <OprationConverted profile={profile} />
+              </> : <></>
+            }
+            {
+              Page === 'Poststay' ? <>
+                <Poststay profile={profile} />
+              </> : <></>
+            }
+            {
+              // Duringstay
+              Page === 'Duringstay' ? <>
+                <Duringstay profile={profile} />
+              </> : <></>
+            }
 
-          {Page === "voucher" ?
-            <>
-              {
-                auth &&
-                <Vouchers auth={auth} profile={profile} />
-              }
-            </>
-            : <></>
-          }
-             {Page === "Flight" ?
-            <>
-              {
-                auth &&
-                <Flight auth={auth} profile={profile} />
-              }
-            </>
-            : <></>
-          }
-          {Page === "ConvertedFiles" ?
-            <>
-              {
-                auth &&
-                <AllConvertedFile auth={auth} profile={profile} />
-              }
-            </>
-            : <></>
-          }
-          {
-            Page === "profile" ?
-              <>
-                <Test />
-              </>
-              : <></>
-          }
-          {
-            Page === "Driver" ?
-              <>
-                <Driver auth={auth} />
-              </>
-              : <></>
-          }
-          {/* Investigate Current Lead */}
-          {
-            Page === "Account_Converted" ? <>
-              <Account_converted auth={auth} profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === "Investigate Current Lead" ? <>
-              <SuperAdmin auth={auth} profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === 'Operation_converted' ? <>
-              <OprationConverted profile={profile} />
-            </> : <></>
-          }
-          {
-            Page === 'Poststay' ? <>
-              <Poststay profile={profile} />
-            </> : <></>
-          }
-          {
-            // Duringstay
-            Page === 'Duringstay' ? <>
-              <Duringstay profile={profile} />
-            </> : <></>
-          }
-
+          </div>
         </div>
+        {/* <button className='top'>Top</button> */}
       </div>
-      {/* <button className='top'>Top</button> */}
     </>
 
   );

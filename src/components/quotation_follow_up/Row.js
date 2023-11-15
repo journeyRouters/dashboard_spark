@@ -118,7 +118,7 @@ const Row = (props) => {
             list.push(doc.data())
         });
         setpdf(list)
-        // console.log('all quote', list)
+        console.log('all quote', list)
 
     }
     async function getinvoice() {

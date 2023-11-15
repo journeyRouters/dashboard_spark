@@ -19,6 +19,7 @@ const AdminInvestigation = ({ profile }) => {
     const [prevMonth, setPrevMonth] = useState([])
     const [AllUserprofile, setAllUserprofile] = useState([])
     const [Create_quote_data_Analysed, setCreate_quote_data_Analysed] = useState([])
+    const [lastupdated72hr, setlastupdated72hr] = useState([])
     const [Hot_Lead_Analysed, set_Hot_Lead_Analysed] = useState([])
     const [Active_Lead_Analysed, set_Active_Lead_Analysed] = useState([])
     const [Converted_Lead_Analysed, set_Converted_Lead_Analysed] = useState([])
@@ -55,7 +56,63 @@ const AdminInvestigation = ({ profile }) => {
             getPendingLead(Profile)
         });
     }
+    function checkForLastUpdate(LeadList) {
+        var counted = 0
+        LeadList.forEach((Lead) => {
+            var today = new Date()
+            if (Lead.updated_last) {
+                var commentLimit = new Date(Lead.updated_last.toDate());
+                commentLimit.setDate(commentLimit.getDate() + 3)
+                // setLimit(commentLimit < today)
+                if (commentLimit < today) {
+                    counted++
+                }
 
+            }
+        })
+        return counted
+    }
+
+
+    async function unresponsedLead72hr(AllUserprofile) {
+        var datePrev = moment(new Date()).subtract(2, 'month').calendar()
+        var month = moment(datePrev).format('MMMM')
+        var holdAlluserAnalytics = []
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true)
+                );
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                    // console.log(doc.data())
+                });
+                user_analytics.value = checkForLastUpdate(list)
+                holdAlluserAnalytics.push(user_analytics)
+                // console.log(holdAlluserAnalytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        setlastupdated72hr([
+            {
+                name: '72 hr',
+                values: holdAlluserAnalytics
+            }
+        ])
+        // getConvertedLeadData(AllUserprofile)
+        // console.log(holdAlluserAnalytics)
+        // setdataAvailablityFlg(true)
+
+    }
     async function getPendingLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -228,7 +285,7 @@ const AdminInvestigation = ({ profile }) => {
                     where("assign_to.uid", "==", AllUserprofile[i].uid),
                     where('Lead_Status', '==', 'Converted'),
                     where("quotation_flg", "==", true),
-                    where("Campaign_code","==","Direct"),
+                    where("Campaign_code", "==", "Direct"),
                     where("month", "==", currentMonth),);
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
@@ -523,6 +580,7 @@ const AdminInvestigation = ({ profile }) => {
                 values: holdAlluserAnalytics
             }
         ])
+        unresponsedLead72hr(AllUserprofile)
         setdataAvailablityFlg(true)
     }
     useEffect(() => {
@@ -564,7 +622,7 @@ const AdminInvestigation = ({ profile }) => {
                     <button onClick={() => setDetailGraphFlg(!DetailGraphFlg)}>Detail</button>
                     {
                         DetailGraphFlg ? <>
-                            <div style={{ display: 'flex',borderTop:'20px solid blue' }}>
+                            <div style={{ display: 'flex', borderTop: '20px solid blue' }}>
                                 <DynamicBarChart
                                     data={Create_quote_data_Analysed}
                                     // Timeout in ms between each iteration
@@ -596,7 +654,7 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-                            <div style={{ display: 'flex',borderTop:'20px solid pink'  }}>
+                            <div style={{ display: 'flex', borderTop: '20px solid pink' }}>
 
                                 <DynamicBarChart
                                     data={Dump_Lead_Analysed}
@@ -629,9 +687,19 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-                            <div style={{borderTop:'20px solid green',borderBottom:'20px solid yellow'  }}>
+                            <div style={{ borderTop: '20px solid green', borderBottom: '20px solid yellow',display:'flex' }}>
                                 <DynamicBarChart
                                     data={Cold_Lead_Analysed}
+                                    // Timeout in ms between each iteration
+                                    iterationTimeout={1200}
+                                    startRunningTimeout={2500}
+                                    barHeight={20}
+                                    iterationTitleStyles={{
+                                        fontSize: 18
+                                    }}
+                                />
+                                 <DynamicBarChart
+                                    data={lastupdated72hr}
                                     // Timeout in ms between each iteration
                                     iterationTimeout={1200}
                                     startRunningTimeout={2500}
@@ -643,7 +711,7 @@ const AdminInvestigation = ({ profile }) => {
                             </div>
                             <div style={{ width: "60%", }}>
                                 <DynamicBarChart
-                               
+
                                     data={DirectLead}
                                     iterationTimeout={1200}
                                     startRunningTimeout={2500}
@@ -655,7 +723,7 @@ const AdminInvestigation = ({ profile }) => {
                             </div>
                         </> : <></>
                     }
-                    <div style={{ display: 'flex',borderTop:'20px solid green'  }}>
+                    <div style={{ display: 'flex', borderTop: '20px solid green' }}>
                         <DynamicBarChart
                             data={data_Analysed}
                             // Timeout in ms between each iteration
@@ -687,11 +755,11 @@ const AdminInvestigation = ({ profile }) => {
                             }}
                         />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around',borderTop:'20px solid black'  }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', borderTop: '20px solid black' }}>
                         <ConversionPrecentage />
                         <ConversionPercentageAgaintLeadSeeded />
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '-3rem', justifyContent: 'space-around',borderTop:'20px solid red',borderBottom:'10px solid cyan'   }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '-3rem', justifyContent: 'space-around', borderTop: '20px solid red', borderBottom: '10px solid cyan' }}>
                         <TotalLeadeSeeded />
                         <AvgLeadSeeded />
                     </div>

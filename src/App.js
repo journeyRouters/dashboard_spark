@@ -551,7 +551,7 @@ function App() {
                       </div>
                     </div>
 
-                    <div className='sidebarCard' onClick={() => page("create_quote")}>
+                    <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
                       <div className='sidebarCardContaint'>
                         <FileCopyOutlined style={{ marginRight: "1rem" }} />
                         <p>Create Quote</p>

@@ -108,9 +108,7 @@ const AdminInvestigation = ({ profile }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        // getConvertedLeadData(AllUserprofile)
-        // console.log(holdAlluserAnalytics)
-        // setdataAvailablityFlg(true)
+        setdataAvailablityFlg(true)
 
     }
     async function getPendingLead(AllUserprofile) {
@@ -581,7 +579,7 @@ const AdminInvestigation = ({ profile }) => {
             }
         ])
         unresponsedLead72hr(AllUserprofile)
-        setdataAvailablityFlg(true)
+        // setdataAvailablityFlg(true)
     }
     useEffect(() => {
         getAllUserProfie()

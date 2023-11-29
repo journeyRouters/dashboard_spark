@@ -730,7 +730,7 @@ const Profile = (
                             <div className="page-break">
                                 <div className="page2"
                                     style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/PaymentPageMaldives.jpg)",
+                                        backgroundImage: "url(/assets/pdfDefaultImage/GENERAL.png)",
                                         backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover"

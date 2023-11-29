@@ -731,7 +731,7 @@ const Maldivespdf = ({
                     <div className="page-break">
                         <div className="page2"
                             style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/MALDIVES.PNG)",
+                                backgroundImage: "url(/assets/pdfDefaultImage/MALDIVES.png)",
                                 backgroundPosition: "top",
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover"

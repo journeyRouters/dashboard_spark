@@ -196,6 +196,12 @@ function App() {
                         <p>Quotation Followup</p>
                       </div>
                     </div>
+                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                      <div className='sidebarCardContaint'>
+                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                        <p>Converted Files</p>
+                      </div>
+                    </div>
                     <div className='sidebarCard' onClick={(() => page("voucher"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
@@ -706,7 +712,7 @@ function App() {
             }
 
           </div>
-          <div style={{marginTop:"7rem"}}>
+          <div style={{ marginTop: "7rem" }}>
 
             {
               Page === "create_quote" ?

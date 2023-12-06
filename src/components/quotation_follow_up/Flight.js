@@ -48,7 +48,7 @@ const Flight = (props) => {
                 where('Lead_Status', '==', 'Converted'),
                 where('Travel_Date', '>', CurrentDate),
                 where("quotation_flg", "==", true),
-                orderBy('Travel_Date'),
+                orderBy('updated_last'),
                 startAfter(lastDocument),
                 limit(50)
             );

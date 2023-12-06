@@ -11,6 +11,8 @@ import ConversionPrecentage from './ConversionPrecentage';
 import ConversionPercentageAgaintLeadSeeded from './ConversionPercentageAgaintLeadSeeded';
 import TotalLeadeSeeded from './TotalLeadSeeded';
 import AvgLeadSeeded from './AvgLeadSeeded';
+import './investigation.css'
+import TotalLeadAssigned from './TotalLeadAssigned';
 const db = getFirestore(app);
 
 
@@ -45,7 +47,9 @@ const AdminInvestigation = ({ profile }) => {
         }
     }
     function getAllUserProfie() {
-        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"]));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"])
+            , where("user_type", "==", "show")
+        );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
@@ -72,8 +76,6 @@ const AdminInvestigation = ({ profile }) => {
         })
         return counted
     }
-
-
     async function unresponsedLead72hr(AllUserprofile) {
         var datePrev = moment(new Date()).subtract(2, 'month').calendar()
         var month = moment(datePrev).format('MMMM')
@@ -549,12 +551,15 @@ const AdminInvestigation = ({ profile }) => {
         var holdAlluserAnalytics = []
         var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        console.log(firstDay)
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
             try {
                 let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid), where("assigned_date_time", ">=", firstDay));
+                var q = query(collection(db, "Trip"),
+                    where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where("assigned_date_time", ">=", firstDay));
                 var querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
@@ -581,6 +586,7 @@ const AdminInvestigation = ({ profile }) => {
         unresponsedLead72hr(AllUserprofile)
         // setdataAvailablityFlg(true)
     }
+   
     useEffect(() => {
         getAllUserProfie()
     }, []);
@@ -664,16 +670,9 @@ const AdminInvestigation = ({ profile }) => {
                                         fontSize: 18
                                     }}
                                 />
-                                <DynamicBarChart
-                                    data={Total_Lead_Analysed}
-                                    // Timeout in ms between each iteration
-                                    iterationTimeout={1200}
-                                    startRunningTimeout={2500}
-                                    barHeight={20}
-                                    iterationTitleStyles={{
-                                        fontSize: 18
-                                    }}
-                                />
+                                <div style={{ width: '100%' }}>
+                                    <TotalLeadAssigned Total_Lead_Analysed={Total_Lead_Analysed} AllUserprofile={AllUserprofile}/>
+                                </div>
                                 <DynamicBarChart
                                     data={AllStatus_Lead_Analysed}
                                     // Timeout in ms between each iteration
@@ -685,7 +684,7 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                             </div>
-                            <div style={{ borderTop: '20px solid green', borderBottom: '20px solid yellow',display:'flex' }}>
+                            <div style={{ borderTop: '20px solid green', borderBottom: '20px solid yellow', display: 'flex' }}>
                                 <DynamicBarChart
                                     data={Cold_Lead_Analysed}
                                     // Timeout in ms between each iteration
@@ -696,7 +695,7 @@ const AdminInvestigation = ({ profile }) => {
                                         fontSize: 18
                                     }}
                                 />
-                                 <DynamicBarChart
+                                <DynamicBarChart
                                     data={lastupdated72hr}
                                     // Timeout in ms between each iteration
                                     iterationTimeout={1200}

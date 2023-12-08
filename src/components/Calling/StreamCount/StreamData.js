@@ -30,7 +30,7 @@ function StreamData() {
         else {
             const documentRef = doc(db, "Support", "tripCount");
             const dataToUpdate = {
-                tripCount: valueToUpdate,
+                tripCount: parseInt(valueToUpdate),
             };
             try {
                 await updateDoc(documentRef, dataToUpdate);

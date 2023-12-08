@@ -28,7 +28,7 @@ const Driver = (props) => {
             //   console.log(auth)
             const handles = await window.showOpenFilePicker({ multiple: false });
             const files = await fromEvent(handles);
-            const path = files[0].path
+            // const path = files[0].path
             // setInProgress(true)
             readXlsxFile(files[0]).then((rows) => {
                 let countUpdater = TripCounter
@@ -96,11 +96,15 @@ const Driver = (props) => {
                         caller: {
                             name: '',
                             uid: ''
-                        }
+                        },
+                        FlightStatus:false,
+                        FlightComments:[],
+                        FlightBookedDate:null,
+                        Flight_LastUpdate:null
                     });
                 }
                 updateTripCounter(countUpdater)
-                updateHash(HashTable)
+                // updateHash(HashTable)
                 getLeadByDate()
                 // console.log(rows[1][0])
                 // uploadFileOnStorage(path,'dingdong')
@@ -146,12 +150,7 @@ const Driver = (props) => {
         return () => unsubscribe()
 
     }, []);
-    function test() {
-        let date = new Date();
-        // date.setDate(date.getDate() + days);
-        // console.log(objectHash({foo: 'nand'+date}))
-        // console.log(moment(date).format('DD-MM-YYYY-HH-mm-ss-a'))
-    }
+ 
     useEffect(() => {
         window.scrollTo(0, 0);
         getTripCounter()
@@ -160,7 +159,7 @@ const Driver = (props) => {
         // console.log(moment(test(3)).format('DD MMMM YYYY'))
         // console.log(selectedDate)
         getLeadByDate(currentdate)
-    }, []);
+    },);
     async function getTripCounter() {
         const TripRef = doc(db, "Support", "tripCount");
         let SupportSnap;

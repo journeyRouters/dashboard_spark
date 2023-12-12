@@ -11,8 +11,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [flightBooked, setflightBooked] = useState(false)
     const db = getFirestore(app);
     var today = new Date()
-        var currentdate = moment(today).format('YYYY-MM-DD')
-
+    var currentdate = moment(today).format('YYYY-MM-DD')
     async function deletelead(tripid) {
         try {
             await deleteDoc(doc(db, "Trip", tripid));
@@ -97,7 +96,6 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                         <option value='Cold'>cold</option>
                         <option value='Active'>Active</option>
                         <option value='Hot'>Hot</option>
-
                     </select>
                 </span><br />
                 {/* {

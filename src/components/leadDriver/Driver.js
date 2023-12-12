@@ -104,7 +104,7 @@ const Driver = (props) => {
                     });
                 }
                 updateTripCounter(countUpdater)
-                // updateHash(HashTable)
+                updateHash(HashTable)
                 getLeadByDate()
                 // console.log(rows[1][0])
                 // uploadFileOnStorage(path,'dingdong')
@@ -114,7 +114,7 @@ const Driver = (props) => {
             //   setopen(true)
         }
     }
-    async function getLeadByDate() {
+    async function getLeadByDate(selectedDate) {
         let list = []
         // console.log(selectedDate)
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
@@ -138,14 +138,15 @@ const Driver = (props) => {
 
     }
     useEffect(() => {
-        const q = query(collection(db, "Profile"));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"])
+        , where("user_type", "==", "show"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
                 Profile.push(doc.data());
             });
             setprofile(Profile)
-            // console.log(Profile,);
+            console.log(Profile,);
         });
         return () => unsubscribe()
 
@@ -159,7 +160,7 @@ const Driver = (props) => {
         // console.log(moment(test(3)).format('DD MMMM YYYY'))
         // console.log(selectedDate)
         getLeadByDate(currentdate)
-    },);
+    },[]);
     async function getTripCounter() {
         const TripRef = doc(db, "Support", "tripCount");
         let SupportSnap;

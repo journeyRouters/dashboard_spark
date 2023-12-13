@@ -517,6 +517,7 @@ const Maldivespdf = ({
                                 </div>
                                 <div
                                     style={{
+                                        width:'55rem',
                                         backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
                                         // backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",

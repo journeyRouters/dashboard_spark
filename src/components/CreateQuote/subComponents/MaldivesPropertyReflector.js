@@ -115,10 +115,10 @@ export const propertyMaldives = [
         label: 'HIDEAWAY BEACH RESORT AND SPA',
         value: 'HideawayBeachResort_Spa'
     },
-    // {
-    //     label: 'HOLIDAY INN KANDOOMA',
-    //     value: 'HolidayInnKandooma'
-    // },
+    {
+        label: 'HOLIDAY INN KANDOOMA',
+        value: 'HolidayInnKandooma'
+    },
     {
         label: 'KANDIMA MALDIVES',
         value: 'KandimaMaldives'

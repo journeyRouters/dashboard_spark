@@ -973,10 +973,29 @@ const RoomType = {
     ],
     HolidayInnKandooma: [
         {
-            label: 'under development',
-            value: ''
-        }
-
+            label: 'One Bedroom Beach House with Garden View',
+            value: 'OneBedroomBeachHousewithGardenView'
+        },
+        {
+            label: 'Overwater Villa with King and Twin Beds',
+            value: 'OverwaterVillawithKingandTwinBeds'
+        },
+        {
+            label: 'Overwater Villa with sea view',
+            value: 'OverwaterVillawithseaview'
+        },
+        {
+            label: 'Resort Villa',
+            value: 'ResortVilla'
+        },
+        {
+            label: 'sunset water villa with pool',
+            value: 'Sunsetwatervillawithpool'
+        },
+        {
+            label: 'two bedroom family with pool',
+            value: 'Twobedroomfamilywithpool'
+        },
     ],
     KandimaMaldives: [
         {

@@ -6,7 +6,9 @@ import { Modal } from '@material-ui/core';
 const db = getFirestore(app);
 
 
-const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, auth, deliverable_item, BillingAddress, documents, profile, hint, getinvoice: invoiceOnPrepage }) => {
+const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, 
+    auth, deliverable_item, BillingAddress, documents, profile,
+     hint, getinvoice: invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({

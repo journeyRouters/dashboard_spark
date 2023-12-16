@@ -218,7 +218,48 @@ export const propertyMaldives = [
     {
         label: 'YOU AND ME BY COCOON',
         value: 'YouAndMeByCocoon'
-    }
+    },
+    // Mauritius/////////////////////////////////////////////////////////////////////////////////////
+    {
+       label:'JW Marriot',
+       value:'JWMarriot' 
+    },
+    {
+        label:'The westin Turtle bay',
+        value:'ThewestinTurtlebay' 
+     },
+     {
+        label:'Radisson Blu',
+        value:'RadissonBlu' 
+     }, {
+        label:'Long Beach',
+        value:'LongBeach' 
+     }, 
+     {
+        label:'Laguna Beach',
+        value:'LagunaBeach'
+     },
+     {
+        label:'Lagoon Attitude',
+        value:'LagoonAttitude' 
+     },
+     {
+        label:'Radisson Blu Azuri Resort',
+        value:'RadissonBluAzuriResort'
+     },
+     {
+        label:'Coral Azur Beach Resort',
+        value:'CoralAzurBeachResort'
+     },
+     {
+        label:'Ravenala Attitude',
+        value:'RavenalaAttitude'
+     },
+     {
+        label:'Sun rise Attitude',
+        value:'SunriseAttitude'
+     },
+    
 ]
 
 

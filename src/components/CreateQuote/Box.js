@@ -342,8 +342,9 @@ const Box = ({
 
     return (
         <>
+          
             {
-                Destination === "Maldives" ? <>
+                Destination === "Maldives" ||Destination==="Mauritius" ?
                     <Maldives
                         email={email}
                         data={data}
@@ -351,92 +352,95 @@ const Box = ({
                         set_popupopner={set_popupopner}
                         profile={profile}
                     />
-                </> : <>
-                    <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
-                        <div className='popUp_body'>
+                    : <>
 
-                            <div className='save_close'>
-                                <button className='compo_button' onClick={() => closeHandler()} >close</button>
-                                <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
-                            </div>
-                            <div >
-                                <div style={{ display: 'flex', width: '70%', justifyContent: 'space-between' }} >
-                                    <div>
-                                        <h4>
-                                            <span>Trip id:- </span>
-                                            <span>{data.TripId}</span>
-                                        </h4>
-                                        <h4>
-                                            <span>Budget:-</span>
-                                            <span>INR {formatter.format(data.Budget)}/-</span>
-                                        </h4>
-                                        <h4>
-                                            <span>Travel Date:- </span>
-                                            <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
-                                        </h4>
-                                        <h4>
-                                            <span>Travel Duration :- </span>
-                                            <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
-                                        </h4>
-                                    </div>
-                                    <div>
-                                        <h4>
-                                            <span>No of pax:- </span>
-                                            <span>{data.Pax}</span>
-                                        </h4>
-                                        <h4>
-                                            <span>No of child:- </span>
-                                            <span>{data.Child ? data.Child : 0}</span>
-                                        </h4>
-                                        <h4>
-                                            <span>Contact:- </span>
-                                            <span>{data.Contact_Number}</span>
-                                        </h4>
-                                        <h4>
-                                            comments:-
-                                            <span>
-                                                {
-                                                    data.Comment
-                                                }
-                                            </span>
-                                        </h4>
+                        <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
+                            <div className='popUp_body'>
 
-                                    </div>
-                                    <div>
-                                        <h4>
-                                            <span>Departure City:- </span>
-                                            <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
-                                        </h4>
-                                        <h4>
-                                            <span>Traveler:- </span>
-                                            <input style={{ border: "2px solid Blue" }} onChange={(e) => ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
-                                        </h4>
-                                        <h4>
-                                            <span>Destination:- </span>
-                                            <span style={{ border: "2px solid green" }}>{data.Destination}</span>
-                                            <select onChange={(destination) => changingDestination(destination)}>
-                                                <option value={'change Destination'}>change Destination</option>
-                                                <option value={'Dubai'}>Dubai</option>
-                                                <option value={'Maldives'}>Maldives</option>
-                                                <option value={'Thailand'}>Thailand</option>
-                                                <option value={'Singapore'}>Singapore</option>
-                                                <option value={'Malaysia'}>Malaysia</option>
-                                                <option value={'Bali'}>Bali</option>
-                                                <option value={'Himachal'}>Himachal</option>
-                                                <option value={'Ladakh'}>Ladakh</option>
-                                                <option value={'Kerala'}>Kerala</option>
-                                                <option value={'Kashmir'}>Kashmir</option>
-                                                <option value={'Andaman'}>Andaman</option>
-                                                <option value={'Goa'}>Goa</option>
-                                                <option value={'Singapore'}>Singapore</option>
-                                                <option value={'Rajasthan'}>Rajasthan</option>
-                                                <option value={'Veitnam'}>Veitnam</option>
-                                                <option value={'Northeast'}>Northeast</option>
-                                                <option value={'Europe'}>Europe</option>
-                                            </select>
-                                        </h4>
-                                    </div>
-                                    {/* <div>
+                                <div className='save_close'>
+                                    <button className='compo_button' onClick={() => closeHandler()} >close</button>
+                                    <button className='compo_button' onClick={() => Save_download()}>save&downlod</button>
+                                </div>
+                                <div >
+                                    <div style={{ display: 'flex', width: '70%', justifyContent: 'space-between' }} >
+                                        <div>
+                                            <h4>
+                                                <span>Trip id:- </span>
+                                                <span>{data.TripId}</span>
+                                            </h4>
+                                            <h4>
+                                                <span>Budget:-</span>
+                                                <span>INR {formatter.format(data.Budget)}/-</span>
+                                            </h4>
+                                            <h4>
+                                                <span>Travel Date:- </span>
+                                                <span>{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span>
+                                            </h4>
+                                            <h4>
+                                                <span>Travel Duration :- </span>
+                                                <span>{data.Travel_Duration} days,{data.Travel_Duration - 1}Nights</span>
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <h4>
+                                                <span>No of pax:- </span>
+                                                <span>{data.Pax}</span>
+                                            </h4>
+                                            <h4>
+                                                <span>No of child:- </span>
+                                                <span>{data.Child ? data.Child : 0}</span>
+                                            </h4>
+                                            <h4>
+                                                <span>Contact:- </span>
+                                                <span>{data.Contact_Number}</span>
+                                            </h4>
+                                            <h4>
+                                                comments:-
+                                                <span>
+                                                    {
+                                                        data.Comment
+                                                    }
+                                                </span>
+                                            </h4>
+
+                                        </div>
+                                        <div>
+                                            <h4>
+                                                <span>Departure City:- </span>
+                                                <span style={{ border: "2px solid green" }}>{data.Departure_City}</span>
+                                            </h4>
+                                            <h4>
+                                                <span>Traveler:- </span>
+                                                <input style={{ border: "2px solid Blue" }} onChange={(e) => ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
+                                            </h4>
+                                            <h4>
+                                                <span>Destination:- </span>
+                                                <span style={{ border: "2px solid green" }}>{data.Destination}</span>
+                                                <select onChange={(destination) => changingDestination(destination)}>
+                                                    <option value={'change Destination'}>change Destination</option>
+                                                    <option value={'Dubai'}>Dubai</option>
+                                                    <option value={'Maldives'}>Maldives</option>
+                                                    <option value={'Thailand'}>Thailand</option>
+                                                    <option value={'Singapore'}>Singapore</option>
+                                                    <option value={'Malaysia'}>Malaysia</option>
+                                                    <option value={'Bali'}>Bali</option>
+                                                    <option value={'Himachal'}>Himachal</option>
+                                                    <option value={'Ladakh'}>Ladakh</option>
+                                                    <option value={'Kerala'}>Kerala</option>
+                                                    <option value={'Kashmir'}>Kashmir</option>
+                                                    <option value={'Andaman'}>Andaman</option>
+                                                    <option value={'Goa'}>Goa</option>
+                                                    <option value={'Singapore'}>Singapore</option>
+                                                    <option value={'Rajasthan'}>Rajasthan</option>
+                                                    <option value={'Veitnam'}>Veitnam</option>
+                                                    <option value={'Northeast'}>Northeast</option>
+                                                    <option value={'Europe'}>Europe</option>
+                                                    <option value={'Mauritius'}>Mauritius</option>
+
+                                                </select>
+                                            </h4>
+                                        </div>
+                                        {/* <div>
                                         {
                                             data.Comment? <>
                                                 comments:-
@@ -447,232 +451,232 @@ const Box = ({
                                         }
 
                                     </div> */}
-                                </div>
-                                <p className='basicDetailsheading'>Basic Details</p>
-                                <div className='basicDetails'>
-                                    <div>
-                                        <label className='san-serif'>Days</label><br />
-                                        <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
                                     </div>
-                                    <div>
-                                        <label className='san-serif'>Night</label><br />
-                                        <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
-                                    </div>
-                                    <div>
-                                        <label className='san-serif'>number of Pax</label><br />
-                                        <input value={Pax} onChange={(e) => changePax(e)}></input>
-                                    </div>
-                                    <div>
-                                        <label className='san-serif'>number of Child</label><br />
-                                        <input onChange={(e) => changechild(e)} value={Child}></input>
-                                    </div>
-                                </div>
-                                <div className='cost_estimation_body'>
-                                    <div className='costOption'>
+                                    <p className='basicDetailsheading'>Basic Details</p>
+                                    <div className='basicDetails'>
                                         <div>
-                                            <Radio
-                                                checked={SelectedpackageType === 'Per Person'}
-                                                onChange={handleChange}
-                                                value="Per Person"
-                                                name="radio-button"
-                                                color='primary'
-                                            // inputProps={{ 'aria-label': 'A' }}
-                                            />
-                                            <label>per Person</label>
+                                            <label className='san-serif'>Days</label><br />
+                                            <input type="number" min="1" max="50" placeholder='Days count eg:-0,1,2,3..' onChange={(e) => daysChanges(e)} value={days_total.length} />
                                         </div>
                                         <div>
-                                            <Radio
-                                                checked={SelectedpackageType === 'Per Couple'}
-                                                onChange={handleChange}
-                                                value="Per Couple"
-                                                name="radio-button"
-                                                color='primary'
-                                            // inputProps={{ 'aria-label': 'A' }}
-                                            />
-                                            <label>per Couple</label>
+                                            <label className='san-serif'>Night</label><br />
+                                            <input placeholder='Night count eg:-0,1,2,3..' value={days_total.length - 1} readOnly={true}></input>
                                         </div>
                                         <div>
-                                            <Radio
-                                                checked={SelectedpackageType === 'Total'}
-                                                onChange={handleChange}
-                                                value="Total"
-                                                name="radio-button"
-                                                color='primary'
-                                            // inputProps={{ 'aria-label': 'A' }}
-                                            />
-                                            <label>total</label>
+                                            <label className='san-serif'>number of Pax</label><br />
+                                            <input value={Pax} onChange={(e) => changePax(e)}></input>
                                         </div>
-
+                                        <div>
+                                            <label className='san-serif'>number of Child</label><br />
+                                            <input onChange={(e) => changechild(e)} value={Child}></input>
+                                        </div>
                                     </div>
-                                    <div className='costOption_estimatiom'>
-                                        <div>
-                                            <label >Flight Cost</label><br />
-                                            <input type="number"
-                                                className='input_filed'
-                                                placeholder='Flight'
-                                                value={flightcost}
-                                                onChange={(e) => flightcostChange(e)}
-                                            ></input>
-                                            <span className='spacer'>+</span>
-                                        </div>
-                                        <div>
-                                            <label>Visa Cost</label><br />
-                                            <input type="number" className='input_filed' placeholder='visa' value={visacost} onChange={(e) => visacostChange(e)}></input>
-                                            <span className='spacer'>+</span>
-                                        </div>
-                                        <div>
-                                            <label>Land Package Cost</label><br />
-                                            <input type="number" className='input_filed' placeholder='Land' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
-                                            <span className='spacer'>=</span>
-                                        </div>
+                                    <div className='cost_estimation_body'>
+                                        <div className='costOption'>
+                                            <div>
+                                                <Radio
+                                                    checked={SelectedpackageType === 'Per Person'}
+                                                    onChange={handleChange}
+                                                    value="Per Person"
+                                                    name="radio-button"
+                                                    color='primary'
+                                                // inputProps={{ 'aria-label': 'A' }}
+                                                />
+                                                <label>per Person</label>
+                                            </div>
+                                            <div>
+                                                <Radio
+                                                    checked={SelectedpackageType === 'Per Couple'}
+                                                    onChange={handleChange}
+                                                    value="Per Couple"
+                                                    name="radio-button"
+                                                    color='primary'
+                                                // inputProps={{ 'aria-label': 'A' }}
+                                                />
+                                                <label>per Couple</label>
+                                            </div>
+                                            <div>
+                                                <Radio
+                                                    checked={SelectedpackageType === 'Total'}
+                                                    onChange={handleChange}
+                                                    value="Total"
+                                                    name="radio-button"
+                                                    color='primary'
+                                                // inputProps={{ 'aria-label': 'A' }}
+                                                />
+                                                <label>total</label>
+                                            </div>
 
-                                        <div className='totalSeprator'>
-                                            <label>Quotation price</label><br />
-                                            <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
                                         </div>
+                                        <div className='costOption_estimatiom'>
+                                            <div>
+                                                <label >Flight Cost</label><br />
+                                                <input type="number"
+                                                    className='input_filed'
+                                                    placeholder='Flight'
+                                                    value={flightcost}
+                                                    onChange={(e) => flightcostChange(e)}
+                                                ></input>
+                                                <span className='spacer'>+</span>
+                                            </div>
+                                            <div>
+                                                <label>Visa Cost</label><br />
+                                                <input type="number" className='input_filed' placeholder='visa' value={visacost} onChange={(e) => visacostChange(e)}></input>
+                                                <span className='spacer'>+</span>
+                                            </div>
+                                            <div>
+                                                <label>Land Package Cost</label><br />
+                                                <input type="number" className='input_filed' placeholder='Land' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
+                                                <span className='spacer'>=</span>
+                                            </div>
 
+                                            <div className='totalSeprator'>
+                                                <label>Quotation price</label><br />
+                                                <input type="number" className='input_filed' value={parseInt(flightcost) + parseInt(visacost) + parseInt(landPackage)} placeholder='0' readOnly={true}></input>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div className='cost_estimation_body'>
-                                    <p className='HotelDetailsheading'>Hotel Details</p>
-                                    {
-                                        // console.log(NightDataFields),
-                                        NightDataFields &&
-                                        NightDataFields.map((data, index) => {
-                                            return (
-                                                <>
-                                                    <div key={index} className='costOption_estimatiom'>
-                                                        <div className='unitComponent'>
-                                                            <label>Night</label><br />
-                                                            <Select
-                                                                closeMenuOnSelect={false}
-                                                                components={animatedComponents}
-                                                                isMulti
-                                                                options={nights}
-                                                                defaultValue={Edit_NightDataFields ? data.Night : null}
-                                                                onChange={(e) => advance_controller_nights(e, index)}
-                                                            />
-                                                        </div>
-                                                        <div className='unitComponent'>
-                                                            <label>HotelMeal</label><br />
-                                                            <Select
-                                                                closeMenuOnSelect={false}
-                                                                components={animatedComponents}
-                                                                isMulti
-                                                                defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
-                                                                options={HotelMeals}
-                                                                onChange={(e) => advance_controller_Hotel_meals(e, index)}
-                                                            />
-                                                        </div>
-                                                        <div className='unitComponent'>
-                                                            <label>Hotel Name</label><br />
-                                                            <input placeholder='hotel Name'
-                                                                name='HotelName'
-                                                                value={data.HotelName}
-                                                                onChange={(event) => handleFormChange(event, index)}
-                                                            >
-                                                            </input>
+                                    <div className='cost_estimation_body'>
+                                        <p className='HotelDetailsheading'>Hotel Details</p>
+                                        {
+                                            // console.log(NightDataFields),
+                                            NightDataFields &&
+                                            NightDataFields.map((data, index) => {
+                                                return (
+                                                    <>
+                                                        <div key={index} className='costOption_estimatiom'>
+                                                            <div className='unitComponent'>
+                                                                <label>Night</label><br />
+                                                                <Select
+                                                                    closeMenuOnSelect={false}
+                                                                    components={animatedComponents}
+                                                                    isMulti
+                                                                    options={nights}
+                                                                    defaultValue={Edit_NightDataFields ? data.Night : null}
+                                                                    onChange={(e) => advance_controller_nights(e, index)}
+                                                                />
+                                                            </div>
+                                                            <div className='unitComponent'>
+                                                                <label>HotelMeal</label><br />
+                                                                <Select
+                                                                    closeMenuOnSelect={false}
+                                                                    components={animatedComponents}
+                                                                    isMulti
+                                                                    defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
+                                                                    options={HotelMeals}
+                                                                    onChange={(e) => advance_controller_Hotel_meals(e, index)}
+                                                                />
+                                                            </div>
+                                                            <div className='unitComponent'>
+                                                                <label>Hotel Name</label><br />
+                                                                <input placeholder='hotel Name'
+                                                                    name='HotelName'
+                                                                    value={data.HotelName}
+                                                                    onChange={(event) => handleFormChange(event, index)}
+                                                                >
+                                                                </input>
 
-                                                        </div>
+                                                            </div>
 
-                                                        <div className='unitComponent'>
-                                                            <label>City</label><br />
-                                                            <input placeholder='city'
-                                                                name='City'
-                                                                value={data.City}
-                                                                onChange={(event) => handleFormChange(event, index)}
-                                                            ></input>
-                                                        </div>
-                                                        <div className='unitComponent'>
-                                                            <label>Category</label><br />
-                                                            <input placeholder='Category'
-                                                                list="HotelCategory"
-                                                                name='Category'
-                                                                value={data.Category}
-                                                                onChange={(event) => handleFormChange(event, index)}
-                                                            />
-                                                            <datalist id="HotelCategory">
-                                                                <option value="1 star">1 star</option>
-                                                                <option value="2 star">2 star</option>
-                                                                <option value="3 Star">3 star</option>
-                                                                <option value="4 star">4 star</option>
-                                                                <option value="5 star">5 star</option>
-                                                                <option value="7 star">7 Star</option>
+                                                            <div className='unitComponent'>
+                                                                <label>City</label><br />
+                                                                <input placeholder='city'
+                                                                    name='City'
+                                                                    value={data.City}
+                                                                    onChange={(event) => handleFormChange(event, index)}
+                                                                ></input>
+                                                            </div>
+                                                            <div className='unitComponent'>
+                                                                <label>Category</label><br />
+                                                                <input placeholder='Category'
+                                                                    list="HotelCategory"
+                                                                    name='Category'
+                                                                    value={data.Category}
+                                                                    onChange={(event) => handleFormChange(event, index)}
+                                                                />
+                                                                <datalist id="HotelCategory">
+                                                                    <option value="1 star">1 star</option>
+                                                                    <option value="2 star">2 star</option>
+                                                                    <option value="3 Star">3 star</option>
+                                                                    <option value="4 star">4 star</option>
+                                                                    <option value="5 star">5 star</option>
+                                                                    <option value="7 star">7 Star</option>
 
-                                                            </datalist>
+                                                                </datalist>
+                                                            </div>
+                                                            <div className='unitComponent'>
+                                                                <label>Room Type</label>
+                                                                <RoomType
+                                                                    handleFormChange={handleFormChange}
+                                                                    index={index}
+                                                                    value={data.RoomType}
+                                                                />
+                                                            </div>
+                                                            <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
                                                         </div>
-                                                        <div className='unitComponent'>
-                                                            <label>Room Type</label>
-                                                            <RoomType
-                                                                handleFormChange={handleFormChange}
-                                                                index={index}
-                                                                value={data.RoomType}
-                                                            />
-                                                        </div>
-                                                        <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
-                                                    </div>
-                                                    {/* <textarea
+                                                        {/* <textarea
                                                 className='comments'
                                                 name='comments'
                                                 value={data.comments}
                                                 onChange={(event) => handleFormChange(event, index)}
                                                 placeholder='Additional information'
                                             ></textarea> */}
-                                                </>
-                                            );
+                                                    </>
+                                                );
+                                            }
+                                            )
                                         }
-                                        )
-                                    }
-                                    <button className='addMore' onClick={addFields}>Add More..</button>
-                                    <div className='FlightDetails'>
-                                        <Flight />
-                                        <p>
-                                            <input type='checkbox' onChange={() => setflight(!flight)}></input>
-                                            <label>Flight Not Included</label>
-                                        </p>
-                                    </div>
-                                    {
-                                        flight ?
-                                            <>
+                                        <button className='addMore' onClick={addFields}>Add More..</button>
+                                        <div className='FlightDetails'>
+                                            <Flight />
+                                            <p>
+                                                <input type='checkbox' onChange={() => setflight(!flight)}></input>
+                                                <label>Flight Not Included</label>
+                                            </p>
+                                        </div>
+                                        {
+                                            flight ?
+                                                <>
 
-                                                <div onPaste={(e) => handlePasteFlight(e)}>
-                                                    <Upload
-                                                        autoUpload={false}
-                                                        batch={false}
-                                                        multiple={true}
-                                                    />
-                                                    <div
-                                                        className='copypastArea'
-                                                    >
-                                                        <div >
-                                                            {
-                                                                flightImgUrl ? <>
-                                                                    <div className='grid-container'>
-                                                                        <div className='grid-item'>
-                                                                            {
-                                                                                flightImgUrl.map((link, index) => (<>
-                                                                                    <div>
-                                                                                        <span onClick={() => deletefrom(index, 'flight')}>
-                                                                                            <img alt='delete icon' src='/assets/img/deleteIcon.png' />
-                                                                                        </span>
-                                                                                        <img width='320px' src={link} />
-                                                                                    </div>
-                                                                                </>))
-                                                                            }
+                                                    <div onPaste={(e) => handlePasteFlight(e)}>
+                                                        <Upload
+                                                            autoUpload={false}
+                                                            batch={false}
+                                                            multiple={true}
+                                                        />
+                                                        <div
+                                                            className='copypastArea'
+                                                        >
+                                                            <div >
+                                                                {
+                                                                    flightImgUrl ? <>
+                                                                        <div className='grid-container'>
+                                                                            <div className='grid-item'>
+                                                                                {
+                                                                                    flightImgUrl.map((link, index) => (<>
+                                                                                        <div>
+                                                                                            <span onClick={() => deletefrom(index, 'flight')}>
+                                                                                                <img alt='delete icon' src='/assets/img/deleteIcon.png' />
+                                                                                            </span>
+                                                                                            <img width='320px' src={link} />
+                                                                                        </div>
+                                                                                    </>))
+                                                                                }
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </> : <></>
-                                                            }
-                                                        </div>
-                                                        Paste Area
+                                                                    </> : <></>
+                                                                }
+                                                            </div>
+                                                            Paste Area
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </>
-                                            :
-                                            <></>
-                                    }
-                                    {/* <div className='FlightDetails'>
+                                                </>
+                                                :
+                                                <></>
+                                        }
+                                        {/* <div className='FlightDetails'>
                                 <EmojiTransportation />
                                 <p>
                                     <input type='checkbox' onChange={() => setcab(!cab)}></input>
@@ -688,53 +692,53 @@ const Box = ({
                                     :
                                     <></>
                             } */}
-                                    <div className='inclusionExclusion'>
-                                        <ExtensionSharp />
-                                        <button onClick={() => openInclusion()}>Inclusion/Exclusion</button>
-                                    </div>
-                                    <Modal open={opennclusion} style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
-                                        <>
-                                            <Inclusion onClose={closeInclusion} setinclusion={setinclusion} inclusion_data={inclusion_data}></Inclusion>
-                                        </>
-                                    </Modal>
+                                        <div className='inclusionExclusion'>
+                                            <ExtensionSharp />
+                                            <button onClick={() => openInclusion()}>Inclusion/Exclusion</button>
+                                        </div>
+                                        <Modal open={opennclusion} style={{ justifyContent: "center", with: '100%', overflowY: 'scroll' }} >
+                                            <>
+                                                <Inclusion onClose={closeInclusion} setinclusion={setinclusion} inclusion_data={inclusion_data}></Inclusion>
+                                            </>
+                                        </Modal>
 
-                                    <div className='itineary'>
-                                        <p>Itinerary Start date</p>
-                                        <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                                        <div className='itineary'>
+                                            <p>Itinerary Start date</p>
+                                            <input type='date' value={selected_Travel_date} onChange={(e) => select_date(e)}></input>
+                                        </div>
+                                        {
+                                            days_total &&
+                                            days_total.map((data, index) => {
+                                                // console.log(data)
+                                                return (
+                                                    <div key={index} className='days'>
+                                                        <label className='title'>Day{index + 1}:Title</label><br />
+                                                        <div style={{ display: 'flex', alignItems: 'baseline' }} >
+                                                            <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
+                                                            <Select
+                                                                className='Autocomplete'
+                                                                placeholder='Activity'
+                                                                name='Activity'
+                                                                closeMenuOnSelect={true}
+                                                                components={animatedComponents}
+                                                                options={activity}
+                                                                defaultValue={Edit_itineary ? data.Activity : null}
+                                                                onChange={(event) => advance_controller_Activity(event, index)}
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label className='title'>Description</label><br />
+                                                            <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </div>
-                                    {
-                                        days_total &&
-                                        days_total.map((data, index) => {
-                                            // console.log(data)
-                                            return (
-                                                <div key={index} className='days'>
-                                                    <label className='title'>Day{index + 1}:Title</label><br />
-                                                    <div style={{ display: 'flex', alignItems: 'baseline' }} >
-                                                        <input className='dayByitineary' placeholder='Enter Title of the day' value={data.Day} name='Day' onChange={(e) => handleFormChangeItineary(e, index)}></input>
-                                                        <Select
-                                                            className='Autocomplete'
-                                                            placeholder='Activity'
-                                                            name='Activity'
-                                                            closeMenuOnSelect={true}
-                                                            components={animatedComponents}
-                                                            options={activity}
-                                                            defaultValue={Edit_itineary ? data.Activity : null}
-                                                            onChange={(event) => advance_controller_Activity(event, index)}
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className='title'>Description</label><br />
-                                                        <textarea placeholder=' Write Description' name='Description' value={data.Description} onChange={(event) => handleFormChangeItineary(event, index)} className='Description'></textarea>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
                                 </div>
                             </div>
-                        </div>
-                    </Modal>
-                </>
+                        </Modal>
+                    </>
             }
             <Modal open={openPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <Profile

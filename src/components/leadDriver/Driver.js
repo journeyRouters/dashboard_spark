@@ -104,8 +104,9 @@ const Driver = (props) => {
                     });
                 }
                 updateTripCounter(countUpdater)
-                updateHash(HashTable)
-                getLeadByDate()
+                // updateHash(HashTable)
+                getLeadByDate(selectedDate)
+                window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
                 // console.log(rows[1][0])
                 // uploadFileOnStorage(path,'dingdong')
             })
@@ -154,7 +155,7 @@ const Driver = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getTripCounter()
-        getHashTable()
+        // getHashTable()
         // var check = moment(today,'DD MMMM YYYY').add(5, 'days').calendar()
         // console.log(moment(test(3)).format('DD MMMM YYYY'))
         // console.log(selectedDate)

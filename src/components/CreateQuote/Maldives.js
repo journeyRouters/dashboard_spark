@@ -408,7 +408,7 @@ const Maldives = ({
             />
         </Modal>
         {
-            Destination === "Maldives" ? <>
+            Destination === "Maldives" ||Destination==="Mauritius" ? <>
                 <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                     <div className='popUp_body'>
                         <div className='save_close'>
@@ -467,6 +467,7 @@ const Maldives = ({
                                         <option value={'Singapore'}>Singapore</option>
                                         <option value={'Rajasthan'}>Rajasthan</option>
                                         <option value={'Veitnam'}>Veitnam</option>
+                                        <option value={'Mauritius'}>Mauritius</option>
                                     </select>
                                 </h4>
                             </div>

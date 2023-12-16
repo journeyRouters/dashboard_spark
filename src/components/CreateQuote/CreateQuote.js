@@ -234,7 +234,8 @@ const Createquote = (props) => {
                             {
                                 popupopener ? <>
                                     {
-                                        user_uni_data.Destination === "Maldives" ? <>
+                                        user_uni_data.Destination === "Maldives"||user_uni_data.Destination === "Mauritius" ?
+                                         <>
                                             <Maldives
                                                 email={props.auth.email}
                                                 profile={props.userProfile}
@@ -242,7 +243,9 @@ const Createquote = (props) => {
                                                 updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                 set_popupopner={set_popupopner}
                                             />
-                                        </> : <>
+                                        </> 
+                                        : 
+                                        <>
                                             <Box
                                                 email={props.auth.email}
                                                 data={user_uni_data}

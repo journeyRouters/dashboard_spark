@@ -29,7 +29,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assigned_date_time": today,
             "Lead_Status": Status
         });
-        getLeadByDate(currentdate)
+        getLeadByDate(selectedDate)
     }
     function OnStatusChange(value) {
         setStatus(value)
@@ -40,7 +40,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         await updateDoc(Databaseref, {
             "Travel_Duration": parseInt(value)
         });
-        getLeadByDate(currentdate)
+        getLeadByDate(selectedDate)
     }
     async function updateDate(value) {
         var date = new Date(value)
@@ -54,7 +54,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         await updateDoc(Databaseref, {
             "assign_flg": false,
         });
-        getLeadByDate(currentdate)
+        getLeadByDate(selectedDate)
     }
     function filterDataFromProfile(uid) {
         /**this function is to filter the current user from the all user data */
@@ -68,7 +68,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         await updateDoc(Databaseref, {
             "FlightBookedFlg": !flightBooked
         });
-        getLeadByDate(currentdate)
+        getLeadByDate(selectedDate)
     }
     return (
         <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>

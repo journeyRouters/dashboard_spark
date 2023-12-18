@@ -35,9 +35,9 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
         var total = 0
         installment.forEach((item, index) => {
             total = total + parseInt(item.amount)
-            console.log(item.amount)
+            // console.log(item.amount)
         })
-        var packageCost = parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package)
+        var packageCost = parseFloat(flight_cost) + parseFloat(visa_cost) + parseFloat(land_package) + parseFloat(TCS)
         // console.log(total, packageCost)
         if (total == packageCost) {
             return true

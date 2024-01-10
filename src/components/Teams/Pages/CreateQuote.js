@@ -77,7 +77,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "!=", "Converted"),
                     where("TripId", "==", input),
-                    orderBy("Travel_Date")
+                    // orderBy("Travel_Date")
                 )
                 break;
             }
@@ -85,7 +85,7 @@ const CreateQuote = ({ uid, TeamProfile }) => {
                 q = query(collection(db, "Trip"),
                     where("Contact_Number", "==", parseInt(input)),
                     where("Lead_Status", "!=", "Converted"),
-                    orderBy("Travel_Date")
+                    // orderBy("Travel_Date")
                 )
                 break;
             }

@@ -138,22 +138,20 @@ const Box = ({
         setnights(list)
     }
     useEffect(() => {
-        // console.log(data)
         handleOptionOfNights()
     }, [countNight]);
+
     useEffect(() => {
-        // console.log(Edit_itineary)
         if (!Edit_itineary) {
             setVar()
         }
-
         setActivity(ActivityResolver(data.Destination))
-        // console.log(Edit_itineary)
-
     }, [Destination]);
+
     useEffect(() => {
         localStorage.setItem('Journeydate', selected_Travel_date);
     }, [openPDF]);
+
     function daysChanges(event) {
         let len = parseInt(event.target.value)
         var temp = Array(len).fill('a');

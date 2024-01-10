@@ -59,6 +59,7 @@ const Test = () => {
       await updateDoc(ref, {
          month: "April-2023"
       });
+      // till april-2023  
       console.log('updated', id)
    }
    function add_a_feild(tripid) {

@@ -6,9 +6,9 @@ import { Modal } from '@material-ui/core';
 const db = getFirestore(app);
 
 
-const InvoicePdf = ({ date, TCS, selected_pdf_data, installment, 
+const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
     auth, deliverable_item, BillingAddress, documents, profile,
-     hint, getinvoice: invoiceOnPrepage }) => {
+    hint, getinvoice: invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
@@ -21,7 +21,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
     const [invoicedDate, setInvoiceDate] = useState(date ? date : selected_pdf_data.date)
     const [EditinvoicedDate, setEditinvoicedDate] = useState()
     const [editaddress, setEditaddress] = useState()
-    const[wait,setWait]=useState(false)
+    const [wait, setWait] = useState(false)
     const [address, setaddress] = useState(BillingAddress ? BillingAddress : selected_pdf_data.BillingAddress)
     function handleExportWithComponent() {
         setWait(true)
@@ -70,7 +70,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
             updated_at: today,
             updated_by: profile.email,
             selected_pdf_data: selected_pdf_data,
-            finalPackageId: selected_pdf_data.pdf_name+'/'+selected_pdf_data.travel_data.TripId,
+            finalPackageId: selected_pdf_data.pdf_name + '/' + selected_pdf_data.travel_data.TripId,
             BillingAddress: BillingAddress,
             date: date,
             TCS: parseInt(TCS)
@@ -108,7 +108,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
     let flight_cost = parseInt(selected_pdf_data.flightcost)
     let land_package = parseInt(selected_pdf_data.landPackage)
     let visa_cost = parseInt(selected_pdf_data.visacost)
-    var total = flight_cost + land_package + visa_cost+TCS
+    var total = flight_cost + land_package + visa_cost + TCS
     return (
         <>
             <PDFExport
@@ -135,7 +135,17 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                                     <div className="TitleValue">
                                         <p>:- {selected_pdf_data.travel_data.Traveller_name}</p>
                                         <p>:- {hint ? invoicedDate : EditinvoicedDate}</p>
-                                        <p>:- {selected_pdf_data.travel_data.TripId}</p>
+                                        <span>
+                                            {selected_pdf_data.travel_data.Campaign_code == 'Direct' ?
+                                                <span>
+                                                    D-{selected_pdf_data.travel_data.TripId}
+                                                </span>
+                                                :
+                                                <span>
+                                                    JR-{selected_pdf_data.travel_data.TripId}
+                                                </span>
+                                            }
+                                        </span>
                                         <p>:- {hint ? address : editaddress}</p>
 
                                     </div>
@@ -218,7 +228,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
 
                             </div>
                             <div className="grandtotal">
-                                <div className={TCS>0?"total":"total2"}>
+                                <div className={TCS > 0 ? "total" : "total2"}>
                                     {
                                         TCS > 0 ? <>
                                             <div className="grandTotal_Tcs">

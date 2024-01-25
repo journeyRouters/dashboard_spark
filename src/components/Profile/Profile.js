@@ -39,7 +39,7 @@ const Profile = (
         flight
     }
 ) => {
-    console.log(travel_data)
+    // console.log(travel_data, 'here we are')
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"
@@ -103,7 +103,7 @@ const Profile = (
     }, []);
 
     async function setQuotationData() {
-        // console.log(ImgLinks)
+        console.log(indicator, 'this is indicator')
         // debugger
         if (indicator) {
         }
@@ -134,7 +134,6 @@ const Profile = (
     }
 
     async function update_quotation_flg() {
-        // debugger
         let quotation_new = parseInt(travel_data.quotation) + 1
         await updateDoc(doc(db, "Trip", `${travel_data.TripId}`), {
             quotation: quotation_new,
@@ -147,6 +146,7 @@ const Profile = (
             Travel_Duration: count_days,
             updated_last: new Date()
         });
+        debugger
     }
 
 
@@ -203,6 +203,7 @@ const Profile = (
 
         if (docSnap.exists()) {
             TripData = docSnap.data()
+            // console.log(TripData)
         } else {
             console.log("document not found!");
         }
@@ -249,7 +250,7 @@ const Profile = (
             update_quotation_flg()
         }
         catch (e) {
-            console.log(e)
+            console.log(e, 'error for update_quotation_flg')
         }
         try {
             setQuotationData()
@@ -346,7 +347,8 @@ const Profile = (
                                         <span>
                                             JR-{travel_data.TripId}
                                         </span>
-                                    }</span>
+                                    }
+                                </span>
                             </div>
 
                             <div className="package_details">

@@ -234,26 +234,26 @@ const Createquote = (props) => {
                             {
                                 popupopener ? <>
                                     {
-                                        user_uni_data.Destination === "Maldives"||user_uni_data.Destination === "Mauritius" ?
-                                         <>
-                                            <Maldives
-                                                email={props.auth.email}
-                                                profile={props.userProfile}
-                                                data={user_uni_data}
-                                                updateTableDataAfterQuote={updateTableDataAfterQuote}
-                                                set_popupopner={set_popupopner}
-                                            />
-                                        </> 
-                                        : 
-                                        <>
-                                            <Box
-                                                email={props.auth.email}
-                                                data={user_uni_data}
-                                                updateTableDataAfterQuote={updateTableDataAfterQuote}
-                                                set_popupopner={set_popupopner}
-                                                profile={props.userProfile}
-                                            />
-                                        </>
+                                        user_uni_data.Destination === "Maldives" || user_uni_data.Destination === "Mauritius" ?
+                                            <>
+                                                <Maldives
+                                                    email={props.auth.email}
+                                                    profile={props.userProfile}
+                                                    data={user_uni_data}
+                                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                                    set_popupopner={set_popupopner}
+                                                />
+                                            </>
+                                            :
+                                            <>
+                                                <Box
+                                                    email={props.auth.email}
+                                                    data={user_uni_data}
+                                                    updateTableDataAfterQuote={updateTableDataAfterQuote}
+                                                    set_popupopner={set_popupopner}
+                                                    profile={props.userProfile}
+                                                />
+                                            </>
                                     }
                                 </> :
                                     // <SortableTbl
@@ -271,13 +271,15 @@ const Createquote = (props) => {
 
                                     lead_data.map((data, index) =>
                                         <CreateQuoteTableRow
+                                            key={index}
                                             updateTableDataAfterQuote={updateTableDataAfterQuote}
                                             handleSuggestion={closeMaldivesSuggestionModal}
                                             closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                                             set_popupopner={set_popupopner}
                                             email={props.auth.email}
                                             userProfile={props.userProfile}
-                                            data={data} key={index}
+                                            data={data}
+
                                         />
                                     )
                             }

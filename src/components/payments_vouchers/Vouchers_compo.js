@@ -721,7 +721,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                                 <p>Payment's/<span className='upload_proof' onClick={() => PaymentsScreenShotsloader(true)} >upload</span ></p>
                                 <div className='upload_radio_button'>
                                     <div className='parent'>
-                                        <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0}></input>
+                                        <input type='radio' checked={latestData.PaymentScreenshots_flight.length != 0} readOnly></input>
                                         <div className='childpopup'>
                                             {
                                                 latestData.PaymentScreenshots_flight.map((flight, index) => (

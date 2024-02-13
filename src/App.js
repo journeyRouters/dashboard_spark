@@ -196,12 +196,12 @@ function App() {
                         <p>Quotation Followup</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                         <p>Converted Files</p>
                       </div>
-                    </div>
+                    </div> */}
                     <div className='sidebarCard' onClick={(() => page("voucher"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
@@ -254,12 +254,12 @@ function App() {
                         <p>Vouchers & payments</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                         <p>Converted Files</p>
                       </div>
-                    </div>
+                    </div> */}
                     <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
                       <div className='sidebarCardContaint'>
                         <SearchTwoTone style={{ marginRight: "1rem" }} />
@@ -325,12 +325,12 @@ function App() {
                         <p>Vouchers & payments</p>
                       </div>
                     </div>
-                    <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
+                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
                       <div className='sidebarCardContaint'>
                         <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                         <p>Converted Files</p>
                       </div>
-                    </div>
+                    </div> */}
                     <div className='sidebarCard' onClick={() => page("Investigation")}>
                       <div className='sidebarCardContaint'>
                         {/* <SearchTwoTone style={{ marginRight: "1rem" }} /> */}
@@ -868,7 +868,7 @@ function App() {
               </>
               : <></>
             }
-            {Page === "ConvertedFiles" ?
+            {/* {Page === "ConvertedFiles" ?
               <>
                 {
                   auth &&
@@ -876,7 +876,7 @@ function App() {
                 }
               </>
               : <></>
-            }
+            } */}
             {
               Page === "profile" ?
                 <>

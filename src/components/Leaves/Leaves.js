@@ -2,11 +2,9 @@ import React from 'react';
 
 const Leaves = () => {
     return (
-        <div style={{height:'100%'}}>
+        <div style={{height:'41rem'}}>
             <iframe
                 src="https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/policy%2FLeaves.pdf?alt=media"
-                frameBorder="0"
-                scrolling="auto"
                 height="100%"
                 width="100%"
             ></iframe>

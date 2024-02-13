@@ -280,7 +280,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                     </div>
                     <div className='SelfLeadGenleftDiv'>
                         {
-                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10].map((data, index) => <p>:-</p>)
+                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10].map((data, index) => <p key={index}>:-</p>)
                         }
 
                     </div>

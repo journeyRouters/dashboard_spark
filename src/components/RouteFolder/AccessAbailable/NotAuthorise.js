@@ -3,7 +3,7 @@ import React from 'react';
 function NotAuthorise() {
     return (
         <div>
-            <h1>Hey Buddy Don't try to play Smart................</h1>
+            <h1>You are not Authorise, Report to you Team Leader</h1>
         </div>
     );
 }

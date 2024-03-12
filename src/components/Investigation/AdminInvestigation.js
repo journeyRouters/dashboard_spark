@@ -56,11 +56,50 @@ const AdminInvestigation = ({ }) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
                 Profile.push(doc.data());
-                // console.log(doc.data())
             });
             setAllUserprofile(Profile)
             getPendingLead(Profile)
         });
+    }
+    async function getPendingLead(AllUserprofile) {
+        // correct
+        var holdAlluserAnalytics = []
+        var local = { name: 'C.Q', value: 0, fill: 'yellow' }
+        var prev_instance = dataLoaded
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                user_analytics.value = list.length
+                local.value = local.value + list.length
+                holdAlluserAnalytics.push(user_analytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        prev_instance.push(local)
+        loadData(prev_instance)
+        setCreate_quote_data_Analysed([
+            {
+                name: 'Lead to be quoted',
+                values: holdAlluserAnalytics
+            }
+        ])
+        // console.log(holdAlluserAnalytics)
+        getPaymentawaitedLead(AllUserprofile)
+
+
     }
     function checkForLastUpdate(LeadList) {
         var counted = 0
@@ -115,49 +154,7 @@ const AdminInvestigation = ({ }) => {
         setdataAvailablityFlg(true)
 
     }
-    async function getPendingLead(AllUserprofile) {
-        var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
-        var local = { name: 'C.Q', value: 0, fill: 'yellow' }
-        var prev_instance = dataLoaded
-        for (var i = 0; i < AllUserprofile.length; i++) {
-            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
-            try {
-                let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
-                var querySnapshot = await getDocs(q);
-                querySnapshot.forEach((doc) => {
-                    list.push(doc.data())
-                });
-                // console.log(list)
-                user_analytics.value = list.length
-                // console.log(list.length,local.value)
-                local.value = local.value + list.length
-                holdAlluserAnalytics.push(user_analytics)
-                // console.log(list)
-
-
-            }
-            catch (erorr) {
-                console.log(erorr)
-                // setopen(false)
-            }
-        }
-        prev_instance.push(local)
-        loadData(prev_instance)
-        setCreate_quote_data_Analysed([
-            {
-                name: 'Lead to be quoted',
-                values: holdAlluserAnalytics
-            }
-        ])
-        // console.log(holdAlluserAnalytics)
-        getPaymentawaitedLead(AllUserprofile)
-
-
-    }
+   
     async function getPaymentawaitedLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -187,9 +184,9 @@ const AdminInvestigation = ({ }) => {
         }
         prev_instance.push(local)
         loadData(prev_instance)
-        setCreate_quote_data_Analysed([
+        setPaymentAwaited([
             {
-                name: 'Lead to be quoted',
+                name: 'Payment Awaited',
                 values: holdAlluserAnalytics
             }
         ])
@@ -625,42 +622,9 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getPaymentAwaitedLeadsAllSpokes(AllUserprofile)
-    }
-    async function getPaymentAwaitedLeadsAllSpokes(AllUserprofile) {
-        var holdAlluserAnalytics = []
-        // console.log(AllUserprofile)
-        for (var i = 0; i < AllUserprofile.length; i++) {
-            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
-            try {
-                let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
-                    where('Lead_Status', '==', 'Paymentawaited'), where("quotation_flg", "==", true));
-                var querySnapshot = await getDocs(q);
-                querySnapshot.forEach((doc) => {
-                    list.push(doc.data())
-                    // console.log(doc.data())
-                });
-                user_analytics.value = list.length
-                holdAlluserAnalytics.push(user_analytics)
-
-
-            }
-            catch (erorr) {
-                console.log(erorr)
-                // setopen(false)
-            }
-        }
-        setPaymentAwaited([
-            {
-                name: 'Payments Awaited',
-                values: holdAlluserAnalytics
-            }
-        ])
         unresponsedLead72hr(AllUserprofile)
-
     }
+   
     useEffect(() => {
         getAllUserProfie()
     }, []);
@@ -703,7 +667,6 @@ const AdminInvestigation = ({ }) => {
                             <div style={{ display: 'flex', borderTop: '20px solid blue' }}>
                                 <DynamicBarChart
                                     data={Create_quote_data_Analysed}
-                                    // Timeout in ms between each iteration
                                     iterationTimeout={1200}
                                     startRunningTimeout={2500}
                                     barHeight={20}

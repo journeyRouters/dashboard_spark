@@ -9,6 +9,9 @@ function Create_hot_active({ AllUserprofile,loadData ,dataLoaded}) {
     const [Hot_Lead_Analysed, set_Hot_Lead_Analysed] = useState([])
     const [Active_Lead_Analysed, set_Active_Lead_Analysed] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
+
+
+    
     async function getPendingLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         var local = { name: 'Create quote', value: 0, fill: 'yellow' }

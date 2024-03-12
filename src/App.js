@@ -10,7 +10,7 @@ import AttendanceMain from './components/Attendance/AttendanceMain';
 import UploadAttendance from './components/Attendance/uploadAttendance';
 import Assignerhandler from './components/Calling/Pages/Assignerhandler';
 import CreateQuote from './components/Calling/Pages/CreateQuote';
-import Createquote from './components/CreateQuote/Createquote';
+import Createquote from './components/CreateQuote/Createquote.js';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Dump from './components/DumpLead/Dump';

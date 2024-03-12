@@ -6,7 +6,9 @@ import '../Teams.css';
 import Createteamform from './Createteamform';
 import GraphHandler from './graphHandler';
 
-const Main_Admin = ({ profile, auth }) => {
+const Main_Admin = ({ }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])

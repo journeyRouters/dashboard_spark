@@ -11,7 +11,8 @@ import moment from 'moment';
 
 
 const FollowUp = (props) => {
-    const [SearchKey, setSearchKey] = useState(0)
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app);
     const [lead_data, setLead_data] = useState(props.adminFlg ? props.data : [])
     const [open, setopen] = useState(true)
@@ -20,7 +21,7 @@ const FollowUp = (props) => {
     const [lead, setLead] = useState([])
     const [assign_date, setassign_month] = useState([])
     const animatedComponents = makeAnimated();
-    const [user, setuser] = useState(props.adminFlg ? props.user : props.auth.uid)
+    const [user, setuser] = useState(props.adminFlg ? props.user : auth.uid)
     const [leadStatus, setStatus] = useState(0)
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
@@ -29,7 +30,7 @@ const FollowUp = (props) => {
         else {
             try {
                 let list = []
-                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target ? props.target.uid : props.auth.uid),
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.target ? props.target.uid : auth.uid),
                     where('Lead_Status', 'in', [status]), where("quotation_flg", "==", true));
                 var querySnapshot;
 
@@ -105,7 +106,7 @@ const FollowUp = (props) => {
         else {
             getLeadOnBoard()
         }
-    }, [props.auth])
+    }, [auth])
 
 
     const Destinations = [
@@ -667,7 +668,7 @@ const FollowUp = (props) => {
     return (
         <div>
             {
-                props.auth ? <>
+                auth ? <>
                     {
                         props.adminFlg ? <></>
                             : <>
@@ -811,8 +812,8 @@ const FollowUp = (props) => {
                                         {lead_data &&
                                             (lead_data.slice(0).reverse()).map((row, index) => (
                                                 <Row
-                                                    auth={props.auth}
-                                                    profile={props.profile}
+                                                    auth={auth}
+                                                    profile={profile}
                                                     key={index}
                                                     row={row}
                                                     getLeadOnBoard={getLeadOnBoard}

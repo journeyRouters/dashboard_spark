@@ -6,16 +6,18 @@ import VouchersCompo from './Vouchers_compo';
 const Vouchers = (props) => {
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
 
 
 
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
+        // console.log(auth.uid)
         var CurrentDate = new Date()
         try {
             let list = []
             var q = query(collection(db, "Trip"),
-                where("assign_to.uid", "==", props.auth.uid),
+                where("assign_to.uid", "==", auth.uid),
                 where('Lead_Status', '==', 'Converted'),
                 where('Travel_Date', '>', CurrentDate),
                 where("quotation_flg", "==", true));
@@ -63,7 +65,7 @@ const Vouchers = (props) => {
                 {
                     lead_data.map((data, index) => (
 
-                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={props.profile} />
+                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={profile} />
 
                     ))
                 }

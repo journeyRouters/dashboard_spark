@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    border-radius: 12px;
+    border-radius: 0.75rem;
 }
 
 .label {
@@ -22,13 +22,13 @@
 .setInput {
     width: 26rem;
     height: 2rem;
-    border: 2px dashed grey;
+    border: 0.125rem dashed grey;
 }
 
 .setInput1 {
     width: 26rem;
     height: 2rem;
-    border: 2px dashed red;
+    border: 0.125rem dashed red;
 }
 
 .Button_save {
@@ -48,14 +48,16 @@
     justify-content: space-between;
     background-image: linear-gradient(to right, #dee04a, #e76e6e);
 }
-.teamdiv::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+
+.teamdiv::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
 }
 
 .headerTeam {
     display: flex;
     justify-content: space-between;
-    border: 2px solid;
+    border: 0.125rem solid;
     height: 2rem;
     background-color: black;
     color: yellow;
@@ -65,11 +67,17 @@
 }
 
 .ButtonEffect {
-    box-shadow: 5px 1px 12px yellow;
+    box-shadow: 0.3125rem 0.0625rem 0.75rem yellow;
 }
 
 .ButtonEffect:hover {
     cursor: pointer;
     color: white;
     transform: scale(1.2);
+}
+
+.Team_mapping_area {
+    height: 7rem;
+    width: 9rem;
+    overflow-y: scroll;
 }

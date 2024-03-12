@@ -1,0 +1,89 @@
+.personal_details_page {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* margin-left: 20%; */
+    padding-left: 10%;
+    font-size: 1rem;
+    font-family: verdana;
+    color: rgb(233, 39, 165);
+    /* background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC); */
+    box-shadow: -3px 6px 19px 0px rgba(0, 0, 0, 0.17), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 2.0625rem;
+
+}
+
+.professional_details_page {
+    margin-top: 2rem;
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* margin-left: 20%; */
+    padding-left: 10%;
+    font-size: 1rem;
+    font-family: verdana;
+    color: rgb(233, 39, 165);
+    /* background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC); */
+    box-shadow: -3px 6px 19px 0px rgba(0, 0, 0, 0.17), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 2.0625rem;
+}
+
+.Experience_list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.experience {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+
+}
+
+.Certificates {
+    width: 10rem;
+    height: 10rem;
+    border: 0.0625rem dotted gray;
+    margin-bottom: 2rem;
+}
+
+.AllSlipsContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* background-color: #2196F3; */
+    padding: 0.625rem;
+
+}
+
+.Slips {
+    margin-bottom: 3rem;
+    display: flex;
+    color: black;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 0.0625rem solid rgba(0, 0, 0, 0.8);
+    padding: 1.25rem;
+    font-size: 0.6rem;
+    text-align: center;
+}
+.Accounts_details_page {
+    margin-top: 2rem;
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* margin-left: 20%; */
+    padding-left: 10%;
+    font-size: 1rem;
+    font-family: verdana;
+    color: rgb(233, 39, 165);
+    /* background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC); */
+    box-shadow: -3px 6px 19px 0px rgba(0, 0, 0, 0.17), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 2.0625rem;
+
+}

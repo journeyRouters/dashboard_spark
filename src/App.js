@@ -10,7 +10,7 @@ import AttendanceMain from './components/Attendance/AttendanceMain';
 import UploadAttendance from './components/Attendance/uploadAttendance';
 import Assignerhandler from './components/Calling/Pages/Assignerhandler';
 import CreateQuote from './components/Calling/Pages/CreateQuote';
-import Createquote from './components/CreateQuote/CreateQuote';
+import Createquote from './components/CreateQuote/Createquote';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Dump from './components/DumpLead/Dump';
@@ -38,6 +38,19 @@ import CallerInvestigation from './components/Investigation/CallerInvestigation'
 import Rapid from './components/Rapid/Rapid';
 import AllConvertedFile from './components/quotation_follow_up/AllConvertedFile';
 import Flight from './components/quotation_follow_up/Flight';
+import { Link, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import TeamLeader from './components/RouteFolder/AccessAbailable/TeamLeader.js';
+import SuperAdminDrawer from './components/RouteFolder/AccessAbailable/SuperAdminDrawer.js';
+import Operations from './components/RouteFolder/AccessAbailable/Operations.js';
+import FlightsBooking from './components/RouteFolder/AccessAbailable/FlightsBooking.js';
+import Accounts from './components/RouteFolder/AccessAbailable/Accounts.js';
+import SalesPerson from './components/RouteFolder/AccessAbailable/SalesPerson.js';
+import Caller from './components/RouteFolder/AccessAbailable/Caller.js';
+import Freelancer from './components/RouteFolder/AccessAbailable/Freelancer.js';
+import Admin from './components/RouteFolder/AccessAbailable/Admin.js';
+import Identity from './components/Identity/Identity.js';
+import NotAuthorise from './components/RouteFolder/AccessAbailable/NotAuthorise.js';
+import HomePage from './components/Homepage/HomePage.js';
 
 
 function App() {
@@ -48,7 +61,8 @@ function App() {
   const [auth, setauth] = useState()
   const [Page, setPage] = React.useState("")
   const oauth = getAuth();
-
+  const ProfileImageLink = JSON.parse(localStorage.getItem('ProfileImageLink'));
+  const navigate = useNavigate();
   function setAuthFirebase(args) {
     // console.log("setting auth")
     setauth(args)
@@ -98,7 +112,7 @@ function App() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setData(docSnap.data())
-        // console.log("Document data:", docSnap.data());
+        localStorage.setItem('profile', JSON.stringify(docSnap.data()));
       } else {
         // console.log("No such document!");
       }
@@ -115,6 +129,9 @@ function App() {
       signOut(oauth).then(() => {
         setauth()
         setData()
+        navigate('/')
+        localStorage.removeItem('auth');
+        localStorage.removeItem('profile');
         refreshPage()
       }).catch((error) => {
         // An error happened.
@@ -125,14 +142,14 @@ function App() {
     }
 
   }
-  function page(args) { setPage(args) }
 
   async function authListener() {
     oauth.onAuthStateChanged(user => {
       try {
         if (user) {
           setauth(user);
-          // console.log(user)
+          localStorage.setItem('auth', JSON.stringify(user));
+          // navigate('/')
         }
         else {
         }
@@ -143,6 +160,25 @@ function App() {
 
     })
   }
+//   const getUserProfile = async (userId) => {
+//     const db = getFirestore(app);
+
+//     try {
+//         const docRef = doc(db, "UserProfile", userId);
+//         const docSnap = await getDoc(docRef);
+//         if (docSnap.exists()) {
+//             // if there is data in collection, we will have the data
+//             setuserprofileData(docSnap.data())
+//             return docSnap.data();
+//         } else {
+
+//             return null;
+//         }
+//     } catch (error) {
+//         console.error("Error getting document:", error);
+//         return null;
+//     }
+// };
 
   useEffect(() => {
     authListener()
@@ -150,6 +186,8 @@ function App() {
     }
     else {
       fetch_profile(auth)
+      // getUserProfile(auth.uid)
+      
     }
 
   }, [auth])
@@ -157,7 +195,12 @@ function App() {
   function refreshPage() {
     window.location.reload(false);
   }
+  const ProtectedRoute = ({ user, allowedAccessTypes }) => {
+    // Check if user's access_type is in the list of allowedAccessTypes
+    const isAllowed = user && allowedAccessTypes.includes(user.access_type);
 
+    return isAllowed ? <Outlet /> : <Navigate to="/NotAuthorise" replace />;
+  };
   return (
     <>
 
@@ -172,511 +215,35 @@ function App() {
             profile ?
               <>
                 {
-                  profile.access_type === "freelance" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("create_quote")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Create Quote</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Quotation Followup</p>
-                      </div>
-                    </div>
-                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </div>
-                    </div> */}
-                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Vouchers & payments</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Freelance_Investigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-
-                  </> : <></>
+                  profile.access_type === "freelance" ? <Freelancer /> : <></>
                 }
                 {
-                  profile.access_type === "Team Leader" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Rapid Fire</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("create_quote")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Create Quote</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Quotation Followup</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Vouchers & payments</p>
-                      </div>
-                    </div>
-                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </div>
-                    </div> */}
-                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Team")}>
-                      <div className='sidebarCardContaint'>
-                        <GroupAddTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Team</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("leave policy")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>leave policy
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>Manage Leave
-                        </p>
-                      </div>
-                    </div>
-                  </> : <></>
+                  profile.access_type === "Team Leader" ? <TeamLeader /> : <></>
                 }
                 {
-                  profile.access_type === "User" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("rapid_fire"))}>
-                      <div className='sidebarCardContaint'>
-                        {/* <Speed style={{ marginRight: "1rem" }} /> */}
-                        <p>Rapid Fire</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        {/* <Speed style={{ marginRight: "1rem" }} /> */}
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("create_quote")}>
-                      <div className='sidebarCardContaint'>
-                        {/* <FileCopyOutlined style={{ marginRight: "1rem" }} /> */}
-                        <p>Create Quote</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Quotation_Followup")}>
-                      <div className='sidebarCardContaint'>
-                        {/* <FileCopyOutlined style={{ marginRight: "1rem" }} /> */}
-                        <p>Quotation Followup</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("voucher"))}>
-                      <div className='sidebarCardContaint'>
-                        {/* <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} /> */}
-                        <p>Vouchers & payments</p>
-                      </div>
-                    </div>
-                    {/* <div className='sidebarCard' onClick={(() => page("ConvertedFiles"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </div>
-                    </div> */}
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
-                      <div className='sidebarCardContaint'>
-                        {/* <SearchTwoTone style={{ marginRight: "1rem" }} /> */}
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("leave policy")}>
-                      <div className='sidebarCardContaint'>
-                        {/* <PublicTwoTone style={{ marginRight: "1rem" }} /> */}
-                        <p>leave policy
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
-                      <div className='sidebarCardContaint'>
-                        {/* <PublicOutlined style={{ marginRight: "1rem" }} /> */}
-                        <p>Manage Leave
-                        </p>
-                      </div>
-                    </div>
-                  </> : <></>
+                  profile.access_type === "User" ? <SalesPerson /> : <></>
                 }
                 {
-                  profile.access_type === "Caller" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("CallerLeads")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>LEADS</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Calling_Followup")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Quotation Followup</p>
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={() => page("Investigation caller")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("leave policy")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicTwoTone style={{ marginRight: "1rem" }} />
-                        <p>leave policy
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>Manage Leave
-                        </p>
-                      </div>
-                    </div>
-                  </> : <></>
+                  profile.access_type === "Caller" ? <Caller /> : <></>
                 }
                 {
-                  profile.access_type === "Flight" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Flight"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("leave policy")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicTwoTone style={{ marginRight: "1rem" }} />
-                        <p>leave policy
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Manage Leave")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>Manage Leave
-                        </p>
-                      </div>
-                    </div>
-                  </> : <></>
-                }
-
-                {
-                  profile.access_type === "Accounts" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted</p>
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={() => page("Payments")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Payments</p>
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-
-                  </> : <></>
+                  profile.access_type === "Flight" ? <FlightsBooking /> : <></>
                 }
                 {
-                  profile.access_type === "Operation" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Operation_converted")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>converted</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Duringstay"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>During Stay</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Poststay"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Post Stay</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Investigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-                  </> : <></>
+                  profile.access_type === "Accounts" ? <Accounts /> : <></>
                 }
                 {
-                  profile.access_type === "admin" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>User Controller</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("LeadFromCallers"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Lead From Callers</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Caller_Lead_Assigning"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Caller's lead</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Attendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>Attendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("UploadAttendance"))}>
-                      <div className='sidebarCardContaint'>
-                        <Speed style={{ marginRight: "1rem" }} />
-                        <p>UploadAttendance</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
-                      <div className='sidebarCardContaint'>
-                        <FileCopyOutlined style={{ marginRight: "1rem" }} />
-                        <p>Create Quote</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Driver</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("transfer_request"))}>
-                      <div className='sidebarCardContaint'>
-                        <TrendingUp style={{ marginRight: "1rem" }} />
-                        <p>Transfer Requests</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("profile"))}>
-                      <div className='sidebarCardContaint'>
-                        <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
-                        <p>Profile</p>
-                      </div>
-                    </div>
-                  </> : <></>
+                  profile.access_type === "Operation" ? <Operations /> : <></>
                 }
                 {
-                  profile.access_type === "Super Admin" ? <>
-                    <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <img width={'128px'} src='./assets/img/jrlogo.png' />
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={(() => page("Driver"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Driver</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("AdminLeaveFunnel")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Leaves</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Team_")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Teams
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Investigate Current Lead")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Current Lead</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("Admin_Follow_up")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Followed Lead</p>
-                      </div>
-                    </div>
-
-                    <div className='sidebarCard' onClick={() => page("Account_Converted")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("AdminInvestigation")}>
-                      <div className='sidebarCardContaint'>
-                        <SearchTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Investigation</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("During_Stay"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>During Stay</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Poststay"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Post Stay</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={() => page("leave policy")}>
-                      <div className='sidebarCardContaint'>
-                        <PublicOutlined style={{ marginRight: "1rem" }} />
-                        <p>leave policy
-                        </p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("User_Controller"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>User Controller</p>
-                      </div>
-                    </div>
-                    <div className='sidebarCard' onClick={(() => page("Caller_Lead_Assigning"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Caller's lead</p>
-                      </div>
-                    </div>
-                    {/* <div className='sidebarCard' onClick={(() => page("Switch_user"))}>
-                      <div className='sidebarCardContaint'>
-                        <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Switch user</p>
-                      </div>
-                    </div> */}
-
-                  </> : <></>
+                  profile.access_type === "admin" ? <Admin /> : <></>
+                }
+                {
+                  profile.access_type === "Super Admin" ? <SuperAdminDrawer /> : <></>
                 }
               </>
-              : <></>
+              :
+              <></>
           }
         </div>
         <div className='mainContaint'>
@@ -686,7 +253,14 @@ function App() {
                 auth ? <>{
 
                   profile ? <>
-                    <img width={'30px'} src='./assets/img/user.png' />
+                    <Link to='/Identity'>
+                      {
+                        ProfileImageLink == null ?
+                        <img width={'30px'} src='./assets/img/user.png' />:
+                        <img className='User_imageAt_Header' src={ProfileImageLink} />
+                      }
+                    
+                    </Link>
                     <span style={{ fontFamily: 'Poppins', fontSize: '13px' }}>Hello, {profile ? profile.name : ''}</span> </> : ''
                 }
                 </> : <></>
@@ -712,216 +286,53 @@ function App() {
             }
 
           </div>
-          <div style={{ marginTop: "7rem" }}>
-
-            {
-              Page === "create_quote" ?
-                <>{
-                  auth &&
-                  <Createquote auth={auth} userProfile={profile} />
-                }
-                </> : <></>
-            }
-            {
-              Page == 'Payments' ? <PaymentMarking Auth={auth} profile={profile} /> : <></>
-            }
-
-            {
-              Page === 'Caller_Lead_Assigning' ? <>
-                <Assignerhandler Auth={auth} profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === 'CallerLeads' ? <>
-                <CreateQuote Auth={auth} profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === 'Attendance' ? <>
-                <AttendanceMain profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === "AdminLeaveFunnel" ?
-                <Adminleavefunnel auth={auth} />
-                : <></>
-            }
-            {
-              Page === "Investigation caller" ?
-                <CallerInvestigation auth={auth} profile={profile} />
-                : <></>
-            }
-
-            {
-              Page == "AdminInvestigation" ?
-                <AdminInvestigation profile={profile} /> : <></>
-            }
-            {
-              Page === "rapid_fire" ?
-                // <Test />
-                <Rapid auth={auth} profile={profile} />
-                : <></>
-            }
-            {
-              Page === "LeadFromCallers" ?
-                <LeadFromCallers />
-                : <></>
-            }
-            {/* LeadFromCallers */}
-
-            {
-              Page === "Dump" ?
-                <Dump profile={profile} auth={auth} />
-
-                : <></>
-            }
-            {
-              Page === "UploadAttendance" ?
-                <UploadAttendance />
-                : <></>
-            }
-            {/* UploadAttendance */}
-            {
-              Page === "Manage Leave" ?
-                <LeaveMainPage profile={profile} auth={auth} />
-                : <></>
-            }
-            {
-              Page === "Team" ?
-                <Main profile={profile} auth={auth} />
-                // <div></div>
-                : <></>
-            }
-            {
-              Page === "Team_" ?
-                <Main_Admin profile={profile} auth={auth} />
-                // <div></div>
-                : <></>
-            }
-            {
-              Page === "Investigation" ?
-                <Investigation profile={profile} />
-                : <></>
-            }
-            {
-              Page === "Freelance_Investigation" ?
-                <Freelance_Investigation profile={profile} />
-                : <></>
-            }
-            {
-              Page === "User_Controller" ?
-                <Usercontrol auth={auth} data={profile} />
-                : <></>
-            }
-            {
-              Page === "leave policy" ?
-                <Leaves auth={auth} data={profile} />
-                : <></>
-            }
-            {
-              Page === "Quotation_Followup" ?
-                <>
-                  {
-                    auth &&
-                    <FollowUp auth={auth} profile={profile} />
-                  }
-                </>
-                : <></>
-            }
-            {
-              Page === "Calling_Followup" ?
-                <>
-                  {
-                    auth &&
-                    <CallerFollowUp auth={auth} profile={profile} />
-                  }
-                </>
-                : <></>
-
-            }
-            {
-              Page === "Admin_Follow_up" ?
-                <>
-                  {
-                    auth &&
-                    <AdminFollow auth={auth} profile={profile} />
-                  }
-                </>
-                : <></>
-            }
-
-            {Page === "voucher" ?
-              <>
-                {
-                  auth &&
-                  <Vouchers auth={auth} profile={profile} />
-                }
-              </>
-              : <></>
-            }
-            {Page === "Flight" ?
-              <>
-                {
-                  auth &&
-                  <Flight auth={auth} profile={profile} />
-                }
-              </>
-              : <></>
-            }
-            {/* {Page === "ConvertedFiles" ?
-              <>
-                {
-                  auth &&
-                  <AllConvertedFile auth={auth} profile={profile} />
-                }
-              </>
-              : <></>
-            } */}
-            {
-              Page === "profile" ?
-                <>
-                  <Test />
-                </>
-                : <></>
-            }
-            {
-              Page === "Driver" ?
-                <>
-                  <Driver auth={auth} />
-                </>
-                : <></>
-            }
-            {/* Investigate Current Lead */}
-            {
-              Page === "Account_Converted" ? <>
-                <Account_converted auth={auth} profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === "Investigate Current Lead" ? <>
-                <SuperAdmin auth={auth} profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === 'Operation_converted' ? <>
-                <OprationConverted profile={profile} />
-              </> : <></>
-            }
-            {
-              Page === 'Poststay' ? <>
-                <Poststay profile={profile} />
-              </> : <></>
-            }
-            {
-              // Duringstay
-              Page === 'Duringstay' ? <>
-                <Duringstay profile={profile} />
-              </> : <></>
-            }
-
+          <div className='rended_routes_main_components'>
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/RapidFire' element={<Rapid auth={auth} profile={profile} />} />
+              <Route path='/CreateQuotes' element={<Createquote auth={auth} profile={profile} />} />
+              <Route path='/FollowUp' element={<FollowUp auth={auth} profile={profile} />} />
+              <Route path='/VouchersAndPayments' element={<Vouchers auth={auth} profile={profile} />} />
+              <Route path='/SalesPersonInvestigation' element={<Investigation profile={profile} />} />
+              <Route path='/FreeLancerInvestigation' element={<Freelance_Investigation profile={profile} />} />
+              <Route path='/CallerInvestigation' element={<CallerInvestigation auth={auth} profile={profile} />} />
+              <Route path='/LeavePolicy' element={<Leaves auth={auth} data={profile} />} />
+              <Route path='/ManageLeaves' element={<LeaveMainPage profile={profile} auth={auth} />} />
+            
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin","Team Leader"]} />}>
+                <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
+                <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
+                <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />
+                <Route path='/SeekCreateQuote' element={<SuperAdmin auth={auth} profile={profile} />} />
+                <Route path='/ManageAllTeam' element={<Main_Admin profile={profile} auth={auth} />} />
+              </Route>
+              
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Accounts"]} />}>
+                <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
+                <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
+              </Route>
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["admin"]} />}>
+                <Route path='ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
+                <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
+                <Route path='/ControleLeads' element={<Driver auth={auth} />} />
+              </Route>
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Operations"]} />}>
+                <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />
+                <Route path='/DuringStayFiles' element={<Duringstay profile={profile} />} />
+                <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
+              </Route>
+              <Route path='/Team' element={<Main profile={profile} auth={auth} />} />
+              <Route path='/CallerCreateQuote' element={<CreateQuote Auth={auth} profile={profile} />} />
+              <Route path='/CallerLead' element={<LeadFromCallers Auth={auth} profile={profile} />} />
+              <Route path='/CallerFollowUp' element={<CallerFollowUp auth={auth} profile={profile} />} />
+              <Route path='/Flights' element={<Flight auth={auth} profile={profile} />} />
+              {/* <Route path='/FlightCreateQuote' element={<Flight auth={auth} profile={profile} />} /> */}
+              <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
+              <Route path='/NotAuthorise' element={<NotAuthorise />} />
+            </Routes>
           </div>
+
         </div>
-        {/* <button className='top'>Top</button> */}
       </div>
     </>
 

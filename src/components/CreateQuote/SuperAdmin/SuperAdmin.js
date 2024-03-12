@@ -14,6 +14,7 @@ import MaldiveSuggestion from '../MaldiveSuggestion';
 
 const SuperAdmin = (props) => {
     const [open, setopen] = useState(true)
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app);
     const [lead_data, setLead_data] = useState([])
     const [popupopener, set_popupopner] = useState(false)
@@ -86,7 +87,7 @@ const SuperAdmin = (props) => {
     }
 
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
+        // console.log(auth.uid)
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", currentUser[0].uid), where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
@@ -118,7 +119,7 @@ const SuperAdmin = (props) => {
         window.scrollTo(0, 0);
         getLeadOnBoard()
 
-        // console.log(props.auth.uid)
+        // console.log(auth.uid)
 
     }, [popupopener]);
 
@@ -202,7 +203,7 @@ const SuperAdmin = (props) => {
             </div>
 
             {
-                props.auth ? <>
+                auth ? <>
                     <Modal open={SuggestionModal} onClose={handleSuggestion} >
                         
                         {
@@ -210,7 +211,7 @@ const SuperAdmin = (props) => {
                                 <MaldiveSuggestion
                                     closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
-                                    email={props.auth.email}
+                                    email={auth.email}
                                     profile={props.profile}
                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                                 />
@@ -218,7 +219,7 @@ const SuperAdmin = (props) => {
                                 <SuggestionQuotes
                                     handleSuggestion={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
-                                    email={props.auth.email}
+                                    email={auth.email}
                                     profile={props.profile}
                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
 
@@ -249,7 +250,7 @@ const SuperAdmin = (props) => {
                                     {
                                         user_uni_data.Destination === "Maldives" ? <>
                                             <Maldives
-                                                email={props.auth.email}
+                                                email={auth.email}
                                                 data={user_uni_data}
                                                 updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                 set_popupopner={set_popupopner}
@@ -257,7 +258,7 @@ const SuperAdmin = (props) => {
                                             />
                                         </> : <>
                                             <Box
-                                                email={props.auth.email}
+                                                email={auth.email}
                                                 data={user_uni_data}
                                                 updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                 set_popupopner={set_popupopner}

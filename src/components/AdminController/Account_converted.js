@@ -8,7 +8,9 @@ import '../Accounts/Accounts.css'
 const db = getFirestore(app);
 
 
-const Account_converted = ({ profile }) => {
+const Account_converted = ({}) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const [SearchKey, setSearchKey] = useState(0)
     const [input, setInput] = useState('')
 

@@ -4,8 +4,11 @@ import app from '../required';
 import Createteamform from './support/Createteamform';
 import GraphHandler from './support/graphHandler';
 import Team from './support/Team';
+import './Teams.css'
 
-const MainPage = ({ profile ,auth }) => {
+const MainPage = ({ }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app)
     const [open, setopen] = useState(false)
     const [Teams, setTeams] = useState([])
@@ -59,7 +62,7 @@ const MainPage = ({ profile ,auth }) => {
                             </div>
                             <div>
                                 <span style={{ fontSize: '15px', fontWeight: '600' }}> Leader:-{data.createdBy.name}</span>
-                                <div style={{ marginTop: '2rem', marginLeft: '0.5rem' }}>
+                                <div className='Team_mapping_area'>
                                     {
                                         data.TeamMembers.map((data, index) => <>
                                             <ul key={index} style={{ fontSize: '10px', fontWeight: '600' }}>

@@ -16,8 +16,10 @@ import TotalLeadAssigned from './TotalLeadAssigned';
 const db = getFirestore(app);
 
 
-const AdminInvestigation = ({ profile }) => {
+const AdminInvestigation = ({ }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [data_Analysed, setdata_Analysed] = useState([])
+    const [PaymentAwaited, setPaymentAwaited] = useState([])
     const [prevMonth, setPrevMonth] = useState([])
     const [AllUserprofile, setAllUserprofile] = useState([])
     const [Create_quote_data_Analysed, setCreate_quote_data_Analysed] = useState([])
@@ -116,7 +118,7 @@ const AdminInvestigation = ({ profile }) => {
     async function getPendingLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
-        var local = { name: 'Create quote', value: 0, fill: 'yellow' }
+        var local = { name: 'C.Q', value: 0, fill: 'yellow' }
         var prev_instance = dataLoaded
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -135,6 +137,46 @@ const AdminInvestigation = ({ profile }) => {
                 local.value = local.value + list.length
                 holdAlluserAnalytics.push(user_analytics)
                 // console.log(list)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        prev_instance.push(local)
+        loadData(prev_instance)
+        setCreate_quote_data_Analysed([
+            {
+                name: 'Lead to be quoted',
+                values: holdAlluserAnalytics
+            }
+        ])
+        // console.log(holdAlluserAnalytics)
+        getPaymentawaitedLead(AllUserprofile)
+
+
+    }
+    async function getPaymentawaitedLead(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        var local = { name: 'P.A', value: 0, fill: 'cyna' }
+        var prev_instance = dataLoaded
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Paymentawaited'));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                user_analytics.value = list.length
+                local.value = local.value + list.length
+                holdAlluserAnalytics.push(user_analytics)
 
 
             }
@@ -196,6 +238,7 @@ const AdminInvestigation = ({ profile }) => {
         getActiveLeadData(AllUserprofile)
 
     }
+  
     async function getActiveLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -237,7 +280,6 @@ const AdminInvestigation = ({ profile }) => {
         // setdataAvailablityFlg(true)
 
     }
-
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -395,7 +437,7 @@ const AdminInvestigation = ({ profile }) => {
     async function getConvertedLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
-        var local = { name: 'converted', value: 0, fill: '#814fdc' }
+        var local = { name: 'convt', value: 0, fill: '#814fdc' }
         var prev_instance = dataLoaded
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -583,10 +625,42 @@ const AdminInvestigation = ({ profile }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        unresponsedLead72hr(AllUserprofile)
-        // setdataAvailablityFlg(true)
+        getPaymentAwaitedLeadsAllSpokes(AllUserprofile)
     }
-   
+    async function getPaymentAwaitedLeadsAllSpokes(AllUserprofile) {
+        var holdAlluserAnalytics = []
+        // console.log(AllUserprofile)
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
+            try {
+                let list = []
+                var q = query(collection(db, "Trip"), where("assign_to.uid", "==", AllUserprofile[i].uid),
+                    where('Lead_Status', '==', 'Paymentawaited'), where("quotation_flg", "==", true));
+                var querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                    // console.log(doc.data())
+                });
+                user_analytics.value = list.length
+                holdAlluserAnalytics.push(user_analytics)
+
+
+            }
+            catch (erorr) {
+                console.log(erorr)
+                // setopen(false)
+            }
+        }
+        setPaymentAwaited([
+            {
+                name: 'Payments Awaited',
+                values: holdAlluserAnalytics
+            }
+        ])
+        unresponsedLead72hr(AllUserprofile)
+
+    }
     useEffect(() => {
         getAllUserProfie()
     }, []);
@@ -671,7 +745,7 @@ const AdminInvestigation = ({ profile }) => {
                                     }}
                                 />
                                 <div style={{ width: '100%' }}>
-                                    <TotalLeadAssigned Total_Lead_Analysed={Total_Lead_Analysed} AllUserprofile={AllUserprofile}/>
+                                    <TotalLeadAssigned Total_Lead_Analysed={Total_Lead_Analysed} AllUserprofile={AllUserprofile} />
                                 </div>
                                 <DynamicBarChart
                                     data={AllStatus_Lead_Analysed}
@@ -697,6 +771,16 @@ const AdminInvestigation = ({ profile }) => {
                                 />
                                 <DynamicBarChart
                                     data={lastupdated72hr}
+                                    // Timeout in ms between each iteration
+                                    iterationTimeout={1200}
+                                    startRunningTimeout={2500}
+                                    barHeight={20}
+                                    iterationTitleStyles={{
+                                        fontSize: 18
+                                    }}
+                                />
+                                <DynamicBarChart
+                                    data={PaymentAwaited}
                                     // Timeout in ms between each iteration
                                     iterationTimeout={1200}
                                     startRunningTimeout={2500}

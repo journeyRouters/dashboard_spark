@@ -9,7 +9,9 @@ import moment from 'moment';
 import './Leave.css'
 const db = getFirestore(app);
 
-const LeaveMainPage = ({ profile, auth }) => {
+const LeaveMainPage = ({}) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const [AllLeaves, setAllLeaves] = useState([])
     async function getLeaveApplication() {
         var localList = []

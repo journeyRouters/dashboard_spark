@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import '../payments_vouchers/Payments.css';
 import VouchersCompo from '../payments_vouchers/Vouchers_compo';
 import app from '../required';
-const Flight = (props) => {
+const Flight = () => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
     const[lastDocument,setlastDocument]=useState(null)
@@ -83,7 +84,7 @@ const Flight = (props) => {
                 {
                     lead_data.map((data, index) => (
 
-                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={props.profile} />
+                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={profile} />
 
                     ))
                 }

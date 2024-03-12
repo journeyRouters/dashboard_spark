@@ -8,7 +8,8 @@ import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "rec
 import app from '../required';
 const db = getFirestore(app);
 
-const Freelance_Investigation = ({ profile }) => {
+const Freelance_Investigation = ({  }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
     const [dataLoaded, loadData] = useState([])

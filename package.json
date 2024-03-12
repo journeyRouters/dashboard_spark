@@ -35,6 +35,7 @@
     "react-dom": "^16.2.0",
     "react-dynamic-charts": "1.0.5",
     "react-scripts": "5.0.0",
+    "react-router-dom": "^6.17.0",
     "react-select": "^5.2.2",
     "react-sort-search-table": "^1.1.2",
     "read-excel-file": "^5.2.28",

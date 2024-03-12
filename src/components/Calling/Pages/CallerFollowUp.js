@@ -4,7 +4,8 @@ import { useState } from 'react';
 import app from '../../required';
 import TableRow from './TableRow';
 
-const FollowUp = ({ profile }) => {
+const FollowUp = ({}) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [lead_data, setLead_data] = useState([])
     const db = getFirestore(app);
     const [open, setopen] = useState(true)

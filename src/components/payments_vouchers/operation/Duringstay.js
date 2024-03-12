@@ -4,7 +4,8 @@ import app from '../../required';
 import VouchersCompo from '../Vouchers_compo';
 const db = getFirestore(app);
 
-const Duringstay = ({profile}) => {
+const Duringstay = ({}) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [lead_data, setLead_data] = useState([])
     const [open, setopen] = useState(true)
 

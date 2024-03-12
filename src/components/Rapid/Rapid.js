@@ -8,6 +8,8 @@ const db = getFirestore(app);
 const Rapid = (props) => {
     const [lead_data, setLead_data] = useState([])
     const [open, setopen] = useState(true)
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
@@ -19,7 +21,7 @@ const Rapid = (props) => {
         // console.log(props.target.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid),
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", auth.uid),
                 where('Lead_Status', '==', 'Hot'), where("quotation_flg", "==", true)
             );
             var querySnapshot;
@@ -46,6 +48,7 @@ const Rapid = (props) => {
 
     }
     useEffect(() => {
+        // authListener()
         getLeadOnBoard()
     }, []);
     return (
@@ -65,8 +68,8 @@ const Rapid = (props) => {
                         {lead_data &&
                             (lead_data.slice(0).reverse()).map((row, index) => (
                                 <Row
-                                    auth={props.auth}
-                                    profile={props.profile}
+                                    auth={auth}
+                                    profile={profile}
                                     key={index}
                                     row={row}
                                     getLeadOnBoard={getLeadOnBoard}

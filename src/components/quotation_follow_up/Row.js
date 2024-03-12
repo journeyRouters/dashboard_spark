@@ -228,11 +228,12 @@ const Row = (props) => {
                                 <FormControl onChange={(e) => changeLead_Status(e)}>
                                     <FormLabel >Status</FormLabel>
                                     <RadioGroup defaultValue={row.Lead_Status} >
-                                        <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
+                                        <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
+                                        <FormControlLabel value="Paymentawaited" control={<Radio />} label="Payment awaited" />
+                                        <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
                                         <FormControlLabel value="Active" control={<Radio />} label="Active" />
                                         <FormControlLabel value="Cold" control={<Radio />} label="Cold" />
-                                        <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
-                                        <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
+                                        <FormControlLabel value="Dump" control={<Radio />} label="Dump" />
                                     </RadioGroup>
                                 </FormControl>
                                 <div>
@@ -268,9 +269,9 @@ const Row = (props) => {
                     <TableCell component="th" scope="row">
                         {row.Campaign_code == 'Direct' ?
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                
+
                                 <span>
-                                <span style={{marginLeft:'-5rem',marginRight:'1rem'}}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
+                                    <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
                                     D-{row.TripId}
                                 </span>
                                 {
@@ -284,7 +285,7 @@ const Row = (props) => {
                             :
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <span>
-                                    <span style={{marginLeft:'-5rem',marginRight:'1rem'}}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
+                                    <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
                                     {row.TripId}
                                 </span>
                                 {
@@ -524,8 +525,11 @@ const Row = (props) => {
                                                     </Modal>
                                                 </> : <></>
                                             }
+                                            {
+                                                row.Lead_Status === 'Paymentawaited' ?
+                                                    <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button> :<></>
+                                            }
 
-                                            <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button>
                                             {
                                                 Invoice_flg ?
                                                     <Invoice

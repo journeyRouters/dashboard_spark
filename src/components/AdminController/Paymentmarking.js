@@ -15,7 +15,8 @@ import EditInvoice from '../Accounts/EditInvoice';
 import PaymentsScreenShotUploader from './PaymentsScreenShotUploader';
 const db = getFirestore(app);
 
-const PaymentMarking = ({ profile }) => {
+const PaymentMarking = ({  }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [SearchKey, setSearchKey] = useState(0)
     const [input, setInput] = useState('')
     const currentDate = new Date();

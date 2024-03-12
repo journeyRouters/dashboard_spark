@@ -9,7 +9,7 @@ import AttendanceMain from '../../Attendance/AttendanceMain';
 const db = getFirestore(app);
 
 
-const Adminleavefunnel = ({ auth }) => {
+const Adminleavefunnel = ({}) => {
     const [AllLeaves, setAllLeaves] = useState([])
     const [Profile, SetProfile] = useState([])
     const [ActiveFlg, setActiveFlg] = useState(0)

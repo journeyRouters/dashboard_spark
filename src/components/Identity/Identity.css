@@ -1,0 +1,128 @@
+.user_profile_drawer {
+    width: 30%;
+    height: 35rem;
+    border-radius: 2.0625rem;
+    background: #FFF;
+    box-shadow: -3px 6px 19px 0px rgba(0, 0, 0, 0.17), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 3rem;
+}
+
+.User_profile_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-image: linear-gradient(13deg,#689CFC,#FF4F4ACC);
+}
+.User_image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    /* background-color: aqua; */
+}
+
+
+
+.Profile_details_Parent {
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-family: cursive;
+}
+
+.Right_index_column {
+    color: blueviolet;
+}
+
+.Right_index_column_value:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.Basic_details_section {
+    margin: 2rem;
+}
+
+.Basic_details_title {
+    /* width: 19rem; */
+    /* border: 0.0625rem solid gray; */
+    color: rgb(37, 161, 214);
+}
+
+.Index_uniCoponent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15rem;
+    height: 3rem;
+    color: rgb(65, 115, 142);
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.0625rem solid gray;
+    border-radius: 1rem;
+    /* text-align: center; */
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+
+.Index_uniCoponent:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+.EditComponent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 8rem;
+    height: 3rem; */
+    color: rgb(65, 115, 142);
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.0625rem solid gray;
+    border-radius: 1rem;
+    /* text-align: center; */
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+
+.active {
+    color: rgb(166, 226, 128);
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Circular_card {
+    width: 12rem;
+    height: 12rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1.25rem;
+    font-size: 1.875rem;
+    text-align: center;
+    border: 0.0625rem dotted;
+}
+
+.Circular_card_container {
+    width: 25rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.125rem;
+    grid-column-gap: 3rem;
+}
+
+.user_profile_Main_page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Pages_to_be_render {
+    width: 60%;
+    /* background-color: aqua; */
+}

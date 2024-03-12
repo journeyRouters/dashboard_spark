@@ -14,7 +14,8 @@ import FollowupBreak from './FollowupBreak';
 // import IndividuaInvestigation from './IndividuaInvestigation';
 const db = getFirestore(app);
 
-const Investigation = ({ profile }) => {
+const Investigation = ({}) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     var date = new Date()
     const [data_Analysed, setdata_Analysed] = useState([])
     const [prevMonth, setPrevMonth] = useState([])

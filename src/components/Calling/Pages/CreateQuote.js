@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import Row from '../../quotation_follow_up/Row';
 import app from '../../required';
 
-const CreateQuote = ({ Auth, profile }) => {
+const CreateQuote = ({}) => {
     const [lead_data, setLead_data] = useState([])
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const Auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app);
     const [open, setopen] = useState(true)
+    // console.log(profile.uid)
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
         try {
             let list = []
             var q = query(collection(db, "Trip"),

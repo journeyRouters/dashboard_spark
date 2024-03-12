@@ -6,7 +6,8 @@ import "react-dynamic-charts/dist/index.css";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import app from '../required';
 
-const CallerInvestigation = ({ profile }) => {
+const CallerInvestigation = ({ }) => {
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const db = getFirestore(app);
     const [ConvertedByCaller, setConvertedByCaller] = useState([])
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)

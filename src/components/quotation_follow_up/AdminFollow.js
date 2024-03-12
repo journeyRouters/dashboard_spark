@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import app from '../required';
 import FollowUp from './Follow_up';
 
-const AdminFollow = ({ auth, profile: profile_ }) => {
+const AdminFollow = ({}) => {
+    const profile_ = JSON.parse(localStorage.getItem('profile'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const [profile, setprofile] = useState(null)
     const [SearchKey, setSearchKey] = useState(0)
     const [input, setInput] = useState('')

@@ -16,13 +16,14 @@ import CreateQuoteTableRow from './CreateQuoteTableRow';
 
 
 const Createquote = (props) => {
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    const profile = JSON.parse(localStorage.getItem('profile'));
     const [open, setopen] = useState(true)
     const db = getFirestore(app);
     const [lead_data, setLead_data] = useState([])
     const [popupopener, set_popupopner] = useState(false)
     const [user_uni_data, set_uni_data] = useState([])
     const time = new Date()
-    const [profile, setProfile] = useState(null)
     const Current = time.getSeconds()
     const [SuggestionModal, settransfermodal] = useState(false)
     const [lastVisible, setlastVisible] = useState(null)
@@ -80,10 +81,10 @@ const Createquote = (props) => {
     }
 
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
+        // console.log(auth.uid)
         try {
             let list = []
-            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", props.auth.uid), where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
+            var q = query(collection(db, "Trip"), where("assign_to.uid", "==", auth.uid), where('Lead_Status', '!=', 'Dump'), where("quotation_flg", "==", false));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -111,7 +112,7 @@ const Createquote = (props) => {
         window.scrollTo(0, 0);
         getLeadOnBoard()
 
-        // console.log(props.auth.uid)
+        // console.log(auth.uid)
 
     }, [popupopener]);
 
@@ -168,7 +169,7 @@ const Createquote = (props) => {
 
         <div className='tableAliner'>
             {
-                props.auth ? <>
+                auth ? <>
                     <div className='global_search' >
 
                         {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
@@ -179,7 +180,7 @@ const Createquote = (props) => {
                             color: 'yellow',
                         }}>Total Lead - {lead_data.length}</span>
                         <button onClick={() => AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
-                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={props.userProfile} getLeadOnBoard={getLeadOnBoard} />
+                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={profile} getLeadOnBoard={getLeadOnBoard} />
                     </div>
                     <Modal open={SuggestionModal} onClose={closeMaldivesSuggestionModal} >
                         {
@@ -187,16 +188,16 @@ const Createquote = (props) => {
                                 <MaldiveSuggestion
                                     closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
-                                    email={props.auth.email}
-                                    profile={props.userProfile}
+                                    email={auth.email}
+                                    profile={profile}
                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                                 />
                             </> : <>
                                 <SuggestionQuotes
                                     handleSuggestion={closeMaldivesSuggestionModal}
                                     Lead_data_to_be_quoted={user_uni_data}
-                                    email={props.auth.email}
-                                    profile={props.userProfile}
+                                    email={auth.email}
+                                    profile={profile}
                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
 
                                 />
@@ -237,8 +238,8 @@ const Createquote = (props) => {
                                         user_uni_data.Destination === "Maldives" || user_uni_data.Destination === "Mauritius" ?
                                             <>
                                                 <Maldives
-                                                    email={props.auth.email}
-                                                    profile={props.userProfile}
+                                                    email={auth.email}
+                                                    profile={profile}
                                                     data={user_uni_data}
                                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                     set_popupopner={set_popupopner}
@@ -247,11 +248,11 @@ const Createquote = (props) => {
                                             :
                                             <>
                                                 <Box
-                                                    email={props.auth.email}
+                                                    email={auth.email}
                                                     data={user_uni_data}
                                                     updateTableDataAfterQuote={updateTableDataAfterQuote}
                                                     set_popupopner={set_popupopner}
-                                                    profile={props.userProfile}
+                                                    profile={profile}
                                                 />
                                             </>
                                     }
@@ -276,8 +277,8 @@ const Createquote = (props) => {
                                             handleSuggestion={closeMaldivesSuggestionModal}
                                             closeMaldivesSuggestionModal={closeMaldivesSuggestionModal}
                                             set_popupopner={set_popupopner}
-                                            email={props.auth.email}
-                                            userProfile={props.userProfile}
+                                            email={auth.email}
+                                            userProfile={profile}
                                             data={data}
 
                                         />

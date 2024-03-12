@@ -12,6 +12,7 @@ const db = getFirestore(app);
 
 
 const Driver = (props) => {
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
@@ -24,7 +25,7 @@ const Driver = (props) => {
         setopenlistOfUsers(!openlistOfUsers)
     }
     async function UploadFile() {
-        if (props.auth) {
+        if (auth) {
             //   console.log(auth)
             const handles = await window.showOpenFilePicker({ multiple: false });
             const files = await fromEvent(handles);
@@ -65,7 +66,7 @@ const Driver = (props) => {
                         Email: Row[14],
                         Remark: Row[15],
                         Lead_genrate_date: Row[16],
-                        uploaded_by: props.auth.email,
+                        uploaded_by: auth.email,
                         Quoted_by: null,
                         uploaded_date: moment(currentdate).format('YYYY-MM-DD'),
                         uploaded_time: `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}:${today.getMilliseconds()}`,

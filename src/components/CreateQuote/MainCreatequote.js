@@ -1,21 +1,16 @@
 import { CircularProgress, Modal } from '@material-ui/core';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import SortableTbl from 'react-sort-search-table';
 import app from '../required';
 import Box from './Box';
-import Maldives from './Maldives';
-import MaldiveSuggestion from './MaldiveSuggestion';
-import SelfLeadgenrator from './SelfLeadgenrator';
-import SuggestionQuotes from './suggestionQuotes';
-import './TripComponent.css';
 import CreateQuoteTableRow from './CreateQuoteTableRow';
+import MaldiveSuggestion from './MaldiveSuggestion';
+import Maldives from './Maldives';
+import SelfLeadgenrator from './SelfLeadgenrator';
+import './TripComponent.css';
+import SuggestionQuotes from './suggestionQuotes';
 
-
-
-
-const Createquote = (props) => {
+const MainCreatequote = (props) => {
     const auth = JSON.parse(localStorage.getItem('auth'));
     const profile = JSON.parse(localStorage.getItem('profile'));
     const [open, setopen] = useState(true)
@@ -297,4 +292,4 @@ const Createquote = (props) => {
     );
 }
 
-export default Createquote;
+export default MainCreatequote;

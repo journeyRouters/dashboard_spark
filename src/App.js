@@ -10,7 +10,6 @@ import AttendanceMain from './components/Attendance/AttendanceMain';
 import UploadAttendance from './components/Attendance/uploadAttendance';
 import Assignerhandler from './components/Calling/Pages/Assignerhandler';
 import CreateQuote from './components/Calling/Pages/CreateQuote';
-import Createquote from './components/CreateQuote/Createquote.js';
 import Loginform from './components/CreateQuote/loginForm';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
 import Dump from './components/DumpLead/Dump';
@@ -51,6 +50,7 @@ import Admin from './components/RouteFolder/AccessAbailable/Admin.js';
 import Identity from './components/Identity/Identity.js';
 import NotAuthorise from './components/RouteFolder/AccessAbailable/NotAuthorise.js';
 import HomePage from './components/Homepage/HomePage.js';
+import MainCreatequote from './components/CreateQuote/MainCreatequote.js';
 
 
 function App() {
@@ -290,7 +290,7 @@ function App() {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/RapidFire' element={<Rapid auth={auth} profile={profile} />} />
-              <Route path='/CreateQuotes' element={<Createquote auth={auth} profile={profile} />} />
+              <Route path='/CreateQuotes' element={<MainCreatequote auth={auth} profile={profile} />} />
               <Route path='/FollowUp' element={<FollowUp auth={auth} profile={profile} />} />
               <Route path='/VouchersAndPayments' element={<Vouchers auth={auth} profile={profile} />} />
               <Route path='/SalesPersonInvestigation' element={<Investigation profile={profile} />} />

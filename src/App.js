@@ -299,7 +299,7 @@ function App() {
               <Route path='/LeavePolicy' element={<Leaves auth={auth} data={profile} />} />
               <Route path='/ManageLeaves' element={<LeaveMainPage profile={profile} auth={auth} />} />
             
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin","Team Leader"]} />}>
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin","Team Leader","admin"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
                 <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
                 <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />

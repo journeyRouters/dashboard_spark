@@ -50,7 +50,6 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                 setEditinvoicedDate(docSnap.data().date)
                 setEditaddress(docSnap.data().BillingAddress)
             } else {
-                console.log("No such document!");
                 // setinvocice({})
 
             }

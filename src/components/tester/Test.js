@@ -142,7 +142,7 @@ const Test = () => {
 
          })
          .then(data => {
-            console.log("GET Request Response:", data);
+            // console.log("GET Request Response:", data);
          })
          .catch(error => {
             console.error('Error:', error);

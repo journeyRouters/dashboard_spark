@@ -47,7 +47,6 @@ const Converted = ({ setcount, uid,profile }) => {
             querySnapshot = await getDocs(q);
             if (querySnapshot.docs.length == 0) {
                 setopen(false)
-                console.log("no data")
 
             }
             else {

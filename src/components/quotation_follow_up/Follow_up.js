@@ -91,7 +91,6 @@ const FollowUp = (props) => {
 
     }
 
-
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
@@ -106,7 +105,7 @@ const FollowUp = (props) => {
         else {
             getLeadOnBoard()
         }
-    }, [auth])
+    }, [])
 
 
     const Destinations = [
@@ -143,6 +142,7 @@ const FollowUp = (props) => {
         { value: 'Hot', label: 'Hot', color: '#0052CC' },
         { value: 'Cold', label: 'Cold', color: '#5243AA' },
         { value: 'Dump', label: 'Dump', color: '#FF5630', },
+        { value: 'Paymentawaited', label: 'Payment Awaited', color: '#FF5630', },
         // { value: 'Converted', label: 'Converted', color: '#FF5630', },
 
 

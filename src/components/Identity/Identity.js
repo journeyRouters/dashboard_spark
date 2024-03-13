@@ -154,7 +154,7 @@ function Identity({ }) {
             const docRef = doc(db, "UserProfile", userId);
             await updateDoc(docRef, data);
 
-            console.log("Document written with ID: ", userId);
+            // console.log("Document written with ID: ", userId);
             return true;
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -171,7 +171,7 @@ function Identity({ }) {
             // Set data in the document
             await setDoc(docRef, data);
 
-            console.log("Document written with ID: ", userId);
+            // console.log("Document written with ID: ", userId);
             return true;
         } catch (e) {
             console.error("Error adding document: ", e);

@@ -47,7 +47,6 @@ const Loginform = (props) => {
             props.setData(docSnap.data())
             // console.log("Document data:", docSnap.data());
         } else {
-            console.log("No such document!");
         }
 
     }

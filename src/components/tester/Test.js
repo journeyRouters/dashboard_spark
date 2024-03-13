@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { default as React, useEffect } from 'react';
 import app from '../required';
 import './testcss.css';
@@ -39,17 +39,14 @@ const Test = () => {
    }
    async function allDoc() {
       var list = []
-      // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      // console.log('trigger')
-      const q = query(collection(db, "Attendance"),
-         // where("month", "==", "May"),
-         where('Lead_Status', '==', 'Converted'),
-         // where('caller.name', '==', 'KULJEET SINGH'),
-         // where('callingStatus', '==', 'Converted')
+      const q = query(collection(db, "Trip"),
+         where("month", "==", "December"),
+         // where('Lead_Status', '==', 'Converted'),
       )
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         console.log(doc.data())
+         // console.log(doc.data())
+         // updateMonthFeild(doc.id)
          list.push(doc.id)
       });
       console.log(list.length)
@@ -57,9 +54,9 @@ const Test = () => {
    async function updateMonthFeild(id) {
       const ref = doc(db, "Trip", id);
       await updateDoc(ref, {
-         month: "April-2023"
+         month: "December-2023"
       });
-      // till april-2023  
+      // till December-2023  
       console.log('updated', id)
    }
    function add_a_feild(tripid) {
@@ -85,9 +82,6 @@ const Test = () => {
          console.log(docSnap.id, 'fetching profile')
       }
    }
-
-
-
    function calculateLeaves(userProfile, data, docid) {
       console.log('calculating....')
       var BalanceLeaves = userProfile.Leave
@@ -154,27 +148,50 @@ const Test = () => {
             console.error('Error:', error);
          });
    }
+   function getAllUserProfie() {
+      const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"])
+          , where("user_type", "==", "show")
+      );
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const Profile = [];
+          querySnapshot.forEach((doc) => {
+              Profile.push(doc.data());
+          });
+          getTotalLeadData(Profile)
+      });
+  }
+   async function getTotalLeadData(AllUserprofile) {
+      var date = new Date();
+      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      console.log(firstDay)
+      for (var i = 0; i < AllUserprofile.length; i++) {
+          try {
+              let list = []
+              var q = query(collection(db, "Trip"),
+                  where("assign_to.uid", "==", AllUserprofile[i].uid),
+                  where("assigned_date_time", ">=", firstDay));
+              var querySnapshot = await getDocs(q);
+              querySnapshot.forEach((doc) => {
+                  list.push(doc.data())
+              });
+              console.log(AllUserprofile[i].name)
+              console.log(list.length)
+              console.log(list)
 
+
+          }
+          catch (erorr) {
+              console.log(erorr)
+          }
+      }
+  }
    useEffect(() => {
       // allDoc()
-      // FetchProfile()
-      // add_a_feild_()
-      // FetchLeaves()
-      // SendNotification()
-      //   tester()
-      // add_a_feild()
-      notification()
+      // getAllUserProfie()
    }, []);
    return (
       <div>
-         {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <ConversionPrecentage />
-            <ConversionPercentageAgaintLeadSeeded />
-         </div>
-         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <AvgLeadSeeded />
-            <TotalLeadSeeded />
-         </div> */}
+        running.....
       </div>
    );
 }

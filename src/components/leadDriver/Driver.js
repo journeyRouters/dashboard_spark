@@ -147,7 +147,6 @@ const Driver = (props) => {
                 Profile.push(doc.data());
             });
             setprofile(Profile)
-            console.log(Profile,);
         });
         return () => unsubscribe()
 
@@ -156,10 +155,6 @@ const Driver = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getTripCounter()
-        // getHashTable()
-        // var check = moment(today,'DD MMMM YYYY').add(5, 'days').calendar()
-        // console.log(moment(test(3)).format('DD MMMM YYYY'))
-        // console.log(selectedDate)
         getLeadByDate(currentdate)
     },[]);
     async function getTripCounter() {

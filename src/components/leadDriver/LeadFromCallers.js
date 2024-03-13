@@ -25,7 +25,6 @@ const LeadFromCallers = () => {
             var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
-                console.log(doc.data())
             });
             try {
                 // console.log(list)

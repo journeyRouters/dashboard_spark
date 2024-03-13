@@ -160,25 +160,25 @@ function App() {
 
     })
   }
-//   const getUserProfile = async (userId) => {
-//     const db = getFirestore(app);
+  //   const getUserProfile = async (userId) => {
+  //     const db = getFirestore(app);
 
-//     try {
-//         const docRef = doc(db, "UserProfile", userId);
-//         const docSnap = await getDoc(docRef);
-//         if (docSnap.exists()) {
-//             // if there is data in collection, we will have the data
-//             setuserprofileData(docSnap.data())
-//             return docSnap.data();
-//         } else {
+  //     try {
+  //         const docRef = doc(db, "UserProfile", userId);
+  //         const docSnap = await getDoc(docRef);
+  //         if (docSnap.exists()) {
+  //             // if there is data in collection, we will have the data
+  //             setuserprofileData(docSnap.data())
+  //             return docSnap.data();
+  //         } else {
 
-//             return null;
-//         }
-//     } catch (error) {
-//         console.error("Error getting document:", error);
-//         return null;
-//     }
-// };
+  //             return null;
+  //         }
+  //     } catch (error) {
+  //         console.error("Error getting document:", error);
+  //         return null;
+  //     }
+  // };
 
   useEffect(() => {
     authListener()
@@ -187,7 +187,7 @@ function App() {
     else {
       fetch_profile(auth)
       // getUserProfile(auth.uid)
-      
+
     }
 
   }, [auth])
@@ -196,10 +196,13 @@ function App() {
     window.location.reload(false);
   }
   const ProtectedRoute = ({ user, allowedAccessTypes }) => {
-    // Check if user's access_type is in the list of allowedAccessTypes
-    const isAllowed = user && allowedAccessTypes.includes(user.access_type);
-
-    return isAllowed ? <Outlet /> : <Navigate to="/NotAuthorise" replace />;
+    if (user == null || user == 'undefined') {
+      return <Navigate to="/" replace />
+    }
+    else {
+      const isAllowed = user && allowedAccessTypes.includes(user.access_type);
+      return isAllowed ? <Outlet /> : <Navigate to="/NotAuthorise" replace />;
+    }
   };
   return (
     <>
@@ -256,10 +259,10 @@ function App() {
                     <Link to='/Identity'>
                       {
                         ProfileImageLink == null ?
-                        <img width={'30px'} src='./assets/img/user.png' />:
-                        <img className='User_imageAt_Header' src={ProfileImageLink} />
+                          <img width={'30px'} src='./assets/img/user.png' /> :
+                          <img className='User_imageAt_Header' src={ProfileImageLink} />
                       }
-                    
+
                     </Link>
                     <span style={{ fontFamily: 'Poppins', fontSize: '13px' }}>Hello, {profile ? profile.name : ''}</span> </> : ''
                 }
@@ -298,23 +301,22 @@ function App() {
               <Route path='/CallerInvestigation' element={<CallerInvestigation auth={auth} profile={profile} />} />
               <Route path='/LeavePolicy' element={<Leaves auth={auth} data={profile} />} />
               <Route path='/ManageLeaves' element={<LeaveMainPage profile={profile} auth={auth} />} />
-            
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin","Team Leader","admin"]} />}>
+
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
                 <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
                 <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />
                 <Route path='/SeekCreateQuote' element={<SuperAdmin auth={auth} profile={profile} />} />
                 <Route path='/ManageAllTeam' element={<Main_Admin profile={profile} auth={auth} />} />
+                <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
+                {/* <Route path='/ControleUsers' element={<Test auth={auth} data={profile} />} /> */}
+                <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
+                <Route path='/ControleLeads' element={<Driver auth={auth} />} />
               </Route>
-              
+
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Accounts"]} />}>
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
-              </Route>
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["admin"]} />}>
-                <Route path='ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
-                <Route path='/ControleLeads' element={<Driver auth={auth} />} />
               </Route>
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Operations"]} />}>
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

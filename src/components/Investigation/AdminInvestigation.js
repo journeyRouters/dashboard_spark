@@ -48,6 +48,7 @@ const AdminInvestigation = ({ }) => {
             setdetailsFlg(true)
         }
     }
+    // this getAllUserProfie function is fetching all user in Dashboard.
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"])
             , where("user_type", "==", "show")
@@ -61,6 +62,7 @@ const AdminInvestigation = ({ }) => {
             getPendingLead(Profile)
         });
     }
+    // this  GetPendingLead function is fetching all leads in create quotes and also the specific user's create qoute leads
     async function getPendingLead(AllUserprofile) {
         // correct
         var holdAlluserAnalytics = []
@@ -97,7 +99,7 @@ const AdminInvestigation = ({ }) => {
             }
         ])
         // console.log(holdAlluserAnalytics)
-        getPaymentawaitedLead(AllUserprofile)
+        getcoldLeadData(AllUserprofile)
 
 
     }
@@ -117,6 +119,7 @@ const AdminInvestigation = ({ }) => {
         })
         return counted
     }
+    // this unresponsedLead72hr is checking for those which have last update timestamp more than 72 hr
     async function unresponsedLead72hr(AllUserprofile) {
         var datePrev = moment(new Date()).subtract(2, 'month').calendar()
         var month = moment(datePrev).format('MMMM')
@@ -154,7 +157,7 @@ const AdminInvestigation = ({ }) => {
         setdataAvailablityFlg(true)
 
     }
-   
+//    this getPaymentawaitedLead function is fetching the leads which have status of payments Awaited
     async function getPaymentawaitedLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -191,10 +194,11 @@ const AdminInvestigation = ({ }) => {
             }
         ])
         // console.log(holdAlluserAnalytics)
-        getHotLeadData(AllUserprofile)
+        getConvertedLeadData(AllUserprofile)
 
 
     }
+    //    this getHotLeadData function is fetching the leads which have status of Hot
     async function getHotLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -232,10 +236,10 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getActiveLeadData(AllUserprofile)
+        getPaymentawaitedLead(AllUserprofile)
 
     }
-  
+  //    this getActiveLeadData function is fetching the leads which have status of Active
     async function getActiveLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -273,10 +277,11 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getConvertedByAllSpokes(AllUserprofile)
+        getHotLeadData(AllUserprofile)
         // setdataAvailablityFlg(true)
 
     }
+    // this getConvertedByAllSpokes function is fetching leads which have status of Converted/ specific all user
     async function getConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -313,6 +318,7 @@ const AdminInvestigation = ({ }) => {
         getdirectleadConvertedByAllSpokes(AllUserprofile)
 
     }
+    // this getdirectleadConvertedByAllSpokes function is fetching Direct leads which have status of Converted/ specific all user
     async function getdirectleadConvertedByAllSpokes(AllUserprofile) {
         var holdAlluserAnalytics = []
         for (var i = 0; i < AllUserprofile.length; i++) {
@@ -346,6 +352,7 @@ const AdminInvestigation = ({ }) => {
         getPrevMonthConvertedByAllSpokes(AllUserprofile)
 
     }
+    // this getPrevMonthConvertedByAllSpokes function is fetching all the leads of specific user converted in previous month
     async function getPrevMonthConvertedByAllSpokes(AllUserprofile) {
         var datePrev = moment(new Date()).subtract(1, 'month').calendar()
         var month = moment(datePrev).format('MMMM')
@@ -385,6 +392,7 @@ const AdminInvestigation = ({ }) => {
         // setdataAvailablityFlg(true)
 
     }
+    //error this getPre_PrevMonthConvertedByAllSpokes function is fetching all the leads of specific user converted in two previous month
     async function getPre_PrevMonthConvertedByAllSpokes(AllUserprofile) {
         var datePrev = moment(new Date()).subtract(2, 'month').calendar()
         var month = moment(datePrev).format('MMMM')
@@ -419,7 +427,7 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getConvertedLeadData(AllUserprofile)
+        getTotalLeadData(AllUserprofile)
         // console.log(holdAlluserAnalytics)
         // setdataAvailablityFlg(true)
 
@@ -431,6 +439,7 @@ const AdminInvestigation = ({ }) => {
         setCurrentuser(profile_of_user)
 
     }
+    // error this getConvertedLeadData function is fetching all the leads of specific user converted in Current month
     async function getConvertedLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -470,6 +479,7 @@ const AdminInvestigation = ({ }) => {
         ])
         getDumpLeadData(AllUserprofile)
     }
+      // this getDumpLeadData function is fetching all the leads of specific user Dumped in Current month
     async function getDumpLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
@@ -511,6 +521,7 @@ const AdminInvestigation = ({ }) => {
         ])
         getAllStatusLeadData(AllUserprofile)
     }
+    // this getAllStatusLeadData function fetching all status Leads except Dump for specific user
     async function getAllStatusLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
@@ -545,8 +556,9 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getcoldLeadData(AllUserprofile)
+        getConvertedByAllSpokes(AllUserprofile)
     }
+      // this  getcoldLeadData function is fetching all leads having status of Cold and also the specific user's.
     async function getcoldLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
@@ -584,13 +596,14 @@ const AdminInvestigation = ({ }) => {
                 values: holdAlluserAnalytics
             }
         ])
-        getTotalLeadData(AllUserprofile)
+        getActiveLeadData(AllUserprofile)
     }
+    // this getTotalLeadData function total assigned to a specific user in a month.
     async function getTotalLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-        console.log(firstDay)
+        // console.log(firstDay)
         for (var i = 0; i < AllUserprofile.length; i++) {
             var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
             var user_analytics = { id: i, label: AllUserprofile[i].name, value: 0, color: randomColor }
@@ -612,7 +625,6 @@ const AdminInvestigation = ({ }) => {
             }
             catch (erorr) {
                 console.log(erorr)
-                // setopen(false)
             }
         }
 

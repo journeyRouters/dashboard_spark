@@ -46,6 +46,7 @@ const Profile = (
     });
     const pdfExportComponent = useRef(null);
     const Data = travel_data
+    const codes=['Direct',"Repeated","Converted"]
     const currentdate = new Date();
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
@@ -103,7 +104,7 @@ const Profile = (
     }, []);
 
     async function setQuotationData() {
-        console.log(indicator, 'this is indicator')
+        // console.log(indicator, 'this is indicator')
         // debugger
         if (indicator) {
         }
@@ -339,9 +340,9 @@ const Profile = (
                             <div className='trip_summary'>
                                 <span>TRIP ID:-&nbsp;</span>
                                 <span>
-                                    {travel_data.Campaign_code == 'Direct' ?
+                                    {codes.includes(travel_data.Campaign_code)?
                                         <span>
-                                            D-{travel_data.TripId}
+                                            {travel_data.Campaign_code[0]}-{travel_data.TripId}
                                         </span>
                                         :
                                         <span>

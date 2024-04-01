@@ -15,6 +15,7 @@ import './Payments.css';
 
 const VouchersCompo = ({ data, profile, datahandle }) => {
     const [latestData, setlatestData] = useState(data)
+    const codes=['Direct',"Repeated","Converted"]
     const [loading, setloading] = useState(false)
     const [openPaymentsScreenShotsloader, setopenPaymentsScreenShotsloader] = useState(false)
     const [details, setDetails] = useState(false)
@@ -469,9 +470,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             <div className='client_detail'>
                 <div className='personal-details'>
                     <div className='TripId'>
-                        {data.Campaign_code == 'Direct' ?
+                        {codes.includes(data.Campaign_code) ?
                             <span>
-                                D-{data.TripId}
+                                {data.Campaign_code[0]}--{data.TripId}
                             </span>
                             :
                             <span>

@@ -1,6 +1,6 @@
-import { deleteDoc, doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import app from '../required';
 import './Driver.css';
 
@@ -9,6 +9,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
+    const [LeadType, setLeadType] = useState(data.Campaign_code)
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
@@ -27,12 +28,24 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assign_to.name": name,
             "assign_flg": true,
             "assigned_date_time": today,
-            "Lead_Status": Status
+            "Lead_Status": Status,
+            "Campaign_code": LeadType
+        });
+        getLeadByDate(selectedDate)
+    }
+    async function UpdateCampionCode() {
+        const Databaseref = doc(db, "Trip", data.TripId);
+        await updateDoc(Databaseref, {
+            "Campaign_code": LeadType
         });
         getLeadByDate(selectedDate)
     }
     function OnStatusChange(value) {
         setStatus(value)
+    }
+    function changeLeadtype(value) {
+        // console.log(value, LeadType)
+        setLeadType(value)
     }
     async function updateNumberOfDays(value) {
         setNumberOfDays(value)
@@ -70,6 +83,46 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         });
         getLeadByDate(selectedDate)
     }
+
+    async function SearchForClientMatch(Contact_Number) {
+        let list = []
+        var q = query(collection(db, "Trip"),
+            where('Contact_Number', '==', Contact_Number),
+            where('TripId', '!=', data.TripId)
+        );
+        try {
+            var querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            try {
+                // console.log(list)
+                if (list.length == 0) {
+                    return
+                }
+                else {
+                    var IsConverted = CheckForConvertedClient(list)
+                    // console.log(IsConverted)
+                    if (IsConverted) { setLeadType("Converted") }
+                    else { setLeadType("Repeated") }
+                    UpdateCampionCode()
+                }
+            }
+            catch (e) { console.log(e) }
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+
+    }
+    function CheckForConvertedClient(list) {
+        return list.some(item => item.Lead_Status === "Converted");
+    }
+    useEffect(() => {
+        if (LeadType === "INSTA01" || LeadType=="FB001") {
+            SearchForClientMatch(data.Contact_Number)
+        }
+    }, [])
     return (
         <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>
             <div>
@@ -78,6 +131,14 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Pax:-{data.Pax}</span><br />
                 <span>Child:-{data.Child}</span><br />
                 <input type='checkbox' checked={flightBooked} onChange={(e) => FlightController(e)} /><span>Flight Is Booked</span>
+                <br />
+                <span>Client</span>
+                <select value={LeadType} onChange={(e) => changeLeadtype(e.target.value)}>
+                    <option value='Normal'>Normal</option>
+                    <option value='Converted'>Converted</option>
+                    <option value='Repeated'>Repeated</option>
+                    <option value='Direct'>Direct</option>
+                </select>
             </div>
             <div>
                 {/* <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br /> */}

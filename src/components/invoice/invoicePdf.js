@@ -10,6 +10,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
     auth, deliverable_item, BillingAddress, documents, profile,
     hint, getinvoice: invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
+    const codes=['Direct',"Repeated","Converted"]
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -135,9 +136,9 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                                         <p>:- {selected_pdf_data.travel_data.Traveller_name}</p>
                                         <p>:- {hint ? invoicedDate : EditinvoicedDate}</p>
                                         <span>
-                                            {selected_pdf_data.travel_data.Campaign_code == 'Direct' ?
+                                            {codes.includes(selected_pdf_data.travel_data.Campaign_code) ?
                                                 <span>
-                                                    D-{selected_pdf_data.travel_data.TripId}
+                                                    {selected_pdf_data.travel_data.Campaign_code[0]}-{selected_pdf_data.travel_data.TripId}
                                                 </span>
                                                 :
                                                 <span>

@@ -83,7 +83,7 @@ const CreateQuoteTableRow = ({
             <div className='createQouteBox'>
                 <div className='createQouteBoxFirstHalf'>
                     <div className={userProfile.user_type == 'Team Leader' && data.x_callerFlg == true ? 'called' : 'called1'}>
-                        <h4 className='tripId'>TripId:-{data.TripId} </h4>
+                        <h4 className='tripId'>TripId:-{data.Campaign_code[0]} {data.TripId} </h4>
                         <h4>Name:-{data.Traveller_name}</h4>
                         <h4>Contact:- {data.Contact_Number}</h4>
                         <h4>E-mail:-</h4>

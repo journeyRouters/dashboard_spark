@@ -301,28 +301,6 @@ function App() {
               <Route path='/CallerInvestigation' element={<CallerInvestigation auth={auth} profile={profile} />} />
               <Route path='/LeavePolicy' element={<Leaves auth={auth} data={profile} />} />
               <Route path='/ManageLeaves' element={<LeaveMainPage profile={profile} auth={auth} />} />
-
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin"]} />}>
-                <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
-                <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
-                <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />
-                <Route path='/SeekCreateQuote' element={<SuperAdmin auth={auth} profile={profile} />} />
-                <Route path='/ManageAllTeam' element={<Main_Admin profile={profile} auth={auth} />} />
-                <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                {/* <Route path='/ControleUsers' element={<Test auth={auth} data={profile} />} /> */}
-                <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
-                <Route path='/ControleLeads' element={<Driver auth={auth} />} />
-              </Route>
-
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Accounts"]} />}>
-                <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
-                <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
-              </Route>
-              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Operations"]} />}>
-                <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />
-                <Route path='/DuringStayFiles' element={<Duringstay profile={profile} />} />
-                <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
-              </Route>
               <Route path='/Team' element={<Main profile={profile} auth={auth} />} />
               <Route path='/CallerCreateQuote' element={<CreateQuote Auth={auth} profile={profile} />} />
               <Route path='/CallerLead' element={<LeadFromCallers Auth={auth} profile={profile} />} />
@@ -331,6 +309,22 @@ function App() {
               {/* <Route path='/FlightCreateQuote' element={<Flight auth={auth} profile={profile} />} /> */}
               <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
+              <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operations"]} />}>
+                <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
+                <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
+                <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />
+                <Route path='/SeekCreateQuote' element={<SuperAdmin auth={auth} profile={profile} />} />
+                <Route path='/ManageAllTeam' element={<Main_Admin profile={profile} auth={auth} />} />
+                <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
+                <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
+                <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
+                {/* <Route path='/ControleUsers' element={<Test auth={auth} data={profile} />} /> */}
+                <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
+                <Route path='/ControleLeads' element={<Driver auth={auth} />} />
+                <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />
+                <Route path='/DuringStayFiles' element={<Duringstay profile={profile} />} />
+                <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
+              </Route>
             </Routes>
           </div>
 

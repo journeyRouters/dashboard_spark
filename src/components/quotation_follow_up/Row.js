@@ -43,6 +43,7 @@ const Row = (props) => {
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [limit, setLimit] = useState(false)
+    const codes=['Direct',"Repeated","Converted"]
     function setEdit_flg() {
         set_edit(true)
     }
@@ -145,19 +146,38 @@ const Row = (props) => {
     }
     async function updateStatus() {
         if (props.Caller == 1) {
+            /**this props.caller key is coming from dump caller create quote to update the lead status */
             setDoc(doc(db, "Trip", row.TripId), {
                 callingStatus: Lead_Status,
                 updated_last_By_Caller: today
             }, { merge: true });
             props.updateTableDataAfterUpdate(row.TripId)
+            return
         }
-        else if (row.month == null || row.month == "") {
+        else if (row.Lead_Status === 'Dump') {
             setDoc(doc(db, "Trip", row.TripId), {
                 Lead_Status: Lead_Status,
-                month: moment(today).format('MMMM'),
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                month: '',
                 updated_last: today
             }, { merge: true });
+        }
+        else if (Lead_Status === 'Converted') {
+            if (!row.month) {
+                setDoc(doc(db, "Trip", row.TripId), {
+                    Lead_Status: Lead_Status,
+                    month: moment(today).format('MMMM'),
+                    Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                    updated_last: today
+                }, { merge: true });
+            }
+            else {
+                setDoc(doc(db, "Trip", row.TripId), {
+                    Lead_Status: Lead_Status,
+                    Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                    updated_last: today
+                }, { merge: true });
+            }
         }
         else {
             setDoc(doc(db, "Trip", row.TripId), {
@@ -267,12 +287,12 @@ const Row = (props) => {
             <React.Fragment >
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">
-                        {row.Campaign_code == 'Direct' ?
+                        {codes.includes(row.Campaign_code) ?
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
 
                                 <span>
                                     <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
-                                    D-{row.TripId}
+                                    {row.Campaign_code[0]}-{row.TripId}
                                 </span>
                                 {
                                     row.FlightBookedFlg ?
@@ -527,7 +547,7 @@ const Row = (props) => {
                                             }
                                             {
                                                 row.Lead_Status === 'Paymentawaited' ?
-                                                    <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button> :<></>
+                                                    <button className='download_requote' onClick={() => invoiceForm()}>Create invoice</button> : <></>
                                             }
 
                                             {

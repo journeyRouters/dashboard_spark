@@ -8,6 +8,7 @@ import app from '../required';
 import './TripComponent.css';
 const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => {
     const db = getFirestore(app);
+    const animatedComponents = makeAnimated();
     var today = new Date()
     const [AllUserprofile, setAllUserprofile] = useState([])
     const [TripCounter, setTripCount] = useState()
@@ -25,7 +26,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         Child: null,
         Email: null,
         Assigner: function (key, value) {
-            // console.log(this.Budget,this.Child,this.Contact_Number,this.Departure_City,this.Destination,this.name,this.Travel_date)
             switch (key) {
                 case 'name':
                     this.name = value
@@ -87,7 +87,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
 
         }
     }
-    const animatedComponents = makeAnimated();
+    
     const Destinations = [
         { value: 'Thailand', label: 'Thailand', color: '#00B8D9' },
         { value: 'Bali', label: 'Bali', color: '#0052CC' },

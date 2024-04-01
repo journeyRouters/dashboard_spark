@@ -201,37 +201,6 @@ const Driver = (props) => {
     }
     return (
         <div>
-            {/* <Modal open={openlistOfUsers} onClose={handleListChange} >
-                <>
-                    <div className='listofuser'>
-
-                        <table style={{ width: "100%" }}>
-                            <tr>
-                                <th>name</th>
-                                <th>Lead Current</th>
-                                <th>Lead Dump</th>
-                                <th>Lead Vouchers</th>
-                                <th>Lead converted</th>
-                                <th>Lead followUp</th>
-
-                            </tr>
-                            {
-                                profile.map((data, index) => (<>
-                                    <tr key={index}>
-                                        <td>{data.name}</td>
-                                        <td>{(data.Lead_Current).length}</td>
-                                        <td>{data.Lead_Dump.length}</td>
-                                        <td>{data.Lead_Vouchers.length}</td>
-                                        <td>{data.Lead_converted.length}</td>
-                                        <td>{data.Lead_followUp.length}</td>
-                                    </tr>
-                                </>))
-                            }
-
-                        </table>
-                    </div>
-                </>
-            </Modal> */}
             <div className='Driver_header'>
                 <div>
                     <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>

@@ -49,7 +49,7 @@ const AvgLeadSeeded = () => {
                 loadData(prev_instance)
                 loadData([
                     {
-                        name: 'Daily Avg Lead',
+                        name: `'Daily Avg Lead' ${prev_instance.reduce((sum, item) => sum + item.value, 0)}`,
                         values: prev_instance
                     }
                 ])

@@ -94,7 +94,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         setCreate_quote_data_Analysed([
             {
-                name: 'Lead to be quoted',
+                name: `'Lead to be quoted' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -150,14 +150,14 @@ const AdminInvestigation = ({ }) => {
         }
         setlastupdated72hr([
             {
-                name: '72 hr',
+                name: `'72 hr' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
         setdataAvailablityFlg(true)
 
     }
-//    this getPaymentawaitedLead function is fetching the leads which have status of payments Awaited
+    //    this getPaymentawaitedLead function is fetching the leads which have status of payments Awaited
     async function getPaymentawaitedLead(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -189,7 +189,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         setPaymentAwaited([
             {
-                name: 'Payment Awaited',
+                name: `'Payment Awaited' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -232,14 +232,14 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Hot_Lead_Analysed([
             {
-                name: 'Lead HoT',
+                name:`'Lead HoT' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
         getPaymentawaitedLead(AllUserprofile)
 
     }
-  //    this getActiveLeadData function is fetching the leads which have status of Active
+    //    this getActiveLeadData function is fetching the leads which have status of Active
     async function getActiveLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         // console.log(AllUserprofile)
@@ -273,7 +273,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Active_Lead_Analysed([
             {
-                name: 'Lead Active',
+                name: `'Lead Active' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -310,7 +310,7 @@ const AdminInvestigation = ({ }) => {
         }
         setdata_Analysed([
             {
-                name: `${currentMonth}-Conversion`,
+                name: `${currentMonth}-Conversion ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -345,7 +345,7 @@ const AdminInvestigation = ({ }) => {
         }
         setDirectLead([
             {
-                name: `${currentMonth}-Direct-Lead-Conversion`,
+                name: `${currentMonth}-Direct-Lead-Conversion ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -383,7 +383,7 @@ const AdminInvestigation = ({ }) => {
         }
         setPrevMonth([
             {
-                name: `${month}-Conversion`,
+                name: `${month}-Conversion ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -423,7 +423,7 @@ const AdminInvestigation = ({ }) => {
         }
         setPre_PrevMonth([
             {
-                name: `${month}-Conversion`,
+                name: `${month}-Conversion ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -473,13 +473,13 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Converted_Lead_Analysed([
             {
-                name: 'Lead Converted',
+                name: `'Lead Converted' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
         getDumpLeadData(AllUserprofile)
     }
-      // this getDumpLeadData function is fetching all the leads of specific user Dumped in Current month
+    // this getDumpLeadData function is fetching all the leads of specific user Dumped in Current month
     async function getDumpLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
@@ -515,7 +515,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Dump_Lead_Analysed([
             {
-                name: 'Lead Dumped',
+                name: `'Lead Dumped' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -552,13 +552,13 @@ const AdminInvestigation = ({ }) => {
 
         set_AllStatus_Lead_Analysed([
             {
-                name: 'Total In funnel',
+                name: `'Total In funnel'${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
         getConvertedByAllSpokes(AllUserprofile)
     }
-      // this  getcoldLeadData function is fetching all leads having status of Cold and also the specific user's.
+    // this  getcoldLeadData function is fetching all leads having status of Cold and also the specific user's.
     async function getcoldLeadData(AllUserprofile) {
         var holdAlluserAnalytics = []
         var date = new Date();
@@ -592,7 +592,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Cold_Lead_Analysed([
             {
-                name: 'Total Cold Leads',
+                name: `'Total Cold Leads' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -630,13 +630,13 @@ const AdminInvestigation = ({ }) => {
 
         set_Total_Lead_Analysed([
             {
-                name: 'Total lead Assigned',
+                name: `'Total lead Assigned' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
         unresponsedLead72hr(AllUserprofile)
     }
-   
+
     useEffect(() => {
         getAllUserProfie()
     }, []);

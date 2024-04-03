@@ -47,7 +47,7 @@ const TotalLeadeSeeded = () => {
                 loadData(prev_instance)
                 loadData([
                     {
-                        name: 'Leads Assigned',
+                        name: `'Leads Assigned' ${prev_instance.reduce((sum, item) => sum + item.value, 0)}`,
                         values: prev_instance
                     }
                 ])
@@ -62,25 +62,25 @@ const TotalLeadeSeeded = () => {
         }
         )
     }
-    
+
     useEffect(() => {
         getAllUserProfie()
     }, []);
     return (
-        <div style={{width:'30rem'}}>
-        {
-            dataAvailablityFlg ?
-                <DynamicBarChart
-                    data={dataLoaded}
-                    iterationTimeout={1200}
-                    startRunningTimeout={2500}
-                    barHeight={20}
-                    iterationTitleStyles={{
-                        fontSize: 18
-                    }}
-                /> : <></>
-        }
-    </div>
+        <div style={{ width: '30rem' }}>
+            {
+                dataAvailablityFlg ?
+                    <DynamicBarChart
+                        data={dataLoaded}
+                        iterationTimeout={1200}
+                        startRunningTimeout={2500}
+                        barHeight={20}
+                        iterationTitleStyles={{
+                            fontSize: 18
+                        }}
+                    /> : <></>
+            }
+        </div>
     );
 }
 

@@ -135,6 +135,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <span>Client</span>
                 <select value={LeadType} onChange={(e) => changeLeadtype(e.target.value)}>
                     <option value='Normal'>Normal</option>
+                    <option value='Premium'>Premium</option>
                     <option value='Converted'>Converted</option>
                     <option value='Repeated'>Repeated</option>
                     <option value='Direct'>Direct</option>

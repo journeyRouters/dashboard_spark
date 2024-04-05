@@ -185,7 +185,6 @@ const Driver = (props) => {
     async function dynamicSearch() {
         let q = null
         let list = []
-        console.log(SearchOptionkey)
         switch (SearchOptionkey) {
             case 'null': {
                 return
@@ -195,7 +194,7 @@ const Driver = (props) => {
                 break
             }
             case 'Contact_Number': {
-                q = query(collection(db, 'Trip'), where('Contact_Number', '==', SearchOptionkeyValue))
+                q = query(collection(db, 'Trip'), where('Contact_Number', '==', parseInt(SearchOptionkeyValue)))
                 break
             }
 

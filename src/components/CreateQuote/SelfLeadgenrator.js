@@ -12,6 +12,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     var today = new Date()
     const [AllUserprofile, setAllUserprofile] = useState([])
     const [TripCounter, setTripCount] = useState()
+    const [ClientType, setClientType] = useState('Direct')
     // const [Hash, setHash] = useState()
     const [currentUser, setCurrentuser] = useState(undefined)
     const leadData = {
@@ -87,7 +88,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
 
         }
     }
-    
+
     const Destinations = [
         { value: 'Thailand', label: 'Thailand', color: '#00B8D9' },
         { value: 'Bali', label: 'Bali', color: '#0052CC' },
@@ -124,8 +125,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     }
     function onclose() {
         setAddLead(false)
-        // console.log(leadData.Checker())
-        // console.log(leadData)
     }
     useEffect(() => {
         getAllUserProfie()
@@ -154,20 +153,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             // console.log(leadData)
         }
     }
-    // async function getHashTable() {
-    //     const TripRef = doc(db, "Support", "Hash");
-    //     let SupportSnap;
-    //     try {
-    //         SupportSnap = await getDoc(TripRef);
-    //     }
-    //     catch (e) { console.log(e) }
-    //     if (SupportSnap.exists()) {
-    //         setHash(SupportSnap.data().hash)
-    //         // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
 
-
-    //     }
-    // }
     async function updateTripCounter(counted) {
         // console.log(counted)
 
@@ -175,14 +161,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         await updateDoc(TripRef, {
             tripCount: counted
         });
-
-    }
-    async function updateHash(json) {
-        const TripRef = doc(db, "Support", "Hash");
-        // console.log(Object.keys(json).length)
-        await updateDoc(TripRef, {
-            hash: json
-        }, { merge: true });
 
     }
     function uploadLeadBySpokes(assigned_uid, assigned_name) {
@@ -201,10 +179,10 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             setDoc(doc(db, "Trip", tripid), {
                 TripId: tripid,
                 Lead_Status: 'Hot',
-                Campaign_code: 'Direct',
+                Campaign_code: ClientType,
                 Date_of_lead: today,
                 Traveller_name: leadData.name,
-                FlightBookedFlg:false,
+                FlightBookedFlg: false,
                 InstaId: 'Direct lead',
                 Contact_Number: leadData.Contact_Number,
                 Destination: leadData.Destination,
@@ -249,7 +227,9 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
 
     }
-
+    function ClientTypeController(value) {
+        setClientType(value)
+    }
     function saveForSelf() {
         if (leadData.Checker()) {
             alert('please add sufficient data')
@@ -272,6 +252,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                         <p>Contact </p>
                         <p>Email</p>
                         <p>Destination </p>
+                        <p>Client Type</p>
                         <p>Departure_City </p>
                         <p>Duration </p>
                         <p>Travel_Date </p>
@@ -281,7 +262,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                     </div>
                     <div className='SelfLeadGenleftDiv'>
                         {
-                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10].map((data, index) => <p key={index}>:-</p>)
+                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10,11].map((data, index) => <p key={index}>:-</p>)
                         }
 
                     </div>
@@ -297,12 +278,18 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                             options={Destinations}
                             onChange={(e) => leadData.Assigner('Destination', e.value)}
                         />
+                        <select value={ClientType} onChange={(e) => ClientTypeController(e.target.value)}>
+                            <option value='Premium'>Premium</option>
+                            <option value='Converted'>Converted</option>
+                            <option value='Repeated'>Repeated</option>
+                            <option value='Direct'>Direct</option>
+                        </select>
                         <input onChange={(e) => leadData.Assigner('Departure_City', e.target.value)}></input>
                         <input className='required' onChange={(e) => leadData.Assigner('Travel_Duration', e.target.value)} type={'number'}></input>
                         <input className='required' onChange={(e) => leadData.Assigner('Travel_date', e.target.value)} type={'date'}></input>
                         <input className='required' onChange={(e) => leadData.Assigner('Pax', e.target.value)} type={'number'}></input>
-                        <input onChange={(e) => leadData.Assigner('Child', e.target.value)} type={'number'}></input>
-                        <input onChange={(e) => leadData.Assigner('Budget', e.target.value)} type={'number'}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Child', e.target.value)} type={'number'}></input>
+                        <input className='required' onChange={(e) => leadData.Assigner('Budget', e.target.value)} type={'number'}></input>
                     </div>
                 </div>
                 <div className='SelfLeadButtonDiv'>

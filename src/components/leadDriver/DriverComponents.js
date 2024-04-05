@@ -44,7 +44,6 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         setStatus(value)
     }
     function changeLeadtype(value) {
-        // console.log(value, LeadType)
         setLeadType(value)
     }
     async function updateNumberOfDays(value) {

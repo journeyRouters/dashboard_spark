@@ -21,6 +21,8 @@ const Driver = (props) => {
     const [openlistOfUsers, setopenlistOfUsers] = useState(false)
     const [TripCounter, setTripCount] = useState()
     const [Hash, setHash] = useState()
+    const [SearchOptionkey, setSearchOptionkey] = useState(null)
+    const [SearchOptionkeyValue, setSearchOptionkeyValue] = useState(null)
     function handleListChange() {
         setopenlistOfUsers(!openlistOfUsers)
     }
@@ -79,12 +81,12 @@ const Driver = (props) => {
                         Vouchers_hotels: [],
                         Vouchers_others: [],
                         vouchers_idproof: [],
-                        PaymentScreenshots_flight:[],
-                        PaymentScreenshots_hotels:[],
-                        PaymentScreenshots_others:[],
+                        PaymentScreenshots_flight: [],
+                        PaymentScreenshots_hotels: [],
+                        PaymentScreenshots_others: [],
                         transfer_request: false,
                         transfer_request_reason: [],
-                        FlightBookedFlg:false,
+                        FlightBookedFlg: false,
                         assign_to: {
                             uid: null,
                             name: null
@@ -98,10 +100,10 @@ const Driver = (props) => {
                             name: '',
                             uid: ''
                         },
-                        FlightStatus:false,
-                        FlightComments:[],
-                        FlightBookedDate:null,
-                        Flight_LastUpdate:null
+                        FlightStatus: false,
+                        FlightComments: [],
+                        FlightBookedDate: null,
+                        Flight_LastUpdate: null
                     });
                 }
                 updateTripCounter(countUpdater)
@@ -139,7 +141,7 @@ const Driver = (props) => {
         }
 
     }
-    useEffect(() => {
+    function FetchData() {
         const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"]));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
@@ -150,13 +152,15 @@ const Driver = (props) => {
         });
         return () => unsubscribe()
 
-    }, []);
- 
+    };
+
     useEffect(() => {
+        FetchData()
         window.scrollTo(0, 0);
         getTripCounter()
         getLeadByDate(currentdate)
-    },[]);
+    }, []);
+
     async function getTripCounter() {
         const TripRef = doc(db, "Support", "tripCount");
         let SupportSnap;
@@ -170,20 +174,7 @@ const Driver = (props) => {
 
         }
     }
-    async function getHashTable() {
-        const TripRef = doc(db, "Support", "Hash");
-        let SupportSnap;
-        try {
-            SupportSnap = await getDoc(TripRef);
-        }
-        catch (e) { console.log(e) }
-        if (SupportSnap.exists()) {
-            setHash(SupportSnap.data().hash)
-            // console.log(SupportSnap.data().hash,Object.keys(SupportSnap.data().hash).length)
 
-
-        }
-    }
     async function updateTripCounter(counted) {
         const TripRef = doc(db, "Support", "tripCount");
         await updateDoc(TripRef, {
@@ -191,20 +182,55 @@ const Driver = (props) => {
         });
 
     }
-    async function updateHash(json) {
-        const TripRef = doc(db, "Support", "Hash");
-        // console.log(Object.keys(json).length)
-        await updateDoc(TripRef, {
-            hash: json
-        }, { merge: true });
+    async function dynamicSearch() {
+        let q = null
+        let list = []
+        console.log(SearchOptionkey)
+        switch (SearchOptionkey) {
+            case 'null': {
+                return
+            }
+            case 'TripId': {
+                q = query(collection(db, 'Trip'), where('TripId', '==', SearchOptionkeyValue))
+                break
+            }
+            case 'Contact_Number': {
+                q = query(collection(db, 'Trip'), where('Contact_Number', '==', SearchOptionkeyValue))
+                break
+            }
 
+        }
+        try {
+            var querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+            });
+            try {
+                setLead_data(list)
+            }
+            catch (e) { console.log(e) }
+        }
+        catch (error) {
+            console.log(error.message)
+        }
     }
+    function OptionSelector(value) { setSearchOptionkey(value) }
+    function valueSelector(value) { setSearchOptionkeyValue(value) }
     return (
         <div>
             <div className='Driver_header'>
                 <div>
                     <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>
                     <button onClick={() => getLeadByDate(selectedDate)}>Search</button>
+                </div>
+                <div>
+                    <select onChange={(event) => OptionSelector(event.target.value)}>
+                        <option value={null}>select</option>
+                        <option value={'TripId'}>TripId</option>
+                        <option value={'Contact_Number'}>Contact_Number</option>
+                    </select>
+                    <input onChange={(e) => valueSelector(e.target.value)} placeholder="Input Search Value"></input>
+                    <button onClick={() => dynamicSearch()}>Search</button>
                 </div>
                 <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>
                 <button className='userlist_button' onClick={handleListChange}>All listed User</button>

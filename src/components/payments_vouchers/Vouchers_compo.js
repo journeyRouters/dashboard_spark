@@ -196,15 +196,15 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
     }
 
     async function updateLinkAndPathOfUploadedPaymentsScreenShots(path, link, name) {
-        var param = {
-            "email": "991221nandkishor@gmail.com", "message": "Auto triggered mail", "emailTitle": "Payment ScreenShots Uplaoded",
-            "ClientData": {
-                "tripId": data.TripId, "ClientName": data.Traveller_name,
-                "Contact": data.Contact_Number, "Destination": data.Destination,
-                "DepartureCity": data.Departure_City, "Pax": data.Pax,
-                "Nights": data.Travel_Duration - 1, "TravelDate": moment(data.Travel_Date).format('DD-MMMM-YYYY')
-            }
-        }
+        // var param = {
+        //     "email": "991221nandkishor@gmail.com", "message": "Auto triggered mail", "emailTitle": "Payment ScreenShots Uplaoded",
+        //     "ClientData": {
+        //         "tripId": data.TripId, "ClientName": data.Traveller_name,
+        //         "Contact": data.Contact_Number, "Destination": data.Destination,
+        //         "DepartureCity": data.Departure_City, "Pax": data.Pax,
+        //         "Nights": data.Travel_Duration - 1, "TravelDate": moment(data.Travel_Date).format('DD-MMMM-YYYY')
+        //     }
+        // }
         const docref = doc(db, "Trip", data.TripId);
         // console.log(target)
         if (target === 'flights') {
@@ -222,7 +222,7 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
             await setDoc(docref, {
                 "PaymentScreenshots_flight": previousData
             }, { merge: true });
-            SendNotification(param)
+            // SendNotification(param)
 
         }
         if (target === 'hotels') {

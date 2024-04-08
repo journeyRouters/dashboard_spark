@@ -13,3 +13,8 @@
   justify-content: space-between;
   height: 5rem;
 }
+.TopBarChart{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

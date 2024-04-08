@@ -39,7 +39,10 @@ const AdminInvestigation = ({ }) => {
     const [currentUser, setCurrentuser] = useState(null)
     const [detailsFlg, setdetailsFlg] = useState(false)
     const [DirectLead, setDirectLead] = useState([])
-
+    ////////////////////////////////////////////////////////////
+    // below variables are for getting leads type i.e ConvertedLeadType,DirectLeadType,reapeateadLeadtype e.t.c
+    const [LeadType, setLeadType] = useState()
+    const [AlluserLeadType, setAlluserLeadType] = useState([])
     function handleSearch(e) {
         if (e == 'hide') {
             setdetailsFlg(false)
@@ -59,12 +62,12 @@ const AdminInvestigation = ({ }) => {
                 Profile.push(doc.data());
             });
             setAllUserprofile(Profile)
+            GetLeadTypeAssignedToSales(Profile)
             getPendingLead(Profile)
         });
     }
     // this  GetPendingLead function is fetching all leads in create quotes and also the specific user's create qoute leads
     async function getPendingLead(AllUserprofile) {
-        // correct
         var holdAlluserAnalytics = []
         var local = { name: 'C.Q', value: 0, fill: 'yellow' }
         var prev_instance = dataLoaded
@@ -232,7 +235,7 @@ const AdminInvestigation = ({ }) => {
         loadData(prev_instance)
         set_Hot_Lead_Analysed([
             {
-                name:`'Lead HoT' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
+                name: `'Lead HoT' ${holdAlluserAnalytics.reduce((sum, item) => sum + item.value, 0)}`,
                 values: holdAlluserAnalytics
             }
         ])
@@ -636,6 +639,68 @@ const AdminInvestigation = ({ }) => {
         ])
         unresponsedLead72hr(AllUserprofile)
     }
+    async function GetLeadTypeAssignedToSales(AllUserprofile) {
+        var Direct = { name: 'Direct', value: 0, fill: 'blue' }
+        var Repeated = { name: 'Repeated', value: 0, fill: 'green' }
+        var Converted = { name: 'Converted', value: 0, fill: 'yellow' }
+        var Premium = { name: 'Premium', value: 0, fill: 'pink' }
+        function dataSetter(data, Type) {
+            switch (Type) {
+                case 'Direct':
+                    Direct.value += data;
+                    break;
+                case 'Repeated':
+                    Repeated.value += data;
+                    break;
+                case 'Converted':
+                    Converted.value += data;
+                    break;
+                case 'Premium':
+                    Premium.value += data;
+                    break;
+                default:
+                    console.log('Unknown Type');
+            }
+        }
+        let date = new Date();
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        for (var i = 0; i < AllUserprofile.length; i++) {
+            var q = query(collection(db, 'Trip'),
+                where("assign_to.uid", "==", AllUserprofile[i].uid),
+                where("Campaign_code", "in", ['Direct', 'Repeated', 'Premium', 'Converted']),
+                where("assigned_date_time", ">=", firstDay)
+            );
+            try {
+                var list = []
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((Docs) => {
+                    list.push(Docs.data())
+                })
+                DataResolver(list, AllUserprofile[i].name, dataSetter, i)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        let mergelist = [Direct, Repeated, Premium, Converted]
+        setLeadType(mergelist)
+    }
+    function DataResolver(Data, Name, dataSetter, index) {
+        var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        var userIndividual_analytics = { id: index, label: Name, value: 0, color: randomColor }
+        if (Data.length > 0) {
+            var Repeated = Data.filter(item => item.Campaign_code === "Repeated")
+            dataSetter(Repeated.length, 'Repeated')
+            var Direct = Data.filter(item => item.Campaign_code === "Direct")
+            dataSetter(Direct.length, 'Direct')
+            var Converted = Data.filter(item => item.Campaign_code === "Converted")
+            dataSetter(Converted.length, 'Converted')
+            var Premium = Data.filter(item => item.Campaign_code === "Premium")
+            dataSetter(Premium.length, 'Premium')
+
+        }
+
+
+    }
 
     useEffect(() => {
         getAllUserProfie()
@@ -649,30 +714,56 @@ const AdminInvestigation = ({ }) => {
             </Modal>
             {
                 dataAvailablityFlg ? <>
-                    <BarChart
-                        width={500}
-                        height={300}
-                        data={dataLoaded}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5
-                        }}
-                        barSize={30}
-                    >
-                        <XAxis
-                            dataKey="name"
-                            scale="point"
-                            padding={{ left: 10, right: 10 }}
-                        />
-                        <YAxis type="number" domain={[0, 'dataMax+100']} />
-                        <Tooltip />
-                        <Legend legendType='circle' />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Bar
-                            dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-                    </BarChart>
+                    <div className='TopBarChart'>
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={dataLoaded}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5
+                            }}
+                            barSize={30}
+                        >
+                            <XAxis
+                                dataKey="name"
+                                scale="point"
+                                padding={{ left: 10, right: 10 }}
+                            />
+                            <YAxis type="number" domain={[0, 'dataMax+100']} />
+                            <Tooltip />
+                            <Legend legendType='circle' />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Bar
+                                dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                        </BarChart>
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={LeadType}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5
+                            }}
+                            barSize={30}
+                        >
+                            <XAxis
+                                dataKey="name"
+                                scale="point"
+                                padding={{ left: 10, right: 10 }}
+                            />
+                            <YAxis type="number" domain={[0, 'dataMax+20']} />
+                            <Tooltip />
+                            <Legend legendType='circle' />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Bar
+                                dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+                        </BarChart>
+                    </div>
                     <button onClick={() => setDetailGraphFlg(!DetailGraphFlg)}>Detail</button>
                     {
                         DetailGraphFlg ? <>
@@ -823,10 +914,10 @@ const AdminInvestigation = ({ }) => {
                         <select onChange={(e) => filterDataFromProfile(e.target.value)} >
                             <option value={0}> assign to</option>
                             {
-                                AllUserprofile.map((data, index) => (<>
+                                AllUserprofile.map((data, index) => (
                                     <option key={index} value={data.uid}>{data.name}</option>
 
-                                </>))
+                                ))
                             }
                         </select>
                         {

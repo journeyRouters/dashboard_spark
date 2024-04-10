@@ -640,15 +640,23 @@ const AdminInvestigation = ({ }) => {
         unresponsedLead72hr(AllUserprofile)
     }
     async function GetLeadTypeAssignedToSales(AllUserprofile) {
-        var Direct = { name: 'Direct', value: 0, fill: 'blue' }
+        var TotalDirect = { name: 'Direct', value: 0, fill: 'blue' }
+        var SalesDirect = { name: 'D-Sales', value: 0, fill: 'cyan' }
+        var JRDirect = { name: 'D-JR', value: 0, fill: 'black' }
         var Repeated = { name: 'Repeated', value: 0, fill: 'green' }
         var Converted = { name: 'Converted', value: 0, fill: 'yellow' }
         var Premium = { name: 'Premium', value: 0, fill: 'pink' }
         function dataSetter(data, Type) {
             switch (Type) {
                 case 'Direct':
-                    Direct.value += data;
+                    TotalDirect.value += data;
                     break;
+                case 'sales direct':
+                    SalesDirect.value += data
+                    break;
+                case 'Jr direct':
+                    JRDirect.value += data
+                    break
                 case 'Repeated':
                     Repeated.value += data;
                     break;
@@ -681,7 +689,7 @@ const AdminInvestigation = ({ }) => {
                 console.log(error);
             }
         }
-        let mergelist = [Direct, Repeated, Premium, Converted]
+        let mergelist = [TotalDirect, SalesDirect, JRDirect, Repeated, Premium, Converted]
         setLeadType(mergelist)
     }
     function DataResolver(Data, Name, dataSetter, index) {
@@ -692,6 +700,10 @@ const AdminInvestigation = ({ }) => {
             dataSetter(Repeated.length, 'Repeated')
             var Direct = Data.filter(item => item.Campaign_code === "Direct")
             dataSetter(Direct.length, 'Direct')
+            var SalesDirect = Data.filter(item => item.Campaign_code === "Direct" && item.InstaId === "Direct lead")
+            dataSetter(SalesDirect.length, 'sales direct')
+            var JrDirect = Data.filter(item => item.Campaign_code === "Direct" && item.InstaId != "Direct lead")
+            dataSetter(JrDirect.length, 'Jr direct')
             var Converted = Data.filter(item => item.Campaign_code === "Converted")
             dataSetter(Converted.length, 'Converted')
             var Premium = Data.filter(item => item.Campaign_code === "Premium")

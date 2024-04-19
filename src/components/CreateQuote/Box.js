@@ -433,6 +433,7 @@ const Box = ({
                                                     <option value={'Veitnam'}>Veitnam</option>
                                                     <option value={'Northeast'}>Northeast</option>
                                                     <option value={'Europe'}>Europe</option>
+                                                    <option value={'Turkey'}>Turkey</option>
                                                     <option value={'Mauritius'}>Mauritius</option>
 
                                                 </select>

@@ -245,3 +245,8 @@
     justify-content: space-between;
     background-color: cornflowerblue;
 }
+.LeadStatus{
+    display: flex;
+    flex-direction: row;
+    
+}

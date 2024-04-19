@@ -105,6 +105,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Europe', label: 'Europe', color: '#5243AA' },
         { value: 'Northeast', label: 'Northeast', color: '#5243AA' },
         { value: 'Ladakh', label: 'Ladakh', color: '#666666' },
+        { value: 'Turkey', label: 'Turkey', color: '#666666' },
 
     ];
     function getAllUserProfie() {

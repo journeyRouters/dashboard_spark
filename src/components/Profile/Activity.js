@@ -39,12 +39,12 @@ export const avtivityList = {
             value: 'BaliSwing'
         },
         {
-            label:'Atv Ride',
-            value:'Atvride'
+            label: 'Atv Ride',
+            value: 'Atvride'
         },
         {
-            label:'Dinner Discovery Kartika',
-            value:'DinnerDiscoveryKartika'
+            label: 'Dinner Discovery Kartika',
+            value: 'DinnerDiscoveryKartika'
         },
         {
             label: 'Water Sports Activities',
@@ -693,39 +693,39 @@ export const avtivityList = {
             value: 'ArtScienceMuseum'
         },
         {
-            label:'Adventure Cove Water Park',
-            value:'AdventureCoveWaterPark'
+            label: 'Adventure Cove Water Park',
+            value: 'AdventureCoveWaterPark'
         },
         {
-            label:'Botanical and Orchid Garden',
-            value:'BotanicalandOrchidGardenSingapore'
-        },{
-            label:'Coach Transfers',
-            value:'CoachTransfers'
-        },{
-            label:'Dolphin Encounter',
-            value:'DolphinEncounter'
-        },{
-            label:'Museum of Ice Cream',
-            value:'MuseumofIceCream'
-        },{
-            label:'Sea Aquarium Sentosa',
-            value:'SeaAquariumSentosa'
-        },{
-            label:'Singapore Big Bus Tour',
-            value:'SingaporeBigBusTour'
-        },{
-            label:'Singapore Flyer',
-            value:'SingaporeFlyer'
-        },{
-            label:'Singapore I fly',
-            value:'SingaporeIfly'
-        },{
-            label:'Singapore Vintage Vespa Side car Heritage Tour',
-            value:'SingaporeVintageVespaSidecarHeritageTour'
-        },{
-            label:'Singapore River Cruise',
-            value:'SingaporeRiverCruise'
+            label: 'Botanical and Orchid Garden',
+            value: 'BotanicalandOrchidGardenSingapore'
+        }, {
+            label: 'Coach Transfers',
+            value: 'CoachTransfers'
+        }, {
+            label: 'Dolphin Encounter',
+            value: 'DolphinEncounter'
+        }, {
+            label: 'Museum of Ice Cream',
+            value: 'MuseumofIceCream'
+        }, {
+            label: 'Sea Aquarium Sentosa',
+            value: 'SeaAquariumSentosa'
+        }, {
+            label: 'Singapore Big Bus Tour',
+            value: 'SingaporeBigBusTour'
+        }, {
+            label: 'Singapore Flyer',
+            value: 'SingaporeFlyer'
+        }, {
+            label: 'Singapore I fly',
+            value: 'SingaporeIfly'
+        }, {
+            label: 'Singapore Vintage Vespa Side car Heritage Tour',
+            value: 'SingaporeVintageVespaSidecarHeritageTour'
+        }, {
+            label: 'Singapore River Cruise',
+            value: 'SingaporeRiverCruise'
         },
     ],
     Veitnam: [
@@ -1838,7 +1838,7 @@ export const avtivityList = {
             label: 'Suomenlinna Fortress',
             value: 'SuomenlinnaFortress'
         },
-		{
+        {
             label: 'City Tour',
             value: 'CityTour'
         },
@@ -1955,6 +1955,190 @@ export const avtivityList = {
             value: 'VaticanMuseum'
         }
     ],
+    Turkey:
+        [
+            {
+                label: 'Antalya city',
+                value: 'Antalyacity'
+            },
+            {
+                label: 'Blue Mosque',
+                value: 'BlueMosque'
+            },
+            {
+                label: 'Cappadocia Red Valley',
+                value: 'CappadociaRedValley'
+            },
+            {
+                label: 'Ephesus and Sirince Village',
+                value: 'EphesusSirinceVillage'
+            },
+            {
+                label: 'folkloricshow',
+                value: 'folkloricshow'
+            },
+            {
+                label: 'grandbazaaristanbul',
+                value: 'grandbazaaristanbul'
+            },
+            {
+                label: 'hagaiSophia',
+                value: 'hagaiSophia'
+            },
+            {
+                label: 'HAMAM(turkish bath)',
+                value: 'HAMAM'
+            },
+            {
+                label: 'hippodrome',
+                value: 'hippodrome'
+            },
+            {
+                label: 'Ihlara Valley',
+                value: 'IhlaraValley'
+            },
+            {
+                label: 'Old Town antalya',
+                value: 'OldTownantalya'
+            },
+            {
+                label: 'Pamukkale',
+                value: 'Pamukkale'
+            },
+            {
+                label: 'pasabagvalley',
+                value: 'pasabagvalley'
+            },
+            {
+                label: 'Pigeonvalley',
+                value: 'Pigeonvalley'
+            },
+            {
+                label: 'st. Sophia',
+                value: 'stSophia'
+            },
+            {
+                label: 'wind mill',
+                value: 'windmill'
+            },
+            {
+                label: 'Ancient theater',
+                value: 'Ancienttheater'
+            },
+            {
+                label: 'Aqualand Antalya',
+                value: 'AqualandAntalya'
+            },
+            {
+                label: 'avanos pottery',
+                value: 'avanospottery'
+            },
+            {
+                label: 'Belisirma',
+                value: 'Belisirma'
+            },
+            {
+                label: 'Bosphorus Cruise',
+                value: 'BosphorusCruise'
+            },
+            {
+                label: 'Bursa Cable Car',
+                value: 'BursaCableCar'
+            },
+            {
+                label: 'Cavusin',
+                value: 'Cavusin'
+            },
+            {
+                label: 'devrant valley',
+                value: 'devrantvalley'
+            },
+            {
+                label: 'Goremeopenair museum',
+                value: 'Goremeopenairmuseum'
+            },
+            {
+                label: 'green Mosque',
+                value: 'greenMosque'
+            },
+            {
+                label: 'Hierapolis',
+                value: 'Hierapolis'
+            },
+            {
+                label: 'myndos gate',
+                value: 'myndosgate'
+            },
+            {
+                label: 'ortahisar',
+                value: 'ortahisar'
+            },
+            {
+                label: 'princess island',
+                value: 'princessisland'
+            },
+            {
+                label: 'Selime Monastery',
+                value: 'SelimeMonastery'
+            },
+            {
+                label: 'shopping',
+                value: 'shopping'
+            },
+            {
+                labe:'woodenold house',
+                value:'woodenoldhouse'
+            },
+            {
+                label:'Yaprakhisar',
+                value:'Yaprakhisar'
+            },
+            {
+                label:'bodrum castle',
+                value:'bodrumcastle'
+            },
+            {
+                label:'openair museum',
+                value:'openairmuseum'
+            },
+            {
+                label:'topkapi palace',
+                value:'topkapipalace'
+            },
+            {
+                label:'uludag',
+                value:'uludag'
+            },
+            {
+                label:'under ground city',
+                value:'undergroundcity'
+            },
+            {
+                label:'Arrival',
+                value:'Arrival'
+            },
+            {
+                label:'Departure',
+                value:'Departure'
+            },
+            {
+                label:'leisure',
+                value:'leisure'
+            },
+            {
+                label:'Transfer by Cab',
+                value:'Cab'
+            },
+            {
+                label:'Transfer by Bus',
+                value:'Bus'
+            },
+            {
+                label:'ATV',
+                value:'ATV'
+            }
+            
+        ]
 }
 export function ActivityResolver(destination) {
     // console.log(avtivityList[destination])

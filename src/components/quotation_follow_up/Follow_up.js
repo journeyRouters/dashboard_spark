@@ -115,10 +115,16 @@ const FollowUp = (props) => {
         { value: 'Kashmir', label: 'Kashmir', color: '#666666' },
         { value: 'Himachal', label: 'Himachal', color: '#666666' },
         { value: 'Kerala', label: 'Kerala', color: '#666666' },
-        { value: "Andaman", label: "Andaman", color: '666666' },
-        { value: 'Maldives', label: 'Maldives', color: '666666' },
-        { value: 'Veitnam', label: 'Veitnam', color: '666666' },
-        { value: 'NorthEast', label: 'NorthEast', color: '666666' }
+        { value: "Andaman", label: "Andaman", color: '#666666' },
+        { value: 'Maldives', label: 'Maldives', color: '#666666' },
+        { value: 'Goa', label: 'Goa', color: '#666666' },
+        { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
+        { value: 'Singapore', label: 'Singapore', color: '#666666' },
+        { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' },
+        { value: 'Europe', label: 'Europe', color: '#5243AA' },
+        { value: 'Northeast', label: 'Northeast', color: '#5243AA' },
+        { value: 'Ladakh', label: 'Ladakh', color: '#666666' },
+        { value: 'Turkey', label: 'Turkey', color: '#5243AA' }
 
 
     ];

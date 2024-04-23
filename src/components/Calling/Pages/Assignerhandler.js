@@ -1,4 +1,4 @@
-import { Modal } from '@material-ui/core';
+import { Modal, Select } from '@material-ui/core';
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import app from '../../required';
@@ -13,6 +13,7 @@ const Assignerhandler = () => {
     const [startDate, setstartDate] = useState(null)
     const [endDate, setendDate] = useState(null)
     const [dataAvailablityFlg, setdataAvailablityFlg] = useState(false)
+    const [Status, setStatus] = useState(null)
 
     const db = getFirestore(app);
     useEffect(() => {
@@ -67,7 +68,7 @@ const Assignerhandler = () => {
                 // console.log(DayAfter, DayBefore)
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Dump"),
+                    where("Lead_Status", "==", Status),
                     where("updated_last", ">", DayBefore),
                     where("updated_last", "<", DayAfter),
                 )
@@ -101,7 +102,7 @@ const Assignerhandler = () => {
                 // console.log(DayAfter, DayBefore)
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Dump"),
+                    where("Lead_Status", "==", Status),
                     where("updated_last", ">", new Date(startDate)),
                     where("updated_last", "<", new Date(endDate)),
                 )
@@ -139,7 +140,7 @@ const Assignerhandler = () => {
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
                     where('assign_to.uid', '==', salesPerson[0].uid),
-                    where("Lead_Status", "==", "Dump"),
+                    where("Lead_Status", "==", Status),
                     where("updated_last", ">", new Date(startDate)),
                     where("updated_last", "<", new Date(endDate)),
                 )
@@ -195,7 +196,10 @@ const Assignerhandler = () => {
             allTripWithinDateRangeWithSpecificSalesPerson()
         }
     }
-
+    function handldeStatusController(value) {
+        // console.log(value.target.value)
+        setStatus(value.target.value)
+    }
     useEffect(() => {
         const q = query(collection(db, "Profile"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -226,11 +230,21 @@ const Assignerhandler = () => {
             </div>
             <div className='assignerBox'>
                 <span>Assign By Date</span>
+                <select onChange={(e) => handldeStatusController(e)}>
+                    <option value={null}>Choose Status</option>
+                    <option value={'Dump'}>Dump</option>
+                    <option value={'Cold'}>Cold</option>
+                </select>
                 <input type={"date"} onChange={(event) => handleSelectedDate(event.target.value)}></input>
                 <button onClick={() => ControllApplyer(1)}>Apply</button>
             </div>
             <div className='assignerBox'>
                 <span>Assign By Date range</span>
+                <select onChange={(e) => handldeStatusController(e)}>
+                    <option value={null}>Choose Status</option>
+                    <option value={'Dump'}>Dump</option>
+                    <option value={'Cold'}>Cold</option>
+                </select>
                 <label>
                     FROM
                     <input type={"date"} onChange={(event) => handleRangeDate(event.target.value, 'start')}></input>
@@ -243,6 +257,11 @@ const Assignerhandler = () => {
             </div>
             <div className='assignerBox'>
                 <span>Assign By Date range and sales  </span>
+                <select onChange={(e) => handldeStatusController(e)}>
+                    <option value={null}>Choose Status</option>
+                    <option value={'Dump'}>Dump</option>
+                    <option value={'Cold'}>Cold</option>
+                </select>
                 <select onChange={(e) => salesWhichLeadIsTOBeAssign(e.target.value)}>
                     <option value={0}> Dumped By</option>
                     {

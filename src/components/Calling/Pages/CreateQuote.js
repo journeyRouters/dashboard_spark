@@ -4,21 +4,21 @@ import React, { useEffect, useState } from 'react';
 import Row from '../../quotation_follow_up/Row';
 import app from '../../required';
 
-const CreateQuote = ({}) => {
+const CreateQuote = ({ }) => {
     const [lead_data, setLead_data] = useState([])
     const profile = JSON.parse(localStorage.getItem('profile'));
     const Auth = JSON.parse(localStorage.getItem('auth'));
     const db = getFirestore(app);
     const [open, setopen] = useState(true)
-    // console.log(profile.uid)
     async function getLeadOnBoard() {
         try {
             let list = []
             var q = query(collection(db, "Trip"),
                 where("caller.uid", "==", profile.uid),
-                where('Lead_Status', '==', 'Dump'),
+                // where('Lead_Status', '==', 'Dump'),
                 where('callingStatus', 'not-in', ['Cold', 'Dump', 'Active', 'Hot', 'Converted'])
             );
+            
             var querySnapshot;
 
             querySnapshot = await getDocs(q);
@@ -26,7 +26,7 @@ const CreateQuote = ({}) => {
                 setopen(false)
             }
             else {
-
+                
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
@@ -49,11 +49,11 @@ const CreateQuote = ({}) => {
     function updateTableDataAfterUpdate(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
-        // console.log(remaining_data, pre_tableData)
         setLead_data(remaining_data)
     }
     useEffect(() => {
         getLeadOnBoard()
+
     }, [])
 
     return (
@@ -80,11 +80,6 @@ const CreateQuote = ({}) => {
                             }
 
                         </> : <>
-                            {/* {
-                        lead_data.map((info, index) => (
-                            <Boxs key={index} data={info} />
-                        ))
-                    } */}
                             <TableContainer component={Paper}>
                                 <Table aria-label="collapsible table" style={{ width: "99%" }}>
                                     <TableHead>

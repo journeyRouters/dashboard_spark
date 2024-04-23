@@ -24,7 +24,6 @@ const db = getFirestore(app);
 
 const Row = (props) => {
     const { row } = props;
-    // console.log(row)
     const [invoice, setinvocice] = useState()
     const [Invoice_flg, setInvoice] = useState(false)
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
@@ -43,7 +42,7 @@ const Row = (props) => {
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [limit, setLimit] = useState(false)
-    const codes=['Direct',"Repeated","Converted"]
+    const codes = ['Direct', "Repeated", "Converted"]
     function setEdit_flg() {
         set_edit(true)
     }
@@ -68,7 +67,6 @@ const Row = (props) => {
     }
     function invoiceForm() {
         setInvoice(true)
-        // console.log(Invoice_flg)
     }
     function closeinvoice() {
         setInvoice(false)
@@ -77,16 +75,19 @@ const Row = (props) => {
         setcomments(e.target.value)
     }
 
+
     useEffect(() => {
-        Allquote()
-    }, [open]);
-    useEffect(() => {
-        if (Reqoute_flg == false) {
-            Allquote()
+        if (open || Reqoute_flg === false) {
+            Allquote();
         }
-        // console.log(row.TripId)
-        // console.log(row.Travel_Date)
-    }, [Reqoute_flg]);
+    }, [open, Reqoute_flg]);
+
+    useEffect(() => {
+        latestTripData();
+        getinvoice();
+        checkForLastUpdate();
+    }, []);
+
 
     function closeUpdater() {
         setopenupdater(false)
@@ -104,9 +105,7 @@ const Row = (props) => {
         if (docSnap.exists()) {
             setLatestComment(docSnap.data().comments)
             setTripData(docSnap.data())
-            // console.log(docSnap.data())
-        } else {
-            console.log("No such document!");
+
         }
 
     }
@@ -119,27 +118,18 @@ const Row = (props) => {
             list.push(doc.data())
         });
         setpdf(list)
-        // console.log('all quote', list)
-
     }
     async function getinvoice() {
-        // console.log(row.TripId)
         try {
+
             const docRef = doc(db, "invoice", row.TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
-                // console.log(row.TripId)
-                // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
-            } else {
-                console.log("No such document!");
-                // setinvocice({})
-
             }
         }
         catch (error) {
-            // console.log(row.TripId)
             console.log(error)
         }
 
@@ -196,7 +186,6 @@ const Row = (props) => {
                 time: moment(today).calendar()
             }
             allComments.push(comment_holder)
-            // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
                 updated_last: today
@@ -215,12 +204,7 @@ const Row = (props) => {
     }
 
 
-    useEffect(() => {
-        latestTripData()
-        Allquote()
-        getinvoice()
-        checkForLastUpdate()
-    }, []);
+
 
     function sethint(hint) {
         setUpdate(hint)
@@ -304,10 +288,17 @@ const Row = (props) => {
                             </div>
                             :
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <span>
-                                    <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
-                                    {row.TripId}
-                                </span>
+                                {
+                                    props.Caller == 1 ?
+                                        <span>
+                                            {row.TripId}
+                                        </span> :
+                                        <span>
+                                            <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
+                                            {row.TripId}
+                                        </span>
+
+                                }
                                 {
                                     row.FlightBookedFlg ?
                                         <img
@@ -423,7 +414,6 @@ const Row = (props) => {
 
                                                 pdfHolder.map((data, index) => (
                                                     <div key={index}>
-                                                        {/* {console.log(data)} */}
                                                         <div className='pdf_setter'>
                                                             <PictureAsPdfTwoToneIcon style={{ margin: '15px' }} />
                                                             <span style={{ color: 'red' }}>{data.value.travel_data.Destination}</span>
@@ -432,7 +422,6 @@ const Row = (props) => {
                                                                     typeof (data.value.pdf_name) === 'string' ? <>
                                                                         {data.value.pdf_name}
                                                                     </> : <>
-                                                                        {/* {console.log(moment(data.value.pdf_name.toDate()).format('LL'))} */}
                                                                         {moment(data.value.pdf_name.toDate()).format('lll')}
                                                                     </>
                                                                 }

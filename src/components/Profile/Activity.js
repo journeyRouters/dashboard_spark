@@ -827,7 +827,7 @@ export const avtivityList = {
         },
         {
             label: 'Abu Dhabi Ferrari World',
-            balue: 'AbuDhabiFerrariWorld'
+            value: 'AbuDhabiFerrariWorld'
         },
         {
             label: 'Aura Skypool Dubai',

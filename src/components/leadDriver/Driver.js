@@ -142,7 +142,7 @@ const Driver = (props) => {
 
     }
     function FetchData() {
-        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"]));
+        const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance","Caller"]));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

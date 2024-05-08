@@ -1,0 +1,59 @@
+.Parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    background: radial-gradient(#00ffef, #3e8c8a);    
+}
+.parent2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    background: black
+}
+.Child1{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.childTitle{
+    display: flex;
+    flex-direction: column;
+}
+.childTitleValue{
+    display: flex;
+    flex-direction: column;
+}
+.ValueText{
+    font-size: large;
+    font-weight: 700;
+    color: #ffffff;
+}.TitleText{
+    font-size: large;
+    font-weight: 700;
+    color: #ffffff;
+}
+.childButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.whatsappSelfLeadGenRightDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40rem;
+    margin-left: 2rem;
+}
+.genLeadparentdiv{
+    background-color: #FFFFFF;
+    width: 34rem;
+    border-radius: 10px;
+}
+.whatsappdatasidesuggestion{
+    color: gray;
+    font-size: 1rem;
+    font-family: monospace;
+}

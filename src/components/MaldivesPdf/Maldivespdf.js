@@ -665,7 +665,7 @@ const Maldivespdf = ({
                                                 }
                                             </> : <></>
                                         }
-                                        <sapn style={{ textDecoration: 'underline', color: '#bbc9ef', marginLeft: '13rem', fontSize: '13px', fontStyle: 'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</sapn>
+                                        <span style={{ textDecoration: 'underline', color: '#bbc9ef', marginLeft: '13rem', fontSize: '13px', fontStyle: 'italic' }}>Note - Flight Fare is Dynamic, Actual Cost would be Shared at the Time of Booking</span>
                                         <div
                                             style={{
                                                 backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",

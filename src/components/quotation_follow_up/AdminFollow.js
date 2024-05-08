@@ -2,8 +2,9 @@ import { collection, getDocs, getFirestore, onSnapshot, orderBy, Query, query, w
 import React, { useEffect, useState } from 'react';
 import app from '../required';
 import FollowUp from './Follow_up';
+import Adminfollowupcompo from './Adminfollowupcompo';
 
-const AdminFollow = ({}) => {
+const AdminFollow = ({ }) => {
     const profile_ = JSON.parse(localStorage.getItem('profile'));
     const auth = JSON.parse(localStorage.getItem('auth'));
     const [profile, setprofile] = useState(null)
@@ -185,13 +186,15 @@ const AdminFollow = ({}) => {
                 }
             </div>
             {
-                flg ? <>
-                    <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} user={currentUser.uid}/>
-
-                </> : <>
+                flg ? (
+                    currentUser? (
+                        <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} user={currentUser.uid} />
+                    ) : (
+                        <Adminfollowupcompo data={lead_data} />
+                    )
+                ) : (
                     <div className='no_data'></div>
-                    {/* <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} /> */}
-                </>
+                )
             }
         </div>
     );

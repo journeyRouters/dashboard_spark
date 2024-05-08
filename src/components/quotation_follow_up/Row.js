@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import PictureAsPdfTwoToneIcon from '@material-ui/icons/PictureAsPdfTwoTone';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Box from '../CreateQuote/Box';
@@ -134,6 +134,12 @@ const Row = (props) => {
         }
 
     }
+    async function updatewhatsappCollectionDoc() {
+        const Databaseref = doc(db, "whatsapp", data.TripId);
+        await updateDoc(Databaseref, {
+            "Status": Lead_Status,
+        });
+    }
     async function updateStatus() {
         if (props.Caller == 1) {
             /**this props.caller key is coming from dump caller create quote to update the lead status */
@@ -151,6 +157,7 @@ const Row = (props) => {
                 month: '',
                 updated_last: today
             }, { merge: true });
+            updatewhatsappCollectionDoc()
         }
         else if (Lead_Status === 'Converted') {
             if (!row.month) {
@@ -160,6 +167,7 @@ const Row = (props) => {
                     Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
                     updated_last: today
                 }, { merge: true });
+                updatewhatsappCollectionDoc()
             }
             else {
                 setDoc(doc(db, "Trip", row.TripId), {
@@ -167,6 +175,7 @@ const Row = (props) => {
                     Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
                     updated_last: today
                 }, { merge: true });
+                updatewhatsappCollectionDoc()
             }
         }
         else {
@@ -175,6 +184,7 @@ const Row = (props) => {
                 Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
                 updated_last: today
             }, { merge: true });
+            updatewhatsappCollectionDoc()
         }
     }
     async function update_comments() {

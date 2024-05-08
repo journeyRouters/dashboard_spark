@@ -18,7 +18,7 @@
     margin-bottom: 1rem !important;
 }
 
- 
+
 .caps{
     text-transform: uppercase;
     font-weight: 900;
@@ -248,5 +248,29 @@
 .LeadStatus{
     display: flex;
     flex-direction: row;
-    
+
+}
+
+.DetailsChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.Details_Parent {
+    height: 14rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 0.0625rem solid gray;
+    background-image: linear-gradient(136deg, #689CFC, #FF4F4ACC);
+}
+.DeatailsData{
+    display: flex;
+    align-items: center;
+}
+.DeatailsDataspan{
+    font-size: large;
+    font-weight: 700;
+
 }

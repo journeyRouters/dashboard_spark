@@ -561,17 +561,17 @@ const Maldives = ({
                                         value={flightcost}
                                         onChange={(e) => flightcostChange(e)}
                                     ></input>
-                                    <sapn className='spacer'>+</sapn>
+                                    <span className='spacer'>+</span>
                                 </div>
                                 <div>
                                     <label>Visa Cost</label><br />
                                     <input type="number" className='input_filed' placeholder='Visa' value={visacost} onChange={(e) => visacostChange(e)}></input>
-                                    <sapn className='spacer'>+</sapn>
+                                    <span className='spacer'>+</span>
                                 </div>
                                 <div>
                                     <label>Land Package Cost</label><br />
                                     <input type="number" className='input_filed' placeholder='Land' value={landPackage} onChange={(e) => landPackagechange(e)}></input>
-                                    <sapn className='spacer'>=</sapn>
+                                    <span className='spacer'>=</span>
                                 </div>
 
                                 <div className='totalSeprator'>

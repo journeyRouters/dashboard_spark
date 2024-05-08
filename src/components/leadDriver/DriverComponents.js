@@ -20,6 +20,14 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         }
         catch (e) { console.log(e) }
     }
+    async function updatewhatsappCollectionDoc(uid,name) {
+        const Databaseref = doc(db, "whatsapp", data.TripId);
+        await updateDoc(Databaseref, {
+            "assign_to.uid": uid,
+            "assign_to.name": name,
+            "Status": Status,
+        });
+    }
     async function update_lead_field(uid, name) {
         /**this function is to update the assigned user in lead data for ref and to be identify */
         const Databaseref = doc(db, "Trip", data.TripId);
@@ -31,6 +39,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "Lead_Status": Status,
             "Campaign_code": LeadType
         });
+        updatewhatsappCollectionDoc(uid,name)
         getLeadByDate(selectedDate)
     }
     async function UpdateCampionCode() {
@@ -118,7 +127,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         return list.some(item => item.Lead_Status === "Converted");
     }
     useEffect(() => {
-        if (LeadType === "INSTA01" || LeadType=="FB001") {
+        if (LeadType === "INSTA01" || LeadType == "FB001") {
             SearchForClientMatch(data.Contact_Number)
         }
     }, [])

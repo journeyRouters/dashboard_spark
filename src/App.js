@@ -33,6 +33,7 @@ import Test from './components/tester/Test';
 import Usercontrol from './components/usercontrol/UserControl';
 import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 import LeadFromCallers from './components/leadDriver/LeadFromCallers';
+import Whatsappleads from './components/leadDriver/Whatsapp/Whatsappleads.js';
 import CallerInvestigation from './components/Investigation/CallerInvestigation';
 import Rapid from './components/Rapid/Rapid';
 import AllConvertedFile from './components/quotation_follow_up/AllConvertedFile';
@@ -51,6 +52,7 @@ import Identity from './components/Identity/Identity.js';
 import NotAuthorise from './components/RouteFolder/AccessAbailable/NotAuthorise.js';
 import HomePage from './components/Homepage/HomePage.js';
 import MainCreatequote from './components/CreateQuote/MainCreatequote.js';
+
 
 
 function App() {
@@ -324,6 +326,7 @@ function App() {
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />
                 <Route path='/DuringStayFiles' element={<Duringstay profile={profile} />} />
                 <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
+                <Route path='/Whatsappleads' element={<Whatsappleads profile={profile} />} />
               </Route>
             </Routes>
           </div>

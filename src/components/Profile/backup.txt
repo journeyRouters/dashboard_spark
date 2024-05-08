@@ -30,7 +30,7 @@
 
                                 <div className='destination_details'>
                                     <p>{Data.Destination} : {props.travel_data.Pax} Adult ,Child{props.travel_data.Child}</p>
-                                    <p>{props.cost} <sapn>total</sapn></p>
+                                    <p>{props.cost} <span>total</span></p>
                                 </div>
                                 {/* <p className='underline'></p> */}
 

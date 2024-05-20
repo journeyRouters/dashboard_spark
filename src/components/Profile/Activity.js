@@ -2086,59 +2086,145 @@ export const avtivityList = {
                 value: 'shopping'
             },
             {
-                labe:'woodenold house',
-                value:'woodenoldhouse'
+                labe: 'woodenold house',
+                value: 'woodenoldhouse'
             },
             {
-                label:'Yaprakhisar',
-                value:'Yaprakhisar'
+                label: 'Yaprakhisar',
+                value: 'Yaprakhisar'
             },
             {
-                label:'bodrum castle',
-                value:'bodrumcastle'
+                label: 'bodrum castle',
+                value: 'bodrumcastle'
             },
             {
-                label:'openair museum',
-                value:'openairmuseum'
+                label: 'openair museum',
+                value: 'openairmuseum'
             },
             {
-                label:'topkapi palace',
-                value:'topkapipalace'
+                label: 'topkapi palace',
+                value: 'topkapipalace'
             },
             {
-                label:'uludag',
-                value:'uludag'
+                label: 'uludag',
+                value: 'uludag'
             },
             {
-                label:'under ground city',
-                value:'undergroundcity'
+                label: 'under ground city',
+                value: 'undergroundcity'
             },
             {
-                label:'Arrival',
-                value:'Arrival'
+                label: 'Arrival',
+                value: 'Arrival'
             },
             {
-                label:'Departure',
-                value:'Departure'
+                label: 'Departure',
+                value: 'Departure'
             },
             {
-                label:'leisure',
-                value:'leisure'
+                label: 'leisure',
+                value: 'leisure'
             },
             {
-                label:'Transfer by Cab',
-                value:'Cab'
+                label: 'Transfer by Cab',
+                value: 'Cab'
             },
             {
-                label:'Transfer by Bus',
-                value:'Bus'
+                label: 'Transfer by Bus',
+                value: 'Bus'
             },
             {
-                label:'ATV',
-                value:'ATV'
+                label: 'ATV',
+                value: 'ATV'
             }
-            
-        ]
+
+        ],
+    Baku: [
+        {
+            label: 'Almaty Lake',
+            value: 'AlmatyLake'
+        },
+        {
+            label: 'charyn Canyon',
+            value: 'CharynCanyon'
+        },
+        {
+            label: 'fire Mountain',
+            value: 'FireMountain'
+        },
+        {
+            label: 'Issyk Lake',
+            value: 'IssykLake'
+        },
+        {
+            label: 'kaindy Lake',
+            value: 'KaindyLake'
+        },
+        {
+            label: 'kok Tob',
+            value: 'KokTob'
+        },
+        {
+            label: 'shymbulak',
+            value: 'Shymbulak'
+        },
+        {
+            label: 'turgen Water fall',
+            value: 'TurgenWaterfall'
+        },
+        {
+            label: 'zenKov',
+            value: 'ZenKov'
+        },
+        {
+            label: 'Candy cane mountain',
+            value: 'Candycanemountain'
+        },
+        {
+            label: 'Gabala Resort',
+            value: 'GabalaResort'
+        },
+        {
+            label: 'haiderali museum',
+            value: 'Haideralimuseum'
+        },
+        {
+            label: 'Highland park Flame tower',
+            value: 'HighlandparkFlametower'
+        },
+        {
+            label: 'khans Palace',
+            value: 'KhansPalace'
+        },
+        {
+            label: 'khinaliq Village',
+            value: 'KhinaliqVillage'
+        },
+        {
+            label: 'mud Volcano',
+            value: 'MudVolcano'
+        },
+        {
+            label: 'shahdag Tour',
+            value: 'ShahdagTour'
+        },
+        {
+            label: 'Arrival',
+            value: 'Arrival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: 'leisure',
+            value: 'leisure'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+    ]
 }
 export function ActivityResolver(destination) {
     // console.log(avtivityList[destination])

@@ -1,4 +1,4 @@
-import { AccountTreeTwoTone, FileCopyOutlined, SearchTwoTone, TrendingUp } from '@material-ui/icons';
+import { AccountTreeTwoTone, FileCopyOutlined, PersonOutlineOutlined, SearchTwoTone, TrendingUp } from '@material-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -66,9 +66,9 @@ function Admin({}) {
                 </NavLink>
             </div>
             {/* <div className='sidebarCard'>
-                <NavLink className='sidebarCardContaint'>
+                <NavLink className='sidebarCardContaint' to='/Test'>
                     <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
-                    <p>Profile</p>
+                    <p>Test Zone</p>
                 </NavLink>
             </div> */}
         </div>

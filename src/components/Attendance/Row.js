@@ -8,7 +8,6 @@ const Row = ({ data, totalAttendance,fetch_Attendance,user }) => {
     function DeleteEntry() {
         var date = moment(data.dateObject.toDate()).format('DD-MM-YYYY')
         var index = totalAttendance.findIndex((value) => value.date == date)
-        // console.log(index)
         totalAttendance.splice(index, 1);
         updateAttendance(totalAttendance,user)
 
@@ -18,7 +17,6 @@ const Row = ({ data, totalAttendance,fetch_Attendance,user }) => {
         await updateDoc(AttendanceRef, {
             attendance: data
         });
-        // console.log(data)
         fetch_Attendance(user)
     }
 

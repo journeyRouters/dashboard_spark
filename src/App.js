@@ -1,57 +1,53 @@
-import { AccountBalanceWalletTwoTone, AccountTreeTwoTone, FileCopyOutlined, Fingerprint, GroupAddTwoTone, PersonOutlineOutlined, PublicOutlined, PublicTwoTone, SearchTwoTone, Speed, TrendingUp } from '@material-ui/icons';
+import { Fingerprint } from '@material-ui/icons';
 import { getAuth, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from 'react';
+import { Link, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Account_converted from './components/AdminController/Account_converted';
 import PaymentMarking from './components/AdminController/Paymentmarking';
-import AttendanceMain from './components/Attendance/AttendanceMain';
-import UploadAttendance from './components/Attendance/uploadAttendance';
 import Assignerhandler from './components/Calling/Pages/Assignerhandler';
+import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
 import CreateQuote from './components/Calling/Pages/CreateQuote';
-import Loginform from './components/CreateQuote/loginForm';
+import MainCreatequote from './components/CreateQuote/MainCreatequote.js';
 import SuperAdmin from './components/CreateQuote/SuperAdmin/SuperAdmin';
-import Dump from './components/DumpLead/Dump';
+import Loginform from './components/CreateQuote/loginForm';
+import HomePage from './components/Homepage/HomePage.js';
+import Identity from './components/Identity/Identity.js';
 import AdminInvestigation from './components/Investigation/AdminInvestigation';
+import CallerInvestigation from './components/Investigation/CallerInvestigation';
+import Testchart from './components/Investigation/Components/Testchart.js';
 import Freelance_Investigation from './components/Investigation/Freelance_Investigation';
 import Investigation from './components/Investigation/investigation';
-import Driver from './components/leadDriver/Driver';
 import Leaves from './components/Leaves/Leaves';
 import LeaveMainPage from './components/ManageLeaves/leaveMainPage';
-import Duringstay from './components/payments_vouchers/operation/Duringstay';
-import OprationConverted from './components/payments_vouchers/operation/oprationConverted';
-import Poststay from './components/payments_vouchers/operation/Poststay';
-import Vouchers from './components/payments_vouchers/Vouchers';
-import AdminFollow from './components/quotation_follow_up/AdminFollow';
-import FollowUp from './components/quotation_follow_up/Follow_up';
-import app from './components/required';
-import Main from './components/Teams/main';
+import Rapid from './components/Rapid/Rapid';
+import Accounts from './components/RouteFolder/AccessAbailable/Accounts.js';
+import Admin from './components/RouteFolder/AccessAbailable/Admin.js';
+import Caller from './components/RouteFolder/AccessAbailable/Caller.js';
+import FlightsBooking from './components/RouteFolder/AccessAbailable/FlightsBooking.js';
+import Freelancer from './components/RouteFolder/AccessAbailable/Freelancer.js';
+import NotAuthorise from './components/RouteFolder/AccessAbailable/NotAuthorise.js';
+import Operations from './components/RouteFolder/AccessAbailable/Operations.js';
+import SalesPerson from './components/RouteFolder/AccessAbailable/SalesPerson.js';
+import SuperAdminDrawer from './components/RouteFolder/AccessAbailable/SuperAdminDrawer.js';
+import TeamLeader from './components/RouteFolder/AccessAbailable/TeamLeader.js';
 import Adminleavefunnel from './components/Teams/Pages/AdminLeaveFunnel';
+import Main from './components/Teams/main';
 import Main_Admin from './components/Teams/support/Main_Admin.js';
-import Test from './components/tester/Test';
-import Usercontrol from './components/usercontrol/UserControl';
-import CallerFollowUp from './components/Calling/Pages/CallerFollowUp';
+import Driver from './components/leadDriver/Driver';
 import LeadFromCallers from './components/leadDriver/LeadFromCallers';
 import Whatsappleads from './components/leadDriver/Whatsapp/Whatsappleads.js';
-import CallerInvestigation from './components/Investigation/CallerInvestigation';
-import Rapid from './components/Rapid/Rapid';
-import AllConvertedFile from './components/quotation_follow_up/AllConvertedFile';
+import Vouchers from './components/payments_vouchers/Vouchers';
+import Duringstay from './components/payments_vouchers/operation/Duringstay';
+import Poststay from './components/payments_vouchers/operation/Poststay';
+import OprationConverted from './components/payments_vouchers/operation/oprationConverted';
+import AdminFollow from './components/quotation_follow_up/AdminFollow';
 import Flight from './components/quotation_follow_up/Flight';
-import { Link, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
-import TeamLeader from './components/RouteFolder/AccessAbailable/TeamLeader.js';
-import SuperAdminDrawer from './components/RouteFolder/AccessAbailable/SuperAdminDrawer.js';
-import Operations from './components/RouteFolder/AccessAbailable/Operations.js';
-import FlightsBooking from './components/RouteFolder/AccessAbailable/FlightsBooking.js';
-import Accounts from './components/RouteFolder/AccessAbailable/Accounts.js';
-import SalesPerson from './components/RouteFolder/AccessAbailable/SalesPerson.js';
-import Caller from './components/RouteFolder/AccessAbailable/Caller.js';
-import Freelancer from './components/RouteFolder/AccessAbailable/Freelancer.js';
-import Admin from './components/RouteFolder/AccessAbailable/Admin.js';
-import Identity from './components/Identity/Identity.js';
-import NotAuthorise from './components/RouteFolder/AccessAbailable/NotAuthorise.js';
-import HomePage from './components/Homepage/HomePage.js';
-import MainCreatequote from './components/CreateQuote/MainCreatequote.js';
+import FollowUp from './components/quotation_follow_up/Follow_up';
+import app from './components/required';
+import Usercontrol from './components/usercontrol/UserControl';
 
 
 
@@ -61,14 +57,11 @@ function App() {
   const [open, setopen] = React.useState(false)
   const db = getFirestore(app);
   const [auth, setauth] = useState()
-  const [Page, setPage] = React.useState("")
   const oauth = getAuth();
   const ProfileImageLink = JSON.parse(localStorage.getItem('ProfileImageLink'));
   const navigate = useNavigate();
   function setAuthFirebase(args) {
-    // console.log("setting auth")
     setauth(args)
-    // console.log("auth set")
   }
   function openPopUp() {
     setopen(true)
@@ -80,13 +73,10 @@ function App() {
     const uploadTask = uploadBytes(storageRef, Filepath[0]);
     uploadTask.on('state_changed',
       (snapshot) => {
-        // console.log(snapshot)
         switch (snapshot.state) {
           case 'paused':
-            // console.log('Upload is paused');
             break;
           case 'running':
-            // console.log('Upload is running');
             break;
         }
       },
@@ -102,13 +92,11 @@ function App() {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          // console.log('File available at', downloadURL);
         });
       }
     );
   }
   async function fetch_profile(args) {
-    // console.log(args)
     try {
       const docRef = doc(db, "Profile", args.uid);
       const docSnap = await getDoc(docRef);
@@ -116,7 +104,6 @@ function App() {
         setData(docSnap.data())
         localStorage.setItem('profile', JSON.stringify(docSnap.data()));
       } else {
-        // console.log("No such document!");
       }
     }
     catch (error) {
@@ -320,7 +307,7 @@ function App() {
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                {/* <Route path='/ControleUsers' element={<Test auth={auth} data={profile} />} /> */}
+                {/* <Route path='/Test' element={<Testchart auth={auth} data={profile} />} /> */}
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

@@ -8,7 +8,6 @@ import app from '../required';
 
 
 const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoiceModal }) => {
-    // console.log(installments)
     const db = getFirestore(app);
     async function setInvoice() {
         var today = new Date()
@@ -35,7 +34,6 @@ const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoi
     const [installment, setinstallment] = useState(installments)
     function handleInstallments(event, index) {
         let data = [...installment];
-        // console.log(data)
         data[index][event.target.name] = event.target.value;
         setinstallment(data);
 
@@ -43,7 +41,6 @@ const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoi
     function addMOreInstallments() {
         let newInstallment = { Date: '', amount: 0, Status: 'Pending', TransactionId: '', amountRecived: '', yourname: '' }
         setinstallment([...installment, newInstallment])
-        // console.log(documents)
     }
     function removeInstallments(index) {
         let data = [...installment];

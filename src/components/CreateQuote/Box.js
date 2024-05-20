@@ -34,7 +34,6 @@ const Box = ({
     Edit_count_days,
     Allquote
 }) => {
-    // console.log(data.Travel_Duration)
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
@@ -105,7 +104,6 @@ const Box = ({
         }
     ]
     function changingDestination(Destination) {
-        // console.log(itineary)
         setDestination(Destination.target.value)
         data.Destination = Destination.target.value
     }
@@ -179,7 +177,6 @@ const Box = ({
     function changechild(event) {
         setChild(event.target.value)
         data.Child = event.target.value
-        // console.log(data)
     }
     function itinearyDaysincrease() {
         let data = { Day: '', Description: '', Activity: {} }
@@ -202,8 +199,7 @@ const Box = ({
         }
     }
     function advance_controller_Activity(e, index) {
-        let data = [...itineary];
-        // console.log(e,data)    
+        let data = [...itineary];  
         data[index]['Activity'] = e;
         setItineary(data);
     }
@@ -212,7 +208,6 @@ const Box = ({
         let data = [...itineary];
         data[index][event.target.name] = event.target.value;
         setItineary(data);
-        // console.log(data)
 
     }
     function addFields() {
@@ -290,24 +285,20 @@ const Box = ({
     // function test(date,days) {
     //     let date_= new Date(date);
     //     date_.setDate(date_.getDate() + days);
-    //     console.log(moment(date_).format('DD MMMM YYYY'))
     //     return date_;
     // }
     function select_date(e) {
         var date = e.target.value
-        // console.log(date)
         set_selected_Travel_date(date)
         localStorage.setItem('Journeydate', date);
     }
     function flightDetails(files) {
-        // console.log(files)
         setflightsObject(files)
     }
     function handlePasteFlight(e) {
         if (e.clipboardData.files.length) {
             var localHolder = flightsObject
             const fileObject = e.clipboardData.files[0];
-            // console.log(fileObject)
             localHolder.push(fileObject)
             setflightsObject(localHolder)
             convertObjectToLink(fileObject)
@@ -435,6 +426,7 @@ const Box = ({
                                                     <option value={'Europe'}>Europe</option>
                                                     <option value={'Turkey'}>Turkey</option>
                                                     <option value={'Mauritius'}>Mauritius</option>
+                                                    <option value={'Baku'}>Baku</option>
 
                                                 </select>
                                             </h4>
@@ -539,7 +531,6 @@ const Box = ({
                                     <div className='cost_estimation_body'>
                                         <p className='HotelDetailsheading'>Hotel Details</p>
                                         {
-                                            // console.log(NightDataFields),
                                             NightDataFields &&
                                             NightDataFields.map((data, index) => {
                                                 return (
@@ -708,7 +699,6 @@ const Box = ({
                                         {
                                             days_total &&
                                             days_total.map((data, index) => {
-                                                // console.log(data)
                                                 return (
                                                     <div key={index} className='days'>
                                                         <label className='title'>Day{index + 1}:Title</label><br />

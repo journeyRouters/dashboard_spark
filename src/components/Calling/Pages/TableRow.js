@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import app from '../../required';
 
 const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
-    // console.log(data.Travel_Date.toDate())
     const db = getFirestore(app);
     const [comments, setcomments] = useState(null)
     const [detailsPopUp, setdetailsPopUp] = useState(false);
@@ -87,7 +86,6 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                 time: moment(new Date()).calendar()
             }
             allComments.push(comment_holder)
-            // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", data.TripId), {
                 comments: allComments,
                 updated_last_By_Caller: new Date()
@@ -121,7 +119,6 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                         {
                             (data.comments.slice(0).reverse()).map((sapn, index) => (
                                 <div key={index} className='comments_maping'>
-                                    {/* {console.log("comments data",sapn)} */}
                                     <p style={{ fontSize: '10px', borderRight: '1px solid' }}>
                                         {sapn.comments}
                                     </p>
@@ -209,6 +206,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                                     <option value={'Singapore'}>Singapore</option>
                                     <option value={'Rajasthan'}>Rajasthan</option>
                                     <option value={'Veitnam'}>Veitnam</option>
+                                    <option value={'Baku'}>Baku</option>
                                 </select>
                             </h4>
                             {/* <h4>Destination :-{data.Destination}</h4> */}

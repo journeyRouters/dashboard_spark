@@ -18,7 +18,6 @@ const AttendanceMain = ({ profile }) => {
         if (selectedDate != null) {
             var key = new Date(selectedDate)
             var new_tableData = Attendance.filter((data) => data.dateObject.toDate() >= key)
-            // console.log(new_tableData)
             contAbsent(new_tableData)
             sortAttendanceByDate(new_tableData)
         }
@@ -28,7 +27,6 @@ const AttendanceMain = ({ profile }) => {
 
     }
    function  ExportToExcel () { 
-    console.log(Attendance) 
         exportFromJSON({  data: Attendance, fileName: 'download', exportType: exportFromJSON.types.xls})  
       }  
     function contAbsent(data) {
@@ -70,9 +68,7 @@ const AttendanceMain = ({ profile }) => {
             const docRef = doc(db, "Attendance", userId);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                // console.log("Document data:", docSnap.data().attendance);
                 sortAttendanceByDate(docSnap.data().attendance)
-                // console.log(docSnap.data().attendance)
                 contAbsent(docSnap.data().attendance)
                 setAttendanceflg(true)
             }
@@ -86,14 +82,12 @@ const AttendanceMain = ({ profile }) => {
     function sortAttendanceByDate(Attendance) {
         let sortedAttendance = Attendance.sort(
             (p1, p2) => (p1.dateObject < p2.dateObject) ? 1 : (p1.dateObject > p2.dateObject) ? -1 : 0);
-        // console.log(sortedAttendance)
         setData(sortedAttendance)
 
     }
 
     useEffect(() => {
         fetch_Attendance(profile.AttendanceId)
-        // console.log(typeof(Attendance))
 
     }, []);
     return (

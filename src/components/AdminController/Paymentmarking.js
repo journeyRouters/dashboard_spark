@@ -56,7 +56,6 @@ const PaymentMarking = ({  }) => {
                 break;
             }
             case "Contact_Number": {
-                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -68,7 +67,6 @@ const PaymentMarking = ({  }) => {
             case "Travel_date": {
                 var before = new Date(input);
                 before.setDate(before.getDate() - 1);
-                // console.log(before)
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -91,11 +89,9 @@ const PaymentMarking = ({  }) => {
                 let list = []
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
-                });
-                // console.log(list)
+                })
                 set_lead_data(list[0])
                 setInput('')
-                // getinvoice(list[0])
                 setdataAvailityFlg(true)
             }
         }
@@ -124,7 +120,6 @@ const PaymentMarking = ({  }) => {
         }
     }
     function finalPackageOpen() {
-        // console.log(finalPackage)
         setpackageOpener(true)
     }
     async function resetToEdit() {
@@ -144,7 +139,6 @@ const PaymentMarking = ({  }) => {
     }
     function handleInstallments(event, index) {
         let data = [...installment];
-        // console.log(data)
         data[index][event.target.name] = event.target.value;
         setinstallment(data);
 

@@ -41,16 +41,12 @@ export async function UploadFile() {
 
             });
         }
-        // console.log(rows[1][0])
     })
-    // setInProgress(false)
-    // console.log(path);
     const mountainsRef = ref(storage, path);
     const storageRef = ref(storage, `nandu/${path}`);
     // const uploadTask = uploadBytesResumable(storageRef, files[0]);
     // uploadTask.on('state_changed',
     //     (snapshot) => {
-    //         console.log(snapshot)
     //         switch (snapshot.state) {
     //             case 'paused':
     //                 console.log('Upload is paused');

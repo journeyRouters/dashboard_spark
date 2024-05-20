@@ -4,16 +4,13 @@ import './inclusioncss.css';
 
 const Inclusion = (props) => {
     const [btn_flg, setflg] = useState(false)
-    // console.log(props.inclusion_data)
     const [inclusionFeed, setFeed] = useState(props.inclusion_data)
-    // console.log(inclusionFeed)
 
 
 
 
     function handleSave() {
         props.setinclusion(inclusionFeed)
-        // console.log(inclusionFeed)
         props.onClose()
 
     }
@@ -28,7 +25,6 @@ const Inclusion = (props) => {
     }
     function handleData_inclusion(e) {
         var firevalue = BooleanCaseResolver(e.target.value)
-        // console.log(inclusionFeed)
         // debugger
 
         if (e.target.name === "Breakfast") {
@@ -162,7 +158,6 @@ const Inclusion = (props) => {
                 cab_Private_comments: (e.target.value)
             }))
         }
-        // console.log(inclusionFeed)
 
     }
     return (

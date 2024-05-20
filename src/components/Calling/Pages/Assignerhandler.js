@@ -33,14 +33,12 @@ const Assignerhandler = () => {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = profile.filter((data) => data.uid === uid)
         setCurrentcaller(profile_of_user)
-        // console.log(profile_of_user)
 
     }
     function salesWhichLeadIsTOBeAssign(uid) {
         /**this function is to filter the current user from the all user data */
         var profile_of_user = AllSalePerson.filter((data) => data.uid === uid)
         setsalesPerson(profile_of_user)
-        // console.log(profile_of_user)
 
     }
     function handleRangeDate(args, flg) {
@@ -65,7 +63,6 @@ const Assignerhandler = () => {
                 DayBefore.setDate(DayBefore.getDate() - 1);
                 var DayAfter = new Date(SelectedDate)
                 DayAfter.setDate(DayAfter.getDate() + 1);
-                // console.log(DayAfter, DayBefore)
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", Status),
@@ -80,7 +77,6 @@ const Assignerhandler = () => {
                 }
                 else {
                     querySnapshot.forEach((doc) => {
-                        // console.log(doc.data())
                         AssignLeadToCaller(doc.id)
                         setdataAvailablityFlg(false)
                     });
@@ -99,7 +95,6 @@ const Assignerhandler = () => {
         }
         else {
             try {
-                // console.log(DayAfter, DayBefore)
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", Status),
@@ -113,8 +108,7 @@ const Assignerhandler = () => {
 
                 }
                 else {
-                    querySnapshot.forEach((doc) => {
-                        // console.log(doc.data())                        
+                    querySnapshot.forEach((doc) => {                     
                         AssignLeadToCaller(doc.id)
                         setdataAvailablityFlg(false)
 
@@ -136,7 +130,6 @@ const Assignerhandler = () => {
         }
         else {
             try {
-                // console.log(DayAfter, DayBefore)
                 // var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 const q = query(collection(db, "Trip"),
                     where('assign_to.uid', '==', salesPerson[0].uid),
@@ -152,7 +145,6 @@ const Assignerhandler = () => {
                 }
                 else {
                     querySnapshot.forEach((doc) => {
-                        // console.log(doc.data())
                         AssignLeadToCaller(doc.id)
                         setdataAvailablityFlg(false)
 
@@ -169,7 +161,6 @@ const Assignerhandler = () => {
     }
 
     async function AssignLeadToCaller(id) {
-        // console.log(id)
         setDoc(doc(db, "Trip", id), {
             callingLastUpdate: new Date(),
             caller: {
@@ -197,7 +188,6 @@ const Assignerhandler = () => {
         }
     }
     function handldeStatusController(value) {
-        // console.log(value.target.value)
         setStatus(value.target.value)
     }
     useEffect(() => {
@@ -208,7 +198,6 @@ const Assignerhandler = () => {
                 Profile.push(doc.data());
             });
             setAllSalePerson(Profile)
-            // console.log(Profile,);
         });
         return () => unsubscribe()
 
@@ -266,7 +255,6 @@ const Assignerhandler = () => {
                     <option value={0}> Dumped By</option>
                     {
                         AllSalePerson.map((data, index) => (<>
-                            {/* {console.log(data.Lead_Current)} */}
                             <option key={index} value={data.uid}>{data.name}</option>
 
                         </>))

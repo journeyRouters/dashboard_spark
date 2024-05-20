@@ -13,12 +13,10 @@ const FollowUp = ({}) => {
     function updateTableDataAfterConversion(tripid) {
         var pre_tableData = lead_data
         var remaining_data = pre_tableData.filter((data) => data.TripId !== tripid)
-        // console.log(remaining_data, pre_tableData)
         setLead_data(remaining_data)
         getLeadOnBoard()
     }
     async function getLeadOnBoard() {
-        // console.log(props.auth.uid)
         try {
             let list = []
             var q = query(collection(db, "Trip"),
@@ -37,7 +35,6 @@ const FollowUp = ({}) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                // console.log(list)
                 setLead_data(list)
                 setopen(false)
             }

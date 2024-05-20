@@ -14,7 +14,6 @@ import EditInvoice from './EditInvoice'
 const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
-    // console.log("from vouchers", data)
     const [details, setDetails] = useState(false)
     const [target, settarget] = useState(0)
     const storage = getStorage();
@@ -34,7 +33,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
         setEditInvoice(false)
     }
     function finalPackageOpen() {
-        // console.log(finalPackage)
         setpackageOpener(true)
     }
     function closePackage() {
@@ -60,7 +58,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 setinstallment(docSnap.data().installment)
                 setFinalPackage(docSnap.data().selected_pdf_data)
             } else {
-                console.log("No such document!");
                 setinstallment()
                 // setinvocice([])
 
@@ -85,7 +82,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 break
             }
             case "OperationClearnace": {
-                // console.log(name)
                 setOperationsClearanceFlg(!OperationsClearanceFlg)
                 markComplete("OperationsClearance", !OperationsClearanceFlg)
                 break
@@ -98,7 +94,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     }
     async function markComplete(name, value) {
         const docref = doc(db, "Trip", data.TripId);
-        // console.log(name)
         await updateDoc(docref, {
             [name]: value
         });
@@ -116,7 +111,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
 
     async function getFinalPackage(finalPackageId) {
         try {
-            // console.log(finalPackageId)
             const q = query(collection(db, "Quote"), where("label", "==", finalPackageId));
             var collect = []
             const querySnapshot = await getDocs(q);
@@ -135,10 +129,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     //         const docSnap = await getDoc(docRef);
 
     //         if (docSnap.exists()) {
-    //             console.log(docSnap.data())
-    //             // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
     //         } else {
-    //             console.log("No such document!");
     //             // setinvocice({})
 
     //         }
@@ -154,14 +145,12 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
 
         if (docSnap.exists()) {
             setlatestData(docSnap.data())
-            // console.log("Document data:", docSnap.data());
         } else {
             console.log("No such document!");
         }
     }
     async function updateLinkAndPathOfUploadedVouchers(path, link, name) {
         const docref = doc(db, "Trip", data.TripId);
-        // console.log(target)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
             let content =
@@ -171,8 +160,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 created_at: today,
                 name: name
             }
-            previousData.push(content)
-            // console.log("list to set", content, previousData)
+            previousData.push(content);
             await updateDoc(docref, {
                 "Vouchers_flight": previousData
             });
@@ -180,7 +168,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
         }
         if (target === 'hotels') {
             let previousData = latestData.Vouchers_hotels
-            // console.log(data.Vouchers_hotels)
             let content =
             {
                 path: path,
@@ -189,7 +176,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 name: name
             }
             previousData.push(content)
-            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_hotels": previousData
             });
@@ -197,7 +183,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
         }
         if (target === 'others') {
             let previousData = latestData.Vouchers_others
-            // console.log(data.Vouchers_others)
             let content =
             {
                 path: path,
@@ -206,7 +191,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                 name: name
             }
             previousData.push(content)
-            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_others": previousData
             });
@@ -230,7 +214,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
 
     function handleInstallments(event, index) {
         let data = [...installment];
-        // console.log(data)
         data[index][event.target.name] = event.target.value;
         setinstallment(data);
 
@@ -241,7 +224,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
          */
         const handles = await window.showOpenFilePicker({ multiple: false });
         const file = await fromEvent(handles);
-        // console.log('sufficient',file[0].name,file[0])
         uploaderpopup()
         setloading(true)
         if (!file) return;
@@ -252,13 +234,11 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
 
         uploadTask.on('state_changed',
             (snapshot) => {
-                // console.log(snapshot)
                 switch (snapshot.state) {
                     case 'paused':
                         console.log('Upload is paused');
                         break;
                     case 'running':
-                        // console.log('Upload is running');
                         break;
                 }
             },
@@ -274,7 +254,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
@@ -288,7 +267,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
         getdatalatest_for_voucher()
     }, [details]);
     function ondelete(target, path, index) {
-        // console.log(target, path, index)
 
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)
@@ -315,7 +293,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                         console.log('Upload is paused');
                         break;
                     case 'running':
-                        // console.log('Upload is running');
                         break;
                 }
             },
@@ -331,7 +308,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedVouchers(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
@@ -342,12 +318,9 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     }
     async function delete_vouchers_from_firebase_firestore(target, del_index) {
         const docref = doc(db, "Trip", data.TripId);
-        // console.log(target, del_index)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
             previousData.splice(del_index, 1);
-            // console.log(previousData)
-            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_flight": previousData
             });
@@ -373,7 +346,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
             let previousData = data.vouchers_idproof
 
             previousData.splice(del_index, 1)
-            // console.log(previousData)
 
             await updateDoc(docref, {
                 "vouchers_idproof": previousData
@@ -387,7 +359,6 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     }
     function detailsFlgactive() {
         var date = new Date()
-        // console.log(moment(date).format('DDMMYYYY'))
         setDetails(!details)
     }
     function optionHandler(e) {

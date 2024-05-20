@@ -11,7 +11,6 @@ const CreateQuoteTableRow = ({
     data, updateTableDataAfterQuote,
     email, userProfile
 }) => {
-    // console.log(userProfile)
     const [SuggestionModal, settransfermodal] = useState(false)
     const [popupopener, set_popupopner] = useState(false)
     const [user_uni_data, set_uni_data] = useState([])

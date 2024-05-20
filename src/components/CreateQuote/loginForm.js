@@ -40,18 +40,15 @@ const Loginform = (props) => {
         setEmail_flg(false)
     }
     async function fetch_profile(args) {
-        // console.log("fetch profile from login page")
         const docRef = doc(db, "Profile", args.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             props.setData(docSnap.data())
-            // console.log("Document data:", docSnap.data());
         } else {
         }
 
     }
     function set_profile(args) {
-        // console.log("called", args)
         try {
             setDoc(doc(db, "Profile", args.uid), {
                 name: userName,
@@ -91,7 +88,6 @@ const Loginform = (props) => {
         sethasaccount(!hasaccount)
     }
     function submit() {
-        // console.log(email.slice(-10))
 
         if (email.length === 0) {
             setEmail_flg(true)
@@ -108,7 +104,6 @@ const Loginform = (props) => {
 
     }
     function signUp() {
-        // console.log(email.slice(-10))
 
         if (email.length === 0) {
             setEmail_flg(true)
@@ -155,14 +150,12 @@ const Loginform = (props) => {
                 props.setauth(user)
                 set_profile(user)
                 fetch_profile(user)
-                // console.log(user)
                 handelClose()
 
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // console.log(errorCode)
                 setEmail_flg(true)
                 setpassword_flg(true)
                 // debugger

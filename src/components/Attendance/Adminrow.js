@@ -24,13 +24,11 @@ const Adminrow = ({ data, totalAttendance, fetch_Attendance }) => {
     }
     function updateThePermmisionTrue(index) {
         totalAttendance[index].LatePermisson = 'true'
-        // console.log(data.userId)
         updateAttendance(totalAttendance, data.userId)
     }
 
     function updateThePermmisionFalse(index) {
         totalAttendance[index].LatePermisson = 'false'
-        // console.log(totalAttendance)
         updateAttendance(totalAttendance, data.userId)
     }
 
@@ -55,13 +53,11 @@ const Adminrow = ({ data, totalAttendance, fetch_Attendance }) => {
         await updateDoc(AttendanceRef, {
             attendance: data
         });
-        // console.log(data)
         fetch_Attendance(user)
     }
     function calculateHr() {
         let Hr = new Date("01/01/2023 " + `${CheckOut}`).getHours() - new Date("01/01/2023 " + `${CheckIn}`).getHours();
         let min = new Date("01/01/2023 " + `${CheckOut}`).getMinutes() - new Date("01/01/2023 " + `${CheckIn}`).getMinutes();
-        // console.log(Hr, min);
 
         if (min < 0) {
             Hr = Hr - 1
@@ -78,7 +74,6 @@ const Adminrow = ({ data, totalAttendance, fetch_Attendance }) => {
             setStatus('Absent')
 
         }
-        // console.log(Hr, min);
     }
     useEffect(() => {
         calculateHr()

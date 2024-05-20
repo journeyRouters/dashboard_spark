@@ -1,0 +1,32 @@
+.Chart_Bar_Parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+.Chart_Bar_Parent:hover{
+    cursor: pointer;
+    color: rgb(20, 22, 22);
+    transform: scale(1.1);
+    transition: transform .2s;
+}
+
+.Chart_Bar_Name {
+    /* text-transform: uppercase; */
+    font-size: large;
+    font-weight: 400;
+    color: rgb(17, 18, 17);
+}
+
+
+.verticale_chart_size{
+    width: 30%;
+    margin-left: 5rem;
+    /* background-color: aqua; */
+}
+.bar_and_Number{
+    width: 55%;
+    display: flex;
+    align-items: center;
+    
+}

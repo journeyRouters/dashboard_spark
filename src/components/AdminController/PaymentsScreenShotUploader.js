@@ -28,10 +28,8 @@ const PaymentsScreenShotUploader = ({ data }) => {
     }
     async function updateLinkAndPathOfUploadedPaymentsScreenShots(path, link, name) {
         const docref = doc(db, "Trip", data.TripId);
-        // console.log(target)
         if (target === 'flights') {
             let previousData = latestData.PaymentScreenshots_flight
-            // console.log(data.Vouchers_flight)
             let content =
             {
                 path: path,
@@ -40,7 +38,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
                 name: name
             }
             previousData.push(content)
-            // console.log("list to set", content, previousData)
             await setDoc(docref, {
                 "PaymentScreenshots_flight": previousData
             }, { merge: true });
@@ -48,7 +45,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
         }
         if (target === 'hotels') {
             let previousData = latestData.PaymentScreenshots_hotels
-            // console.log(data.Vouchers_hotels)
             let content =
             {
                 path: path,
@@ -57,7 +53,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
                 name: name
             }
             previousData.push(content)
-            // console.log("list to set", content, previousData)
             await setDoc(docref, {
                 "PaymentScreenshots_hotels": previousData
             }, { merge: true });
@@ -65,7 +60,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
         }
         if (target === 'others') {
             let previousData = latestData.PaymentScreenshots_others
-            // console.log(data.Vouchers_others)
             let content =
             {
                 path: path,
@@ -74,7 +68,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
                 name: name
             }
             previousData.push(content)
-            // console.log("list to set", content, previousData)
             await setDoc(docref, {
                 "PaymentScreenshots_others": previousData
             }, { merge: true });
@@ -98,13 +91,11 @@ const PaymentsScreenShotUploader = ({ data }) => {
 
         uploadTask.on('state_changed',
             (snapshot) => {
-                // console.log(snapshot)
                 switch (snapshot.state) {
                     case 'paused':
                         console.log('Upload is paused');
                         break;
                     case 'running':
-                        // console.log('Upload is running');
                         break;
                 }
             },
@@ -120,7 +111,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    // console.log('File available at', downloadURL);
                     updateLinkAndPathOfUploadedPaymentsScreenShots(path, downloadURL, name)
                     getdatalatest_for_voucher()
                     stoploading()
@@ -135,7 +125,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
 
         if (docSnap.exists()) {
             setlatestData(docSnap.data())
-            console.log("Document data:", docSnap.data());
         } else {
             console.log("No such document!");
         }
@@ -146,12 +135,9 @@ const PaymentsScreenShotUploader = ({ data }) => {
     }
     async function delete_vouchers_from_firebase_firestore(target, del_index) {
         const docref = doc(db, "Trip", data.TripId);
-        // console.log(target, del_index)
         if (target === 'flights') {
             let previousData = latestData.Vouchers_flight
             previousData.splice(del_index, 1);
-            // console.log(previousData)
-            // console.log("list to set", content, previousData)
             await updateDoc(docref, {
                 "Vouchers_flight": previousData
             });
@@ -177,7 +163,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
             let previousData = data.vouchers_idproof
 
             previousData.splice(del_index, 1)
-            // console.log(previousData)
 
             await updateDoc(docref, {
                 "vouchers_idproof": previousData
@@ -186,7 +171,6 @@ const PaymentsScreenShotUploader = ({ data }) => {
     }
 
     function ondelete(target, path, index) {
-        // console.log(target, path, index)
 
         deleteuploadedvoucher_from_firebase_storage(path)
         delete_vouchers_from_firebase_firestore(target, index)

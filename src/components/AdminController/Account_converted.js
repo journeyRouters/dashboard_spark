@@ -14,7 +14,6 @@ const Account_converted = ({}) => {
     const [SearchKey, setSearchKey] = useState(0)
     const [input, setInput] = useState('')
 
-    // console.log('ACCOUNTS')
     const currentDate = new Date();
     var times = 0
     const [lead_data, set_lead_data] = useState([])
@@ -45,7 +44,6 @@ const Account_converted = ({}) => {
                 break;
             }
             case "Contact_Number": {
-                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -57,7 +55,6 @@ const Account_converted = ({}) => {
             case "Travel_date": {
                 var before = new Date(input);
                 before.setDate(before.getDate() - 1);
-                // console.log(before)
                 q = query(collection(db, "Trip"),
                     where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
@@ -83,7 +80,6 @@ const Account_converted = ({}) => {
                 querySnapshot.forEach((doc) => {
                     list.push(doc.data())
                 });
-                // console.log(list)
                 set_lead_data(list)
                 setInput('')
             }
@@ -102,12 +98,10 @@ const Account_converted = ({}) => {
         );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const converted = [];
-            // console.log(times)
             times = times + 1
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            // console.log(converted)
             set_lead_data(converted)
             // Beep()
         });
@@ -122,12 +116,10 @@ const Account_converted = ({}) => {
         );
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const converted = [];
-            // console.log(times)
             times = times + 1
             querySnapshot.forEach((doc) => {
                 converted.push(doc.data());
             });
-            // console.log(converted)
             set_lead_data(converted)
             // Beep()
         });

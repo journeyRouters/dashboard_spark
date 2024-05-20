@@ -12,12 +12,10 @@ const UploadAttendance = () => {
         var today = new Date(date)
         // today.setDate(today.getDate() - 1);
         var key = moment(date).format('DD-MM-YYYY')
-        //   console.log(auth)
         const handles = await window.showOpenFilePicker({ multiple: false });
         const files = await fromEvent(handles);
         const path = files[0].path
         readXlsxFile(files[0]).then((rows) => {
-            // console.log(rows)
             for (let i = 1; i <= rows.length - 1; i++) {
                 let Row = rows[i]
                 getPrevAttendance(Row[1]).then((data) => {
@@ -66,7 +64,6 @@ const UploadAttendance = () => {
     }
      function HandaleDate(e){
         setDate(e.target.value)
-        // console.log(e.target.value)
      }
     async function updateAttendance(data, user){
         const AttendanceRef = doc(db, "Attendance", user);

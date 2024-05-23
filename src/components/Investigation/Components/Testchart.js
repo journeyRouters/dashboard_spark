@@ -1,54 +1,23 @@
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import { React, useEffect, useState } from 'react';
-import Verticlechart from './Verticlechart';
-import app from '../../required';
+import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import moment from 'moment';
+import { React, useEffect, useState } from 'react';
+import app from '../../required';
+import Verticlechart from './Verticlechart';
+import Currentmonthconversionchart from '../Pages/Currentmonthconversionchart';
+import Previousmonthconversionchart from '../Pages/Previousmonthconversionchart';
+import Last3rdmonthconversionchart from '../Pages/Last3rdmonthconversionchart';
 const db = getFirestore(app);
 
 function Testchart() {
-    const [currentMonthConvertedData, setcurrentMonthConvertedData] = useState([])
-    const currentMonth = moment(new Date()).format('MMMM')
-    
-    function getAllUserProfiles() {
-        const q = query(collection(db, "Profile"), 
-                        where("access_type", "in", ["User", "Team Leader", "freelance"]),
-                        where("user_type", "==", "show"));
-    
-        return onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const userProfile = doc.data();
-                getConvertedDataForUserProfile(userProfile);
-            });
-        });
-    }
-    
-    function getConvertedDataForUserProfile(userProfile) {
-        const q = query(collection(db, "Trip"),
-                        where("assign_to.uid", "==", userProfile.uid),
-                        where('Lead_Status', '==', 'Converted'),
-                        where("quotation_flg", "==", true),
-                        where("month", "==", currentMonth));
-    
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const list = [];
-            querySnapshot.forEach((doc) => {
-                list.push(doc.data());
-            });
-            const templateDataset = { Name: userProfile.name, Data: list, Number: list.length };
-            // console.log(templateDataset)
-            setcurrentMonthConvertedData((prevData) => [...prevData, templateDataset]);
-        });
-        return unsubscribe;
-    }
-    
 
-    useEffect(() => {
-        getAllUserProfiles()
-    }, [])
 
     return (
-        <div>
-            <Verticlechart Data={currentMonthConvertedData} />
+        <div className=''>
+            <div className='three_month_conversion_data'>
+            <Currentmonthconversionchart />
+            <Previousmonthconversionchart />
+            <Last3rdmonthconversionchart/>
+            </div>
         </div>
     );
 }

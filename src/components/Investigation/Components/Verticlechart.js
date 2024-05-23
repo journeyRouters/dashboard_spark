@@ -1,14 +1,14 @@
 import React from 'react';
 import Chartbar from './Chartbar';
 import './Chartbar.css'
-function Verticlechart({ Data}) {
-    const SortedData = Data.sort((a,b)=>b.Number-a.Number)
-    console.log(SortedData)
+function Verticlechart({ Data }) {
+    const SortedData = Data.sort((a, b) => b.Number - a.Number)
     return (
         <div className='verticale_chart_size'>
+            <h3>Total = {Data.reduce((sum, item) => sum + item.Number, 0)}</h3>
             {
-                SortedData.map((Data,index) =>
-                    <Chartbar Data={Data} key={index}/>
+                SortedData.map((Data, index) =>
+                    <Chartbar Data={Data} key={index} />
                 )
             }
 

@@ -1,4 +1,4 @@
-import { collection, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import { default as React, useEffect, useState } from 'react';
 import app from '../required';
 import './testcss.css';
@@ -6,7 +6,8 @@ import * as XLSX from 'xlsx';
 const db = getFirestore(app);
 
 const Test = () => {
-   const[datalength,setlength]=useState(0)
+   const [datalength, setlength] = useState(0)
+   const [totaltimebyallleads, settotaltimebyallleads] = useState(0)
    async function tester() {
       // Sep 7, 2022 3:56 PM"
       // const q = query(collection(db, "Trip"), where("leave_avail.2021.cl", "==", 12));
@@ -19,7 +20,7 @@ const Test = () => {
       // var collect = []
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-         console.log(doc.id)
+         // console.log(doc.id)
       });
    }
    function exportJSONToExcel(jsonData, fileName) {
@@ -48,10 +49,8 @@ const Test = () => {
       querySnapshot.forEach((doc) => {
          list.push(doc.data())
       });
-      console.log(list)
-      console.log(list.length)
       setlength(list.length)
-      exportJSONToExcel(list,'August-2022_Client_data')
+      exportJSONToExcel(list, 'August-2022_Client_data')
    }
 
    function getAllUserProfie() {
@@ -66,10 +65,40 @@ const Test = () => {
          //  getTotalLeadData(Profile)
       });
    }
+   async function calculateResponseTime(TripId) {
+      var TripData;
+      const docRef = doc(db, "Trip", TripId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+         TripData = docSnap.data()
+      } else {
+         console.log("document not found!");
+      }
+      var difference = TripData.dateTimeStampList[0].toDate() - TripData.assigned_date_time.toDate();
+      var MinutesDifference = Math.floor(difference / 1000 / 60);
+      if (MinutesDifference > 0) {
+         settotaltimebyallleads((prev) => Number(prev) + MinutesDifference)
+      }
+      
+
+   }
+   async function getAllConverted() {
+      let totalsumTime=0
+      var q = query(collection(db, "Trip"), where('Lead_Status', '==', 'Converted'), where('month', '==', 'May'))
+      var querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+         let TripData=doc.data()
+         let diff=TripData.dateTimeStampList.pop().toDate() - TripData.assigned_date_time.toDate();
+         if(diff>=0){
+            totalsumTime+=diff
+         }
+      })
+   }
    async function getTotalLeadData(AllUserprofile) {
       var date = new Date();
       var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      console.log(firstDay)
+      // console.log(firstDay)
       for (var i = 0; i < AllUserprofile.length; i++) {
          try {
             let list = []
@@ -80,9 +109,7 @@ const Test = () => {
             querySnapshot.forEach((doc) => {
                list.push(doc.data())
             });
-            console.log(AllUserprofile[i].name)
-            console.log(list.length)
-            console.log(list)
+          
 
 
          }
@@ -92,6 +119,7 @@ const Test = () => {
       }
    }
    useEffect(() => {
+      // getAllConverted()
       // allDoc()
       // getAllUserProfie()
    }, []);

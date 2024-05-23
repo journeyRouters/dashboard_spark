@@ -19,11 +19,12 @@
 }
 
 
-.caps{
+.caps {
     text-transform: uppercase;
     font-weight: 900;
     /* color: red; */
 }
+
 .compoLimitCross {
     width: 99%;
     height: 9rem;
@@ -42,6 +43,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .flightbook_ {
     width: 5rem;
     height: 4rem;
@@ -245,7 +247,8 @@
     justify-content: space-between;
     background-color: cornflowerblue;
 }
-.LeadStatus{
+
+.LeadStatus {
     display: flex;
     flex-direction: row;
 
@@ -265,12 +268,33 @@
     border: 0.0625rem solid gray;
     background-image: linear-gradient(136deg, #689CFC, #FF4F4ACC);
 }
-.DeatailsData{
+
+.DeatailsData {
     display: flex;
     align-items: center;
 }
-.DeatailsDataspan{
+
+.DeatailsDataspan {
     font-size: large;
     font-weight: 700;
 
+}
+
+.SpecialAccess {
+    width: 18rem;
+    /* height: 21rem; */
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5rem;
+}
+
+.SpecialAccessButton {
+    width: 8rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background: yellowgreen;
+    border: 0.1rem;
 }

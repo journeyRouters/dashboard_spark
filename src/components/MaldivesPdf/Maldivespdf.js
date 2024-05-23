@@ -745,6 +745,23 @@ const Maldivespdf = ({
 
                         </div>
                     </div>
+                    {/* cancellation page */}
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FMaldives.png?alt=media)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div className='paymentsPage'>
+                                <Footer whatsApp={whatsApp} />
+                            </div>
+
+
+                        </div>
+                    </div>
                     <div className="page-break">
                         <div className="page2"
                             style={{

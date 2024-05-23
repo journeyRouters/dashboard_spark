@@ -1,29 +1,29 @@
-import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup, TextField } from '@material-ui/core';
+import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup } from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import PictureAsPdfTwoToneIcon from '@material-ui/icons/PictureAsPdfTwoTone';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Box from '../CreateQuote/Box';
 import Maldives from '../CreateQuote/Maldives';
-import Invoice from '../invoice/InvoiceForm';
-import InvoicePdf from '../invoice/invoicePdf';
 import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import Profile from '../Profile/Profile';
+import Invoice from '../invoice/InvoiceForm';
+import InvoicePdf from '../invoice/invoicePdf';
 import app from '../required';
-import './quote.css';
 import CommentsUniCompo from './CommentsUniCompo';
+import './quote.css';
 const db = getFirestore(app);
 
 
 
 const Row = (props) => {
     const { row } = props;
+    // console.log(row)
     const [invoice, setinvocice] = useState()
     const [Invoice_flg, setInvoice] = useState(false)
     const [Lead_Status, setLead_Status] = useState(row.Lead_Status)
@@ -42,7 +42,12 @@ const Row = (props) => {
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [limit, setLimit] = useState(false)
+    const [SpecialPermissionFlg, setSpecialPermissionFlg] = useState(false)
+    const [monthControlllerModalFlg, setmonthControlllerModalFlg] = useState(false)
     const codes = ['Direct', "Repeated", "Converted"]
+    function handleMonthControllerModal() {
+        setmonthControlllerModalFlg(false)
+    }
     function setEdit_flg() {
         set_edit(true)
     }
@@ -67,6 +72,7 @@ const Row = (props) => {
     }
     function invoiceForm() {
         setInvoice(true)
+        // console.log(Invoice_flg)
     }
     function closeinvoice() {
         setInvoice(false)
@@ -74,19 +80,31 @@ const Row = (props) => {
     function handlecomment(e) {
         setcomments(e.target.value)
     }
-
+    function SpecialPermissionActivationController() {
+        var date = new Date();
+        var LastMonthLastDate = new Date(date.getFullYear(), date.getMonth(), 0);
+        var currentMonthSecondDay = new Date(date.getFullYear(), date.getMonth(), 2)
+        // var today = new Date();
+        // var yesterday = new Date(today);
+        // yesterday.setDate(today.getDate() - 1);
+        // var tomorrow = new Date(today);
+        // tomorrow.setDate(today.getDate() + 1);
+        var Today = new Date()
+        // console.log(Today > yesterday)
+        // if (Today > yesterday && Today < tomorrow) {
+        //     setSpecialPermissionFlg(true)
+        // }
+        if (Today > LastMonthLastDate && Today < currentMonthSecondDay) {
+            setSpecialPermissionFlg(true)
+        }
+    }
 
     useEffect(() => {
-        if (open || Reqoute_flg === false) {
+        if (open || !Reqoute_flg) {
             Allquote();
         }
+        SpecialPermissionActivationController()
     }, [open, Reqoute_flg]);
-
-    useEffect(() => {
-        latestTripData();
-        getinvoice();
-        checkForLastUpdate();
-    }, []);
 
 
     function closeUpdater() {
@@ -105,7 +123,9 @@ const Row = (props) => {
         if (docSnap.exists()) {
             setLatestComment(docSnap.data().comments)
             setTripData(docSnap.data())
-
+            // console.log(docSnap.data())
+        } else {
+            console.log("No such document!");
         }
 
     }
@@ -118,27 +138,61 @@ const Row = (props) => {
             list.push(doc.data())
         });
         setpdf(list)
+        // console.log('all quote', list)
+
     }
     async function getinvoice() {
+        // console.log(row.TripId)
         try {
-
             const docRef = doc(db, "invoice", row.TripId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
                 setinvocice(docSnap.data())
+                // console.log(row.TripId)
+                // console.log(moment(docSnap.data().created_at.toDate()).format('DD MM YYYY'))
+            } else {
+                // setinvocice({})
+
             }
         }
         catch (error) {
+            // console.log(row.TripId)
             console.log(error)
         }
-
     }
     async function updatewhatsappCollectionDoc() {
-        const Databaseref = doc(db, "whatsapp", data.TripId);
+        const Databaseref = doc(db, "whatsapp", row.TripId);
         await updateDoc(Databaseref, {
             "Status": Lead_Status,
         });
+    }
+    function Conversion_update_by_special_access(input) {
+        let Month = null;
+        if (input) {
+            Month = moment().format('MMMM');
+        } else {
+            Month = moment().subtract(1, 'months').format('MMMM');
+        }
+        if (Month != null) {
+            setDoc(doc(db, "Trip", row.TripId), {
+                Lead_Status: Lead_Status,
+                month: Month,
+                Lead_status_change_date: moment(today).format('YYYY-MM-DD'),
+                updated_last: today
+            }, { merge: true })
+                .then(() => {
+                    console.log("successfully updated!");
+                })
+                .catch((error) => {
+                    console.error("Error updating document: ", error);
+                });
+            setOpen(!open)
+            props.getLeadOnBoard()
+            handleMonthControllerModal()
+        } else {
+            console.log("Month does not match , no update performed.");
+        }
     }
     async function updateStatus() {
         if (props.Caller == 1) {
@@ -160,6 +214,11 @@ const Row = (props) => {
             updatewhatsappCollectionDoc()
         }
         else if (Lead_Status === 'Converted') {
+            if (SpecialPermissionFlg) {
+                closeUpdater()
+                setmonthControlllerModalFlg(true)
+                return
+            }
             if (!row.month) {
                 setDoc(doc(db, "Trip", row.TripId), {
                     Lead_Status: Lead_Status,
@@ -196,6 +255,7 @@ const Row = (props) => {
                 time: moment(today).calendar()
             }
             allComments.push(comment_holder)
+            // console.log('allcoments new', allComments, row.trip_doc)
             setDoc(doc(db, "Trip", row.TripId), {
                 comments: allComments,
                 updated_last: today
@@ -214,7 +274,12 @@ const Row = (props) => {
     }
 
 
-
+    useEffect(() => {
+        latestTripData()
+        Allquote()
+        getinvoice()
+        checkForLastUpdate()
+    }, []);
 
     function sethint(hint) {
         setUpdate(hint)
@@ -234,6 +299,13 @@ const Row = (props) => {
 
     return (
         <>
+            <Modal open={monthControlllerModalFlg} onClose={handleMonthControllerModal} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+                <div className='SpecialAccess'>
+                    <button className='SpecialAccessButton' onClick={() => Conversion_update_by_special_access(1)}>current Month</button>
+                    <button className='SpecialAccessButton' onClick={() => Conversion_update_by_special_access(0)}>Previous Month</button>
+                </div>
+            </Modal>
+
             <Modal open={openUpdater} onClose={closeUpdater} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 <div className='popOver'>
                     {
@@ -298,17 +370,10 @@ const Row = (props) => {
                             </div>
                             :
                             <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                {
-                                    props.Caller == 1 ?
-                                        <span>
-                                            {row.TripId}
-                                        </span> :
-                                        <span>
-                                            <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
-                                            {row.TripId}
-                                        </span>
-
-                                }
+                                <span>
+                                    <span style={{ marginLeft: '-5rem', marginRight: '1rem' }}>{moment(row.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</span>
+                                    {row.TripId}
+                                </span>
                                 {
                                     row.FlightBookedFlg ?
                                         <img

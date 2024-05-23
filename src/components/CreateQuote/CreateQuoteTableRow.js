@@ -103,7 +103,9 @@ const CreateQuoteTableRow = ({
                         </div>
                         {
                             data.FlightBookedFlg ?
-                                <img src='../assets/Notification/plane1.gif' className='flightbook' /> : <></>
+                            <img
+                            src='https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FPlane1.gif?alt=media'
+                            className='flightbook_' /> : <></>
                         }
                     </div>
                     <div>

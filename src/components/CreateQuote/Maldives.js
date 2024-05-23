@@ -1,19 +1,17 @@
 import { Modal, Radio } from '@material-ui/core';
+import { Flight } from '@material-ui/icons';
+import DeckIcon from '@material-ui/icons/Deck';
+import { Upload } from "@progress/kendo-react-upload";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import DeckIcon from '@material-ui/icons/Deck';
-import './Maldives.css'
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import Maldivespdf from '../MaldivesPdf/Maldivespdf';
+import Box from './Box';
+import './Maldives.css';
+import MaldivesInclusion from './MaldivesInclusion';
 import { RoomTypeReflector } from './MaldivesRoomTypeReflector';
 import { propertyMaldives } from './subComponents/MaldivesPropertyReflector';
-import Maldivespdf from '../MaldivesPdf/Maldivespdf';
-import { DropzoneArea } from 'material-ui-dropzone';
-import { Flight } from '@material-ui/icons';
-import MaldivesInclusion from './MaldivesInclusion';
-import RoomType from './subComponents/RoomType';
-import Box from './Box';
-import { Upload } from "@progress/kendo-react-upload";
 
 const Maldives = ({
     closeMaldivesSuggestionModal,
@@ -44,8 +42,6 @@ const Maldives = ({
     const animatedComponents = makeAnimated();
     const [open, setopen] = useState(true)
     const [data, setdata] = useState(PassData)
-
-    // console.log(inclusion_data_)
     const days = Array(data.Travel_Duration).fill('a');
     const [countNight, setCountnight] = useState(0)
     const [days_total, setTotalDays] = useState(Edit_itineary ? Edit_itineary : days);

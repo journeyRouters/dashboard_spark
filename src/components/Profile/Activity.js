@@ -2224,6 +2224,92 @@ export const avtivityList = {
             label: 'Transfer',
             value: 'Transfer'
         },
+    ],
+    Almaty: [
+        {
+            label: 'Almaty Lake',
+            value: 'AlmatyLake'
+        },
+        {
+            label: 'charyn Canyon',
+            value: 'CharynCanyon'
+        },
+        {
+            label: 'fire Mountain',
+            value: 'FireMountain'
+        },
+        {
+            label: 'Issyk Lake',
+            value: 'IssykLake'
+        },
+        {
+            label: 'kaindy Lake',
+            value: 'KaindyLake'
+        },
+        {
+            label: 'kok Tob',
+            value: 'KokTob'
+        },
+        {
+            label: 'shymbulak',
+            value: 'Shymbulak'
+        },
+        {
+            label: 'turgen Water fall',
+            value: 'TurgenWaterfall'
+        },
+        {
+            label: 'zenKov',
+            value: 'ZenKov'
+        },
+        {
+            label: 'Candy cane mountain',
+            value: 'Candycanemountain'
+        },
+        {
+            label: 'Gabala Resort',
+            value: 'GabalaResort'
+        },
+        {
+            label: 'haiderali museum',
+            value: 'Haideralimuseum'
+        },
+        {
+            label: 'Highland park Flame tower',
+            value: 'HighlandparkFlametower'
+        },
+        {
+            label: 'khans Palace',
+            value: 'KhansPalace'
+        },
+        {
+            label: 'khinaliq Village',
+            value: 'KhinaliqVillage'
+        },
+        {
+            label: 'mud Volcano',
+            value: 'MudVolcano'
+        },
+        {
+            label: 'shahdag Tour',
+            value: 'ShahdagTour'
+        },
+        {
+            label: 'Arrival',
+            value: 'Arrival'
+        },
+        {
+            label: 'Departure',
+            value: 'Departure'
+        },
+        {
+            label: 'leisure',
+            value: 'leisure'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
     ]
 }
 export function ActivityResolver(destination) {

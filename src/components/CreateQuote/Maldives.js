@@ -465,6 +465,7 @@ const Maldives = ({
                                         <option value={'Veitnam'}>Veitnam</option>
                                         <option value={'Mauritius'}>Mauritius</option>
                                         <option value={'Baku'}>Baku</option>
+                                        <option value={'Almaty'}>Almaty</option>
                                     </select>
                                 </h4>
                             </div>

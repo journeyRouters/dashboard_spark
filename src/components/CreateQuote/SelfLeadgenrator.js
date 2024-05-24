@@ -64,13 +64,15 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
 
         },
         Checker: function () {
-            if (this.name == null ||
-                this.Destination == null ||
-                this.Travel_Duration == null ||
-                this.Contact_Number == null ||
-                this.pax == null ||
-                this.Travel_date == null
-            ) { return true }
+                if (this.name == null ||
+                    this.Destination == null ||
+                    this.Travel_Duration == null ||
+                    this.Contact_Number == null ||
+                    this.pax == null ||
+                    this.Travel_date == null
+                ) 
+                
+            { return true }
             return false
         }
     }
@@ -107,6 +109,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         { value: 'Ladakh', label: 'Ladakh', color: '#666666' },
         { value: 'Turkey', label: 'Turkey', color: '#666666' },
         { value: 'Baku', label: 'Baku', color: '#666666' },
+        { value: 'Almaty', label: 'Almaty', color: '#666666' },
     ];
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"),
@@ -131,7 +134,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         getAllUserProfie()
         getTripCounter()
     }, [open]);
-    function saveToOthers(currentUser) {
+    function saveToOthers(currentUser) {        
         if (typeof currentUser === 'undefined' || leadData.Checker()) {
             alert('select spokes/ insufficient data')
         }
@@ -263,7 +266,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                     </div>
                     <div className='SelfLeadGenleftDiv'>
                         {
-                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10,11].map((data, index) => <p key={index}>:-</p>)
+                            [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11].map((data, index) => <p key={index}>:-</p>)
                         }
 
                     </div>

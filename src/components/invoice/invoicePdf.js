@@ -154,9 +154,9 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                                 <div>
                                     <div className="officeDetails">
                                         <p>GST:-  07BQSPK6324C1ZS</p>
-                                        <p>2nd Floor, 258 Kuldeep House</p>
-                                        <p>Lane 3, Westend Marg,</p>
-                                        <p>Saket, Delh110031</p>
+                                        <p> Khasra 275,2nd Floor, Westend Marg,</p>
+                                        <p>Saidulajab, Saiyad Ul Ajaib Extension,</p>
+                                        <p>Saket, New Delhi, Delhi 110030</p>
                                     </div>
                                 </div>
 

@@ -191,7 +191,7 @@ const Assignerhandler = () => {
         setStatus(value.target.value)
     }
     useEffect(() => {
-        const q = query(collection(db, "Profile"));
+        const q = query(collection(db, "Profile"),where("access_type","==","Caller"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

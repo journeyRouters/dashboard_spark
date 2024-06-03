@@ -16,7 +16,9 @@ const AdminFollow = ({ }) => {
     const [lead_data, setLead_data] = useState([])
 
     useEffect(() => {
-        const q = query(collection(db, "Profile"));
+        const q = query(collection(db, "Profile"),
+        where("access_type", "in", ["User", "Team Leader", "freelance"]),
+        where("user_type", "==", "show"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

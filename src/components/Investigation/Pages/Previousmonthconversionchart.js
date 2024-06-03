@@ -30,7 +30,7 @@ function Previousmonthconversionchart() {
     }, [])
     return (
         <div>
-            <Verticlechart Data={PreviousMonthConvertedData} />
+            <Verticlechart Data={PreviousMonthConvertedData} Comment={PreviousMonth+' Conversion'}/>
         </div>
     );
 }

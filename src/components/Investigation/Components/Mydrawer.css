@@ -1,0 +1,23 @@
+.Drawer{
+    width: 20rem;
+    background-color: #FFFFFF;
+}
+.Drawer_Details_Card_Parent{
+    border: 0.0625rem solid grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Drawer_Details_Card_Left{
+margin-left: 0.125rem;
+}
+.Drawer_Details_Card_Right{
+margin-right: 0.125rem;
+}
+.Drawer_Details_Card_tripId_border{
+    border: 0.0625rem dotted green;
+    color: green;
+}
+.Drawer_Details_Card_tripId_border:hover{
+    cursor: pointer;
+}

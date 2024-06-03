@@ -15,7 +15,9 @@ const Adminleavefunnel = ({}) => {
     const [ActiveFlg, setActiveFlg] = useState(0)
     const[Currentuser,setCurrentuser]=useState()
     async function fetch_profile() {
-        const q = query(collection(db, "Profile"));
+        const q = query(collection(db, "Profile"),
+        where("access_type", "in", ["User", "Team Leader", "freelance"]),
+        where("user_type", "==", "show"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

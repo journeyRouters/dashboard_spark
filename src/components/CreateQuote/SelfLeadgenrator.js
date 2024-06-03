@@ -1,5 +1,5 @@
 import { Modal } from '@material-ui/core';
-import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
@@ -113,8 +113,8 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     ];
     function getAllUserProfie() {
         const q = query(collection(db, "Profile"),
-            // where("access_type", "==", "User")
-        );
+        where("access_type", "in", ["User", "Team Leader", "freelance"]),
+        where("user_type", "==", "show"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {

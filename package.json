@@ -31,6 +31,7 @@
     "moment": "^2.29.3",
     "object-hash": "^3.0.0",
     "paste-img": "^1.0.9",
+    "query-string": "^9.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dynamic-charts": "1.0.5",

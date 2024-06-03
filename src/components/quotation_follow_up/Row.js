@@ -83,7 +83,7 @@ const Row = (props) => {
     function SpecialPermissionActivationController() {
         var date = new Date();
         var LastMonthLastDate = new Date(date.getFullYear(), date.getMonth(), 0);
-        var currentMonthSecondDay = new Date(date.getFullYear(), date.getMonth(), 2)
+        var currentMonthSecondDay = new Date(date.getFullYear(), date.getMonth(), 4)
         // var today = new Date();
         // var yesterday = new Date(today);
         // yesterday.setDate(today.getDate() - 1);
@@ -394,7 +394,7 @@ const Row = (props) => {
                     <TableCell align="right">{row.Traveller_name}</TableCell>
                     {
                         limit ? <>
-                            <TableCell align='right'><img src='/assets/img/point1.gif' height={'37px'} /> </TableCell>
+                            <TableCell align='right'><img src='/assets/img/point1.gif' height={'2.3125rem'} /> </TableCell>
                         </> : <>
                             <TableCell align="right">
                                 <span className='caps'>

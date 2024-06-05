@@ -1,0 +1,11 @@
+.remark{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+.childPdf{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

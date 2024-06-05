@@ -199,7 +199,7 @@ const Box = ({
         }
     }
     function advance_controller_Activity(e, index) {
-        let data = [...itineary];  
+        let data = [...itineary];
         data[index]['Activity'] = e;
         setItineary(data);
     }
@@ -331,9 +331,9 @@ const Box = ({
 
     return (
         <>
-          
+
             {
-                Destination === "Maldives" ||Destination==="Mauritius" ?
+                Destination === "Maldives" || Destination === "Mauritius" ?
                     <Maldives
                         email={email}
                         data={data}
@@ -343,7 +343,7 @@ const Box = ({
                     />
                     : <>
 
-                        <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
+                        <Modal open={open} onClose={closeHandler} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                             <div className='popUp_body'>
 
                                 <div className='save_close'>
@@ -535,85 +535,77 @@ const Box = ({
                                             NightDataFields &&
                                             NightDataFields.map((data, index) => {
                                                 return (
-                                                    <>
-                                                        <div key={index} className='costOption_estimatiom'>
-                                                            <div className='unitComponent'>
-                                                                <label>Night</label><br />
-                                                                <Select
-                                                                    closeMenuOnSelect={false}
-                                                                    components={animatedComponents}
-                                                                    isMulti
-                                                                    options={nights}
-                                                                    defaultValue={Edit_NightDataFields ? data.Night : null}
-                                                                    onChange={(e) => advance_controller_nights(e, index)}
-                                                                />
-                                                            </div>
-                                                            <div className='unitComponent'>
-                                                                <label>HotelMeal</label><br />
-                                                                <Select
-                                                                    closeMenuOnSelect={false}
-                                                                    components={animatedComponents}
-                                                                    isMulti
-                                                                    defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
-                                                                    options={HotelMeals}
-                                                                    onChange={(e) => advance_controller_Hotel_meals(e, index)}
-                                                                />
-                                                            </div>
-                                                            <div className='unitComponent'>
-                                                                <label>Hotel Name</label><br />
-                                                                <input placeholder='hotel Name'
-                                                                    name='HotelName'
-                                                                    value={data.HotelName}
-                                                                    onChange={(event) => handleFormChange(event, index)}
-                                                                >
-                                                                </input>
-
-                                                            </div>
-
-                                                            <div className='unitComponent'>
-                                                                <label>City</label><br />
-                                                                <input placeholder='city'
-                                                                    name='City'
-                                                                    value={data.City}
-                                                                    onChange={(event) => handleFormChange(event, index)}
-                                                                ></input>
-                                                            </div>
-                                                            <div className='unitComponent'>
-                                                                <label>Category</label><br />
-                                                                <input placeholder='Category'
-                                                                    list="HotelCategory"
-                                                                    name='Category'
-                                                                    value={data.Category}
-                                                                    onChange={(event) => handleFormChange(event, index)}
-                                                                />
-                                                                <datalist id="HotelCategory">
-                                                                    <option value="1 star">1 star</option>
-                                                                    <option value="2 star">2 star</option>
-                                                                    <option value="3 Star">3 star</option>
-                                                                    <option value="4 star">4 star</option>
-                                                                    <option value="5 star">5 star</option>
-                                                                    <option value="7 star">7 Star</option>
-
-                                                                </datalist>
-                                                            </div>
-                                                            <div className='unitComponent'>
-                                                                <label>Room Type</label>
-                                                                <RoomType
-                                                                    handleFormChange={handleFormChange}
-                                                                    index={index}
-                                                                    value={data.RoomType}
-                                                                />
-                                                            </div>
-                                                            <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
+                                                    <div key={index} className='costOption_estimatiom'>
+                                                        <div className='unitComponent'>
+                                                            <label>Night</label><br />
+                                                            <Select
+                                                                closeMenuOnSelect={false}
+                                                                components={animatedComponents}
+                                                                isMulti
+                                                                options={nights}
+                                                                defaultValue={Edit_NightDataFields ? data.Night : null}
+                                                                onChange={(e) => advance_controller_nights(e, index)}
+                                                            />
                                                         </div>
-                                                        {/* <textarea
-                                                className='comments'
-                                                name='comments'
-                                                value={data.comments}
-                                                onChange={(event) => handleFormChange(event, index)}
-                                                placeholder='Additional information'
-                                            ></textarea> */}
-                                                    </>
+                                                        <div className='unitComponent'>
+                                                            <label>HotelMeal</label><br />
+                                                            <Select
+                                                                closeMenuOnSelect={false}
+                                                                components={animatedComponents}
+                                                                isMulti
+                                                                defaultValue={Edit_NightDataFields ? data.HotelMeal : null}
+                                                                options={HotelMeals}
+                                                                onChange={(e) => advance_controller_Hotel_meals(e, index)}
+                                                            />
+                                                        </div>
+                                                        <div className='unitComponent'>
+                                                            <label>Hotel Name</label><br />
+                                                            <input placeholder='hotel Name'
+                                                                name='HotelName'
+                                                                value={data.HotelName}
+                                                                onChange={(event) => handleFormChange(event, index)}
+                                                            >
+                                                            </input>
+
+                                                        </div>
+
+                                                        <div className='unitComponent'>
+                                                            <label>City</label><br />
+                                                            <input placeholder='city'
+                                                                name='City'
+                                                                value={data.City}
+                                                                onChange={(event) => handleFormChange(event, index)}
+                                                            ></input>
+                                                        </div>
+                                                        <div className='unitComponent'>
+                                                            <label>Category</label><br />
+                                                            <input placeholder='Category'
+                                                                list="HotelCategory"
+                                                                name='Category'
+                                                                value={data.Category}
+                                                                onChange={(event) => handleFormChange(event, index)}
+                                                            />
+                                                            <datalist id="HotelCategory">
+                                                                <option value="1 star">1 star</option>
+                                                                <option value="2 star">2 star</option>
+                                                                <option value="3 Star">3 star</option>
+                                                                <option value="4 star">4 star</option>
+                                                                <option value="5 star">5 star</option>
+                                                                <option value="7 star">7 Star</option>
+
+                                                            </datalist>
+                                                        </div>
+                                                        <div className='unitComponent'>
+                                                            <label>Room Type</label>
+                                                            <RoomType
+                                                                handleFormChange={handleFormChange}
+                                                                index={index}
+                                                                value={data.RoomType}
+                                                            />
+                                                        </div>
+                                                        <button style={{ height: '32px' }} onClick={() => removeFields(index)}>Remove</button>
+                                                    </div>
+
                                                 );
                                             }
                                             )

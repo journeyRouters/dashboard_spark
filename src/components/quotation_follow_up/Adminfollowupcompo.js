@@ -57,6 +57,16 @@ function Adminfollowupcompo({ data }) {
                     </span>
                 </div>
                 <div className='DeatailsData'>
+                    <label>Lead in System:-</label>
+                    <span className='DeatailsDataspan'>{moment(lead_data.uploaded_date).format('DD/MMM/YYYY')}
+                    </span>
+                </div>
+                <div className='DeatailsData'>
+                    <label>clock:-</label>
+                    <span className='DeatailsDataspan'>{lead_data.uploaded_time}
+                    </span>
+                </div>
+                <div className='DeatailsData'>
                     <label>Month:-</label>
                     <span className='DeatailsDataspan'>{lead_data.month}</span>
                 </div>

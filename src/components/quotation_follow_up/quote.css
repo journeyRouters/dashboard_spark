@@ -298,3 +298,12 @@
     background: yellowgreen;
     border: 0.1rem;
 }
+.global_search_adminpage{
+    display: flex;
+    justify-content: space-evenly;
+    width: 45%;
+    margin-top: 2rem;
+    position: absolute;
+    top: 0;
+    margin-left: 43%;
+}

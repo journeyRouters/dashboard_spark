@@ -39,7 +39,7 @@ const Profile = (
         flight
     }
 ) => {
-    // console.log(travel_data, 'here we are')
+    // console.log(travel_data,travel_data.Destination, 'here we are')
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"

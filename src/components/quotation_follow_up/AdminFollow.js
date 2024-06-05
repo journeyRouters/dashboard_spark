@@ -17,8 +17,8 @@ const AdminFollow = ({ }) => {
 
     useEffect(() => {
         const q = query(collection(db, "Profile"),
-        where("access_type", "in", ["User", "Team Leader", "freelance"]),
-        where("user_type", "==", "show"));
+            where("access_type", "in", ["User", "Team Leader", "freelance"]),
+            where("user_type", "==", "show"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const Profile = [];
             querySnapshot.forEach((doc) => {
@@ -44,52 +44,55 @@ const AdminFollow = ({ }) => {
     }
     async function fetchTheSearch() {
         var q;
-        switch (SearchKey) {
-            case "Name": {
-                q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
-                    where("quotation_flg", "==", true),
-                    where('Traveller_name', '>=', input),
-                    where("Traveller_name", '<=', input + '\uf8ff'),
-                )
-                break;
-            }
-            case "Trip_id": {
-                q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
-                    where("quotation_flg", "==", true),
-                    where("TripId", "==", input),
-                    orderBy("Travel_Date")
-                )
-                break;
-            }
-            case "Contact_Number": {
-                // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
-                q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
-                    where("quotation_flg", "==", true),
-                    where("Contact_Number", "==", parseInt(input)),
-                    orderBy("Travel_Date")
-                )
-                break;
-            }
-            case "Travel_date": {
-                var before = new Date(input);
-                before.setDate(before.getDate() - 1);
-                // console.log(before)
-                q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
-                    where("quotation_flg", "==", true),
-                    where("Travel_Date", ">", before),
-                    where("Travel_Date", "<=", new Date(input)),
-                    orderBy("Travel_Date")
-                )
-                break;
-            }
-            default:
-                q = null;
+        // switch (SearchKey) {
+        //     case "Name": {
+        //         q = query(collection(db, "Trip"),
+        //             // where("Lead_Status", "==", "Converted"),
+        //             where("quotation_flg", "==", true),
+        //             where('Traveller_name', '>=', input),
+        //             where("Traveller_name", '<=', input + '\uf8ff'),
+        //         )
+        //         break;
+        //     }
+        //     case "Trip_id": {
+        //         q = query(collection(db, "Trip"),
+        //             // where("Lead_Status", "==", "Converted"),
+        //             where("quotation_flg", "==", true),
+        //             where("TripId", "==", parseInt(input)),
+        //             orderBy("Travel_Date")
+        //         )
+        //         break;
+        //     }
+        //     case "Contact_Number": {
+        //         // console.log(typeof (input), parseInt(input), typeof (parseInt(input)))
+        //         q = query(collection(db, "Trip"),
+        //             // where("Lead_Status", "==", "Converted"),
+        //             where("quotation_flg", "==", true),
+        //             where("Contact_Number", "==", parseInt(input)),
+        //             orderBy("Travel_Date")
+        //         )
+        //         break;
+        //     }
+        //     case "Travel_date": {
+        //         var before = new Date(input);
+        //         before.setDate(before.getDate() - 1);
+        //         // console.log(before)
+        //         q = query(collection(db, "Trip"),
+        //             where("Lead_Status", "==", "Converted"),
+        //             where("quotation_flg", "==", true),
+        //             where("Travel_Date", ">", before),
+        //             where("Travel_Date", "<=", new Date(input)),
+        //             orderBy("Travel_Date")
+        //         )
+        //         break;
+        //     }
+        //     default:
+        //         q = null;
 
-        }
+        // }
+        q = query(collection(db, "Trip"),
+            where("TripId", "==", input))
+
         getQueryDatafromDatbase(q)
 
 
@@ -151,17 +154,10 @@ const AdminFollow = ({ }) => {
 
     return (
         <div>
-            <div className='global_search'>
+            <div className='global_search_adminpage'>
                 <button onClick={() => reset()}>Refresh</button>
-                <select name='search_type' id='firestore' className='option_selector' onChange={(e) => setSearchKey(e.target.value)}>
-                    <option value={0}>select</option>
-                    <option value="Name">Name</option>
-                    <option value="Trip_id">TripId</option>
-                    <option value="Contact_Number">Contact Number</option>
-                    <option value="Travel_date">Travel Month</option>
-                </select>
-                <input placeholder='search your selection' type={SearchKey == 'Travel_date' ? "date" : String}
-                    onChange={(e) => setInput(e.target.value)}
+                <label>Trip Id</label>
+                <input placeholder='search your selection' onChange={(e) => setInput(e.target.value)}
                 ></input>
                 <input
                     className='global_search_button'
@@ -177,7 +173,6 @@ const AdminFollow = ({ }) => {
                             <option value={0}> assign to</option>
                             {
                                 profile.map((data, index) => (<>
-                                    {/* {console.log(data.Lead_Current)} */}
                                     <option key={index} value={data.uid}>{data.name}</option>
 
                                 </>))
@@ -189,7 +184,7 @@ const AdminFollow = ({ }) => {
             </div>
             {
                 flg ? (
-                    currentUser? (
+                    currentUser ? (
                         <FollowUp auth={auth} profile={profile_} target={currentUser} data={lead_data} adminFlg={true} user={currentUser.uid} />
                     ) : (
                         <Adminfollowupcompo data={lead_data} />

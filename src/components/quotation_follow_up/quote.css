@@ -272,11 +272,12 @@
 .DeatailsData {
     display: flex;
     align-items: center;
+    font-size: 0.75rem;
 }
 
 .DeatailsDataspan {
-    font-size: large;
-    font-weight: 700;
+    font-size: small;
+    font-weight: 500;
 
 }
 
@@ -306,4 +307,7 @@
     position: absolute;
     top: 0;
     margin-left: 43%;
+}
+.allComments{
+    width: 40%;
 }

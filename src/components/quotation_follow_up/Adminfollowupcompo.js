@@ -45,6 +45,8 @@ function Adminfollowupcompo({ data }) {
                     <label>Lead Status :-</label>
                     <span className='DeatailsDataspan'>{lead_data.Lead_Status}</span>
                 </div>
+                <button>download Invoice</button>
+                <button>Download final package</button>
             </div>
             <div className='DetailsChild'>
                 <div className='DeatailsData'>
@@ -70,10 +72,11 @@ function Adminfollowupcompo({ data }) {
                     <label>Month:-</label>
                     <span className='DeatailsDataspan'>{lead_data.month}</span>
                 </div>
-                <button>download Invoice</button>
-                <button>Download final package</button>
+               
             </div>
+            <div className='allComments'>
             <CommentsUniCompo row={lead_data}/>
+            </div>
         </div>
     );
 }

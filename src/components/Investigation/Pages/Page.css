@@ -8,8 +8,25 @@
     flex-direction: row;
     justify-content: space-evenly;
     color: #FFFFFF;
+    font-size: 0.9375rem;
 }
 .Leadsdetails_tripId{
     border: 1px dotted white;
     height: 2rem;
+}
+.Comments_and_allQuotes{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.PaymentsButton_DetailsPage{
+
+}
+.PaymentButtonDiv_detailsPage{
+    margin-left: 2rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

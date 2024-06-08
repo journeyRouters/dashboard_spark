@@ -331,7 +331,8 @@
     margin-bottom: 1.3rem;
 
 }
-.total2{
+
+.total2 {
     margin-left: 5rem;
     display: flex;
     align-items: center;
@@ -355,6 +356,15 @@
     width: 55rem;
     height: 78rem;
     background-image: url("/public/assets/InvoiceAssets/JR-INVOICE.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Invoice {
+    width: 55rem;
+    height: 78rem;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FInvoice.png?alt=media");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;

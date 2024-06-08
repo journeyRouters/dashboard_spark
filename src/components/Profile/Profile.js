@@ -39,7 +39,7 @@ const Profile = (
         flight
     }
 ) => {
-    // console.log(travel_data,travel_data.Destination, 'here we are')
+    // console.log(profile, 'here we are')
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
         value: "size-a4"
@@ -74,8 +74,6 @@ const Profile = (
     async function convertObjectToLink() {
         try {
             const file = flightsObject
-            // console.log(file)
-            // debugger
             var local_link_list = []
             for (var start = 0; start < flightsObject.length; start++) {
                 var temp = { Link: '', path: '' }
@@ -428,12 +426,12 @@ const Profile = (
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Inclusion ? <>
-                                                {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<>
-                                                    <div key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<div  key={index}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
-                                                </>))}
+                                                </div>))}
                                             </> : <></>
                                         }
 
@@ -459,12 +457,12 @@ const Profile = (
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Exclusion ? <>
-                                                {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<>
-                                                    <div key={index} style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<div key={index}>
+                                                    <div  style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
-                                                </>))}
+                                                </div>))}
                                             </> : <></>
                                         }
 

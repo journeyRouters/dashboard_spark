@@ -120,7 +120,6 @@ const Driver = (props) => {
     }
     async function getLeadByDate(selectedDate) {
         let list = []
-        // console.log(selectedDate)
         var q = query(collection(db, "Trip"), where('uploaded_date', '==', selectedDate));
         // console.log(date)
         try {

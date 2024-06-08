@@ -51,6 +51,12 @@ function SuperAdminDrawer({ }) {
                 </NavLink>
             </div>
             <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/Dynamicdatachart'>
+                    <SearchTwoTone style={{ marginRight: "1rem" }} />
+                    <p>New Investigation</p>
+                </NavLink>
+            </div>
+            <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/AdminInvestigation'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />
                     <p>Investigation</p>

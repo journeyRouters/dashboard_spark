@@ -85,8 +85,8 @@ function Allquotes({ TripId }) {
             />
         )
     }
-    const Pdfopener = ({ viewPDF, closePDF, data, profile }) => {
-        console.log(data)
+    const Pdfopener = ({ viewPDF, closePDF, data, profile,rawdata }) => {
+       
         return (
             <Modal open={viewPDF} onClose={closePDF} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
                 {
@@ -98,10 +98,10 @@ function Allquotes({ TripId }) {
                             MealPlan={data.MealPlan}
                             Transfer={data.Transfer}
                             NightDataFields={data.NightDataFields}
-                            count_days={data.count_days}
-                            flightcost={data.flightcost}
-                            visacost={data.visacost}
-                            landPackage={data.landPackage}
+                            count_days={rawdata.count_days}
+                            flightcost={rawdata.flightcost}
+                            visacost={rawdata.visacost}
+                            landPackage={rawdata.landPackage}
                             SelectedpackageType={data.SelectedpackageType}
                             Property={data.Property}
                             flightsLinkfromstorage={data.flightImgLinks}
@@ -110,7 +110,7 @@ function Allquotes({ TripId }) {
                             inclusionImgFlg={data.inclusionLinks ? true : false}
                             Pax={data.travel_data.Pax}
                             Child={data.travel_data.Child}
-                            inclusion_data={data.inclusion_data}
+                            inclusion_data={rawdata.inclusion_data}
                             profile={profile}
                             indicator={false}
                             onClosePdf={closePDF}
@@ -120,17 +120,17 @@ function Allquotes({ TripId }) {
                         <Profile
                             SelectedpackageType={data.SelectedpackageType}
                             indicator={true}
-                            inclusion_data={data.inclusion_data}
+                            inclusion_data={rawdata.inclusion_data}
                             travel_data={data}
-                            count_days={data.count_days}
+                            count_days={rawdata.count_days}
                             cabDetailsData={data.cabDetailsData}
                             flights={data.flights}
-                            itineary={data.itineary}
-                            NightDataFields={data.NightDataFields}
+                            itineary={rawdata.itineary}
+                            NightDataFields={rawdata.NightDataFields}
                             selected_Travel_date={data.selected_Travel_date}
-                            flightcost={data.flightcost}
-                            visacost={data.visacost}
-                            landPackage={data.landPackage}
+                            flightcost={rawdata.flightcost}
+                            visacost={rawdata.visacost}
+                            landPackage={rawdata.landPackage}
                             profile={profile}
                             flight={true}
                             flightsLinkfromstorage={data.flightsImagesLinks}
@@ -143,7 +143,6 @@ function Allquotes({ TripId }) {
     }
     const HandlePdf = (data) => {
         setDataForPdf(data)
-        console.log(data)
         setviewPDF(true)
     }
     useEffect(() => {
@@ -184,7 +183,7 @@ function Allquotes({ TripId }) {
             </div>
             {
                 viewPDF ?
-                    <Pdfopener viewPDF={viewPDF} closePDF={closePDF} profile={profile} data={data.travel_data} /> :
+                    <Pdfopener viewPDF={viewPDF} closePDF={closePDF} profile={profile} data={data.travel_data} rawdata={data}/> :
                     <></>
             }
 

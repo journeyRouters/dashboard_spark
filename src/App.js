@@ -17,8 +17,9 @@ import HomePage from './components/Homepage/HomePage.js';
 import Identity from './components/Identity/Identity.js';
 import AdminInvestigation from './components/Investigation/AdminInvestigation';
 import CallerInvestigation from './components/Investigation/CallerInvestigation';
-import Testchart from './components/Investigation/Components/Testchart.js';
+import Dynamicdatachart from './components/Investigation/Components/Dynamicdatachart.js';
 import Freelance_Investigation from './components/Investigation/Freelance_Investigation';
+import Detailpage from './components/Investigation/Pages/Detailpage.js';
 import Investigation from './components/Investigation/investigation';
 import Leaves from './components/Leaves/Leaves';
 import LeaveMainPage from './components/ManageLeaves/leaveMainPage';
@@ -48,8 +49,6 @@ import Flight from './components/quotation_follow_up/Flight';
 import FollowUp from './components/quotation_follow_up/Follow_up';
 import app from './components/required';
 import Usercontrol from './components/usercontrol/UserControl';
-import Test from './components/tester/Test.js';
-import Detailpage from './components/Investigation/Pages/Detailpage.js';
 
 
 
@@ -310,7 +309,8 @@ function App() {
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                {/* <Route path='/Test' element={<Testchart auth={auth} data={profile} />} /> */}
+                <Route path='/Dynamicdatachart' element={<Dynamicdatachart auth={auth} data={profile} />} />
+                {/* <Route path='/Test' element={<Test auth={auth} data={profile} />} /> */}
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

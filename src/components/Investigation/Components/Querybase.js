@@ -14,6 +14,7 @@ export function getConvertedDataForUserProfile(usersProfile, DataQuery, stateman
     return unsubscribe;
 }
 function HandleIncomingData(IncomingData, statemanagment) {
+    // console.log(IncomingData)
     statemanagment(prevData => {
         const dataIndex = prevData.findIndex(item => item.Name === IncomingData.Name);
 
@@ -36,6 +37,7 @@ export function get72hrNon_respondedLeads(usersProfile, DataQuery, statemanagmen
             list.push(doc.data());
         });
         const finalData = list.filter((item) => {
+            // console.log(item)
             var commentLimit = new Date(item.updated_last.toDate());
             commentLimit.setDate(commentLimit.getDate() + 3)
             // console.log(commentLimit<Today)

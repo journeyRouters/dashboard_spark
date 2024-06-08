@@ -1,23 +1,44 @@
-.Drawer{
-    width: 20rem;
+.Drawer {
+    width: 30rem;
     background-color: #FFFFFF;
 }
-.Drawer_Details_Card_Parent{
+
+.Drawer_Details_Card_Parent {
+    width: 30rem;
+    height: 14.125rem;
     border: 0.0625rem solid grey;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background: ghostwhite;
+    margin-bottom: 0.75rem;
 }
-.Drawer_Details_Card_Left{
-margin-left: 0.125rem;
+
+.Drawer_Details_Card_Left {
+    margin-left: 0.125rem;
+    font-size: 0.9rem;
 }
-.Drawer_Details_Card_Right{
-margin-right: 0.125rem;
+
+.Drawer_Details_Card_Right {
+    margin-right: 0.125rem;
+    width: 16rem;
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    border-radius: 0.6875rem;
+    background: #3C6298;
+    box-shadow: 0rem 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.25);
 }
-.Drawer_Details_Card_tripId_border{
+
+.Drawer_Details_Card_tripId_border {
+    width: 8rem;
     border: 0.0625rem dotted green;
     color: green;
 }
-.Drawer_Details_Card_tripId_border:hover{
+
+.Drawer_Details_Card_tripId_border:hover {
     cursor: pointer;
 }

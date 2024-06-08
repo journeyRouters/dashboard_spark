@@ -33,6 +33,7 @@
 }
 .three_month_conversion_data{
     display: flex;
+    box-shadow: 0.625rem 0.625rem 0.625rem lightblue;
     flex-direction: row;
     justify-content: space-around;
     border: 1px dotted gray;

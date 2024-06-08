@@ -22,7 +22,7 @@ function Mydrawer({ open, Data }) {
         const url = `/Detailpage?TripId=${encodedData}`;
         window.open(url, '_blank');
     };
-  
+
     useEffect(() => {
         setIsDrawerOpen(open);
     }, [open]);
@@ -35,18 +35,18 @@ function Mydrawer({ open, Data }) {
                         Data.map((item, index) =>
                             <div className='Drawer_Details_Card_Parent' key={index}>
                                 <div className='Drawer_Details_Card_Left'>
-                                    <h3 className='Drawer_Details_Card_tripId_border' onClick={()=>handleNavigation(item)}>{item.TripId}</h3>
-                                    <h3>{item.Traveller_name}</h3>
-                                    <h3>{item.Contact_Number}</h3>
-                                    <h3>{moment(item.Travel_Date.toDate()).format('DD-MM-YYYY')}</h3>
-                                    <h3>{item.Destination}</h3>
+                                    <h3 className='Drawer_Details_Card_tripId_border' onClick={() => handleNavigation(item)}>{item.TripId}</h3>
+                                    <h3>Client - {item.Traveller_name}</h3>
+                                    <h3>Contact no.- {item.Contact_Number}</h3>
+                                    <h3>Date of Travel- {moment(item.Travel_Date.toDate()).format('DD-MM-YYYY')}</h3>
+                                    <h3>Destination- {item.Destination}</h3>
 
                                 </div>
                                 <div className='Drawer_Details_Card_Right'>
-                                    <h3>{item.assign_to.name}</h3>
-                                    <h3>{item.month}</h3>
-                                    <h3>{moment(item.assigned_date_time.toDate()).format('DD-MM-YYYY')}</h3>
-                                    <h3>{item.updated_last == null ? "" : moment(item.updated_last.toDate()).format('DD-MM-YYYY')}</h3>
+                                    <h3>Sales Person- {item.assign_to.name}</h3>
+                                    <h3>Lead Converted- {item.month}</h3>
+                                    <h3>Lead Assigned- {moment(item.assigned_date_time.toDate()).format('DD-MM-YYYY')}</h3>
+                                    <h3>Converted Date- {item.updated_last == null ? "" : moment(item.updated_last.toDate()).format('DD-MM-YYYY')}</h3>
 
                                 </div>
                             </div>

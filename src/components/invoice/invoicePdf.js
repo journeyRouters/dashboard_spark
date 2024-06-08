@@ -263,7 +263,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                         </div>
                     </div>
                     <div className="page-break">
-                        <div className="secondpage"></div>
+                        <div className={selected_pdf_data.travel_data.Destination=="Maldives"?"secondpage":"Invoice"}></div>
 
                     </div>
                 </div>

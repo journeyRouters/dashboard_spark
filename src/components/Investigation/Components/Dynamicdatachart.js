@@ -17,7 +17,7 @@ import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
 const db = getFirestore(app);
 
-function Testchart() {
+function Dynamicdatachart() {
 
 
     return (
@@ -27,7 +27,6 @@ function Testchart() {
                 <Seventytwohr/>
                 <Totalassignedleads/>
             </div>
-            <h1>Conversions</h1>
             <div className='three_month_conversion_data'>
                 <Currentmonthconversionchart />
                 <Previousmonthconversionchart />
@@ -49,4 +48,4 @@ function Testchart() {
     );
 }
 
-export default Testchart;
+export default Dynamicdatachart;

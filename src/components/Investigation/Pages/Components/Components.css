@@ -9,3 +9,11 @@
     justify-content: space-around;
     align-items: center;
 }
+.All_buttons{
+    width: 25rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

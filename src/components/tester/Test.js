@@ -42,7 +42,7 @@ const Test = () => {
       // we completed the marking till December-2023
       var list = []
       const q = query(collection(db, "Trip"),
-         where("month", "==", "August-2022"),
+         where("month", "==", "September-2022"),
          // where('Lead_Status', '==', 'Converted'),
       )
       const querySnapshot = await getDocs(q);
@@ -50,7 +50,7 @@ const Test = () => {
          list.push(doc.data())
       });
       setlength(list.length)
-      exportJSONToExcel(list, 'August-2022_Client_data')
+      exportJSONToExcel(list, 'September-2022_Client_data')
    }
 
    function getAllUserProfie() {

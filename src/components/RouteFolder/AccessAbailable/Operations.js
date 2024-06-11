@@ -3,8 +3,10 @@ import React from 'react';
 import '../../../App.css';
 import { NavLink } from 'react-router-dom';
 function Operations({ }) {
+    
     return (
         <div>
+            
             <div className='sidebarCard' >
                 <div className='sidebarCardContaint'>
                     <img width={'128px'} src='./assets/img/jrlogo.png' />

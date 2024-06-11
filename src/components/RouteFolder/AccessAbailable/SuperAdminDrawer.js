@@ -18,12 +18,12 @@ function SuperAdminDrawer({ }) {
                     <p>Driver</p>
                 </NavLink>
             </div>
-            <div className='sidebarCard' >
+            {/* <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/AdminLeaveManagement'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />
                     <p>Leaves</p>
                 </NavLink>
-            </div>
+            </div> */}
             <div className='sidebarCard'>
                 <NavLink className='sidebarCardContaint' to='/ManageAllTeam'>
                     <PublicTwoTone style={{ marginRight: "1rem" }} />

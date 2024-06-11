@@ -20,13 +20,13 @@ const Flight = () => {
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
-    
+    const [input, setInput] = useState()
 
     async function getLeadByDate(selectedDate) {
         // console.log('hit',selectedDate)
-        var Currentdate=new Date(selectedDate)
-        Currentdate.setHours(0,0,0,0)
-        var tommorowDate=new Date(selectedDate)
+        var Currentdate = new Date(selectedDate)
+        Currentdate.setHours(0, 0, 0, 0)
+        var tommorowDate = new Date(selectedDate)
         tommorowDate.setDate(tommorowDate.getDate() + 1);
         tommorowDate.setHours(0, 0, 0, 0);
         // console.log(Currentdate,tommorowDate)
@@ -35,7 +35,7 @@ const Flight = () => {
             where('updated_last', '>=', Currentdate),
             where('updated_last', '<', tommorowDate),
             where('Lead_Status', '==', 'Converted'),
-            where("month","==",currentMonth)
+            where("month", "==", currentMonth)
         );
         // console.log(date)
         try {
@@ -56,30 +56,59 @@ const Flight = () => {
         }
 
     }
+    async function fetchTheSearch() {
+        var q;
+        q = query(collection(db, "Trip"),
+            where("TripId", "==", input))
 
+        getQueryDatafromDatbase(q)
+    }
+    async function getQueryDatafromDatbase(q) {
+        try {
+            var querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length != 0) {
+                let list = []
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                // console.log(list)
+                setLead_data(list)
+                setInput('')
+
+            }
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
     function exportToExcel(data) {
-        var sheetname=moment(new Date()).format('DD-MMM-YYYY')
+        var sheetname = moment(new Date()).format('DD-MMM-YYYY')
         const worksheetData = data.map(item => ({
-            TripID:item.TripId,
-            Destination:item.Destination,
+            TripID: item.TripId,
+            Destination: item.Destination,
             ClientName: item.Traveller_name,
             Number: item.Contact_Number,
-            TravelDate:item.Travel_Date.toDate(),
-            SalesPerson:item.assign_to.name,
-            ConvertedMonth:item.month
+            TravelDate: item.Travel_Date.toDate(),
+            SalesPerson: item.assign_to.name,
+            ConvertedMonth: item.month
         }));
-    
+
         // Create a new worksheet
         const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-    
+
         // Create a new workbook
         const workbook = XLSX.utils.book_new();
-    
+
         // Append the worksheet to the workbook
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    
+
         // Generate Excel file and trigger download
         XLSX.writeFile(workbook, `${sheetname}.xlsx`);
+    }
+    function reset() {
+        setInput('')
+        getLeadByDate(currentdate)
+
     }
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -90,11 +119,23 @@ const Flight = () => {
 
     return (
         <div>
+            <div className='global_search_adminpage'>
+                <button onClick={() => reset()}>Refresh</button>
+                <label>Trip Id</label>
+                <input placeholder='search your selection' onChange={(e) => setInput(e.target.value)}
+                ></input>
+                <input
+                    className='global_search_button'
+                    type="button"
+                    value="Search "
+                    onClick={() => fetchTheSearch()}
+                ></input>
+            </div>
             <div className='Driver_header'>
                 <div>
                     <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>
                     <button onClick={() => getLeadByDate(selectedDate)}>Search</button>
-                    <button onClick={()=>exportToExcel(lead_data)}>Export Data</button>
+                    <button onClick={() => exportToExcel(lead_data)}>Export Data</button>
                 </div>
 
                 <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>

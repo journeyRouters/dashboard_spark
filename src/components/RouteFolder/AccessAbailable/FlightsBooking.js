@@ -12,7 +12,7 @@ function FlightsBooking(props) {
                 </NavLink>
             </div>
             <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint' to='/FlightCreateQuote'>
+                <NavLink className='sidebarCardContaint' to='/Flights'>
                     <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                     <p>Converted Files</p>
                 </NavLink>

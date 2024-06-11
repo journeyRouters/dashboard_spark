@@ -17,18 +17,18 @@ function Coldleads() {
                 const usersProfile = doc.data();
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    where('Lead_Status', '!=', 'Dump'), 
-                    where("quotation_flg", "==", false));
+                    where('Lead_Status', '==', 'Cold'), where("quotation_flg", "==", true));
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setTotalColdLeads);
             });
         });
     }
+   
     useEffect(() => {
         getAllUserProfiles()
     }, [])
     return (
         <div>
-            <Verticlechart Data={TotalColdLeads} Comment={'Cold Leads'}/>
+            <Verticlechart Data={TotalColdLeads} Comment={'Cold Leads'} />
         </div>
     );
 }

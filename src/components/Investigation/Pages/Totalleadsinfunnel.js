@@ -15,7 +15,7 @@ function Totalleadsinfunnel() {
                 const usersProfile = doc.data();
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    where('Lead_Status', 'in', ['Active', 'Cold', 'Hot','Paymentawaited']));
+                    where('Lead_Status', 'in', ['Active', 'Cold', 'Hot','Paymentawaited']),where("quotation_flg", "==", true));
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setTotalLeadsInFunnel);
             });
         });

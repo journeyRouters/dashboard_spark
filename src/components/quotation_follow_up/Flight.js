@@ -1,96 +1,109 @@
-import { collection, getDocs, getFirestore, limit, orderBy, query, startAfter, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import '../payments_vouchers/Payments.css';
-import VouchersCompo from '../payments_vouchers/Vouchers_compo';
-import app from '../required';
+import { fromEvent } from "file-selector";
+import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import moment from 'moment';
+import * as XLSX from 'xlsx';
+import objectHash from 'object-hash';
+import React, { useEffect, useState } from 'react';
+import readXlsxFile from 'read-excel-file';
+import app from "../required";
+import DriverComponents from "../leadDriver/DriverComponents";
+import Flightmappingcomponent from "./Flightmappingcomponent";
+import SalesPerson from "../RouteFolder/AccessAbailable/SalesPerson";
+const db = getFirestore(app);
+
+
+
 const Flight = () => {
-    const profile = JSON.parse(localStorage.getItem('profile'));
     const [lead_data, setLead_data] = useState([])
-    const db = getFirestore(app);
-    const[lastDocument,setlastDocument]=useState(null)
-    async function getLeadOnBoard() {
-        var CurrentDate = new Date()
+    var today = new Date()
+    var currentdate = moment(today).format('YYYY-MM-DD')
+    const [selectedDate, setSeletctedDate] = useState(currentdate)
+    const [profile, setprofile] = useState([])
+    const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
+    
+
+    async function getLeadByDate(selectedDate) {
+        // console.log('hit',selectedDate)
+        var Currentdate=new Date(selectedDate)
+        Currentdate.setHours(0,0,0,0)
+        var tommorowDate=new Date(selectedDate)
+        tommorowDate.setDate(tommorowDate.getDate() + 1);
+        tommorowDate.setHours(0, 0, 0, 0);
+        // console.log(Currentdate,tommorowDate)
+        let list = []
+        var q = query(collection(db, "Trip"),
+            where('updated_last', '>=', Currentdate),
+            where('updated_last', '<', tommorowDate),
+            where('Lead_Status', '==', 'Converted'),
+            where("month","==",currentMonth)
+        );
+        // console.log(date)
         try {
-            let list = []
-            var q = query(collection(db, "Trip"),
-                where('Lead_Status', '==', 'Converted'),
-                where('Travel_Date', '>', CurrentDate),
-                where("quotation_flg", "==", true),
-                orderBy('Travel_Date'),
-                limit(50),
-            );
-            var querySnapshot;
-
-            querySnapshot = await getDocs(q);
-            if (querySnapshot.docs.length == 0) {
-            }
-            else {
-
-                querySnapshot.forEach((doc) => {
-                    list.push(doc.data())
-                });
-                setLead_data(list)
-                // console.log(list)
-            }
-            let lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-            setlastDocument(lastDocument)
-        }
-        catch (erorr) {
-            console.log(erorr)
-        }
-
-    }
-
-    async function fetchNext50Documents(lastDocument) {
-        var CurrentDate = new Date()
-        try {
-            const q = query(
-                collection(db, "Trip"),
-                where('Lead_Status', '==', 'Converted'),
-                where('Travel_Date', '>', CurrentDate),
-                where("quotation_flg", "==", true),
-                orderBy('updated_last'),
-                startAfter(lastDocument),
-                limit(50)
-            );
-
-            const querySnapshot = await getDocs(q);
-            const list = [];
-
+            var querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 list.push(doc.data())
+                // console.log(doc.data().updated_last.toDate())
             });
-            setLead_data(list)
-            let lastDocumentfile= querySnapshot.docs[querySnapshot.docs.length - 1];
-            setlastDocument(lastDocumentfile)
+            try {
+                // console.log(list)
+                setLead_data(list)
+            }
+            catch (e) { console.log(e) }
+            // console.log(list);
+        }
+        catch (error) {
+            console.log(error.message)
         }
 
-        catch (error) {
-            console.error("Error fetching documents: ", error);
-            throw error; // Rethrow the error for handling in the calling code
-        }
     }
 
+    function exportToExcel(data) {
+        var sheetname=moment(new Date()).format('DD-MMM-YYYY')
+        const worksheetData = data.map(item => ({
+            TripID:item.TripId,
+            Destination:item.Destination,
+            ClientName: item.Traveller_name,
+            Number: item.Contact_Number,
+            TravelDate:item.Travel_Date.toDate(),
+            SalesPerson:item.assign_to.name,
+            ConvertedMonth:item.month
+        }));
+    
+        // Create a new worksheet
+        const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+    
+        // Create a new workbook
+        const workbook = XLSX.utils.book_new();
+    
+        // Append the worksheet to the workbook
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    
+        // Generate Excel file and trigger download
+        XLSX.writeFile(workbook, `${sheetname}.xlsx`);
+    }
     useEffect(() => {
-        getLeadOnBoard()
+        window.scrollTo(0, 0);
+        getLeadByDate(currentdate)
     }, []);
+
+
+
     return (
         <div>
-            <div className='global_search' >
-                {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
-                <span style={{ color: 'white' }}>Lead - {lead_data.length}</span>
+            <div className='Driver_header'>
+                <div>
+                    <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>
+                    <button onClick={() => getLeadByDate(selectedDate)}>Search</button>
+                    <button onClick={()=>exportToExcel(lead_data)}>Export Data</button>
+                </div>
+
+                <span style={{ background: 'yellow' }}>Total uploaded leads= {lead_data.length}</span>
             </div>
-            <div className='details_of_specific_trip_main_container'>
-                {
-                    lead_data.map((data, index) => (
-
-                        <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={profile} />
-
-                    ))
-                }
-
+            <div style={{ background: 'cyan' }}>
+                {lead_data.map((data, index) => (
+                    <Flightmappingcomponent key={index} profile={profile} data={data} index={index} getLeadByDate={getLeadByDate} selectedDate={selectedDate} />
+                ))}
             </div>
-            <button onClick={()=>fetchNext50Documents(lastDocument)}>Next 50 files</button>
         </div>
     );
 }

@@ -34,12 +34,13 @@ function Operations({ }) {
                     <p>Post Stay</p>
                 </NavLink>
             </div>
-            {/* <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint'>
-                    <SearchTwoTone style={{ marginRight: "1rem" }} />
-                    <p>Investigation</p>
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/Flights'>
+                    <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Post Stay</p>
                 </NavLink>
-            </div> */}
+            </div>
+          
         </div>
     );
 }

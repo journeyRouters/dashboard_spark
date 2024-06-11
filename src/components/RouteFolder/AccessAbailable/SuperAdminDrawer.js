@@ -74,23 +74,30 @@ function SuperAdminDrawer({ }) {
                     <p>Post Stay</p>
                 </NavLink>
             </div>
-            <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint' to='/LeavePolicy'>
-                    <PublicOutlined style={{ marginRight: "1rem" }} />
-                    <p>leave policy
-                    </p>
-                </NavLink>
-            </div>
+
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/ControleUsers'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                     <p>User Controller</p>
                 </NavLink>
             </div>
-            <div className='sidebarCard' >
+            {/* <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/CallerLead'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                     <p>Caller's lead</p>
+                </NavLink>
+            </div> */}
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/Flights'>
+                    <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Flights</p>
+                </NavLink>
+            </div>
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/LeavePolicy'>
+                    <PublicOutlined style={{ marginRight: "1rem" }} />
+                    <p>leave policy
+                    </p>
                 </NavLink>
             </div>
 

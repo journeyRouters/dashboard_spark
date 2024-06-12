@@ -39,7 +39,7 @@ function Operations({ }) {
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/Flights'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
-                    <p>Post Stay</p>
+                    <p>Flights</p>
                 </NavLink>
             </div>
           

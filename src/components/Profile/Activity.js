@@ -1953,6 +1953,158 @@ export const avtivityList = {
         {
             label: 'Vatican Museum',
             value: 'VaticanMuseum'
+        },
+        {
+            label: 'Amsterdam',
+            value: 'Amsterdam'
+        },
+        {
+            label: 'delft the Hague',
+            value: 'DelfttheHague'
+        },
+        {
+            label: 'marken',
+            value: 'Marken'
+        },
+        {
+            label: 'netherlands Edam',
+            value: 'NetherlandsEdam'
+        },
+        {
+            label: 'rotterdam',
+            value: 'Rotterdam'
+        },
+        {
+            label: 'vatican Museum',
+            value: 'VaticanMuseum'
+        },
+        {
+            label: 'volendam',
+            value: 'Volendam'
+        },
+        {
+            label: 'bellagio',
+            value: 'Bellagio'
+        },
+        {
+            label: 'bruges and Ghent',
+            value: 'BrugesandGhent'
+        },
+        {
+            label: 'Grindelwald',
+            value: 'Grindelwald'
+        },
+        {
+            label: 'Interlaken',
+            value: 'Interlaken'
+        },
+        {
+            label: 'lake Brienz',
+            value: 'lakeBrienz'
+        },
+        {
+            label: 'lake como',
+            value: 'lakecomo'
+        },
+        {
+            label: 'lake Thun',
+            value: 'lakeThun'
+        },
+        {
+            label: 'lindt',
+            value: 'lindt'
+        },
+        {
+            label: 'MtPilatus',
+            value: 'MtPilatus'
+        },
+        {
+            label: 'Pompeii',
+            value: 'Pompeii'
+        },
+        {
+            label: 'Rhine water falls',
+            value: 'Rhinewaterfalls'
+        },
+        {
+            label: 'Roman Forum',
+            value: 'RomanForum'
+        },
+        {
+            label: 'Sienna',
+            value: 'Sienna'
+        },
+        {
+            label: 'SteinamRhein',
+            value: 'SteinamRhein'
+        },
+        {
+            label: 'Torcello',
+            value: 'Torcello'
+        },
+        {
+            label: 'TowerofPisa',
+            value: 'TowerofPisa'
+        },
+        {
+            label: 'Versailles Palace',
+            value: 'VersaillesPalace'
+        },
+        {
+            label: 'Waltdisney',
+            value: 'Waltdisney'
+        },
+        {
+            label: 'Zaanse Schans',
+            value: 'ZaanseSchans'
+        },
+        {
+            label: 'Zurich Cruise',
+            value: 'ZurichCruise'
+        },
+        {
+            label: 'Amalfi coast',
+            value: 'Amalficoast'
+        },
+        {
+            label: 'Berninaexpress',
+            value: 'Berninaexpress'
+        },
+        {
+            label: 'Disney land',
+            value: 'Disneyland'
+        },
+        {
+            label: 'Duomo',
+            value: 'Duomo'
+        },
+        {
+            label: 'HarderKulm',
+            value: 'HarderKulm'
+        },
+        {
+            label: 'Lakelugano',
+            value: 'Lakelugano'
+        },
+        {
+            label: 'LouvreMuseum',
+            value: 'LouvreMuseum'
+        },
+        {
+            label: 'PalatineHill',
+            value: 'PalatineHill'
+        },
+        {
+            label: 'River Seine cruise',
+            value: 'RiverSeinecruise'
+        },
+        {
+            label: 'SanGimignano',
+            value: 'SanGimignano'
+        },
+        {
+            label: 'TitiseeLake',
+            value: 'TitiseeLake'
         }
     ],
     Turkey:

@@ -493,6 +493,9 @@ const VouchersCompo = ({ data, profile, datahandle }) => {
                     <p>converted by:-
                         {data.assign_to.name}
                     </p>
+                    <p>Lead Source:-
+                        {data.Campaign_code}
+                    </p>
                     {
                         details ? <>
                             <button onClick={() => finalPackageOpen()}>Final Package</button>

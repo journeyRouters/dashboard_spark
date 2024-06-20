@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const Flightmappingcomponent = ({ data, profile, index, getLeadByDate, selectedDate }) => { 
+const Flightmappingcomponent = ({ data, profile, index, getLeadByDate, selectedDate }) => {
     const [Status, setStatus] = useState(data.Lead_Status)
-   
+
 
     return (
         <div key={index} className={data.assign_flg ? 'Driver_components_' : 'Driver_components1'}>
@@ -20,10 +20,13 @@ const Flightmappingcomponent = ({ data, profile, index, getLeadByDate, selectedD
                 <div className='limitComments'>{data.Comment}</div><br />
                 <span style={{ color: 'yellow', background: 'black' }}>Lead Status:- {Status}</span>
             </div>
-            <div>
+            <div style={{marginRight:'1rem'}}>
                 {
                     data.assign_flg ? <span>Owner:-{data.assign_to.name}</span> : <></>
                 }<br />
+                <p >Lead Source:-
+                    {data.Campaign_code}
+                </p>
             </div>
         </div>
 

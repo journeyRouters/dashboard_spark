@@ -1,10 +1,9 @@
 import { Drawer } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import './Mydrawer.css'
 import moment from 'moment';
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
-import { AccountTreeTwoTone } from '@material-ui/icons';
-import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
+import './Mydrawer.css';
 function Mydrawer({ open, Data }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(open);
     const navigate = useNavigate();
@@ -22,7 +21,30 @@ function Mydrawer({ open, Data }) {
         const url = `/Detailpage?TripId=${encodedData}`;
         window.open(url, '_blank');
     };
+    function exportToExcel(data) {
+        var sheetname = moment(new Date()).format('DD-MMM-YYYY')
+        const worksheetData = data.map(item => ({
+            TripID: item.TripId,
+            Destination: item.Destination,
+            ClientName: item.Traveller_name,
+            Number: item.Contact_Number,
+            TravelDate: item.Travel_Date.toDate(),
+            SalesPerson: item.assign_to.name,
+            ConvertedMonth: item.month
+        }));
 
+        // Create a new worksheet
+        const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+
+        // Create a new workbook
+        const workbook = XLSX.utils.book_new();
+
+        // Append the worksheet to the workbook
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+        // Generate Excel file and trigger download
+        XLSX.writeFile(workbook, `${sheetname}.xlsx`);
+    }
     useEffect(() => {
         setIsDrawerOpen(open);
     }, [open]);
@@ -31,6 +53,7 @@ function Mydrawer({ open, Data }) {
         <div>
             <Drawer anchor='right' open={isDrawerOpen} onClose={() => toggleDrawer(false)}>
                 <div className='Drawer' onClick={handleOutsideClick}>
+                    <button className='export_button' onClick={()=>exportToExcel(Data)}>Export Data </button>
                     {
                         Data.map((item, index) =>
                             <div className='Drawer_Details_Card_Parent' key={index}>
@@ -46,7 +69,7 @@ function Mydrawer({ open, Data }) {
                                     <h3>Lead Converted- {item.month}</h3>
                                     <h3>Lead Assigned- {moment(item.assigned_date_time.toDate()).format('DD-MM-YYYY')}</h3>
                                     <h3>Converted Date- {item.updated_last == null ? "" : moment(item.updated_last.toDate()).format('DD-MM-YYYY')}</h3>
-                                    
+
                                 </div>
                             </div>
                         )

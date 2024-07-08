@@ -46,7 +46,7 @@ const Profile = (
     });
     const pdfExportComponent = useRef(null);
     const Data = travel_data
-    const codes=['Direct',"Repeated","Converted"]
+    const codes = ['Direct', "Repeated", "Converted"]
     const currentdate = new Date();
     const [flightsLocalUrl, setflightsLocalUrl] = useState(flightsLinkfromstorage ? flightsLinkfromstorage : null)
     const [checkIn, setcheckIn] = useState(selected_Travel_date)
@@ -338,7 +338,7 @@ const Profile = (
                             <div className='trip_summary'>
                                 <span>TRIP ID:-&nbsp;</span>
                                 <span>
-                                    {codes.includes(travel_data.Campaign_code)?
+                                    {codes.includes(travel_data.Campaign_code) ?
                                         <span>
                                             {travel_data.Campaign_code[0]}-{travel_data.TripId}
                                         </span>
@@ -426,7 +426,7 @@ const Profile = (
                                     <div className='otherInclusion'>
                                         {
                                             inclusion_data.other_Inclusion ? <>
-                                                {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<div  key={index}>
+                                                {inclusion_data.other_Inclusion.split('\n').map((data, index) => (<div key={index}>
                                                     <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
@@ -458,7 +458,7 @@ const Profile = (
                                         {
                                             inclusion_data.other_Exclusion ? <>
                                                 {inclusion_data.other_Exclusion.split('\n').map((data, index) => (<div key={index}>
-                                                    <div  style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', fontSize: '17px', marginLeft: '2rem', marginBottom: '-1.7rem', overflowWrap: "break-word" }}>
                                                         <span>-&nbsp; </span>
                                                         <span>  {data.trim()}</span>
                                                     </div><br />
@@ -726,50 +726,27 @@ const Profile = (
                     {/* end of 8th page(Flights page) */}
 
                     {/* start of 9th page(payments details) */}
-                    {
-                        travel_data.Destination == 'Maldives' ?
-                            <div className="page-break">
-                                <div className="page2"
-                                    style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/GENERAL.png)",
-                                        backgroundPosition: "top",
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundSize: "cover"
-                                    }}
-                                >
-                                    <div className='paymentsPage'>
-                                        <Footer whatsApp={whatsApp} />
-                                    </div>
-
-
-                                </div>
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/GENERAL.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div className='paymentsPage'>
+                                <Footer whatsApp={whatsApp} />
                             </div>
-                            :
-                            <div className="page-break">
-                                <div className="page2"
-                                    style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/GENERAL.png)",
-                                        backgroundPosition: "top",
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundSize: "cover"
-                                    }}
-                                >
-                                    <div className='paymentsPage'>
-                                        <Footer whatsApp={whatsApp} />
-                                    </div>
-
-
-                                </div>
-                            </div>
-                    }
-
+                        </div>
+                    </div>
                     {/* end of 9th page(payments details) */}
 
                     {/* start of jr cancellation page */}
                     <div className="page-break">
                         <div className="page2"
                             style={{
-                                backgroundImage: "url(/assets/pdfDefaultImage/cancellation.jpg)",
+                                backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/${destinationName}%2FCancellation${travel_data.Destination}.png?alt=media)`,
                                 backgroundPosition: "top",
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover"
@@ -806,7 +783,7 @@ const Profile = (
                             <div className="page-break">
                                 <div className="page2"
                                     style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/FAQEurope.png)",
+                                        backgroundImage: "url(https://firebasestorage.googleapis.com/v0/b/destination_image/o/EUROPE%2FEuropeFAQ.png?alt=media)",
                                         backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover"
@@ -821,7 +798,7 @@ const Profile = (
                             <div className="page-break">
                                 <div className="page2"
                                     style={{
-                                        backgroundImage: "url(/assets/pdfDefaultImage/FAQ.png)",
+                                        backgroundImage: "url(https://firebasestorage.googleapis.com/v0/b/jrspark-adb98.appspot.com/o/pdfHelperImages%2FGenralFAQ.png?alt=media)",
                                         backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",
                                         backgroundSize: "cover"

@@ -15,6 +15,7 @@ import Coldleads from '../Pages/Coldleads';
 import Paymentawaited from '../Pages/Paymentawaited';
 import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
+import Leadsaccordingtotraveldate from '../Pages/Components/Leadsaccordingtotraveldate';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -23,9 +24,9 @@ function Dynamicdatachart() {
     return (
         <div className=''>
             <div className='three_month_conversion_data'>
-                <Paymentawaited/>
-                <Seventytwohr/>
-                <Totalassignedleads/>
+                <Paymentawaited />
+                <Seventytwohr />
+                <Totalassignedleads />
             </div>
             <div className='three_month_conversion_data'>
                 <Currentmonthconversionchart />
@@ -40,10 +41,13 @@ function Dynamicdatachart() {
             </div>
             <div className='three_month_conversion_data'>
                 <Dumpleads />
-                <Totalleadsinfunnel/>
-                <Coldleads/>
-            </div> 
-            
+                <Totalleadsinfunnel />
+                <Coldleads />
+            </div>
+            {/* <div className='three_month_conversion_data'>
+                <Leadsaccordingtotraveldate />
+            </div> */}
+
         </div>
     );
 }

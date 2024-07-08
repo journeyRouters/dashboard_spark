@@ -314,6 +314,7 @@ const PaymentMarking = ({  }) => {
                     <div className='paymentsConfirmer'>
                         <InstallmentsMapper data={invoice.installment}
                             // setDetails={setDetails}
+                            Email={invoice.selected_pdf_data.travel_data.Email}
                             handleInstallments={handleInstallments} TripId={lead_data.TripId} />
                     </div>
 

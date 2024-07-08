@@ -49,6 +49,7 @@ import Flight from './components/quotation_follow_up/Flight';
 import FollowUp from './components/quotation_follow_up/Follow_up';
 import app from './components/required';
 import Usercontrol from './components/usercontrol/UserControl';
+import Test from './components/tester/Test.js';
 
 
 
@@ -298,7 +299,7 @@ function App() {
               <Route path='/Flights' element={<Flight auth={auth} profile={profile} />} />
               {/* <Route path='/FlightCreateQuote' element={<Flight auth={auth} profile={profile} />} /> */}
               <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
-              <Route path='/Detailpage' element={<Detailpage auth={auth} profile={profile}/>}/>
+              <Route path='/Detailpage' element={<Detailpage auth={auth} profile={profile} />} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operation"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />

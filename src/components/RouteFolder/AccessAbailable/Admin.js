@@ -10,12 +10,12 @@ function Admin({}) {
                     <img width={'128px'} src='./assets/img/jrlogo.png' />
                 </NavLink>
             </div>
-            <div className='sidebarCard'>
+            {/* <div className='sidebarCard'>
                 <NavLink className='sidebarCardContaint' to='/ControleUsers'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
                     <p>User Controller</p>
                 </NavLink>
-            </div>
+            </div> */}
             <div className='sidebarCard'>
                 <NavLink className='sidebarCardContaint' to='/CallerLead'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />

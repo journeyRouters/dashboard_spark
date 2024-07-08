@@ -10,6 +10,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
     const [LeadType, setLeadType] = useState(data.Campaign_code)
+    const [Potential, setPotential] = useState(data.Potential)
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
@@ -20,7 +21,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         }
         catch (e) { console.log(e) }
     }
-    async function updatewhatsappCollectionDoc(uid,name) {
+    async function updatewhatsappCollectionDoc(uid, name) {
         const Databaseref = doc(db, "whatsapp", data.TripId);
         await updateDoc(Databaseref, {
             "assign_to.uid": uid,
@@ -37,9 +38,10 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assign_flg": true,
             "assigned_date_time": today,
             "Lead_Status": Status,
-            "Campaign_code": LeadType
+            "Campaign_code": LeadType,
+            "Potential":Potential
         });
-        updatewhatsappCollectionDoc(uid,name)
+        updatewhatsappCollectionDoc(uid, name)
         getLeadByDate(selectedDate)
     }
     async function UpdateCampionCode() {
@@ -147,6 +149,12 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                     <option value='Converted'>Converted</option>
                     <option value='Repeated'>Repeated</option>
                     <option value='Direct'>Direct</option>
+                </select>
+                <br />
+                <span>Lead Potential</span>
+                <select value={Potential} onChange={(e) => setPotential(e.target.value)}>
+                    <option value='Normal'>Normal</option>
+                    <option value='Nurture'>Nurture</option>
                 </select>
             </div>
             <div>

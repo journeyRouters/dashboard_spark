@@ -221,7 +221,9 @@ const Maldives = ({
     function ChangeNameOnPackage(name) {
         data.Traveller_name = name
     }
-
+    function emailhandler(email) {
+        data.Email = email
+    }
     function flightDetails(files) {
         // console.log(files)
         setflightsObject(files)
@@ -301,7 +303,7 @@ const Maldives = ({
         }
 
     }
-    
+
     const handleFormChange = (event, index) => {
         let data = [...NightDataFields];
         data[index]['RoomType'] = event;
@@ -404,7 +406,7 @@ const Maldives = ({
             />
         </Modal>
         {
-            Destination === "Maldives" ||Destination==="Mauritius" ? <>
+            Destination === "Maldives" || Destination === "Mauritius" ? <>
                 <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                     <div className='popUp_body'>
                         <div className='save_close'>
@@ -476,7 +478,11 @@ const Maldives = ({
                                 </h4>
                                 <h4>
                                     <span>Traveler:- </span>
-                                    <input style={{ border: "2px solid Blue" }} onChange={(e)=>ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
+                                    <input style={{ border: "2px solid Blue" }} onChange={(e) => ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
+                                </h4>
+                                <h4>
+                                    <span>Email:- </span>
+                                    <input style={{ border: "2px solid Blue",width:'15rem' }} onChange={(e) => emailhandler(e.target.value)} placeholder={data.Email}></input>
                                 </h4>
                                 <h4>
                                     comments:-

@@ -1,0 +1,120 @@
+import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { getConvertedDataForUserProfile } from '../../Components/Querybase';
+import app from '../../../required';
+import Verticlechart from '../../Components/Verticlechart';
+const db = getFirestore(app);
+
+function Leadsaccordingtotraveldate(props) {
+    const [Leadaccordingtotraveldate, setLadsaccordingtotraveldate] = useState([])
+    var datePrev = moment(new Date()).subtract(1, 'month').calendar()
+    const [fromDate, setFromDate] = useState('');
+    const [toDate, setToDate] = useState('');
+    const [destination, setDestination] = useState('');
+
+    var PreviousMonth = moment(datePrev).format('MMMM')
+    function getAllUserProfiles(from, to, Destination) {
+        const q = query(collection(db, "Profile"),
+            where("access_type", "in", ["User", "Team Leader", "freelance"]));
+        return onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const usersProfile = doc.data();
+                const DataQuery = query(collection(db, "Trip"),
+                    where("assign_to.uid", "==", usersProfile.uid),
+                    where('Travel_Date', '>=', from),
+                    where('Travel_Date', '<', to),
+                    where('Destination', '==', Destination),
+                    where("Lead_Status", "==", ['Cold', 'Active', 'Hot', 'Paymentawaited','Converted']));
+                    console.log(DataQuery)
+                getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
+            });
+        });
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const fromDateObj = new Date(fromDate);
+        fromDateObj.setHours(0, 0, 0, 0);
+        const toDateObj = new Date(toDate);
+        toDateObj.setHours(0, 0, 0, 0);
+        console.log('From Date:', fromDate);
+        console.log('To Date:', toDate);
+        console.log('Destination:', destination);
+        getAllUserProfiles(fromDateObj, toDateObj, destination)
+    };
+    useEffect(() => {
+        // getAllUserProfiles()
+    }, [])
+    return (
+        <div >
+            <div className="form-container">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label className='labels' htmlFor="from-date">From Date:</label>
+                        <input
+                            type="date"
+                            id="from-date"
+                            name="from-date"
+                            value={fromDate}
+                            onChange={(e) => setFromDate(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className='labels' htmlFor="to-date">To Date:</label>
+                        <input
+                            className='inputFeild'
+                            type="date"
+                            id="to-date"
+                            name="to-date"
+                            value={toDate}
+                            onChange={(e) => setToDate(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label className='labels' htmlFor="destination">Destination:</label>
+                        <select
+                            className='SelectFeild'
+                            id="destination"
+                            name="destination"
+                            value={destination}
+                            onChange={(e) => setDestination(e.target.value)}
+                            required
+                        >
+                            <option value="">Select a destination</option>
+                            <option value={'Dubai'}>Dubai</option>
+                            <option value={'Maldives'}>Maldives</option>
+                            <option value={'Thailand'}>Thailand</option>
+                            <option value={'Singapore'}>Singapore</option>
+                            <option value={'Malaysia'}>Malaysia</option>
+                            <option value={'Bali'}>Bali</option>
+                            <option value={'Himachal'}>Himachal</option>
+                            <option value={'Ladakh'}>Ladakh</option>
+                            <option value={'Kerala'}>Kerala</option>
+                            <option value={'Kashmir'}>Kashmir</option>
+                            <option value={'Andaman'}>Andaman</option>
+                            <option value={'Goa'}>Goa</option>
+                            <option value={'Singapore'}>Singapore</option>
+                            <option value={'Rajasthan'}>Rajasthan</option>
+                            <option value={'Veitnam'}>Veitnam</option>
+                            <option value={'Northeast'}>Northeast</option>
+                            <option value={'Europe'}>Europe</option>
+                            <option value={'Turkey'}>Turkey</option>
+                            <option value={'Mauritius'}>Mauritius</option>
+                            <option value={'Baku'}>Baku</option>
+                            <option value={'Almaty'}>Almaty</option>
+                        </select>
+                    </div>
+
+                    <button className='buttonSubmit' type="submit">Submit</button>
+                </form>
+            </div>
+            <Verticlechart Data={Leadaccordingtotraveldate} Comment={`${destination} Leads`} />
+        </div>
+    );
+}
+
+export default Leadsaccordingtotraveldate;

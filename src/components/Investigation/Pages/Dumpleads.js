@@ -12,6 +12,7 @@ function Dumpleads() {
     function getAllUserProfiles() {
         var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        // const firstDay = new Date(date.getFullYear(), date.getMonth() - 1, 1);
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));
         return onSnapshot(q, (querySnapshot) => {

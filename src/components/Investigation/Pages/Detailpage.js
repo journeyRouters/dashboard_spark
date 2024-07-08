@@ -1,13 +1,12 @@
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './Page.css';
 import CommentsUniCompo from '../../quotation_follow_up/CommentsUniCompo';
-import Allquotes from './Components/Allquotes';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import app from '../../required';
-import moment from 'moment';
-import InstallmentsMapper from '../../Accounts/installmentsMapper';
+import Allquotes from './Components/Allquotes';
 import Installmentmapper from './Components/Installmentmapper';
+import './Page.css';
 
 
 function Detailpage() {

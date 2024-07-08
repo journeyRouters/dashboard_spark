@@ -42,3 +42,13 @@
 .Drawer_Details_Card_tripId_border:hover {
     cursor: pointer;
 }
+.export_button{
+    background-color: blue;
+    color: #FFFFFF;
+    width: 8rem;
+    height: 2rem;
+    border: 0.0625rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}

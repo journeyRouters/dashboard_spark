@@ -3,6 +3,7 @@ import { addDoc, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from
 import React, { useEffect, useRef, useState } from 'react';
 import app from "../required";
 import { Modal } from '@material-ui/core';
+import { installmentController } from "./Globalcontroller";
 const db = getFirestore(app);
 
 
@@ -10,7 +11,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
     auth, deliverable_item, BillingAddress, documents, profile,
     hint, getinvoice: invoiceOnPrepage }) => {
     const pdfExportComponent = useRef(null);
-    const codes=['Direct',"Repeated","Converted"]
+    const codes = ['Direct', "Repeated", "Converted"]
     const [Invoicedata, setInvoiceData] = useState()
     const [layoutSelection, setLayoutSelection] = useState({
         sapn: "A4",
@@ -59,7 +60,9 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
 
         }
 
-    }
+    }   
+    
+
     async function setInvoice() {
         await setDoc(doc(db, "invoice", `${selected_pdf_data.travel_data.TripId}`), {
             installment: installment,
@@ -75,6 +78,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
             date: date,
             TCS: parseInt(TCS)
         });
+        installmentController(installment,selected_pdf_data.travel_data.TripId)
     }
     // async function updateTrip() {
     //     const database = doc(db, "Trip", selected_pdf_data.travel_data.TripId);
@@ -263,7 +267,7 @@ const InvoicePdf = ({ date, TCS, selected_pdf_data, installment,
                         </div>
                     </div>
                     <div className="page-break">
-                        <div className={selected_pdf_data.travel_data.Destination=="Maldives"?"secondpage":"Invoice"}></div>
+                        <div className={selected_pdf_data.travel_data.Destination == "Maldives" ? "secondpage" : "Invoice"}></div>
 
                     </div>
                 </div>

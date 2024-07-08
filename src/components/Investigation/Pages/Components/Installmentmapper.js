@@ -175,6 +175,7 @@ function Installmentmapper({ Data }) {
                         <div className='paymentsConfirmer'>
                             <InstallmentsMapper
                                 data={invoice.installment}
+                                Email={invoice.selected_pdf_data.travel_data.Email}
                                 setDetails={setDetails}
                                 handleInstallments={handleInstallments}
                                 TripId={Data.TripId}

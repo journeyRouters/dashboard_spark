@@ -316,6 +316,9 @@ const Box = ({
     function ChangeNameOnPackage(name) {
         data.Traveller_name = name
     }
+    function Emailhandle(email) {
+        data.Email = email
+    }
     async function convertObjectToLink(files) {
         try {
             const file = files
@@ -401,6 +404,10 @@ const Box = ({
                                             <h4>
                                                 <span>Traveler:- </span>
                                                 <input style={{ border: "2px solid Blue" }} onChange={(e) => ChangeNameOnPackage(e.target.value)} placeholder={data.Traveller_name}></input>
+                                            </h4>
+                                            <h4>
+                                                <span>Email:- </span>
+                                                <input  type='email' style={{ border: "2px solid Blue",width:'15rem' }} onChange={(e) => Emailhandle(e.target.value)} placeholder={data.Email}></input>
                                             </h4>
                                             <h4>
                                                 <span>Destination:- </span>

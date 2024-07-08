@@ -1,14 +1,9 @@
-import { fromEvent } from "file-selector";
-import { collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import moment from 'moment';
-import * as XLSX from 'xlsx';
-import objectHash from 'object-hash';
 import React, { useEffect, useState } from 'react';
-import readXlsxFile from 'read-excel-file';
+import * as XLSX from 'xlsx';
 import app from "../required";
-import DriverComponents from "../leadDriver/DriverComponents";
 import Flightmappingcomponent from "./Flightmappingcomponent";
-import SalesPerson from "../RouteFolder/AccessAbailable/SalesPerson";
 const db = getFirestore(app);
 
 
@@ -19,11 +14,13 @@ const Flight = () => {
     var currentdate = moment(today).format('YYYY-MM-DD')
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
-    const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
+    // const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
     const [input, setInput] = useState()
 
     async function getLeadByDate(selectedDate) {
         // console.log('hit',selectedDate)
+        const month=moment(selectedDate).format('MMMM')
+        console.log(month)
         var Currentdate = new Date(selectedDate)
         Currentdate.setHours(0, 0, 0, 0)
         var tommorowDate = new Date(selectedDate)
@@ -35,7 +32,7 @@ const Flight = () => {
             where('updated_last', '>=', Currentdate),
             where('updated_last', '<', tommorowDate),
             where('Lead_Status', '==', 'Converted'),
-            where("month", "==", currentMonth)
+            where("month", "==", month)
         );
         // console.log(date)
         try {

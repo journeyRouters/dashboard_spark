@@ -44,9 +44,11 @@ function Dynamicdatachart() {
                 <Totalleadsinfunnel />
                 <Coldleads />
             </div>
-            {/* <div className='three_month_conversion_data'>
+            <div className='three_month_conversion_data'>
                 <Leadsaccordingtotraveldate />
-            </div> */}
+                <Leadsaccordingtotraveldate />
+                <Leadsaccordingtotraveldate />
+            </div>
 
         </div>
     );

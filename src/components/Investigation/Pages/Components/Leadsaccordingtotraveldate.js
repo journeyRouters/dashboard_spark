@@ -1,19 +1,15 @@
 import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { getConvertedDataForUserProfile } from '../../Components/Querybase';
 import app from '../../../required';
+import { getConvertedDataForUserProfile } from '../../Components/Querybase';
 import Verticlechart from '../../Components/Verticlechart';
 const db = getFirestore(app);
 
 function Leadsaccordingtotraveldate(props) {
     const [Leadaccordingtotraveldate, setLadsaccordingtotraveldate] = useState([])
-    var datePrev = moment(new Date()).subtract(1, 'month').calendar()
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [destination, setDestination] = useState('');
-
-    var PreviousMonth = moment(datePrev).format('MMMM')
     function getAllUserProfiles(from, to, Destination) {
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));
@@ -22,23 +18,23 @@ function Leadsaccordingtotraveldate(props) {
                 const usersProfile = doc.data();
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
+                    // where('assign_to.uid','==','YYPWnlPccvUizJliY5PhnHKmL902'),
                     where('Travel_Date', '>=', from),
                     where('Travel_Date', '<', to),
                     where('Destination', '==', Destination),
-                    where("Lead_Status", "==", ['Cold', 'Active', 'Hot', 'Paymentawaited','Converted']));
-                    console.log(DataQuery)
+                    where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited']));
+                // console.log(DataQuery)
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
             });
         });
     }
+  
     const handleSubmit = (e) => {
         e.preventDefault();
         const fromDateObj = new Date(fromDate);
         fromDateObj.setHours(0, 0, 0, 0);
         const toDateObj = new Date(toDate);
         toDateObj.setHours(0, 0, 0, 0);
-        console.log('From Date:', fromDate);
-        console.log('To Date:', toDate);
         console.log('Destination:', destination);
         getAllUserProfiles(fromDateObj, toDateObj, destination)
     };

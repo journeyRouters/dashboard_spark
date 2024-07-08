@@ -151,6 +151,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             Contact_Number: leadData.Contact_Number,
             Destination: leadData.Destination,
             Comment: 'none',
+            Potential:'',
             Departure_City: leadData.Departure_City,
             Travel_Date: new Date(leadData.Travel_date),
             Travel_Duration: parseInt(leadData.Travel_Duration, 10),

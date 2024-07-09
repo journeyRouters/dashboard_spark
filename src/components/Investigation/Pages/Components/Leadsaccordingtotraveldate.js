@@ -9,7 +9,7 @@ function Leadsaccordingtotraveldate(props) {
     const [Leadaccordingtotraveldate, setLadsaccordingtotraveldate] = useState([])
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [destination, setDestination] = useState('');
+    const [destination, setDestination] = useState(null);
     function getAllUserProfiles(from, to, Destination) {
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));
@@ -18,10 +18,25 @@ function Leadsaccordingtotraveldate(props) {
                 const usersProfile = doc.data();
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    // where('assign_to.uid','==','YYPWnlPccvUizJliY5PhnHKmL902'),
                     where('Travel_Date', '>=', from),
                     where('Travel_Date', '<', to),
                     where('Destination', '==', Destination),
+                    where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited']));
+                // console.log(DataQuery)
+                getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
+            });
+        });
+    }
+    function getAllDatawithoutDestion(from, to) {
+        const q = query(collection(db, "Profile"),
+            where("access_type", "in", ["User", "Team Leader", "freelance"]));
+        return onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const usersProfile = doc.data();
+                const DataQuery = query(collection(db, "Trip"),
+                    where("assign_to.uid", "==", usersProfile.uid),
+                    where('Travel_Date', '>=', from),
+                    where('Travel_Date', '<', to),
                     where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited']));
                 // console.log(DataQuery)
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
@@ -35,8 +50,13 @@ function Leadsaccordingtotraveldate(props) {
         fromDateObj.setHours(0, 0, 0, 0);
         const toDateObj = new Date(toDate);
         toDateObj.setHours(0, 0, 0, 0);
-        console.log('Destination:', destination);
-        getAllUserProfiles(fromDateObj, toDateObj, destination)
+        // console.log('Destination:', destination);
+        if(destination){
+            getAllUserProfiles(fromDateObj, toDateObj, destination)
+        }
+        else{
+            getAllDatawithoutDestion(fromDateObj, toDateObj)
+        }
     };
     useEffect(() => {
         // getAllUserProfiles()
@@ -78,7 +98,7 @@ function Leadsaccordingtotraveldate(props) {
                             name="destination"
                             value={destination}
                             onChange={(e) => setDestination(e.target.value)}
-                            required
+                            // required
                         >
                             <option value="">Select a destination</option>
                             <option value={'Dubai'}>Dubai</option>

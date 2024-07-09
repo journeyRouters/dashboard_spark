@@ -103,7 +103,8 @@ const Driver = (props) => {
                         FlightStatus: false,
                         FlightComments: [],
                         FlightBookedDate: null,
-                        Flight_LastUpdate: null
+                        Flight_LastUpdate: null,
+                        Potential:'Normal'
                     });
                 }
                 updateTripCounter(countUpdater)

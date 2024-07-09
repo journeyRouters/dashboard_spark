@@ -10,7 +10,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
     const [LeadType, setLeadType] = useState(data.Campaign_code)
-    const [Potential, setPotential] = useState(data.Potential)
+    const [Potential, setPotential] = useState(data.Potential?data.Potential:'Normal')
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
@@ -21,13 +21,18 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
         }
         catch (e) { console.log(e) }
     }
-    async function updatewhatsappCollectionDoc(uid, name) {
-        const Databaseref = doc(db, "whatsapp", data.TripId);
-        await updateDoc(Databaseref, {
-            "assign_to.uid": uid,
-            "assign_to.name": name,
-            "Status": Status,
-        });
+    async function updatewhatsappCollectionDoc(TripId, uid, name, Status) {
+        try {
+            const Databaseref = doc(db, "whatsapp", TripId);
+            await updateDoc(Databaseref, {
+                "assign_to.uid": uid,
+                "assign_to.name": name,
+                "Status": Status,
+            });
+            console.log('Document successfully updated!');
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
     }
     async function update_lead_field(uid, name) {
         /**this function is to update the assigned user in lead data for ref and to be identify */
@@ -194,7 +199,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 <input type={"number"} value={numberOfDays} onChange={(e) => updateNumberOfDays(e.target.value)}></input>
                 <input type='date' onChange={(e) => updateDate(e.target.value)} ></input>
             </div>
-            <input disabled={data.assign_flg || currentUser == null} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
+            <input disabled={data.assign_flg} className='driverButton' type='button' value='Save the Changes' onClick={() => update_lead_field(currentUser[0].uid, currentUser[0].name)} ></input>
             <button disabled={data.assign_flg} onClick={() => deletelead(data.TripId)}>delete</button>
             <button onClick={() => reassign()}>Reset</button>
         </div>

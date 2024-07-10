@@ -9,12 +9,21 @@ import './TripComponent.css';
 
 const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => {
     const db = getFirestore(app);
-    const animatedComponents = makeAnimated();
+    const [formData, setFormData] = useState({
+        name: '',
+        contact: '',
+        email: '',
+        destination: '',
+        clientType: 'Direct',
+        departureCity: '',
+        duration: '',
+        travelDate: '',
+        pax: '',
+        child: '',
+        budget: ''
+    });
     const today = new Date();
-
-    const [allUserProfile, setAllUserProfile] = useState([]);
     const [tripCounter, setTripCounter] = useState();
-    const [clientType, setClientType] = useState('Direct');
     const [leadData, setLeadData] = useState({
         name: '',
         Contact_Number: '',
@@ -27,37 +36,6 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         Child: '',
         Email: '',
     });
-    const destinations = [
-        { value: 'Thailand', label: 'Thailand' },
-        { value: 'Bali', label: 'Bali' },
-        { value: 'Dubai', label: 'Dubai' },
-        { value: 'Kashmir', label: 'Kashmir' },
-        { value: 'Himachal', label: 'Himachal' },
-        { value: 'Kerala', label: 'Kerala' },
-        { value: 'Andaman', label: 'Andaman' },
-        { value: 'Maldives', label: 'Maldives' },
-        { value: 'Goa', label: 'Goa' },
-        { value: 'Rajasthan', label: 'Rajasthan' },
-        { value: 'Singapore', label: 'Singapore' },
-        { value: 'Vietnam', label: 'Vietnam' },
-        { value: 'Europe', label: 'Europe' },
-        { value: 'Northeast', label: 'Northeast' },
-        { value: 'Ladakh', label: 'Ladakh' },
-        { value: 'Turkey', label: 'Turkey' },
-        { value: 'Baku', label: 'Baku' },
-        { value: 'Almaty', label: 'Almaty' },
-    ];
-    const handleInputChange = (key, value) => {
-        setLeadData((prev) => ({ ...prev, [key]: value }));
-    };
-
-    const isDataValid = () => {
-        const { name, Contact_Number, Destination, Departure_City, Travel_Duration, Travel_date, Budget, pax, Child } = leadData;
-        return (
-            name && Contact_Number && Destination && Departure_City && Travel_Duration && Travel_date && Budget && pax && Child
-        );
-    };
-
     const getTripCounter = async () => {
         const tripRef = doc(db, 'Support', 'tripCount');
         try {
@@ -69,58 +47,15 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             console.log(e);
         }
     };
-
-   
-
-    const getAllUserProfile = () => {
-        const q = query(
-            collection(db, 'Profile'),
-            where('access_type', 'in', ['User', 'Team Leader', 'freelance']),
-            where('user_type', '==', 'show')
-        );
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const profiles = [];
-            querySnapshot.forEach((doc) => {
-                profiles.push(doc.data());
-            });
-            setAllUserProfile(profiles);
-        });
-
-        return () => unsubscribe();
-    };
-
     const handleClose = () => {
         setAddLead(false);
     };
-
     useEffect(() => {
         if (open) {
-            getAllUserProfile();
             getTripCounter();
         }
     }, [open]);
 
-    const saveToOthers = (selectedUser) => {
-        if (!selectedUser || !isDataValid()) {
-            alert('Select a user and provide all required data');
-            return;
-        }
-        uploadLeadBySpokes(selectedUser.uid, selectedUser.name);
-        getLeadOnBoard();
-        handleClose();
-    };
-
-    const filterDataFromProfile = (uid) => {
-        if (uid === '0') {
-            alert('Select any user or assign to self');
-            return;
-        }
-        const profileOfUser = allUserProfile.find((data) => data.uid === uid);
-        if (profileOfUser) {
-            saveToOthers(profileOfUser);
-        }
-    };
 
     const updateTripCounter = async (counted) => {
         const tripRef = doc(db, 'Support', 'tripCount');
@@ -129,7 +64,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
 
     const uploadLeadBySpokes = (assignedUid, assignedName) => {
         let countUpdater = tripCounter;
-        const contactString = leadData.Contact_Number.toString();
+        const contactString = formData.contact
         const last4 = contactString.slice(-4);
         const tripId = countUpdater + last4;
 
@@ -138,27 +73,27 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
             return;
         }
 
-        countUpdater = parseInt(countUpdater, 10) + 1;
+        countUpdater = parseInt(countUpdater) + 1;
 
         setDoc(doc(db, 'Trip', tripId), {
             TripId: tripId,
             Lead_Status: 'Hot',
-            Campaign_code: clientType,
+            Campaign_code: formData.clientType,
             Date_of_lead: today,
-            Traveller_name: leadData.name,
+            Traveller_name: formData.name,
             FlightBookedFlg: false,
             InstaId: 'Direct lead',
-            Contact_Number: leadData.Contact_Number,
-            Destination: leadData.Destination,
+            Contact_Number: formData.contact,
+            Destination: formData.destination,
             Comment: 'none',
-            Potential:'',
-            Departure_City: leadData.Departure_City,
-            Travel_Date: new Date(leadData.Travel_date),
-            Travel_Duration: parseInt(leadData.Travel_Duration, 10),
-            Budget: parseInt(leadData.Budget, 10),
-            Pax: parseInt(leadData.pax, 10),
-            Child: parseInt(leadData.Child, 10),
-            Email: leadData.Email,
+            Potential: '',
+            Departure_City: formData.departureCity,
+            Travel_Date: new Date(formData.travelDate),
+            Travel_Duration: parseInt(formData.duration),
+            Budget: parseInt(formData.budget),
+            Pax: parseInt(formData.pax),
+            Child: parseInt(formData.child),
+            Email: formData.email,
             Remark: 'none',
             Lead_genrate_date: today,
             uploaded_by: userProfile.email,
@@ -191,78 +126,104 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
 
         updateTripCounter(countUpdater);
     };
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(formData);
+        saveForSelf()
+    };
     const saveForSelf = () => {
-        if (isDataValid()) {
-            uploadLeadBySpokes(userProfile.uid, userProfile.name);
-            getLeadOnBoard();
-            handleClose();
-        } else {
-            alert('Please add sufficient data');
-        }
+        uploadLeadBySpokes(userProfile.uid, userProfile.name);
+        getLeadOnBoard();
+        handleClose();
+
     };
 
     return (
         <Modal open={open} onClose={handleClose} style={{ display: 'grid', justifyContent: 'center', marginTop: '2rem', overflowY: 'scroll' }}>
             <div className='SelfLeadDiv'>
-                <h3 style={{ marginLeft: '10rem' }}>SELF LEAD</h3>
-                <div className='SelfLeadGenParentDiv'>
-                    <div className='SelfLeadGenleftDiv'>
-                        <p>Name </p>
-                        <p>Contact </p>
-                        <p>Email</p>
-                        <p>Destination </p>
-                        <p>Client Type</p>
-                        <p>Departure City </p>
-                        <p>Duration </p>
-                        <p>Travel Date </p>
-                        <p>Pax </p>
-                        <p>Child </p>
-                        <p>Budget </p>
+                <form onSubmit={handleSubmit} className="selfLead-form-container">
+                    <div>
+                        <label>Name:</label>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
                     </div>
-                    <div className='SelfLeadGenleftDiv'>
-                        {[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11].map((data, index) => <p key={index}>:-</p>)}
+                    <div>
+                        <label>Contact:</label>
+                        <input type="text" name="contact" value={formData.contact} onChange={handleChange} required />
                     </div>
-                    <div className='SelfLeadGenRightDiv'>
-                        <input className='required' onChange={(e) => handleInputChange('name', e.target.value)}></input>
-                        <input className='required' type='number' onChange={(e) => handleInputChange('Contact_Number', e.target.value)}></input>
-                        <input type='email' onChange={(e) => handleInputChange('Email', e.target.value)}></input>
-                        <Select
-                            placeholder='Destination'
-                            className='required'
-                            closeMenuOnSelect={true}
-                            components={animatedComponents}
-                            options={destinations}
-                            onChange={(e) => handleInputChange('Destination', e.value)}
-                        />
-                        <select value={clientType} onChange={(e) => setClientType(e.target.value)}>
+                    <div>
+                        <label>Email:</label>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange}  />
+                    </div>
+                    <div>
+                        <label>Destination:</label>
+                        <select name="destination" value={formData.destination} onChange={handleChange} required>
+                            <option value="">Select Destination</option>
+                            <option value={'Dubai'}>Dubai</option>
+                            <option value={'Maldives'}>Maldives</option>
+                            <option value={'Thailand'}>Thailand</option>
+                            <option value={'Singapore'}>Singapore</option>
+                            <option value={'Malaysia'}>Malaysia</option>
+                            <option value={'Bali'}>Bali</option>
+                            <option value={'Himachal'}>Himachal</option>
+                            <option value={'Ladakh'}>Ladakh</option>
+                            <option value={'Kerala'}>Kerala</option>
+                            <option value={'Kashmir'}>Kashmir</option>
+                            <option value={'Andaman'}>Andaman</option>
+                            <option value={'Goa'}>Goa</option>
+                            <option value={'Singapore'}>Singapore</option>
+                            <option value={'Rajasthan'}>Rajasthan</option>
+                            <option value={'Veitnam'}>Veitnam</option>
+                            <option value={'Northeast'}>Northeast</option>
+                            <option value={'Europe'}>Europe</option>
+                            <option value={'Turkey'}>Turkey</option>
+                            <option value={'Mauritius'}>Mauritius</option>
+                            <option value={'Baku'}>Baku</option>
+                            <option value={'Almaty'}>Almaty</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Client Type:</label>
+                        <select name="clientType" value={formData.clientType} onChange={handleChange} required>
+                            <option value="">Select Client Type</option>
                             <option value='Premium'>Premium</option>
                             <option value='Converted'>Converted</option>
                             <option value='Repeated'>Repeated</option>
                             <option value='Direct'>Direct</option>
                         </select>
-                        <input onChange={(e) => handleInputChange('Departure_City', e.target.value)}></input>
-                        <input className='required' type='number' onChange={(e) => handleInputChange('Travel_Duration', e.target.value)}></input>
-                        <input className='required' type='date' onChange={(e) => handleInputChange('Travel_date', e.target.value)}></input>
-                        <input className='required' type='number' onChange={(e) => handleInputChange('pax', e.target.value)}></input>
-                        <input className='required' type='number' onChange={(e) => handleInputChange('Child', e.target.value)}></input>
-                        <input className='required' type='number' onChange={(e) => handleInputChange('Budget', e.target.value)}></input>
-                    </div>
-                </div>
-                <div className='SelfLeadButtonDiv'>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem' }}>
-                        <span>Assign to</span>
-                        <select onChange={(e) => filterDataFromProfile(e.target.value)}>
-                            <option value={0}>Select Spokes</option>
-                            {allUserProfile.map((data, index) => (
-                                <option key={index} value={data.uid}>{data.name}</option>
-                            ))}
-                        </select>
                     </div>
                     <div>
-                        <button onClick={saveForSelf}>Save for Self</button>
+                        <label>Departure City:</label>
+                        <input type="text" name="departureCity" value={formData.departureCity} onChange={handleChange} required />
                     </div>
-                </div>
+                    <div>
+                        <label>Duration (in days):</label>
+                        <input type="number" name="duration" value={formData.duration} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Travel Date:</label>
+                        <input type="date" name="travelDate" value={formData.travelDate} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Pax:</label>
+                        <input type="number" name="pax" value={formData.pax} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Child:</label>
+                        <input type="number" name="child" value={formData.child} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Budget:</label>
+                        <input type="number" name="budget" value={formData.budget} onChange={handleChange} required />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         </Modal>
     );

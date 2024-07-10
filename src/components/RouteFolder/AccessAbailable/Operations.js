@@ -18,12 +18,12 @@ function Operations({ }) {
                     <p>converted</p>
                 </NavLink>
             </div>
-            {/* <div className='sidebarCard' >
+            <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint'  to='/PendingPayments'>
                     <Speed style={{ marginRight: "1rem" }} />
                     <p>Pending Payments</p>
                 </NavLink>
-            </div> */}
+            </div>
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/DuringStayFiles'>
                     <AccountTreeTwoTone style={{ marginRight: "1rem" }} />

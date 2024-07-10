@@ -1,4 +1,4 @@
-import { AccountTreeTwoTone, PublicOutlined, PublicTwoTone, SearchTwoTone } from '@material-ui/icons';
+import { AccountTreeTwoTone, PublicOutlined, PublicTwoTone, SearchTwoTone, Speed } from '@material-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../../App.css';
@@ -18,12 +18,12 @@ function SuperAdminDrawer({ }) {
                     <p>Driver</p>
                 </NavLink>
             </div>
-            {/* <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint' to='/AdminLeaveManagement'>
-                    <SearchTwoTone style={{ marginRight: "1rem" }} />
-                    <p>Leaves</p>
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint'  to='/PendingPayments'>
+                    <Speed style={{ marginRight: "1rem" }} />
+                    <p>Pending Payments</p>
                 </NavLink>
-            </div> */}
+            </div>
             <div className='sidebarCard'>
                 <NavLink className='sidebarCardContaint' to='/ManageAllTeam'>
                     <PublicTwoTone style={{ marginRight: "1rem" }} />

@@ -25,8 +25,9 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
     // console.log(Email, typeof (Email), Email.length)
     const [amountReceived_, setAmountReceived] = useState()
     const [Transactionid, setTransactionId] = useState()
-    function statusHandler(response) {
-        installmentjson[index].Status = response.target.value
+    const [Status, setStatus] = useState(installmentjson[index].Status)
+    function statusHandler() {        
+        installmentjson[index].Status = Status
     }
     function TransactionId(response) {
         installmentjson[index].TransactionId = response.target.value
@@ -38,6 +39,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         // console.log(installmentjson)
     }
     async function updateStatus() {
+        statusHandler()
         await setDoc(doc(db, "invoice", TripId), {
             installment: installmentjson
         }, { merge: true });
@@ -45,10 +47,12 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         handleNotification()
     }
     function handleNotification() {
+        console.log(installmentjson[index].Status)
         if (installmentjson[index].Status === 'Received') {
-            if (Email.length > 0) {
+            if (Email) {
                 PaymentConfirmation(installmentjson, Email, installmentjson[index].amount, installmentjson[index + 1].amount);
-            } else {
+            }
+            else {
                 alert('No Email Available');
                 // console.log(Email.length);
             }
@@ -75,7 +79,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
                     value={data.Status == 'Received' ? installmentjson[index].amountRecived : amountReceived_} placeholder='recived Amount' onChange={(e) => amountReceived(e)} />
             </div>
             <div>
-                <select className='showInput' value={installmentjson[index].Status} disabled={data.Status == 'Received'} onChange={(response) => statusHandler(response)}>
+                <select className='showInput' value={Status} disabled={data.Status == 'Received'} onChange={(response) => setStatus(response.target.value)}>
                     <option value="Received"> Received</option>
                     <option value="Pending">Pending</option>
                 </select>

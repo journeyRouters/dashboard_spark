@@ -27,7 +27,7 @@ function Seventytwohr() {
     }, [])
     return (
         <div>
-            <Verticlechart Data={SeventyTwohr} Comment={'72 hr Waiting'} />
+            <Verticlechart Data={SeventyTwohr} Comment={'48 hr Waiting'} />
         </div>
     );
 }

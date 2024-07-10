@@ -1,4 +1,4 @@
-import { AccountTreeTwoTone, SearchTwoTone } from '@material-ui/icons';
+import { AccountTreeTwoTone, SearchTwoTone, Speed } from '@material-ui/icons';
 import React from 'react';
 import '../../../App.css';
 import { NavLink } from 'react-router-dom';
@@ -19,9 +19,9 @@ function Operations({ }) {
                 </NavLink>
             </div>
             {/* <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint'>
+                <NavLink className='sidebarCardContaint'  to='/PendingPayments'>
                     <Speed style={{ marginRight: "1rem" }} />
-                    <p>Attendance</p>
+                    <p>Pending Payments</p>
                 </NavLink>
             </div> */}
             <div className='sidebarCard' >

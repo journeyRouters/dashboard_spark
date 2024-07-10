@@ -39,7 +39,7 @@ export function get72hrNon_respondedLeads(usersProfile, DataQuery, statemanagmen
         const finalData = list.filter((item) => {
             // console.log(item)
             var commentLimit = new Date(item.updated_last.toDate());
-            commentLimit.setDate(commentLimit.getDate() + 3)
+            commentLimit.setDate(commentLimit.getDate() + 2)
             // console.log(commentLimit<Today)
             if(commentLimit<Today)return item
         })

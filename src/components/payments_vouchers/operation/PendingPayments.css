@@ -1,0 +1,86 @@
+.Filterparents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.FilterMain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 30rem;
+}
+
+.inputFeild {
+  width: 8rem;
+  height: 2rem;
+}
+
+.buttonSubmit {
+  width: 10rem;
+  height: 2rem;
+  display: inline-block;
+  /* padding: 0.625rem 1.25rem; */
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.buttonSubmit:hover {
+  background-color: #218838;
+}
+
+.tripId {
+  border: 0.0625rem solid white;
+  width: 12rem;
+}
+
+.invoiceDataMapping {
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+.All_installmentsParent{
+  width: 49rem;
+  height: 31rem;
+  background: white;
+}
+
+.installment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.installment-table th,
+.installment-table td {
+  padding: 12px 15px;
+}
+
+.installment-table th {
+  background-color: #009879;
+  color: #ffffff;
+}
+
+.installment-table tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.installment-table tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.installment-table tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.installment-table tr:hover {
+  background-color: #f1f1f1;
+}

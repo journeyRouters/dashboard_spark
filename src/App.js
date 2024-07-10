@@ -50,6 +50,7 @@ import FollowUp from './components/quotation_follow_up/Follow_up';
 import app from './components/required';
 import Usercontrol from './components/usercontrol/UserControl';
 import Test from './components/tester/Test.js';
+import PendingPayments from './components/payments_vouchers/operation/PendingPayments.js';
 
 
 
@@ -318,6 +319,7 @@ function App() {
                 <Route path='/DuringStayFiles' element={<Duringstay profile={profile} />} />
                 <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
                 <Route path='/Whatsappleads' element={<Whatsappleads profile={profile} />} />
+                <Route path='/PendingPayments' element={<PendingPayments profile={profile} />} />
               </Route>
             </Routes>
           </div>

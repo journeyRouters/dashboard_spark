@@ -1,9 +1,9 @@
-export async function installmentController(installment,TripId) {
+export async function installmentController(installment, TripId) {
     const url = 'https://payments-buoig14.an.gateway.dev/update';
     const data = {
         "Installments": installment,
         "TripId": TripId
-    };    
+    };
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -27,14 +27,15 @@ export async function installmentController(installment,TripId) {
     }
 }
 
-export async function PaymentConfirmation(installment,Email,AmountReceive,NextInstallment) {
+export async function PaymentConfirmation(installment, Email, AmountReceive, NextInstallment,TripId) {
     const url = 'https://s5abd82gwi.execute-api.ap-south-1.amazonaws.com/emailshooter/email';
     const data = {
         "Data": installment,
         "To": Email,
-        'AmountReceive':AmountReceive,
-        'NextInstallment':NextInstallment
-    };    
+        'AmountReceive': AmountReceive,
+        'NextInstallment': NextInstallment,
+        'TripId': TripId
+    };
     try {
         const response = await fetch(url, {
             method: 'POST',

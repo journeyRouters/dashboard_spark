@@ -16,7 +16,7 @@ const FollowupBreak = ({ uid }) => {
         var today = new Date()
         if (row.updated_last) {
             var commentLimit = new Date(row.updated_last.toDate());
-            commentLimit.setDate(commentLimit.getDate() + 3)
+            commentLimit.setDate(commentLimit.getDate() + 2)
             // setLimit(commentLimit < today)
             if (commentLimit < today) {
                 counted++

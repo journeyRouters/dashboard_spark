@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import app from "../required";
 import Flightmappingcomponent from "./Flightmappingcomponent";
+import './quote.css';
 const db = getFirestore(app);
 
 
@@ -11,16 +12,25 @@ const db = getFirestore(app);
 const Flight = () => {
     const [lead_data, setLead_data] = useState([])
     var today = new Date()
+    const [isChecked, setIsChecked] = useState(false);
     var currentdate = moment(today).format('YYYY-MM-DD')
     const [selectedDate, setSeletctedDate] = useState(currentdate)
     const [profile, setprofile] = useState([])
     // const [currentMonth, setmonth] = useState(moment(new Date()).format('MMMM'))
     const [input, setInput] = useState()
 
+    const handleToggle = () => {
+        setIsChecked(!isChecked);
+        // console.log(`Switch is ${isChecked ? 'OFF' : 'ON'}`);
+    };
+    function ControlAllSearch(selectedDate) {
+        if (isChecked) getLeadByDate(selectedDate)
+        else getLeadOFAnyMonth(selectedDate)
+    }
     async function getLeadByDate(selectedDate) {
         // console.log('hit',selectedDate)
-        const month=moment(selectedDate).format('MMMM')
-        console.log(month)
+        const month = moment(selectedDate).format('MMMM')
+        // console.log(month)
         var Currentdate = new Date(selectedDate)
         Currentdate.setHours(0, 0, 0, 0)
         var tommorowDate = new Date(selectedDate)
@@ -33,6 +43,38 @@ const Flight = () => {
             where('updated_last', '<', tommorowDate),
             where('Lead_Status', '==', 'Converted'),
             where("month", "==", month)
+        );
+        // console.log(date)
+        try {
+            var querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                list.push(doc.data())
+                // console.log(doc.data().updated_last.toDate())
+            });
+            try {
+                // console.log(list)
+                setLead_data(list)
+            }
+            catch (e) { console.log(e) }
+            // console.log(list);
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+
+    }
+    async function getLeadOFAnyMonth(selectedDate) {
+        var Currentdate = new Date(selectedDate)
+        Currentdate.setHours(0, 0, 0, 0)
+        var tommorowDate = new Date(selectedDate)
+        tommorowDate.setDate(tommorowDate.getDate() + 1);
+        tommorowDate.setHours(0, 0, 0, 0);
+        // console.log(Currentdate,tommorowDate)
+        let list = []
+        var q = query(collection(db, "Trip"),
+            where('updated_last', '>=', Currentdate),
+            where('updated_last', '<', tommorowDate),
+            where('Lead_Status', '==', 'Converted'),
         );
         // console.log(date)
         try {
@@ -116,6 +158,7 @@ const Flight = () => {
 
     return (
         <div>
+           
             <div className='global_search_adminpage'>
                 <button onClick={() => reset()}>Refresh</button>
                 <label>Trip Id</label>
@@ -129,9 +172,21 @@ const Flight = () => {
                 ></input>
             </div>
             <div className='Driver_header'>
-                <div>
+                <div className='filtersParents'>
                     <input onChange={(e) => setSeletctedDate(e.target.value)} type='date' value={selectedDate}></input>
-                    <button onClick={() => getLeadByDate(selectedDate)}>Search</button>
+                    <button onClick={() => ControlAllSearch(selectedDate)}>Search</button>
+                    <div className="switch-container">
+                        <span className="label">Any month</span>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={handleToggle}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                        <span className="label">Current month</span>
+                    </div>
                     <button onClick={() => exportToExcel(lead_data)}>Export Data</button>
                 </div>
 

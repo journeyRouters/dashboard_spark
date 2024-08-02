@@ -47,7 +47,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         handleNotification()
     }
     function handleNotification() {
-        console.log(installmentjson[index].Status)
+        // console.log(installmentjson[index].Status)
         if (installmentjson[index].Status === 'Received') {
             if (Email) {
                 PaymentConfirmation(installmentjson, Email, installmentjson[index].amount, installmentjson[index + 1].amount,TripId);

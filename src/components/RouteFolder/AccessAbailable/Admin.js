@@ -2,7 +2,7 @@ import { AccountTreeTwoTone, FileCopyOutlined, PersonOutlineOutlined, SearchTwoT
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Admin({}) {
+function Admin({ }) {
     return (
         <div>
             <div className='sidebarCard' >
@@ -41,7 +41,7 @@ function Admin({}) {
                 </NavLink>
             </div> */}
             <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint' to='/AdminInvestigation'>
+                <NavLink className='sidebarCardContaint' to='/Dynamicdatachart'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />
                     <p>Investigation</p>
                 </NavLink>

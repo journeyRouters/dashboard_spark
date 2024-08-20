@@ -3,6 +3,7 @@ import { default as React, useEffect, useState } from 'react';
 import app from '../required';
 import './testcss.css';
 import * as XLSX from 'xlsx';
+import moment from 'moment/moment';
 const db = getFirestore(app);
 
 const Test = () => {
@@ -23,6 +24,7 @@ const Test = () => {
          // console.log(doc.id)
       });
    }
+   const data=[]
    function exportJSONToExcel(jsonData, fileName) {
       // Create a new workbook (this is required for the library)
       const workbook = XLSX.utils.book_new();
@@ -49,7 +51,6 @@ const Test = () => {
          list.push(doc.data())
       });
       setlength(list.length)
-      exportJSONToExcel(list, 'September-2022_Client_data')
    }
    function getAllUserProfie() {
       const q = query(collection(db, "Profile"), where("access_type", "in", ["User", "Team Leader", "freelance"])
@@ -62,6 +63,51 @@ const Test = () => {
          });
          //  getTotalLeadData(Profile)
       });
+   }
+   async function getAllTripData() {
+      const tripList = [];  // List to store all trip data
+   
+      try {
+         // Reference to the Trip collection
+         const querySnapshot = await getDocs(collection(db, "Trip"));
+         
+         // Loop through each document in the snapshot and push the data to the tripList array
+         querySnapshot.forEach((doc) => {
+            tripList.push(doc.data());
+         });
+   
+         // Process the tripList array as needed
+
+         console.log(tripList);  // You can replace this with your processing logic
+         exportToExcel(tripList)
+         return tripList;  // Return the list containing all trip data
+         
+      } catch (error) {
+         console.error("Error fetching documents: ", error);
+         return [];  // Return an empty list in case of an error
+      }
+   }
+   function exportToExcel(data) {
+      console.log(data)
+      var sheetname = moment(new Date()).format('DD-MMM-YYYY')
+      const worksheetData = data.map(item => ({
+         TripID: item.TripId,
+         Destination: item.Destination,
+         ClientName: item.Traveller_name,
+         Number: item.Contact_Number,
+      }));
+
+      // Create a new worksheet
+      const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+
+      // Create a new workbook
+      const workbook = XLSX.utils.book_new();
+
+      // Append the worksheet to the workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+      // Generate Excel file and trigger download
+      XLSX.writeFile(workbook, `${sheetname}.xlsx`);
    }
    async function calculateResponseTime(TripId) {
       var TripData;
@@ -200,7 +246,7 @@ const Test = () => {
             console.log(`Successfully added new key "${newKey}" to document "${document.id}".`);
          });
          const end = new Date()
-         console.log(end-start)
+         console.log(end - start)
          console.log(`Successfully added new key "${newKey}" to all documents in collection "${collectionName}".`);
       } catch (error) {
          console.error("Error adding new key to documents:", error);
@@ -216,7 +262,7 @@ const Test = () => {
    }, []);
    return (
       <div>
-         {/* <button onClick={() => addNewKeyToAllDocuments('Trip', 'Potential', '')}>click to get things work</button> */}
+         {/* <button onClick={() => getAllTripData()}>click to get things work</button> */}
          <h2>{datalength}</h2>
       </div>
    );

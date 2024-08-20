@@ -16,6 +16,7 @@ import Paymentawaited from '../Pages/Paymentawaited';
 import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
 import Leadsaccordingtotraveldate from '../Pages/Components/Leadsaccordingtotraveldate';
+import Paxmorethan4 from '../Pages/Paxmorethan4';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -46,8 +47,7 @@ function Dynamicdatachart() {
             </div>
             <div className='three_month_conversion_data'>
                 <Leadsaccordingtotraveldate />
-                <Leadsaccordingtotraveldate />
-                <Leadsaccordingtotraveldate />
+                <Paxmorethan4 />
             </div>
 
         </div>

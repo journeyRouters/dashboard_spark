@@ -17,6 +17,7 @@ import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
 import Leadsaccordingtotraveldate from '../Pages/Components/Leadsaccordingtotraveldate';
 import Paxmorethan4 from '../Pages/Paxmorethan4';
+import DumpLeadsOnBasisOfPacCount from '../Pages/DumpLeadsOnBasisOfPacCount';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -48,6 +49,7 @@ function Dynamicdatachart() {
             <div className='three_month_conversion_data'>
                 <Leadsaccordingtotraveldate />
                 <Paxmorethan4 />
+                <DumpLeadsOnBasisOfPacCount/>
             </div>
 
         </div>

@@ -58,7 +58,7 @@ function Paxmorethan4() {
                     ))}
                 </select>
             </div>
-            <Verticlechart Data={Paxmorethan4} Comment={'Dump Leads'} />
+            <Verticlechart Data={Paxmorethan4} Comment={'Leads Alive'} />
         </div>
     );
 }

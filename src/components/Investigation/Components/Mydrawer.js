@@ -63,10 +63,11 @@ function Mydrawer({ open, Data }) {
                                     <h3>Contact no.- {item.Contact_Number}</h3>
                                     <h3>Date of Travel- {moment(item.Travel_Date.toDate()).format('DD-MM-YYYY')}</h3>
                                     <h3>Destination- {item.Destination}</h3>
+                                    <h3>Pax- {item.Pax}</h3>
                                 </div>
                                 <div className='Drawer_Details_Card_Right'>
                                     <h3>Sales Person- {item.assign_to.name}</h3>
-                                    <h3>Lead Status- {item.Lead_Status}</h3>
+                                    <h3>Lead Status- {item.Lead_Status}</h3>                                    
                                     <h3>Lead Assigned- {moment(item.assigned_date_time.toDate()).format('DD-MM-YYYY')}</h3>
                                     <h3>Last Updated Date- {item.updated_last == null ? "" : moment(item.updated_last.toDate()).format('DD-MM-YYYY')}</h3>
 

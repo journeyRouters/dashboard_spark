@@ -27,7 +27,20 @@ function HandleIncomingData(IncomingData, statemanagment) {
         }
     });
 }
-
+export function getDumpLeadsAccordingTopax(usersProfile, DataQuery, statemanagment,selectedPax) {
+    // console.log(selectedPax)
+    const unsubscribe = onSnapshot(DataQuery, (querySnapshot) => {
+        const list = [];
+        querySnapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        const filteredData = list.filter(item => item.Pax >= selectedPax);
+        // console.log(filteredData)
+        const IncomingData = { Name: usersProfile.name, Data: filteredData, Number: filteredData.length };
+        HandleIncomingData(IncomingData, statemanagment)
+    });
+    return unsubscribe;
+}
 
 export function get72hrNon_respondedLeads(usersProfile, DataQuery, statemanagment) {
     const Today = new Date()

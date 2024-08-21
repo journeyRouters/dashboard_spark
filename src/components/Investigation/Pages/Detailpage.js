@@ -76,7 +76,7 @@ function Detailpage() {
                                 <p>Sales Person - {Data.assign_to.name}</p>
                                 <p>Lead type - {Data.Campaign_code}</p>
                                 <p>Lead Assigned - {moment(Data.assigned_date_time.toDate()).format('DD/MMM/YYYY')}</p>
-                                <p>Converted Date- {Data.updated_last == null ? "" : moment(Data.updated_last.toDate()).format('DD-MM-YYYY')}</p>
+                                <p>Last Updated Date- {Data.updated_last == null ? "" : moment(Data.updated_last.toDate()).format('DD-MM-YYYY')}</p>
                             </div>
                             {/* <div>
                                 <p>Travel Date - {moment(Data.Travel_Date.toDate()).format('DD-MM-YYYY')}</p>

@@ -31,7 +31,7 @@ function Paxmorethan4() {
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
                     where('Lead_Status', 'in', ['Hot', 'Active', 'Cold', 'Paymentawaited']),
-                    where('Pax', '==', selectedPax),
+                    where('Pax', '>=', selectedPax),
                     where("quotation_flg", "==", true));
 
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setPaxmorethan4);

@@ -264,7 +264,7 @@ const Profile = (
 
     return (
         <>
-            <Modal open={wait} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", with: '100%', overflowY: 'scroll' }} >
+            <Modal open={wait} style={{ display: "grid", justifyContent: "center", marginTop: "4rem", width: '100%', overflowY: 'scroll' }} >
                 <>
                     <img src='/assets/pdfDefaultImage/loader.gif' width={'200px'} />
                 </>

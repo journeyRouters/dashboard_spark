@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useState } from 'react';
 
 const Flightmappingcomponent = ({ data, profile, index, getLeadByDate, selectedDate }) => {
@@ -16,6 +17,7 @@ const Flightmappingcomponent = ({ data, profile, index, getLeadByDate, selectedD
             <div>
                 {/* <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br /> */}
                 <span>Destination:-{data.Destination}</span><br />
+                <span style={{ color: 'yellow', background: 'black' }}>Travel Date:-{moment(data.Travel_Date.toDate()).format('DD-MMMM-YYYY')}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />
                 <span style={{ color: 'yellow', background: 'black' }}>Lead Status:- {Status}</span>

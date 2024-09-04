@@ -5,6 +5,7 @@ import app from '../required';
 import './Driver.css';
 
 const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
+    // console.log(data.TripId)
     const [currentUser, setCurrentuser] = useState(null)
     const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
     const [Status, setStatus] = useState(data.Lead_Status)
@@ -163,7 +164,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 </select>
             </div>
             <div>
-                {/* <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br /> */}
+                <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />

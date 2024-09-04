@@ -7,6 +7,7 @@ export function getConvertedDataForUserProfile(usersProfile, DataQuery, stateman
         const list = [];
         querySnapshot.forEach((doc) => {
             list.push(doc.data());
+            console.log(doc.data().TripId)
         });
         const IncomingData = { Name: usersProfile.name, Data: list, Number: list.length };
         HandleIncomingData(IncomingData, statemanagment)
@@ -14,7 +15,6 @@ export function getConvertedDataForUserProfile(usersProfile, DataQuery, stateman
     return unsubscribe;
 }
 function HandleIncomingData(IncomingData, statemanagment) {
-    // console.log(IncomingData)
     statemanagment(prevData => {
         const dataIndex = prevData.findIndex(item => item.Name === IncomingData.Name);
 

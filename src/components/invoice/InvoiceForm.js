@@ -29,7 +29,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [selected_pdf_data, setpdf] = useState([])
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
     const [TCS, setTCS] = useState(0)
-    const db = getFirestore(app);
+    const [email, setemail] = useState('')
     // console.log(selected_pdf_data)
     function checkbalanceEquality() {
         var total = 0
@@ -55,21 +55,26 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     function controllDate(e) {
         setcurrentday(e.target.value)
     }
-    function showinvoice() {
-        if (checkbalanceEquality()) {
-            if (selected_pdf_data.length != 0) {
-                setpdf_flg(false)
-                setInvoice(true)
-            }
-            else {
-                setpdf_flg(true)
-                setInvoice(false)
-            }
+    function showinvoice() {        
+        if (!email || email.trim() === "") {
+            alert('Email is required');
+            return;
         }
-        else {
-            alert('amount mismatch')
+    
+        if (checkbalanceEquality()) {
+            if (selected_pdf_data.length !== 0) {
+                selected_pdf_data.travel_data.Email=email
+                setpdf_flg(false);
+                setInvoice(true);
+            } else {
+                setpdf_flg(true);
+                setInvoice(false);
+            }
+        } else {
+            alert('Amount mismatch');
         }
     }
+    
     function closeinvoice_() {
         setInvoice(false)
     }
@@ -208,6 +213,11 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
                         <div className='BillingAddress'>
                             <label>Billing Name</label>
                             <input className='txtArea' type='sapn' name='Billing_Name' value={BillingName} onChange={(event) => handleBillingName(event)} >
+                            </input>
+                        </div>
+                        <div className='BillingAddress'>
+                            <label>Email</label>
+                            <input className='txtArea' type='sapn' name='Billing_Name' value={email} onChange={(event) => setemail(event.target.value)} >
                             </input>
                         </div>
                         <div className='BillingAddress'>

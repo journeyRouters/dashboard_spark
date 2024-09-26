@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Modal, Radio, RadioGroup } from '@material-ui/core';
 import { PersonOutlined } from '@material-ui/icons';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import app from '../required';
@@ -9,199 +9,133 @@ import './usercontrol.css';
 
 const Userunitcomponent = (props) => {
     const db = getFirestore(app);
-    // console.log(props.user)
-    const [edit, setEdit] = useState(false)
-    const [name, setName] = useState(props.data.name)
-    const [email, setEmail] = useState(props.data.email)
-    const [contact, setContact] = useState(props.data.contact_number)
-    const [access_type, setAccessType] = useState(props.data.access_type)
-    const [WhatsApp_number, setWhatsApp_number] = useState(props.data.WhatsApp_number)
-    const [userType, setUserType] = useState({value:props.data.user_type,label:props.data.user_type})
     const animatedComponents = makeAnimated();
-    const [lead_list, setLead_list] = useState([])
-    // console.log(userType)
-    const Access=[
-        {value:'Hide', label:'Hide' },
-        {value:'show', label:'show' },
-        {vlaue:'other' , label:'other'}
-    ]
-    const Destinations = [
-        { value: 'Thailand', label: 'Thailand', color: '#00B8D9' },
-        { value: 'Bali', label: 'Bali', color: '#0052CC' },
-        { value: 'Dubai', label: 'Dubai', color: '#5243AA' },
-        { value: 'Europe', label: 'Europe', color: '#FF5630', },
-        { value: 'Sri Lanka', label: 'Sri Lanka', color: '#FF8B00' },
-        { value: 'Mauritius', label: 'Mauritius', color: '#FFC400' },
-        { value: 'Seychelles', label: 'Seychelles', color: '#36B37E' },
-        { value: 'Vietnmam', label: 'Vietnmam', color: '#00875A' },
-        { value: 'Malaysia', label: 'Malaysia', color: '#253858' },
-        { value: 'Singapore', label: 'Singapore', color: '#666666' },
-        { value: 'Australia', label: 'Australia', color: '#666666' },
-        { value: 'New Zealand', label: 'New Zealand', color: '#666666' },
-        { value: 'Kashmir', label: 'Kashmir', color: '#666666' },
-        { value: 'Himachal', label: 'Himachal', color: '#666666' },
-        { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
-        { value: 'Uttrakhand', label: 'Uttrakhand', color: '#666666' },
-        { value: 'Goa', label: 'Goa', color: '#666666' },
-        { value: 'Kerala', label: 'Kerala', color: '#666666' },
-        { value: 'Andaman', label: 'Andaman', color: '#666666' },
-        { value: 'Sikkim', label: 'Sikkim', color: '#666666' },
-        { value: 'Karnataka', label: 'Karnataka', color: '#666666' },
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [contact, setContact] = useState('');
+    const [access_type, setAccessType] = useState('');
+    const [WhatsApp_number, setWhatsApp_number] = useState('');
+    const [userType, setUserType] = useState({ value: '', label: '' });
+    const [lead_list, setLead_list] = useState([]);
+
+    const Access = [
+        { value: 'Hide', label: 'Hide' },
+        { value: 'show', label: 'show' },
+        { value: 'other', label: 'other' }
     ];
+
     var currentdate = new Date();
-    function handleUserType(args){
-        setUserType({value:args.value, label:args.value})
-        // console.log(args)
-    }
-    function leadHandler(e) {
-        const list = []
-        for (let len = 0; len <= e.length - 1; len++) {
-            list.push(e[len].value)
-            // console.log(e[len].value)
-        }
-        // console.log(list)
-        setLead_list(list)
-    }
-    function changeAcessType(args) {
-        setAccessType(args.target.value)
-    }
-    function onChangeName(e) {
-        setName(e.target.value)
-    }
-    function onChangeEmail(e) {
-        setEmail(e.target.value)
-    }
-    function onChangeContact(e) {
-        setContact(e.target.value)
-    }
-    function onChangeWhatsAppNumber(e) {
-        setWhatsApp_number(e.target.value)
+
+    useEffect(() => {
+        setName(props.data.name);
+        setEmail(props.data.email);
+        setContact(props.data.contact_number);
+        setAccessType(props.data.access_type);
+        setWhatsApp_number(props.data.WhatsApp_number);
+        setUserType({ value: props.data.user_type, label: props.data.user_type });
+        setLead_list(props.data.following_lead || []);
+    }, [props.data]);
+
+    function handleUserType(args) {
+        setUserType({ value: args.value, label: args.value });
     }
 
-    function handelClose() {
-        setEdit(false)
+    function leadHandler(e) {
+        const list = e.map(item => item.value);
+        setLead_list(list);
     }
-    function editmode() {
-        setEdit(true)
+
+    function changeAcessType(args) {
+        setAccessType(args.target.value);
     }
+
     async function updateUserDetails() {
         try {
-            // console.log({name ,access_type,WhatsApp_number,contact})
-            // console.log(props.data)
             const user = doc(db, "Profile", props.data.uid);
             await updateDoc(user, {
-                name: name,
+                name,
                 account_updated_date: `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`,
-                account_updated_time: `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}:${currentdate.getMilliseconds()}`,
-                WhatsApp_number: WhatsApp_number,
+                account_updated_time: `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`,
+                WhatsApp_number,
                 contact_number: contact,
-                access_type: access_type,
-                email: props.data.email,
-                user_type:userType.value,
+                access_type,
+                email,
+                user_type: userType.value,
                 following_lead: lead_list
             });
-            props.datahandle()
-            handelClose()
+            props.datahandle();
+            props.closeModal(); // Close modal after updating
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(error)
-        }
-
     }
+
     return (
         <>
             <div className="main">
                 <div className='logo'>
-                    <PersonOutlined
-                        color='primary'
-                        fontSize='large'
-                    />
+                    <PersonOutlined color='primary' fontSize='large' />
                 </div>
                 <div className='user_details'>
-                    <p>E-mail:-{props.data.email}</p>
-                    <p>Name:-{props.data.name}</p>
-                    <p>access_type:-{props.data.access_type}</p>
-                    <p>following_lead:-{props.data.following_lead}</p>
-                    <p>contact_number:-{props.data.contact_number}</p>
+                    <p><strong>E-mail:</strong> {props.data.email}</p>
+                    <p><strong>Name:</strong> {props.data.name}</p>
+                    <p><strong>Access Type:</strong> {props.data.access_type}</p>
+                    <p><strong>Contact Number:</strong> {props.data.contact_number}</p>
                 </div>
-                <div >
-                    <button className='access_control' onClick={() => editmode()}>Edit</button>
+                <div>
+                    <button className='access_control' onClick={props.onEdit}>Edit</button>
                 </div>
             </div>
-            {
-                edit ?
-                    <Modal style={{ display: "flex", justifyContent: "center" }} open={edit} onClose={handelClose} >
-                        <div className='edit_main'>
-                            <PersonOutlined
-                                color='primary'
-                                fontSize='large'
-                            />
-                            <div className='input_slot'>
-                                <label>name</label>
-                                <input className='input' type="sapn" placeholder='Name' value={name} onChange={(e) => onChangeName(e)}></input>
-                            </div>
-                            <div className='input_slot'>
-                                <label>email</label>
-                                <input className='input' type="email" placeholder='E-mail' value={email} onChange={(e) => onChangeEmail(e)}></input>
-                            </div>
-                            <div className='input_slot'>
-                                <label>contact</label>
-                                <input className='input' type="tel" placeholder='Contact' value={contact} onChange={(e) => onChangeContact(e)}></input>
-                            </div>
-                            <div className='input_slot'>
-                                <label>what's app</label>
-                                <input className='input' type="tel" placeholder="What's app" value={WhatsApp_number} onChange={(e) => onChangeWhatsAppNumber(e)}></input>
-                            </div>
-                            <div className='access_setter'>
-                                <div>
-                                    <FormControl onChange={(e) => changeAcessType(e)}>
-                                        <FormLabel >Access</FormLabel>
-                                        <RadioGroup value={access_type} >
-                                            <FormControlLabel value="admin" control={<Radio />} label="Admin" />
-                                            <FormControlLabel value="User" control={<Radio />} label="User" />
-                                            <FormControlLabel value="Flight" control={<Radio />} label="Flight" />
-                                            <FormControlLabel value="Unauthorise" control={<Radio />} label="Unauthorise" />
-                                            <FormControlLabel value="Block" control={<Radio />} label="Block" />
-                                            <FormControlLabel value="Operation" control={<Radio />} label="Operation" />
-                                            <FormControlLabel value="Super Admin" control={<Radio />} label="Super Admin" />
-                                            <FormControlLabel value="Accounts" control={<Radio />} label="Accounts" />
-                                            <FormControlLabel value="freelance" control={<Radio />} label="freelance" />
-                                            <FormControlLabel value="Team Leader" control={<Radio />} label="Team Leader" />
-                                            <FormControlLabel value="Caller" control={<Radio />} label="Caller" />
 
-
-                                        </RadioGroup>
-                                    </FormControl>
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '9rem' }}>
-                                    {/* <Select
-
-                                        closeMenuOnSelect={false}
-                                        components={animatedComponents}
-                                        isMulti
-                                        options={Destinations}
-                                        onChange={(e) => leadHandler(e)}
-                                    /> */}
-                                    <div>
-                                        <FormLabel >user Type</FormLabel>
-                                        <Select
-                                            closeMenuOnSelect={true}
-                                            components={animatedComponents}
-                                            defaultValue={userType}
-                                            options={Access}
-                                            onChange={(e) => handleUserType(e)}
-                                        />
-
-                                    </div>
-                                </div>
-                            </div>
-                            <button className='userupdateButton' onClick={() => updateUserDetails()}>update</button>
+            {props.isEditMode && (
+                <Modal style={{ display: "flex", justifyContent: "center", alignItems: "center" }} open={true} onClose={props.closeModal}>
+                    <div className='edit_main'>
+                        <PersonOutlined color='primary' fontSize='large' />
+                        <div className='input_slot'>
+                            <label>Name</label>
+                            <input className='input' type="text" value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
-                    </Modal>
-                    : <></>
-            }
+                        <div className='input_slot'>
+                            <label>Email</label>
+                            <input className='input' type="email" value={email} disabled />
+                        </div>
+                        <div className='input_slot'>
+                            <label>Contact</label>
+                            <input className='input' type="tel" value={contact} onChange={(e) => setContact(e.target.value)} />
+                        </div>
+                        <div className='input_slot'>
+                            <label>WhatsApp Number</label>
+                            <input className='input' type="tel" value={WhatsApp_number} onChange={(e) => setWhatsApp_number(e.target.value)} />
+                        </div>
+                        <div className='access_setter'>
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Access</FormLabel>
+                                <RadioGroup value={access_type} onChange={changeAcessType}>
+                                    <FormControlLabel value="User" control={<Radio />} label="User" />
+                                    <FormControlLabel value="Caller" control={<Radio />} label="Caller" />
+                                    <FormControlLabel value="Flight" control={<Radio />} label="Flight" />
+                                    <FormControlLabel value="freelance" control={<Radio />} label="freelance" />
+                                    <FormControlLabel value="Unauthorise" control={<Radio />} label="Unauthorise" />
+                                    <FormControlLabel value="Block" control={<Radio />} label="Block" />
+                                    <FormControlLabel value="Team Leader" control={<Radio />} label="Team Leader" />
+                                    <FormControlLabel value="Operation" control={<Radio />} label="Operation" />
+                                    <FormControlLabel value="Accounts" control={<Radio />} label="Accounts" />
+                                    <FormControlLabel value="admin" control={<Radio />} label="Admin" />
+                                    <FormControlLabel value="Super Admin" control={<Radio />} label="Super Admin" />
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                        <div className='input_slot'>
+                            <label>User Type</label>
+                            <Select options={Access} components={animatedComponents} onChange={handleUserType} value={userType} />
+                        </div>
+                        <button className='access_control' onClick={updateUserDetails}>Submit</button>
+                    </div>
+                </Modal>
+            )}
         </>
     );
-}
+};
 
 export default Userunitcomponent;

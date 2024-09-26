@@ -1,83 +1,151 @@
-.main{
-    width: 95%;
-    /* height: 10rem; */
-    /* background-color: aqua; */
-    align-items: center;
-    margin: 1rem;
+.main {
     display: flex;
     justify-content: space-between;
-    border-radius: 1rem;
-    border: 0.2rem solid rgb(48, 205, 233);
-}
-.logo{
-    margin: 3rem;
-    width: 1rem;
-    height: 1rem;
-}
-.user_details{
-width: 20rem;
-font-family: Montserrat;
-color: darkcyan;
-/* background-color: aqua; */
-}
-.change_acess{
-    /* width: 1rem; */
-    height: 0.1rem;
-    border: 0.2rem solid rgb(48, 205, 233);
-    /* background-color: black; */
-}
-.access_control{
-    margin-right: 1rem;
-    width: 5rem;
-    border-radius: 1rem;
-    border: 0.1rem dashed rgb(48, 205, 233);
-
-}
-.access_control:hover{
-    transform: scale(1.1);
-}
-.edit_main{
-    width: 30rem;
-    height: 35rem;
-    background: #FFFF;
-    border-radius: 1rem;
-    border: 0.1rem dashed rgb(48, 205, 233);
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    font-family: Montserrat;
-    text-transform: capitalize;
-    color: rgb(48, 205, 233);
-    overflow-y: scroll;
-
-}
-.input_slot{
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .logo {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
-}
-.input{
-    width: 15rem;
-    border-radius: 1rem;
-    padding-left: 1rem;
-}
-.access_setter{
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-
-}
-.userupdateButton{
-    width: 5rem;
-    height: 1.5rem;
-    border-radius: 1rem;
     justify-content: center;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 0.8rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .user_details {
+    flex-grow: 1;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .user_details p {
+    margin: 0.2rem 0;
+  }
+  
+  .access_control {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+  }
+  
+  .access_control:hover {
+    background-color: #0056b3;
+  }
+  
+  .edit_main {
+    height: 87%;
+    overflow-y: scroll;
+    background-color: #fff;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
     display: flex;
-    align-items: center;
-    font-family: Montserrat;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .input_slot {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input_slot label {
     font-weight: 600;
-    color: green;
-    text-transform: capitalize;
-    letter-spacing: 0.1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .input {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+  }
+  
+  .input:focus {
+    border-color: #007bff;
+  }
+  
+  .access_setter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .userupdateButton {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end;
+  }
+  
+  .userupdateButton:hover {
+    background-color: #218838;
+  }
+  
+  @media (max-width: 768px) {
+    .main {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .access_control {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  }
+  .search-bar {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .search-input {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 50%;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .search-input:focus {
+    border-color: #007bff;
+  }
+  .user-count-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #007BFF; /* Bright blue background */
+    border-bottom: 2px solid #0056b3; /* Darker blue for contrast */
+    border-radius: 4px; /* Slightly rounded corners */
+}
+
+.access-count {
+    font-weight: bold;
+    color: #FFFFFF; /* White text for clarity */
+    font-size: 1.1em; /* Slightly larger font size */
 }

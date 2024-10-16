@@ -18,7 +18,7 @@ export async function SendNotification() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         // handle the response from the function
       })
       .catch(error => {

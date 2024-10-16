@@ -84,3 +84,30 @@
 .installment-table tr:hover {
   background-color: #f1f1f1;
 }
+/* ///////////////////////////////////////////// */
+/* Table Styling */
+.lead-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.lead-data-table th,
+.lead-data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.lead-data-table th {
+  background-color: #007bff; /* Header background color */
+  color: white; /* Header text color */
+}
+
+.lead-data-table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Zebra striping */
+}
+
+.lead-data-table tr:hover {
+  background-color: #ddd; /* Highlight on hover */
+}

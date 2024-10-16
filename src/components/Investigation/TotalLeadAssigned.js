@@ -15,7 +15,7 @@ function TotalLeadAssigned({ Total_Lead_Analysed: passed_Total_Lead_Analysed, Al
   const [error, setError] = useState(null);
 
   function rangeController(trigger, e) {
-    console.log(trigger)
+    // console.log(trigger)
     if (trigger == 'from') {
         var date = new Date(e.target.value)
         setStartDate(date)
@@ -50,7 +50,7 @@ function TotalLeadAssigned({ Total_Lead_Analysed: passed_Total_Lead_Analysed, Al
                 });
                 user_analytics.value = list.length
                 holdAlluserAnalytics.push(user_analytics)
-                console.log(list)
+                // console.log(list)
 
 
             }

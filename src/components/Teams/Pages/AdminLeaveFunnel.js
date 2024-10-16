@@ -126,7 +126,7 @@ const Component = ({ data, docid, getLeaveApplication }) => {
         if (Day == 0) {
             Day = -1
         }
-        { console.log(data.LeaveType, Day) }
+        // { console.log(data.LeaveType, Day) }
         switch (data.LeaveType) {
             case 'CasualLeave': {
                 Leaves.CasualLeave = Math.abs(Leaves['CasualLeave'] + Day)
@@ -163,7 +163,7 @@ const Component = ({ data, docid, getLeaveApplication }) => {
         if (Day == 0) {
             Day = 1
         }
-        { console.log(data.LeaveType, Day) }
+        // { console.log(data.LeaveType, Day) }
         switch (data.LeaveType) {
             case 'CasualLeave': {
                 Leaves.CasualLeave = Math.abs(Leaves['CasualLeave'] + Day)

@@ -191,7 +191,7 @@ const Row = (props) => {
             props.getLeadOnBoard()
             handleMonthControllerModal()
         } else {
-            console.log("Month does not match , no update performed.");
+            // console.log("Month does not match , no update performed.");
         }
     }
     async function updateStatus() {

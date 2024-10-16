@@ -20,7 +20,7 @@ const Usercontrol = (props) => {
         if (auth) {
             let list = [];
             const querySnapshot = await getDocs(
-                query(collection(db, "Profile"), where("access_type", "!=", "Block"))
+                query(collection(db, "Profile"))
             );
             querySnapshot.forEach((doc) => {
                 list.push(doc.data());

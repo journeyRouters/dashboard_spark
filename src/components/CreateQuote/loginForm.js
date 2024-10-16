@@ -1,11 +1,10 @@
 import { Modal } from '@material-ui/core';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import moment from 'moment';
 import React, { useState } from 'react';
 import '../../App.css';
-import moment from 'moment';
 import app from '../required';
-import { isAdmin } from '@firebase/util';
 
 
 const Loginform = (props) => {
@@ -58,7 +57,7 @@ const Loginform = (props) => {
                 account_updated_time: moment(currentdate).format('h:mm:ss'),
                 WhatsApp_number: userWhatsApp_number,
                 contact_number: contact,
-                access_type: "Block",
+                access_type: "Unauthorise",
                 email: args.email,
                 following_lead: [],
                 uid: args.uid,

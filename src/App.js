@@ -51,6 +51,8 @@ import app from './components/required';
 import Usercontrol from './components/usercontrol/UserControl';
 import Test from './components/tester/Test.js';
 import PendingPayments from './components/payments_vouchers/operation/PendingPayments.js';
+import WebLeadLoader from './components/leadDriver/WebLead/WebLeadLoader.js';
+import OperationInvoiceHandle from './components/payments_vouchers/operation/OperationInvoiceHandle.js';
 
 
 
@@ -301,6 +303,7 @@ function App() {
               {/* <Route path='/FlightCreateQuote' element={<Flight auth={auth} profile={profile} />} /> */}
               <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
               <Route path='/Detailpage' element={<Detailpage auth={auth} profile={profile} />} />
+                <Route path='OperationFileManager' element={<OperationInvoiceHandle Auth={auth} profile={profile}/>} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operation"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
@@ -312,7 +315,7 @@ function App() {
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
                 <Route path='/Dynamicdatachart' element={<Dynamicdatachart auth={auth} data={profile} />} />
-                {/* <Route path='/Test' element={<Test auth={auth} data={profile} />} /> */}
+                <Route path='/Test' element={<Test auth={auth} data={profile} />} />
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />
@@ -320,6 +323,7 @@ function App() {
                 <Route path='/PostStayFiles' element={<Poststay profile={profile} />} />
                 <Route path='/Whatsappleads' element={<Whatsappleads profile={profile} />} />
                 <Route path='/PendingPayments' element={<PendingPayments profile={profile} />} />
+                <Route path='/WebLeadLoader' element={<WebLeadLoader profile={profile} />} />
               </Route>
             </Routes>
           </div>

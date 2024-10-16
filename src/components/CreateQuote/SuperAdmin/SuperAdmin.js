@@ -191,7 +191,6 @@ const SuperAdmin = (props) => {
                             <option value={0}> assign to</option>
                             {
                                 profile.map((data, index) => (<>
-                                    {/* {console.log(data.Lead_Current)} */}
                                     <option key={index} value={data.uid}>{data.name}</option>
 
                                 </>))

@@ -21,7 +21,7 @@ export async function installmentController(installment, TripId) {
         }
 
         const text = await response.text();
-        console.log('Response:', text);
+        // console.log('Response:', text);
     } catch (error) {
         console.error('Request failed:', error);
     }
@@ -53,7 +53,7 @@ export async function PaymentConfirmation(installment, Email, AmountReceive, Nex
         }
 
         const text = await response.text();
-        console.log('Response:', text);
+        // console.log('Response:', text);
     } catch (error) {
         console.error('Request failed:', error);
     }

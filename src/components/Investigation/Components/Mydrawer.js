@@ -1,14 +1,10 @@
 import { Drawer } from '@material-ui/core';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import './Mydrawer.css';
 function Mydrawer({ open, Data }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(open);
-    const navigate = useNavigate();
-    const threeDaysAgo = moment().subtract(3, 'days').toDate();
-    // const threeDaysAgo = moment().subtract(3, 'days').startOf('day').toDate();
 
     const toggleDrawer = (newOpen) => {
         setIsDrawerOpen(newOpen);

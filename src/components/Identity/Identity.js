@@ -135,7 +135,7 @@ function Identity({ }) {
                     // console.log(isUserDataAvailableInDb, updatedUserProfileData);
                     UpdateUserDataToFireBaseCollection(profile.uid, updatedUserProfileData);
                 } else {
-                    console.log(isUserDataAvailableInDb, updatedUserProfileData);
+                    // console.log(isUserDataAvailableInDb, updatedUserProfileData);
                     setNewUserDataToFireBaseCollection(profile.uid, updatedUserProfileData);
                 }
             },

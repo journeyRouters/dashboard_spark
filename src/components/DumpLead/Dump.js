@@ -35,7 +35,7 @@ const Dump = ({ auth, profile_ }) => {
                     list.push(doc.data())
                 });
                 setLead_data(list)
-                console.log(list)
+                // console.log(list)
 
             }
         }

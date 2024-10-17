@@ -66,7 +66,6 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         installmentController(installmentjson, TripId);
     }
 
-    // Disable fields if status is 'Received' or profile access_type is not 'Accounts'
     const isDisabled = data.Status === 'Received' || profile.access_type !== 'Accounts';
 
     return (

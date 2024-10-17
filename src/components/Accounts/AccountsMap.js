@@ -707,6 +707,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                 </div>
                                 <div className='paymentsConfirmer'>
                                     <InstallmentsMapper data={invoice.installment}
+                                        profile={profile}
                                         Email={invoice.selected_pdf_data.travel_data.Email}
                                         setDetails={setDetails}
                                         handleInstallments={handleInstallments} TripId={data.TripId} />

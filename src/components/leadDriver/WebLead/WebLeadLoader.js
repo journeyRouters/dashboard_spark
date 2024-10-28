@@ -41,7 +41,7 @@ const WebLeadLoader = () => {
         try {
             const response = await fetch(`https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?query=${searchQuery}`);
             const data = await response.json();
-            setLeads(data.leads); // Replace existing leads with fetched leads
+            setLeads(data.leads);
         } catch (error) {
             console.error('Error fetching leads:', error);
         }

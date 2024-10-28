@@ -24,6 +24,7 @@ const Inclusion = (props) => {
         return false
     }
     function handleData_inclusion(e) {
+
         var firevalue = BooleanCaseResolver(e.target.value)
         // debugger
 
@@ -149,6 +150,7 @@ const Inclusion = (props) => {
             setFeed(prevState => ({
                 ...prevState,
                 other_Exclusion: e.target.value
+
             }))
         }
         if (e.target.name === "Private_cab") {

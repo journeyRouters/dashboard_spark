@@ -145,7 +145,7 @@ const Profile = (
             Travel_Duration: count_days,
             updated_last: new Date()
         });
-        debugger
+        // debugger
     }
 
 

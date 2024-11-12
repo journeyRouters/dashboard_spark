@@ -55,11 +55,11 @@ const Maldivespdf = ({
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const [flightImgLinks, setflightImgLinks] = useState([])
     const [inclusionLinks, setinclusionLinks] = useState([])
-    const[travelEndDate,setTravelEndDate]=useState()
-    function getTravelEndDate(){
-        var tempDate=new Date(selected_Travel_date)
-        var nights=count_days-1
-        tempDate.setDate(tempDate.getDate()+nights)
+    const [travelEndDate, setTravelEndDate] = useState()
+    function getTravelEndDate() {
+        var tempDate = new Date(selected_Travel_date)
+        var nights = count_days - 1
+        tempDate.setDate(tempDate.getDate() + nights)
         setTravelEndDate(tempDate)
         // console.log(tempDate)
     }
@@ -138,7 +138,7 @@ const Maldivespdf = ({
             Follow_Up_date: String(selected_Travel_date),
             time: currentdate,
             Quoted_by: profile.email,
-            travelEndDate:travelEndDate,
+            travelEndDate: travelEndDate,
             Travel_Duration: count_days,
             Pax: data.Pax,
             Child: data.Child,
@@ -167,7 +167,7 @@ const Maldivespdf = ({
                     inclusion_data: inclusion_data,
                     SelectedpackageType: SelectedpackageType,
                     Quoted_by: profile.name,
-                    travelEndDate:travelEndDate,
+                    travelEndDate: travelEndDate,
                     no_rooms: no_rooms,
                     MealPlan: MealPlan,
                     Transfer: Transfer,
@@ -517,7 +517,7 @@ const Maldivespdf = ({
                                 </div>
                                 <div
                                     style={{
-                                        width:'55rem',
+                                        width: '55rem',
                                         backgroundImage: "url(/assets/pdfDefaultImage/seprateFooter1.jpg)",
                                         // backgroundPosition: "top",
                                         backgroundRepeat: "no-repeat",
@@ -762,6 +762,23 @@ const Maldivespdf = ({
 
                         </div>
                     </div>
+                    {/* start of jr info page */}
+                    <div className="page-break">
+                        <div className="page2"
+                            style={{
+                                backgroundImage: "url(/assets/pdfDefaultImage/journeyRouters_about.png)",
+                                backgroundPosition: "top",
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover"
+                            }}
+                        >
+                            <div className='paymentsPage'>
+                                <Footer whatsApp={whatsApp} />
+                            </div>
+
+                        </div>
+                    </div>
+                    {/* end of jr info page */}
                     <div className="page-break">
                         <div className="page2"
                             style={{

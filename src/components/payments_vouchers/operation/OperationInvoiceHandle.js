@@ -11,6 +11,7 @@ import InvoicePdf from '../../invoice/invoicePdf.js';
 import InstallmentsMapper from '../../Accounts/installmentsMapper.js';
 import EditInvoice from '../../Accounts/EditInvoice.js';
 import { useLocation } from 'react-router-dom';
+import moment from 'moment';
 
 const db = getFirestore(app);
 
@@ -197,7 +198,7 @@ const OperationInvoiceHandle = () => {
                         <div className='personal_details'>
                             <p>Package: {leadData.Departure_City} ---- {leadData.Destination}</p>
                             <p>Travel Duration: {leadData.Travel_Duration} Night(s)</p>
-                            <p>Travel date: {leadData.Follow_Up_date}</p>
+                            <p>Travel date: {moment(leadData.Travel_Date.toDate()).format('DD-MM-YYYY')}</p>
                             <p>Budget: {leadData.Budget}</p>
                         </div>
                     </div>

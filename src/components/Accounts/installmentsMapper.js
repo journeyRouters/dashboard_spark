@@ -58,7 +58,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         if (installmentjson[index].Status === 'Received' && !emailSent) {
             if (Email) {
                 PaymentConfirmation(installmentjson, Email, installmentjson[index].amount, installmentjson[index + 1]?.amount, TripId);
-                setEmailSent(true); // Mark email as sent
+                setEmailSent(true); 
             } else {
                 alert('No Email Available');
             }

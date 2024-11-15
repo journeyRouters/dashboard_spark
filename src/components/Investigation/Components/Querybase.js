@@ -7,7 +7,7 @@ export function getConvertedDataForUserProfile(usersProfile, DataQuery, stateman
         const list = [];
         querySnapshot.forEach((doc) => {
             list.push(doc.data());
-            console.log(doc.data().TripId)
+            // console.log(doc.data().TripId)
         });
         const IncomingData = { Name: usersProfile.name, Data: list, Number: list.length };
         HandleIncomingData(IncomingData, statemanagment)

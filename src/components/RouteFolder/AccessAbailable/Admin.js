@@ -65,12 +65,12 @@ function Admin({ }) {
                     <p>What's app</p>
                 </NavLink>
             </div>
-            <div className='sidebarCard'>
-                <NavLink className='sidebarCardContaint' to='/WebLeadLoader'>
+            {/* <div className='sidebarCard'>
+                <NavLink className='sidebarCardContaint' to='/Test'>
                     <PersonOutlineOutlined style={{ marginRight: "1rem" }} />
                     <p>Website Lead</p>
                 </NavLink>
-            </div>
+            </div> */}
         </div>
     );
 }

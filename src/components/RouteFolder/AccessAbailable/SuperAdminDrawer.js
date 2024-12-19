@@ -50,6 +50,13 @@ function SuperAdminDrawer({ }) {
                     <p>Converted</p>
                 </NavLink>
             </div>
+
+            <div className='sidebarCard'>
+                <NavLink className='sidebarCardContaint' to='/CanceledTripOperations'>
+                    <SearchTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Cancel Trips</p>
+                </NavLink>
+            </div>
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/Dynamicdatachart'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />

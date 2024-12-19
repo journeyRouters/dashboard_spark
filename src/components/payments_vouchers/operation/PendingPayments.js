@@ -117,7 +117,7 @@ function PendingPayments(props) {
                     </div>
                     <button className='buttonSubmit' type="submit">Submit</button>
                 </form>
-                <button className='buttonSubmit' onClick={() => OverDuePaymentsController()}>Over Due Payments</button>
+                <button className='buttonSubmit' onClick={() => OverDuePaymentsController()}>Over Due</button>
                 <button className='buttonSubmit' onClick={() => exportToExcel(Leads)}>export Data</button>
             </div>
 

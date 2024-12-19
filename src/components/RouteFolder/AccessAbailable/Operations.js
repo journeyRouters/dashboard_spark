@@ -42,6 +42,12 @@ function Operations({ }) {
                     <p>Flights</p>
                 </NavLink>
             </div>
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/CanceledTripOperations'>
+                    <AccountTreeTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Cancel Trip</p>
+                </NavLink>
+            </div>
           
         </div>
     );

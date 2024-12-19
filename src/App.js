@@ -53,6 +53,7 @@ import Test from './components/tester/Test.js';
 import PendingPayments from './components/payments_vouchers/operation/PendingPayments.js';
 import WebLeadLoader from './components/leadDriver/WebLead/WebLeadLoader.js';
 import OperationInvoiceHandle from './components/payments_vouchers/operation/OperationInvoiceHandle.js';
+import CanceledTripOperations from './components/payments_vouchers/operation/CanceledTripOperations.js';
 
 
 
@@ -309,13 +310,14 @@ function App() {
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
                 <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
                 <Route path='AdminFollowUpManagement' element={<AdminFollow auth={auth} profile={profile} />} />
+                <Route path='/CanceledTripOperations' element={<CanceledTripOperations auth={auth} profile={profile} />} />
                 <Route path='/SeekCreateQuote' element={<SuperAdmin auth={auth} profile={profile} />} />
                 <Route path='/ManageAllTeam' element={<Main_Admin profile={profile} auth={auth} />} />
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
                 <Route path='/Dynamicdatachart' element={<Dynamicdatachart auth={auth} data={profile} />} />
-                {/* <Route path='/Test' element={<Test auth={auth} data={profile} />} /> */}
+                <Route path='/Test' element={<Test auth={auth} data={profile} />} />
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

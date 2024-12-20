@@ -186,6 +186,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                             <option value={'Mauritius'}>Mauritius</option>
                             <option value={'Baku'}>Baku</option>
                             <option value={'Almaty'}>Almaty</option>
+                            <option value={'Srilanka'}>Srilanka</option>
                         </select>
                     </div>
                     <div>

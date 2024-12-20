@@ -2462,7 +2462,42 @@ export const avtivityList = {
             label: 'Transfer',
             value: 'Transfer'
         },
-    ]
+    ],
+    Srilanka:
+        [
+            { label: 'Arrival', value: 'Arrival' },
+            { label: "COLOMBO CITY TOUR (COLOMBO)", value: "ColomboCityTour" },
+            { label: "SIGIRIYA LION ROCK (SIGIRIYA)", value: "SigiriyaLionrock" },
+            { label: "PINNAWALA ELEPHANT ORPHANAGE (Rambukkana)", value: "PinnawalaElephantOrphanage" },
+            { label: "TEMPLE OF THE TOOTH RELIC (Kandy)", value: "TempleOfTheSacredToothRelic" },
+            { label: "MADU RIVER BOAT RIDE (GALLE)", value: "MaduRiverBoatRide" },
+            { label: "TURTLE HATCHERY (Hikkaduwa)", value: "TurtleHatchery" },
+            { label: "GREGORY LAKE (Nuwara Eliya)", value: "GregoryLake" },
+            { label: "HAGGALA GARDEN (Nuwara Eliya)", value: "HagglaGarden" },
+            { label: "LOTUS TOWER (COLOMBO)", value: "LotusTower" },
+            { label: "KANDY LAKE (KANDY)", value: "kandyLake" },
+            { label: "ELLA TRAIN (ELLA)", value: "EllaTrain)" },
+            { label: "MIRISSA (WHALE WATCHING)", value: "Mirissa" },
+            { label: "GALLE", value: "Galle" },
+            { label: "NUWARA ELIYA", value: "NuwaraEliya" },
+            { label: "SEETHA ELIYA TEMPLE", value: "SeethaEliyaTemple" },
+            { label: "Ambuluwawa Tower (Kandy)", value: "AmbuluwawaTower" },
+            { label: "Peradeniya Botanical Garden (Kandy)", value: "PeradeniyaBotanicalGarden" },
+            { label: "Ravana waterfall (ELLA)", value: "RavanaFalls" },
+            { label: "YALA NATIONAL PARK", value: "YalaNationalPark" },
+            { label: "NINE ARCH BRIDGE (ELLA)", value: "NineArchBridge" },
+            { label: "DAMBULLA", value: "Dambulla" },
+            { label: "GALLE FACE GREEN (COLOMBO)", value: "GalleFaceGreen" },
+            { label: "VIHARAMAHADEVI PARK (COLOMBO)", value: "ViharamaDeviPark" },
+            { label: "NATIONAL MUSEUM (COLOMBO)", value: "NationalMuseumColombo" },
+            { label: "INDEPENDENCE HALL AT INDEPENDENCE SQUARE (COLOMBO)", value: "IndependenceHall" },
+            { label: "KANDY CITY TOUR", value: "KandyCityTour" },
+            { label: 'Transfer', value: 'Transfer' },
+            { label: "leisure", value: "Leisureday" },
+            { label: 'Departure', value: 'Departure' }
+        ]
+
+
 }
 export function ActivityResolver(destination) {
     // console.log(avtivityList[destination])

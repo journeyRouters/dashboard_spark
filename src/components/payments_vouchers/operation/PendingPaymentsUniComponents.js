@@ -30,6 +30,17 @@ function PendingPaymentsUniComponents({ lead }) {
         setCancellationType(e.target.value)
         // console.log(e.target.value)
     }
+    async function updateInvoiceWithCancellation(invoiceID) {
+        try {
+            const invoiceRef = doc(db, "invoice", invoiceID);
+            await updateDoc(invoiceRef, {
+                FinalInstallmentStatus: "Cancel",
+            });
+        } catch (error) {
+            console.error("Error updating document: ", error);
+        }
+    }
+    
     async function updateTripWithCancellation(tripID, cancellationReason) {
         try {
             const tripRef = doc(db, "Trip", tripID);
@@ -39,7 +50,7 @@ function PendingPaymentsUniComponents({ lead }) {
                 CanceldAt: new Date(),
                 CancellationType:CancellationType,
             });
-            console.log("Trip updated successfully with cancellation details!");
+            updateInvoiceWithCancellation(tripID)
         } catch (error) {
             console.error("Error updating document: ", error);
         }

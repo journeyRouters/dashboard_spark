@@ -2487,6 +2487,8 @@ export const avtivityList = {
             { label: "YALA NATIONAL PARK", value: "YalaNationalPark" },
             { label: "NINE ARCH BRIDGE (ELLA)", value: "NineArchBridge" },
             { label: "DAMBULLA", value: "Dambulla" },
+            { label: 'Bentota', value: 'Bentota' },
+            { label: 'Colombo', value: 'Colombo' },
             { label: "GALLE FACE GREEN (COLOMBO)", value: "GalleFaceGreen" },
             { label: "VIHARAMAHADEVI PARK (COLOMBO)", value: "ViharamaDeviPark" },
             { label: "NATIONAL MUSEUM (COLOMBO)", value: "NationalMuseumColombo" },

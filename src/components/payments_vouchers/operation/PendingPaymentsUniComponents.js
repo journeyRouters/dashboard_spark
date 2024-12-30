@@ -59,7 +59,7 @@ function PendingPaymentsUniComponents({ lead }) {
         }
     }
     return (<>
-        <div className='invoiceDataMapping'>
+        <div className={lead.FinalInstallmentStatus =='Cancel'?'CancelTrip':'invoiceDataMapping'}>
             <div className='Basic_details'>
                 <h3 className='tripId'>{lead.selected_pdf_data.travel_data.TripId}</h3>
                 <h3>{lead.selected_pdf_data.travel_data.Traveller_name}</h3>
@@ -76,7 +76,7 @@ function PendingPaymentsUniComponents({ lead }) {
                 <h3>Installment Amount:- {lead.NextInstallmentAmount}</h3>
                 <h3>Due On:- {moment(lead.NextInstallmentDate.toDate()).format('DD-MMMM-YYYY')}</h3>
                 <button onClick={handleopen}>All Installments</button>
-                <button onClick={() => setCancellationFormOpen(true)}>Initialize Cancellation</button>
+                <button disabled={lead.FinalInstallmentStatus =='Cancel'} onClick={() => setCancellationFormOpen(true)}>Initialize Cancellation</button>
             </div>
         </div>
         <Modal open={CancellationFormOpen} onClose={closecancellationForm}>

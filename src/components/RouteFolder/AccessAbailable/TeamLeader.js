@@ -43,6 +43,12 @@ function TeamLeader({ }) {
                 </NavLink>
             </div>
             <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/CancelTrip'>
+                    <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Cancel trips</p>
+                </NavLink>
+            </div>
+            <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/Dynamicdatachart'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />
                     <p>New Investigation</p>

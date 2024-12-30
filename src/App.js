@@ -54,6 +54,7 @@ import PendingPayments from './components/payments_vouchers/operation/PendingPay
 import WebLeadLoader from './components/leadDriver/WebLead/WebLeadLoader.js';
 import OperationInvoiceHandle from './components/payments_vouchers/operation/OperationInvoiceHandle.js';
 import CanceledTripOperations from './components/payments_vouchers/operation/CanceledTripOperations.js';
+import CancelTrip from './components/CancelTrips/CancelTrips.js';
 
 
 
@@ -305,6 +306,7 @@ function App() {
               <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
               <Route path='/Detailpage' element={<Detailpage auth={auth} profile={profile} />} />
                 <Route path='OperationFileManager' element={<OperationInvoiceHandle Auth={auth} profile={profile}/>} />
+                <Route path='CancelTrip' element={<CancelTrip Auth={auth} profile={profile}/>} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operation"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />

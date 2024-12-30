@@ -1,3 +1,4 @@
+import { AccountBalanceWalletTwoTone } from '@material-ui/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -29,12 +30,12 @@ function SalesPerson({ }) {
                     <p>Vouchers & payments</p>
                 </NavLink>
             </div>
-            {/* <div className='sidebarCard' >
-                      <div className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </div>
-                    </div> */}
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/CancelTrip'>
+                    <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Cancel Trips</p>
+                </NavLink>
+            </div>
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/SalesPersonInvestigation'>
                     <p>Investigation</p>

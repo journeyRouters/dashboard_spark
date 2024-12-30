@@ -28,16 +28,17 @@ function Freelancer({ }) {
                     <p>Quotation Followup</p>
                 </NavLink>
             </div>
-            {/* <div className='sidebarCard' >
-                      <NavLink className='sidebarCardContaint'>
-                        <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
-                        <p>Converted Files</p>
-                      </NavLink>
-                    </div> */}
+
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/VouchersAndPayments'>
                     <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
                     <p>Vouchers & payments</p>
+                </NavLink>
+            </div>
+            <div className='sidebarCard' >
+                <NavLink className='sidebarCardContaint' to='/CancelTrip'>
+                    <AccountBalanceWalletTwoTone style={{ marginRight: "1rem" }} />
+                    <p>Cancel Trips</p>
                 </NavLink>
             </div>
             <div className='sidebarCard' >

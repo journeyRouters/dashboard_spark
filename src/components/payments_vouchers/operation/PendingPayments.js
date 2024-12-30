@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PendingPayments.css'
 import * as XLSX from 'xlsx';
-import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import app from '../../required';
 import moment from 'moment';
 import PendingPaymentsUniComponents from './PendingPaymentsUniComponents';
@@ -10,6 +10,7 @@ function PendingPayments(props) {
     const [Leads, setLeads] = useState([])
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const[SearchTripId,setSearchTripId]=useState('')
     const handleSubmit = (e) => {
         e.preventDefault();
         const fromDateObj = new Date(fromDate);
@@ -44,6 +45,28 @@ function PendingPayments(props) {
             // console.log(list)
         });
     }
+
+    async function fetchInvoiceById(docId) {
+        if (!docId) {
+            setLeads([]);
+            return;
+        }
+    
+        try {
+            const docSnap = await getDoc(doc(db, "invoice", docId));
+    
+            if (docSnap.exists()) {
+                setLeads([docSnap.data()]);
+            } else {
+                setLeads([]);
+            }
+        } catch (error) {
+            setLeads([]);
+        }
+    }   
+    
+    
+    
     async function getDataInDateRange(from, to) {
         const DataQuery = query(collection(db, "invoice"),
             where('FinalInstallmentStatus', '==', 'Pending'),
@@ -84,9 +107,9 @@ function PendingPayments(props) {
         // Generate Excel file and trigger download
         XLSX.writeFile(workbook, `${sheetname}.xlsx`);
     }
-    useEffect(()=>{
+    useEffect(() => {
         TodayOverDuePaymentsController()
-    },[])
+    }, [])
     return (
         <div>
             <div className='Filterparents'>
@@ -117,8 +140,12 @@ function PendingPayments(props) {
                     </div>
                     <button className='buttonSubmit' type="submit">Submit</button>
                 </form>
-                <button className='buttonSubmit' onClick={() => OverDuePaymentsController()}>Over Due</button>
-                <button className='buttonSubmit' onClick={() => exportToExcel(Leads)}>export Data</button>
+                <div className='SearchIndividualTripsAndexport'>
+                    <input placeholder='TripId' onChange={(e)=>setSearchTripId(e.target.value)} value={SearchTripId} ></input>
+                    <button onClick={()=>fetchInvoiceById(SearchTripId)}>Search TripID</button>
+                    <button className='buttonSubmit' onClick={() => OverDuePaymentsController()}>Over Due</button>
+                    <button className='buttonSubmit' onClick={() => exportToExcel(Leads)}>export Data</button>
+                </div>
             </div>
 
             <div className='DataMappingSection'>

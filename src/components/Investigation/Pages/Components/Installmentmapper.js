@@ -165,6 +165,7 @@ function Installmentmapper({ Data }) {
                                     <EditInvoice
                                         installments={invoice.installment}
                                         TripId={Data.TripId}
+                                        finalPackage={finalPackage}
                                         profile={profile}
                                         getUpdatedlead={getInvoice}
                                         closeInvoiceModal={closeInvoiceModal}

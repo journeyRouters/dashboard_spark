@@ -3,11 +3,13 @@ import moment from 'moment';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import app from '../required';
 
-const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoiceModal }) => {
+const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoiceModal, finalPackage }) => {
 
     const db = getFirestore(app);
     const [installment, setInstallment] = useState(installments);
-
+    const totalFinalPackageCost = ['visacost', 'flightcost', 'landPackage']
+        .reduce((sum, key) => sum + parseFloat(finalPackage[key] || 0), 0);
+    const totalInstallments = installment.reduce((sum, { amount }) => sum + parseFloat(amount || 0), 0);
     const setInvoice = async () => {
         try {
             const today = new Date();
@@ -29,12 +31,18 @@ const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoi
             alert('Failed to update the invoice. Please try again.');
         }
     };
-
+    function validatePackage() {
+        return totalFinalPackageCost === totalInstallments;
+    }
     const handleUpdateClick = () => {
         if (installment.length === 0) {
             alert('No Installment Found');
-        } else {
-            setInvoice();
+        }
+        else if (validatePackage()) {
+            setInvoice()
+        }
+        else {
+            alert(`Incorrect Installments , total Amount should be ${totalFinalPackageCost} and  your's = ${totalInstallments}`);
         }
     };
 

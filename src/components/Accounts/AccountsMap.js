@@ -9,8 +9,8 @@ import Maldivespdf from '../MaldivesPdf/Maldivespdf';
 import '../payments_vouchers/Payments.css';
 import Profile from '../Profile/Profile';
 import app from '../required';
+import EditInvoice from './EditInvoice';
 import InstallmentsMapper from './installmentsMapper';
-import EditInvoice from './EditInvoice'
 const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
     const [latestData, setlatestData] = useState(null)
     const [loading, setloading] = useState(false)
@@ -507,8 +507,8 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div className='allComments' >
                                 {
-                                    data.comments.slice(0).reverse().map((U_data, index) => (<>
-                                        <p key={index} className='comment_'>
+                                    data.comments.slice(0).reverse().map((U_data, index) => (
+                                        <div key={index} className='comment_'>
                                             <p>
                                                 {U_data.comments}
                                             </p>
@@ -518,8 +518,8 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                             <p>
                                                 {U_data.time}
                                             </p>
-                                        </p>
-                                    </>))
+
+                                        </div>))
                                 }
                             </div>
                             <div>
@@ -548,15 +548,15 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.vouchers_idproof.map((id, index) => (
-                                                    <>
-                                                        <div key={index} className='hover_popup_main_div'>
-                                                            <p>
-                                                                {id.name}
-                                                            </p>
-                                                            <a href={id.link} download={id.name} target="_blank">download</a>
-                                                            <button disabled onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
-                                                        </div>
-                                                    </>
+
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {id.name}
+                                                        </p>
+                                                        <a href={id.link} download={id.name} target="_blank">download</a>
+                                                        <button disabled onClick={() => ondelete('id', id.path, index)} className='delete_button'>Delete</button>
+                                                    </div>
+
                                                 ))}
                                         </div>
                                     </div>
@@ -611,15 +611,15 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                         <div className='childpopup'>
                                             {
                                                 latestData.Vouchers_others.map((others, index) => (
-                                                    <>
-                                                        <div key={index} className='hover_popup_main_div'>
-                                                            <p>
-                                                                {others.name}
-                                                            </p>
-                                                            <a href={others.link} download={others.name} target="_blank">download</a>
-                                                            <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
-                                                        </div>
-                                                    </>
+
+                                                    <div key={index} className='hover_popup_main_div'>
+                                                        <p>
+                                                            {others.name}
+                                                        </p>
+                                                        <a href={others.link} download={others.name} target="_blank">download</a>
+                                                        <button onClick={() => ondelete('others', others.path, index)} className='delete_button'>Delete</button>
+                                                    </div>
+
                                                 ))}
                                         </div>
 
@@ -698,7 +698,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
                                         EditInvoiceflg ? <>
                                             <Modal open={EditInvoiceflg} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
                                                 <>
-                                                    <EditInvoice installments={invoice.installment} TripId={data.TripId} finalPackage={finalPackage} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal} />
+                                                    <EditInvoice installments={invoice.installment} invoice={invoice} TripId={data.TripId} finalPackage={finalPackage} profile={profile} getUpdatedlead={getUpdatedlead} closeInvoiceModal={closeInvoiceModal} />
                                                 </>
                                             </Modal>
 

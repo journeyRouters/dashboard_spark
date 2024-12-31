@@ -164,6 +164,7 @@ function Installmentmapper({ Data }) {
                                 <Modal open={editInvoiceFlg} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }}>
                                     <EditInvoice
                                         installments={invoice.installment}
+                                        invoice={invoice}
                                         TripId={Data.TripId}
                                         finalPackage={finalPackage}
                                         profile={profile}

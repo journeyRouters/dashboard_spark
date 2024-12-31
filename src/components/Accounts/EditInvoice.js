@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import moment from 'moment';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import moment from 'moment';
+import React, { useState } from 'react';
+import { installmentController } from '../invoice/Globalcontroller';
 import app from '../required';
 
-const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoiceModal, finalPackage }) => {
-
+const EditInvoice = ({ installments,invoice, TripId, profile, getUpdatedlead, closeInvoiceModal, finalPackage }) => {
     const db = getFirestore(app);
     const [installment, setInstallment] = useState(installments);
     const totalFinalPackageCost = ['visacost', 'flightcost', 'landPackage']
@@ -32,7 +32,8 @@ const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoi
         }
     };
     function validatePackage() {
-        return totalFinalPackageCost === totalInstallments;
+        // console.log(totalFinalPackageCost+invoice.TCS,totalInstallments)
+        return totalFinalPackageCost+parseFloat(invoice.TCS) === totalInstallments
     }
     const handleUpdateClick = () => {
         if (installment.length === 0) {
@@ -40,6 +41,7 @@ const EditInvoice = ({ installments, TripId, profile, getUpdatedlead, closeInvoi
         }
         else if (validatePackage()) {
             setInvoice()
+            installmentController(installment,TripId)
         }
         else {
             alert(`Incorrect Installments , total Amount should be ${totalFinalPackageCost} and  your's = ${totalInstallments}`);

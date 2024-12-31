@@ -214,7 +214,7 @@ const OperationInvoiceHandle = () => {
 
                     {isEditInvoiceOpen && (
                         <Modal open={isEditInvoiceOpen} onClose={toggleEditInvoiceModal} style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
-                            <EditInvoice installments={installments} finalPackage={finalPackage} TripId={leadData.TripId} profile={profile} closeInvoiceModal={toggleEditInvoiceModal} />
+                            <EditInvoice installments={installments} invoice={invoice} finalPackage={finalPackage} TripId={leadData.TripId} profile={profile} closeInvoiceModal={toggleEditInvoiceModal} />
                         </Modal>
                     )}
 

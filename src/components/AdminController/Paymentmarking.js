@@ -304,7 +304,7 @@ const PaymentMarking = ({  }) => {
                             EditInvoiceflg ? <>
                                 <Modal open={EditInvoiceflg} onClose={closeInvoiceModal} style={{ display: "flex", justifyContent: "center", marginTop: "4rem" }} >
                                     <>
-                                        <EditInvoice installments={invoice.installment} finalPackage={finalPackage} TripId={lead_data.TripId} profile={profile} closeInvoiceModal={closeInvoiceModal} />
+                                        <EditInvoice installments={invoice.installment} invoice={invoice} finalPackage={finalPackage} TripId={lead_data.TripId} profile={profile} closeInvoiceModal={closeInvoiceModal} />
                                     </>
                                 </Modal>
 

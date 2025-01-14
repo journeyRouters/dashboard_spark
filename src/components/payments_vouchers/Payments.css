@@ -1,7 +1,9 @@
 .global_search {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 19%;
+    border-color: antiquewhite;
+    border: 1px solid;
 }
 
 .option_selector {

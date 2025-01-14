@@ -16,7 +16,7 @@ function Seventytwohr() {
                 const usersProfile = doc.data();
                 const DataQuery = query(collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    where('Lead_Status', 'not-in', ['Dump', 'Converted']),
+                    where('Lead_Status', 'not-in', ['Dump', 'Converted','Cancel']),
                     where("quotation_flg", "==", true));
                     get72hrNon_respondedLeads(usersProfile, DataQuery, setSeventyTwohr);
             });

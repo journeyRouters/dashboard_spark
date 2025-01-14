@@ -55,6 +55,7 @@ import WebLeadLoader from './components/leadDriver/WebLead/WebLeadLoader.js';
 import OperationInvoiceHandle from './components/payments_vouchers/operation/OperationInvoiceHandle.js';
 import CanceledTripOperations from './components/payments_vouchers/operation/CanceledTripOperations.js';
 import CancelTrip from './components/CancelTrips/CancelTrips.js';
+import LeadTeamLeader from './components/leadDriver/LeadTeamLeader.js';
 
 
 
@@ -207,44 +208,26 @@ function App() {
         open ? <Loginform open={open} setopen={setopen} setauth={setAuthFirebase} setData={setData} refreshPage={refreshPage} /> : <></>
       }
 
-
       <div className='assembler'>
-        <div className='sidebars'>
-          {
-            profile ?
-              <>
-                {
-                  profile.access_type === "freelance" ? <Freelancer /> : <></>
-                }
-                {
-                  profile.access_type === "Team Leader" ? <TeamLeader /> : <></>
-                }
-                {
-                  profile.access_type === "User" ? <SalesPerson /> : <></>
-                }
-                {
-                  profile.access_type === "Caller" ? <Caller /> : <></>
-                }
-                {
-                  profile.access_type === "Flight" ? <FlightsBooking /> : <></>
-                }
-                {
-                  profile.access_type === "Accounts" ? <Accounts /> : <></>
-                }
-                {
-                  profile.access_type === "Operation" ? <Operations /> : <></>
-                }
-                {
-                  profile.access_type === "admin" ? <Admin /> : <></>
-                }
-                {
-                  profile.access_type === "Super Admin" ? <SuperAdminDrawer /> : <></>
-                }
-              </>
-              :
-              <></>
-          }
+        <div className="sidebars">
+          {profile && (() => {
+            const componentsMap = {
+              freelance: <Freelancer />,
+              "Team Leader": <TeamLeader />,
+              User: <SalesPerson />,
+              Caller: <Caller />,
+              Flight: <FlightsBooking />,
+              Accounts: <Accounts />,
+              Operation: <Operations />,
+              admin: <Admin />,
+              LeadAdminTeamLeader : <LeadTeamLeader/>,
+              "Super Admin": <SuperAdminDrawer />,
+            };
+
+            return componentsMap[profile.access_type] || null;
+          })()}
         </div>
+
         <div className='mainContaint'>
           <div className='header'>
             <div className='headerfirstpart'>
@@ -305,8 +288,8 @@ function App() {
               {/* <Route path='/FlightCreateQuote' element={<Flight auth={auth} profile={profile} />} /> */}
               <Route path='/Identity' element={<Identity auth={auth} profile={profile} />} />
               <Route path='/Detailpage' element={<Detailpage auth={auth} profile={profile} />} />
-                <Route path='OperationFileManager' element={<OperationInvoiceHandle Auth={auth} profile={profile}/>} />
-                <Route path='CancelTrip' element={<CancelTrip Auth={auth} profile={profile}/>} />
+              <Route path='OperationFileManager' element={<OperationInvoiceHandle Auth={auth} profile={profile} />} />
+              <Route path='CancelTrip' element={<CancelTrip Auth={auth} profile={profile} />} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operation"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />

@@ -121,7 +121,7 @@ const AdminFollow = ({ }) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", currentUser.uid),
-                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true), orderBy("Lead_Status")
+                where('Lead_Status', 'not-in', ['Dump', 'Converted','Cancel']), where("quotation_flg", "==", true), orderBy("Lead_Status")
                 , orderBy("Lead_status_change_date"));
             var querySnapshot;
 

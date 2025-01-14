@@ -27,7 +27,7 @@ const Investigation = ({ uid, TeamProfile }) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
-                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true)
+                where('Lead_Status', 'not-in', ['Dump', 'Converted','Cancel']), where("quotation_flg", "==", true)
             );
             var querySnapshot;
 
@@ -182,7 +182,7 @@ const Investigation = ({ uid, TeamProfile }) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", uid),
-                where('Lead_Status', 'not-in', ['Dump', 'Converted']), where("quotation_flg", "==", true));
+                where('Lead_Status', 'not-in', ['Dump', 'Converted','Cancel']), where("quotation_flg", "==", true));
             var querySnapshot;
 
             querySnapshot = await getDocs(q);

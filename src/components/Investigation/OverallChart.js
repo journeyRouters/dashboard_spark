@@ -57,7 +57,7 @@ const OverallChart = ({ currentUser }) => {
         var querySnapshot = await getDocs(firequery);
         querySnapshot.forEach((doc) => {
             list.push(doc.data())
-            console.log(moment(doc.data().assigned_date_time.toDate()).format('DD-MM-YYYY'))
+            // console.log(moment(doc.data().assigned_date_time.toDate()).format('DD-MM-YYYY'))
         });
         setTotaldata(list)
         // console.log(list)

@@ -37,17 +37,17 @@ const LeadCard = ({ lead, onCreateLead, onNoResponse, onNotInterested }) => {
 const LeadDetails = ({ leads }) => {
     // console.log(leads)
     const handleCreateLead = (lead) => {
-        console.log('Create Lead action for:', lead);
+        // console.log('Create Lead action for:', lead);
         // Add logic to handle "Create Lead" action
     };
 
     const handleNoResponse = (lead) => {
-        console.log('No Response action for:', lead);
+        // console.log('No Response action for:', lead);
         // Add logic to handle "No Response" action
     };
 
     const handleNotInterested = (lead) => {
-        console.log('Not Interested action for:', lead);
+        // console.log('Not Interested action for:', lead);
         // Add logic to handle "Not Interested" action
     };
 

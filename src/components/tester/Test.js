@@ -88,7 +88,7 @@ const Test = () => {
       }
    }
    function exportToExcel(data) {
-      console.log(data)
+      // console.log(data)
       var sheetname = moment(new Date()).format('DD-MMM-YYYY')
       const worksheetData = data.map(item => ({
          TripID: item.TripId,
@@ -200,7 +200,7 @@ const Test = () => {
          );
 
          // Log the query object to ensure it's created correctly
-         console.log("Query:", q);
+         // console.log("Query:", q);
 
          // Execute the query.
          const querySnapshot = await getDocs(q);
@@ -213,7 +213,7 @@ const Test = () => {
 
          // Process the query results.
          querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.id, " => ", doc.data());
          });
       } catch (error) {
          // Handle any errors that occur.
@@ -282,7 +282,7 @@ const Test = () => {
 
             // Update the invoice with the calculated travelEndDate
             invoice.selected_pdf_data.travelEndDate = travelEndDate;
-            console.log('Updated travelEndDate:', travelEndDate.toISOString());
+            // console.log('Updated travelEndDate:', travelEndDate.toISOString());
          } else {
             console.warn('Missing Travel_Date or Travel_Duration, unable to calculate travelEndDate.');
             travelEndDate = null;

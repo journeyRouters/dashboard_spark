@@ -13,7 +13,7 @@ const WebLeadLoader = () => {
         setSocket(ws);
 
         ws.onopen = () => {
-            console.log('WebSocket connection opened');
+            // console.log('WebSocket connection opened');
         };
 
         ws.onmessage = (event) => {
@@ -24,7 +24,7 @@ const WebLeadLoader = () => {
         };
 
         ws.onclose = (event) => {
-            console.log('WebSocket closed:', event);
+            // console.log('WebSocket closed:', event);
         };
 
         ws.onerror = (error) => {

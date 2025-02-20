@@ -48,7 +48,6 @@ const PaymentMarking = ({  }) => {
             }
             case "Trip_id": {
                 q = query(collection(db, "Trip"),
-                    where("Lead_Status", "==", "Converted"),
                     where("quotation_flg", "==", true),
                     where("TripId", "==", input),
                     orderBy("Travel_Date")

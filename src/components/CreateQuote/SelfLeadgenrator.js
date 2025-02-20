@@ -7,7 +7,7 @@ import makeAnimated from 'react-select/animated';
 import app from '../required';
 import './TripComponent.css';
 
-const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => {
+const SelfLeadgenrator = ({ open, onClose, userProfile, getLeadOnBoard }) => {
     const db = getFirestore(app);
     const [formData, setFormData] = useState({
         name: '',
@@ -48,7 +48,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
         }
     };
     const handleClose = () => {
-        setAddLead(false);
+        onClose(false);
     };
     useEffect(() => {
         if (open) {
@@ -65,7 +65,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
     const uploadLeadBySpokes = (assignedUid, assignedName) => {
         let countUpdater = tripCounter;
         const contactString = formData.contact
-        const last4 = contactString.slice(-4);
+        const last4 = contactString.replace(/\s+/g, '').slice(-4);
         const tripId = countUpdater + last4;
 
         if (isNaN(countUpdater)) {
@@ -179,7 +179,7 @@ const SelfLeadgenrator = ({ open, setAddLead, userProfile, getLeadOnBoard }) => 
                             <option value={'Goa'}>Goa</option>
                             <option value={'Singapore'}>Singapore</option>
                             <option value={'Rajasthan'}>Rajasthan</option>
-                            <option value={'Veitnam'}>Veitnam</option>
+                            <option value={'Vietnam'}>Vietnam</option>
                             <option value={'Northeast'}>Northeast</option>
                             <option value={'Europe'}>Europe</option>
                             <option value={'Turkey'}>Turkey</option>

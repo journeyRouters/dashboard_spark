@@ -15,8 +15,8 @@ function Dumpleads() {
 
     function getAllUserProfiles(selectedMonth) {
         const date = new Date();
-        const firstDay = new Date(date.getFullYear(), selectedMonth, 1);
-        const lastDay = new Date(date.getFullYear(), selectedMonth + 1, 0); // last day of the selected month
+        const firstDay = new Date(date.getFullYear() , selectedMonth, 1);
+        const lastDay = new Date(date.getFullYear(), selectedMonth + 1, 0); 
 
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));

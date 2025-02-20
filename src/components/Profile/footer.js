@@ -49,7 +49,7 @@ export const GoogleReviews = () => {
                     target='_blank' className="link">
                     <img src="/assets/pdfDefaultImage/google.png" className="googleImg_" />
                     <img src="/assets/pdfDefaultImage/4.8ratting.png" className="ratting" />
-                    <span> 1249 & Counting Google Review</span>
+                    <span> 1611 & Counting Google Review</span>
                 </a>
                 <a href={Akshat_Aggarwal} target="_blank">
                     <img src={Akshat} className="review_img" />

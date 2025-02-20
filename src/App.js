@@ -220,7 +220,7 @@ function App() {
               Accounts: <Accounts />,
               Operation: <Operations />,
               admin: <Admin />,
-              LeadAdminTeamLeader : <LeadTeamLeader/>,
+              LeadAdminTeamLeader: <LeadTeamLeader />,
               "Super Admin": <SuperAdminDrawer />,
             };
 
@@ -291,6 +291,7 @@ function App() {
               <Route path='OperationFileManager' element={<OperationInvoiceHandle Auth={auth} profile={profile} />} />
               <Route path='CancelTrip' element={<CancelTrip Auth={auth} profile={profile} />} />
               <Route path='/NotAuthorise' element={<NotAuthorise />} />
+              <Route path='/Dynamicdatachart' element={<Dynamicdatachart auth={auth} data={profile} />} />
               <Route element={<ProtectedRoute user={profile} allowedAccessTypes={["Super Admin", "Team Leader", "admin", "Accounts", "Operation"]} />}>
                 <Route path='/AdminInvestigation' element={<AdminInvestigation profile={profile} />} />
                 <Route path='/AdminLeaveManagement' element={<Adminleavefunnel auth={auth} />} />
@@ -301,8 +302,7 @@ function App() {
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                <Route path='/Dynamicdatachart' element={<Dynamicdatachart auth={auth} data={profile} />} />
-                <Route path='/Test' element={<Test auth={auth} data={profile} />} />
+                {/* <Route path='/Test' element={<Test auth={auth} data={profile} />} /> */}
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

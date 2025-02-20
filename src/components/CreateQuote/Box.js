@@ -37,7 +37,7 @@ const Box = ({
     const animatedComponents = makeAnimated();
     const [Travel_Duration, setTravel_Duration] = useState(data.Travel_Duration)
     const [open, setOpen] = useState(true)
-    const [SelectedpackageType, setSelectedpackageType] = useState("Per Person")
+    const [SelectedpackageType, setSelectedpackageType] = useState("Per Couple")
     const [flightcost, setFlightcost] = useState(Edit_flightcost ? Edit_flightcost : 0)
     const [visacost, setvisacost] = useState(Edit_visacost ? Edit_visacost : 0)
     const [landPackage, setlandpackage] = useState(Edit_landPackage ? Edit_landPackage : 0)
@@ -68,7 +68,10 @@ const Box = ({
         lunch_comments: '',
         dinner: false,
         dinner_comments: '',
-        airport_Arival: false,
+        // airport_Arival: false,
+        airport_Arrival:false,
+        // Domestic:false,
+        // International:false,
         airport_Departure: false,
         Transfer: false,
         cab_Private_comments: '',
@@ -428,7 +431,7 @@ const Box = ({
                                                     <option value={'Goa'}>Goa</option>
                                                     <option value={'Singapore'}>Singapore</option>
                                                     <option value={'Rajasthan'}>Rajasthan</option>
-                                                    <option value={'Veitnam'}>Veitnam</option>
+                                                    <option value={'Vietnam'}>Vietnam</option>
                                                     <option value={'Northeast'}>Northeast</option>
                                                     <option value={'Europe'}>Europe</option>
                                                     <option value={'Turkey'}>Turkey</option>

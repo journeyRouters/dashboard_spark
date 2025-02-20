@@ -37,7 +37,7 @@ function SalesPerson({ }) {
                 </NavLink>
             </div>
             <div className='sidebarCard' >
-                <NavLink className='sidebarCardContaint' to='/SalesPersonInvestigation'>
+                <NavLink className='sidebarCardContaint' to='/Dynamicdatachart'>
                     <p>Investigation</p>
                 </NavLink>
             </div>

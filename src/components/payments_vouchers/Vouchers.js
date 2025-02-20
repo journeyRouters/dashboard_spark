@@ -64,9 +64,7 @@ const Vouchers = (props) => {
             <div className='details_of_specific_trip_main_container'>
                 {
                     lead_data.map((data, index) => (
-
                         <VouchersCompo key={index} data={data} datahandle={getLeadOnBoard} profile={profile} />
-
                     ))
                 }
 

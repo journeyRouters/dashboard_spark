@@ -1,4 +1,4 @@
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { PaymentConfirmation, installmentController } from '../invoice/Globalcontroller';
 import app from '../required';
@@ -47,9 +47,12 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
 
     async function updateStatus() {
         statusHandler();
-        await setDoc(doc(db, 'invoice', TripId), {
+        await updateDoc(doc(db, 'invoice', TripId), {
             installment: installmentjson,
-        }, { merge: true });
+        });
+        await updateDoc(doc(db, 'Trip', TripId), {
+            Lead_Status: "Converted",
+        });
         handleNotification();
     }
 

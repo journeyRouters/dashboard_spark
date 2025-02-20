@@ -17,6 +17,8 @@ import InvoicePdf from '../invoice/invoicePdf';
 import app from '../required';
 import CommentsUniCompo from './CommentsUniCompo';
 import './quote.css';
+import { fromEvent } from 'file-selector';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 const db = getFirestore(app);
 
 
@@ -34,7 +36,10 @@ const Row = (props) => {
     const [update, setUpdate] = useState('')
     const reverse = latestComment.slice(0).reverse();
     const [viewPDF, setPDF] = useState(false)
+    const [openPaymentsScreenShotsloader, setopenPaymentsScreenShotsloader] = useState(false)
+    const [target, settarget] = useState(0)
     const [data, setdata] = useState()
+    const [latestData, setlatestData] = useState(row)
     const [Reqoute_flg, setReqoute_flg] = useState(false)
     const [download, setdownload] = useState(false)
     const [tripData, setTripData] = useState(null)
@@ -42,9 +47,131 @@ const Row = (props) => {
     const [edit_flg, set_edit] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [limit, setLimit] = useState(false)
+    const [loading, setloading] = useState(false)
+    const storage = getStorage();
     const [SpecialPermissionFlg, setSpecialPermissionFlg] = useState(false)
     const [monthControlllerModalFlg, setmonthControlllerModalFlg] = useState(false)
+    const [openuploader, setuploader] = useState(false)
     const codes = ['Direct', "Repeated", "Converted"]
+    function PaymentsScreenShotsloader(value) {
+        setopenPaymentsScreenShotsloader(value)
+    }
+    function stoploading() {
+        setloading(false)
+    }
+    function uploaderpopup() {
+        setuploader(!openuploader)
+        settarget(0)
+    }
+
+
+    async function getdatalatest_for_voucher() {
+        const docRef = doc(db, "Trip", row.TripId);
+        const docSnap = await getDoc(docRef);
+        PaymentsScreenShotsloader(false)
+        if (docSnap.exists()) {
+            setlatestData(docSnap.data())
+        } else {
+            console.log("No such document!");
+        }
+    }
+
+    async function PaymentsScreenShotshandleSubmit() {
+        /**this function will upload the file in firebase storage
+           vouchers/tripid/flight,hotel,others/filename 
+         */
+        const handles = await window.showOpenFilePicker({ multiple: false });
+        const file = await fromEvent(handles);
+        uploaderpopup()
+        setloading(true)
+        if (!file) return;
+        const storageRef = ref(storage, `vouchers/${row.TripId}/Payments/${target}/${file[0].name}`);
+        const path = `vouchers/${row.TripId}/Payments/${target}/${file[0].name}`
+        const name = file[0].name
+        const uploadTask = uploadBytesResumable(storageRef, file[0]);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                switch (snapshot.state) {
+                    case 'paused':
+                        console.log('Upload is paused');
+                        break;
+                    case 'running':
+                        break;
+                }
+            },
+            (error) => {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        break;
+                    case 'storage/canceled':
+                        break;
+                    case 'storage/unknown':
+                        break;
+                }
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    updateLinkAndPathOfUploadedPaymentsScreenShots(path, downloadURL, name)
+                    getdatalatest_for_voucher()
+                    stoploading()
+
+                });
+            }
+        );
+    }
+
+    async function updateLinkAndPathOfUploadedPaymentsScreenShots(path, link, name) {
+
+        const docref = doc(db, "Trip", row.TripId);
+        if (target === 'flights') {
+            let previousData = latestData.PaymentScreenshots_flight
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            await setDoc(docref, {
+                "PaymentScreenshots_flight": previousData
+            }, { merge: true });
+
+        }
+        if (target === 'hotels') {
+            let previousData = latestData.PaymentScreenshots_hotels
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            await setDoc(docref, {
+                "PaymentScreenshots_hotels": previousData
+            }, { merge: true });
+
+        }
+        if (target === 'others') {
+            let previousData = latestData.PaymentScreenshots_others
+            let content =
+            {
+                path: path,
+                link: link,
+                created_at: today,
+                name: name
+            }
+            previousData.push(content)
+            await setDoc(docref, {
+                "PaymentScreenshots_others": previousData
+            }, { merge: true });
+
+        }
+
+    }
+
     function handleMonthControllerModal() {
         setmonthControlllerModalFlg(false)
     }
@@ -296,6 +423,11 @@ const Row = (props) => {
             setLimit(commentLimit < today)
         }
     }
+    function optionHandler(e) {
+        settarget(e.target.value)
+    }
+
+
 
     return (
         <>
@@ -314,7 +446,7 @@ const Row = (props) => {
                                 <FormControl onChange={(e) => changeLead_Status(e)}>
                                     <FormLabel >Status</FormLabel>
                                     <RadioGroup defaultValue={row.Lead_Status} >
-                                        <FormControlLabel value="Converted" control={<Radio />} label="Converted" />
+                                        {/* <FormControlLabel value="Converted" control={<Radio />} label="Converted" /> */}
                                         <FormControlLabel value="Paymentawaited" control={<Radio />} label="Payment awaited" />
                                         <FormControlLabel value="Hot" control={<Radio />} label="Hot" />
                                         <FormControlLabel value="Active" control={<Radio />} label="Active" />
@@ -350,6 +482,18 @@ const Row = (props) => {
                     }
                 </div>
             </Modal>
+            <Modal style={{ display: "flex", justifyContent: "center", marginTop: "2rem", }} open={openPaymentsScreenShotsloader} onClose={() => PaymentsScreenShotsloader(false)} >
+                <div className='uploaderPopUp'>
+                    <select className='optionChoose' onChange={(e) => optionHandler(e)}>
+                        <option value={0}>choose here</option>
+                        <option value='flights'>flights</option>
+                        <option value='hotels'>hotel</option>
+                        <option value='others' >others</option>
+                    </select>
+                    <button className='upload_button' disabled={target == 0 ? true : false} onClick={() => PaymentsScreenShotshandleSubmit()}>upload</button>
+                </div>
+            </Modal>
+
             <React.Fragment >
                 <TableRow className={limit ? 'compoLimitCross' : 'compo'} onClick={() => setOpen(!open)}>
                     <TableCell component="th" scope="row">
@@ -655,6 +799,67 @@ const Row = (props) => {
 
 
                                 </div >
+                                {
+                                    row.Lead_Status === 'Paymentawaited' ? <>
+                                        <div className='vouchers_upload'>
+                                            <p>Payment's/<span className='upload_proof' onClick={() => PaymentsScreenShotsloader(true)} >upload</span ></p>
+                                            <div className='upload_radio_button'>
+                                                <div className='parent'>
+                                                    <input type='radio' checked={row.PaymentScreenshots_flight.length != 0} readOnly></input>
+                                                    <div className='childpopup'>
+                                                        {
+                                                            row.PaymentScreenshots_flight.map((flight, index) => (
+                                                                <div key={index} className='hover_popup_main_div'>
+                                                                    <p>
+                                                                        {flight.name}
+                                                                    </p>
+                                                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                                </div>
+
+                                                            ))}
+                                                    </div>
+
+                                                </div>
+                                                <div className='parent'>
+                                                    <input type='radio'></input>
+                                                    <div className='childpopup'>
+                                                        {
+                                                            row.PaymentScreenshots_hotels.map((flight, index) => (
+
+                                                                <div key={index} className='hover_popup_main_div'>
+                                                                    <p>
+                                                                        {flight.name}
+                                                                    </p>
+                                                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                                </div>
+
+                                                            ))}
+                                                    </div>
+                                                </div>
+                                                <div className='parent'>
+                                                    <input type='radio'></input>
+                                                    <div className='childpopup'>
+                                                        {
+                                                            row.PaymentScreenshots_others.map((flight, index) => (
+
+                                                                <div key={index} className='hover_popup_main_div'>
+                                                                    <p>
+                                                                        {flight.name}
+                                                                    </p>
+                                                                    <a href={flight.link} download={flight.name} target="_blank">download</a>
+                                                                    {/* <button onClick={() => ondelete('flights', flight.path, index)} className='delete_button'>Delete</button> */}
+                                                                </div>
+
+                                                            ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </> : <></>
+
+                                }
                             </div>
                         </Collapse>
                     </TableCell>

@@ -54,12 +54,12 @@ function TeamLeader({ }) {
                     <p>New Investigation</p>
                 </NavLink>
             </div>
-            <div className='sidebarCard' >
+            {/* <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/AdminInvestigation'>
                     <SearchTwoTone style={{ marginRight: "1rem" }} />
                     <p>Investigation</p>
                 </NavLink>
-            </div>
+            </div> */}
             <div className='sidebarCard' >
                 <NavLink className='sidebarCardContaint' to='/Team'>
                     <GroupAddTwoTone style={{ marginRight: "1rem" }} />

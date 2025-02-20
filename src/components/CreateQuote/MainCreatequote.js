@@ -18,11 +18,7 @@ const MainCreatequote = (props) => {
     const [lead_data, setLead_data] = useState([])
     const [popupopener, set_popupopner] = useState(false)
     const [user_uni_data, set_uni_data] = useState([])
-    const time = new Date()
-    const Current = time.getSeconds()
     const [SuggestionModal, settransfermodal] = useState(false)
-    const [lastVisible, setlastVisible] = useState(null)
-    const [sampleQuotes, setsampleQuotes] = useState([])
     const [AddLead, setAddLead] = useState(false)
     function AddLeadButtonController() {
         setAddLead(true)
@@ -37,35 +33,7 @@ const MainCreatequote = (props) => {
         settransfermodal(!SuggestionModal)
 
     }
-    let tHead = [
-        "TripId",
-        "NAME",
-        "Contact_Number",
-        "Destination",
-        "Budget",
-        "Pax",
-        'Child',
-        "Email",
-        "assign_date",
-        "Lead_Status",
-        "Action",
-        "Quote",
-    ];
-    let col = [
-        "TripId",
-        "Traveller_name",
-        "Contact_Number",
-        "Destination",
-        "Budget",
-        "Pax",
-        'Child',
-        "Email",
-        "uploaded_date",
-        "Lead_Status",
-        "Last 10 Quote",
-        "Quote",
-
-    ];
+   
 
     function updateTableDataAfterQuote(tripid) {
         var pre_tableData = lead_data
@@ -165,7 +133,7 @@ const MainCreatequote = (props) => {
         <div className='tableAliner'>
             {
                 auth ? <>
-                    <div className='global_search' >
+                    <div className='global_search_adminpage' >
 
                         {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
                         <span style={{
@@ -175,7 +143,7 @@ const MainCreatequote = (props) => {
                             color: 'yellow',
                         }}>Total Lead - {lead_data.length}</span>
                         <button onClick={() => AddLeadButtonController()} className='addNewLeadButton'>Add Lead</button>
-                        <SelfLeadgenrator open={AddLead} setAddLead={setAddLead} userProfile={profile} getLeadOnBoard={getLeadOnBoard} />
+                        <SelfLeadgenrator open={AddLead} onClose={setAddLead} userProfile={profile} getLeadOnBoard={getLeadOnBoard} />
                     </div>
                     <Modal open={SuggestionModal} onClose={closeMaldivesSuggestionModal} >
                         {

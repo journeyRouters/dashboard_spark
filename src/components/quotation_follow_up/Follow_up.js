@@ -120,7 +120,7 @@ const FollowUp = (props) => {
         { value: 'Goa', label: 'Goa', color: '#666666' },
         { value: 'Rajasthan', label: 'Rajasthan', color: '#666666' },
         { value: 'Singapore', label: 'Singapore', color: '#666666' },
-        { value: 'Veitnam', label: 'Veitnam', color: '#5243AA' },
+        { value: 'Vietnam', label: 'Vietnam', color: '#5243AA' },
         { value: 'Europe', label: 'Europe', color: '#5243AA' },
         { value: 'Northeast', label: 'Northeast', color: '#5243AA' },
         { value: 'Ladakh', label: 'Ladakh', color: '#666666' },
@@ -678,14 +678,14 @@ const FollowUp = (props) => {
                     {
                         props.adminFlg ? <></>
                             : <>
-                                <div className='global_search' >
-                                    <button onClick={() => getLeadOnBoard()}>Refresh</button>
-                                    <span style={{ color: 'white' }}>Lead - {lead_data.length}</span>
+                                <div className='global_search_adminpage' >
+                                    {/* <button onClick={() => getLeadOnBoard()}>Refresh</button> */}
+                                    <span>Total Lead in Funnel - {lead_data.length}</span>
                                 </div>
                             </>
                     }
 
-                    <div className='filter'>
+                    {/* <div className='filter'>
                         <div>
                             <label>Destination</label>
                             {
@@ -781,7 +781,7 @@ const FollowUp = (props) => {
                             <img src='/assets/img/search.png' height={'48px'} />
 
                         </div>
-                    </div>
+                    </div> */}
                     {
                         lead_data.length == 0 ? <>
                             {

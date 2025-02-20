@@ -189,6 +189,7 @@
 .download_requote {
     width: 7rem;
     height: 2rem;
+    font-size: 0.8rem;
     color: #FFFFFF;
     font-weight: bold;
     border-color: aliceblue;

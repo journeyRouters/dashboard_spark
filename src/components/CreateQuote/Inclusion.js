@@ -61,7 +61,7 @@ const Inclusion = (props) => {
         if (e.target.name === "Arival") {
             setFeed(prevState => ({
                 ...prevState,
-                airport_Arival: firevalue
+                airport_Arrival: firevalue
             }))
         }
         if (e.target.name === "Departure") {
@@ -234,7 +234,7 @@ const Inclusion = (props) => {
                     <div className='breakfast'>
                         Arival
                         <div className='settingToSide'>
-                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_Arival} onChange={(event) => handleData_inclusion(event)}>
+                            <RadioGroup className='radiogroup' name='Arival' value={inclusionFeed.airport_Arrival} onChange={(event) => handleData_inclusion(event)}>
                                 <FormControlLabel control={<Radio />} value={true} />
                                 <FormControlLabel control={<Radio />} value={false} />
                             </RadioGroup >

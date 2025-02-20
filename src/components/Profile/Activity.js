@@ -728,7 +728,7 @@ export const avtivityList = {
             value: 'SingaporeRiverCruise'
         },
     ],
-    Veitnam: [
+    Vietnam: [
         {
             label: 'Danang Bana hill golden Bridge',
             value: 'DanangBanahillgoldenBridge'

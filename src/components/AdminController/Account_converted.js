@@ -170,7 +170,7 @@ const Account_converted = ({ }) => {
                         <option value={'Goa'}>Goa</option>
                         <option value={'Singapore'}>Singapore</option>
                         <option value={'Rajasthan'}>Rajasthan</option>
-                        <option value={'Veitnam'}>Veitnam</option>
+                        <option value={'Vietnam'}>Vietnam</option>
                         <option value={'Northeast'}>Northeast</option>
                         <option value={'Europe'}>Europe</option>
                         <option value={'Turkey'}>Turkey</option>

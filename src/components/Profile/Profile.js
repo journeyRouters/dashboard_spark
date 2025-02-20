@@ -419,7 +419,7 @@ const Profile = (
                                             <div className="aliner_" key={index}>
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/correct.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
-                                                    {data}</span>
+                                                    {data.replace(/_/g, " ")}</span>
                                             </div>
                                         ))
                                     }
@@ -450,7 +450,7 @@ const Profile = (
                                                 <span key={index}>
                                                     <img src="/assets/pdfDefaultImage/cross.png" width="16px" height="16px" style={{ marginRight: "0.3rem" }} />
 
-                                                    {data}</span>
+                                                    {data.replace(/_/g, " ")}</span>
                                             </div>
                                         ))
                                     }

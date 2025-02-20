@@ -205,7 +205,7 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                                     <option value={'Europe'}>Europe</option>
                                     <option value={'Singapore'}>Singapore</option>
                                     <option value={'Rajasthan'}>Rajasthan</option>
-                                    <option value={'Veitnam'}>Veitnam</option>
+                                    <option value={'Vietnam'}>Vietnam</option>
                                     <option value={'Baku'}>Baku</option>
                                     <option value={'Srilanka'}>Srilanka</option>
                                 </select>

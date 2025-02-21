@@ -340,7 +340,7 @@ const Row = (props) => {
             }, { merge: true });
             updatewhatsappCollectionDoc()
         }
-        else if (Lead_Status === 'Converted') {
+        else if (Lead_Status === 'Paymentawaited') {
             if (SpecialPermissionFlg) {
                 closeUpdater()
                 setmonthControlllerModalFlg(true)

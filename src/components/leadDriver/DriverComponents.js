@@ -11,7 +11,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
     const [Status, setStatus] = useState(data.Lead_Status)
     const [flightBooked, setflightBooked] = useState(false)
     const [LeadType, setLeadType] = useState(data.Campaign_code)
-    const [Potential, setPotential] = useState(data.Potential?data.Potential:'Normal')
+    const [Potential, setPotential] = useState(data.Potential ? data.Potential : 'Normal')
     const db = getFirestore(app);
     var today = new Date()
     var currentdate = moment(today).format('YYYY-MM-DD')
@@ -45,7 +45,7 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             "assigned_date_time": today,
             "Lead_Status": Status,
             "Campaign_code": LeadType,
-            "Potential":Potential
+            "Potential": Potential
         });
         updatewhatsappCollectionDoc(uid, name)
         getLeadByDate(selectedDate)
@@ -165,7 +165,11 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
             </div>
             <div>
                 <span> Travel Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />
-                <span> Assign Date:-{moment((data.assigned_date_time).toDate()).format('DD-MMM-YYYY HH:MM')}</span><br />
+                <span>
+                    Assign Date: {data.assigned_date_time
+                        ? moment(data.assigned_date_time.toDate()).format('DD-MMM-YYYY HH:mm')
+                        : 'Not Assigned'}
+                </span><br />
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />

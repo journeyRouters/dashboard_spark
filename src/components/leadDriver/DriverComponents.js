@@ -164,7 +164,8 @@ const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate })
                 </select>
             </div>
             <div>
-                <span> Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />
+                <span> Travel Date:-{moment((data.Travel_Date).toDate()).format('DD-MMM-YYYY')}</span><br />
+                <span> Assign Date:-{moment((data.assigned_date_time).toDate()).format('DD-MMM-YYYY HH:MM')}</span><br />
                 <span>Destination:-{data.Destination}</span><br />
                 <span>Budget:-{data.Budget}</span><br />Comments:-
                 <div className='limitComments'>{data.Comment}</div><br />

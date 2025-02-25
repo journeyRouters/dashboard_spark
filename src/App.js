@@ -51,7 +51,7 @@ import app from './components/required';
 import Usercontrol from './components/usercontrol/UserControl';
 import Test from './components/tester/Test.js';
 import PendingPayments from './components/payments_vouchers/operation/PendingPayments.js';
-import WebLeadLoader from './components/leadDriver/WebLead/WebLeadLoader.js';
+import WebLeadLoader from './components/SalesDashBoard/WebLeadLoader.jsx';
 import OperationInvoiceHandle from './components/payments_vouchers/operation/OperationInvoiceHandle.js';
 import CanceledTripOperations from './components/payments_vouchers/operation/CanceledTripOperations.js';
 import CancelTrip from './components/CancelTrips/CancelTrips.js';

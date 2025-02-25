@@ -1,0 +1,157 @@
+.driver-voucher-cards {
+  border-radius: 15px;
+  background: #9fb3b2a3;
+  box-shadow: 4px 4px 4px 0px rgba(109, 109, 109, 0.25);
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  margin: 2px 0;
+}
+
+.driver-voucher-cards .webLead_followUps .voucher_id_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .voucher_id_container
+  .tripid_and_flights {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .voucher_id_container
+  .tripid_and_flights
+  h2 {
+  color: #53fff5;
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .voucher_id_container
+  .followUp_ratings {
+  display: flex;
+  gap: 10px;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .voucher_id_container
+  .followUp_ratings
+  div {
+  display: flex;
+}
+
+.driver-voucher-cards .webLead_followUps .followups_client_details {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.driver-voucher-cards .webLead_followUps .followups_client_details p {
+  color: rgb(50, 50, 50);
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 25%;
+  margin: 0.5rem 0;
+}
+
+.driver-voucher-cards .webLead_followUps .followups_client_details span {
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .followups_client_details
+  .lead_status {
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 3px 12px;
+  border-radius: 10px;
+}
+
+.driver-voucher-cards .webLead_followUps .followups_client_details .paxnchild {
+  display: flex;
+  width: 50%;
+  gap: 24px;
+}
+
+.driver-voucher-cards
+  .webLead_followUps
+  .followups_client_details
+  .paxnchild
+  p {
+  display: flex;
+}
+
+.active-card {
+  border-radius: 0.9375rem;
+  background: #77beba;
+  box-shadow: 4px 4px 4px 0px rgba(109, 109, 109, 0.25);
+}
+
+.active-card .webLead_followUps .followup_client_details p {
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  width: 50%;
+}
+
+.active-card .webLead_followUps .followup_client_details span {
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+}
+
+.btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-caller {
+  background-color: #33a39e;
+  color: white;
+  border: 2px solid #33a39e;
+}
+
+.select-caller:hover {
+  background-color: white;
+  color: #33a39e;
+}
+
+.generate-lead {
+  background-color: white;
+  color: #33a39e;
+  border: 2px solid #33a39e;
+}
+
+.generate-lead:hover {
+  background-color: #33a39e;
+  color: white;
+}

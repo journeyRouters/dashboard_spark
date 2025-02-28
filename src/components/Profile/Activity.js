@@ -1419,6 +1419,12 @@ export const avtivityList = {
             label: "Tulip Garden",
             value: "TulipGarden",
         },
+        { label: "Yousmarg", value: "Yousmarg" },
+        { label: "Bungus Valley", value: "BungusValley" },
+        { label: "Aharbal Waterfall", value: "AharbalWaterfall" },
+        { label: "Drung Waterfall", value: "DrungWaterfall" },
+        { label: "Srinagar", value: "Srinagar" },
+        { label: "Gurez Valley", value: "Gurezvalley" }
     ],
     Goa: [
         {
@@ -2497,7 +2503,16 @@ export const avtivityList = {
             { label: 'Transfer', value: 'Transfer' },
             { label: "leisure", value: "Leisureday" },
             { label: 'Departure', value: 'Departure' }
-        ]
+        ],
+    HongKong: [
+        { label: "Hong Kong City Tour with Madam Tussauds", value: "hongKongCityTourMadamTussauds" },
+        { label: "Macau City Tour", value: "macauCityTour" },
+        { label: "Ocean Park", value: "oceanPark" },
+        { label: "Disney Island One Day One Park", value: "disneyIslandOneDayOnePark" },
+        { label: "100 Sky Observatory View", value: "sky100ObservatoryView" },
+        { label: "Ngong Ping Village with 2-Way Cable Car or 360 Degree Lantau Island", value: "ngongPingVillageCableCar" },
+        { label: "Hong Kong to Macau by Ferry and Vice Versa", value: "hongKongMacauFerry" }
+    ]
 
 
 }

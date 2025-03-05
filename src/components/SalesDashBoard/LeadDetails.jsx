@@ -73,7 +73,6 @@ const LeadDetails = ({ leads }) => {
     };
 
     await statusChangeApi(paylaod);
-    console.log("No Response action for:", lead);
   };
 
   const handleNotInterested = async (lead) => {
@@ -82,9 +81,6 @@ const LeadDetails = ({ leads }) => {
       LeadStatus: "NotInterested",
       LeadId: lead.LeadId,
     };
-
-    await statusChangeApi(paylaod);
-    console.log("Not Interested action for:", lead);
   };
 
   const statusChangeApi = async (payload) => {
@@ -94,7 +90,6 @@ const LeadDetails = ({ leads }) => {
         payload
       );
       const data = await response.data;
-      console.log(data);
     } catch (error) {
       console.error("Error fetching leads:", error);
     }

@@ -61,7 +61,6 @@ const SelfLeadgenrator = ({ open, onClose, userProfile, getLeadOnBoard }) => {
         const tripRef = doc(db, 'Support', 'tripCount');
         await updateDoc(tripRef, { tripCount: counted });
     };
-
     const uploadLeadBySpokes = (assignedUid, assignedName) => {
         let countUpdater = tripCounter;
         const contactString = formData.contact

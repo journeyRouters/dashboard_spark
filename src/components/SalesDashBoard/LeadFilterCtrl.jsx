@@ -29,7 +29,6 @@ export const LeadFilterCtrl = () => {
       key: "selection",
     };
     setSelectionRange(updatedRange);
-    console.log(updatedRange);
     const params = new URLSearchParams({
       leadStatus: status,
       startDate: formatDate(ranges.selection.startDate),

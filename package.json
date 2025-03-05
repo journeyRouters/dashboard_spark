@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^13.5.0",
     "ag-grid-community": "^27.1.0",
     "ag-grid-react": "^27.1.0",
+    "axios": "^1.8.1",
     "date-fns": "^4.1.0",
     "export-from-json": "^1.7.2",
     "file-selector": "^0.4.0",

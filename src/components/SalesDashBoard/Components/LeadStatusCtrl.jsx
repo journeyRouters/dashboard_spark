@@ -4,9 +4,9 @@ import axios from "axios";
 import { useState } from "react";
 import "./DriverCard.css";
 
-const LeadStatusCtrl = ({ trip }) => {
+const LeadStatusCtrl = ({ trip ,getrawleadsonboard}) => {
   const [leadStatus, setLeadStatus] = useState("");
-  const LeadStatus = ["Active", "Interested", "NotInterested",'Dump'];
+  const LeadStatus = ["Active", "Interested", "Not Interested", 'Dump'];
 
   const changingLeadStatus = async () => {
     let updatedData = {
@@ -23,13 +23,13 @@ const LeadStatusCtrl = ({ trip }) => {
     };
     try {
       await axios.put(
-        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new`,
+        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander`,
         updatedData
       );
-
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
       }, 1000);
+      getrawleadsonboard()
     } catch (error) {
       console.error("Error saving status:", error);
     }

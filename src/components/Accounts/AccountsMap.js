@@ -369,7 +369,7 @@ const AccountsMap = ({ data, profile, datahandle, getUpdatedlead }) => {
             <div className={AccountClearanceFlg ? 'client_detailMarked' : 'client_detail'}>
                 <div className='personal-details'>
                     <div className='TripId'>
-                        {data.TripId}
+                        {data.TripId}/{data.Campaign_code}
                     </div>
                     <p>Name :-
                         {data.Traveller_name}

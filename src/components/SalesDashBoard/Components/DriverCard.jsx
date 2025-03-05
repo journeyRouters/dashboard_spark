@@ -10,7 +10,7 @@ import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore
 import app from "../../required";
 import axios from "axios";
 
-const DriverCard = ({ lead }) => {
+const DriverCard = ({ lead,getrawleadsonboard }) => {
   const db = getFirestore(app);
   const activeId = useLocation().state;
   const [loader, setLoader] = useState(false);
@@ -24,7 +24,7 @@ const DriverCard = ({ lead }) => {
     Email,
     DepartureCity,
     DestinationName,
-    Pax,
+    NoOfPax,
     Child,
     Infant,
     Budget,
@@ -45,10 +45,10 @@ const DriverCard = ({ lead }) => {
     { label: "Budget", value: Budget },
     { label: "Travel Date", value: TravelDate },
     { label: "Days", value: Days },
-    { label: "Pax", value: Pax },
+    { label: "Pax", value: NoOfPax },
     { label: "Child", value: Child },
     { label: "Infant", value: Infant },
-    { label: "Status", value: NurtureLeadStatus },
+    { label: "Status", value: NurtureLeadStatus},
   ];
 
   const getTripCounter = async () => {
@@ -144,12 +144,8 @@ const DriverCard = ({ lead }) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-  
+      
       console.log("Status updated successfully:", response.data);
-  
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     } catch (error) {
       console.error("Error updating status:", error.response?.data || error.message);
     }
@@ -174,7 +170,7 @@ const DriverCard = ({ lead }) => {
 
             {!assigned && (
               <div className="button-container">
-                <LeadStatusCtrl trip={lead} />
+                <LeadStatusCtrl trip={lead} getrawleadsonboard={getrawleadsonboard} />
                 <button
                   onClick={() => setIsOpen(true)}
                   className="open-modal-button"

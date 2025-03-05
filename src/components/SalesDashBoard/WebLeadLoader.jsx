@@ -21,6 +21,13 @@ const WebLeadLoader = () => {
   const [data, setData] = useState(null);
   // `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new&from=${date.currentDate}&to=${date.nextDate}`
 
+  async function getrawleadsonboard() {
+    const res = await axios.get(
+      `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new`
+    );
+    setData(res.data);
+
+  }
   useEffect(() => {
     const fetchLead = async () => {
       setLoading(true);
@@ -42,7 +49,7 @@ const WebLeadLoader = () => {
       <br />
       {data?.map((lead, id) => (
         <Fragment key={id}>
-          <DriverCard lead={lead} date={date} />
+          <DriverCard lead={lead} date={date} getrawleadsonboard={getrawleadsonboard}/>
           <br />
         </Fragment>
       ))}

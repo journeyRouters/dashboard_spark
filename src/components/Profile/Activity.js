@@ -2504,7 +2504,9 @@ export const avtivityList = {
             { label: "leisure", value: "Leisureday" },
             { label: 'Departure', value: 'Departure' }
         ],
-    HongKong: [
+    Hongkong: [
+        { label: 'Arrival', value: 'Arrival' },
+        { label: 'Departure', value: 'Departure' },
         { label: "Hong Kong City Tour with Madam Tussauds", value: "hongKongCityTourMadamTussauds" },
         { label: "Macau City Tour", value: "macauCityTour" },
         { label: "Ocean Park", value: "oceanPark" },
@@ -2517,6 +2519,6 @@ export const avtivityList = {
 
 }
 export function ActivityResolver(destination) {
-    // console.log(avtivityList[destination])
+    // console.log(destination)
     return avtivityList[destination];
 }

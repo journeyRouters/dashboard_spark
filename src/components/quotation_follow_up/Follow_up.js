@@ -602,6 +602,7 @@ const FollowUp = (props) => {
 
         var q = query(collection(db, 'Trip'),
             where("assign_to.uid", "==", user),
+            where("Lead_Status", "not-in", ["Converted"] ),
             where("TripId", "==", TripId))
         try {
             let list = []

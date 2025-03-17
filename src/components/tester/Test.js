@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocFromCache, getDocs, getFirestore, onSnapshot, query, updateDoc, where, WriteBatch, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocFromCache, getDocs, getFirestore, limit, onSnapshot, orderBy, query, startAfter, updateDoc, where, WriteBatch, writeBatch } from 'firebase/firestore';
 import { default as React, useEffect, useState } from 'react';
 import app from '../required';
 import './testcss.css';
@@ -241,17 +241,17 @@ const Test = () => {
             // console.log(invoiceId, updatedInvoiceData)
             // Step 4: Add only the updated fields to the batch
             if (updatedInvoiceData) {
-                const docRef = doc(db, "invoice", invoiceId);
-                batch.update(docRef, {
-                    FinalInstallmentStatus: updatedInvoiceData.FinalInstallmentStatus,
-                    NextInstallmentAmount: updatedInvoiceData.NextInstallmentAmount,
-                    NextInstallmentDate: updatedInvoiceData.NextInstallmentDate
-                });
+               const docRef = doc(db, "invoice", invoiceId);
+               batch.update(docRef, {
+                  FinalInstallmentStatus: updatedInvoiceData.FinalInstallmentStatus,
+                  NextInstallmentAmount: updatedInvoiceData.NextInstallmentAmount,
+                  NextInstallmentDate: updatedInvoiceData.NextInstallmentDate
+               });
             }
          });
 
          // Step 5: Commit the batch update
-           await batch.commit();
+         await batch.commit();
 
          console.log("Batch update completed successfully!");
       } catch (error) {
@@ -558,41 +558,110 @@ const Test = () => {
 
    async function queryInvoicesFor29thNovember() {
       try {
-          // Define the start and end of 29th November
-          const startDate = new Date(2024, 10, 30, 0, 0, 0, 0); // 29th Nov 2024 00:00:00.000
-          const endDate = new Date(2024, 10, 30, 23, 59, 59, 999); // 29th Nov 2024 23:59:59.999
-  
-          // Firestore collection reference
-          const invoiceCollectionRef = collection(db, "invoice");
-  
-          // Query Firestore for invoices with NextInstallmentDate between startDate and endDate
-          const invoiceQuery = query(
-              invoiceCollectionRef,
-              where("NextInstallmentDate", ">=", startDate),
-              where("NextInstallmentDate", "<=", endDate)
-          );
-  
-          const querySnapshot = await getDocs(invoiceQuery);
-  
-          // Process and display the results
-          const invoicesFor29thNovember = [];
-          querySnapshot.forEach((docSnapshot) => {
-              const invoiceData = docSnapshot.data();
-              invoicesFor29thNovember.push({
-                  InvoiceId: docSnapshot.id,
-                  NextInstallmentAmount: invoiceData.NextInstallmentAmount || "N/A",
-                  NextInstallmentDate: new Date(invoiceData.NextInstallmentDate.toDate()).toISOString(),
-                  FinalInstallmentStatus: invoiceData.FinalInstallmentStatus || "N/A"
-              });
-          });
-  
-          console.log("Invoices with NextInstallmentDate on 29th November:", invoicesFor29thNovember);
-          return invoicesFor29thNovember;
-  
+         // Define the start and end of 29th November
+         const startDate = new Date(2024, 10, 30, 0, 0, 0, 0); // 29th Nov 2024 00:00:00.000
+         const endDate = new Date(2024, 10, 30, 23, 59, 59, 999); // 29th Nov 2024 23:59:59.999
+
+         // Firestore collection reference
+         const invoiceCollectionRef = collection(db, "invoice");
+
+         // Query Firestore for invoices with NextInstallmentDate between startDate and endDate
+         const invoiceQuery = query(
+            invoiceCollectionRef,
+            where("NextInstallmentDate", ">=", startDate),
+            where("NextInstallmentDate", "<=", endDate)
+         );
+
+         const querySnapshot = await getDocs(invoiceQuery);
+
+         // Process and display the results
+         const invoicesFor29thNovember = [];
+         querySnapshot.forEach((docSnapshot) => {
+            const invoiceData = docSnapshot.data();
+            invoicesFor29thNovember.push({
+               InvoiceId: docSnapshot.id,
+               NextInstallmentAmount: invoiceData.NextInstallmentAmount || "N/A",
+               NextInstallmentDate: new Date(invoiceData.NextInstallmentDate.toDate()).toISOString(),
+               FinalInstallmentStatus: invoiceData.FinalInstallmentStatus || "N/A"
+            });
+         });
+
+         console.log("Invoices with NextInstallmentDate on 29th November:", invoicesFor29thNovember);
+         return invoicesFor29thNovember;
+
       } catch (error) {
-          console.error("Error querying invoices for 29th November:", error);
+         console.error("Error querying invoices for 29th November:", error);
       }
-  }
+   }
+
+
+
+   const db = getFirestore();
+   const BATCH_SIZE = 500;
+
+   async function batchGetConvertedLeads() {
+      try {
+         const startDate = new Date("2023-01-01");
+         const endDate = new Date("2023-12-31");
+         console.log(startDate,endDate)
+         const leadsRef = collection(db, "Trip");
+         let lastVisible = null;
+         let allLeads = [];
+         let hasMore = true;
+
+         while (hasMore) {
+            let q = query(
+               leadsRef,
+               where("time", ">=", startDate),
+               where("time", "<=", endDate),
+               where("Lead_Status", "==", "Converted"),
+               orderBy("time"),
+               limit(BATCH_SIZE)
+            );
+
+            if (lastVisible) {
+               q = query(q, startAfter(lastVisible));
+            }
+
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+               querySnapshot.forEach((doc) => {
+                  const data = doc.data();
+                  allLeads.push({
+                     TripId: data.TripId || "N/A",
+                     InstaId: data.InstaId || "N/A",
+                     Campaign_code: data.Campaign_code || "N/A",
+                     Destination: data.Destination || "N/A",
+                     Assign_to_Name: data.assign_to?.name || "N/A"
+                  });
+               });
+
+               lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+            } else {
+               hasMore = false;
+            }
+         }
+
+          exportToExcel(allLeads);
+         // console.log(allLeads)
+         return allLeads;
+      } catch (error) {
+         console.error("Error fetching converted leads:", error);
+         return [];
+      }
+   }
+
+   function exportToExcel(data) {
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "ConvertedLeads");
+      XLSX.writeFile(wb, "Converted_Leads.xlsx");
+   }
+
+
+
+
    useEffect(() => {
       // queryInvoicesFor29thNovember()
       // getAllConverted()
@@ -606,7 +675,7 @@ const Test = () => {
    }, []);
    return (
       <div>
-         {/* <button onClick={() => exportPendingInvoicesWithEndedTravelToExcel()}>click to get things work</button> */}
+         {/* <button onClick={() => batchGetConvertedLeads()}>click to get things work</button> */}
          {/* <h2>{datalength}</h2> */}
       </div>
    );

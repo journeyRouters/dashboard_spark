@@ -23,6 +23,7 @@ const FollowUp = (props) => {
     const animatedComponents = makeAnimated();
     const [user, setuser] = useState(props.adminFlg ? props.user : auth.uid)
     const [leadStatus, setStatus] = useState(0)
+    const [TripId, settripid] = useState("")
     async function getOthersStatusLeadOnBoard(status) {
         // console.log(props.target.uid)
         setStatus(status)
@@ -61,7 +62,7 @@ const FollowUp = (props) => {
         try {
             let list = []
             var q = query(collection(db, "Trip"), where("assign_to.uid", "==", user),
-                where('Lead_Status', 'not-in', ['Dump', 'Converted','Cancel']), where("quotation_flg", "==", true),
+                where('Lead_Status', 'not-in', ['Dump', 'Converted', 'Cancel']), where("quotation_flg", "==", true),
 
 
             );
@@ -535,7 +536,7 @@ const FollowUp = (props) => {
                 )
             }
             else {
-            // console.log('trigger')
+                // console.log('trigger')
                 // console.log('get',lead[0],currentMonth)
                 q = query(collection(db, 'Trip'),
                     where("assign_to.uid", "==", user),
@@ -596,6 +597,40 @@ const FollowUp = (props) => {
             setopen(false)
         }
     }
+
+    async function searchTripId() {
+
+        var q = query(collection(db, 'Trip'),
+            where("assign_to.uid", "==", user),
+            where("TripId", "==", TripId))
+        try {
+            let list = []
+            var querySnapshot;
+            querySnapshot = await getDocs(q);
+            if (querySnapshot.docs.length == 0) {
+                setopen(false)
+                // console.log('no data')
+                setLead_data(list)
+                setStatus(0)
+
+            }
+            else {
+
+                querySnapshot.forEach((doc) => {
+                    list.push(doc.data())
+                });
+                setLead_data(list)
+                setStatus(0)
+                setopen(false)
+
+            }
+        }
+        catch (erorr) {
+            console.log(erorr)
+            setopen(false)
+        }
+    }
+
     function DestinationHandler(e) {
         // console.log(e)
 
@@ -684,6 +719,11 @@ const FollowUp = (props) => {
                                 </div>
                             </>
                     }
+                    <div className='filter'>
+                        <input placeholder='Enter TripId' className='tripid_input_feild' onChange={(e)=>settripid(e.target.value) } />
+                        <button onClick={()=>searchTripId()}>Search </button>
+                        <button onClick={()=>getLeadOnBoard()}>Refresh</button>
+                    </div>
 
                     {/* <div className='filter'>
                         <div>

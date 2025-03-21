@@ -36,10 +36,11 @@ const Comments = ({ commentData, showSaleFlightComment = true }) => {
       const updatedData = {
         ...commentData,
         NurtureComments: [...comments, newComment],
+        source: "WebLeads",
       };
 
       await axios.put(
-        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new`,
+        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander`,
         updatedData
       );
     } catch (error) {

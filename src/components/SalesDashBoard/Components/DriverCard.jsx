@@ -57,7 +57,7 @@ const DriverCard = ({ lead,getrawleadsonboard }) => {
       const supportSnap = await getDoc(tripRef);
       if (supportSnap.exists()) {
         setTripCounter(supportSnap.data().tripCount);
-        console.log(supportSnap.data().tripCount)
+        // console.log(supportSnap.data().tripCount)
         GenLeadFromRawLead(supportSnap.data().tripCount)
       }
     } catch (e) {
@@ -145,7 +145,7 @@ const DriverCard = ({ lead,getrawleadsonboard }) => {
         }
       );
       
-      console.log("Status updated successfully:", response.data);
+      // console.log("Status updated successfully:", response.data);
     } catch (error) {
       console.error("Error updating status:", error.response?.data || error.message);
     }

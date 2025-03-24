@@ -339,7 +339,7 @@ const Box = ({
         <>
 
             {
-                Destination === "Maldives" || Destination === "Mauritius" ?
+                Destination === "Maldives" ?
                     <Maldives
                         email={email}
                         data={data}

@@ -198,7 +198,7 @@ const MainCreatequote = (props) => {
                             {
                                 popupopener ? <>
                                     {
-                                        user_uni_data.Destination === "Maldives" || user_uni_data.Destination === "Mauritius" ?
+                                        user_uni_data.Destination === "Maldives"  ?
                                             <>
                                                 <Maldives
                                                     email={auth.email}

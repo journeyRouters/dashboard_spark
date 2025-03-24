@@ -2514,6 +2514,17 @@ export const avtivityList = {
         { label: "100 Sky Observatory View", value: "sky100ObservatoryView" },
         { label: "Ngong Ping Village with 2-Way Cable Car or 360 Degree Lantau Island", value: "ngongPingVillageCableCar" },
         { label: "Hong Kong to Macau by Ferry and Vice Versa", value: "hongKongMacauFerry" }
+    ],
+    Mauritius: [
+        { label: 'Arrival', value: 'Arrival' },
+        { label: 'Departure', value: 'Departure' },
+        { label: 'Leisureday', value: 'Leisureday' },
+        { label: "Catermaran Cruise", value: "CatermaranCruise" },
+        { label: "Casela Nature Park", value: "CaselaNaturePark" },
+        { label: "Ile AuxCerf Tour with speed Boat", value: "IleAuxCerfTourwithspeedBoat" },
+        { label: "South Island Tour", value: "SouthIslandTour" },
+        { label: "North Island Tour", value: "NorthIslandTour" },
+        { label: "Transfer", value: "Transfer" }
     ]
 
 

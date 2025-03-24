@@ -406,7 +406,7 @@ const Maldives = ({
             />
         </Modal>
         {
-            Destination === "Maldives" || Destination === "Mauritius" ? <>
+            Destination === "Maldives"? <>
                 <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                     <div className='popUp_body'>
                         <div className='save_close'>

@@ -1631,241 +1631,241 @@ const RoomType = {
         },
     ],
     // Mauritius//////////////////////////////////////////////////////////////////
-    JWMarriot: [
-        {
-            label: 'four bedroom',
-            value: 'FourBedroom'
-        },
-        {
-            label: 'heritage balcony',
-            value: 'HeritageBalcony'
-        },
-        {
-            label: 'heritage beach ',
-            value: 'HeritageBeach'
-        },
-        {
-            label: 'Junior king twins',
-            value: 'JuniorkingTwins'
-        },
-        {
-            label: 'junior suit',
-            value: 'JuniorSuit'
-        },
-        {
-            label: 'le morne balcony',
-            value: 'LemorneBalcony'
-        },
-        {
-            label: 'le morne beach',
-            value: 'LemorneBeach'
-        },
-        {
-            label: 'Manor house spa',
-            value: 'ManorHouseSpa'
-        },
-        {
-            label: 'ocean haven balcony',
-            value: 'OceanHavenBalcony'
-        },
-        {
-            label: 'ocean haven junior',
-            value: 'OceanHavenJunior'
-        },
-        {
-            label: 'ocean junior',
-            value: 'OceanJunior'
-        },
-        {
-            label: 'peninsula balcony',
-            value: 'PeninsulaBalcony'
-        },
-        {
-            label: 'peninsula beach',
-            value: 'PeninsulaBeach'
-        },
-    ],
-    ThewestinTurtlebay: [
-        {
-            label: 'BeachFront',
-            value: 'BeachFront'
-        },
-        {
-            label:'Banyan Suite',
-            value:'BanyanSuite'
-        },
-        {
-            label: 'Heavenly Family',
-            value: 'HeavenlyFamily'
-        },
-        {
-            label: 'Heavenly Junior',
-            value: 'HeavenlyJunior'
-        },
-        {
-            label: 'Junior King',
-            value: 'JuniorKing'
-        },
-        {
-            label: 'Junior Suite King',
-            value: 'JuniorSuiteKing'
-        },
-        {
-            label: 'Turtle Bay Junior',
-            value: 'TurtleBayJunior'
-        },
-        {
-            label: 'Wellbeing Suite',
-            value: 'WellbeingSuite'
-        },
-    ],
-    RadissonBlu: [
-        {
-            label: 'Standard room',
-            value: 'Standardroom'
-        },
-        {
-            label: 'Superior Beach Front',
-            value: 'SuperiorBeachfront'
-        },
-        {
-            label: 'Superior Garden View',
-            value: 'SuperiorGardenView'
-        },
-        {
-            label: 'Superior Sea View',
-            value: 'SuperiorSeaView'
-        },
-    ],
-    LongBeach: [
-        {
-            label: 'junior Premium',
-            value: 'juniorPremium'
-        },
-        {
-            label: 'family Suite',
-            value: 'familySuite'
-        },
-        {
-            label: 'Junior Suite',
-            value: 'juniorSuite'
-        },
-        {
-            label: 'junior Beach front',
-            value: 'juniorBeachfront'
-        },
-        {
-            label: 'long beach Executive',
-            value: 'longbeachExecutive'
-        }
-    ],
+    // JWMarriot: [
+    //     {
+    //         label: 'four bedroom',
+    //         value: 'FourBedroom'
+    //     },
+    //     {
+    //         label: 'heritage balcony',
+    //         value: 'HeritageBalcony'
+    //     },
+    //     {
+    //         label: 'heritage beach ',
+    //         value: 'HeritageBeach'
+    //     },
+    //     {
+    //         label: 'Junior king twins',
+    //         value: 'JuniorkingTwins'
+    //     },
+    //     {
+    //         label: 'junior suit',
+    //         value: 'JuniorSuit'
+    //     },
+    //     {
+    //         label: 'le morne balcony',
+    //         value: 'LemorneBalcony'
+    //     },
+    //     {
+    //         label: 'le morne beach',
+    //         value: 'LemorneBeach'
+    //     },
+    //     {
+    //         label: 'Manor house spa',
+    //         value: 'ManorHouseSpa'
+    //     },
+    //     {
+    //         label: 'ocean haven balcony',
+    //         value: 'OceanHavenBalcony'
+    //     },
+    //     {
+    //         label: 'ocean haven junior',
+    //         value: 'OceanHavenJunior'
+    //     },
+    //     {
+    //         label: 'ocean junior',
+    //         value: 'OceanJunior'
+    //     },
+    //     {
+    //         label: 'peninsula balcony',
+    //         value: 'PeninsulaBalcony'
+    //     },
+    //     {
+    //         label: 'peninsula beach',
+    //         value: 'PeninsulaBeach'
+    //     },
+    // ],
+    // ThewestinTurtlebay: [
+    //     {
+    //         label: 'BeachFront',
+    //         value: 'BeachFront'
+    //     },
+    //     {
+    //         label:'Banyan Suite',
+    //         value:'BanyanSuite'
+    //     },
+    //     {
+    //         label: 'Heavenly Family',
+    //         value: 'HeavenlyFamily'
+    //     },
+    //     {
+    //         label: 'Heavenly Junior',
+    //         value: 'HeavenlyJunior'
+    //     },
+    //     {
+    //         label: 'Junior King',
+    //         value: 'JuniorKing'
+    //     },
+    //     {
+    //         label: 'Junior Suite King',
+    //         value: 'JuniorSuiteKing'
+    //     },
+    //     {
+    //         label: 'Turtle Bay Junior',
+    //         value: 'TurtleBayJunior'
+    //     },
+    //     {
+    //         label: 'Wellbeing Suite',
+    //         value: 'WellbeingSuite'
+    //     },
+    // ],
+    // RadissonBlu: [
+    //     {
+    //         label: 'Standard room',
+    //         value: 'Standardroom'
+    //     },
+    //     {
+    //         label: 'Superior Beach Front',
+    //         value: 'SuperiorBeachfront'
+    //     },
+    //     {
+    //         label: 'Superior Garden View',
+    //         value: 'SuperiorGardenView'
+    //     },
+    //     {
+    //         label: 'Superior Sea View',
+    //         value: 'SuperiorSeaView'
+    //     },
+    // ],
+    // LongBeach: [
+    //     {
+    //         label: 'junior Premium',
+    //         value: 'juniorPremium'
+    //     },
+    //     {
+    //         label: 'family Suite',
+    //         value: 'familySuite'
+    //     },
+    //     {
+    //         label: 'Junior Suite',
+    //         value: 'juniorSuite'
+    //     },
+    //     {
+    //         label: 'junior Beach front',
+    //         value: 'juniorBeachfront'
+    //     },
+    //     {
+    //         label: 'long beach Executive',
+    //         value: 'longbeachExecutive'
+    //     }
+    // ],
    
-    LagunaBeach:[
-        {
-            label:'barachois Room',
-            value:'barachoisRoom'
-        },
-        {
-            label:'deluxe Room',
-            value:'deluxeRoom'
-        },
-        {
-            label:'family Room',
-            value:'familyRoom'
-        },
-        {
-            label:'Standard Room',
-            value:'standardRoom'
-        },
+    // LagunaBeach:[
+    //     {
+    //         label:'barachois Room',
+    //         value:'barachoisRoom'
+    //     },
+    //     {
+    //         label:'deluxe Room',
+    //         value:'deluxeRoom'
+    //     },
+    //     {
+    //         label:'family Room',
+    //         value:'familyRoom'
+    //     },
+    //     {
+    //         label:'Standard Room',
+    //         value:'standardRoom'
+    //     },
        
-    ],
-    LagoonAttitude:[
-        {
-            label:'couple Pool side',
-            value:'couplePoolside'
-        },
-        {
-            label:'couple Room',
-            value:'coupleRoom'
-        },
-        {
-            label:'couple Sea front',
-            value:'coupleSeafront'
-        },
-        {
-            label:'whirlpool Suite',
-            value:'whirlpoolSuite'
-        },
-        {
-            label:'suite',
-            value:'suite'
-        },
+    // ],
+    // LagoonAttitude:[
+    //     {
+    //         label:'couple Pool side',
+    //         value:'couplePoolside'
+    //     },
+    //     {
+    //         label:'couple Room',
+    //         value:'coupleRoom'
+    //     },
+    //     {
+    //         label:'couple Sea front',
+    //         value:'coupleSeafront'
+    //     },
+    //     {
+    //         label:'whirlpool Suite',
+    //         value:'whirlpoolSuite'
+    //     },
+    //     {
+    //         label:'suite',
+    //         value:'suite'
+    //     },
        
-    ],
-    SunriseAttitude:[
-        {
-            label:'couple Room',
-            value:'coupleRoom'
-        },
-        {
-            label:'couple Swim up',
-            value:'coupleSwimup'
-        },
-        {
-            label:'partial Sea view',
-            value:'partialSeaview'
-        },
-        {
-            label:'villa',
-            value:'villa'
-        },
+    // ],
+    // SunriseAttitude:[
+    //     {
+    //         label:'couple Room',
+    //         value:'coupleRoom'
+    //     },
+    //     {
+    //         label:'couple Swim up',
+    //         value:'coupleSwimup'
+    //     },
+    //     {
+    //         label:'partial Sea view',
+    //         value:'partialSeaview'
+    //     },
+    //     {
+    //         label:'villa',
+    //         value:'villa'
+    //     },
       
-    ],
-    RavenalaAttitude:[
-        {
-            label:'couple Suite',
-            value:'coupleSuite'
-        },
-        {
-            label:'executive Sea front',
-            value:'executiveSeafront'
-        },
-        {
-            label:'family Suite',
-            value:'familySuite'
-        },
+    // ],
+    // RavenalaAttitude:[
+    //     {
+    //         label:'couple Suite',
+    //         value:'coupleSuite'
+    //     },
+    //     {
+    //         label:'executive Sea front',
+    //         value:'executiveSeafront'
+    //     },
+    //     {
+    //         label:'family Suite',
+    //         value:'familySuite'
+    //     },
       
-    ],
-    CoralAzurBeachResort:[
-        {
-            label:'coral Signature',
-            value:'coralSignature'
-        },
-        {
-            label:'standard Garden view',
-            value:'standardGardenview'
-        },
-        {
-            label:'standard Sea view',
-            value:'standardSeaview'
-        },
+    // ],
+    // CoralAzurBeachResort:[
+    //     {
+    //         label:'coral Signature',
+    //         value:'coralSignature'
+    //     },
+    //     {
+    //         label:'standard Garden view',
+    //         value:'standardGardenview'
+    //     },
+    //     {
+    //         label:'standard Sea view',
+    //         value:'standardSeaview'
+    //     },
       
-    ],
-    RadissonBluAzuriResort:[
-        {
-            label:'premium Beach front',
-            value:'premiumBeachfront'
-        },
-        {
-            label:'premium Garden view',
-            value:'premiumGardenview'
-        },
-        {
-            label:'premium Ocean view',
-            value:'premiumOceanview'
-        },
+    // ],
+    // RadissonBluAzuriResort:[
+    //     {
+    //         label:'premium Beach front',
+    //         value:'premiumBeachfront'
+    //     },
+    //     {
+    //         label:'premium Garden view',
+    //         value:'premiumGardenview'
+    //     },
+    //     {
+    //         label:'premium Ocean view',
+    //         value:'premiumOceanview'
+    //     },
      
-    ],
+    // ],
 
 }
 export function RoomTypeReflector(property) {

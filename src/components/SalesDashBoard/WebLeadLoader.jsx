@@ -23,7 +23,7 @@ const WebLeadLoader = () => {
 
   async function getrawleadsonboard() {
     const res = await axios.get(
-      `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new&source=WebLeads`
+      `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?LeadStatus=New&source=WebLeads`
     );
     setData(res.data);
 
@@ -32,7 +32,7 @@ const WebLeadLoader = () => {
     const fetchLead = async () => {
       setLoading(true);
       const res = await axios.get(
-        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?Status=new&source=WebLeads`
+        `https://2rltmjilx9.execute-api.ap-south-1.amazonaws.com/DataTransaction/LeadLander?LeadStatus=New&source=WebLeads`
       );
       setLoading(false);
       setData(res.data);

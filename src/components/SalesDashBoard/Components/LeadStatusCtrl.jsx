@@ -17,7 +17,7 @@ const LeadStatusCtrl = ({ trip ,getrawleadsonboard}) => {
         ...(trip.NurtureStatusHistory || []),
         {
           DateTimeStamp: new Date(),
-          Status: leadStatus,
+          LeadStatus: leadStatus,
         },
       ],
     };

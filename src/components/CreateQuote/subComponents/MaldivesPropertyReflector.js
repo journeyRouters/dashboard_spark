@@ -172,7 +172,7 @@ export const propertyMaldives = [
         value: 'SiyamWorldMaldives'
     },
     {
-        label: 'Villa PARK',
+        label: 'VILLA PARK',
         value: 'VillaPark'
 
     },

@@ -152,8 +152,8 @@ export const propertyMaldives = [
         value: 'ObluSelectSangeli'
     },
     {
-        label: 'PARADISE ISLAND RESORT',
-        value: 'ParadiseIslandResort'
+        label: 'VILLA NAUTICA',
+        value: 'VillaNautica'
     },
     {
         label: 'REETHI FARU RESORT',
@@ -172,8 +172,9 @@ export const propertyMaldives = [
         value: 'SiyamWorldMaldives'
     },
     {
-        label: 'SUN ISLAND RESORT AND SPA',
-        value: 'SunIslandResort_Spa'
+        label: 'Villa PARK',
+        value: 'VillaPark'
+
     },
     {
         label: 'SUN SIYAM IRU FUSHI',

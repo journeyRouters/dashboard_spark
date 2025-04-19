@@ -1202,7 +1202,7 @@ const RoomType = {
             value: "WaterVillaWithPool",
         },
     ],
-    ParadiseIslandResort: [
+    VillaNautica: [
         {
             label: "Beach Villa",
             value: "BeachVilla",
@@ -1408,7 +1408,7 @@ const RoomType = {
             value: "WaterVillaWithPool_Slide",
         },
     ],
-    SunIslandResort_Spa: [
+    VillaPark: [
         {
             label: "Beach Pool Villa",
             value: "BeachPoolVilla",

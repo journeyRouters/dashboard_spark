@@ -26,7 +26,7 @@ function Mydrawer({ open, Data }) {
             Number: item.Contact_Number,
             TravelDate: item.Travel_Date.toDate(),
             Lead_Assigned:item.assigned_date_time.toDate(),
-            updated_last:item.updated_last.toDate(),
+            // updated_last:item.updated_last.toDate(),
             SalesPerson: item.assign_to.name,
             ConvertedMonth: item.month
         }));

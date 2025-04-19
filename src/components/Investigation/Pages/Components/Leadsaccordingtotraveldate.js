@@ -1,72 +1,81 @@
 import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import app from '../../../required';
 import { getConvertedDataForUserProfile } from '../../Components/Querybase';
 import Verticlechart from '../../Components/Verticlechart';
+
 const db = getFirestore(app);
 
 function Leadsaccordingtotraveldate(props) {
-    const [Leadaccordingtotraveldate, setLadsaccordingtotraveldate] = useState([])
+    const [Leadaccordingtotraveldate, setLadsaccordingtotraveldate] = useState([]);
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [destination, setDestination] = useState(null);
+    const [leadStatus, setLeadStatus] = useState('');
+
     function getAllUserProfiles(from, to, Destination) {
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));
+
         return onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 const usersProfile = doc.data();
-                const DataQuery = query(collection(db, "Trip"),
+                const DataQuery = query(
+                    collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    where('Travel_Date', '>=', from),
-                    where('Travel_Date', '<', to),
-                    where('Destination', '==', Destination),
-                    where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited']));
-                // console.log(DataQuery)
+                    where("Travel_Date", ">=", from),
+                    where("Travel_Date", "<", to),
+                    ...(Destination ? [where("Destination", "==", Destination)] : []),
+                    ...(leadStatus
+                        ? [where("Lead_Status", "==", leadStatus)]
+                        : [where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited'])])
+                );
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
             });
         });
     }
+
     function getAllDatawithoutDestion(from, to) {
         const q = query(collection(db, "Profile"),
             where("access_type", "in", ["User", "Team Leader", "freelance"]));
+
         return onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 const usersProfile = doc.data();
-                const DataQuery = query(collection(db, "Trip"),
+                const DataQuery = query(
+                    collection(db, "Trip"),
                     where("assign_to.uid", "==", usersProfile.uid),
-                    where('Travel_Date', '>=', from),
-                    where('Travel_Date', '<', to),
-                    where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited']));
-                // console.log(DataQuery)
+                    where("Travel_Date", ">=", from),
+                    where("Travel_Date", "<", to),
+                    ...(leadStatus
+                        ? [where("Lead_Status", "==", leadStatus)]
+                        : [where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited','Converted'])])
+                );
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
             });
         });
     }
-  
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const fromDateObj = new Date(fromDate);
         fromDateObj.setHours(0, 0, 0, 0);
         const toDateObj = new Date(toDate);
         toDateObj.setHours(0, 0, 0, 0);
-        // console.log('Destination:', destination);
-        if(destination){
-            getAllUserProfiles(fromDateObj, toDateObj, destination)
-        }
-        else{
-            getAllDatawithoutDestion(fromDateObj, toDateObj)
+
+        if (destination) {
+            getAllUserProfiles(fromDateObj, toDateObj, destination);
+        } else {
+            getAllDatawithoutDestion(fromDateObj, toDateObj);
         }
     };
-    useEffect(() => {
-        // getAllUserProfiles()
-    }, [])
+
     return (
-        <div >
+        <div>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label className='labels' htmlFor="from-date">From Date:</label>
+                        <label className="labels" htmlFor="from-date">From Date:</label>
                         <input
                             type="date"
                             id="from-date"
@@ -78,9 +87,9 @@ function Leadsaccordingtotraveldate(props) {
                     </div>
 
                     <div className="form-group">
-                        <label className='labels' htmlFor="to-date">To Date:</label>
+                        <label className="labels" htmlFor="to-date">To Date:</label>
                         <input
-                            className='inputFeild'
+                            className="inputFeild"
                             type="date"
                             id="to-date"
                             name="to-date"
@@ -91,14 +100,13 @@ function Leadsaccordingtotraveldate(props) {
                     </div>
 
                     <div className="form-group">
-                        <label className='labels' htmlFor="destination">Destination:</label>
+                        <label className="labels" htmlFor="destination">Destination:</label>
                         <select
-                            className='SelectFeild'
+                            className="SelectFeild"
                             id="destination"
                             name="destination"
                             value={destination}
                             onChange={(e) => setDestination(e.target.value)}
-                            // required
                         >
                             <option value="">Select a destination</option>
                             <option value={'Dubai'}>Dubai</option>
@@ -113,7 +121,6 @@ function Leadsaccordingtotraveldate(props) {
                             <option value={'Kashmir'}>Kashmir</option>
                             <option value={'Andaman'}>Andaman</option>
                             <option value={'Goa'}>Goa</option>
-                            <option value={'Singapore'}>Singapore</option>
                             <option value={'Rajasthan'}>Rajasthan</option>
                             <option value={'Vietnam'}>Vietnam</option>
                             <option value={'Northeast'}>Northeast</option>
@@ -127,10 +134,29 @@ function Leadsaccordingtotraveldate(props) {
                         </select>
                     </div>
 
-                    <button className='buttonSubmit' type="submit">Submit</button>
+                    <div className="form-group">
+                        <label className="labels" htmlFor="leadStatus">Lead Status:</label>
+                        <select
+                            className="SelectFeild"
+                            id="leadStatus"
+                            name="leadStatus"
+                            value={leadStatus}
+                            onChange={(e) => setLeadStatus(e.target.value)}
+                        >
+                            <option value="">All</option>
+                            <option value="Cold">Cold</option>
+                            <option value="Active">Active</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Paymentawaited">Paymentawaited</option>
+                            <option value="Converted">Converted</option>
+                        </select>
+                    </div>
+
+                    <button className="buttonSubmit" type="submit">Submit</button>
                 </form>
             </div>
-            <Verticlechart Data={Leadaccordingtotraveldate} Comment={`${destination} Leads`} />
+
+            <Verticlechart Data={Leadaccordingtotraveldate} Comment={`${destination || 'All'} Leads`} />
         </div>
     );
 }

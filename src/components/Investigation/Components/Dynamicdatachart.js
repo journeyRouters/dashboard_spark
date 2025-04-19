@@ -1,23 +1,21 @@
-import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
-import moment from 'moment';
-import { React, useEffect, useState } from 'react';
+import { getFirestore } from 'firebase/firestore';
+import { React } from 'react';
 import app from '../../required';
-import Verticlechart from './Verticlechart';
+import Activeleads from '../Pages/Activeleads';
+import Coldleads from '../Pages/Coldleads';
+import Leadsaccordingtotraveldate from '../Pages/Components/Leadsaccordingtotraveldate';
 import Currentmonthconversionchart from '../Pages/Currentmonthconversionchart';
-import Previousmonthconversionchart from '../Pages/Previousmonthconversionchart';
+import Dumpleads from '../Pages/Dumpleads';
+import DumpLeadsOnBasisOfPacCount from '../Pages/DumpLeadsOnBasisOfPacCount';
+import Hotleads from '../Pages/Hotleads';
 import Last3rdmonthconversionchart from '../Pages/Last3rdmonthconversionchart';
 import Leadtobequoted from '../Pages/Leadtobequoted';
-import Hotleads from '../Pages/Hotleads';
-import Activeleads from '../Pages/Activeleads';
-import Dumpleads from '../Pages/Dumpleads';
-import Totalleadsinfunnel from '../Pages/Totalleadsinfunnel';
-import Coldleads from '../Pages/Coldleads';
+import Paxmorethan4 from '../Pages/Paxmorethan4';
 import Paymentawaited from '../Pages/Paymentawaited';
+import Previousmonthconversionchart from '../Pages/Previousmonthconversionchart';
 import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
-import Leadsaccordingtotraveldate from '../Pages/Components/Leadsaccordingtotraveldate';
-import Paxmorethan4 from '../Pages/Paxmorethan4';
-import DumpLeadsOnBasisOfPacCount from '../Pages/DumpLeadsOnBasisOfPacCount';
+import Totalleadsinfunnel from '../Pages/Totalleadsinfunnel';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -51,6 +49,9 @@ function Dynamicdatachart() {
                 <Paxmorethan4 />
                 <DumpLeadsOnBasisOfPacCount/>
             </div>
+            {/* <div>
+                <Destinationdatadriven/>
+            </div> */}
 
         </div>
     );

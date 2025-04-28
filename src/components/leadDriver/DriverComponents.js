@@ -5,7 +5,7 @@ import app from '../required';
 import './Driver.css';
 
 const DriverComponents = ({ data, profile, index, getLeadByDate, selectedDate }) => {
-    // console.log(data.TripId)
+    // console.log(data?.TripId)
     const [currentUser, setCurrentuser] = useState(null)
     const [numberOfDays, setNumberOfDays] = useState(data.Travel_Duration)
     const [Status, setStatus] = useState(data.Lead_Status)

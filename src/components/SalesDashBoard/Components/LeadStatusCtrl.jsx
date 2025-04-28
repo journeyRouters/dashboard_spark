@@ -12,12 +12,12 @@ const LeadStatusCtrl = ({ trip ,getrawleadsonboard}) => {
     let updatedData = {
       Contact: trip.Contact,
       LeadId: trip.LeadId,
-      NurtureLeadStatus: leadStatus,
+      LeadStatus: leadStatus,
+      source:'WebLeads',
       NurtureStatusHistory: [
         ...(trip.NurtureStatusHistory || []),
         {
           DateTimeStamp: new Date(),
-          LeadStatus: leadStatus,
         },
       ],
     };

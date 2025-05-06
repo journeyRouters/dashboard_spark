@@ -49,7 +49,7 @@ function Leadsaccordingtotraveldate(props) {
                     where("Travel_Date", "<", to),
                     ...(leadStatus
                         ? [where("Lead_Status", "==", leadStatus)]
-                        : [where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited','Converted'])])
+                        : [where("Lead_Status", "in", ['Cold', 'Active', 'Hot', 'Paymentawaited', 'Converted'])])
                 );
                 getConvertedDataForUserProfile(usersProfile, DataQuery, setLadsaccordingtotraveldate);
             });
@@ -131,6 +131,7 @@ function Leadsaccordingtotraveldate(props) {
                             <option value={'Almaty'}>Almaty</option>
                             <option value={'Srilanka'}>Srilanka</option>
                             <option value={'Hongkong'}>Hongkong</option>
+                            <option value={'Nepal'}>Nepal</option>
                         </select>
                     </div>
 

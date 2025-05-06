@@ -179,6 +179,7 @@ const Account_converted = ({ }) => {
                         <option value={'Almaty'}>Almaty</option>
                         <option value={'Srilanka'}>Srilanka</option>
                         <option value={'Hongkong'}>Hongkong</option>
+                        <option value={'Nepal'}>Nepal</option>
                     </select>
                     <button onClick={() => HandleDestinationSearchControl()}>Search</button>
                 </div>

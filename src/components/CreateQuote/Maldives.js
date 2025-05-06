@@ -406,7 +406,7 @@ const Maldives = ({
             />
         </Modal>
         {
-            Destination === "Maldives"? <>
+            Destination === "Maldives" ? <>
                 <Modal open={open} style={{ display: "flex", justifyContent: "right", marginTop: "4rem" }} >
                     <div className='popUp_body'>
                         <div className='save_close'>
@@ -470,6 +470,8 @@ const Maldives = ({
                                         <option value={'Almaty'}>Almaty</option>
                                         <option value={'Srilanka'}>Srilanka</option>
                                         <option value={'Hongkong'}>Hongkong</option>
+                                        <option value={'Nepal'}>Nepal</option>
+
                                     </select>
                                 </h4>
                             </div>
@@ -484,7 +486,7 @@ const Maldives = ({
                                 </h4>
                                 <h4>
                                     <span>Email:- </span>
-                                    <input style={{ border: "2px solid Blue",width:'15rem' }} onChange={(e) => emailhandler(e.target.value)} placeholder={data.Email}></input>
+                                    <input style={{ border: "2px solid Blue", width: '15rem' }} onChange={(e) => emailhandler(e.target.value)} placeholder={data.Email}></input>
                                 </h4>
                                 <h4>
                                     comments:-

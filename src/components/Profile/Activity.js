@@ -2525,7 +2525,15 @@ export const avtivityList = {
         { label: "South Island Tour", value: "SouthIslandTour" },
         { label: "North Island Tour", value: "NorthIslandTour" },
         { label: "Transfer", value: "Transfer" }
-    ]
+    ],
+    Nepal:[
+        { "label": "Kathmandu Airport to Pokhara", "value": "kathmandu_airport_pokhara" },
+        { "label": "Pokhara Sightseeing", "value": "pokhara_sightseeing" },
+        { "label": "Pokhara to Kathmandu (By Flight 30 Minutes)", "value": "pokhara_kathmandu_flight" },
+        { "label": "Kathmandu (Chandragiri Hills Sightseeing)", "value": "kathmandu_chandragiri_hills" },
+        { "label": "Airport Drop", "value": "airport_drop" }
+      ]
+      
 
 
 }

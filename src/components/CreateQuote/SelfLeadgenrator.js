@@ -158,7 +158,7 @@ const SelfLeadgenrator = ({ open, onClose, userProfile, getLeadOnBoard }) => {
                     </div>
                     <div>
                         <label>Email:</label>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange}  />
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} />
                     </div>
                     <div>
                         <label>Destination:</label>
@@ -187,6 +187,8 @@ const SelfLeadgenrator = ({ open, onClose, userProfile, getLeadOnBoard }) => {
                             <option value={'Almaty'}>Almaty</option>
                             <option value={'Srilanka'}>Srilanka</option>
                             <option value={'Hongkong'}>Hongkong</option>
+                            <option value={'Nepal'}>Nepal</option>
+
                         </select>
                     </div>
                     <div>

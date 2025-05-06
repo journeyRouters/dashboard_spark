@@ -69,7 +69,7 @@ const Box = ({
         dinner: false,
         dinner_comments: '',
         // airport_Arival: false,
-        airport_Arrival:false,
+        airport_Arrival: false,
         // Domestic:false,
         // International:false,
         airport_Departure: false,
@@ -410,7 +410,7 @@ const Box = ({
                                             </h4>
                                             <h4>
                                                 <span>Email:- </span>
-                                                <input  type='email' style={{ border: "2px solid Blue",width:'15rem' }} onChange={(e) => Emailhandle(e.target.value)} placeholder={data.Email}></input>
+                                                <input type='email' style={{ border: "2px solid Blue", width: '15rem' }} onChange={(e) => Emailhandle(e.target.value)} placeholder={data.Email}></input>
                                             </h4>
                                             <h4>
                                                 <span>Destination:- </span>
@@ -440,6 +440,8 @@ const Box = ({
                                                     <option value={'Almaty'}>Almaty</option>
                                                     <option value={'Srilanka'}>Srilanka</option>
                                                     <option value={'Hongkong'}>Hongkong</option>
+                                                    <option value={'Nepal'}>Nepal</option>
+
 
                                                 </select>
                                             </h4>

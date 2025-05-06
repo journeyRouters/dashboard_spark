@@ -42,8 +42,8 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                 Traveller_name: Name,
                 Lead_Status: 'Hot',
                 callingStatus: 'Converted',
-                x_callerFlg:true,
-                x_Caller:data.assign_to.name,
+                x_callerFlg: true,
+                x_Caller: data.assign_to.name,
                 Contact_Number: Contact,
                 callingStatusChangeDate: currentdate,
                 Follow_Up_date: '',
@@ -209,6 +209,8 @@ const TableRow = ({ data, updateTableDataAfterConversion, index, }) => {
                                     <option value={'Baku'}>Baku</option>
                                     <option value={'Srilanka'}>Srilanka</option>
                                     <option value={'Hongkong'}>Hongkong</option>
+                                    <option value={'Nepal'}>Nepal</option>
+
                                 </select>
                             </h4>
                             {/* <h4>Destination :-{data.Destination}</h4> */}

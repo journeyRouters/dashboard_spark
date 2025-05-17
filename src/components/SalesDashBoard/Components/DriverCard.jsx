@@ -112,7 +112,7 @@ const DriverCard = ({ lead,getrawleadsonboard }) => {
       quotation_flg: false,
       month: '',
       Lead_status_change_date: null,
-      comments: [],
+      comments: lead.NurtureComments,
       Vouchers_flight: [],
       Vouchers_hotels: [],
       Vouchers_others: [],

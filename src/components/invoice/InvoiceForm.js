@@ -30,6 +30,32 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     const [pdfseletcted_flg, setpdf_flg] = useState(false)
     const [TCS, setTCS] = useState(0)
     const [email, setemail] = useState('')
+
+//  Controlling invoce date and limiting date in invoice
+    function getMinDateForNextInstallment() {
+    const validDates = installment
+        .map(inst => inst.Date)
+        .filter(date => date)
+        .map(date => new Date(date));
+
+    if (validDates.length === 0) {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    }
+
+    const latestDate = new Date(Math.max(...validDates));
+    latestDate.setDate(latestDate.getDate() + 1);  // adding 1 day
+    return latestDate.toISOString().split('T')[0];
+}
+// filtering datetime stamp from firestore as YYYY-MM-DD
+    function convertFirestoreTimestampToDateString(firestoreTimestamp) {
+    if (!firestoreTimestamp || !firestoreTimestamp.seconds) {
+        return '';
+    }
+    return moment.unix(firestoreTimestamp.seconds).format('YYYY-MM-DD');
+}
+
+
     // console.log(selected_pdf_data)
     function checkbalanceEquality() {
         var total = 0
@@ -190,7 +216,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
 
                                     </div>
                                     <div className='installments'>
-                                        <input type='date' name='Date' value={data.Date} onChange={(event) => handleInstallments(event, index)}></input>
+                                        <input type='date' min={getMinDateForNextInstallment()}  name='Date' value={data.Date} onChange={(event) => handleInstallments(event, index)}></input>
                                         <input value={data.amount} name='amount' onChange={(event) => handleInstallments(event, index)}></input>
                                         <div className='deleteInstallmentButton' onClick={() => removeInstallments(index)}>
                                             <img alt='delete icon' src='/assets/img/deleteIcon.png' />

@@ -16,6 +16,10 @@ import Previousmonthconversionchart from '../Pages/Previousmonthconversionchart'
 import Seventytwohr from '../Pages/Seventytwohr';
 import Totalassignedleads from '../Pages/Totalassignedleads';
 import Totalleadsinfunnel from '../Pages/Totalleadsinfunnel';
+import JrDirectLead from '../Pages/JrDirectLead';
+import SalesDirectLead from '../Pages/SalesDirectLead';
+import RepeatedClientLeads from '../Pages/RepeatedClientLeads';
+import ConvertedClientLeads from '../Pages/ConvertedClientLeads';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -23,6 +27,13 @@ function Dynamicdatachart() {
 
     return (
         <div className=''>
+            <div className='three_month_conversion_data'>
+                <JrDirectLead />
+                <SalesDirectLead/>
+                <RepeatedClientLeads/>
+                {/* <ConvertedClientLeads/> */}
+
+            </div>
             <div className='three_month_conversion_data'>
                 <Paymentawaited />
                 <Seventytwohr />
@@ -47,7 +58,7 @@ function Dynamicdatachart() {
             <div className='three_month_conversion_data'>
                 <Leadsaccordingtotraveldate />
                 <Paxmorethan4 />
-                <DumpLeadsOnBasisOfPacCount/>
+                <DumpLeadsOnBasisOfPacCount />
             </div>
             {/* <div>
                 <Destinationdatadriven/>

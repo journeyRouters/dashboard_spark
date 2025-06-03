@@ -40,7 +40,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
 
     if (validDates.length === 0) {
         const today = new Date();
-        return today.toISOString().split('T')[0];
+        return ''
     }
 
     const latestDate = new Date(Math.max(...validDates));

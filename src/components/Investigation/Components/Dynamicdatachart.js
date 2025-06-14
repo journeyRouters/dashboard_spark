@@ -20,6 +20,9 @@ import JrDirectLead from '../Pages/JrDirectLead';
 import SalesDirectLead from '../Pages/SalesDirectLead';
 import RepeatedClientLeads from '../Pages/RepeatedClientLeads';
 import ConvertedClientLeads from '../Pages/ConvertedClientLeads';
+import CurrentMonthDumpLead from '../Pages/CurrentMonthDumpLead';
+import PreviousMonthDumpLead from '../Pages/PreviousMonthDumpLead';
+import Last3rdMonthDumpLead from '../Pages/Last3rdMonthDumpLead';
 const db = getFirestore(app);
 
 function Dynamicdatachart() {
@@ -28,10 +31,16 @@ function Dynamicdatachart() {
     return (
         <div className=''>
             <div className='three_month_conversion_data'>
-                <JrDirectLead />
-                <SalesDirectLead/>
-                <RepeatedClientLeads/>
-                {/* <ConvertedClientLeads/> */}
+                {/* <JrDirectLead /> */}
+                <SalesDirectLead />
+                <ConvertedClientLeads />
+                <RepeatedClientLeads />
+
+            </div>
+            <div className='three_month_conversion_data'>
+                <CurrentMonthDumpLead/>
+                <PreviousMonthDumpLead/>
+                <Last3rdMonthDumpLead/>
 
             </div>
             <div className='three_month_conversion_data'>

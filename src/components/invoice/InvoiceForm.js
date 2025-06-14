@@ -47,13 +47,7 @@ const Invoice = ({ Invoice_flg, closeinvoice, auth, pdfHolder, profile, getinvoi
     latestDate.setDate(latestDate.getDate() + 1);  // adding 1 day
     return latestDate.toISOString().split('T')[0];
 }
-// filtering datetime stamp from firestore as YYYY-MM-DD
-    function convertFirestoreTimestampToDateString(firestoreTimestamp) {
-    if (!firestoreTimestamp || !firestoreTimestamp.seconds) {
-        return '';
-    }
-    return moment.unix(firestoreTimestamp.seconds).format('YYYY-MM-DD');
-}
+
 
 
     // console.log(selected_pdf_data)

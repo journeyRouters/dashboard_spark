@@ -302,7 +302,7 @@ function App() {
                 <Route path='/ConvertedFiles' element={<Account_converted auth={auth} profile={profile} />} />
                 <Route path='/PaymentMarking' element={<PaymentMarking Auth={auth} profile={profile} />} />
                 <Route path='/ControleUsers' element={<Usercontrol auth={auth} data={profile} />} />
-                {/* <Route path='/Test' element={<Test auth={auth} data={profile} />} /> */}
+                <Route path='/Test' element={<Test auth={auth} data={profile} />} />
                 <Route path='/CallerLeadAssinger' element={<Assignerhandler Auth={auth} profile={profile} />} />
                 <Route path='/ControleLeads' element={<Driver auth={auth} />} />
                 <Route path='/OperationsFiles' element={<OprationConverted profile={profile} />} />

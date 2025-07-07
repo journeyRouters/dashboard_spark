@@ -4,6 +4,7 @@ import app from '../required';
 import './testcss.css';
 import * as XLSX from 'xlsx';
 import moment from 'moment/moment';
+import { saveAs } from 'file-saver';
 const db = getFirestore(app);
 
 const Test = () => {
@@ -661,7 +662,74 @@ const Test = () => {
 
 
 
+const flattenObject = (obj, prefix = '', res = {}) => {
+  for (const key in obj) {
+    const value = obj[key];
+    const newKey = prefix ? `${prefix}.${key}` : key;
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      flattenObject(value, newKey, res);
+    } else {
+      res[newKey] = value;
+    }
+  }
+  return res;
+};
 
+// async function exportToExcelsingapore() {
+//   const batchSize = 500;
+//   let lastDoc = null;
+//   let allInvoices = [];
+//   let hasMore = true;
+
+//   try {
+//     while (hasMore) {
+//       const q = query(
+//         collection(db, 'invoice'),
+//       //   where('selected_pdf_data.travel_data.Destination', '==', 'Singapore'), 
+//         orderBy('__name__'),
+//         limit(batchSize),
+//         ...(lastDoc ? [startAfter(lastDoc)] : [])
+//       );
+
+//       const querySnapshot = await getDocs(q);
+
+//       if (querySnapshot.empty) {
+//         hasMore = false;
+//         break;
+//       }
+
+//       const currentBatch = [];
+//       querySnapshot.forEach((doc) => {
+//         const flatData = flattenObject({ id: doc.id, ...doc.data() });
+//         currentBatch.push(flatData);
+//       });
+
+//       allInvoices = allInvoices.concat(currentBatch);
+//       lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+//       hasMore = querySnapshot.docs.length === batchSize;
+//     }
+
+//     if (allInvoices.length === 0) {
+//       alert('No invoices found for Singapore.');
+//       return;
+//     }
+
+//     const worksheet = XLSX.utils.json_to_sheet(allInvoices);
+//     const workbook = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Invoices');
+
+//     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+//     const blob = new Blob([excelBuffer], {
+//       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//     });
+
+//     saveAs(blob, 'Singapore_Invoices.xlsx');
+//     alert(`✅ Exported ${allInvoices.length} flattened invoices to Excel.`);
+//   } catch (error) {
+//     console.error('Export failed:', error);
+//     alert('❌ Failed to export invoices. Check the console.');
+//   }
+// }
    useEffect(() => {
       // queryInvoicesFor29thNovember()
       // getAllConverted()
@@ -675,7 +743,7 @@ const Test = () => {
    }, []);
    return (
       <div>
-         {/* <button onClick={() => batchGetConvertedLeads()}>click to get things work</button> */}
+         {/* <button onClick={() => exportToExcelsingapore()}>click to get things work</button> */}
          {/* <h2>{datalength}</h2> */}
       </div>
    );

@@ -39,8 +39,8 @@ function Dynamicdatachart() {
             </div>
             <div className='three_month_conversion_data'>
                 <CurrentMonthDumpLead/>
-                <PreviousMonthDumpLead/>
-                <Last3rdMonthDumpLead/>
+                {/* <PreviousMonthDumpLead/>
+                <Last3rdMonthDumpLead/> */}
 
             </div>
             <div className='three_month_conversion_data'>

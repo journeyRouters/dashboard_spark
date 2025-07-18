@@ -2532,7 +2532,22 @@ export const avtivityList = {
         { "label": "Pokhara to Kathmandu (By Flight 30 Minutes)", "value": "pokhara_kathmandu_flight" },
         { "label": "Kathmandu (Chandragiri Hills Sightseeing)", "value": "kathmandu_chandragiri_hills" },
         { "label": "Airport Drop", "value": "airport_drop" }
-      ]
+      ],
+    Georgia:[
+    { "label": "AnanuriGeorgia", "value": "AnanuriGeorgia" },
+    { "label": "BatumiBotanicalgarden", "value": "BatumiBotanicalgarden" },
+    { "label": "DiamondBridgeDashbashiCanyonGeorgia", "value": "DiamondBridgeDashbashiCanyonGeorgia" },
+    { "label": "GudauriGeorgia", "value": "GudauriGeorgia" },
+    { "label": "KakhetiInGeogira", "value": "KakhetiInGeogira" },
+    { "label": "MtskhetaGeorgia", "value": "MtskhetaGeorgia" },
+    { "label": "PrometheusCave", "value": "PrometheusCave" },
+    { "label": "Svetitskhoveli", "value": "Svetitskhoveli" },
+    { "label": "Tbilisi", "value": "Tbilisi" },
+    { "label": "WineRegionGeorgia", "value": "WineRegionGeorgia" },
+    { "label": "Arrival", "value": "Arrival" },
+    { "label": "Departure", "value": "Departure" }
+    ]
+
       
 
 

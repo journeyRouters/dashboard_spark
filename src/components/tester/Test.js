@@ -604,7 +604,7 @@ const Test = () => {
       try {
          const startDate = new Date("2023-01-01");
          const endDate = new Date("2023-12-31");
-         console.log(startDate,endDate)
+         console.log(startDate, endDate)
          const leadsRef = collection(db, "Trip");
          let lastVisible = null;
          let allLeads = [];
@@ -644,7 +644,7 @@ const Test = () => {
             }
          }
 
-          exportToExcel(allLeads);
+         exportToExcel(allLeads);
          // console.log(allLeads)
          return allLeads;
       } catch (error) {
@@ -662,74 +662,130 @@ const Test = () => {
 
 
 
-const flattenObject = (obj, prefix = '', res = {}) => {
-  for (const key in obj) {
-    const value = obj[key];
-    const newKey = prefix ? `${prefix}.${key}` : key;
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      flattenObject(value, newKey, res);
-    } else {
-      res[newKey] = value;
-    }
-  }
-  return res;
-};
+   // ***********************************************getting invoice data***********************************
+   async function buildInvoiceWorkbook(pageSize = 10000) {
+      console.log('hit')
+      const header = [
+         'email',
+         'clientName',
+         'destination',
+         'Departure City',
+         'Travel Date',
+         'Duration',
+         'Pax',
+      ];
+      const rows = [header];
 
-// async function exportToExcelsingapore() {
-//   const batchSize = 500;
-//   let lastDoc = null;
-//   let allInvoices = [];
-//   let hasMore = true;
+      let lastDoc = null;
+      while (true) {
+         // 10 k-doc page ordered by document ID
+         const q = query(
+            collection(db, 'invoice'),
+            orderBy('__name__'),
+            ...(lastDoc ? [startAfter(lastDoc)] : []),
+            limit(pageSize)
+         );
 
-//   try {
-//     while (hasMore) {
-//       const q = query(
-//         collection(db, 'invoice'),
-//       //   where('selected_pdf_data.travel_data.Destination', '==', 'Singapore'), 
-//         orderBy('__name__'),
-//         limit(batchSize),
-//         ...(lastDoc ? [startAfter(lastDoc)] : [])
-//       );
+         const snap = await getDocs(q);
+         if (snap.empty) break;
 
-//       const querySnapshot = await getDocs(q);
+         snap.forEach(doc => {
+            const travel = doc.data()?.selected_pdf_data?.travel_data ?? {};
+            const email = (travel.Email ?? '').trim();
+            if (!email || !email.includes('@')) return;
 
-//       if (querySnapshot.empty) {
-//         hasMore = false;
-//         break;
-//       }
+            rows.push([
+               email,
+               travel.Traveller_name ?? 'No Name',
+               travel.Destination ?? 'N/a',
+               travel.Departure_City ?? 'N/a',
+               // travel.Contact_Number ?? 'N/a',
+               travel.Travel_Date?.toDate?.().toISOString().slice(0, 10) ?? 'N/a',
+               travel.Travel_Duration ?? 'N/a',
+               travel.Pax ?? 'N/a',
+               // travel.leadDate  <-- you can still add more here
+            ]);
+         });
+         console.log('after loop', rows)
+         exportToExcel(rows)
+         lastDoc = snap.docs[snap.docs.length - 1];
+         if (snap.size < pageSize) break; // reached the end
+      }
 
-//       const currentBatch = [];
-//       querySnapshot.forEach((doc) => {
-//         const flatData = flattenObject({ id: doc.id, ...doc.data() });
-//         currentBatch.push(flatData);
-//       });
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), 'Invoice');
+      return wb;
+   }
 
-//       allInvoices = allInvoices.concat(currentBatch);
-//       lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-//       hasMore = querySnapshot.docs.length === batchSize;
-//     }
 
-//     if (allInvoices.length === 0) {
-//       alert('No invoices found for Singapore.');
-//       return;
-//     }
+   const flattenObject = (obj, prefix = '', res = {}) => {
+      for (const key in obj) {
+         const value = obj[key];
+         const newKey = prefix ? `${prefix}.${key}` : key;
+         if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            flattenObject(value, newKey, res);
+         } else {
+            res[newKey] = value;
+         }
+      }
+      return res;
+   };
 
-//     const worksheet = XLSX.utils.json_to_sheet(allInvoices);
-//     const workbook = XLSX.utils.book_new();
-//     XLSX.utils.book_append_sheet(workbook, worksheet, 'Invoices');
+   // async function exportToExcelsingapore() {
+   //   const batchSize = 500;
+   //   let lastDoc = null;
+   //   let allInvoices = [];
+   //   let hasMore = true;
 
-//     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-//     const blob = new Blob([excelBuffer], {
-//       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-//     });
+   //   try {
+   //     while (hasMore) {
+   //       const q = query(
+   //         collection(db, 'invoice'),
+   //       //   where('selected_pdf_data.travel_data.Destination', '==', 'Singapore'), 
+   //         orderBy('__name__'),
+   //         limit(batchSize),
+   //         ...(lastDoc ? [startAfter(lastDoc)] : [])
+   //       );
 
-//     saveAs(blob, 'Singapore_Invoices.xlsx');
-//     alert(`✅ Exported ${allInvoices.length} flattened invoices to Excel.`);
-//   } catch (error) {
-//     console.error('Export failed:', error);
-//     alert('❌ Failed to export invoices. Check the console.');
-//   }
-// }
+   //       const querySnapshot = await getDocs(q);
+
+   //       if (querySnapshot.empty) {
+   //         hasMore = false;
+   //         break;
+   //       }
+
+   //       const currentBatch = [];
+   //       querySnapshot.forEach((doc) => {
+   //         const flatData = flattenObject({ id: doc.id, ...doc.data() });
+   //         currentBatch.push(flatData);
+   //       });
+
+   //       allInvoices = allInvoices.concat(currentBatch);
+   //       lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+   //       hasMore = querySnapshot.docs.length === batchSize;
+   //     }
+
+   //     if (allInvoices.length === 0) {
+   //       alert('No invoices found for Singapore.');
+   //       return;
+   //     }
+
+   //     const worksheet = XLSX.utils.json_to_sheet(allInvoices);
+   //     const workbook = XLSX.utils.book_new();
+   //     XLSX.utils.book_append_sheet(workbook, worksheet, 'Invoices');
+
+   //     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+   //     const blob = new Blob([excelBuffer], {
+   //       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+   //     });
+
+   //     saveAs(blob, 'Singapore_Invoices.xlsx');
+   //     alert(`✅ Exported ${allInvoices.length} flattened invoices to Excel.`);
+   //   } catch (error) {
+   //     console.error('Export failed:', error);
+   //     alert('❌ Failed to export invoices. Check the console.');
+   //   }
+   // }
    useEffect(() => {
       // queryInvoicesFor29thNovember()
       // getAllConverted()
@@ -743,7 +799,7 @@ const flattenObject = (obj, prefix = '', res = {}) => {
    }, []);
    return (
       <div>
-         {/* <button onClick={() => exportToExcelsingapore()}>click to get things work</button> */}
+         {/* <button onClick={() => buildInvoiceWorkbook()}>click to get things work</button> */}
          {/* <h2>{datalength}</h2> */}
       </div>
    );

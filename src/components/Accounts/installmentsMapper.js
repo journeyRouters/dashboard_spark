@@ -42,6 +42,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
 
     function amountReceived(response) {
         installmentjson[index].amountRecived = response.target.value;
+        installmentjson[index].yourname = profile.email;
         setAmountReceived(response.target.value);
     }
 
@@ -61,7 +62,7 @@ const InstallmentsMapperHelper = ({ data, installmentjson, index, TripId, setDet
         if (installmentjson[index].Status === 'Received' && !emailSent) {
             if (Email) {
                 PaymentConfirmation(installmentjson, Email, installmentjson[index].amount, installmentjson[index + 1]?.amount, TripId);
-                setEmailSent(true); 
+                setEmailSent(true);
             } else {
                 alert('No Email Available');
             }
